@@ -1,4 +1,7 @@
 /**app.wxss**/
+page{
+  background-color: #F6F6F6;
+}
 .container {
   height: 100%;
   display: flex;
@@ -8,3 +11,36 @@
   padding: 200rpx 0;
   box-sizing: border-box;
 } 
+.layout-column {
+    display:flex;
+    flex-direction: column;
+}
+.layout-row {
+    display:flex;
+    flex-direction: row;
+}
+.layout-inline{
+  position: relative;
+  padding-left: 85px;
+}
+.marTop {
+  margin-top:15px;
+}
+.marUpTop{
+  margin-top: 20px;
+}
+.border {
+    background-color:white;
+    padding:15px 10px;
+}
+.desc {
+    width: auto;
+    height: 80px;
+}
+.halfTop {
+    margin-top: 5px;
+}
+.line {
+  border-bottom:1px solid #eee;
+  margin-top:40px;
+}
