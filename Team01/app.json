@@ -1,7 +1,11 @@
 {
   "pages":[
+<<<<<<< HEAD
     "pages/newProject/newProject",
     "pages/newProject/template",
+=======
+    "pages/login/login",
+>>>>>>> 5e307aa055a92edd140de66ecd95903f6c677f10
     "pages/newTask/newTask",
     "pages/index/index",
     "pages/logs/logs"
