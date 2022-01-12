@@ -1,9 +1,15 @@
 {
   "pages":[
+    "pages/project/project",
+    "pages/projectInfo/projectInfo",
+
     "pages/login/login",
     "pages/newTask/newTask",
     "pages/index/index",
-    "pages/logs/logs"
+    "pages/logs/logs",
+    "pages/task/task",
+    "pages/createPro/createPro"
+  
   ],
   "window":{
     "backgroundTextStyle":"light",
@@ -14,6 +20,8 @@
   "sitemapLocation": "sitemap.json",
   "usingComponents": {
     "van-datetime-picker": "@vant/weapp/datetime-picker/index",
-    "van-circle": "@vant/weapp/circle/index"
+    "van-circle": "@vant/weapp/circle/index",
+    "van-cell": "@vant/weapp/cell/index",
+  "van-cell-group": "@vant/weapp/cell-group/index"
   }
 }
