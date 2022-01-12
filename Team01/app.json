@@ -1,6 +1,7 @@
 {
   "pages":[
     "pages/login/login",
+    "pages/newTask/newTask",
     "pages/index/index",
     "pages/logs/logs"
   ],
@@ -10,6 +11,9 @@
     "navigationBarTitleText": "Weixin",
     "navigationBarTextStyle":"black"
   },
-  "style": "v2",
-  "sitemapLocation": "sitemap.json"
+  "sitemapLocation": "sitemap.json",
+  "usingComponents": {
+    "van-datetime-picker": "@vant/weapp/datetime-picker/index",
+    "van-circle": "@vant/weapp/circle/index"
+  }
 }

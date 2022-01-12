@@ -1,0 +1,60 @@
+<!--pages/newTask/newTask.wxml-->
+<form bindsubmit="formSubmit" report-submit>
+<view class="layout-column marUpTop">
+    <!--Input task name-->
+    <input style="width: 750rpx; height: 100rpx; display: block; box-sizing: border-box"  class="layout-row border marTop" maxlength="100" placeholder="Enter Task name..." name="name"/>
+    
+    <!--Set task type-->
+    <view class="layout-row border marTop" bindtap="changeTaskType">
+        <view class="gray">Task type</view>
+        <view class="text"  name="taskType" value="{{taskType[taskTypeIndex].value}}" style="width: 480rpx; height: 34rpx; display: flex; box-sizing: border-box">{{taskType[taskTypeIndex].name}}</view>
+        <image class="img" src="../../images/right.png"></image>
+    </view>
+    
+    <!--Set start time-->
+    <view class="layout-row border marTop">
+        <view class="gray">Start time</view>
+        <picker class="date margin-left" mode="date" value="{{initDate}}" start="{{initDate}}" bindchange="changeStartDate" name="startDate">
+            <view class="picker" style="display: flex; width: 300">
+            {{startDate}}
+            </view>
+        </picker>
+        <image class="img" src="../../images/right.png"></image>
+    </view>
+
+    <!--Set end time-->
+    <view class="layout-row border">
+        <view class="gray">End time</view>
+        <picker class="date margin-left" mode="date" value="{{initDate}}" start="{{initDate}}" end="{{initEndDate}}" bindchange="changeEndDate" name="endDate">
+            <view class="picker">
+            {{endDate}}
+            </view>
+        </picker>
+        <image class="img" src="../../images/right.png"></image>
+    </view>
+
+    <!--Set task stage-->
+    <view class="layout-row border" bindtap="changeTaskStage">
+        <view class="gray">Task stage</view>
+        <view class="text"  name="taskStage" value="{{taskStage[taskStageIndex].value}}" style="width: 460rpx; height: 34rpx; display: flex">{{taskStage[taskStageIndex].name}}</view>
+        <image class="img" src="../../images/right.png"></image>
+    </view>
+
+    <!--Set task priority-->
+    <view class="layout-row border" bindtap="changePriority">
+        <view class="gray">Priority</view>
+        <view class="text"  name="priority" value="{{priority[priorityIndex].value}}" style="width: 520rpx; height: 34rpx; display: flex; float: right">{{priority[priorityIndex].name}}</view>
+        <image class="img" src="../../images/right.png"></image>
+    </view>
+
+    <!--Set follower-->
+
+    <!--Description-->
+    <textarea class="border desc marTop" placeholder="Details..." name="desc" maxlength="1000"/>
+
+    <!--Submit-->
+    <view class="border marTop">
+        <button type="primary" size="default" style="background-color: #265a88;" formType="submit" disabled="{{disableHookBtn}}">Submit</button>
+    </view>
+</view>
+</form>
