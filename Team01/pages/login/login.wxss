@@ -2,12 +2,12 @@
 /*First part*/
 
 .header{
-  height: 200rpx;
+  height: 100rpx;
   padding: 50rpx ;
   display: flex;
   justify-content: center;
-  background-color: #73ccd8;
-  color: white;
+  background-color: white;
+  color: black;
 }
 
 .title{
@@ -23,34 +23,34 @@
 .inputField{
   height: 100rpx;
   margin-top: 30rpx;
-  box-shadow: #77778a 0 0 5rpx;
-  border-radius: 10rpx;
+  border-bottom: 1px solid gray;
 }
 
 .button{
-  border: solid 1rpx #73ccd8;
+  border: solid 1rpx #5599ff;
   margin-top: 60rpx;
   width: 100%;
-  background-color: #73ccd8;
+  background-color: #5599ff;
   border-radius: 40rpx;
   color: white;
 }
 
 .remember{
-  margin-top: 20rpx;
+  margin-top: 30rpx;
 }
 
 /*Third part*/
 .end{
+  padding: 10px;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
 }
 .end text{
   margin-left: 20rpx;
-  color: blue;
+  color: #5599ff;
 }
 .return{
-  color: blue;
+  color: #5599ff;
   display: flex;
   justify-content: center;
 }
