@@ -14,11 +14,16 @@
   },
   "sitemapLocation": "sitemap.json",
   "usingComponents": {
+<<<<<<< HEAD
     "van-field": "@vant/weapp/field/index",
     "van-datetime-picker": "@vant/weapp/datetime-picker/index",
     "van-cell": "@vant/weapp/cell/index",
     "van-cell-group": "@vant/weapp/cell-group/index",
     "van-nav-bar": "@vant/weapp/nav-bar/index",
     "van-action-sheet": "@vant/weapp/action-sheet/index"
+=======
+    "van-datetime-picker": "@vant/weapp/datetime-picker/index",
+    "van-circle": "@vant/weapp/circle/index"
+>>>>>>> 501c5969c9d5fe049b9a1f6f0851f9ac5433702e
   }
 }
