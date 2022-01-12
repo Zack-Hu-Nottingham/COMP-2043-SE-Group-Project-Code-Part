@@ -1,0 +1,148 @@
+/**index.wxss**/
+page{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.foo {
+  width: 80%;
+  height: 60rpx;
+  /* line-height: 60rpx; */
+  color: white;
+  /* display:block; */
+  margin:0 auto;
+  /* margin-top: 80rpx; */
+  background-color: #eeeeee;
+  border-radius: 60rpx;
+  font-size: 32rpx;
+  bottom: 50rpx;
+  position: fixed;
+  display: flex;
+  left: 70rpx;
+  justify-content: center;
+  align-items: center;
+}
+
+.createNewTask {
+  position: fixed; 
+  width: 240rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  display: flex; 
+  flex-direction: row; 
+  bottom: 70rpx; 
+  border: solid 2rpx #efefef;
+  width: 100%;
+  justify-content: center; 
+
+  align-items: center;
+}
+
+.suspendV {
+  height: 200rpx;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: fixed;
+  left: 0rpx;
+  right: 0rpx;
+  bottom: 0rpx;
+}
+
+.taskInfo {
+  display: flex;
+  flex-direction: row;
+  font-size: 20rpx;
+  justify-content: space-between;
+  border-top: 2rpx solid #efefef;
+
+  /* width: 15%; */
+  padding: 30rpx;
+  color: #808080;
+}
+
+.taskInfoDetail {
+  display: flex;
+  flex-direction: column; 
+  align-items: center; 
+  justify-content: center;
+}
+
+.discription {
+  padding: 10rpx;
+  color: #dcdcdc;
+}
+
+.state {
+  color: 	#4169E1;
+}
+
+.separator {
+  background-color: #efefef;
+  height: 20rpx;
+  margin: 0rpx;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  
+  border-top: 2rpx solid #efefef;
+  color: #696969;  
+  padding: 30rpx;
+
+}
+
+.block {
+  margin: 20rpx;
+  margin-bottom: 10rpx;
+}
+
+.block .title {
+  color: #DCDCDC;
+  border-top: 2rpx #efefef;
+  /* margin: 20rpx; */
+  padding: 10rpx;
+
+}
+
+.navbar{
+  flex: none;
+  display: flex;
+  background: #fff;
+  font-size: 25rpx;
+  color: #bbbbbb;
+  border-top: 4rpx solid #efefef ;
+  align-content: flex-start;
+  /* justify-content: space-between; */
+}
+
+.navbar .item{
+  position: relative;
+  flex: auto;
+  /* flex-wrap: wrap; */
+  text-align: center;
+  line-height: 80rpx;
+  width: 200rpx;
+
+}
+
+.navbar .item.active{
+  color: #908df5;
+}
+
+.navbar .item.active:after{
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 5rpx;
+  background: #908df5;
+}
