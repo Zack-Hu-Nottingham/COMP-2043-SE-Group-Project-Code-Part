@@ -1,0 +1,23 @@
+<!--pages/newTask/newTask.wxml-->
+<form bindsubmit="formSubmit" report-submit>
+<view class="layout-column marUpTop">
+    <!--Input project name-->
+    <van-cell-group><van-field class="layout-row border marTop" 
+        value="{{ name }}" placeholder="Enter Project name..." style="padding:0rpx"/></van-cell-group>
+
+    <!--Set project template-->
+    <van-cell class="layout-row marTop" title="Project template" is-link value="(Show the template)" bindtap="selectTemplate" />
+
+    <!--Set visibility-->
+    <van-cell class="layout-row marTop" title="Visibility" is-link value="{{visibility[visibilityIndex].name}}" bindtap="changeVisibility" />
+
+    <!--Description-->
+    <textarea class="border desc marTop" placeholder="Details..." name="desc" maxlength="1000"/>
+
+    <!--Submit-->
+    <view class="border marTop">
+        <button type="primary" size="default" style="background-color: #265a88;" formType="submit" disabled="{{disableHookBtn}}">Submit</button>
+    </view>
+    
+</view>
+</form>

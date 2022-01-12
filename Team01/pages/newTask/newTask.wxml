@@ -15,7 +15,7 @@
     <view class="layout-row border marTop">
         <view class="gray">Start time</view>
         <picker class="date margin-left" mode="date" value="{{initDate}}" start="{{initDate}}" bindchange="changeStartDate" name="startDate">
-            <view class="picker" style="display: flex; width: 300">
+            <view class="picker">
             {{startDate}}
             </view>
         </picker>

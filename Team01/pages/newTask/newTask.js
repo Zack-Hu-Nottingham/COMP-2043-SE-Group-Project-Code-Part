@@ -123,8 +123,7 @@ Page({
     },
 
     changeTaskType: function(){
-        var that = this
-        var arr = that.data.taskType
+        var arr = this.data.taskType
         var arrName = new Array()
         for(var i in arr){
             arrName.push(arr[i].name)
@@ -133,7 +132,7 @@ Page({
             itemList: arrName,
             itemColor: "gray",
             success: function(res) {
-                that.setData({
+                this.setData({
                     taskTypeIndex: res.tapIndex
                 })
             }
