@@ -1,8 +1,8 @@
-### Dev Convention
+# Dev Convention
 
 
 
-#### 颜色
+## 颜色
 
 颜色参考：https://www.sioe.cn/yingyong/yanse-rgb-16/
 
@@ -16,24 +16,24 @@
 
 背景色：#efefef
 
+<br/>
 
-
-#### 页面格式
+## 页面格式
 
  标题栏文字(navigationBarTitleText)：统一显示当前页面功能
 
+<br/>
 
-
-#### 代码规范
+## 代码规范
 
 - 尽量使用Vant Weapp组件库
 - 外层同级组件之间空行
 - px->rpx
 - 格式居中：alignment
 
+<br/>
 
-
-#### 数据格式
+## 数据格式
 
 ```
 project {
