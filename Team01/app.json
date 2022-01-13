@@ -1,17 +1,38 @@
 {
   "pages":[
-    "pages/newProject/newProject",
     "pages/project/project",
+    "pages/dashboard/dashboard",
+    "pages/more/more",
     "pages/projectInfo/projectInfo",
     "pages/login/login",
     "pages/newTask/newTask",
-    "pages/newProject/template",
     "pages/index/index",
     "pages/logs/logs",
     "pages/task/task",
     "pages/createPro/createPro"
-  
   ],
+  "tabBar": {
+    "list":[{
+      "pagePath": "pages/project/project",
+      "text": "Project",
+      "iconPath": "/images/project/project.png",
+      "selectedIconPath": "/images/project/project-active.png"
+    },{
+      "pagePath": "pages/dashboard/dashboard",
+      "text": "Dashboard",
+      "iconPath": "/images/dashboard/dashboard.png",
+      "selectedIconPath": "/images/dashboard/dashboard-active.png"
+    },{
+      "pagePath": "pages/more/more",
+      "text": "More",
+      "iconPath": "/images/more/more.png",
+      "selectedIconPath": "/images/more/more-active.png"
+    }
+    ],
+    "color": "#696969",
+    "selectedColor": "#1296db"
+    
+  },
   "window":{
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#fff",
@@ -20,12 +41,9 @@
   },
   "sitemapLocation": "sitemap.json",
   "usingComponents": {
-    "van-field": "@vant/weapp/field/index",
     "van-datetime-picker": "@vant/weapp/datetime-picker/index",
-    "van-cell": "@vant/weapp/cell/index",
-    "van-cell-group": "@vant/weapp/cell-group/index",
-    "van-nav-bar": "@vant/weapp/nav-bar/index",
-    "van-action-sheet": "@vant/weapp/action-sheet/index",
     "van-circle": "@vant/weapp/circle/index",
+    "van-cell": "@vant/weapp/cell/index",
+  "van-cell-group": "@vant/weapp/cell-group/index"
   }
 }

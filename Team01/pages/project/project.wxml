@@ -4,26 +4,26 @@
 
 <view class="projectBlock">
 
-<view class="block">
-<view class="title">Projects</view>
-</view>
+  <view class="block">
+    <view class="title">Projects</view>
+  </view>
 
-
-<view class="container" >
+  <view class="container">
     <image class="taskIcon" src="/images/taskIcon.png"></image>
-  <form bindsubmit='enterSpecificPro' report-submit>
-    <button plain="true" form-type='submit' class="pro"><text>Project1</text></button>
-  </form>
-</view>
+    
+    <form bindsubmit='enterSpecificPro' report-submit>
+      <button plain="true" form-type='submit' class="pro"><text>Project1</text></button>
+    </form>
+  </view>
 
-<view class="sp"></view>
+  <view class="sp"></view>
 
-<view class="container">
+  <view class="container">
     <image class="taskIcon" src="/images/taskIcon.png"></image>
-  <form bindsubmit='enterSpecificTask' report-submit>
-    <button plain="true" form-type='submit' class="pro"><text>Tasks</text></button>
-  </form>
-</view>
+    <form bindsubmit='enterSpecificTask' report-submit>
+      <button plain="true" form-type='submit' class="pro"><text>Tasks</text></button>
+    </form>
+  </view>
 </view>
 
 
