@@ -74,7 +74,7 @@
       }
     </wxs>
 
-    <wxs src="../../utils/tools.wxs" module="m2"></wxs>
+    <wxs src="../../../utils/tools.wxs" module="m2"></wxs>
 
 
 
@@ -153,6 +153,15 @@
 
 
 
+
+
+
+
+
+
+
+
+<!-- Task Management -->
 <view wx:elif="{{currentTab==1}}">
 
 task management
@@ -177,6 +186,11 @@ task management
   <button class="foo">Create New Task</button>
 </view>
 
+
+
+
+
+<!-- Gantt Diagram -->
 <view wx:else>
 
 gant diagram

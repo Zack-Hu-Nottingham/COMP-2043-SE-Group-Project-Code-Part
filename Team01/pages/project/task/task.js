@@ -38,7 +38,7 @@ Page( {
   },
   createTask: function (e) {
     wx.navigateTo({
-      url: '../createPro/createPro'
+      url: '../newTask/newTask'
     })
     console.log(e)
   },

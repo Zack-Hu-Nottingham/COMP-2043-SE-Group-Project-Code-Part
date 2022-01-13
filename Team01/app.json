@@ -1,29 +1,26 @@
 {
   "pages":[
-    "pages/project/project",
-    "pages/dashboard/dashboard",
-    "pages/more/more",
-    "pages/projectInfo/projectInfo",
-    "pages/login/login",
-    "pages/newTask/newTask",
-    "pages/index/index",
-    "pages/logs/logs",
-    "pages/task/task",
-    "pages/createPro/createPro"
+    "pages/project/project/project",
+    "pages/dashboard/dashboard/dashboard",
+    "pages/more/more/more",
+    "pages/project/projectInfo/projectInfo",
+    "pages/project/newTask/newTask",
+    "pages/project/task/task",
+    "pages/project/newProject/newProject"
   ],
   "tabBar": {
     "list":[{
-      "pagePath": "pages/project/project",
+      "pagePath": "pages/project/project/project",
       "text": "Project",
       "iconPath": "/images/project/project.png",
       "selectedIconPath": "/images/project/project-active.png"
     },{
-      "pagePath": "pages/dashboard/dashboard",
+      "pagePath": "pages/dashboard/dashboard/dashboard",
       "text": "Dashboard",
       "iconPath": "/images/dashboard/dashboard.png",
       "selectedIconPath": "/images/dashboard/dashboard-active.png"
     },{
-      "pagePath": "pages/more/more",
+      "pagePath": "pages/more/more/more",
       "text": "More",
       "iconPath": "/images/more/more.png",
       "selectedIconPath": "/images/more/more-active.png"

@@ -14,7 +14,7 @@
       "list": [
         {
           "name": "",
-          "pathName": "pages/projectInfo/projectInfo",
+          "pathName": "pages/project/newProject/newProject",
           "query": "",
           "scene": null
         }

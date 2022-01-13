@@ -19,7 +19,7 @@ Page( {
   },
   createPro: function (e) {
     wx.navigateTo({
-      url: '../createPro/createPro'
+      url: '../newProject/newProject'
     })
     console.log(e)
   },
