@@ -1,11 +1,14 @@
 {
   "pages":[
-    "pages/project/project/project",
-    "pages/dashboard/dashboard/dashboard",
-    "pages/more/more/more",
     "pages/project/projectInfo/projectInfo",
-    "pages/project/newTask/newTask",
+    "pages/dashboard/dashboard/dashboard",
     "pages/project/task/task",
+    "pages/project/project/project",
+   
+    "pages/more/more/more",
+ 
+    "pages/project/newTask/newTask",
+   
     "pages/project/newProject/newProject"
   ],
   "tabBar": {

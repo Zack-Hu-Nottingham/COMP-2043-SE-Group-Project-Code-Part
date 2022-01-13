@@ -55,7 +55,33 @@
     margin: 0rpx;
   }
   
-  .group {
+  .progressingGroup {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 40rpx;
+    width: 220rpx;
+    background: #7FFFAA;
+    padding: 10rpx;
+    margin-left: 20rpx;
+    margin-bottom: 20rpx;
+    border-radius: 0.5ex;
+  }
+  .notStartedGroup {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 40rpx;
+    width: 220rpx;
+    background: #F08080;
+    padding: 10rpx;
+    margin-left: 20rpx;
+    margin-bottom: 20rpx;
+    border-radius: 0.5ex;
+  }
+  .finishedGroup {
     display: flex;
     flex-direction: row;
     justify-content: space-between;

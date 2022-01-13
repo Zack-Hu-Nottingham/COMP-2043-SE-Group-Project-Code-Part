@@ -12,7 +12,7 @@
         <view class="separator"></view>
         <view class="block">
           <view class="list" style="font-size: 40rpx">{{notStartTaskName}}</view> 
-          <view class="group">
+          <view class="notStartedGroup">
           <image src="/images/NotStartedIcon.png" mode="widthFix" style="width: 40rpx;"></image>
           <view class="imageDiscription">NotStarted</view>
         </view>
@@ -26,7 +26,7 @@
         <view class="separator"></view>
         <view class="block">
           <view class="list" style="font-size: 40rpx">{{progressTaskName}}</view>
-          <view class="group">
+          <view class="progressingGroup">
           <image src="/images/ProgressingIcon.png" mode="widthFix" style="width: 40rpx;"></image>
           <view class="imageDiscription">Progressing</view>
         </view>
@@ -34,7 +34,7 @@
         </view>
         <view class="block">
           <view class="list" style="font-size: 40rpx">{{progressTaskName}}</view>
-          <view class="group">
+          <view class="progressingGroup">
           <image src="/images/ProgressingIcon.png" mode="widthFix" style="width: 40rpx;"></image>
           <view class="imageDiscription">Progressing</view>
           </view>
@@ -48,7 +48,7 @@
         <view class="separator"></view>
         <view class="block">
           <view class="list" style="font-size: 40rpx">{{doneTaskName}}</view>
-          <view class="group">
+          <view class="finishedGroup">
           <image src="/images/FinishedIcon.png" mode="widthFix" style="width: 40rpx;"></image>
           <view class="imageDiscription">Finished</view>
         </view>
