@@ -15,6 +15,7 @@ Page({
             "name": "Public",
             "value":"publicProject"
         }],
+        "templates":[],
         "templateIndex": 0,
         "visibilityIndex": 0,
     },
