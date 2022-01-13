@@ -67,6 +67,17 @@
 
     <view class="separator"></view>
 
+
+    <wxs module="m1">
+      module.exports.toInteger = function(str) {
+        return str - str % 1
+      }
+    </wxs>
+
+    <wxs src="../../utils/tools.wxs" module="m2"></wxs>
+
+
+
     <!-- Task Progress -->
     <view class="block">
       <view class="title">Task Progress</view>
@@ -76,7 +87,7 @@
             value="{{(completed/total)*100}}"
             layer-color="#eeeeee"
             color="#4169E1"
-            text="{{(completed/total)%1*100}}%"
+            text="{{m1.toInteger((completed/total)*100)}}%\nCompleted"
           />
           <view style="color: #808080;">Completed</view>
         </view>
@@ -84,7 +95,7 @@
           <van-circle
             value="{{(delayed/total)*100}}"
             layer-color="#eeeeee"
-            color="#4169E1"
+            color="##FF4500"
             text="{{(delayed/total)%1*100}}%"
           />
           <view style="color: #808080;">Delayed</view>

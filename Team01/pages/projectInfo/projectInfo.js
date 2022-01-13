@@ -22,7 +22,7 @@ Page({
     navbar: ['Project Information', 'Task Management', 'Gantt Diagram'],
     currentTab: 0,
     index: 0,
-    // array: ['美国', '中国', '巴西', '日本'],
+    query: {},
 
   },
 
@@ -65,13 +65,24 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.setData ({
+      query: options
+    })
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
+    function capitalizeFirstLetter(string) {
+      return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+    // console.log(this.data.name)
+    // console.log(capitalizeFirstLetter(this.data.name))
+
+    wx.setNavigationBarTitle({
+      title: capitalizeFirstLetter(this.data.name) 
+    })
 
   },
 
