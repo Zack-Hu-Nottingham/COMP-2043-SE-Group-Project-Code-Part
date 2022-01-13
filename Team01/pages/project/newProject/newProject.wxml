@@ -16,7 +16,7 @@
 
     <!--Submit-->
     <view class="border marTop">
-        <button type="primary" size="default" style="background-color: #265a88;" formType="submit" disabled="{{disableHookBtn}}">Submit</button>
+        <button type="primary" size="default" style="background-color: #265a88;" formType="submit" disabled="{{disableHookBtn}}">Create new Project</button>
     </view>
     
 </view>

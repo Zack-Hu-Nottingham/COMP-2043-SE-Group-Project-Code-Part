@@ -30,7 +30,7 @@
 <!-- 底部固定 -->
 
 <view style="position:fixed; bottom: 40rpx; left: 20rpx">
-  <form class="form" bindsubmit='createPro'>
+  <form class="form" bindsubmit='createProject'>
     <van-button plain round type="info" form-type='submit' ><text class="addSign">+</text></van-button>
   </form>
 </view>

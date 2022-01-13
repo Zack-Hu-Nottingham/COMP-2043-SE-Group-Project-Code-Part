@@ -6,7 +6,8 @@
     "pages/project/projectInfo/projectInfo",
     "pages/project/newTask/newTask",
     "pages/project/task/task",
-    "pages/project/newProject/newProject"
+    "pages/project/newProject/newProject",
+    "pages/project/projectTemplate/projectTemplate"
   ],
   "tabBar": {
     "list":[{

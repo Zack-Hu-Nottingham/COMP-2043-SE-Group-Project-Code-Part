@@ -1,6 +1,6 @@
+// pages/newProject/newProject.js
 var util = require('../../utils/util.js')
 var app = getApp()
-// pages/newTask/newTask.js
 Page({
 
     /**
@@ -108,6 +108,6 @@ Page({
         console.log(event.detail);
     },
     selectTemplate: function(){
-        wx.navigateTo({ url: '/pages/newProject/template', })
+        wx.navigateTo({ url: '../projectTemplate/projectTemplate', })
     }
 })

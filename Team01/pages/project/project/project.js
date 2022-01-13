@@ -17,7 +17,7 @@ Page( {
     })
     console.log(e)
   },
-  createPro: function (e) {
+  createProject: function (e) {
     wx.navigateTo({
       url: '../newProject/newProject'
     })
