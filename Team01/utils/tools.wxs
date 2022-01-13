@@ -1,0 +1,7 @@
+function toInteger(double) {
+  return double - double % 1
+}
+
+module.exports = {
+  toInteger: toInteger
+}

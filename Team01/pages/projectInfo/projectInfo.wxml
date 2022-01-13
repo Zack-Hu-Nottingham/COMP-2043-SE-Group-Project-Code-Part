@@ -1,0 +1,183 @@
+<view class="navbar">
+  <text wx:for="{{navbar}}" data-idx="{{index}}" class="item {{currentTab==index ? 'active' : ''}}" wx:key="unique" bindtap="navbarTap">{{item}}</text>
+</view>
+
+
+<!-- Subpages -->
+<view wx:if="{{currentTab==0}}">
+
+  <scroll-view scroll-y="true" style="height: 90%;">
+    <!-- Project Information -->
+    <view class="block">
+      
+      <view class="title">Project Information</view>
+      
+      <view class="container">
+        <view>Owner</view>
+        <view>
+          {{owner}}
+          <image src="/images/rightArrow.png" mode="widthFix" style="width: 30rpx;"></image>
+        </view>
+      </view>
+
+      <view class="container">
+        <view>Start time</view>
+        <picker mode="date" value="startTime" start="2021-09-01" end="2023-09-01" bindchange="bindStartDateChange">
+          {{startTime}}
+          <image src="/images/rightArrow.png" mode="widthFix" style="width: 30rpx;"></image>
+        </picker>
+      </view>
+      
+      <view class="container">
+        <view>End time</view>
+        <picker mode="date" value="endTime" start="2021-09-01" end="2023-09-01" bindchange="bindEndDateChange">
+          {{endTime}}
+          <image src="/images/rightArrow.png" mode="widthFix" style="width: 30rpx;"></image>
+        </picker>
+      </view>
+      
+      <view class="container" style="flex-direction: column; align-items: flex-start;">
+        <view>Description</view>
+        <view>{{projectDescription}}</view>
+      </view>
+
+    </view>
+
+    <view class="separator"></view>
+
+    <!-- State Information -->
+    <view class="block">
+
+      <view style="flex-direction: row; justify-content: space-between; padding: 20rpx; display: flex;">
+        <view class="title">State Information</view>
+        <image src="/images/modify.png" mode="widthFix" style="width: 40rpx;"></image>
+      </view>
+
+      <view class="container">
+        <view class="left">Current State</view>
+        <view class="state">{{currentState}}</view>
+      </view>
+
+      <view class="container" style="flex-direction: column; align-items: flex-start;">
+        <view class="left">Description</view>
+        <view class="discription">{{stateDescription}}</view>
+      </view>
+
+    </view>
+
+    <view class="separator"></view>
+
+
+    <wxs module="m1">
+      module.exports.toInteger = function(str) {
+        return str - str % 1
+      }
+    </wxs>
+
+    <wxs src="../../utils/tools.wxs" module="m2"></wxs>
+
+
+
+    <!-- Task Progress -->
+    <view class="block">
+      <view class="title">Task Progress</view>
+      <view style="display: flex; flex-direction: row; justify-content: space-between; padding: 80rpx; padding-bottom: 0;">
+        <view style="display: flex; flex-direction: column;">
+          <van-circle
+            value="{{(completed/total)*100}}"
+            layer-color="#eeeeee"
+            color="#4169E1"
+            text="{{m1.toInteger((completed/total)*100)}}%\nCompleted"
+          />
+          <view style="color: #808080;">Completed</view>
+        </view>
+        <view style="display: flex; flex-direction: column;">
+          <van-circle
+            value="{{(delayed/total)*100}}"
+            layer-color="#eeeeee"
+            color="##FF4500"
+            text="{{(delayed/total)%1*100}}%"
+          />
+          <view style="color: #808080;">Delayed</view>
+        </view>
+      </view>
+
+      <view style="flex-direction: row; display: flex; justify-content: space-between;">
+        <view style="display:flex; flex-direction: column; justify-content: center; align-items: center; padding: 80rpx;">
+          <view style="color: #4169E1; font-size: 60rpx;">{{completed}}</view>
+          <view style="color: #808080;">Completed</view>
+        </view>
+        
+        <view style="display:flex; flex-direction: column; justify-content: center; align-items: center; padding: 80rpx;">
+          <view style="color: #FF4500; font-size: 60rpx;">{{delayed}}</view>
+          <view style="color: #808080;">Delayed</view>
+        </view>
+      </view>
+
+      <view class="taskInfo">
+        
+        <view class="taskInfoDetail">
+          <view style="font-size: 35rpx; color: #696969;">{{unstarted}}</view>
+          <view>Unstarted</view>
+        </view>
+
+        <view class="taskInfoDetail">
+          <view style="font-size: 35rpx; color: #FFA500;">{{processing}}</view>
+          <view>Processing</view>
+        </view>
+
+        <view class="taskInfoDetail">
+          <view style="font-size: 35rpx; color: 	#FF4500;">{{completed}}</view>
+          <view>Completed</view>
+        </view>
+
+        <view class="taskInfoDetail" style="padding-left: 40rpx ; border-left: 2rpx solid #efefef;">
+          <view style="font-size: 35rpx; color: #696969; ">{{total}}</view>
+          <view>Total</view>
+        </view>
+
+        <view class="taskInfoDetail">
+          <view style="font-size: 35rpx; color:#FF4500;">{{delayed}}</view>
+          <view>Delayed</view>
+        </view>
+
+      </view>
+    </view>
+
+  </scroll-view>
+</view>
+
+
+
+
+
+
+
+<view wx:elif="{{currentTab==1}}">
+
+task management
+  <view wx:for="{{task}}" >
+    <view style="display: flex; flex-direction: column;">
+      
+      <view>{{item.name}}</view>
+      
+      <view style="display: flex; flex-direction: row;">
+        <view>{{item.state}}</view> 
+        <view>{{item.owner}}</view>
+      </view>
+
+      <view style="display: flex; flex-direction: row;">
+        <view>{{item.startTime}}</view> 
+        <view>{{item.endTime}}</view>
+      </view>
+      
+    </view>
+  </view>
+
+  <button class="foo">Create New Task</button>
+</view>
+
+<view wx:else>
+
+gant diagram
+</view>
