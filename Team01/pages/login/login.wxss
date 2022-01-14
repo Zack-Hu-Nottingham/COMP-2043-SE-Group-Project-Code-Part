@@ -2,11 +2,11 @@
 /*First part*/
 
 .header{
-  height: 100rpx;
+  height: 150rpx;
   padding: 50rpx ;
+  border-top: 5rpx solid black;
   display: flex;
   justify-content: center;
-  background-color: white;
   color: black;
 }
 
@@ -16,32 +16,45 @@
 }
 
 /*Second part*/
-.body{
-  padding: 40rpx;
-}
 
 .inputField{
   height: 100rpx;
   margin-top: 30rpx;
-  border-bottom: 1px solid gray;
+  margin-left: 50rpx;
+  margin-right: 50rpx;
+  border-bottom: 1px solid #aaaaaa;
 }
 
 .button{
-  border: solid 1rpx #5599ff;
+  display:block;
   margin-top: 60rpx;
   width: 100%;
+  border: solid 0  #5599ff;
   background-color: #5599ff;
   border-radius: 40rpx;
   color: white;
 }
 
+/*去掉边框*/
+.button::after{
+  border: none;
+}
+
+/* 修改默认背景色 */
+.button[disabled][type="default"], wx-button[disabled]:not([type]) {
+  color: #aaaaaa;
+  background-color: #99bbff;
+}
+
 .remember{
   margin-top: 30rpx;
+  margin-left: 50rpx;
 }
 
 /*Third part*/
 .end{
   padding: 10px;
+  margin-top: 20rpx;
   display: flex;
   justify-content: space-between;
 }
@@ -51,6 +64,8 @@
 }
 .return{
   color: #5599ff;
+  padding: 10px;
+  margin-top: 20rpx;
   display: flex;
   justify-content: center;
 }

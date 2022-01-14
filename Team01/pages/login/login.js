@@ -110,6 +110,7 @@ Page({
       {
         wx.showToast({
           title: 'Login successful',
+          icon: 'none',
         })
         wx.switchTab({
           url: '../index/index',
@@ -118,12 +119,14 @@ Page({
       else{
         wx.showToast({
           title: 'Wrong password',
+          icon: 'none',
         })
       }
     }
     else {
       wx.showToast({
-        title: 'Mobile number not registered',
+        title: 'Number not registered',
+        icon: 'none',
       })
     }
   },
@@ -155,7 +158,7 @@ Page({
     }
     else {
       wx.showToast({
-        title: 'Mobile number not registered',
+        title: 'Number not registered',
       })
 
     }
@@ -226,6 +229,7 @@ Page({
     wx.setStorageSync('userAccount', obj)
     wx.showToast({
       title: 'Registration successful',
+      icon: 'none',
     })
     this.setData({
       isLogin:1
