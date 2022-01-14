@@ -163,25 +163,14 @@
 
 <!-- Task Management -->
 <view wx:elif="{{currentTab==1}}">
+  <van-dropdown-menu active-color="#1296db" bind:change ="changeValue">
+  <van-dropdown-item value="{{ value1 }}" options="{{ option1 }}" />
+</van-dropdown-menu>
 
-task management
-  <view wx:for="{{task}}" >
-    <view style="display: flex; flex-direction: column;">
-      
-      <view>{{item.name}}</view>
-      
-      <view style="display: flex; flex-direction: row;">
-        <view>{{item.state}}</view> 
-        <view>{{item.owner}}</view>
-      </view>
+<view wx:if="{{value1==0}}">
+ssss
 
-      <view style="display: flex; flex-direction: row;">
-        <view>{{item.startTime}}</view> 
-        <view>{{item.endTime}}</view>
-      </view>
-      
-    </view>
-  </view>
+</view>
 
   <button class="foo">Create New Task</button>
 </view>

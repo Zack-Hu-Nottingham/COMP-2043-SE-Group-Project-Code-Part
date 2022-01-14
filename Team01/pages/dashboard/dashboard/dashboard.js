@@ -1,11 +1,19 @@
-// pages/dashboard/dashboard.js
+// pages/dashboard/dashboard/dashboard.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+      name1: "Task1",
+      name2: "Task2",
+      name3: "Task3",
+  },
+  enterSpecificPro: function (e) {
+    wx.navigateTo({
+      url: '../../project/projectInfo/projectInfo'
+    })
+    console.log(e)
   },
 
   /**
@@ -63,4 +71,6 @@ Page({
   onShareAppMessage: function () {
 
   }
+
+  
 })

@@ -23,7 +23,12 @@ Page({
     currentTab: 0,
     index: 0,
     query: {},
-
+    option1: [
+      { text: 'Not started tasks', value: 0 },
+      { text: 'Progressing tasks', value: 1 },
+      { text: 'Finished tasks', value: 2 },
+    ],  
+    value1: 0,
   },
 
   bindStartDateChange: function (e) {
@@ -53,6 +58,10 @@ Page({
       currentTab: e.currentTarget.dataset.idx
     })
     app.globalData.currentTab = e.currentTarget.dataset.idx;
+  },
+
+  changeValue(e) {
+    console.log(this.option1[e].value)
   },
 
   onshow() {
