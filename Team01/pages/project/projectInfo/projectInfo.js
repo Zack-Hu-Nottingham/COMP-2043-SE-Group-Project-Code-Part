@@ -29,8 +29,16 @@ Page({
       { text: 'Finished tasks', value: 2 },
     ],  
     value1: 0,
+    activeNames: ['1'],
+
   },
 
+  onChange(event) {
+    this.setData({
+      activeNames: event.detail,
+    });
+  },
+  
   bindStartDateChange: function (e) {
     console.log(e.detail.value)
     this.setData({
@@ -61,7 +69,9 @@ Page({
   },
 
   changeValue(e) {
-    console.log(this.option1[e].value)
+    this.setData({
+      value1: e.detail
+    })
   },
 
   onshow() {

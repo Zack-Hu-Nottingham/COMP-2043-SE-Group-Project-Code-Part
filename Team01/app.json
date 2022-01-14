@@ -1,5 +1,7 @@
 {
   "pages":[
+    "pages/project/newProject/newProject",
+
     "pages/project/projectInfo/projectInfo",
     "pages/dashboard/dashboard/dashboard",
     "pages/project/task/task",
@@ -7,9 +9,8 @@
    
     "pages/more/more/more",
  
-    "pages/project/newTask/newTask",
+    "pages/project/newTask/newTask"
    
-    "pages/project/newProject/newProject"
   ],
   "tabBar": {
     "list":[{

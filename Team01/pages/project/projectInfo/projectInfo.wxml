@@ -163,16 +163,41 @@
 
 <!-- Task Management -->
 <view wx:elif="{{currentTab==1}}">
-  <van-dropdown-menu active-color="#1296db" bind:change ="changeValue">
-  <van-dropdown-item value="{{ value1 }}" options="{{ option1 }}" />
-</van-dropdown-menu>
+  <!-- <van-dropdown-menu active-color="#1296db" >
+  
+    <van-dropdown-item value="{{ value1 }}" options="{{ option1 }}"  bind:change ="changeValue"/>
+  </van-dropdown-menu>
 
-<view wx:if="{{value1==0}}">
-ssss
+  <view wx:if="{{value1==0}}">
+    not started task
+  </view>
 
-</view>
+  <view wx:elif="{{value1==1}}">
+    progressing task
+  </view>
 
-  <button class="foo">Create New Task</button>
+
+  <button class="foo">Create New Task</button> -->
+  <van-collapse value="{{ activeNames }}" bind:change="onChange">
+
+    <van-collapse-item title="Started" name="1">
+      <van-cell
+        label="start time:{{startTime}}"
+        title="单元格"
+        link-type="navigateTo"
+        url="/pages/project/task/task"
+      />
+    </van-collapse-item>
+
+    <van-collapse-item title="Not Start" name="2">
+
+    </van-collapse-item>
+
+    <van-collapse-item title="Finished" name="3">
+
+    </van-collapse-item>
+  </van-collapse>
+
 </view>
 
 
