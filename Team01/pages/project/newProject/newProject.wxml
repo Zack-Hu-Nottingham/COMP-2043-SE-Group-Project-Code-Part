@@ -1,6 +1,6 @@
-<!--pages/newTask/newTask.wxml-->
+<!--pages/project/newProject/newProject.wxml-->
 <form bindsubmit="formSubmit" report-submit>
-<view class="layout-column marUpTop">
+<view>
     <!--Input project name-->
     <van-cell-group><van-field class="layout-row border marTop" 
         value="{{ name }}" placeholder="Enter Project name..." style="padding:0rpx"/></van-cell-group>
@@ -15,8 +15,9 @@
     <textarea class="border desc marTop" placeholder="Details..." name="desc" maxlength="1000"/>
 
     <!--Submit-->
-    <view class="border marTop">
-        <button type="primary" size="default" style="background-color: #265a88;" formType="submit" disabled="{{disableHookBtn}}">Submit</button>
+    <van-button native-type="button" bind:submit="onSubmit">Create new Project</van-button>
+    <view class="marTop">
+        <button type="primary" size="default" style="background-color: #1296db;" formType="submit" disabled="{{disableHookBtn}}">Create new Project</button>
     </view>
     
 </view>

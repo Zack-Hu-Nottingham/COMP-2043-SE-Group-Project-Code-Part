@@ -1,8 +1,6 @@
-var util = require('../../utils/util.js')
+// pages/project/newProject/newProject.js
 var app = getApp()
-// pages/newTask/newTask.js
 Page({
-
     /**
      * 页面的初始数据
      */
@@ -24,15 +22,6 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        var now = new Date()
-        var initDate = util.formatDate(now)
-        var initEndDate = util.formatDate4YearMotchDay(now.getFullYear() + 1, now.getMonth() + 1, now.getDate())
-        this.setData({
-            initDate: initDate,
-            startDate: initDate,
-            endDate: initDate,
-            initEndDate: initEndDate
-        })
     },
 
     /**
@@ -108,6 +97,6 @@ Page({
         console.log(event.detail);
     },
     selectTemplate: function(){
-        wx.navigateTo({ url: '/pages/newProject/template', })
+        wx.navigateTo({ url: '../projectTemplate/projectTemplate', })
     }
 })

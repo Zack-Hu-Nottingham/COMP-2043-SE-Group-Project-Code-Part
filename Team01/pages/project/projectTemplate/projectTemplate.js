@@ -1,4 +1,4 @@
-// pages/newProject/template.js
+// pages/project/newProject/projectTemplate/projectTemplate.js
 Page({
 
     /**
