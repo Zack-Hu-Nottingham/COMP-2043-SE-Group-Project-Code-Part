@@ -42,6 +42,11 @@
     "van-datetime-picker": "@vant/weapp/datetime-picker/index",
     "van-circle": "@vant/weapp/circle/index",
     "van-cell": "@vant/weapp/cell/index",
-  "van-cell-group": "@vant/weapp/cell-group/index"
+    "van-cell-group": "@vant/weapp/cell-group/index",
+    "van-field": "@vant/weapp/field/index",
+    "van-nav-bar": "@vant/weapp/nav-bar/index", 
+    "van-submit-bar": "@vant/weapp/submit-bar/index",
+    "van-button": "@vant/weapp/button/index",
+    "van-toast": "@vant/weapp/toast/index"
   }
 }

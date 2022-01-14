@@ -1,4 +1,4 @@
-/* pages/newTask/newTask.wxss */
+/* pages/project/newProject/newProject.wxss */
 .weeks {
     font-size:15px;
 }
