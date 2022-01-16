@@ -95,7 +95,7 @@
           <van-circle
             value="{{(delayed/total)*100}}"
             layer-color="#eeeeee"
-            color="##FF4500"
+            color="#FF4500"
             text="{{(delayed/total)%1*100}}%"
           />
           <view style="color: #808080;">Delayed</view>
