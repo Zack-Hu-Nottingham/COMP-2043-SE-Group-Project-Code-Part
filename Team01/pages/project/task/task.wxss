@@ -109,19 +109,31 @@
     margin-bottom: 20rpx;
     border-radius: 0.5ex;
   }
-  
-  .addSign{
-    display: table;
+  .base{
+    position:fixed; 
+    bottom: 40rpx; 
+    display: flex;
+    text-align: center;
     align-items: center;
     justify-content: center;
-    font-size: 110rpx;
+    width: 100%;
+}
+
+.addSign{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 50rpx;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    width: 100%;
 
 }
 
 .van-button--plain {
-    width: 140rpx !important;
-    height: 140rpx !important;
-    border: 2rpx solid #908df5;
-    color: #908df5;
+    width: 700rpx !important;
+    height: 80rpx !important;
+    border: 1rpx solid #1296db;
+    color: #1296db;
     border-radius: 100%;
   }
