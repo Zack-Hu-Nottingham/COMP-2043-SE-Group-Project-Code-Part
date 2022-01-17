@@ -181,13 +181,14 @@
   <van-collapse value="{{ activeNames }}" bind:change="onChange">
 
     <van-collapse-item title="Started" name="1">
-    
+
       <van-cell
         label="start time:{{startTime}}"
         title="单元格"
         link-type="navigateTo"
         url="/pages/project/taskInfo/taskInfo"
       />
+      
     </van-collapse-item>
 
     <van-collapse-item title="Not Start" name="2">

@@ -6,6 +6,16 @@ Page( {
     animation4Reward: {},
     animation4Pull: {},
     rewardHidden: true,
+    
+    project: [{
+      name: "project1"
+    },{
+      name: "project2"
+    },{
+      name: "project3"
+    },{
+      name: "project4"
+    }]
   },  
   onLoad: function() {
   },
@@ -15,18 +25,20 @@ Page( {
     wx.navigateTo({
       url: '../task/task'
     })
-    console.log(e)
   },
   createProject: function (e) {
     wx.navigateTo({
       url: '../newProject/newProject'
     })
-    console.log(e)
   },
   enterSpecificPro: function (e) {
     wx.navigateTo({
       url: '../projectInfo/projectInfo'
     })
-    console.log(e)
+  },
+  enterStatisticReport: function (e) {
+    wx.navigateTo({
+      url: '../statisticReport/statisticReport'
+    })
   }
 })

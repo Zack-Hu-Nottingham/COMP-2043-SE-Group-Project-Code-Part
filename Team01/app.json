@@ -1,6 +1,7 @@
 {
   "pages":[
     "pages/dashboard/dashboard/dashboard",
+    "pages/message/message/message",
     "pages/project/projectInfo/projectInfo",
     "pages/project/taskInfo/taskInfo",
     "pages/project/task/task",
@@ -10,10 +11,17 @@
     "pages/more/moreInfo/moreInfo",
     "pages/project/newTask/newTask",
     "pages/project/newProject/newProject",
-    "pages/project/projectTemplate/projectTemplate"
+    "pages/project/projectTemplate/projectTemplate",
+    "pages/project/statisticReport/statisticReport"
   ],
   "tabBar": {
     "list":[{
+      "pagePath": "pages/message/message/message",
+      "text": "Message",
+      "iconPath": "/images/project/project.png",
+      "selectedIconPath": "/images/project/project-active.png"
+      
+    },{
       "pagePath": "pages/project/project/project",
       "text": "Project",
       "iconPath": "/images/project/project.png",
@@ -57,6 +65,9 @@
     "van-uploader": "@vant/weapp/uploader/index",
     "van-popup": "@vant/weapp/popup/index",
     "van-collapse": "@vant/weapp/collapse/index",
-    "van-collapse-item": "@vant/weapp/collapse-item/index"
+    "van-collapse-item": "@vant/weapp/collapse-item/index",
+    "van-tabbar": "@vant/weapp/tabbar/index",
+    "van-tabbar-item": "@vant/weapp/tabbar-item/index",
+    "van-divider": "@vant/weapp/divider/index"
   }
 }
