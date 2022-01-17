@@ -1,11 +1,13 @@
 // pages/project/newProject/newProject.js
+import Toast from '../../../miniprogram_npm/@vant/weapp/toast/toast'
 var app = getApp()
 Page({
     /**
      * 页面的初始数据
      */
     data: {
-        showVisibility:false,
+        name: "",
+        details: "",
         "visibility":[{
             "name": "Private",
             "value":"privateProject"
@@ -13,9 +15,10 @@ Page({
             "name": "Public",
             "value":"publicProject"
         }],
-        "templates":[],
-        "templateIndex": 0,
-        "visibilityIndex": 0,
+        selectedTemplate: "Select",
+        selectedVisibility: "Private",
+        isLoading: false,
+        fileList: []
     },
 
     /**
@@ -72,7 +75,16 @@ Page({
     onShareAppMessage: function () {
 
     },
-
+    typeName: function(e){
+        this.setData({
+            name: e.detail
+        })
+    },
+    typeDetails: function(e){
+        this.setData({
+            details: e.detail
+        })
+    },
     changeVisibility: function(){
         var arr = this.data.visibility
         var arrName = new Array()
@@ -82,21 +94,65 @@ Page({
         wx.showActionSheet({
             itemList: arrName,
             itemColor: "gray",
-            success: function(res) {
+            success: (res) =>{
                 this.setData({
-                    visibilityIndex: res.tapIndex
+                    selectedVisibility: arrName[res.tapIndex]
                 })
             }
         })
     },
-    onClose() {
-        this.setData({ show: false });
-    },
-
-    onSelect(event) {
-        console.log(event.detail);
-    },
     selectTemplate: function(){
         wx.navigateTo({ url: '../projectTemplate/projectTemplate', })
-    }
+    },
+    afterRead: function(event) {
+        const { file } = event.detail;
+        // 当设置 mutiple 为 true 时, file 为数组格式，否则为对象格式
+        wx.uploadFile({
+          url: 'https://example.weixin.qq.com/upload', // 仅为示例，非真实的接口地址
+          filePath: file.url,
+          name: 'file',
+          formData: { user: 'test' },
+          success(res) {
+            // 上传完成需要更新 fileList
+            const { fileList = [] } = this.data;
+            fileList.push({ ...file, url: res.data });
+            this.setData({ fileList });
+          },
+        });
+      },
+    formSubmit: function (e) {
+        var that = this
+        if(this.data.name==""){
+            Toast('Name is null');
+        }
+        // else if(this.data.selectedTemplate=="Select"){
+        //     Toast('Template has not been selected');
+        // }
+        else if(this.data.details==""){
+            Toast('No detail description');
+        }
+        else{
+            this.setData({
+                isLoading: true
+            })
+            setTimeout(function(){
+                Toast({
+                    forbidClick: 'true',
+                    type: 'success',
+                    message: 'Success!',
+                  });
+            },1500)
+            setTimeout(function(){
+                that.setData({
+                    isLoading: false
+                })
+            },2400)
+            setTimeout(function(){
+                wx.switchTab({
+                  url: '../project/project',
+                })
+            },2500)
+        }
+        
+    },
 })

@@ -1,4 +1,4 @@
-/* pages/project/newProject/newProject.wxss */
+/* pages/project/newTask/newTask.wxss */
 .gray {
     color:gray;
     font-size:15px;
@@ -13,10 +13,8 @@
   padding: 50rpx;
   margin: 0;
 }
+
 .uploader {
   display: flex;
-  padding: 30rpx;
-}
-.desc {
-  height: 800rpx;
+  padding: 5rpx 30rpx;
 }

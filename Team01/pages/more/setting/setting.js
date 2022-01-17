@@ -1,21 +1,10 @@
-// pages/project/newProject/projectTemplate/projectTemplate.js
+// pages/more/setting/setting.js
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
-        templates:[{
-            "name": "template1",
-            "content": "cement project",
-            "useFrq": "5",
-            "id": "0"
-        },{
-            "name": "template2",
-            "content": "engineering project",
-            "useFrq": "2",
-            "id": "1"
-        },]
 
     },
 
@@ -73,9 +62,5 @@ Page({
      */
     onShareAppMessage: function () {
 
-    },
-
-    onChange: function(event) {
-      console.log(event)
-    },
+    }
 })

@@ -1,5 +1,5 @@
 <!--pages/project/newProject/projectTemplate/projectTemplate.wxml-->
-<van-cell-group inset>
-  <van-cell title="单元格" value="内容" />
-  <van-cell title="单元格" value="内容" label="描述信息" />
+<van-cell-group inset class="cell-group" wx:for="{{templates}}" wx:key="templates.id" bindtap="onChange">
+  <van-cell title="Hello" label="world" bindtap="onChange"/>
+  <van-cell title="{{templates.name}}" label="{{templates.content}}"/>
 </van-cell-group>

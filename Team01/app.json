@@ -5,6 +5,8 @@
     "pages/project/task/task",
     "pages/project/project/project",
     "pages/more/more/more",
+    "pages/more/setting/setting",
+    "pages/more/moreInfo/moreInfo",
     "pages/project/newTask/newTask",
     "pages/project/newProject/newProject",
     "pages/project/projectTemplate/projectTemplate"
@@ -47,6 +49,13 @@
     "van-nav-bar": "@vant/weapp/nav-bar/index", 
     "van-submit-bar": "@vant/weapp/submit-bar/index",
     "van-button": "@vant/weapp/button/index",
-    "van-toast": "@vant/weapp/toast/index"
+    "van-toast": "@vant/weapp/toast/index",
+    "van-action-sheet": "@vant/weapp/action-sheet/index",
+    "van-skeleton": "@vant/weapp/skeleton/index",
+    "van-icon": "@vant/weapp/icon/index",
+    "van-uploader": "@vant/weapp/uploader/index",
+    "van-popup": "@vant/weapp/popup/index",
+    "van-collapse": "@vant/weapp/collapse/index",
+    "van-collapse-item": "@vant/weapp/collapse-item/index"
   }
 }

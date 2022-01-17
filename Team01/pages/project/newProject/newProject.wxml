@@ -1,24 +1,62 @@
 <!--pages/project/newProject/newProject.wxml-->
 <form bindsubmit="formSubmit" report-submit>
-<view>
-    <!--Input project name-->
-    <van-cell-group><van-field class="layout-row border marTop" 
-        value="{{ name }}" placeholder="Enter Project name..." style="padding:0rpx"/></van-cell-group>
+<view class="form">
+    <!--Set Project Information-->
+    <van-cell-group title="Project information">
+        <van-field 
+            label="Project name"
+            value="{{ name }}" 
+            size="large" 
+            input-align="right"
+            placeholder="Enter name..."
+            bind:change="typeName"
+            />
+        <van-cell 
+            title="Template" 
+            is-link size="large" 
+            value="{{selectedTemplate}}" 
+            bindtap="selectTemplate" />
+    </van-cell-group>
 
-    <!--Set project template-->
-    <van-cell class="layout-row marTop" title="Project template" is-link value="(Show the template)" bindtap="selectTemplate" />
-
-    <!--Set visibility-->
-    <van-cell class="layout-row marTop" title="Visibility" is-link value="{{visibility[visibilityIndex].name}}" bindtap="changeVisibility" />
+    <!--Set Privilege-->
+    <van-cell-group title="Privilege">
+        <van-cell 
+            title="Visibility" 
+            is-link size="large" 
+            value="{{selectedVisibility}}" 
+            bindtap="changeVisibility" />
+    </van-cell-group>
 
     <!--Description-->
-    <textarea class="border desc marTop" placeholder="Details..." name="desc" maxlength="1000"/>
+    <van-cell-group title="Notes">
+        <van-field
+            label="Details"
+            value="{{ details }}"
+            type="textarea"
+            placeholder="(less than 500 words)"
+            size="large"
+            maxlength="500"
+            input-align="right"
+            autosize
+            bind:change="typeDetails"
+        />
+    </van-cell-group>
 
-    <!--Submit-->
-    <van-button native-type="button" bind:submit="onSubmit">Create new Project</van-button>
-    <view class="marTop">
-        <button type="primary" size="default" style="background-color: #1296db;" formType="submit" disabled="{{disableHookBtn}}">Create new Project</button>
-    </view>
-    
 </view>
+
+<van-uploader class="uploader" file-list="{{ fileList }}" bind:after-read="afterRead" />
+
+<!--Submit-->    
+<van-button 
+        plain 
+        round 
+        block
+        loading="{{isLoading}}"
+        disabled="{{isLoading}}"
+        class="submitBtn"
+        color="#1296db"
+        type="primary"
+        size="normal"
+        form-type="submit">Create new Project</van-button>
 </form>
+<van-toast id="van-toast" />
