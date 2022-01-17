@@ -1,0 +1,22 @@
+<!-- <van-divider></van-divider> -->
+
+<van-cell title="Start Time" is-link value="{{startTime}}" bind:click="onDisplay"/>
+<van-calendar show="{{ dateShow }}" bind:close="onClose" default-date="{{startTime}}" bind:confirm="onConfirmStartTime" />
+
+<van-cell title="End Time" is-link value="{{endTime}}" bind:click="onDisplay"/>
+<van-calendar show="{{ dateShow }}" bind:close="onClose" default-date="{{endTime}}" bind:confirm="onConfirmEndTime" />
+
+<van-cell title="Belong To"  value="{{belongTo}}"/>
+<van-cell title="Stage Of Project" is-link value="{{stageOfProject}}" />
+<van-cell title="Priority" is-link value="{{currentPriority}}" bindtap="clickPriority"/>
+
+<van-action-sheet
+  show="{{ priorityShow }}"
+  actions="{{ priority }}"
+  bind:close="onPriorityClose"
+  bind:select="onPrioritySelect"
+/>
+
+<van-cell title="Tag" is-link value="{{tag}}" />
+<van-cell title="Participant" is-link value="{{participant}}" />
+<van-cell title="Description" is-link value="{{description}}" />

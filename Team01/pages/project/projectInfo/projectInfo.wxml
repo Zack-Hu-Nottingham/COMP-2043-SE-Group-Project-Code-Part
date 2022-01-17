@@ -95,7 +95,7 @@
           <van-circle
             value="{{(delayed/total)*100}}"
             layer-color="#eeeeee"
-            color="##FF4500"
+            color="#FF4500"
             text="{{(delayed/total)%1*100}}%"
           />
           <view style="color: #808080;">Delayed</view>
@@ -181,11 +181,12 @@
   <van-collapse value="{{ activeNames }}" bind:change="onChange">
 
     <van-collapse-item title="Started" name="1">
+    
       <van-cell
         label="start time:{{startTime}}"
         title="单元格"
         link-type="navigateTo"
-        url="/pages/project/task/task"
+        url="/pages/project/taskInfo/taskInfo"
       />
     </van-collapse-item>
 

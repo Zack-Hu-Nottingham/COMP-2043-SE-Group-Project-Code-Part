@@ -9,9 +9,9 @@ Page({
       name2: "Task2",
       name3: "Task3",
   },
-  enterSpecificPro: function (e) {
+  enterSpecificTask: function (e) {
     wx.navigateTo({
-      url: '../../project/projectInfo/projectInfo'
+      url: '../../project/taskInfo/taskInfo'
     })
     console.log(e)
   },

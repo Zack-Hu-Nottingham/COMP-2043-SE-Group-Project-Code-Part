@@ -2,6 +2,7 @@
   "pages":[
     "pages/dashboard/dashboard/dashboard",
     "pages/project/projectInfo/projectInfo",
+    "pages/project/taskInfo/taskInfo",
     "pages/project/task/task",
     "pages/project/project/project",
     "pages/more/more/more",
