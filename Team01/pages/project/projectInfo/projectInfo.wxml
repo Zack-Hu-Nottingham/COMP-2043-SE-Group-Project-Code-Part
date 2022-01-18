@@ -208,6 +208,5 @@
 
 <!-- Gantt Diagram -->
 <view wx:else>
-
 gant diagram
 </view>

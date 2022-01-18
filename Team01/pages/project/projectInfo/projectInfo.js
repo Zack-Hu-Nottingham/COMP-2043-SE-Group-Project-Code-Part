@@ -14,15 +14,11 @@ Page({
     stateDescription: "None",
     currentState: "Normal",
     task: [],
-    startTask: [],
-    notStartTask: [],
-    finishedTask: [],
     unstarted: 5,
     processing: 1,
     completed: 1,
     total: 7,
     delayed: 0,
-
     navbar: ['Project Information', 'Task Management', 'Gantt Diagram'],
     currentTab: 0,
     index: 0,
@@ -88,40 +84,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log("hello")
-    try{
-      wx.request({
-        url: 'team01.site/project',
-        method: 'GET',
-        data: options,
-        timeout: 1000,
-        success (res) {
-          this.setData ({
-            name: options.name,
-            owner: options.owner,
-            startTime: options.startTime,
-            endTime: options.endTime,
-            projectDescription: options.projectDescription,
-            stateDescription: options.stateDescription,
-            currentState: options.currentState,
-            task: options.task,
-            // startTask: [],
-            // notStartTask: [],
-            // finishedTask: [],
-            // unstarted: 5,
-            // processing: 1,
-            // completed: 1,
-            // total: 7,
-            delayed: 2,
-          })
-          com
-        }
-      })  
-    } catch(error) {
-      console.log(error)
-    }
-    console.log("bye")
-    
+    this.setData ({
+      query: options
+    })
   },
 
   /**

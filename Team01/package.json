@@ -1,6 +1,7 @@
 {
   "dependencies": {
-    "@vant/weapp": "^1.10.2"
+    "@vant/weapp": "^1.10.2",
+    "rollup": "^2.64.0"
   },
   "name": "team01",
   "version": "1.0.0",
