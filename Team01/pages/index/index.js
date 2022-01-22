@@ -177,8 +177,14 @@ Page({
    */
   clickMessage(event) {
     wx.navigateTo({
-      url: '../message/message/message',
+      url: '../message/message/message?sender=' + event.target.id,
     })
+  },
+
+  clickNotification(event) {
+    // wx.navigateTo({
+      // url: '',
+    // })
   },
 
 
@@ -201,7 +207,7 @@ Page({
 
   clickProject(event) {
     wx.navigateTo({
-      url: '../project/projectInfo/projectInfo',
+      url: '../project/projectInfo/projectInfo?project=' + event.target.id,
     })
   },
 
@@ -210,7 +216,12 @@ Page({
   /**
    * Dashboard page's method
    */
-
+  clickTask(event) {
+    console.log(event.target)
+    wx.navigateTo({
+      url: '../project/taskInfo/taskInfo?task=' +  event.target.id,
+    })
+  },
 
 
   
