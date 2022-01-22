@@ -1,0 +1,41 @@
+
+<van-cell-group inset style="padding: 30rpx" title="Basic information">
+  <van-cell title="Start time" is-link value="{{startTime}}" bindtap="onDateDisplay" />
+  <van-cell title="End time" is-link value="{{endTime}}" bindtap="onDateDisplay" />
+</van-cell-group>
+
+<van-cell-group inset style="padding: 30rpx">
+  <van-cell title="Belong to" value="{{belongTo}}" />
+  <van-field
+    model:value="{{ description }}"
+    center
+    clearable
+    label="Description"
+    placeholder="None"
+    border="{{ false }}"
+  >
+  </van-field>
+</van-cell-group>
+
+
+<van-cell-group inset style="padding: 30rpx">
+  <van-cell title="Stage Of Project" value="{{stageOfProject}}" />
+  <van-cell title="Priority" is-link value="{{currentPriority}}" bindtap="clickPriority" />
+  <van-cell title="Tag" is-link value="{{tag}}" />
+  <van-cell title="Participant" is-link value="{{participant}}" />
+</van-cell-group>
+
+<van-action-sheet
+  show="{{ priorityShow }}"
+  actions="{{ priority }}"
+  bind:close="onPriorityClose"
+  bind:select="onPrioritySelect"
+/>
+
+<van-calendar
+  show="{{ show }}"
+  title="choose period"
+  type="range"
+  bind:close="onClose"
+  bind:confirm="onConfirm"
+/>

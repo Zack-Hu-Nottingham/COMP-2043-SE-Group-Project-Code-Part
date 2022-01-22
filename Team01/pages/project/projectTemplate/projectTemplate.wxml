@@ -1,0 +1,5 @@
+<!--pages/project/newProject/projectTemplate/projectTemplate.wxml-->
+<van-cell-group inset class="cell-group" wx:for="{{templates}}" wx:key="templates.id" bindtap="onChange">
+  <van-cell title="Hello" label="world" bindtap="onChange"/>
+  <van-cell title="{{templates.name}}" label="{{templates.content}}"/>
+</van-cell-group>

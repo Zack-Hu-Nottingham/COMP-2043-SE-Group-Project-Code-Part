@@ -1,0 +1,20 @@
+/* pages/project/newTask/newTask.wxss */
+.gray {
+    color:gray;
+    font-size:15px;
+}
+.form {
+    margin: 0rpx;
+    padding: 0 10rpx;
+  }
+
+.submitBtn {
+  display: flex;
+  padding: 50rpx;
+  margin: 0;
+}
+
+.uploader {
+  display: flex;
+  padding: 5rpx 30rpx;
+}

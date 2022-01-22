@@ -1,0 +1,65 @@
+<!--pages/dashboard/dashboard.wxml-->
+
+
+<view class="projectBlock">
+
+<view class="block">
+    <image class="taskIcon" src="/images/taskIcon.png"></image>
+    <view class="title">Today Tasks</view>
+</view>
+
+<!-- Not started task template -->
+<form bindsubmit='enterSpecificTask' report-submit>
+    <button plain="true" form-type='submit' class="pro">
+        <view class="container">
+            <view class="notStartedGroup">
+                <image src="/images/NotStartedIcon.png" mode="widthFix" style="width: 40rpx;"></image>
+                <view class="imageDiscription">NotStarted</view>
+            </view>
+
+            <view class="TaskName">{{name1}}</view>
+            <image src="/images/rightArrow.png" mode="widthFix" style="width: 30rpx;" class="rightArrow"></image>
+        </view>
+    </button>
+</form>
+
+
+<view class="sp"></view>
+
+<!-- Progressing task template -->
+<form bindsubmit='enterSpecificTask' report-submit>
+    <button plain="true" form-type='submit' class="pro">
+        <view class="container">
+            <view class="progressingGroup">
+                <image src="/images/ProgressingIcon.png" mode="widthFix" style="width: 40rpx;"></image>
+                <view class="imageDiscription">Progressing</view>
+            </view>
+
+            <view class="TaskName">{{name2}}</view>
+            <image src="/images/rightArrow.png" mode="widthFix" style="width: 30rpx;" class="rightArrow"></image>
+        </view>
+    </button>
+</form>
+
+
+<view class="sp"></view>
+
+<!-- Finished task template -->
+<form bindsubmit='enterSpecificTask' report-submit>
+    <button plain="true" form-type='submit' class="pro">
+        <view class="container">
+
+
+        <view class="finishedGroup">
+             <image src="/images/FinishedIcon.png" mode="widthFix" style="width: 40rpx;"></image>
+            <view class="imageDiscription">NotStarted</view>
+        </view>
+
+         <view class="TaskName">{{name3}}</view>
+        <image src="/images/rightArrow.png" mode="widthFix" style="width: 30rpx;" class="rightArrow"></image>
+        </view>
+    </button>
+</form>
+
+
+</view>

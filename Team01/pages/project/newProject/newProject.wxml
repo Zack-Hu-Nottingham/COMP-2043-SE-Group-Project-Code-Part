@@ -1,0 +1,28 @@
+<!--pages/project/newProject/newProject.wxml-->
+<form bindsubmit="formSubmit" report-submit>
+<view class="form">
+    <!--Set Project Information-->
+    <van-cell-group title="Project information">
+        <van-field label="Project name" value="{{ name }}" size="large" input-align="right" placeholder="Enter name..." bind:change="typeName" />
+        <van-cell title="Template" is-link size="large" value="{{selectedTemplate}}" bindtap="selectTemplate" />
+    </van-cell-group>
+
+    <!--Set Privilege-->
+    <van-cell-group title="Privilege">
+        <van-cell title="Visibility" is-link size="large" value="{{selectedVisibility}}" bindtap="changeVisibility" />
+    </van-cell-group>
+
+    <!--Description-->
+    <van-cell-group title="Notes">
+        <van-field label="Details" value="{{ details }}" type="textarea" placeholder="(less than 500 words)" size="large" maxlength="500" input-align="right" autosize bind:change="typeDetails" />
+    </van-cell-group>
+
+</view>
+
+<van-uploader class="uploader" file-list="{{ fileList }}" bind:after-read="afterRead" />
+
+<!--Submit-->    
+<van-button plain round block loading="{{isLoading}}" disabled="{{isLoading}}" class="submitBtn" color="#1296db" type="primary" size="normal" form-type="submit">Create new Project</van-button>
+
+</form>
+<van-toast id="van-toast" />

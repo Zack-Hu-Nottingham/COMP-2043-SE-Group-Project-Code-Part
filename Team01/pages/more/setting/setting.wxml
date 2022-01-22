@@ -1,0 +1,10 @@
+
+<van-cell title="About" is-link  style="padding: 30rpx" />
+<!-- <van-cell title="单元格" is-link value="内容" /> -->
+<van-cell title="Language" is-link value="内容" arrow-direction="down" />
+
+<view></view>
+<view></view>
+<view></view>
+
+<van-button hairline plain round block color="#DC143C" type="primary" style="padding: 60rpx;">Sign Out</van-button>
