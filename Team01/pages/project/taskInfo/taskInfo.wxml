@@ -1,14 +1,29 @@
-<!-- <van-divider></van-divider> -->
 
-<van-cell title="Start Time" is-link value="{{startTime}}" bind:click="onDisplay"/>
-<van-calendar show="{{ dateShow }}" bind:close="onClose" default-date="{{startTime}}" bind:confirm="onConfirmStartTime" />
+<van-cell-group inset style="padding: 30rpx" title="Basic information">
+  <van-cell title="Start time" is-link value="{{startTime}}" bindtap="onDateDisplay" />
+  <van-cell title="End time" is-link value="{{endTime}}" bindtap="onDateDisplay" />
+</van-cell-group>
 
-<van-cell title="End Time" is-link value="{{endTime}}" bind:click="onDisplay"/>
-<van-calendar show="{{ dateShow }}" bind:close="onClose" default-date="{{endTime}}" bind:confirm="onConfirmEndTime" />
+<van-cell-group inset style="padding: 30rpx">
+  <van-cell title="Belong to" value="{{belongTo}}" />
+  <van-field
+    model:value="{{ description }}"
+    center
+    clearable
+    label="Description"
+    placeholder="None"
+    border="{{ false }}"
+  >
+  </van-field>
+</van-cell-group>
 
-<van-cell title="Belong To"  value="{{belongTo}}"/>
-<van-cell title="Stage Of Project" is-link value="{{stageOfProject}}" />
-<van-cell title="Priority" is-link value="{{currentPriority}}" bindtap="clickPriority"/>
+
+<van-cell-group inset style="padding: 30rpx">
+  <van-cell title="Stage Of Project" value="{{stageOfProject}}" />
+  <van-cell title="Priority" is-link value="{{currentPriority}}" bindtap="clickPriority" />
+  <van-cell title="Tag" is-link value="{{tag}}" />
+  <van-cell title="Participant" is-link value="{{participant}}" />
+</van-cell-group>
 
 <van-action-sheet
   show="{{ priorityShow }}"
@@ -17,6 +32,10 @@
   bind:select="onPrioritySelect"
 />
 
-<van-cell title="Tag" is-link value="{{tag}}" />
-<van-cell title="Participant" is-link value="{{participant}}" />
-<van-cell title="Description" is-link value="{{description}}" />
+<van-calendar
+  show="{{ show }}"
+  title="choose period"
+  type="range"
+  bind:close="onClose"
+  bind:confirm="onConfirm"
+/>

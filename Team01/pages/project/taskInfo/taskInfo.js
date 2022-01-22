@@ -10,11 +10,11 @@ Page({
     stageOfProject: "",
     tag: "",
     participants: [],
-    description: "None",
+    description: "",
 
     
-    startTime: '2022-1-16',
-    endTime: '2022-5-12',
+    startTime: '1/16',
+    endTime: '5/12',
     dateShow: false,
 
     currentPriority: 'normal',
@@ -35,7 +35,11 @@ Page({
       {
         name: 'lowest'
       },
-    ]
+    ],
+
+
+    data: '',
+    show: false
   },
 
   /**
@@ -95,34 +99,53 @@ Page({
   onShareAppMessage: function () {
 
   },
-
-  
   onDateDisplay() {
-    this.setData({ dateShow: true });
+    this.setData({ show: true });
   },
-
-  onDateClose() {
-    this.setData({ dateShow: false });
+  onClose() {
+    this.setData({ show: false });
   },
-
   formatDate(date) {
     date = new Date(date);
-    return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+    return `${date.getMonth() + 1}/${date.getDate()}`;
+  },
+  onConfirm(event) {
+    const [start, end] = event.detail;
+    this.setData({
+      startTime: this.formatDate(start),
+      endTime: this.formatDate(end),
+      show: false,
+      date: `${this.formatDate(start)} - ${this.formatDate(end)}`,
+    });
   },
 
-  onConfirmStartTime(event) {
-    this.setData({
-      dateShow: false,
-      startTime: this.formatDate(event.detail),
-    });
-  },
   
-  onConfirmEndTime(event) {
-    this.setData({
-      dateShow: false,
-      endTime: this.formatDate(event.detail),
-    });
-  },
+  // onDateDisplay() {
+  //   this.setData({ dateShow: true });
+  // },
+
+  // onDateClose() {
+  //   this.setData({ dateShow: false });
+  // },
+
+  // formatDate(date) {
+  //   date = new Date(date);
+  //   return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+  // },
+
+  // onConfirmStartTime(event) {
+  //   this.setData({
+  //     dateShow: false,
+  //     startTime: this.formatDate(event.detail),
+  //   });
+  // },
+  
+  // onConfirmEndTime(event) {
+  //   this.setData({
+  //     dateShow: false,
+  //     endTime: this.formatDate(event.detail),
+  //   });
+  // },
 
   onPriorityClose() {
     this.setData({priorityShow: false})

@@ -1,12 +1,13 @@
-<view class="navbar">
-  <text wx:for="{{navbar}}" data-idx="{{index}}" class="item {{currentTab==index ? 'active' : ''}}" wx:key="unique" bindtap="navbarTap">{{item}}</text>
-</view>
+<van-sticky offset-top="{{ 0 }}">
+  <view class="navbar">
+    <text wx:for="{{navbar}}" data-idx="{{index}}" class="item {{currentTab==index ? 'active' : ''}}" wx:key="unique" bindtap="navbarTap">{{item}}</text>
+  </view>
+</van-sticky>
 
 
 <!-- Subpages -->
 <view wx:if="{{currentTab==0}}">
 
-  <scroll-view scroll-y="true" style="height: 90%;">
     <!-- Project Information -->
     <view class="block">
       
@@ -144,7 +145,6 @@
       </view>
     </view>
 
-  </scroll-view>
 </view>
 
 

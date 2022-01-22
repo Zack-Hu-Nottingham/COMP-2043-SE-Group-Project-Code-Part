@@ -1,5 +1,6 @@
 {
   "pages":[
+    "pages/index/index",
     "pages/dashboard/dashboard/dashboard",
     "pages/message/message/message",
     "pages/project/projectInfo/projectInfo",
@@ -15,34 +16,6 @@
     "pages/project/projectTemplate/projectTemplate",
     "pages/project/statisticReport/statisticReport"
   ],
-  "tabBar": {
-    "list":[{
-      "pagePath": "pages/message/message/message",
-      "text": "Message",
-      "iconPath": "/images/project/project.png",
-      "selectedIconPath": "/images/project/project-active.png"
-      
-    },{
-      "pagePath": "pages/project/project/project",
-      "text": "Project",
-      "iconPath": "/images/project/project.png",
-      "selectedIconPath": "/images/project/project-active.png"
-    },{
-      "pagePath": "pages/dashboard/dashboard/dashboard",
-      "text": "Dashboard",
-      "iconPath": "/images/dashboard/dashboard.png",
-      "selectedIconPath": "/images/dashboard/dashboard-active.png"
-    },{
-      "pagePath": "pages/more/more/more",
-      "text": "More",
-      "iconPath": "/images/more/more.png",
-      "selectedIconPath": "/images/more/more-active.png"
-    }
-    ],
-    "color": "#696969",
-    "selectedColor": "#1296db"
-    
-  },
   "window":{
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#fff",
@@ -69,6 +42,8 @@
     "van-collapse-item": "@vant/weapp/collapse-item/index",
     "van-tabbar": "@vant/weapp/tabbar/index",
     "van-tabbar-item": "@vant/weapp/tabbar-item/index",
-    "van-divider": "@vant/weapp/divider/index"
+    "van-divider": "@vant/weapp/divider/index",
+    "van-tag": "@vant/weapp/tag/index",
+    "van-sticky": "@vant/weapp/sticky/index"
   }
 }

@@ -1,23 +1,24 @@
 {
-    "condition": {
-        "plugin": {
-            "list": []
-        },
-        "game": {
-            "list": []
-        },
-        "gamePlugin": {
-            "list": []
-        },
-        "miniprogram": {
-            "list": [
-                {
-                    "name": "",
-                    "pathName": "pages/project/testDiagram/testDiagram",
-                    "query": "",
-                    "scene": null
-                }
-            ]
+  "setting": {},
+  "condition": {
+    "plugin": {
+      "list": []
+    },
+    "game": {
+      "list": []
+    },
+    "gamePlugin": {
+      "list": []
+    },
+    "miniprogram": {
+      "list": [
+        {
+          "name": "",
+          "pathName": "pages/project/taskInfo/taskInfo",
+          "query": "",
+          "scene": null
         }
+      ]
     }
+  }
 }
