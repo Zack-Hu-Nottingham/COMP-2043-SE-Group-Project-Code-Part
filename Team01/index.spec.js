@@ -18,7 +18,7 @@ describe('index', () => {
 
   test('jump to specific page', async () => {
     //获取发起页面 按钮
-    const element = await page.$('.myTaskCellForTest');
+    const element = await page.$('.myTaskForTest');
     //点击发起  点击后跳转到发起页面
     await element.tap();
     await page.waitFor(500);
