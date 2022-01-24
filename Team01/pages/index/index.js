@@ -91,6 +91,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    wx.login({
+      success: (res) => {
+        console.log(res)
+      }
+    })
+
+
     wx.setNavigationBarTitle({
       title: this.data.pageName[this.data.active],
     }),
@@ -242,11 +249,13 @@ Page({
       }
     })
   },
+
   onSetting: function(){
     wx.navigateTo({
       url: '../more/setting/setting',
     })
   },
+  
   onMoreInfo: function(){
     wx.navigateTo({
       url: '../more/moreInfo/moreInfo',
