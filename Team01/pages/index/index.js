@@ -18,6 +18,12 @@ Page({
     /**
      * Message page's data
      */
+<<<<<<< Updated upstream
+=======
+    messageList: [],
+
+
+>>>>>>> Stashed changes
 
     messageList: [],
 
@@ -26,10 +32,18 @@ Page({
      */
 
     project: [],
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 
     /**
      * Dashboard page's data
      */
+<<<<<<< Updated upstream
+=======
+    taskList:[],
+>>>>>>> Stashed changes
 
     taskList: [],
 
@@ -56,7 +70,10 @@ Page({
    */
   onLoad: function (options) {
 
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
     wx.cloud.database().collection('messageList').get()
       .then(res => {
         this.setData({
@@ -87,6 +104,10 @@ Page({
         console.log('请求失败', err)
       }),
 
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
     wx.setNavigationBarTitle({
       title: this.data.pageName[this.data.active],
     }),

@@ -1,6 +1,11 @@
 // app.js
 App({
+<<<<<<< Updated upstream
   onLaunch: function() {
+=======
+
+  onLaunch() {
+>>>>>>> Stashed changes
 
     wx.cloud.init({
       traceUser: true,
