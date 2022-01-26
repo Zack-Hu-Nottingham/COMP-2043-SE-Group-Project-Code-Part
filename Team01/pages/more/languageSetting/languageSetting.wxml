@@ -1,0 +1,20 @@
+<van-dialog id="van-dialog" />
+
+<!-- <van-cell-group inset title="{{dictionary.current_lan}}" style="padding: 20rpx;">
+  <van-cell title="{{languageList[language]}}" >
+    <view slot="">
+      <van-icon name="success" color="green"/>
+    </view>
+  </van-cell>
+</van-cell-group>
+
+<van-cell-group inset title="{{dictionary.available_lan}}" style="padding: 20rpx;">
+  <view wx:for="{{languageList}}" wx:key="index" >
+    <view wx:if="{{index != language}}">
+      <van-cell title="{{item}}" value="{{dictionary.choose}}" clickable="true" id="{{index}}" bindtap="onChangeLan"/>
+    </view>
+  </view>
+</van-cell-group>
+
+<van-toast id="van-toast" /> -->
+
