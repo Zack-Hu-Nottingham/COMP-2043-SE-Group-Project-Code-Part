@@ -105,7 +105,11 @@ Page({
     })
 
     // 初始化语言
+    var lan = wx.getStorageSync("languageVersion");
     this.initLanguage();
+    this.setData({
+      language: lan
+    })
 
     // 载入时设置初始页面的navBar title
     wx.setNavigationBarTitle({
@@ -137,7 +141,11 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    var lan = wx.getStorageSync("languageVersion");
+    this.initLanguage();
+    this.setData({
+      language: lan
+    })
   },
 
   /**
@@ -220,6 +228,7 @@ Page({
 
 
 
+
    
   /**
    * Project page's method
@@ -287,8 +296,12 @@ Page({
   },
 
   // 点击language展示选项
-  onChangeLan: function() {
-    this.lanShowPopup()
+  onChangeLan(event) {
+    console.log('check')
+    wx.navigateTo({
+      url: '../more/languageSetting/languageSetting',
+    })
   },
+
 
 })

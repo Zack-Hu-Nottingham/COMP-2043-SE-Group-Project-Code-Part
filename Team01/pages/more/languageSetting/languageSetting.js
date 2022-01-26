@@ -20,25 +20,38 @@ Page({
 
   onChangeLan(event) {
 
-    Dialog.confirm({
-      context: this,
-      // title: this.data.dictionary.change_lan_confirm,
-      // message: '弹窗内容',
-    })
-      .then(() => {
-        // on confirm
-      })
-      .catch(() => {
-        // on cancel
-        return
-      });
-
-    // this.setData({
-    //   language: event.target.id
+    // Dialog.confirm({
+    //   context: this,
+    //   // title: this.data.dictionary.change_lan_confirm,
+    //   // message: '弹窗内容',
     // })
-    // languageUtils.changLanguage()
-    // this.initLanguage()
-    // Toast.success(this.data.dictionary.success_change)
+    //   .then(() => {
+    //     // on confirm
+    //   })
+    //   .catch(() => {
+    //     // on cancel
+    //     return
+    //   });
+    
+    // if (this.data.language == 0) {
+    //   wx.setStorage({
+    //     key: "languageVersion",
+    //     data: 1,
+    //   });
+    // } else if (this.data.language == 1) {
+    //   wx.setStorage({
+    //     key: "languageVersion",
+    //     data: 0,
+    //   });
+    // }
+    
+
+    this.setData({
+      language: event.target.id
+    })
+    languageUtils.changLanguage()
+    this.initLanguage()
+    Toast.success(this.data.dictionary.success_change)
   },
 
   // 初始化语言
@@ -70,8 +83,11 @@ Page({
         return
       });
 
-    // console.log('hello')
-    // this.initLanguage();
+    var lan = wx.getStorageSync("languageVersion");
+    this.initLanguage();
+    this.setData({
+      language: lan
+    })
 
   },
 
