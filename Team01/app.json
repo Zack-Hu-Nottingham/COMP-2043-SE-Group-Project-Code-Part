@@ -14,7 +14,8 @@
     "pages/project/newTask/newTask",
     "pages/project/newProject/newProject",
     "pages/project/projectTemplate/projectTemplate",
-    "pages/project/statisticReport/statisticReport"
+    "pages/project/statisticReport/statisticReport",
+    "pages/more/languageSetting/languageSetting"
   ],
   "window":{
     "backgroundTextStyle":"light",
