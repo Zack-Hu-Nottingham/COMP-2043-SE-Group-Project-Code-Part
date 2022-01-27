@@ -58,7 +58,9 @@
   "debugOptions": {
     "hidedInDevtools": []
   },
-  "scripts": {},
+  "scripts": {
+    "test":"jest"
+  },
   "staticServerOptions": {
     "baseURL": "",
     "servePath": ""

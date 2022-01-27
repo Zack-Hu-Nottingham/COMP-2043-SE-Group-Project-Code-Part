@@ -35,8 +35,8 @@
 </view> -->
 
 <van-cell-group inset style="padding: 30rpx;">
-  <van-cell center title="My Task" icon="user-o" bindtap="enterSpecificTask" clickable="true"/>
-  <van-cell center title=" Statistics Report" icon="bar-chart-o" bindtap="enterStatisticReport" clickable="true"/>
+  <van-cell center title="My Task" icon="user-o" bindtap="enterSpecificTask" clickable="true" class="myTaskForTest"/>
+  <van-cell center title=" Statistics Report" icon="bar-chart-o" bindtap="enterStatisticReport" clickable="true" class="statisticReportForTest"/>
 </van-cell-group>
 
 
