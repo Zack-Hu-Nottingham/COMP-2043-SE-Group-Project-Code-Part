@@ -248,7 +248,7 @@ series:[
             }
         },
         //zlevel: -1,
-        data: [new Date("2021-04-30"), new Date("2021-03-12"), new Date("2021-02-15")]
+        data: [new Date("2021-04-30"), new Date("2021-03-15"), new Date("2021-02-15")]
     },
     {
         name: "项目实施阶段",
