@@ -87,6 +87,8 @@
   </view>
 
   <van-cell-group inset>
+    <van-cell center icon="user-o" />
+    <!-- title="{{dictionary.user_info}}" -->
     <van-cell center title="{{dictionary.user_name}}">
         <open-data type="userNickName"></open-data>
     </van-cell>
@@ -100,7 +102,8 @@
   </van-cell-group>
 
   <van-cell-group inset style="padding: 30rpx;">
-    <van-cell center value="Setting" icon="setting-o" clickable="true" bindtap="onSetting"/>
+    <van-cell center icon="setting-o" clickable="true" bindtap="onSetting"/>
+    <!-- title="{{dictionary.setting}}" -->
     <van-cell center title="{{dictionary.invite_member}}" is-link icon="" clickable="true" bindtap="onInviteMember"/>
     <van-cell center title="{{dictionary.language}}" value="{{languageList[language]}}" icon="" is-link clickable="true" bindtap="onChangeLan"/>
   </van-cell-group>

@@ -4,7 +4,7 @@ var Languague = {
      message_page: "消息",
      project_page: "项目",
      dashboard_page: "首页",
-     more_page: "用户",
+     more_page: "更多",
 
      // message page
      notification: "通知",
@@ -28,6 +28,8 @@ var Languague = {
      invite_member: "邀请用户",
      language: "语言",
      more: "更多信息",
+     setting: "设置",
+     user_info: "用户信息",
 
      // language setting page
      current_lan: "当前语言",

@@ -28,6 +28,8 @@ var Languague = {
     invite_member: "Invite Member",
     language: "Language",
     more: "More Information",
+    setting: "Setting",
+    user_info: "User Info",
 
      // language setting page
     current_lan: "Current language",

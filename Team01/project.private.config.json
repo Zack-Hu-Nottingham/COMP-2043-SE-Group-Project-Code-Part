@@ -17,6 +17,18 @@
           "pathName": "pages/project/taskInfo/taskInfo",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/more/languageSetting/languageSetting",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/more/test/test",
+          "query": "",
+          "scene": null
         }
       ]
     }
