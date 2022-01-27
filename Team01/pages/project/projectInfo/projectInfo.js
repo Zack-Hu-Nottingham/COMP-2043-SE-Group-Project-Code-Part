@@ -2,7 +2,7 @@
 import * as echarts from '../../../ec-canvas/echarts';
 
 const app = getApp()
-
+// line 5-441: function initChart() 甘特图填充信息
 function initChart(canvas, width, height, dpr) {
   const chart = echarts.init(canvas, null, {
     width: width,
@@ -16,8 +16,8 @@ function initChart(canvas, width, height, dpr) {
 
 
     title: {
-      text: "项目甘特图",
-      padding: 20,
+      text: "Gantt Diagram(Demo)",
+      padding: 15,
       textStyle: {
           fontSize: 17,
           fontWeight: "bolder",
@@ -29,56 +29,24 @@ function initChart(canvas, width, height, dpr) {
       }
     },
     legend: {
-      data: ["计划工期", "可行性研究阶段", "初步设计阶段", "施工图设计阶段", "项目实施阶段", "项目验收阶段"],
-      align: "right",
-      top: 40
+      data: ["计划总工期", "施工放线阶段", "施工放样阶段", "项目实施阶段", "项目验收阶段"],
+      align: "left",
+      top: '5%'
   },
   grid: {
     containLabel: true,
     show: false,
-    right: 50,
-    left: 10,
-    bottom: 50,
-    top: 90
+    right: '25%',
+    left: '2%',
+    bottom: '10%',
+    top: '15%'
 },
-
 xAxis: {
   type: "time",
   axisLabel: {
       "show": true,
-      "interval": 0
   }
 },
-
-dataZoom: [{
-  type: 'inside',
-}, {
-  handleIcon: 'M10.7,11.9v-1.3H9.3v1.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4v1.3h1.3v-1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7V23h6.6V24.4z M13.3,19.6H6.7v-1.4h6.6V19.6z',
-  handleSize: '80%',
-  handleStyle: {
-      color: '#fff',
-      shadowBlur: 3,
-      shadowColor: 'rgba(0, 0, 0, 0.6)',
-      shadowOffsetX: 2,
-      shadowOffsetY: 2
-  }
-}],
-/*
-dataZoom: [
-    {
-      type: 'inside',
-      show: true,
-      yAxisIndex: [0],
-      startValue: 0,
-      endValue: 9,
-      handleSize: 0,
-      showDetail: false,
-      right: '5%',
-      width: '2%',
-      zoomLock: false
-    }
-  ],*/
-
 yAxis: {
   axisLabel: {
       show: true,
@@ -101,8 +69,22 @@ yAxis: {
           }
       }
   },
-  data: ["阶段一", "标段二", "标段三"]
+  data: ["土木工程", "水电工程", "泥水工程"]
 },
+dataZoom: [{
+  type: 'inside'
+}, {
+  handleIcon: 'M10.7,11.9v-1.3H9.3v1.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4v1.3h1.3v-1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7V23h6.6V24.4z M13.3,19.6H6.7v-1.4h6.6V19.6z',
+  handleSize: '80%',
+  handleStyle: {
+      color: '#fff',
+      shadowBlur: 3,
+      shadowColor: 'rgba(0, 0, 0, 0.6)',
+      shadowOffsetX: 2,
+      shadowOffsetY: 2
+  }
+}],
+
 tooltip: {
   trigger: "axis",
   formatter: function(params) {
@@ -129,10 +111,11 @@ tooltip: {
   }
 },
 series:[
+    //计划总工期 End time:
     {
-        name: "计划工期",
+        name: "计划总工期",
         type: "bar",
-        stack: "总量0",
+        stack: "s0",
         label: {
             normal: {
                 show: true,
@@ -145,19 +128,20 @@ series:[
         },
         itemStyle: {
             normal: {
-                color: "skyblue",
+                color: "#1296db",
                 borderColor: "#fff",
                 borderWidth: 2
             }
         },
         zlevel: 0,
         //zlevel: -1,
-        data: [new Date("2018-05-01"), new Date("2018-03-14"), new Date("2018-05-01")]
+        data: [new Date("2021-05-01"), new Date("2021-03-30"), new Date("2021-03-14")]
     },
+    //计划总工期 Start time:
     {
-        name: "计划工期",
+        name: "计划总工期",
         type: "bar",
-        stack: "总量0",
+        stack: "s0",
         itemStyle: {
             normal: {
                 color: "white",
@@ -166,12 +150,12 @@ series:[
         zlevel: 0,
         //zlevel: -1,
         z: 3,
-        data: [new Date("2018-01-01"), new Date("2018-01-01"), new Date("2018-03-15")]
+        data: [new Date("2021-04-01"), new Date("2021-02-01"), new Date("2021-01-12")]
     },
     {
-        name: "可行性研究阶段",
+        name: "施工放线阶段",
         type: "bar",
-        stack: "总量2",
+        stack: "s1",
         label: {
             normal: {
                 show: true,
@@ -184,55 +168,18 @@ series:[
         },
         itemStyle: {
             normal: {
-                color: "green",
+                color: "#afeeee",
                 borderColor: "#fff",
                 borderWidth: 2
             }
         },
         //zlevel: -1,
-        data: [new Date("2018-01-10"), new Date("2018-01-10"), new Date("2018-03-30")]
+        data: [new Date("2021-04-10"), new Date("2021-02-20"), new Date("2021-01-20")]
     },
     {
-        name: "可行性研究阶段",
+        name: "施工放线阶段",
         type: "bar",
-        stack: "总量2",
-        itemStyle: {
-            normal: {
-                color: "white",
-            }
-        },
-        //zlevel: -1,
-        z: 3,
-        data: [new Date("2018-01-02"), new Date("2018-01-02"), new Date("2018-03-16")]
-    },
-    {
-        name: "初步设计阶段",
-        type: "bar",
-        stack: "总量3",
-        label: {
-            normal: {
-                show: true,
-                color: "#000",
-                position: "right",
-                formatter: function(params) {
-                    return params.seriesName
-                }
-            }
-        },
-        itemStyle: {
-            normal: {
-                color: "red",
-                borderColor: "#fff",
-                borderWidth: 2
-            }
-        },
-        //zlevel: -1,
-        data: [new Date("2018-02-20"), new Date("2018-01-20"), new Date("2018-04-10")]
-    },
-    {
-        name: "初步设计阶段",
-        type: "bar",
-        stack: "总量3",
+        stack: "s1",
         itemStyle: {
             normal: {
                 color: "white"
@@ -240,12 +187,12 @@ series:[
         },
         //zlevel: -1,
         z: 3,
-        data: [new Date("2018-02-01"), new Date("2018-01-12"), new Date("2018-04-01")]
+        data: [new Date("2021-04-01"), new Date("2021-02-01"), new Date("2021-01-12")]
     },
     {
-        name: "施工图设计阶段",
+        name: "施工放样阶段",
         type: "bar",
-        stack: "总量4",
+        stack: "s2",
         label: {
             normal: {
                 show: true,
@@ -258,18 +205,18 @@ series:[
         },
         itemStyle: {
             normal: {
-                color: "brown",
+                color: "#add8e6",
                 borderColor: "#fff",
                 borderWidth: 2
             }
         },
         //zlevel: -1,
-        data: [new Date("2018-03-09"), new Date("2018-01-25"), new Date("2018-04-20")]
+        data: [new Date("2021-04-20"), new Date("2021-03-09"), new Date("2021-01-25")]
     },
     {
-        name: "施工图设计阶段",
+        name: "施工放样阶段",
         type: "bar",
-        stack: "总量4",
+        stack: "s2",
         itemStyle: {
             normal: {
                 color: "white",
@@ -277,12 +224,12 @@ series:[
         },
         //zlevel: -1,
         z: 3,
-        data: [new Date("2018-02-25"), new Date("2018-01-21"), new Date("2018-04-11")]
+        data: [new Date("2021-04-11"), new Date("2021-02-25"), new Date("2021-01-21")]
     },
     {
         name: "项目实施阶段",
         type: "bar",
-        stack: "总量5",
+        stack: "s3",
         label: {
             normal: {
                 show: true,
@@ -295,18 +242,18 @@ series:[
         },
         itemStyle: {
             normal: {
-                color: "yellow",
+                color: "#87cefa",
                 borderColor: "#fff",
                 borderWidth: 2
             }
         },
         //zlevel: -1,
-        data: [new Date("2018-03-12"), new Date("2018-02-15"), new Date("2018-04-30")]
+        data: [new Date("2021-04-30"), new Date("2021-03-12"), new Date("2021-02-15")]
     },
     {
         name: "项目实施阶段",
         type: "bar",
-        stack: "总量5",
+        stack: "s3",
         itemStyle: {
             normal: {
                 color: "white",
@@ -314,12 +261,12 @@ series:[
         },
         //zlevel: -1,
         z: 3,
-        data: [new Date("2018-03-10"), new Date("2018-01-26"), new Date("2018-04-21")]
+        data: [new Date("2021-04-21"), new Date("2021-03-10"), new Date("2021-01-26")]
     },
     {
         name: "项目验收阶段",
         type: "bar",
-        stack: "总量6",
+        stack: "s4",
         label: {
             normal: {
                 show: true,
@@ -332,18 +279,18 @@ series:[
         },
         itemStyle: {
             normal: {
-                color: 'orange',
+                color: '#00bfff',
                 borderColor: "#fff",
                 borderWidth: 2
             }
         },
         //zlevel: -1,
-        data: [new Date("2018-03-30"), new Date("2018-03-13"), new Date("2018-05-01")]
+        data: [new Date("2021-05-01"), new Date("2021-03-30"), new Date("2021-03-13")]
     },
     {
         name: "项目验收阶段",
         type: "bar",
-        stack: "总量6",
+        stack: "s4",
         itemStyle: {
             normal: {
                 color: 'white',
@@ -351,7 +298,7 @@ series:[
         },
         //zlevel: -1,
         z: 3,
-        data: [new Date("2018-03-15"), new Date("2018-02-16"), new Date("2018-04-30")]
+        data: [new Date("2021-04-30"), new Date("2021-03-15"), new Date("2021-02-16")]
     },
 ]
 
@@ -469,7 +416,8 @@ Page({
     ],  
     value1: 0,
     activeNames: ['1'],
-
+    
+    //gantt diagram
     ec: {
       onInit: initChart
     }
