@@ -33,10 +33,6 @@ page{
     background-color:white;
     padding:15px 10px;
 }
-.desc {
-    width: auto;
-    height: 80px;
-}
 .halfTop {
     margin-top: 5px;
 }
@@ -44,3 +40,4 @@ page{
   border-bottom:1px solid #eee;
   margin-top:40px;
 }
+

@@ -1,12 +1,9 @@
-// index.js
-// 获取应用实例
-const app = getApp()
-
 Page({
+
+  /**
+   * 页面的初始数据
+   */
   data: {
-<<<<<<< Updated upstream
-    motto: 'Hello World',
-=======
 
     /**
      * Global data
@@ -14,50 +11,36 @@ Page({
     active: 2,
     pageName: ['Message', 'Project', 'Dashboard', 'More'],
 
-  
+
+
     /**
      * Message page's data
      */
-<<<<<<< Updated upstream
-=======
     messageList: [],
 
 
->>>>>>> Stashed changes
 
-    messageList: [],
 
     /**
      * Projects page's data
      */
 
     project: [],
-<<<<<<< Updated upstream
-=======
 
->>>>>>> Stashed changes
 
     /**
      * Dashboard page's data
      */
-<<<<<<< Updated upstream
-=======
     taskList:[],
->>>>>>> Stashed changes
 
-    taskList: [],
 
     /**
      * More page's data
      */
->>>>>>> Stashed changes
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     canIUseGetUserProfile: false,
-<<<<<<< Updated upstream
-    canIUseOpenData: wx.canIUse('open-data.type.userAvatarUrl') && wx.canIUse('open-data.type.userNickName') // 如需尝试获取用户信息可改为false
-=======
     canIUseOpenData: wx.canIUse('open-data.type.userAvatarUrl') && wx.canIUse('open-data.type.userNickName'), // 如需尝试获取用户信息可改为false
     name: "",
     position: "Project Manager",
@@ -70,10 +53,6 @@ Page({
    */
   onLoad: function (options) {
 
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
     wx.cloud.database().collection('messageList').get()
       .then(res => {
         this.setData({
@@ -104,10 +83,6 @@ Page({
         console.log('请求失败', err)
       }),
 
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
     wx.setNavigationBarTitle({
       title: this.data.pageName[this.data.active],
     }),
@@ -185,21 +160,67 @@ Page({
     wx.setNavigationBarTitle({
       title: this.data.pageName[this.data.active],
     })
->>>>>>> Stashed changes
   },
-  // 事件处理函数
-  bindViewTap() {
+
+
+
+  /**
+   * Message page's method
+   */
+  clickMessage(event) {
     wx.navigateTo({
-      url: '../logs/logs'
+      url: '../message/message/message?sender=' + event.target.id,
     })
   },
-  onLoad() {
-    if (wx.getUserProfile) {
-      this.setData({
-        canIUseGetUserProfile: true
-      })
-    }
+
+  clickNotification(event) {
+    // wx.navigateTo({
+      // url: '',
+    // })
   },
+
+
+
+   
+  /**
+   * Project page's method
+   */
+  clickMyTask(event) {
+    wx.navigateTo({
+      url: '../project/taskInfo/taskInfo',
+    })
+  },
+
+  clickStatisticReport(event) {
+    wx.navigateTo({
+      url: '../project/statisticReport/statisticReport',
+    })
+  },
+
+  clickProject(event) {
+    wx.navigateTo({
+      url: '../project/projectInfo/projectInfo?id=' +  event.currentTarget.dataset.id,
+    })
+  },
+
+
+   
+  /**
+   * Dashboard page's method
+   */
+  clickTask(event) {
+    console.log(event.target)
+    wx.navigateTo({
+      url: '../project/taskInfo/taskInfo?id=' +  event.currentTarget.dataset.id,
+    })
+  },
+
+
+  
+  /**
+   * More page's method
+   */
+  
   getUserProfile(e) {
     // 推荐使用wx.getUserProfile获取用户信息，开发者每次通过该接口获取用户个人信息均需用户确认，开发者妥善保管用户快速填写的头像昵称，避免重复弹窗
     wx.getUserProfile({
@@ -213,12 +234,14 @@ Page({
       }
     })
   },
-  getUserInfo(e) {
-    // 不推荐使用getUserInfo获取用户信息，预计自2021年4月13日起，getUserInfo将不再弹出弹窗，并直接返回匿名的用户个人信息
-    console.log(e)
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
+  onSetting: function(){
+    wx.navigateTo({
+      url: '../more/setting/setting',
+    })
+  },
+  onMoreInfo: function(){
+    wx.navigateTo({
+      url: '../more/moreInfo/moreInfo',
     })
   }
 })
