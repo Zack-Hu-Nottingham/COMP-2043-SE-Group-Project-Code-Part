@@ -42,7 +42,7 @@
 
 <van-cell-group inset style="padding: 30rpx;" title="Projects">
   <view wx:for="{{project}}">
-    <van-cell icon="todo-list-o" title="{{item.name}}" clickable="true" bindtap="enterSpecificPro" />
+    <van-cell icon="todo-list-o" title="{{item.name}}" clickable="true" bindtap="enterSpecificPro" class="projectForTest"/>
   </view>
   
 </van-cell-group>

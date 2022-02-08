@@ -180,13 +180,14 @@
   <button class="foo">Create New Task</button> -->
   <van-collapse value="{{ activeNames }}" bind:change="onChange">
 
-    <van-collapse-item title="Started" name="1">
+    <van-collapse-item title="Started" name="1" class="releaseStartedItemForTest">
 
       <van-cell
         label="start time:{{startTime}}"
         title="单元格"
         link-type="navigateTo"
         url="/pages/project/taskInfo/taskInfo"
+        class="startedTaskForTest"
       />
       
     </van-collapse-item>
