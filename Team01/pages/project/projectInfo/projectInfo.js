@@ -386,12 +386,23 @@ series:[
   chart.setOption(option);
   return chart;
 }
+
+
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+
+    // Global data
+    navbar: ['Project Information', 'Task Management', 'Gantt Diagram'],
+    currentTab: 0,
+    query: {},
+
+
+    // Project Information's data
     name: "project1",
     owner: "Loc",
     startTime: "2022-01-10",
@@ -399,24 +410,24 @@ Page({
     projectDescription: "None",
     stateDescription: "None",
     currentState: "Normal",
-    task: [],
     unstarted: 5,
     processing: 1,
     completed: 1,
     total: 7,
     delayed: 0,
-    navbar: ['Project Information', 'Task Management', 'Gantt Diagram'],
-    currentTab: 0,
-    index: 0,
-    query: {},
-    option1: [
-      { text: 'Not started tasks', value: 0 },
-      { text: 'Progressing tasks', value: 1 },
-      { text: 'Finished tasks', value: 2 },
-    ],  
-    value1: 0,
-    activeNames: ['1'],
+    // time selecter
+    show: false,
     
+
+    // Task Management's data
+    // These data should be filled in when the page is loaded
+    startedTask: [],
+    notStartedTask: [],
+    finishedTask: [],
+    // for collapse bar
+    activeNames: ['1'],
+
+
     //gantt diagram
     ec: {
       onInit: initChart
@@ -424,57 +435,68 @@ Page({
 
   },
 
-  onChange(event) {
-    this.setData({
-      activeNames: event.detail,
-    });
-  },
-  
-  bindStartDateChange: function (e) {
-    console.log(e.detail.value)
-    this.setData({
-      startTime: e.detail.value
-    })
-  },
 
-  bindEndDateChange: function (e) {
-    console.log(e.detail.value)
-    this.setData({
-      endTime: e.detail.value
-    })
-  },
-
-  bindPickerChange: function (e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
-    this.setData({
-      index: e.detail.value
-    })
-  },
+  // Global method
 
   navbarTap: function(e) {
-    console.log(e)
     this.setData({
       currentTab: e.currentTarget.dataset.idx
     })
     app.globalData.currentTab = e.currentTarget.dataset.idx;
   },
 
-  changeValue(e) {
+
+  // Project Information's method
+
+  onDateDisplay() {
+    console.log("show")
+    this.setData({ show: true });
+  },
+
+  onClose() {
+    this.setData({ show: false });
+  },
+
+  formatDate(date) {
+    date = new Date(date);
+    return `${date.getMonth() + 1}/${date.getDate()}`;
+  },
+
+  onConfirm(event) {
+    const [start, end] = event.detail;
     this.setData({
-      value1: e.detail
+      startTime: this.formatDate(start),
+      endTime: this.formatDate(end),
+      show: false,
+      date: `${this.formatDate(start)} - ${this.formatDate(end)}`,
+    });
+  },
+
+
+  // Task Management's method
+
+  onChange(event) {
+    this.setData({
+      activeNames: event.detail,
+    });
+  },
+
+  clickNewProject(event) {
+    wx.navigateTo({
+      url: '../newTask/newTask',
     })
   },
 
-  onshow() {
-    this.setData({
-      currentTab: app.globalData.currntTab
-    })
-  },
+  // Gantt Diagram's method
+ 
+  
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    // 根据project name获取此project信息，并填充到query
+    // 包含owner，起止时间，描述，当前状态，各类task的数量
     this.setData ({
       query: options
     })
@@ -489,9 +511,6 @@ Page({
       return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
-    // console.log(this.data.name)
-    // console.log(capitalizeFirstLetter(this.data.name))
-
     wx.setNavigationBarTitle({
       title: capitalizeFirstLetter(this.data.name) 
     })
@@ -501,9 +520,9 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  // onShow: function () {
+  onShow: function () {
     
-  // },
+  },
 
   /**
    * 生命周期函数--监听页面隐藏

@@ -1,54 +1,60 @@
 {
-    "setting": {},
-    "condition": {
-        "plugin": {
-            "list": []
+  "setting": {},
+  "condition": {
+    "plugin": {
+      "list": []
+    },
+    "game": {
+      "list": []
+    },
+    "gamePlugin": {
+      "list": []
+    },
+    "miniprogram": {
+      "list": [
+        {
+          "name": "",
+          "pathName": "pages/project/taskInfo/taskInfo",
+          "query": "",
+          "scene": null
         },
-        "game": {
-            "list": []
+        {
+          "name": "",
+          "pathName": "pages/project/statisticReport/statisticReport",
+          "query": "",
+          "scene": null
         },
-        "gamePlugin": {
-            "list": []
+        {
+          "name": "",
+          "pathName": "pages/project/testDiagram/testDiagram",
+          "query": "",
+          "scene": null
         },
-        "miniprogram": {
-            "list": [
-                {
-                    "name": "",
-                    "pathName": "pages/project/taskInfo/taskInfo",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "name": "",
-                    "pathName": "pages/project/statisticReport/statisticReport",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "name": "",
-                    "pathName": "pages/project/testDiagram/testDiagram",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "name": "",
-                    "pathName": "pages/project/projectInfo/projectInfo",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "name": "",
-                    "pathName": "pages/project/newProject/newProject",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "name": "",
-                    "pathName": "pages/message/message/message",
-                    "query": "",
-                    "scene": null
-                }
-            ]
+        {
+          "name": "",
+          "pathName": "pages/project/projectInfo/projectInfo",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/project/newProject/newProject",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/message/message/message",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/project/task/task",
+          "query": "",
+          "scene": null
         }
+      ]
     }
+  }
 }

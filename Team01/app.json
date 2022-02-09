@@ -49,6 +49,7 @@
     "van-sticky": "@vant/weapp/sticky/index",
     "van-progress": "@vant/weapp/progress/index",
     "van-tab": "@vant/weapp/tab/index",
-    "van-tabs": "@vant/weapp/tabs/index"
+    "van-tabs": "@vant/weapp/tabs/index",
+    "van-calendar": "@vant/weapp/calendar/index"
   }
 }

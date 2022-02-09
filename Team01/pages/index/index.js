@@ -251,6 +251,12 @@ Page({
     })
   },
 
+  clickNewProject(event) {
+    wx.navigateTo({
+      url: '../project/newProject/newProject',
+    })
+  },
+
 
    
   /**

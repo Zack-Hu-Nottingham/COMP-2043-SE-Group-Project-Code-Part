@@ -40,7 +40,7 @@
   </van-cell-group>
   
   <van-sticky offset-top="{{ 570 }}">
-    <van-button hairline plain round block type="info">{{dictionary.create_new_project}}</van-button>
+    <van-button hairline plain round block type="info" bindtap="clickNewProject">{{dictionary.create_new_project}}</van-button>
   </van-sticky>
 
 </view>
