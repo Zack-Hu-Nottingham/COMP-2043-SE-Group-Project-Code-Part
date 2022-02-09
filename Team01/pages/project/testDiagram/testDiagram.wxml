@@ -1,4 +1,2 @@
 <!--pages/project/testDiagram/testDiagram.wxml-->
-<view class="container">
-    <canvas canvas-id="pieCanvas" class="canvas" style="height:300px" bindtouchstart="touchHandler"></canvas>
-</view>
+<text>pages/project/testDiagram/testDiagram.wxml</text>
