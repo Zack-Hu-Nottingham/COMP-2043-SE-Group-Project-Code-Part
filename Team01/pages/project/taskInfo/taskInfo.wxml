@@ -1,6 +1,6 @@
 
 <van-cell-group inset style="padding: 30rpx" title="Basic information">
-  <van-cell title="Start time" is-link value="{{startTime}}" bindtap="onDateDisplay" />
+  <van-cell title="Start time" is-link value="{{startTime}}" bindtap="onDateDisplay" class="startTimeForTest"/>
   <van-cell title="End time" is-link value="{{endTime}}" bindtap="onDateDisplay" />
 </van-cell-group>
 
@@ -20,7 +20,7 @@
 
 <van-cell-group inset style="padding: 30rpx">
   <van-cell title="Stage Of Project" value="{{stageOfProject}}" />
-  <van-cell title="Priority" is-link value="{{currentPriority}}" bindtap="clickPriority" />
+  <van-cell title="Priority" is-link value="{{priority[3].name}}" bindtap="clickPriority" class="priorityForTest"/>
   <van-cell title="Tag" is-link value="{{tag}}" />
   <van-cell title="Participant" is-link value="{{participant}}" />
 </van-cell-group>
@@ -30,6 +30,7 @@
   actions="{{ priority }}"
   bind:close="onPriorityClose"
   bind:select="onPrioritySelect"
+  
 />
 
 <van-calendar

@@ -93,7 +93,7 @@
 
   <van-collapse value="{{ activeNames }}" bind:change="onChange">
 
-    <van-collapse-item title="Started" name="1">
+    <van-collapse-item title="Started" name="1" class="releaseStartedItemForTest">
 
       <!-- 发起一个请求填充 -->
       <van-cell is-link
@@ -108,6 +108,7 @@
         title="单元格"
         link-type="navigateTo"
         url="/pages/project/taskInfo/taskInfo"
+        class="startedTaskForTest"
       />
       
     </van-collapse-item>

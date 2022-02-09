@@ -289,11 +289,6 @@ Page({
     })
   },
 
-  onSetting: function(){
-    wx.navigateTo({
-      url: '../more/setting/setting',
-    })
-  },
 
   onMoreInfo: function(){
     wx.navigateTo({

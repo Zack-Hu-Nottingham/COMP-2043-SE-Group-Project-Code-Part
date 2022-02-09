@@ -18,7 +18,7 @@
 
   <van-cell-group inset style="padding: 30rpx;" title="{{dictionary.recent_message}}">
     <view wx:for="{{messageList}}">
-      <van-cell  title="{{item.sender}}" clickable="true" bindtap="clickMessage" label="{{item.content}}" value="{{item.timeStamp}}" id="{{item.sender}}" />
+      <van-cell  title="{{item.sender}}" clickable="true" bindtap="clickMessage" label="{{item.content}}" value="{{item.timeStamp}}" id="{{item.sender}}" class="messageForTest"/>
     </view>
   </van-cell-group>
 </view>
@@ -54,7 +54,7 @@
     <van-cell title="{{dictionary.today_task}}" icon="todo-list-o" />
 
     <view wx:for="{{taskList}}">
-      <van-cell title="{{item.name}}" label="{{item.startTime}} - {{item.endTime}}" clickable="true" bindtap="clickTask" id="{{index}}"> 
+      <van-cell title="{{item.name}}" label="{{item.startTime}} - {{item.endTime}}" clickable="true" bindtap="clickTask" id="{{index}}" class="taskForTest"> 
         <view slot="">
           <view wx:if="{{item.state==0}}">
             <view class="notStartedGroup">
@@ -93,7 +93,7 @@
         <open-data type="userNickName"></open-data>
     </van-cell>
     <van-cell center title="{{dictionary.position}}" value="{{position}}" />
-    <van-cell center title="{{dictionary.more}}" clickable="true" bindtap="onMoreInfo">
+    <van-cell center title="{{dictionary.more}}" clickable="true" bindtap="onMoreInfo" class="moreInfoForTest">
       <view slot="">
         <van-icon name="ellipsis" />
       </view>
@@ -102,8 +102,7 @@
   </van-cell-group>
 
   <van-cell-group inset style="padding: 30rpx;">
-    <van-cell center icon="setting-o" clickable="true" bindtap="onSetting"/>
-    <!-- title="{{dictionary.setting}}" -->
+    <van-cell center icon="setting-o"/>
     <van-cell center title="{{dictionary.invite_member}}" is-link icon="" clickable="true" bindtap="onInviteMember"/>
     <van-cell center title="{{dictionary.language}}" value="{{languageList[language]}}" icon="" is-link clickable="true" bindtap="onChangeLan"/>
   </van-cell-group>
