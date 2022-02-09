@@ -1,3 +1,5 @@
+const languageUtils = require("../../../language/languageUtils");
+
 // pages/projectInfo/projectInfo.js
 import * as echarts from '../../../ec-canvas/echarts';
 
@@ -397,16 +399,19 @@ Page({
   data: {
 
     // Global data
-    navbar: ['Project Information', 'Task Management', 'Gantt Diagram'],
+    navbar: [],
+    // navbar: ['Project Information', 'Task Management', 'Gantt Diagram'],
     currentTab: 0,
     query: {},
+    dictionary: {},
+    language: 0,
 
 
     // Project Information's data
     name: "project1",
     owner: "Loc",
-    startTime: "2022-01-10",
-    endTime: "2023-02-20",
+    startTime: "1/10",
+    endTime: "2/20",
     projectDescription: "None",
     stateDescription: "None",
     currentState: "Normal",
@@ -444,6 +449,18 @@ Page({
     })
     app.globalData.currentTab = e.currentTarget.dataset.idx;
   },
+
+  initLanguage() {
+    var self = this;
+    //获取当前小程序语言版本所对应的字典变量
+    var lang = languageUtils.languageVersion();
+
+    // 页面显示
+    self.setData({
+      dictionary: lang.lang.index,
+    });
+  },
+
 
 
   // Project Information's method
@@ -495,6 +512,19 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+
+    // 初始化语言
+    var lan = wx.getStorageSync("languageVersion");
+    this.initLanguage();
+    this.setData({
+      language: lan
+    })
+
+    // 设置navbar
+    this.setData({
+      navbar: [this.data.dictionary.project_info, this.data.dictionary.task_management, this.data.dictionary.gantt_diagram]
+    })
+
     // 根据project name获取此project信息，并填充到query
     // 包含owner，起止时间，描述，当前状态，各类task的数量
     this.setData ({

@@ -19,57 +19,57 @@
 
 <view wx:if="{{currentTab==0}}">
 
-  <van-cell-group inset title="Porject Information">
-    <van-cell title="Owner" value="{{owner}}" />
-    <van-cell title="Start time" is-link value="{{startTime}}" bindtap="onDateDisplay" />
-    <van-cell title="End time" is-link value="{{endTime}}" bindtap="onDateDisplay" />
-    <van-field model:value="{{ projectDescription }}" right clearable label="Description"
+  <van-cell-group inset title="{{dictionary.project_info}}">
+    <van-cell title="{{dictionary.owner}}" value="{{owner}}" />
+    <van-cell title="{{dictionary.start_time}}" is-link value="{{startTime}}" bindtap="onDateDisplay" />
+    <van-cell title="{{dictionary.end_time}}" is-link value="{{endTime}}" bindtap="onDateDisplay" />
+    <van-field model:value="{{ projectDescription }}" right clearable label="{{dictionary.description}}"
     placeholder="{{projectDescription}}" border="{{ false }}"></van-field>
   </van-cell-group>
 
-  <van-cell-group inset title="State Information">
-    <van-cell title="current State" value="{{currentState}}" />
-    <van-field model:value="{{ description }}" center clearable label="Description"
-    placeholder="{{description}}" border="{{ false }}"></van-field>
+  <van-cell-group inset title="{{dictionary.state_information}}">
+    <van-cell title="{{dictionary.current_state}}" value="{{currentState}}" />
+    <van-field model:value="{{ stateDescription }}" center clearable label="{{dictionary.description}}"
+    placeholder="{{stateDescription}}" border="{{ false }}"></van-field>
   </van-cell-group>
 
-  <van-cell-group inset title="Task Progress">
+  <van-cell-group inset title="{{dictionary.task_progress}}">
   </van-cell-group>
   <view class="container">
     <view class="circle">
       <van-circle value="{{(completed/total)*100}}" layer-color="#eeeeee"         color="#4169E1">
-        {{m1.toInteger((completed/total)*100)}}%<view></view>Completed
+        {{m1.toInteger((completed/total)*100)}}%<view></view>{{dictionary.completed}}
       </van-circle>
 
       <van-circle value="{{(delayed/total)*100}}" layer-color="#eeeeee" color="#FF4500">
-        {{(delayed/total)%1*100}}%<view></view> Delayed
+        {{(delayed/total)%1*100}}%<view></view> {{dictionary.delayed}}
       </van-circle>
     </view>
     
     <view class="taskInfo">
       <view class="taskInfoDetail">
         <view style="font-size: 35rpx; color: #696969;">{{unstarted}}</view>
-        <view>Unstarted</view>
+        <view>{{dictionary.unstarted}}</view>
       </view>
 
       <view class="taskInfoDetail">
         <view style="font-size: 35rpx; color: #FFA500;">{{processing}}</view>
-        <view>Processing</view>
+        <view>{{dictionary.processing}}</view>
       </view>
 
       <view class="taskInfoDetail">
         <view style="font-size: 35rpx; color: 	#FF4500;">{{completed}}</view>
-        <view>Completed</view>
+        <view>{{dictionary.completed}}</view>
       </view>
 
       <view class="taskInfoDetail" style="padding-left: 40rpx ; border-left: 2rpx solid #efefef;">
         <view style="font-size: 35rpx; color: #696969; ">{{total}}</view>
-        <view>Total</view>
+        <view>{{dictionary.total}}</view>
       </view>
 
       <view class="taskInfoDetail">
         <view style="font-size: 35rpx; color:#FF4500;">{{delayed}}</view>
-        <view>Delayed</view>
+        <view>{{dictionary.delayed}}</view>
       </view>
 
     </view>
@@ -93,7 +93,7 @@
 
   <van-collapse value="{{ activeNames }}" bind:change="onChange">
 
-    <van-collapse-item title="Started" name="1" class="releaseStartedItemForTest">
+    <van-collapse-item title="{{dictionary.processing}}" name="1" class="releaseStartedItemForTest">
 
       <!-- 发起一个请求填充 -->
       <van-cell is-link
@@ -113,18 +113,18 @@
       
     </van-collapse-item>
 
-    <van-collapse-item title="Not Start" name="2">
+    <van-collapse-item title="{{dictionary.unstarted}}" name="2">
 
     </van-collapse-item>
 
-    <van-collapse-item title="Finished" name="3">
+    <van-collapse-item title="{{dictionary.completed}}" name="3">
 
     </van-collapse-item>
   </van-collapse>
 
   <!-- Create new task -->
-  <van-sticky offset-top="{{ 570 }}">
-    <van-button hairline plain round block type="info" bindtap="clickNewProject">{{dictionary.create_new_project}}</van-button>
+  <van-sticky offset-top="{{ 600 }}">
+    <van-button hairline plain round block type="info" bindtap="clickNewProject">{{dictionary.create_new_task}}</van-button>
   </van-sticky>
 
 </view>

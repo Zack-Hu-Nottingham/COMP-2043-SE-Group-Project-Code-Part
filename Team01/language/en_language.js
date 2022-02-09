@@ -38,7 +38,23 @@ var Languague = {
     success_change: "Change successful",
     change_lan_confirm: "Confirm change language",
     
-
+    // Project information page
+    project_info: "Project Information",
+    task_management: "Task Management",
+    gantt_diagram: "Gantt Diagram",
+    owner: "Owner",
+    start_time: "Start Time",
+    end_time: "End Time",
+    description: "Description",
+    state_information: "State Information",
+    current_state: "Current State",
+    task_progress: "Task Progress",
+    completed: "Completed",
+    delayed: "Delayed",
+    unstarted: "Unstarted",
+    processing: "Processing",
+    total: "Total",
+    create_new_task: "Create New Task",
     
  },
 };
