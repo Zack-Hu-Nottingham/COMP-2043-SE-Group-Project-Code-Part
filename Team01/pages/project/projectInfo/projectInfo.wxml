@@ -21,8 +21,8 @@
 
   <van-cell-group inset title="{{dictionary.project_info}}">
     <van-cell title="{{dictionary.owner}}" value="{{owner}}" />
-    <van-cell title="{{dictionary.start_time}}" is-link value="{{startTime}}" bindtap="onDateDisplay" />
-    <van-cell title="{{dictionary.end_time}}" is-link value="{{endTime}}" bindtap="onDateDisplay" />
+    <van-cell title="{{dictionary.start_time}}" is-link value="{{startTime}}" bindtap="onDateDisplay" class="projectInfoStartTimeForTest"/>
+    <van-cell title="{{dictionary.end_time}}" is-link value="{{endTime}}" bindtap="onDateDisplay" class="projectInfoEndTimeForTest"/>
     <van-field model:value="{{ projectDescription }}" right clearable label="{{dictionary.description}}"
     placeholder="{{projectDescription}}" border="{{ false }}"></van-field>
   </van-cell-group>
