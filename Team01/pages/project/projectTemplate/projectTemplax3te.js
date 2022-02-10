@@ -1,4 +1,4 @@
-// pages/project/testDiagram/testDiagram.js
+// pages/project/projectTemplate/projectTemplax3te.js
 Page({
 
     /**

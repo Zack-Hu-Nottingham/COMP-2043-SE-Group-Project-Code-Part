@@ -11,20 +11,18 @@ Page({
 
     taskPage: {},
 
-    name: "",
     /*
     belongTo: [],
     stageOfProject: "",
     tag: "",
     participants: [],
-    description: "",
+    
 
     
     startTime: '1/16',
     endTime: '5/12',*/
     dateShow: false,
 
-    /*currentPriority: 'normal',*/
     priorityShow: false,
     priority: [
       {
@@ -56,22 +54,7 @@ Page({
     
     id = options.id
 
-    wx.cloud.database().collection('taskList')
-      .doc(id)
-      .get()
-      .then(res => {
-        this.setData({
-          taskPage: res.data,
-        }),
-
-        wx.setNavigationBarTitle({
-          title: res.data.name,
-        })
-
-      })
-      .catch(err => {
-        console.log('请求失败', err)
-      })
+    this.getDetail()
 
   },
 
@@ -156,7 +139,6 @@ Page({
     }).catch(res => {
       console.log('调用云函数失败', res)
     })
-
   },
 
   
@@ -192,12 +174,13 @@ Page({
       .doc(id)
       .get()
       .then(res => {
-        this.setData({
-          taskPage: res.data,
-        }),
 
         wx.setNavigationBarTitle({
           title: res.data.name,
+        }),
+
+        this.setData({
+          taskPage: res.data,
         })
 
       })
@@ -215,14 +198,6 @@ Page({
     this.setData({
       currentPriority: e.detail.name 
     }),
-    
-    //wx.cloud.database().collection('taskList')
-    //  .doc(id)
-    //  .update({
-    //    data: {
-    //      currentPriority: e.detail.name
-    //    }
-    //  })
 
     //调用云函数
     wx.cloud.callFunction({

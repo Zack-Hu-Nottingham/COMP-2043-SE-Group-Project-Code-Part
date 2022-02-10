@@ -1,2 +1,56 @@
 <!--pages/project/statisticReport/statisticReport.wxml-->
-<text>pages/project/statisticReport/statisticReport.wxml</text>
+<van-cell-group style="margin: 0 1rpx;">
+  <van-cell class="van-cell">
+    <view class="parallin">
+
+      <van-circle class="circle" layer-color="#eeeeee" value="{{ value }}" clockwise="{{ false }}" stroke-width="6">Completed: {{value}}%</van-circle>
+      
+      <view class="overall">
+        <view style="margin: 10rpx;">
+            <text>Project numbers</text>
+            <text style="color: rgb(0, 94, 156); font-size: large;">\t{{projectNum}}</text>
+        </view>
+        <view>
+            <text>Task numbers</text>
+            <text style="color: rgb(0, 94, 156); font-size: large;">\t{{totalTasks}}</text>
+        </view>
+      </view>
+    </view>
+  </van-cell>
+
+  <van-cell border="{{ true }}" >
+  <view class="parallin space-between">
+    <view class="virtical">
+      <view style="color: black; font-size: large;">{{totalUnstart}}</view>
+      <view>Unstart</view>
+    </view>
+
+    <view class="virtical">
+      <view style="color: rgb(255, 187, 0); font-size: large;">{{totalProgressing}}</view>
+      <view>Processing</view>
+    </view>
+
+    <view class="virtical">
+      <view style="color: rgb(61, 90, 255); font-size: large;">{{totalCompleted}}</view>
+      <view>Completed</view>
+    </view>
+  </view>
+  </van-cell>
+
+</van-cell-group>
+
+<van-cell-group style="margin: 0 1rpx;" wx:for="{{projects}}" wx:key="index">
+  <van-cell title="{{ item.name }}" icon="todo-list">
+  Task numbers {{ item.taskNum }}
+  </van-cell>
+  <van-cell>
+    <view class="space-around" style="font-size: small;">
+      <view>Unstart {{ item.unstart }}</view>
+      <view>Processing {{ item.processing }}</view>
+      <view>Completed {{ item.completed }}</view>
+    </view>
+    <view class="progress">
+      <van-progress percentage="{{ item.percentage }}" color="{{ item.color }}" show-pivot="{{false}}"/>
+    </view>
+  </van-cell>
+</van-cell-group>

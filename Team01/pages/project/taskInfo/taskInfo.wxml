@@ -6,14 +6,8 @@
 
 <van-cell-group inset style="padding: 30rpx">
   <van-cell title="Belong to" value="{{taskPage.belongTo}}" />
-  <van-field
-    model:value="{{ taskPage.description }}"
-    center
-    clearable
-    label="Description"
-    placeholder="None"
-    border="{{ false }}"
-  >
+  <van-field model:value="{{taskPage.description}}" center clearable label="Description" 
+  placeholder="{{taskPage.description}}" border="{{ false }}">
   </van-field>
 </van-cell-group>
 

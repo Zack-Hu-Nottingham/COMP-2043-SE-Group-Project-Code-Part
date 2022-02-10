@@ -7,14 +7,15 @@
     "pages/project/testDiagram/testDiagram",
     "pages/project/taskInfo/taskInfo",
     "pages/project/task/task",
-    "pages/project/project/project",
     "pages/more/more/more",
     "pages/more/setting/setting",
     "pages/more/moreInfo/moreInfo",
     "pages/project/newTask/newTask",
     "pages/project/newProject/newProject",
-    "pages/project/projectTemplate/projectTemplate",
-    "pages/project/statisticReport/statisticReport"
+    "pages/project/projectTemplate/projectTemplax3te",
+    "pages/project/statisticReport/statisticReport",
+    "pages/more/languageSetting/languageSetting",
+    "pages/more/test/test"
   ],
   "window":{
     "backgroundTextStyle":"light",
@@ -44,6 +45,10 @@
     "van-tabbar-item": "@vant/weapp/tabbar-item/index",
     "van-divider": "@vant/weapp/divider/index",
     "van-tag": "@vant/weapp/tag/index",
-    "van-sticky": "@vant/weapp/sticky/index"
+    "van-sticky": "@vant/weapp/sticky/index",
+    "van-progress": "@vant/weapp/progress/index",
+    "van-tab": "@vant/weapp/tab/index",
+    "van-tabs": "@vant/weapp/tabs/index",
+    "van-calendar": "@vant/weapp/calendar/index"
   }
 }
