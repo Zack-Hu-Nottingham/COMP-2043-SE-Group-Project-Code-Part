@@ -4,6 +4,7 @@ App({
 
     wx.cloud.init({
       traceUser: true,
+      env: 'cloud1-2gqr09fl444e3a8c'
     })
 
     // 展示本地存储能力

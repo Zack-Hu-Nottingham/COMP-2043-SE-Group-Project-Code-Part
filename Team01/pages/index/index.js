@@ -12,12 +12,11 @@ Page({
      */
     active: 2,
     pageName: ['Message', 'Project', 'Dashboard', 'More'],
-    
+
     // 存放双语
     dictionary: {},
     language: 0,
     languageList: ["简体中文", "English"],
-
 
     /**
      * Message page's data
@@ -59,35 +58,7 @@ Page({
    */
   onLoad: function (options) {
 
-    wx.cloud.database().collection('messageList').get()
-      .then(res => {
-        this.setData({
-          messageList: res.data
-        })
-      })
-      .catch(err => {
-        console.log('请求失败', err)
-      }),
-
-    wx.cloud.database().collection('project').get()
-      .then(res => {
-        this.setData({
-          project: res.data
-        })
-      })
-      .catch(err => {
-        console.log('请求失败', err)
-      }),
-
-    wx.cloud.database().collection('taskList').get()
-      .then(res => {
-        this.setData({
-          taskList: res.data
-        })
-      })
-      .catch(err => {
-        console.log('请求失败', err)
-      }),
+    this.getData()
 
     // 测试用，获取login code
     wx.login({
@@ -220,7 +191,6 @@ Page({
 
 
 
-
    
   /**
    * Project page's method
@@ -239,13 +209,7 @@ Page({
 
   clickProject(event) {
     wx.navigateTo({
-      url: '../project/projectInfo/projectInfo?project=' + event.target.id,
-    })
-  },
-
-  clickNewProject(event) {
-    wx.navigateTo({
-      url: '../project/newProject/newProject',
+      url: '../project/projectInfo/projectInfo?id=' +  event.currentTarget.dataset.id,
     })
   },
 
@@ -257,7 +221,7 @@ Page({
   clickTask(event) {
     console.log(event.target)
     wx.navigateTo({
-      url: '../project/taskInfo/taskInfo?task=' +  event.target.id,
+      url: '../project/taskInfo/taskInfo?id=' +  event.currentTarget.dataset.id,
     })
   },
 
@@ -280,13 +244,19 @@ Page({
       }
     })
   },
-
+  
+  onSetting: function(){
+    wx.navigateTo({
+      url: '../more/setting/setting',
+    })
+  },
 
   onMoreInfo: function(){
     wx.navigateTo({
       url: '../more/moreInfo/moreInfo',
     })
   },
+
 
   // 点击language展示选项
   onChangeLan(event) {
@@ -296,5 +266,36 @@ Page({
     })
   },
 
+  getData(){
+    wx.cloud.database().collection('messageList').get()
+      .then(res => {
+        this.setData({
+          messageList: res.data
+        })
+      })
+      .catch(err => {
+        console.log('请求失败', err)
+      }),
+
+    wx.cloud.database().collection('project').get()
+      .then(res => {
+        this.setData({
+          project: res.data
+        })
+      })
+      .catch(err => {
+        console.log('请求失败', err)
+      }),
+
+    wx.cloud.database().collection('taskList').get()
+      .then(res => {
+        this.setData({
+          taskList: res.data
+        })
+      })
+      .catch(err => {
+        console.log('请求失败', err)
+      })
+  }
 
 })

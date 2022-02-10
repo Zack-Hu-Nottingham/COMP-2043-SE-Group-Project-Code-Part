@@ -110,6 +110,7 @@ Page({
     },
     changeST: function(e){
         var CT = new Date(e.detail)
+        console.log(e.detail)
         this.setData({
             startTime: e.detail,
             ST: CT.getFullYear() + "-" + (Number(CT.getMonth()) + 1) + "-" + CT.getDate()
@@ -117,6 +118,7 @@ Page({
     },
     changeET: function(e){
         var CT = new Date(e.detail)
+        console.log(e.detail)
         this.setData({
             endTime: e.detail,
             ET: CT.getFullYear() + "-" + (Number(CT.getMonth()) + 1) + "-" + CT.getDate()
