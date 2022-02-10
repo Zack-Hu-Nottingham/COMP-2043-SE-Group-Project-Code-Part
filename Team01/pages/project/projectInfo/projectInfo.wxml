@@ -52,9 +52,12 @@
         <view>{{dictionary.unstarted}}</view>
       </view>
 
+<<<<<<< Updated upstream
       <view class="taskInfoDetail">
         <view style="font-size: 35rpx; color: #FFA500;">{{processing}}</view>
         <view>{{dictionary.processing}}</view>
+=======
+
       </view>
 
       <view class="taskInfoDetail">
