@@ -10,7 +10,6 @@
 
 <!-- Message page -->
 <view wx:if="{{active == 0}}">
-
   <van-cell-group inset style="padding: 30rpx;">
     <van-cell center title="{{dictionary.notification}}" icon="bullhorn-o" size="large" label="{{messageList[0].sender}}: {{messageList[0].content}}" value="{{messageList[0].timeStamp}}" clickable="true" bindtap="clickNotification" >
     </van-cell>
@@ -35,13 +34,13 @@
 
   <van-cell-group inset style="padding: 30rpx;" title="{{dictionary.project_list}}">
     <view wx:for="{{project}}">
-      <van-cell icon="todo-list-o" title="{{item.name}}" clickable="true" bindtap="clickProject" id="{{item.name}}"/>
+      <van-cell icon="todo-list-o" title="{{item.name}}" clickable="true" bindtap="clickProject" data-id="{{item._id}}"/>
     </view>
   </van-cell-group>
-  
+
   <van-sticky offset-top="{{ 570 }}">
-    <van-button hairline plain round block type="info" bindtap="clickNewProject">{{dictionary.create_new_project}}</van-button>
-  </van-sticky>
+  <van-button hairline plain round block type="info" bindtap="clickNewProject">{{dictionary.create_new_project}}</van-button>
+</van-sticky>
 
 </view>
 
@@ -54,7 +53,7 @@
     <van-cell title="{{dictionary.today_task}}" icon="todo-list-o" />
 
     <view wx:for="{{taskList}}">
-      <van-cell title="{{item.name}}" label="{{item.startTime}} - {{item.endTime}}" clickable="true" bindtap="clickTask" id="{{index}}" class="taskForTest"> 
+      <van-cell title="{{item.name}}" label="{{item.startTime}} - {{item.endTime}}" clickable="true" bindtap="clickTask" data-id="{{item._id}}" class="taskForTest"> 
         <view slot="">
           <view wx:if="{{item.state==0}}">
             <view class="notStartedGroup">
@@ -80,26 +79,26 @@
 <!-- More page -->
 <view wx:elif="{{active == 3}}">
 
-  <view wx:if="{{canIUseOpenData}}">
-    <view class="userinfo-avatar">
-      <open-data type="userAvatarUrl"></open-data>
-    </view>
+<view wx:if="{{canIUseOpenData}}">
+  <view class="userinfo-avatar">
+    <open-data type="userAvatarUrl"></open-data>
   </view>
+</view>
 
-  <van-cell-group inset>
-    <van-cell center icon="user-o" />
-    <!-- title="{{dictionary.user_info}}" -->
-    <van-cell center title="{{dictionary.user_name}}">
-        <open-data type="userNickName"></open-data>
-    </van-cell>
-    <van-cell center title="{{dictionary.position}}" value="{{position}}" />
-    <van-cell center title="{{dictionary.more}}" clickable="true" bindtap="onMoreInfo" class="moreInfoForTest">
-      <view slot="">
-        <van-icon name="ellipsis" />
-      </view>
-    </van-cell>
+<van-cell-group inset>
+  <van-cell center icon="user-o" />
+  <!-- title="{{dictionary.user_info}}" -->
+  <van-cell center title="{{dictionary.user_name}}">
+      <open-data type="userNickName"></open-data>
+  </van-cell>
+  <van-cell center title="{{dictionary.position}}" value="{{position}}" />
+  <van-cell center title="{{dictionary.more}}" clickable="true" bindtap="onMoreInfo" class="moreInfoForTest">
+    <view slot="">
+      <van-icon name="ellipsis" />
+    </view>
+  </van-cell>
 
-  </van-cell-group>
+</van-cell-group>
 
   <van-cell-group inset style="padding: 30rpx;">
     <van-cell center icon="setting-o"/>
@@ -107,9 +106,9 @@
     <van-cell center title="{{dictionary.language}}" value="{{languageList[language]}}" icon="" is-link clickable="true" bindtap="onChangeLan" class="settingForTest"/>
   </van-cell-group>
 
-  <!-- 底部悬浮登出按钮 -->
-  <van-sticky offset-top="{{ 570 }}">
-    <van-button hairline plain round block color="#DC143C" type="primary">{{dictionary.sign_out}}</van-button>
-  </van-sticky>
+<!-- 底部悬浮登出按钮 -->
+<van-sticky offset-top="{{ 570 }}">
+  <van-button hairline plain round block color="#DC143C" type="primary">{{dictionary.sign_out}}</van-button>
+</van-sticky>
 
 </view>

@@ -14,9 +14,8 @@
   bind:confirm="onConfirm"
 />
 
-<!-- Subpages -->
-<!-- Project Information -->
 
+<!-- Subpages -->
 <view wx:if="{{currentTab==0}}">
 
   <van-cell-group inset title="{{dictionary.project_info}}">
@@ -74,17 +73,37 @@
         <view>{{dictionary.delayed}}</view>
       </view>
 
+    <view class="taskInfoDetail">
+      <view style="font-size: 35rpx; color: #FFA500;">{{processing}}</view>
+      <view>{{dictionary.processing}}</view>
     </view>
+
+    <view class="taskInfoDetail">
+      <view style="font-size: 35rpx; color: 	#FF4500;">{{completed}}</view>
+      <view>{{dictionary.completed}}</view>
+    </view>
+
+    <view class="taskInfoDetail" style="padding-left: 40rpx ; border-left: 2rpx solid #efefef;">
+      <view style="font-size: 35rpx; color: #696969; ">{{total}}</view>
+      <view>{{dictionary.total}}</view>
+    </view>
+
+    <view class="taskInfoDetail">
+      <view style="font-size: 35rpx; color:#FF4500;">{{delayed}}</view>
+      <view>{{dictionary.delayed}}</view>
+    </view>
+
   </view>
+</view>
 
 
-    <wxs module="m1">
-      module.exports.toInteger = function(str) {
-        return str - str % 1
-      }
-    </wxs>
+  <wxs module="m1">
+    module.exports.toInteger = function(str) {
+      return str - str % 1
+    }
+  </wxs>
 
-    <wxs src="../../../utils/tools.wxs" module="m2"></wxs>
+  <wxs src="../../../utils/tools.wxs" module="m2"></wxs>
 
 </view>
 
@@ -93,41 +112,41 @@
 <!-- Task Management -->
 <view wx:elif="{{currentTab==1}}">
 
-  <van-collapse value="{{ activeNames }}" bind:change="onChange">
+<van-collapse value="{{ activeNames }}" bind:change="onChange">
 
-    <van-collapse-item title="{{dictionary.processing}}" name="1" class="releaseStartedItemForTest">
+  <van-collapse-item title="{{dictionary.processing}}" name="1" class="releaseStartedItemForTest">
 
-      <!-- 发起一个请求填充 -->
-      <van-cell is-link
-        label="start time:{{startTime}}"
-        title="单元格"
-        link-type="navigateTo"
-        url="/pages/project/taskInfo/taskInfo"
-      />
+    <!-- 发起一个请求填充 -->
+    <van-cell is-link
+      label="start time:{{startTime}}"
+      title="单元格"
+      link-type="navigateTo"
+      url="/pages/project/taskInfo/taskInfo"
+    />
 
-      <van-cell is-link id=""
-        label="start time:{{startTime}}"
-        title="单元格"
-        link-type="navigateTo"
-        url="/pages/project/taskInfo/taskInfo"
-        class="startedTaskForTest"
-      />
-      
-    </van-collapse-item>
+    <van-cell is-link id=""
+      label="start time:{{startTime}}"
+      title="单元格"
+      link-type="navigateTo"
+      url="/pages/project/taskInfo/taskInfo"
+      class="startedTaskForTest"
+    />
+    
+  </van-collapse-item>
 
-    <van-collapse-item title="{{dictionary.unstarted}}" name="2">
+  <van-collapse-item title="{{dictionary.unstarted}}" name="2">
 
-    </van-collapse-item>
+  </van-collapse-item>
 
-    <van-collapse-item title="{{dictionary.completed}}" name="3">
+  <van-collapse-item title="{{dictionary.completed}}" name="3">
 
-    </van-collapse-item>
-  </van-collapse>
+  </van-collapse-item>
+</van-collapse>
 
-  <!-- Create new task -->
-  <van-sticky offset-top="{{ 600 }}">
-    <van-button hairline plain round block type="info" bindtap="clickNewProject">{{dictionary.create_new_task}}</van-button>
-  </van-sticky>
+<!-- Create new task -->
+<van-sticky offset-top="{{ 600 }}">
+  <van-button hairline plain round block type="info" bindtap="clickNewProject">{{dictionary.create_new_task}}</van-button>
+</van-sticky>
 
 </view>
 
@@ -137,7 +156,6 @@
 <view wx:else>
   <view class="gantt">
   <ec-canvas id="mychart-dom-graph" canvas-id="mychart-graph" ec="{{ ec }}"></ec-canvas>
+  </view>
 </view>
-</view>
-
 

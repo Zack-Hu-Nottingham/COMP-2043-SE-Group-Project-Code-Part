@@ -1,23 +1,28 @@
 // pages/project/taskInfo/taskInfo.js
+
+var id = ''
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    name: 'Task1',
+
+    taskPage: {},
+
+    /*
     belongTo: [],
     stageOfProject: "",
     tag: "",
     participants: [],
-    description: "",
+    
 
     
     startTime: '1/16',
-    endTime: '5/12',
+    endTime: '5/12',*/
     dateShow: false,
 
-    currentPriority: 'normal',
     priorityShow: false,
     priority: [
       {
@@ -37,18 +42,20 @@ Page({
       },
     ],
 
-
     data: '',
     show: false
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.setNavigationBarTitle({
-      title: this.data.name,
-    })
+    
+    id = options.id
+
+    this.getDetail()
+
   },
 
   /**
@@ -117,6 +124,21 @@ Page({
       show: false,
       date: `${this.formatDate(start)} - ${this.formatDate(end)}`,
     });
+
+    //调用云函数
+    wx.cloud.callFunction({
+      name: 'updateDate',
+      data:{
+        id: id,
+        startTime: `${start.getFullYear()}-${start.getMonth() + 1}-${start.getDate()}`,
+        endTime: `${end.getFullYear()}-${end.getMonth() + 1}-${end.getDate()}`
+      }
+    }).then(res => {
+      console.log('调用云函数成功', res),
+      this.getDetail()
+    }).catch(res => {
+      console.log('调用云函数失败', res)
+    })
   },
 
   
@@ -147,6 +169,26 @@ Page({
   //   });
   // },
 
+  getDetail(){
+    wx.cloud.database().collection('taskList')
+      .doc(id)
+      .get()
+      .then(res => {
+
+        wx.setNavigationBarTitle({
+          title: res.data.name,
+        }),
+
+        this.setData({
+          taskPage: res.data,
+        })
+
+      })
+      .catch(err => {
+        console.log('请求失败', err)
+      })
+  },
+
   onPriorityClose() {
     this.setData({priorityShow: false})
   },
@@ -155,7 +197,22 @@ Page({
     // console.log(e.detail.name)
     this.setData({
       currentPriority: e.detail.name 
+    }),
+
+    //调用云函数
+    wx.cloud.callFunction({
+      name: 'updateData',
+      data:{
+        id: id,
+        currentPriority: e.detail.name
+      }
+    }).then(res => {
+      console.log('调用云函数成功', res),
+      this.getDetail()
+    }).catch(res => {
+      console.log('调用云函数失败', res)
     })
+
   },
 
   clickPriority() {

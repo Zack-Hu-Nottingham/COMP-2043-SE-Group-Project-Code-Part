@@ -1,9 +1,12 @@
+// pages/projectInfo/projectInfo.js
 const languageUtils = require("../../../language/languageUtils");
 
-// pages/projectInfo/projectInfo.js
 import * as echarts from '../../../ec-canvas/echarts';
 
 const app = getApp()
+
+var id = ''
+
 // line 5-441: function initChart() 甘特图填充信息
 function initChart(canvas, width, height, dpr) {
   const chart = echarts.init(canvas, null, {
@@ -397,8 +400,32 @@ Page({
    * 页面的初始数据
    */
   data: {
+    owner: '',
+    startTime: '',
+    endTime: '',
+    projectDescription: '',
+    stateDescription: '',
+    currentState: '',
+    task: [],
+    unstarted: 0,
+    processing: 0,
+    completed: 0,
+    total: 0,
+    delayed: 0,
+    /*name: "project1",
+    owner: "Loc",
+    startTime: "2022-01-10",
+    endTime: "2023-02-20",
+    projectDescription: "None",
+    stateDescription: "None",
+    currentState: "Normal",
+    task: [],
+    unstarted: 5,
+    processing: 1,
+    completed: 1,
+    total: 7,
+    delayed: 0,*/
 
-    // Global data
     navbar: [],
     // navbar: ['Project Information', 'Task Management', 'Gantt Diagram'],
     currentTab: 0,
@@ -407,22 +434,8 @@ Page({
     language: 0,
 
 
-    // Project Information's data
-    name: "project1",
-    owner: "Loc",
-    startTime: "1/10",
-    endTime: "2/20",
-    projectDescription: "None",
-    stateDescription: "None",
-    currentState: "Normal",
-    unstarted: 5,
-    processing: 1,
-    completed: 1,
-    total: 7,
-    delayed: 0,
-    // time selecter
-    show: false,
-    
+    project: {},
+    name: '',
 
     // Task Management's data
     // These data should be filled in when the page is loaded
@@ -432,14 +445,12 @@ Page({
     // for collapse bar
     activeNames: ['1'],
 
-
     //gantt diagram
     ec: {
       onInit: initChart
     }
 
   },
-
 
   // Global method
 
@@ -460,7 +471,6 @@ Page({
       dictionary: lang.lang.index,
     });
   },
-
 
 
   // Project Information's method
@@ -487,10 +497,22 @@ Page({
       show: false,
       date: `${this.formatDate(start)} - ${this.formatDate(end)}`,
     });
+
+    //调用云函数
+    wx.cloud.callFunction({
+      name: 'updateProjectDate',
+      data:{
+        id: id,
+        startTime: `${start.getFullYear()}-${start.getMonth() + 1}-${start.getDate()}`,
+        endTime: `${end.getFullYear()}-${end.getMonth() + 1}-${end.getDate()}`
+      }
+    }).then(res => {
+      console.log('调用云函数成功', res),
+      this.getDetail()
+    }).catch(res => {
+      console.log('调用云函数失败', res)
+    })
   },
-
-
-  // Task Management's method
 
   onChange(event) {
     this.setData({
@@ -504,9 +526,6 @@ Page({
     })
   },
 
-  // Gantt Diagram's method
- 
-  
 
   /**
    * 生命周期函数--监听页面加载
@@ -530,6 +549,43 @@ Page({
     this.setData ({
       query: options
     })
+
+    id = options.id
+    console.log(options)
+
+    this.getDetail()
+    
+  },
+
+  getDetail(){
+    wx.cloud.database().collection('project')
+      .doc(id)
+      .get()
+      .then(res => {
+        this.setData({
+          project: res.data,
+          owner: res.data.owner,
+          startTime: res.data.startTime,
+          endTime: res.data.endTime,
+          projectDescription: res.data.projectDescription,
+          stateDescription: res.data.stateDescription,
+          currentState: res.data.currentState,
+          task: res.data.task,
+          unstarted: res.data.unstarted,
+          processing: res.data.processing,
+          completed: res.data.completed,
+          total: res.data.total,
+          delayed: res.data.delayed,
+        }),
+
+        wx.setNavigationBarTitle({
+          title: res.data.name,
+        })
+
+      })
+      .catch(err => {
+        console.log('请求失败', err)
+      })
   },
 
   /**
@@ -587,5 +643,41 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+  onProjectBlur: function(e){
+    console.log(e.detail.value)
+
+    wx.cloud.callFunction({
+      name: 'updateProjectDescription',
+      data:{
+        id: id,
+        projectDescription: e.detail.value
+      }
+    }).then(res => {
+      console.log('调用云函数成功', res),
+      this.getDetail()
+    }).catch(res => {
+      console.log('调用云函数失败', res)
+    })
+  },
+
+  onStateBlur: function(e){
+    console.log(e.detail.value)
+
+    wx.cloud.callFunction({
+      name: 'updateProjectDescription',
+      data:{
+        id: id,
+        stateDescription: e.detail.value
+      }
+    }).then(res => {
+      console.log('调用云函数成功', res),
+      this.getDetail()
+    }).catch(res => {
+      console.log('调用云函数失败', res)
+    })
   }
+
 })
+

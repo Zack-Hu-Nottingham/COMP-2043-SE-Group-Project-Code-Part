@@ -12,30 +12,16 @@ Page({
      */
     active: 2,
     pageName: ['Message', 'Project', 'Dashboard', 'More'],
-    
+
     // 存放双语
     dictionary: {},
     language: 0,
     languageList: ["简体中文", "English"],
 
-
     /**
      * Message page's data
      */
-    messageList: [{
-      sender: 'Loc',
-      timeStamp: '2022-1-16',
-      content: 'Hello world',
-    },{
-      sender: 'Zack',
-      timeStamp: '2022-1-08',
-      content: 'Hi',
-    },{
-      sender: 'Christina',
-      timeStamp: '2022-1-11',
-      content: 'Hello',
-    }
-    ],
+    messageList: [],
 
 
 
@@ -44,39 +30,13 @@ Page({
      * Projects page's data
      */
 
-    project: [{
-      name: "project1"
-    },{
-      name: "project2"
-    },{
-      name: "project3"
-    },{
-      name: "project4"
-    }],
+    project: [],
 
 
     /**
      * Dashboard page's data
      */
-    taskList:[{
-      name: "task1",
-      // not start
-      state: 0,
-      startTime: "2022-2-12",
-      endTime: "2022-2-24"
-    },{
-      name: "task2",
-      // started
-      state: 1,
-      startTime: "2022-1-17",
-      endTime: "2022-2-01"
-    },{
-      name: "task3",
-      // finished
-      state: 2,
-      startTime: "2021-12-22",
-      endTime: "2022-1-2"
-    }],
+    taskList:[],
 
 
     /**
@@ -97,6 +57,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+
+    this.getData()
+
     // 测试用，获取login code
     wx.login({
       success: (res) => {
@@ -228,7 +191,6 @@ Page({
 
 
 
-
    
   /**
    * Project page's method
@@ -247,13 +209,7 @@ Page({
 
   clickProject(event) {
     wx.navigateTo({
-      url: '../project/projectInfo/projectInfo?project=' + event.target.id,
-    })
-  },
-
-  clickNewProject(event) {
-    wx.navigateTo({
-      url: '../project/newProject/newProject',
+      url: '../project/projectInfo/projectInfo?id=' +  event.currentTarget.dataset.id,
     })
   },
 
@@ -265,7 +221,7 @@ Page({
   clickTask(event) {
     console.log(event.target)
     wx.navigateTo({
-      url: '../project/taskInfo/taskInfo?task=' +  event.target.id,
+      url: '../project/taskInfo/taskInfo?id=' +  event.currentTarget.dataset.id,
     })
   },
 
@@ -288,13 +244,19 @@ Page({
       }
     })
   },
-
+  
+  onSetting: function(){
+    wx.navigateTo({
+      url: '../more/setting/setting',
+    })
+  },
 
   onMoreInfo: function(){
     wx.navigateTo({
       url: '../more/moreInfo/moreInfo',
     })
   },
+
 
   // 点击language展示选项
   onChangeLan(event) {
@@ -304,5 +266,36 @@ Page({
     })
   },
 
+  getData(){
+    wx.cloud.database().collection('messageList').get()
+      .then(res => {
+        this.setData({
+          messageList: res.data
+        })
+      })
+      .catch(err => {
+        console.log('请求失败', err)
+      }),
+
+    wx.cloud.database().collection('project').get()
+      .then(res => {
+        this.setData({
+          project: res.data
+        })
+      })
+      .catch(err => {
+        console.log('请求失败', err)
+      }),
+
+    wx.cloud.database().collection('taskList').get()
+      .then(res => {
+        this.setData({
+          taskList: res.data
+        })
+      })
+      .catch(err => {
+        console.log('请求失败', err)
+      })
+  }
 
 })
