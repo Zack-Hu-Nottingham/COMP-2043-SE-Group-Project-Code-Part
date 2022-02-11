@@ -15,21 +15,14 @@
     <!--Set other information-->
     <van-cell-group style="padding: 10rpx;">
         <van-cell title="Owner" is-link size="large" value="{{owner}}" bindtap="changeOwner" />
-        <van-cell title="Start time" is-link size="large" value="{{ST}}" bindtap="showPopup" />
-        <van-cell title="End time" is-link size="large" value="{{ET}}" bindtap="showPopup2" />
+        <van-cell title="Start time" is-link size="large" value="{{startTime}}" bindtap="showPopup" />
+        <van-cell title="End time" is-link size="large" value="{{endTime}}" bindtap="showPopup" />
         <van-cell title="Follower" is-link size="large" value="{{follower}}" bindtap="changeFollower" />
         <van-cell title="Priority" is-link size="large" value="{{selectedPriority}}" bindtap="changePriority" />
     </van-cell-group>
 
-    <!--Set startTime-->
-    <van-popup show="{{ show }}" round custom-style="width: 700rpx" bind:close="onClose">
-            <van-datetime-picker type="date" value="{{ startTime }}" bind:input="changeST"/>
-    </van-popup>
-    <!--Set endTime-->
-    <van-popup show="{{ show2 }}" round custom-style="width: 700rpx" bind:close="onClose2">
-            <van-datetime-picker type="date" value="{{ endTime }}" bind:input="changeET"/>
-    </van-popup>
-    
+    <!--Set Time-->
+    <van-calendar show="{{ show }}" title="choose period" type="range" bind:close="onClose" bind:confirm="onConfirm"/>
 
     <!--Description-->
     <van-cell-group style="padding: 10rpx;">

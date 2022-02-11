@@ -175,6 +175,15 @@ Page({
 
 
   /**
+   * Create Project page's method
+   */
+  clickNewProject(event) {
+    wx.navigateTo({
+      url: '../project/newProject/newProject',
+    })
+  },
+
+  /**
    * Message page's method
    */
   clickMessage(event) {

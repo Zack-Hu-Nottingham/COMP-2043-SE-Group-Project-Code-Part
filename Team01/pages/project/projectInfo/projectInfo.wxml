@@ -145,7 +145,7 @@
 
 <!-- Create new task -->
 <van-sticky offset-top="{{ 600 }}">
-  <van-button hairline plain round block type="info" bindtap="clickNewProject">{{dictionary.create_new_task}}</van-button>
+  <van-button hairline plain round block type="info" bindtap="clickNewTask">{{dictionary.create_new_task}}</van-button>
 </van-sticky>
 
 </view>

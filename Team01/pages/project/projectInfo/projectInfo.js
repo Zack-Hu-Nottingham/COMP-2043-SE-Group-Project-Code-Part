@@ -520,7 +520,7 @@ Page({
     });
   },
 
-  clickNewProject(event) {
+  clickNewTask(event) {
     wx.navigateTo({
       url: '../newTask/newTask',
     })
