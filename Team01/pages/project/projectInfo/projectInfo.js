@@ -400,6 +400,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+
+    // Project Information's data
     owner: '',
     startTime: '',
     endTime: '',
@@ -407,29 +409,14 @@ Page({
     stateDescription: '',
     currentState: '',
     task: [],
-    unstarted: 0,
-    processing: 0,
-    completed: 0,
-    total: 0,
+    unstarted: [],
+    processing: [],
+    completed: [],
+    total: [],
     delayed: 0,
-    /*name: "project1",
-    owner: "Loc",
-    startTime: "2022-01-10",
-    endTime: "2023-02-20",
-    projectDescription: "None",
-    stateDescription: "None",
-    currentState: "Normal",
-    task: [],
-    unstarted: 5,
-    processing: 1,
-    completed: 1,
-    total: 7,
-    delayed: 0,*/
 
     navbar: [],
-    // navbar: ['Project Information', 'Task Management', 'Gantt Diagram'],
     currentTab: 0,
-    query: {},
     dictionary: {},
     language: 0,
 
@@ -472,6 +459,37 @@ Page({
     });
   },
 
+  getDetail(){
+    wx.cloud.database().collection('project')
+      .doc(id)
+      .get()
+      .then(res => {
+        this.setData({
+          project: res.data,
+          owner: res.data.owner,
+          startTime: res.data.startTime,
+          endTime: res.data.endTime,
+          projectDescription: res.data.projectDescription,
+          stateDescription: res.data.stateDescription,
+          currentState: res.data.currentState,
+          task: res.data.task,
+          unstarted: res.data.unstarted,
+          processing: res.data.processing,
+          completed: res.data.completed,
+          total: res.data.total,
+          delayed: res.data.delayed,
+        }),
+
+        wx.setNavigationBarTitle({
+          title: res.data.name,
+        })
+
+      })
+      .catch(err => {
+        console.log('请求失败', err)
+      })
+  },
+
 
   // Project Information's method
 
@@ -498,7 +516,7 @@ Page({
       date: `${this.formatDate(start)} - ${this.formatDate(end)}`,
     });
 
-    //调用云函数
+    //调用云函数，更新数据库中日期
     wx.cloud.callFunction({
       name: 'updateProjectDate',
       data:{
@@ -507,10 +525,10 @@ Page({
         endTime: `${end.getFullYear()}-${end.getMonth() + 1}-${end.getDate()}`
       }
     }).then(res => {
-      console.log('调用云函数成功', res),
+      console.log('project日期更新成功', res),
       this.getDetail()
     }).catch(res => {
-      console.log('调用云函数失败', res)
+      console.log('project日期更新失败', res)
     })
   },
 
@@ -544,49 +562,19 @@ Page({
       navbar: [this.data.dictionary.project_info, this.data.dictionary.task_management, this.data.dictionary.gantt_diagram]
     })
 
-    // 根据project name获取此project信息，并填充到query
-    // 包含owner，起止时间，描述，当前状态，各类task的数量
-    this.setData ({
-      query: options
-    })
-
+    // 获取当前project的id
     id = options.id
-    console.log(options)
 
+    // 从数据库中根据id获取数据
     this.getDetail()
+
+    // 设置navbar的名称
+    wx.setNavigationBarTitle({
+      title: this.data.name,
+    })
     
   },
 
-  getDetail(){
-    wx.cloud.database().collection('project')
-      .doc(id)
-      .get()
-      .then(res => {
-        this.setData({
-          project: res.data,
-          owner: res.data.owner,
-          startTime: res.data.startTime,
-          endTime: res.data.endTime,
-          projectDescription: res.data.projectDescription,
-          stateDescription: res.data.stateDescription,
-          currentState: res.data.currentState,
-          task: res.data.task,
-          unstarted: res.data.unstarted,
-          processing: res.data.processing,
-          completed: res.data.completed,
-          total: res.data.total,
-          delayed: res.data.delayed,
-        }),
-
-        wx.setNavigationBarTitle({
-          title: res.data.name,
-        })
-
-      })
-      .catch(err => {
-        console.log('请求失败', err)
-      })
-  },
 
   /**
    * 生命周期函数--监听页面初次渲染完成

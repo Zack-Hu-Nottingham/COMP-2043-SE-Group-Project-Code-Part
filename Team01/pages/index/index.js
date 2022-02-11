@@ -1,4 +1,5 @@
 const languageUtils = require("../../language/languageUtils");
+const db = wx.cloud.database();
 
 Page({
 
@@ -58,6 +59,7 @@ Page({
    */
   onLoad: function (options) {
 
+    // 获取初始数据 
     this.getData()
 
     // 测试用，获取login code
@@ -152,6 +154,43 @@ Page({
    * Global method
    */
 
+  // 初始化数据
+  getData(){
+    // 获取message
+    wx.cloud.database().collection('messageList').get()
+      .then(res => {
+        this.setData({
+          messageList: res.data
+        })
+      })
+      .catch(err => {
+        console.log('请求失败', err)
+      }),
+
+    // 获取项目信息
+    wx.cloud.database().collection('project').get()
+      .then(res => {
+        this.setData({
+          project: res.data
+        })
+      })
+      .catch(err => {
+        console.log('请求失败', err)
+      }),
+
+    // 获取任务信息
+    wx.cloud.database().collection('taskList').get()
+      .then(res => {
+        this.setData({
+          taskList: res.data
+        })
+      })
+      .catch(err => {
+        console.log('请求失败', err)
+      })
+  },
+
+
   // 更改tab选项时对应的逻辑
   onChangeTab(event) {
     this.setData({ active: event.detail });
@@ -213,6 +252,11 @@ Page({
     })
   },
 
+  clickNewProject(event) {
+    wx.navigateTo({
+      url: '../project/newProject/newProject',
+    })
+  },
 
    
   /**
@@ -266,36 +310,5 @@ Page({
     })
   },
 
-  getData(){
-    wx.cloud.database().collection('messageList').get()
-      .then(res => {
-        this.setData({
-          messageList: res.data
-        })
-      })
-      .catch(err => {
-        console.log('请求失败', err)
-      }),
-
-    wx.cloud.database().collection('project').get()
-      .then(res => {
-        this.setData({
-          project: res.data
-        })
-      })
-      .catch(err => {
-        console.log('请求失败', err)
-      }),
-
-    wx.cloud.database().collection('taskList').get()
-      .then(res => {
-        this.setData({
-          taskList: res.data
-        })
-      })
-      .catch(err => {
-        console.log('请求失败', err)
-      })
-  }
-
+  
 })

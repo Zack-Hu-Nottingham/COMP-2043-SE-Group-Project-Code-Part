@@ -22,13 +22,13 @@
     <van-cell title="{{dictionary.owner}}" value="{{owner}}" />
     <van-cell title="{{dictionary.start_time}}" is-link value="{{startTime}}" bindtap="onDateDisplay" class="projectInfoStartTimeForTest"/>
     <van-cell title="{{dictionary.end_time}}" is-link value="{{endTime}}" bindtap="onDateDisplay" class="projectInfoEndTimeForTest"/>
-    <van-field model:value="{{ projectDescription }}" right clearable label="{{dictionary.description}}"
-    placeholder="{{projectDescription}}" border="{{ false }}"></van-field>
+    <van-field model:value="{{ projectDescription }}" input-align="right" clearable label="{{dictionary.description}}" placeholder="{{projectDescription}}" border="{{ false }}"></van-field>
+
   </van-cell-group>
 
   <van-cell-group inset title="{{dictionary.state_information}}">
     <van-cell title="{{dictionary.current_state}}" value="{{currentState}}" />
-    <van-field model:value="{{ stateDescription }}" center clearable label="{{dictionary.description}}"
+    <van-field model:value="{{ stateDescription }}" input-align="right" clearable label="{{dictionary.description}}"
     placeholder="{{stateDescription}}" border="{{ false }}"></van-field>
   </van-cell-group>
 
@@ -116,21 +116,14 @@
 
   <van-collapse-item title="{{dictionary.processing}}" name="1" class="releaseStartedItemForTest">
 
-    <!-- 发起一个请求填充 -->
-    <van-cell is-link
-      label="start time:{{startTime}}"
-      title="单元格"
-      link-type="navigateTo"
-      url="/pages/project/taskInfo/taskInfo"
-    />
-
-    <van-cell is-link id=""
-      label="start time:{{startTime}}"
-      title="单元格"
-      link-type="navigateTo"
-      url="/pages/project/taskInfo/taskInfo"
-      class="startedTaskForTest"
-    />
+    <view wx:for="">
+      <van-cell clickable
+        label="start time:{{startTime}}"
+        title="单元格"
+        link-type="navigateTo"
+        url="/pages/project/taskInfo/taskInfo"
+      />
+    </view>
     
   </van-collapse-item>
 

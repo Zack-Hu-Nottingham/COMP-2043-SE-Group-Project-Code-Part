@@ -55,6 +55,14 @@ var Languague = {
     processing: "Processing",
     total: "Total",
     create_new_task: "Create New Task",
+
+    // Task information page
+    basic_info: "Basic Information",
+    belong_to: "Belong To",
+    stage_of_project: "Stage Of Project",
+    priority: "Priority",
+    tag: "Tag",
+    participant: "Participant"
     
  },
 };

@@ -10,6 +10,7 @@ exports.main = async (event, context) => {
   return cloud.database().collection('taskList')
     .doc(event.id)
     .update({
+      
     data: {
       startTime: event.startTime,
       endTime: event.endTime

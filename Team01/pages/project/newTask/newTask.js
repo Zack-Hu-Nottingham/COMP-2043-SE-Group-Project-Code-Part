@@ -1,11 +1,19 @@
 // pages/project/newTask/newTask.js
 import Toast from '../../../miniprogram_npm/@vant/weapp/toast/toast'
+const languageUtils = require("../../../language/languageUtils");
+
 var app = getApp()
 Page({
     /**
      * 页面的初始数据
      */
     data: {
+        
+        // 存放双语
+        dictionary: {},
+        language: 0,
+        languageList: ["简体中文", "English"],
+        
         name: "",
         details: "",
         "taskState":[{
@@ -48,6 +56,14 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        
+        // 初始化语言
+        var lan = wx.getStorageSync("languageVersion");
+        this.initLanguage();
+        this.setData({
+        language: lan
+        })
+
     },
 
     /**
@@ -249,5 +265,18 @@ Page({
                 } */
         }
         
-    }
+    },
+
+    // 初始化语言
+    initLanguage() {
+        var self = this;
+        //获取当前小程序语言版本所对应的字典变量
+        var lang = languageUtils.languageVersion();
+
+        // 页面显示
+        self.setData({
+        dictionary: lang.lang.index,
+        });
+    },
+
 })

@@ -56,6 +56,15 @@ var Languague = {
     total: "全部",
     create_new_task: "新建任务",
 
+    // Task information page
+    basic_info: "基本信息",
+    belong_to: "所属项目",
+    stage_of_project: "项目状态",
+    priority: "优先级",
+    tag: "标签",
+    participant: "参与者"
+
+
    },
 };
 
