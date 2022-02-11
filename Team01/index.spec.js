@@ -10,12 +10,12 @@ describe('index', () => {
     miniProgram = await automator.launch({
       projectPath: '/Users/edison/Team01/Team01',
     })
-    page = await miniProgram.reLaunch('/pages/project/project/project')
+    page = await miniProgram.reLaunch('/pages/index/index')
     await page.waitFor(500)
   }, 30000)
 
   test('get current start page', async () => {
-    expect(await page.path).toBe('pages/project/project/project')
+    expect(await page.path).toBe('pages/index/index')
   },30000);
 
   test('jump to specific page', async () => {
@@ -33,7 +33,7 @@ describe('index', () => {
 
   test('get back to start page', async () => {
     await miniProgram.navigateBack();
-    expect(await page.path).toBe('pages/project/project/project')
+    expect(await page.path).toBe('pages/index/index')
     await page.waitFor(500);
   },30000);
 
@@ -48,6 +48,19 @@ describe('index', () => {
     //验证是否成功跳转到发起页面
     expect(await currentPageIndex.path).toBe('pages/project/statisticReport/statisticReport');
 
+  },30000);
+
+  test('jump to create new project', async () => {
+    await miniProgram.navigateBack();
+    //获取发起页面 按钮
+    element = await page.$('.createNewProjectForTest');
+    //点击发起  点击后跳转到发起页面
+    await element.tap();
+    await page.waitFor(500);
+
+    currentPageIndex = await miniProgram.currentPage();
+    //验证是否成功跳转到发起页面
+    // expect(await currentPageIndex.path).toBe('pages/project/projectInfo/projectInfo');
   },30000);
 
   test('jump to specific project page', async () => {
@@ -122,6 +135,26 @@ test('jump to Dashboard and taskInfo', async () => {
     currentPageIndex = await miniProgram.currentPage();
     //验证是否成功跳转到发起页面
     expect(await currentPageIndex.path).toBe('pages/project/taskInfo/taskInfo');
+
+  },30000);
+
+  test('jump to Dashboard and taskInfo', async () => {
+    //获取发起页面 按钮
+    await miniProgram.redirectTo('/pages/index/index');
+    page = await miniProgram.currentPage();
+    await page.setData(
+      {
+        active: 2
+      }
+    )
+    element = await page.$('.taskForTest');
+    //点击发起  点击后跳转到发起页面
+    await element.tap();
+    await page.waitFor(500);
+
+    currentPageIndex = await miniProgram.currentPage();
+    //验证是否成功跳转到发起页面
+    expect(await currentPageIndex.path).toBe('pages/project/newTask/newTask');
 
   },30000);
 
@@ -210,24 +243,24 @@ test('jump to Dashboard and taskInfo', async () => {
     currentPageIndex = await miniProgram.currentPage();
   },30000);
 
-  // test('check the picker for start time in project info', async () => {
-  //   await miniProgram.redirectTo('/pages/project/projectInfo/projectInfo');
-  //   page = await miniProgram.currentPage();
-  //   await page.setData(
-  //     {
-  //       currentTab: 0
-  //     }
-  //   )
-  //   //点击发起  点击后跳转到发起页面
-  //   //获取发起页面 按钮
-  //   element = await page.$('.startTimePickerForTest');
-  //   page = await miniProgram.currentPage();
+  test('check the picker for start time in project info', async () => {
+    await miniProgram.redirectTo('/pages/project/projectInfo/projectInfo');
+    page = await miniProgram.currentPage();
+    await page.setData(
+      {
+        currentTab: 0
+      }
+    )
+    //点击发起  点击后跳转到发起页面
+    //获取发起页面 按钮
+    element = await page.$('.startTimePickerForTest');
+    page = await miniProgram.currentPage();
     
-  //   await element.tap();
-  //   await page.waitFor(500);
+    await element.tap();
+    await page.waitFor(500);
 
-  //   currentPageIndex = await miniProgram.currentPage();
-  // },30000);
+    currentPageIndex = await miniProgram.currentPage();
+  },30000);
 
   test('check the triggers in project info', async () => {
     await miniProgram.redirectTo('/pages/project/projectInfo/projectInfo');
@@ -252,6 +285,36 @@ test('jump to Dashboard and taskInfo', async () => {
 
     currentPageIndex = await miniProgram.currentPage();
   },30000);
+
+  test('check the description project info', async () => {
+    await miniProgram.redirectTo('/pages/project/projectInfo/projectInfo');
+    page = await miniProgram.currentPage();
+    //获取发起页面 按钮
+    element = await page.$('.projectInfoDescriptionForTest');
+    await page.waitFor(500);
+    //点击发起  点击后跳转到发起页面
+    //await element.tap();
+    expect(await element.property('placeholder')).toBe(null);
+
+    currentPageIndex = await miniProgram.currentPage();
+  },30000);
+
+  test('check the description project info of state', async () => {
+    await miniProgram.redirectTo('/pages/project/projectInfo/projectInfo');
+    page = await miniProgram.currentPage();
+    await page.callMethod('onLoad');
+    await page.callMethod('onReady');
+    await page.callMethod('onShow');
+    //获取发起页面 按钮
+    element = await page.$('.projectInfoStateDescriptionForTest');
+    await page.waitFor(500);
+    //点击发起  点击后跳转到发起页面
+    //await element.tap();
+    expect(await element.property('placeholder')).toBe(null);
+
+    currentPageIndex = await miniProgram.currentPage();
+  },30000);
+
 
   afterAll(async () => {
     await miniProgram.close()
