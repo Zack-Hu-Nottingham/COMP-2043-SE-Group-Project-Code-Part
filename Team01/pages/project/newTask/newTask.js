@@ -16,37 +16,48 @@ Page({
         
         name: "",
         details: "",
+
+        // Task state 数据格式
+        // 0 - unstarted
+        // 1 - progressing
+        // 2 - finished
+        // 3 - delayed
+        // 4 - reworking
+        // * 5 - accepted
+
         "taskState":[{
-            "name": "Not started"
+            "name": "Unstarted",
+            "value": '0',
         },{
-            "name": "Progressing"
+            "name": "Progressing",
+            "value": '1',
         },{
-            "name": "Need to rework"
+            "name": "Finished",
+            "value": '2',
         },{
-            "name": "Finished"
+            "name": "Accepted",
+            "value": '5'
         },{
-            "name": "Accepted"
+            "name": "Reworking",
+            "value": '4',
         }],
         "priority":[{
-            "name": "Highest"
+            "name": "high",
+            "value": '2'
         },{
-            "name": "Higher"
+            "name": "normal",
+            "value": '1'
         },{
-            "name": "Medium"
-        },{
-            "name": "Lower"
-        },{
-            "name": "Lowest"
+            "name": "low",
+            "value": '0'
         }],
-        selectedPriority: "Medium",
-        selectedState: "Not started",
+        selectedPriority: '',
+        selectedState: '',
         isLoading: false,
         show: false,
         show2: false,
-        startTime: new Date().getTime(),
-        endTime: new Date().getTime(),
-        ST: "",
-        ET: "",
+        startTime: '',
+        endTime: '',
         project: "",
         Owner: [],
         fileList: []
@@ -55,15 +66,13 @@ Page({
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad: function (options) {
-        
+    onLoad: function (options) {        
         // 初始化语言
         var lan = wx.getStorageSync("languageVersion");
         this.initLanguage();
         this.setData({
         language: lan
         })
-
     },
 
     /**
@@ -114,45 +123,58 @@ Page({
     onShareAppMessage: function () {
 
     },
+    // Type the task name
     typeName: function(e){
         this.setData({
             name: e.detail
         })
     },
+
+    // Type task details
     typeDetails: function(e){
         this.setData({
             details: e.detail
         })
     },
-    changeST: function(e){
-        var CT = new Date(e.detail)
-        console.log(e.detail)
-        this.setData({
-            startTime: e.detail,
-            ST: CT.getFullYear() + "-" + (Number(CT.getMonth()) + 1) + "-" + CT.getDate()
-        });
-    },
-    changeET: function(e){
-        var CT = new Date(e.detail)
-        console.log(e.detail)
-        this.setData({
-            endTime: e.detail,
-            ET: CT.getFullYear() + "-" + (Number(CT.getMonth()) + 1) + "-" + CT.getDate()
-        });
-    },
 
+    // Change start/end time
     showPopup() {
         this.setData({ show: true });
     },
+
     onClose() {
         this.setData({ show: false });
     },
-    showPopup2() {
-        this.setData({ show2: true });
-    },
-    onClose2() {
-        this.setData({ show2: false });
-    },
+    
+    formatDate(date) {
+        date = new Date(date);
+        return `${date.getMonth() + 1}/${date.getDate()}`;
+      },
+    
+      onConfirm(event) {
+        const [start, end] = event.detail;
+        this.setData({
+          startTime: this.formatDate(start),
+          endTime: this.formatDate(end),
+          show: false,
+          date: `${this.formatDate(start)} - ${this.formatDate(end)}`,
+        });
+    
+        //调用云函数
+        wx.cloud.callFunction({
+          name: 'updateProjectDate',
+          data:{
+            id: id,
+            startTime: `${start.getFullYear()}-${start.getMonth() + 1}-${start.getDate()}`,
+            endTime: `${end.getFullYear()}-${end.getMonth() + 1}-${end.getDate()}`
+          }
+        }).then(res => {
+          console.log('调用云函数成功', res),
+          this.getDetail()
+        }).catch(res => {
+          console.log('调用云函数失败', res)
+        })
+      },
 
     changeState: function(){
         var arr = this.data.taskState
