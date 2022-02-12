@@ -62,8 +62,11 @@ var Languague = {
     stage_of_project: "Stage Of Project",
     priority: "Priority",
     tag: "Tag",
-    participant: "Participant"
+    participant: "Participant",
     
+    // New task page
+    task_name: "Task Name",
+
  },
 };
 

@@ -62,7 +62,14 @@ var Languague = {
     stage_of_project: "项目状态",
     priority: "优先级",
     tag: "标签",
-    participant: "参与者"
+    participant: "参与者",
+
+    // New task page
+    task_name: "任务名称",
+    
+
+
+    
 
 
    },
