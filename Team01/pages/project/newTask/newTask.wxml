@@ -2,31 +2,34 @@
 <form bindsubmit="formSubmit" report-submit>
 <view class="form">
     <!--Set Task Information-->
-    <van-cell-group style="padding: 10rpx;">
-        <van-field label="Task name" value="{{ name }}" size="large" input-align="right" placeholder="Enter name..." bind:change="typeName"/>
+    <van-cell-group inset style="padding: 10rpx;">
+        <van-field label="{{dictionary.task_name}}" value="{{ name }}" size="large" input-align="right" placeholder="Enter name..." bind:change="typeName"/>
+    </van-cell-group>
+    
+    <van-cell-group inset style="padding: 10rpx;">
+        <van-cell title="{{dictionary.start_time}}" is-link size="large" value="{{startTime}}" bindtap="showPopup" />
+        <van-cell title="{{dictionary.end_time}}" is-link size="large" value="{{endTime}}" bindtap="showPopup" />
     </van-cell-group>
 
     <!--Set Task State-->
-    <van-cell-group style="padding: 10rpx;">
+    <!-- <van-cell-group inset style="padding: 10rpx;">
         <van-cell title="Task state" is-link size="large" value="{{selectedState}}" bindtap="changeState" />
         <van-cell title="Superior project" is-link size="large" value="{{project}}" bindtap="selectProject" />
-    </van-cell-group>
+    </van-cell-group> -->
 
     <!--Set other information-->
-    <van-cell-group style="padding: 10rpx;">
-        <van-cell title="Owner" is-link size="large" value="{{owner}}" bindtap="changeOwner" />
-        <van-cell title="Start time" is-link size="large" value="{{startTime}}" bindtap="showPopup" />
-        <van-cell title="End time" is-link size="large" value="{{endTime}}" bindtap="showPopup" />
-        <van-cell title="Follower" is-link size="large" value="{{follower}}" bindtap="changeFollower" />
-        <van-cell title="Priority" is-link size="large" value="{{selectedPriority}}" bindtap="changePriority" />
+    <van-cell-group inset style="padding: 10rpx;">
+        <van-cell title="{{dictionary.owner}}" is-link size="large" value="{{owner}}" bindtap="changeOwner" />
+        <van-cell title="{{dictionary.participant}}" is-link size="large" value="{{follower}}" bindtap="changeFollower" />
+        <van-cell title="{{dictionary.priority}}" is-link size="large" value="{{selectedPriority}}" bindtap="changePriority" />
     </van-cell-group>
 
     <!--Set Time-->
     <van-calendar show="{{ show }}" title="choose period" type="range" bind:close="onClose" bind:confirm="onConfirm"/>
 
     <!--Description-->
-    <van-cell-group style="padding: 10rpx;">
-        <van-field label="Description" value="{{ details }}" type="textarea" placeholder="(less than 500 words)" size="large" maxlength="500" input-align="right" autosize bind:change="typeDetails" />
+    <van-cell-group inset style="padding: 10rpx;">
+        <van-field label="{{dictionary.description}}" value="{{ details }}" type="textarea" placeholder="(less than 500 words)" size="large" maxlength="500" input-align="right" autosize bind:change="typeDetails" />
     </van-cell-group>
 </view>
 
@@ -34,7 +37,7 @@
 <van-uploader class="uploader" file-list="{{ fileList }}" bind:after-read="afterRead" />
 
 <!--Submit-->    
-<van-button plain round block loading="{{isLoading}}" disabled="{{isLoading}}" class="submitBtn" color="#1296db" type="primary" size="normal" form-type="submit">Create new Task</van-button>
+<van-button plain round block loading="{{isLoading}}" disabled="{{isLoading}}" class="submitBtn" color="#1296db" type="primary" size="normal" form-type="submit">{{dictionary.create_new_task}}</van-button>
 
 </form>
 <van-toast id="van-toast" />

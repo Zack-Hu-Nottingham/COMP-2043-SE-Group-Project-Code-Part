@@ -14,73 +14,17 @@
       "list": [
         {
           "name": "",
-          "pathName": "pages/project/taskInfo/taskInfo",
-          "query": "id=bf4a0bf261ee606609522aa554b48e7f",
+          "pathName": "pages/project/newTask/newTask",
+          "query": "",
           "scene": null
         },
-        "game": {
-            "list": []
-        },
-        "gamePlugin": {
-            "list": []
-        },
-        "miniprogram": {
-            "list": [
-                {
-                    "name": "",
-                    "pathName": "pages/project/taskInfo/taskInfo",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "name": "",
-                    "pathName": "pages/project/statisticReport/statisticReport",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "name": "",
-                    "pathName": "pages/project/testDiagram/testDiagram",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "name": "",
-                    "pathName": "pages/project/projectInfo/projectInfo",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "name": "",
-                    "pathName": "pages/project/newProject/newProject",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "name": "",
-                    "pathName": "pages/message/message/message",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "name": "",
-                    "pathName": "pages/project/task/task",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "name": "",
-                    "pathName": "pages/project/newProject/newProject",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "name": "",
-                    "pathName": "pages/project/newTask/newTask",
-                    "query": "",
-                    "scene": null
-                }
-            ]
+        {
+          "name": "",
+          "pathName": "pages/project/projectInfo/projectInfo",
+          "query": "id=617ef50c61ee5cdf000377d61d2d3f10",
+          "scene": null
         }
+      ]
     }
+  }
 }

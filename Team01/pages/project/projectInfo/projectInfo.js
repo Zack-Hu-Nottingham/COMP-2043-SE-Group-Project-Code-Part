@@ -494,27 +494,22 @@ Page({
   // Project Information's method
 
   onDateDisplay() {
-    console.log("show")
     this.setData({ show: true });
   },
 
-  onClose() {
+  onDateClose() {
     this.setData({ show: false });
   },
 
   formatDate(date) {
     date = new Date(date);
-    return `${date.getMonth() + 1}/${date.getDate()}`;
+    // return `${date.getMonth() + 1}/${date.getDate()}`;
+    return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
   },
 
-  onConfirm(event) {
+  onDateConfirm(event) {
     const [start, end] = event.detail;
-    this.setData({
-      startTime: this.formatDate(start),
-      endTime: this.formatDate(end),
-      show: false,
-      date: `${this.formatDate(start)} - ${this.formatDate(end)}`,
-    });
+    this.onDateClose();
 
     //调用云函数，更新数据库中日期
     wx.cloud.callFunction({
