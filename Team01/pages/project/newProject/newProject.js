@@ -24,6 +24,7 @@ Page({
             "value":"publicProject"
         }],
         selectedTemplate: '',
+        selectedTemplateIndex: '1',
         selectedVisibility: "Private",
         isLoading: false,
         fileList: []
@@ -148,6 +149,7 @@ Page({
         });
       },
     formSubmit: function (e) {
+
         var that = this
         if(this.data.name==""){
             Toast('Name is null');
