@@ -1,5 +1,8 @@
 <!--pages/project/newProject/projectTemplate/projectTemplate.wxml-->
-<van-cell-group inset class="cell-group" wx:for="{{templates}}" wx:key="templates.id" bindtap="onChange">
-  <van-cell title="Hello" label="world" bindtap="onChange"/>
-  <van-cell title="{{templates.name}}" label="{{templates.content}}"/>
-</van-cell-group>
+<van-radio-group value="{{ radio }}" bind:change="onChange">
+  <van-cell-group inset class="cell-group" wx:for="{{ templates }}" wx:key="index">
+    <van-cell title="{{item.name}}" label="{{item.content}}" clickable data-name="{{item.id}}" bind:click="onClick">
+      <van-radio slot="right-icon" name="{{item.id}}" />
+    </van-cell>
+  </van-cell-group> 
+</van-radio-group>

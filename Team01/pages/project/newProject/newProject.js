@@ -15,7 +15,7 @@ Page({
             "name": "Public",
             "value":"publicProject"
         }],
-        selectedTemplate: "Select",
+        selectedTemplate: '',
         selectedVisibility: "Private",
         isLoading: false,
         fileList: []
@@ -125,9 +125,6 @@ Page({
         if(this.data.name==""){
             Toast('Name is null');
         }
-        // else if(this.data.selectedTemplate=="Select"){
-        //     Toast('Template has not been selected');
-        // }
         else if(this.data.details==""){
             Toast('No detail description');
         }
@@ -148,8 +145,8 @@ Page({
                 })
             },2400)
             setTimeout(function(){
-                wx.switchTab({
-                  url: '../project/project',
+                wx.navigateTo({
+                  url: '../../index/index',
                 })
             },2500)
         }
