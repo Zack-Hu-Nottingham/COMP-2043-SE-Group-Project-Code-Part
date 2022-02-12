@@ -19,6 +19,11 @@ describe('index', () => {
   },30000);
 
   test('jump to specific page', async () => {
+    await page.setData(
+      {
+        active: 1
+      }
+    )
     //获取发起页面 按钮
     element = await page.$('.myTaskForTest');
     //点击发起  点击后跳转到发起页面
@@ -27,7 +32,7 @@ describe('index', () => {
 
     currentPageIndex = await miniProgram.currentPage();
     //验证是否成功跳转到发起页面
-    expect(await currentPageIndex.path).toBe('pages/project/task/task');
+    expect(await currentPageIndex.path).toBe('pages/project/taskInfo/taskInfo');
 
   },30000);
 
@@ -110,9 +115,9 @@ describe('index', () => {
     await element.tap();
     await page.waitFor(5000);
 
-    element = await page.$('.startedTaskForTest');
-    await element.tap();
-    await page.waitFor(500);
+    // element = await page.$('.startedTaskForTest');
+    // await element.tap();
+    // await page.waitFor(500);
     
     currentPageIndex = await miniProgram.currentPage();
     expect(await currentPageIndex.path).toBe('pages/project/projectInfo/projectInfo');
@@ -140,14 +145,14 @@ test('jump to Dashboard and taskInfo', async () => {
 
   test('jump to Dashboard and taskInfo', async () => {
     //获取发起页面 按钮
-    await miniProgram.redirectTo('/pages/index/index');
+    await miniProgram.redirectTo('/pages/project/projectInfo/projectInfo');
     page = await miniProgram.currentPage();
     await page.setData(
       {
-        active: 2
+        currentTab: 1
       }
     )
-    element = await page.$('.taskForTest');
+    element = await page.$('.createNewProjectForTest');
     //点击发起  点击后跳转到发起页面
     await element.tap();
     await page.waitFor(500);
@@ -221,10 +226,10 @@ test('jump to Dashboard and taskInfo', async () => {
     await miniProgram.redirectTo('/pages/project/taskInfo/taskInfo');
     page = await miniProgram.currentPage();
     //获取发起页面 按钮
-    element = await page.$('.priorityForTest');
-    //点击发起  点击后跳转到发起页面
-    await element.tap();
-    await element.trigger('change', { value:1 });
+    // element = await page.$('.priorityForTest');
+    // //点击发起  点击后跳转到发起页面
+    // await element.tap();
+    // await element.trigger('change', { value:1 });
    
     await page.waitFor(500);
 
@@ -253,7 +258,7 @@ test('jump to Dashboard and taskInfo', async () => {
     )
     //点击发起  点击后跳转到发起页面
     //获取发起页面 按钮
-    element = await page.$('.startTimePickerForTest');
+    element = await page.$('.projectInfoStartTimeForTest');
     page = await miniProgram.currentPage();
     
     await element.tap();
