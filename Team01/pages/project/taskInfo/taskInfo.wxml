@@ -4,7 +4,7 @@
 
 
 <van-cell-group inset style="padding: 30rpx" >
-  <van-cell title="{{dictionary.start_time}}" is-link value="{{taskPage.startTime}}" bindtap="onDateDisplay" />
+  <van-cell title="{{dictionary.start_time}}" is-link value="{{taskPage.startTime}}" bindtap="onDateDisplay" class="startTimeForTest"/>
   <van-cell title="{{dictionary.end_time}}" is-link value="{{taskPage.endTime}}" bindtap="onDateDisplay" />
 </van-cell-group>
 

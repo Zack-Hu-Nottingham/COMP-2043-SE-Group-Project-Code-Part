@@ -28,18 +28,18 @@
 <view wx:elif="{{active == 1}}">
 
   <van-cell-group inset style="padding: 30rpx;">
-    <van-cell center title="{{dictionary.my_task}}" icon="user-o" clickable="true" bindtap="clickMyTask"/>
-    <van-cell center title=" {{dictionary.statistic_report}}" icon="bar-chart-o" clickable="true" bindtap="clickStatisticReport"/>
+    <van-cell center title="{{dictionary.my_task}}" icon="user-o" clickable="true" bindtap="clickMyTask" class="myTaskForTest"/>
+    <van-cell center title=" {{dictionary.statistic_report}}" icon="bar-chart-o" clickable="true" bindtap="clickStatisticReport" class="statisticReportForTest"/>
   </van-cell-group>
 
   <van-cell-group inset style="padding: 30rpx;" title="{{dictionary.project_list}}">
     <view wx:for="{{project}}">
-      <van-cell icon="todo-list-o" title="{{item.name}}" clickable="true" bindtap="clickProject" data-id="{{item._id}}"/>
+      <van-cell icon="todo-list-o" title="{{item.name}}" clickable="true" bindtap="clickProject" data-id="{{item._id}}" class="projectForTest"/>
     </view>
   </van-cell-group>
 
   <van-sticky offset-top="{{ 570 }}">
-  <van-button hairline plain round block type="info" bindtap="clickNewProject">{{dictionary.create_new_project}}</van-button>
+  <van-button hairline plain round block type="info" bindtap="clickNewProject" class="createNewProjectForTest">{{dictionary.create_new_project}}</van-button>
 </van-sticky>
 
 </view>
