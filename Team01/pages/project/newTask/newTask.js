@@ -41,37 +41,51 @@ Page({
             "name": "Reworking",
             "value": '4',
         }],
-        "priority":[{
+
+        selectedPriority: '',
+        selectedState: '',
+        isLoading: false,
+        showDate: false,
+
+        startTime: '',
+        endTime: '',
+        
+        belongTo: "",
+        Owner: [],
+        fileList: [],
+
+        showPriority: false,
+        prioritys: [{
             "name": "high",
-            "value": '2'
+            "value": '0'
         },{
             "name": "normal",
             "value": '1'
         },{
             "name": "low",
-            "value": '0'
+            "value": '2'
         }],
-        selectedPriority: '',
-        selectedState: '',
-        isLoading: false,
-        show: false,
-        show2: false,
-        startTime: '',
-        endTime: '',
-        project: "",
-        Owner: [],
-        fileList: []
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad: function (options) {        
+    onLoad: function (options) {   
+        
+        this.setData({
+            belongTo: options.id
+        })
+        
         // 初始化语言
         var lan = wx.getStorageSync("languageVersion");
         this.initLanguage();
         this.setData({
-        language: lan
+            language: lan
+        })
+
+        // 设置
+        wx.setNavigationBarTitle({
+          title: this.data.dictionary.create_new_task,
         })
     },
 
@@ -123,6 +137,7 @@ Page({
     onShareAppMessage: function () {
 
     },
+
     // Type the task name
     typeName: function(e){
         this.setData({
@@ -138,76 +153,48 @@ Page({
     },
 
     // Change start/end time
-    showPopup() {
-        this.setData({ show: true });
+    showDatePopup() {
+        this.setData({ showDate: true });
     },
 
-    onClose() {
-        this.setData({ show: false });
+    onDateClose() {
+        this.setData({ showDate: false });
     },
     
     formatDate(date) {
         date = new Date(date);
-        return `${date.getMonth() + 1}/${date.getDate()}`;
-      },
+        return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+    },
     
-      onConfirm(event) {
+    onDateConfirm(event) {
         const [start, end] = event.detail;
         this.setData({
-          startTime: this.formatDate(start),
-          endTime: this.formatDate(end),
-          show: false,
-          date: `${this.formatDate(start)} - ${this.formatDate(end)}`,
+            startTime: this.formatDate(start),
+            endTime: this.formatDate(end),
+            show: false,
+            date: `${this.formatDate(start)} - ${this.formatDate(end)}`,
         });
-    
-        //调用云函数
-        wx.cloud.callFunction({
-          name: 'updateProjectDate',
-          data:{
-            id: id,
-            startTime: `${start.getFullYear()}-${start.getMonth() + 1}-${start.getDate()}`,
-            endTime: `${end.getFullYear()}-${end.getMonth() + 1}-${end.getDate()}`
-          }
-        }).then(res => {
-          console.log('调用云函数成功', res),
-          this.getDetail()
-        }).catch(res => {
-          console.log('调用云函数失败', res)
-        })
-      },
+        this.onDateClose()
+    },
 
-    changeState: function(){
-        var arr = this.data.taskState
-        var arrName = new Array()
-        for(var i in arr){
-            arrName.push(arr[i].name)
-        }
-        wx.showActionSheet({
-            itemList: arrName,
-            itemColor: "gray",
-            success: (res) =>{
-                this.setData({
-                    selectedState: arrName[res.tapIndex]
-                })
-            }
-        })
-    },
     changePriority: function(){
-        var arr = this.data.priority
-        var arrName = new Array()
-        for(var i in arr){
-            arrName.push(arr[i].name)
-        }
-        wx.showActionSheet({
-            itemList: arrName,
-            itemColor: "gray",
-            success: (res) =>{
-                this.setData({
-                    selectedPriority: arrName[res.tapIndex]
-                })
-            }
+        this.setData({
+            showPriority: true,
         })
     },
+
+    onClosePriority() {
+        this.setData({ showPriority: false });
+    },
+
+    onSelectPriority(event) {
+        // console.log(event.detail.value);
+        this.setData({
+            selectedPriority: this.data.prioritys[event.detail.value].name
+        })
+    },
+
+
     afterRead: function(event) {
         const { file } = event.detail;
         // 当设置 mutiple 为 true 时, file 为数组格式，否则为对象格式
@@ -224,13 +211,20 @@ Page({
           },
         });
       },
+
     formSubmit: function (e) {
         var that = this
-        if(this.data.name==""){
-            Toast('Name is null');
-        }
-        else if(this.data.startTime>this.data.endTime){
+        // if(this.data.name == ""){
+        //     Toast.fail('Name is null');
+        // }
+        if(this.data.startTime > this.data.endTime){
             Toast('Wrong time setting')
+        }
+        else if(this.data.startTime > this.data.endTime){
+            Toast('Wrong time setting')
+        }
+        else if (this.data.startTime == '' || this.data.endTime == '') {
+
         }
         // else if(this.data.project==""){
         //     Toast('No superior project');

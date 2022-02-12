@@ -20,7 +20,7 @@
         },
         {
           "name": "",
-          "pathName": "pages/project/projectInfo/projectInfo",
+          "pathName": "pages/project/newProject/newProject",
           "query": "id=617ef50c61ee5cdf000377d61d2d3f10",
           "scene": null
         }

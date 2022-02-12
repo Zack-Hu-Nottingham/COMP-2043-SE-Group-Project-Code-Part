@@ -66,12 +66,14 @@ var Languague = {
 
     // New task page
     task_name: "任务名称",
-    
+    cancel: "取消",
+    select_priority: "选择优先级",
 
-
-    
-
-
+    // New project
+    project_name: "项目名称",
+    choose_template: "选择模板",
+    house_owner: "房屋主人",
+   
    },
 };
 

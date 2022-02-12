@@ -66,7 +66,14 @@ var Languague = {
     
     // New task page
     task_name: "Task Name",
+    cancel: "Cancel",
+    select_priority: "Select Priority",
 
+    // New project
+    project_name: "Project Name",
+    choose_template: "Choose Template",
+    house_owner: "House Owner",
+    
  },
 };
 
