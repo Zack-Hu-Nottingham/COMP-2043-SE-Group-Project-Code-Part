@@ -37,7 +37,37 @@ Page({
     /**
      * Dashboard page's data
      */
-    taskList:[],
+    taskList:[{
+      _id: '',
+      name: '',
+      startTime: '',
+      endTime: '',
+      state: '0'
+    },{
+      _id: '',
+      name: '',
+      startTime: '',
+      endTime: '',
+      state: '1'
+    },{
+      _id: '',
+      name: '',
+      startTime: '',
+      endTime: '',
+      state: '2'
+    },{
+      _id: '',
+      name: '',
+      startTime: '',
+      endTime: '',
+      state: '3'
+    },{
+      _id: '',
+      name: '',
+      startTime: '',
+      endTime: '',
+      state: '4'
+    },],
 
 
     /**
