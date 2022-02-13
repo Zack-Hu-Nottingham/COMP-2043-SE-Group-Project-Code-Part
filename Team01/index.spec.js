@@ -182,6 +182,26 @@ test('jump to Dashboard and taskInfo', async () => {
 
   },30000);
 
+  test('jump to Dashboard and taskInfo', async () => {
+    //获取发起页面 按钮
+    await miniProgram.redirectTo('/pages/index/index');
+    page = await miniProgram.currentPage();
+    await page.setData(
+      {
+        active: 1
+      }
+    )
+    element = await page.$('.createNewProjectForTest');
+    //点击发起  点击后跳转到发起页面
+    await element.tap();
+    await page.waitFor(500);
+
+    currentPageIndex = await miniProgram.currentPage();
+    //验证是否成功跳转到发起页面
+    expect(await currentPageIndex.path).toBe('pages/project/newProject/newProject');
+
+  },30000);
+
   test('jump to setting page', async () => {
     await miniProgram.redirectTo('/pages/index/index');
     page = await miniProgram.currentPage();
