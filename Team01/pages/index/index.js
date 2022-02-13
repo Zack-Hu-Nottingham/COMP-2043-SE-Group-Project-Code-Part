@@ -195,8 +195,7 @@ Page({
 
     await this.getProjectInfo()
 
-    var idx
-    for (idx in this.data.project) {
+    for (var idx in this.data.project) {
       await this.getTaskInfo(this.data.project[idx]._id)
       console.log(this.data.project[idx])
     }
@@ -238,8 +237,9 @@ Page({
       ]))
       .get()
       .then(res => {
-        console.log(res.data[0])
-        this.data.project.push(res.data[0])
+        this.setData({
+          project: this.data.project.concat(res.data[0])
+        })
         resolve("成功获取项目信息")
       })
       .catch(err => {
@@ -256,7 +256,14 @@ Page({
       })
       .get()
       .then(res => {
-        this.data.task.push(res.data[0])
+        console.log(res)
+        for (var idx in res.data) {
+          this.setData({
+            task: this.data.task.concat(res.data[idx])
+          })
+        }
+        
+        // this.data.task.push(res.data[0])
         resolve("成功获取任务信息")
       })
       .catch(err => {
