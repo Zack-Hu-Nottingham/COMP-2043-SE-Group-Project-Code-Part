@@ -24,7 +24,8 @@
     </van-cell-group>
 
 <!--Upload related images-->
-<van-uploader class="uploader" file-list="{{ fileList }}" bind:after-read="afterRead" />
+<van-uploader class="uploader" file-list="{{ fileList }}" bindtap="upImg" />
+<!-- <van-uploader class="uploader" file-list="{{ fileList }}" bind:after-read="afterRead" /> -->
 
 <!--Submit-->    
 <van-button plain round block loading="{{isLoading}}" disabled="{{isLoading}}" class="submitBtn" color="#1296db" type="primary" size="normal" form-type="submit">{{dictionary.create_new_task}}</van-button>
