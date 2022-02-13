@@ -63,26 +63,6 @@ Page({
    */
   onLoad: function (options) {
 
-    // 获取当前用户的openid
-    // wx.login({
-    //   success: (res) => {
-    //     // 根据临时code，访问接口获得用户openid
-    //     if (res.code) { 
-    //       var url = "https://api.weixin.qq.com/sns/jscode2session?appid=wxd4b06f2e9673ed00&secret=909d4ff30ed2d6e828f73e55a63cd862&js_code=" + res.code + "&grant_type=authorization_code";
-    //       wx.request({
-    //         url: url,
-    //         method: 'GET',
-    //         success: (res) => {
-    //           console.log("Openid = " + res.data.openid);
-    //           this.setData({
-    //             openid: res.data.openid,
-    //           })
-    //         }
-    //       })
-    //     }
-    //   }
-    // })
-
     wx.login()
     .then(res => {
       if (res.code) { 
@@ -95,8 +75,24 @@ Page({
             openid: res.data.openid,
           })
         }).then(res => {
-          // 获取初始数据 
-          this.getData()
+          db.collection('user').where({
+            openid: this.data.openid
+          }).get().then(res => {
+
+            // 如果是已知账户
+            if (res.data != null) {
+              // 获取初始数据 
+              this.getData()
+            }
+            // 如果是新账号
+            else {
+              // 注册该账号
+
+            }
+          })
+          
+
+
         })
         
       }
