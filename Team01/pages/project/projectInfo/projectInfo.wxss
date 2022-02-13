@@ -6,19 +6,10 @@ page {
 }
 
 
-.createNewTask {
-  position: fixed; 
-  width: 240rpx;
-  height: 70rpx;
-  line-height: 70rpx;
+.createNewProjectForTest {
   display: flex; 
-  flex-direction: row; 
-  bottom: 70rpx; 
-  border: solid 2rpx #efefef;
-  width: 100%;
-  justify-content: center; 
-
-  align-items: center;
+  padding: 50rpx;
+  margin: 0;
 }
 
 .container {
