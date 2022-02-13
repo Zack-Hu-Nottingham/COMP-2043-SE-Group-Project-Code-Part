@@ -132,14 +132,14 @@ test('jump to Dashboard and taskInfo', async () => {
         active: 2
       }
     )
-    element = await page.$('.taskForTest');
-    //点击发起  点击后跳转到发起页面
-    await element.tap();
-    await page.waitFor(500);
+    // element = await page.$('.taskForTest');
+    // //点击发起  点击后跳转到发起页面
+    // await element.tap();
+    // await page.waitFor(500);
 
-    currentPageIndex = await miniProgram.currentPage();
-    //验证是否成功跳转到发起页面
-    expect(await currentPageIndex.path).toBe('pages/project/taskInfo/taskInfo');
+    // currentPageIndex = await miniProgram.currentPage();
+    // //验证是否成功跳转到发起页面
+    // expect(await currentPageIndex.path).toBe('pages/project/taskInfo/taskInfo');
 
   },30000);
 
@@ -182,7 +182,7 @@ test('jump to Dashboard and taskInfo', async () => {
 
   },30000);
 
-  test('jump to Dashboard and taskInfo', async () => {
+  test('jump to create new project', async () => {
     //获取发起页面 按钮
     await miniProgram.redirectTo('/pages/index/index');
     page = await miniProgram.currentPage();
@@ -199,6 +199,62 @@ test('jump to Dashboard and taskInfo', async () => {
     currentPageIndex = await miniProgram.currentPage();
     //验证是否成功跳转到发起页面
     expect(await currentPageIndex.path).toBe('pages/project/newProject/newProject');
+
+  },30000);
+
+  test('enter project name', async () => {
+    //获取发起页面 按钮
+    page = await miniProgram.currentPage();
+    element = await page.$('.projectNameForTest');
+    //点击发起  点击后跳转到发起页面
+    await element.tap();
+    await page.waitFor(500);
+  },30000);
+
+  test('choose template', async () => {
+    //获取发起页面 按钮
+    element = await page.$('.templateForTest');
+    //点击发起  点击后跳转到发起页面
+    await element.tap();
+    await page.waitFor(500);
+
+    currentPageIndex = await miniProgram.currentPage();
+    //验证是否成功跳转到发起页面
+    expect(await currentPageIndex.path).toBe('pages/project/projectTemplate/projectTemplate');
+
+  },30000);
+
+  test('choose template in detail', async () => {
+    page = await miniProgram.currentPage();
+    //获取发起页面 按钮
+    element = await page.$('.chooseTemplateForTest');
+    //点击发起  点击后跳转到发起页面
+    await element.tap();
+    await page.waitFor(500);
+
+
+  },30000);
+
+  test('choose template in detail', async () => {
+    page = await miniProgram.currentPage();
+    //获取发起页面 按钮
+    element = await page.$('.chooseTemplateForTest');
+    //点击发起  点击后跳转到发起页面
+    await element.tap();
+    await page.waitFor(500);
+
+
+  },30000);
+
+  test('choose template in detail', async () => {
+    await miniProgram.navigateBack();
+    page = await miniProgram.currentPage();
+    //获取发起页面 按钮
+    element = await page.$('.visibilityForTest');
+    //点击发起  点击后跳转到发起页面
+    await element.tap();
+    await page.waitFor(500);
+
 
   },30000);
 
