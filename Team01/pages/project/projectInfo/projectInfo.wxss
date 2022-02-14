@@ -108,3 +108,9 @@ ec-canvas {
   justify-content: space-between;
   box-sizing: border-box;
 } 
+
+.addComment {
+  display: flex;
+  padding: 50rpx;
+  margin: 0;
+}

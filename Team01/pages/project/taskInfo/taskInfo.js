@@ -187,6 +187,15 @@ Page({
     this.setData({priorityShow: false})
   },
 
+     /**
+   * Create Comment page's method
+   */
+  clickAddComment(event) {
+    wx.navigateTo({
+      url: '../addComment/addComment',
+    })
+  },
+
   onPrioritySelect(e) {
     // console.log(e.detail.name)
     this.setData({

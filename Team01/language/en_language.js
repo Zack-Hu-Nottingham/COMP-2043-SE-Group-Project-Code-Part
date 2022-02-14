@@ -55,6 +55,7 @@ var Languague = {
     processing: "Processing",
     total: "Total",
     create_new_task: "Create New Task",
+    add_comment: "Add Comment",
 
     // Task information page
     basic_info: "Basic Information",

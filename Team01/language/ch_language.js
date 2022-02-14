@@ -55,6 +55,7 @@ var Languague = {
     processing: "进行中",
     total: "全部",
     create_new_task: "新建任务",
+    add_comment: "添加评论",
 
     // Task information page
     basic_info: "基本信息",
