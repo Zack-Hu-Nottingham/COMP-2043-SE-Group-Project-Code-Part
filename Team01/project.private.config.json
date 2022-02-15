@@ -20,7 +20,13 @@
                 },
                 {
                     "name": "",
-                    "pathName": "pages/project/taskInfo/taskInfo",
+                    "pathName": "pages/project/newTask/newTask",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "",
+                    "pathName": "pages/project/addComment/addComment",
                     "query": "",
                     "scene": null
                 }
