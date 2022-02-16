@@ -14,20 +14,21 @@ Page({
         language: 0,
         languageList: ["简体中文", "English"],
 
+        // 项目描述
         name: "",
-        details: "",
-        "visibility":[{
-            "name": "Private",
-            "value":"privateProject"
-        },{
-            "name": "Public",
-            "value":"publicProject"
-        }],
+        description: "",
+
+        startDate: "",
+        endDate: "",
+
+        // 模板选择
         selectedTemplate: '',
         selectedTemplateIndex: '1',
-        selectedVisibility: "Private",
+        
+
         isLoading: false,
-        fileList: []
+        fileList: [],
+        
     },
     
      // 初始化语言
@@ -103,35 +104,27 @@ Page({
     onShareAppMessage: function () {
 
     },
+
+    // 处理用户输入名字
     typeName: function(e){
         this.setData({
             name: e.detail
         })
     },
-    typeDetails: function(e){
+
+    // 处理用户输入描述
+    typeDescription: function(e){
         this.setData({
-            details: e.detail
+            description: e.detail
         })
     },
-    changeVisibility: function(){
-        var arr = this.data.visibility
-        var arrName = new Array()
-        for(var i in arr){
-            arrName.push(arr[i].name)
-        }
-        wx.showActionSheet({
-            itemList: arrName,
-            itemColor: "gray",
-            success: (res) =>{
-                this.setData({
-                    selectedVisibility: arrName[res.tapIndex]
-                })
-            }
-        })
-    },
+
+    // 选择模板
     selectTemplate: function(){
         wx.navigateTo({ url: '../projectTemplate/projectTemplate', })
     },
+    
+    // 读完文件后
     afterRead: function(event) {
         const { file } = event.detail;
         // 当设置 mutiple 为 true 时, file 为数组格式，否则为对象格式
@@ -148,19 +141,29 @@ Page({
           },
         });
       },
+
+    // 提交新项目
     formSubmit: function (e) {
 
-        var that = this
-        if(this.data.name==""){
+        // var that = this
+        // 数据校验
+        if (this.data.name == "") {
             Toast('Name is null');
         }
-        else if(this.data.details==""){
+        else if (this.data.description == "") {
             Toast('No detail description');
+        }
+        else if ( startDate == '' || endDate == '' ) {
+            Toast("")
         }
         else{
             this.setData({
                 isLoading: true
             })
+            // wx.showLoading({
+            //   title: 'title',
+            //   musk: true
+            // })
             setTimeout(function(){
                 Toast({
                     forbidClick: 'true',
@@ -181,4 +184,45 @@ Page({
         }
         
     },
+
+    // calendar 的配套method
+    onDateDisplay() {
+        this.setData({ show: true });
+    },
+    
+    onDateClose() {
+        this.setData({ show: false });
+    },
+
+    formatDate(date) {
+        date = new Date(date);
+        // return `${date.getMonth() + 1}/${date.getDate()}`;
+        return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+      },
+    
+      onDateConfirm(event) {
+        const [start, end] = event.detail;
+        this.setData({
+            startDate: this.formatDate(start),
+            endDate: this.formatDate(end)
+        })
+        this.onDateClose();
+
+    
+        // //调用云函数，更新数据库中日期
+        // wx.cloud.callFunction({
+        //   name: 'updateProjectDate',
+        //   data:{
+        //     id: id,
+        //     startTime: `${start.getFullYear()}-${start.getMonth() + 1}-${start.getDate()}`,
+        //     endTime: `${end.getFullYear()}-${end.getMonth() + 1}-${end.getDate()}`
+        //   }
+        // }).then(res => {
+        //   console.log('project日期更新成功', res),
+        //   this.getDetail()
+        // }).catch(res => {
+        //   console.log('project日期更新失败', res)
+        // })
+      },
+
 })
