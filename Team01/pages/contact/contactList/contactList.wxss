@@ -1,0 +1,4 @@
+/* pages/contact/contactList/contactList.wxss */
+.value-class {
+    flex: none !important;
+  }
