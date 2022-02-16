@@ -1,2 +1,21 @@
 <!--pages/project/addComment/addComment.wxml-->
-<text>pages/project/addComment/addComment.wxml</text>
+<van-cell-group inset style="padding: 30rpx">
+  <van-cell title="Feedback" is-link size="large" value="{{selectedFeedback}}" bindtap="changeFeedback" />
+  <van-field label="Description" value="{{ details }}" type="textarea" placeholder="(less than 500 words)" size="large" maxlength="500" input-align="right" autosize bind:change="typeDetails" />
+</van-cell-group>
+
+<!--Submit-->    
+<van-sticky offset-top="{{ 600 }}">
+<van-button plain round block loading="{{isLoading}}" disabled="{{isLoading}}" class="submitBtn" color="#1296db" type="primary" size="normal" form-type="submit">{{dictionary.submit_feedback}}</van-button>
+</van-sticky>
+
+
+<!-- Choose Feedback -->
+<van-action-sheet
+  show="{{ showFeedback }}"
+  title="{{ dictionary.select_feedback }}"
+  actions="{{ feedbackValue }}"
+  cancel-text="{{ dictionary.cancel }}"
+  bind:close="onCloseFeedback"
+  bind:select="onSelectFeedback"
+/>

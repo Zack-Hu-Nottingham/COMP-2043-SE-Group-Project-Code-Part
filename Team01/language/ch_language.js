@@ -76,6 +76,10 @@ var Languague = {
     choose_template: "选择模板",
     house_owner: "房屋主人",
    
+    // Comment page
+    comment_title:"反馈",
+    select_feedback:"选择反馈类型",
+
    },
 };
 
