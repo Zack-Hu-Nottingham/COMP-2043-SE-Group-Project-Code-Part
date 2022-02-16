@@ -13,7 +13,6 @@
         "pages/project/statisticReport/statisticReport",
         "pages/more/languageSetting/languageSetting",
         "pages/more/test/test",
-        "pages/addComment",
         "pages/project/addComment/addComment",
         "pages/contact/contactList/contactList"
     ],
