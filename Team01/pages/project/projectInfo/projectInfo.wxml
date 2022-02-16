@@ -19,78 +19,58 @@
 <view wx:if="{{currentTab==0}}">
 
   <van-cell-group inset title="{{dictionary.project_info}}">
-    <van-cell title="{{dictionary.owner}}" value="{{owner}}" />
-    <van-cell title="{{dictionary.start_time}}" is-link value="{{startTime}}" bindtap="onDateDisplay" class="projectInfoStartTimeForTest"/>
-    <van-cell title="{{dictionary.end_time}}" is-link value="{{endTime}}" bindtap="onDateDisplay" class="projectInfoEndTimeForTest"/>
-    <van-field model:value="{{ projectDescription }}" right clearable label="{{dictionary.description}}" type="textarea" placeholder="{{projectDescription}}" border="{{ false }}" class="projectInfoDescriptionForTest"></van-field>
+    <van-cell title="{{dictionary.owner}}" value="{{ owner }}" />
+    <van-cell title="{{dictionary.start_time}}" is-link value="{{ project.startTime }}" bindtap="onDateDisplay" class="projectInfoStartTimeForTest"/>
+    <van-cell title="{{dictionary.end_time}}" is-link value="{{ project.endTime }}" bindtap="onDateDisplay" class="projectInfoEndTimeForTest"/>
+    <van-field model:value="{{ project.projectDescription }}" right clearable label="{{ dictionary.description }}" type="textarea" placeholder="{{ project.projectDescription }}" border="{{ false }}" class="projectInfoDescriptionForTest"></van-field>
   </van-cell-group>
 
   <van-cell-group inset title="{{dictionary.state_information}}">
-    <van-cell title="{{dictionary.current_state}}" value="{{currentState}}" />
-    <van-field model:value="{{ stateDescription }}" center clearable label="{{dictionary.description}}"
-    placeholder="{{stateDescription}}" border="{{ false }}" class="projectInfoStateDescriptionForTest"></van-field>
+    <van-cell title="{{dictionary.current_state}}" value="{{ project.currentState }}" />
+    <van-field model:value="{{ project.stateDescription }}" center clearable label="{{dictionary.description}}"
+    placeholder="{{project.stateDescription}}" border="{{ false }}" class="projectInfoStateDescriptionForTest"></van-field>
   </van-cell-group>
 
   <van-cell-group inset title="{{dictionary.task_progress}}">
   </van-cell-group>
   <view class="container">
     <view class="circle">
-      <van-circle value="{{(completed/total)*100}}" layer-color="#eeeeee"         color="#4169E1">
-        {{m1.toInteger((completed/total)*100)}}%<view></view>{{dictionary.completed}}
+      <van-circle value="{{(completed.length/task.length)*100}}" layer-color="#eeeeee"         color="#4169E1">
+        {{m1.toInteger((completed.length/task.length)*100)}}%<view></view>{{dictionary.completed}}
       </van-circle>
 
-      <van-circle value="{{(delayed/total)*100}}" layer-color="#eeeeee" color="#FF4500">
-        {{(delayed/total)%1*100}}%<view></view> {{dictionary.delayed}}
+      <van-circle value="{{(delayed.length/task.length)*100}}" layer-color="#eeeeee" color="#FF4500">
+        {{(delayed.length/task.length)%1*100}}%<view></view> {{dictionary.delayed}}
       </van-circle>
     </view>
     
     <view class="taskInfo">
       <view class="taskInfoDetail">
-        <view style="font-size: 35rpx; color: #696969;">{{unstarted}}</view>
+        <view style="font-size: 35rpx; color: #696969;">{{ unstarted.length }}</view>
         <view>{{dictionary.unstarted}}</view>
       </view>
 
 
       <view class="taskInfoDetail">
-        <view style="font-size: 35rpx; color: #FFA500;">{{processing}}</view>
-        <view>{{dictionary.processing}}</view>
+        <view style="font-size: 35rpx; color: #FFA500;">{{ progressing.length }}</view>
+        <view>{{dictionary.progressing}}</view>
 
       </view>
 
       <view class="taskInfoDetail">
-        <view style="font-size: 35rpx; color: 	#FF4500;">{{completed}}</view>
+        <view style="font-size: 35rpx; color: 	#FF4500;">{{ completed.length }}</view>
         <view>{{dictionary.completed}}</view>
       </view>
 
       <view class="taskInfoDetail" style="padding-left: 40rpx ; border-left: 2rpx solid #efefef;">
-        <view style="font-size: 35rpx; color: #696969; ">{{total}}</view>
+        <view style="font-size: 35rpx; color: #696969; ">{{ task.length }}</view>
         <view>{{dictionary.total}}</view>
       </view>
 
       <view class="taskInfoDetail">
-        <view style="font-size: 35rpx; color:#FF4500;">{{delayed}}</view>
+        <view style="font-size: 35rpx; color:#FF4500;">{{ delayed.length }}</view>
         <view>{{dictionary.delayed}}</view>
       </view>
-
-    <view class="taskInfoDetail">
-      <view style="font-size: 35rpx; color: #FFA500;">{{processing}}</view>
-      <view>{{dictionary.processing}}</view>
-    </view>
-
-    <view class="taskInfoDetail">
-      <view style="font-size: 35rpx; color: 	#FF4500;">{{completed}}</view>
-      <view>{{dictionary.completed}}</view>
-    </view>
-
-    <view class="taskInfoDetail" style="padding-left: 40rpx ; border-left: 2rpx solid #efefef;">
-      <view style="font-size: 35rpx; color: #696969; ">{{total}}</view>
-      <view>{{dictionary.total}}</view>
-    </view>
-
-    <view class="taskInfoDetail">
-      <view style="font-size: 35rpx; color:#FF4500;">{{delayed}}</view>
-      <view>{{dictionary.delayed}}</view>
-    </view>
 
   </view>
 </view>
@@ -114,12 +94,17 @@
 
 <!-- Task Management -->
 <view wx:elif="{{currentTab==1}}">
-
+  <!-- // 0 - unstarted
+        // 1 - progressing
+        // 2 - finished
+        // 3 - delayed
+        // 4 - reworking
+        // * 5 - accepted -->
 <van-collapse value="{{ activeNames }}" bind:change="onChange">
 
-  <van-collapse-item title="{{dictionary.processing}}" name="1" class="releaseStartedItemForTest">
+  <van-collapse-item title="{{dictionary.progressing}}" name="1" class="releaseStartedItemForTest">
 
-    <view wx:for="">
+    <view wx:for="{{ progressing }}">
       <van-cell clickable
         label="start time:{{startTime}}"
         title="单元格"
@@ -130,13 +115,75 @@
     
   </van-collapse-item>
 
-  <van-collapse-item title="{{dictionary.unstarted}}" name="2">
+
+  <van-collapse-item title="{{dictionary.reworking}}" name="2">
+
+    <view wx:for="{{ delayed }}">
+      <van-cell clickable
+        label="start time:{{startTime}}"
+        title="单元格"
+        link-type="navigateTo"
+        url="/pages/project/taskInfo/taskInfo"
+      />
+    </view>
+
+</van-collapse-item>
+
+  <van-collapse-item title="{{dictionary.delayed}}" name="3">
+
+    <view wx:for="{{ delayed }}">
+      <van-cell clickable
+        label="start time:{{startTime}}"
+        title="单元格"
+        link-type="navigateTo"
+        url="/pages/project/taskInfo/taskInfo"
+      />
+    </view>
 
   </van-collapse-item>
 
-  <van-collapse-item title="{{dictionary.completed}}" name="3">
+
+  <van-collapse-item title="{{dictionary.unstarted}}" name="4">
+
+    <view wx:for="{{ unstarted }}">
+      <van-cell clickable
+        label="start time:{{startTime}}"
+        title="单元格"
+        link-type="navigateTo"
+        url="/pages/project/taskInfo/taskInfo"
+      />
+    </view>
 
   </van-collapse-item>
+
+
+  <van-collapse-item title="{{dictionary.completed}}" name="5">
+
+    <view wx:for="{{ completed }}">
+      <van-cell clickable
+        label="start time:{{startTime}}"
+        title="单元格"
+        link-type="navigateTo"
+        url="/pages/project/taskInfo/taskInfo"
+      />
+    </view>
+
+  </van-collapse-item>
+
+
+  <!-- <van-collapse-item title="{{dictionary.}}" name="3">
+
+    <view wx:for="">
+      <van-cell clickable
+        label="start time:{{startTime}}"
+        title="单元格"
+        link-type="navigateTo"
+        url="/pages/project/taskInfo/taskInfo"
+      />
+    </view>
+
+  </van-collapse-item> -->
+
 </van-collapse>
 
 <!-- Create new task -->

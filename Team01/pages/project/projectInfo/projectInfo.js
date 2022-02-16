@@ -7,6 +7,8 @@ const app = getApp()
 
 var id = ''
 
+const db = wx.cloud.database()
+
 // line 5-441: function initChart() 甘特图填充信息
 function initChart(canvas, width, height, dpr) {
   const chart = echarts.init(canvas, null, {
@@ -402,18 +404,22 @@ Page({
   data: {
 
     // Project Information's data
-    owner: '',
-    startTime: '',
-    endTime: '',
-    projectDescription: '',
-    stateDescription: '',
-    currentState: '',
     task: [],
+    taskState: [],
+
+    // Task state 数据格式
+        // 0 - unstarted
+        // 1 - progressing
+        // 2 - finished
+        // 3 - delayed
+        // 4 - reworking
+        // * 5 - accepted
     unstarted: [],
-    processing: [],
+    progressing: [],
     completed: [],
-    total: [],
-    delayed: 0,
+    delayed: [],
+    reworking: [],
+    accepted: [],
 
     navbar: [],
     currentTab: 0,
@@ -422,7 +428,7 @@ Page({
 
 
     project: {},
-    name: '',
+    owner: "",
 
     // Task Management's data
     // These data should be filled in when the page is loaded
@@ -459,37 +465,97 @@ Page({
     });
   },
 
+  
   getDetail(){
-    wx.cloud.database().collection('project')
+    db.collection('project')
       .doc(id)
-      .get()
-      .then(res => {
-        this.setData({
-          project: res.data,
-          owner: res.data.owner,
-          startTime: res.data.startTime,
-          endTime: res.data.endTime,
-          projectDescription: res.data.projectDescription,
-          stateDescription: res.data.stateDescription,
-          currentState: res.data.currentState,
-          task: res.data.task,
-          unstarted: res.data.unstarted,
-          processing: res.data.processing,
-          completed: res.data.completed,
-          total: res.data.total,
-          delayed: res.data.delayed,
-        }),
+      .get({
+        success: res => {
 
-        wx.setNavigationBarTitle({
-          title: res.data.name,
-        })
+          this.setData({
+            project: res.data,
+            name: res.data.name
+          }),
 
+          wx.setNavigationBarTitle({
+            title: this.data.name,
+          }),
+
+          this.getProjectManager()
+          this.getTaskState()
+        },
+        fail: function(err) {
+          console.log(err)
+        }
       })
-      .catch(err => {
-        console.log('请求失败', err)
-      })
+    
   },
 
+  getProjectManager() {
+    var ownerId = this.data.project.projectManager
+    db.collection("user")
+    .doc(ownerId)
+    .get({
+      success: res => {
+        this.setData({
+          owner: res.data.name
+        })
+      }
+    })
+  },
+  
+
+  // getDetail(){
+  //   db.collection('project')
+  //     .doc(id)
+  //     .get()
+  //     .then(res => {
+  //       this.setData({
+  //         project: res.data,
+  //         name: res.data.name
+  //       }),
+  //       wx.setNavigationBarTitle({
+  //         title: this.data.name,
+  //       }),
+  //       this.getProjectManager()
+  //       this.getTaskState()
+  //       then(res => {
+  //         this.foo()
+  //       })
+        
+  //     })
+  //     .catch(err => {
+  //       console.log('请求项目信息失败', err)
+  //     })
+    
+  // },
+
+  // getProjectManager() {
+  //   var ownerId = this.data.project.projectManager
+  //   db.collection("user")
+  //   .doc(ownerId)
+  //   .get()
+  //   .then(res => {
+  //     this.setData({
+  //       owner: res.data.name
+  //     })
+  //   })
+  // },
+
+  // getTaskState() {
+  //   for (var idx in this.data.project.task) {
+  //     var taskId = this.data.project.task[idx]
+  //     db.collection("task")
+  //     .doc(taskId)
+  //     .get()
+  //     .then(res => {
+  //       console.log(res)
+  //       // console.log(res.data.state)
+  //       this.setData({
+  //         taskState: this.data.taskState.concat(res.data.state)
+  //       })
+  //     })
+  //   }
 
   // Project Information's method
 
@@ -572,11 +638,6 @@ Page({
     // 从数据库中根据id获取数据
     this.getDetail()
 
-    // 设置navbar的名称
-    wx.setNavigationBarTitle({
-      title: this.data.name,
-    })
-    
   },
 
 
