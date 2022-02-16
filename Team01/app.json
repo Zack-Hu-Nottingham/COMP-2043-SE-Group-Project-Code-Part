@@ -2,6 +2,7 @@
   "pages":[
     "pages/index/index",
     "pages/dashboard/dashboard/dashboard",
+    "pages/contact/contactList/contactList",
     "pages/message/message/message",
     "pages/project/projectInfo/projectInfo",
     "pages/project/testDiagram/testDiagram",
@@ -51,6 +52,9 @@
     "van-checkbox": "@vant/weapp/checkbox/index",
     "van-checkbox-group": "@vant/weapp/checkbox-group/index",
     "van-radio": "@vant/weapp/radio/index",
-    "van-radio-group": "@vant/weapp/radio-group/index"
+    "van-radio-group": "@vant/weapp/radio-group/index",
+    "van-index-bar": "@vant/weapp/index-bar/index",
+    "van-index-anchor": "@vant/weapp/index-anchor/index",
+    "van-search": "@vant/weapp/search/index"
   }
 }

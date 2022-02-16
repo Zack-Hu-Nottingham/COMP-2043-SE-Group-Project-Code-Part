@@ -1,0 +1,31 @@
+<!--pages/contact/contactList/contactList.wxml-->
+<!-- 搜索联系人（筛选条件：职位/姓名） -->
+<van-search
+  value="{{ value }}"
+  placeholder="Please enter key word"
+  use-action-slot
+  bind:change="onChange"
+  bind:search="onSearch"
+><view slot="action" bind:tap="onClick">搜索</view></van-search>
+
+<!-- 选择联系人添加至需要的列表中 -->
+<van-checkbox-group value="{{ result }}" bind:change="onChange">
+  <van-cell-group>
+    <van-cell
+      wx:for="{{ list }}"
+      wx:key="index"
+      title="{{ item.name }}"
+      value-class="value-class"
+      clickable
+      data-index="{{ index }}"
+      bind:click="toggle"
+      label="{{ item.position }}"
+    >
+      <van-checkbox
+        catch:tap="noop"
+        class="checkboxes-{{ index }}"
+        name="{{ item._id }}"
+      />
+    </van-cell>
+  </van-cell-group>
+</van-checkbox-group>

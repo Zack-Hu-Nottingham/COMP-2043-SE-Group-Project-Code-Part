@@ -57,19 +57,13 @@
         <view slot="">
           <view wx:if="{{item.state==0}}">
             <van-tag color="#D3D3D3" icon="fail" size="medium"><van-icon name="close"/>Unstarted</van-tag>
-            <!-- <view class="notStartedGroup">
-              <image src="/images/NotStartedIcon.png" mode="widthFix" style="width: 40rpx;"></image>
-              <view class="imageDiscription">NotStarted</view>
-            </view> -->
           </view>
 
           <view wx:elif="{{item.state==1}}">
-            <van-tag color="#32CD32" size="medium"><van-icon name="play"></van-icon>Progressing</van-tag>
-            <!-- <van-tag color="#F5DEB3" text-color="black" size="medium" plain>{{item.state}}</van-tag> -->
+            <van-tag color="#87CEFA" size="medium"><van-icon name="play"></van-icon>Progressing</van-tag>
           </view>
           <view wx:elif="{{item.state==2}}">
-            <van-tag color="#87CEFA" size="medium"><van-icon name="passed" />Finished</van-tag>
-            <!-- <van-tag color="#32CD32" text-color="black" size="medium" >{{item.state}}</van-tag> -->
+            <van-tag color="#32CD32" size="medium"><van-icon name="passed" />Finished</van-tag>
           </view>
           <view wx:elif="{{item.state==3}}">
             <van-tag color="#ffe1e1" text-color="#ad0000"  size="medium"><van-icon name="warning-o" />Delayed</van-tag>
