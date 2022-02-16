@@ -436,7 +436,7 @@ Page({
     notStartedTask: [],
     finishedTask: [],
     // for collapse bar
-    activeNames: ['1'],
+    activeNames: [],
 
     //gantt diagram
     ec: {

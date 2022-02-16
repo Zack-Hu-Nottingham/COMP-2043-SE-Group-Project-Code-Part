@@ -1,7 +1,7 @@
 <!-- Nav bar -->
 <van-sticky offset-top="{{ 0 }}">
   <view class="navbar">
-    <text wx:for="{{navbar}}" data-idx="{{index}}" class="item {{currentTab==index ? 'active' : ''}}" wx:key="unique" bindtap="navbarTap">{{item}}</text>
+    <text wx:for="{{navbar}}" wx:key="index" data-idx="{{index}}" class="item {{currentTab==index ? 'active' : ''}}" wx:key="unique" bindtap="navbarTap">{{item}}</text>
   </view>
 </van-sticky>
 
@@ -36,7 +36,7 @@
   <view class="container">
     <view class="circle">
       <van-circle value="{{(project.completed.length/project.task.length)*100}}" layer-color="#eeeeee"         color="#4169E1">
-        {{m1.toInteger((project.completed.length/project.task.length)*100)}}%<view></view>{{dictionary.completed}}
+        {{(project.completed.length/project.task.length)%1*100}}%<view></view>{{dictionary.completed}}
       </van-circle>
 
       <van-circle value="{{(project.delayed.length/project.task.length)*100}}" layer-color="#eeeeee" color="#FF4500">
@@ -54,7 +54,6 @@
       <view class="taskInfoDetail">
         <view style="font-size: 35rpx; color: #FFA500;">{{ project.progressing.length }}</view>
         <view>{{dictionary.progressing}}</view>
-
       </view>
 
       <view class="taskInfoDetail">
@@ -72,21 +71,12 @@
         <view>{{dictionary.delayed}}</view>
       </view>
 
+    </view>
   </view>
-</view>
-
-
-  <wxs module="m1">
-    module.exports.toInteger = function(str) {
-      return str - str % 1
-    }
-  </wxs>
-
-  <wxs src="../../../utils/tools.wxs" module="m2"></wxs>
 
   <van-sticky offset-top="{{ 570 }}">
-  <van-button hairline plain round block type="info" bindtap="clickAddComment" class="addComment">{{dictionary.add_comment}}</van-button>
-</van-sticky>
+    <van-button hairline plain round block type="info" bindtap="clickAddComment" class="addComment">{{dictionary.add_comment}}</van-button>
+  </van-sticky>
 
 </view>
 
@@ -104,13 +94,17 @@
 
   <van-collapse-item title="{{dictionary.progressing}}" name="progressing" class="releaseStartedItemForTest">
 
-    <view wx:for="{{ progressing }}">
+    <view wx:for="{{ progressing }}" wx:key="index">
       <van-cell clickable
         label="{{ item.startTime }} — {{ item.endTime }} "
         title="{{ item.name }}"
         link-type="navigateTo"
-        url="/pages/project/taskInfo/taskInfo?id={{item._id}}"
-      />
+        url="/pages/project/taskInfo/taskInfo?id={{item._id}}">
+        
+          <view slot="">
+            <van-tag color="#87CEFA" size="medium"><van-icon name="play"></van-icon>Progressing</van-tag>
+          </view>
+        </van-cell>
     </view>
     
   </van-collapse-item>
@@ -118,59 +112,76 @@
 
   <van-collapse-item title="{{dictionary.reworking}}" name="reworking">
 
-    <view wx:for="{{ reworking }}">
+    <view wx:for="{{ reworking }}" wx:key="index">
       <van-cell clickable
         label="{{ item.startTime }} — {{ item.endTime }} "
         title="{{ item.name }}"
         link-type="navigateTo"
-        url="/pages/project/taskInfo/taskInfo?id={{item._id}}"
-      />
+        url="/pages/project/taskInfo/taskInfo?id={{item._id}}">
+
+          <view slot="">
+            <van-tag color="#ffe1e1" text-color="#ad0000"  size="medium"><van-icon name="replay" />Reworking</van-tag>
+          </view>
+
+        </van-cell>
     </view>
-    
 
 </van-collapse-item>
 
+
   <van-collapse-item title="{{dictionary.delayed}}" name="delayed">
 
-    <view wx:for="{{ delayed }}">
+    <view wx:for="{{ delayed }}" wx:key="index">
       <van-cell clickable
         label="{{ item.startTime }} — {{ item.endTime }} "
         title="{{item.name}}"
         link-type="navigateTo"
-        url="/pages/project/taskInfo/taskInfo?id={{item._id}}"
-      />
+        url="/pages/project/taskInfo/taskInfo?id={{item._id}}">
+
+          <view slot="">
+            <van-tag color="#ffe1e1" text-color="#ad0000"  size="medium"><van-icon name="warning-o" />Delayed</van-tag>
+          </view>
+
+        </van-cell>
     </view>
-    
 
   </van-collapse-item>
 
 
   <van-collapse-item title="{{dictionary.unstarted}}" name="unstarted">
 
-    <view wx:for="{{ unstarted }}">
+    <view wx:for="{{ unstarted }}" wx:key="index">
       <van-cell clickable
         label="{{ item.startTime }} — {{ item.endTime }} "
         title="{{ item.name }}"
         link-type="navigateTo"
-        url="/pages/project/taskInfo/taskInfo?id={{item._id}}"
-      />
+        url="/pages/project/taskInfo/taskInfo?id={{item._id}}">
+
+          <view slot="">
+            <van-tag color="#D3D3D3" icon="fail" size="medium"><van-icon name="close"/>Unstarted</van-tag>
+          </view>
+
+      </van-cell>
     </view>
-    
 
   </van-collapse-item>
 
 
   <van-collapse-item title="{{dictionary.completed}}" name="completed">
 
-    <view wx:for="{{ completed }}">
+    <view wx:for="{{ completed }}" wx:key="index">
       <van-cell clickable
         label="{{ item.startTime }} — {{ item.endTime }} "
         title="{{ item.name }}"
         link-type="navigateTo"
-        url="/pages/project/taskInfo/taskInfo?id={{item._id}}"
-      />
+        url="/pages/project/taskInfo/taskInfo?id={{item._id}}">
+
+          <view slot="">
+            <van-tag color="#32CD32" size="medium"><van-icon name="passed" />Finished</van-tag>
+          </view>
+
+      </van-cell>
     </view>
-    
 
   </van-collapse-item>
 
