@@ -3,11 +3,11 @@ const languageUtils = require("../../../language/languageUtils");
 
 import * as echarts from '../../../ec-canvas/echarts';
 
-const app = getApp()
+const app = getApp();
 
-var id = ''
+var id = '';
 
-const db = wx.cloud.database()
+const db = wx.cloud.database();
 
 // line 5-441: function initChart() 甘特图填充信息
 function initChart(canvas, width, height, dpr) {
@@ -451,9 +451,65 @@ Page({
     this.setData({
       currentTab: e.currentTarget.dataset.idx
     })
-    app.globalData.currentTab = e.currentTarget.dataset.idx;
+    if (this.data.currentTab == 1) {
+      db.collection("task")
+      .where({
+        belongTo: id,
+        state: 0
+      })
+      .get().then(res => {
+        this.setData({
+          unstarted: res.data
+        })
+      })
+
+      db.collection("task")
+      .where({
+        belongTo: id,
+        state: 1
+      })
+      .get().then(res => {
+        this.setData({
+          progressing: res.data
+        })
+      })
+
+      db.collection("task")
+      .where({
+        belongTo: id,
+        state: 2
+      })
+      .get().then(res => {
+        this.setData({
+          completed: res.data
+        })
+      })
+
+      db.collection("task")
+      .where({
+        belongTo: id,
+        state: 3
+      })
+      .get().then(res => {
+        this.setData({
+          delayed: res.data
+        })
+      })
+
+      db.collection("task")
+      .where({
+        belongTo: id,
+        state: 4
+      })
+      .get().then(res => {
+        this.setData({
+          reworking: res.data
+        })
+      })
+    }
   },
 
+  
   initLanguage() {
     var self = this;
     //获取当前小程序语言版本所对应的字典变量
@@ -482,7 +538,7 @@ Page({
           }),
 
           this.getProjectManager()
-          this.getTaskState()
+          // this.getTaskState()
         },
         fail: function(err) {
           console.log(err)
@@ -503,59 +559,6 @@ Page({
       }
     })
   },
-  
-
-  // getDetail(){
-  //   db.collection('project')
-  //     .doc(id)
-  //     .get()
-  //     .then(res => {
-  //       this.setData({
-  //         project: res.data,
-  //         name: res.data.name
-  //       }),
-  //       wx.setNavigationBarTitle({
-  //         title: this.data.name,
-  //       }),
-  //       this.getProjectManager()
-  //       this.getTaskState()
-  //       then(res => {
-  //         this.foo()
-  //       })
-        
-  //     })
-  //     .catch(err => {
-  //       console.log('请求项目信息失败', err)
-  //     })
-    
-  // },
-
-  // getProjectManager() {
-  //   var ownerId = this.data.project.projectManager
-  //   db.collection("user")
-  //   .doc(ownerId)
-  //   .get()
-  //   .then(res => {
-  //     this.setData({
-  //       owner: res.data.name
-  //     })
-  //   })
-  // },
-
-  // getTaskState() {
-  //   for (var idx in this.data.project.task) {
-  //     var taskId = this.data.project.task[idx]
-  //     db.collection("task")
-  //     .doc(taskId)
-  //     .get()
-  //     .then(res => {
-  //       console.log(res)
-  //       // console.log(res.data.state)
-  //       this.setData({
-  //         taskState: this.data.taskState.concat(res.data.state)
-  //       })
-  //     })
-  //   }
 
   // Project Information's method
 
@@ -592,6 +595,8 @@ Page({
       console.log('project日期更新失败', res)
     })
   },
+
+  // Task Management's method
 
   onChange(event) {
     this.setData({

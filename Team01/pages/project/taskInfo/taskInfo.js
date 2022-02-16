@@ -150,11 +150,10 @@ Page({
   },
 
   getDetail(){
-    wx.cloud.database().collection('taskList')
+    wx.cloud.database().collection('task')
       .doc(id)
       .get()
       .then(res => {
-
         wx.setNavigationBarTitle({
           title: res.data.name,
         }),
