@@ -55,6 +55,7 @@ var Languague = {
     processing: "进行中",
     total: "全部",
     create_new_task: "新建任务",
+    add_comment: "添加评论",
 
     // Task information page
     basic_info: "基本信息",
@@ -74,6 +75,10 @@ var Languague = {
     choose_template: "选择模板",
     house_owner: "房屋主人",
    
+    // Comment page
+    comment_title:"反馈",
+    select_feedback:"选择反馈类型",
+
    },
 };
 

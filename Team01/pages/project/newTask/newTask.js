@@ -194,6 +194,22 @@ Page({
         })
     },
 
+    upImg(){
+        var that = this;
+        wx.chooseImage({
+          count: 1,
+          success(res){
+            console.log(res);
+            wx.cloud.uploadFile({
+              cloudPath:'test/' + Math.floor(Math.random()*1000000),
+              filePath:res.tempFilePaths[0],
+              success(res){
+                console.log("成功",res);
+              }
+            })
+          }
+        })
+      },
 
     afterRead: function(event) {
         const { file } = event.detail;

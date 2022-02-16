@@ -51,10 +51,39 @@ function arrayContains(arr, obj) {
   return false;
 }  
 
+function request(params) {
+  const { url, method, header, data } = params
+  let taskController;
+  let task = new Promise((resolve, reject) => {
+    taskController = wx.request({
+      url,
+      header,
+      data,
+      method,
+      success(res) {
+        resolve(res)
+      },
+      fail(err) {
+        reject({
+          msg: '请求失败',
+          url,
+          method,
+          data,
+          header,
+          err,
+        })
+      }
+    })
+  });
+  return { task, taskController };
+}
+
+
 module.exports = {
   formatTime: formatTime,
   formatDate: formatDate,
   formatDate4YearMotchDay: formatDate4YearMotchDay,
   compareDate: compareDate,
-  arrayContains: arrayContains
+  arrayContains: arrayContains,
+  request: request
 }

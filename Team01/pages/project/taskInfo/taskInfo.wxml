@@ -24,6 +24,10 @@
   <van-cell title="{{dictionary.participant}}" is-link value="{{taskPage.participant}}" />
 </van-cell-group>
 
+<van-sticky offset-top="{{ 570 }}">
+  <van-button hairline plain round block type="info" bindtap="clickAddComment" class="addComment">{{dictionary.add_comment}}</van-button>
+</van-sticky>
+
 <van-action-sheet
   show="{{ priorityShow }}"
   actions="{{ priority }}"

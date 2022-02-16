@@ -14,19 +14,19 @@
             "list": [
                 {
                     "name": "",
+                    "pathName": "pages/project/projectInfo/projectInfo",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "",
                     "pathName": "pages/project/newTask/newTask",
                     "query": "",
                     "scene": null
                 },
                 {
                     "name": "",
-                    "pathName": "pages/project/newProject/newProject",
-                    "query": "id=617ef50c61ee5cdf000377d61d2d3f10",
-                    "scene": null
-                },
-                {
-                    "name": "",
-                    "pathName": "pages/contact/contactList/contactList",
+                    "pathName": "pages/project/addComment/addComment",
                     "query": "",
                     "scene": null
                 }

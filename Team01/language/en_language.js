@@ -55,6 +55,7 @@ var Languague = {
     processing: "Processing",
     total: "Total",
     create_new_task: "Create New Task",
+    add_comment: "Add Comment",
 
     // Task information page
     basic_info: "Basic Information",
@@ -73,6 +74,10 @@ var Languague = {
     project_name: "Project Name",
     choose_template: "Choose Template",
     house_owner: "House Owner",
+
+      // Comment page
+   comment_title:"Feedback",
+   select_feedback:"Select feedback type",
     
  },
 };

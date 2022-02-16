@@ -539,6 +539,15 @@ Page({
     })
   },
 
+   /**
+   * Create Comment page's method
+   */
+  clickAddComment(event) {
+    wx.navigateTo({
+      url: '../addComment/addComment',
+    })
+  },
+
 
   /**
    * 生命周期函数--监听页面加载

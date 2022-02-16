@@ -3,13 +3,13 @@
 <view class="form">
     <!--Set Project Information-->
     <van-cell-group title="Project information">
-        <van-field label="Project name" value="{{ name }}" size="large" input-align="right" placeholder="Enter name..." bind:change="typeName" />
-        <van-cell title="Template" is-link size="large" value="{{selectedTemplate}}" bindtap="selectTemplate" />
+        <van-field label="Project name" value="{{ name }}" size="large" input-align="right" placeholder="Enter name..." bind:change="typeName" class="projectNameForTest"/>
+        <van-cell title="Template" is-link size="large" value="{{selectedTemplate}}" bindtap="selectTemplate" class="templateForTest"/>
     </van-cell-group>
 
     <!--Set Privilege-->
     <van-cell-group title="Privilege">
-        <van-cell title="Visibility" is-link size="large" value="{{selectedVisibility}}" bindtap="changeVisibility" />
+        <van-cell title="Visibility" is-link size="large" value="{{selectedVisibility}}" bindtap="changeVisibility" class="visibilityForTest"/>
     </van-cell-group>
 
     <!--Description-->

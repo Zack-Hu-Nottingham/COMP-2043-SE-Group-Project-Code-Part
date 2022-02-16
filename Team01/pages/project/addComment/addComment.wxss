@@ -1,5 +1,5 @@
-/* pages/project/taskInfo/taskInfo.wxss */
-.addComment {
+/* pages/project/addComment/addComment.wxss */
+.submitBtn {
     display: flex;
     padding: 50rpx;
     margin: 0;

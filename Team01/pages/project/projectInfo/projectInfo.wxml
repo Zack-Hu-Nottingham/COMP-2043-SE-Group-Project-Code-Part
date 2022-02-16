@@ -104,6 +104,10 @@
 
   <wxs src="../../../utils/tools.wxs" module="m2"></wxs>
 
+  <van-sticky offset-top="{{ 570 }}">
+  <van-button hairline plain round block type="info" bindtap="clickAddComment" class="addComment">{{dictionary.add_comment}}</van-button>
+</van-sticky>
+
 </view>
 
 
