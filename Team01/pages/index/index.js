@@ -393,5 +393,9 @@ Page({
     })
   },
 
+  // 更新数据
+  go_update(){
+    this.getData()
+  }
   
 })
