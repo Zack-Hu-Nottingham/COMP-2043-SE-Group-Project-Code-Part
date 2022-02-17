@@ -27,10 +27,10 @@
 </view>
 
 <!--Upload related images-->
-<van-uploader class="uploader" file-list="{{ fileList }}" bind:after-read="afterRead" />
+<van-uploader class="uploader" file-list="{{ fileList }}" bind:after-read="upload" />
 
 <!--Submit-->    
-<van-button plain round block loading="{{isLoading}}" disabled="{{isLoading}}" class="submitBtn" color="#1296db" type="primary" size="normal" form-type="submit">{{dictionary.create_new_project}}</van-button>
+<van-button plain round block loading="{{isLoading}}" disabled="{{isLoading}}" class="submitBtn" color="#1296db" type="primary" size="normal" form-type="submit" bind:tap="formSubmit">{{dictionary.create_new_project}}</van-button>
 
 
 <van-toast id="van-toast" />

@@ -100,7 +100,7 @@ Page({
           db.collection('user').where({
             _openid: app.globalData.userInfo.openid
           }).get().then(res => {
-
+            console.log(res.data)
             // 如果是已知账户
             if (res.data.length != 0) {
               this.getData()
