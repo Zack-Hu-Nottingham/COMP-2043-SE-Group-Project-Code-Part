@@ -123,24 +123,33 @@ Page({
     selectTemplate: function(){
         wx.navigateTo({ url: '../projectTemplate/projectTemplate', })
     },
-    
-    // 读完文件后
-    afterRead: function(event) {
-        const { file } = event.detail;
-        // 当设置 mutiple 为 true 时, file 为数组格式，否则为对象格式
-        wx.uploadFile({
-          url: 'https://example.weixin.qq.com/upload', // 仅为示例，非真实的接口地址
-          filePath: file.url,
-          name: 'file',
-          formData: { user: 'test' },
+    upload(){
+        //把this赋值给that，就相当于that的作用域是全局的。
+        let that = this;
+        wx.chooseImage({
+          // count: 1,
+          sizeType: ['original', 'compressed'],
+          sourceType: ['album', 'camera'],
           success(res) {
-            // 上传完成需要更新 fileList
-            const { fileList = [] } = this.data;
-            fileList.push({ ...file, url: res.data });
-            this.setData({ fileList });
-          },
-        });
+            console.log("成功选择图片",res);
+            that.uploadImage(res.tempFilePaths[0]);
+          }
+        })
       },
+
+    uploadImage(fileURL) {
+        wx.cloud.uploadFile({
+          cloudPath: 'feedBack/'+ new Date().getTime() +'.png', // 上传至云端的路径
+          filePath: fileURL, // 小程序临时文件路径
+          success: res => {
+            var fileList = this.data.fileList;
+            fileList.push({url: res.fileID,name: fileURL,deletable: true});
+            this.setData({ fileList: fileList });
+            console.log("图片上传成功",res)
+          },
+          fail: console.error
+        })
+    },
 
     // 提交新项目
     formSubmit: function (e) {
@@ -160,10 +169,6 @@ Page({
             this.setData({
                 isLoading: true
             })
-            // wx.showLoading({
-            //   title: 'title',
-            //   musk: true
-            // })
             setTimeout(function(){
                 Toast({
                     forbidClick: 'true',

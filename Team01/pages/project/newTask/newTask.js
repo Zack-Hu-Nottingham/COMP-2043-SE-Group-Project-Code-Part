@@ -193,6 +193,7 @@ Page({
             selectedPriority: this.data.prioritys[event.detail.value].name
         })
     },
+    
     upload(){
         //把this赋值给that，就相当于that的作用域是全局的。
         let that = this;
@@ -220,6 +221,7 @@ Page({
           fail: console.error
         })
     },
+
     formSubmit: function (e) {
         var that = this
         // if(this.data.name == ""){
