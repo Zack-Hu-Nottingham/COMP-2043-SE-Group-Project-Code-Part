@@ -1,4 +1,7 @@
 const languageUtils = require("../../language/languageUtils");
+const db = wx.cloud.database();
+const _ = db.command;
+const lib = require('../../utils/util')
 
 Page({
 
@@ -10,6 +13,8 @@ Page({
     /**
      * Global data
      */
+    openid: "",
+    user: [],
     active: 2,
     pageName: ['Message', 'Project', 'Dashboard', 'More'],
 
@@ -36,7 +41,7 @@ Page({
     /**
      * Dashboard page's data
      */
-    taskList:[],
+    task:[],
 
 
     /**
@@ -58,14 +63,41 @@ Page({
    */
   onLoad: function (options) {
 
-    this.getData()
+    wx.login()
+    .then(res => {
+      if (res.code) { 
+        var url = "https://api.weixin.qq.com/sns/jscode2session?appid=wxd4b06f2e9673ed00&secret=909d4ff30ed2d6e828f73e55a63cd862&js_code=" + res.code + "&grant_type=authorization_code";
+        lib.request({
+          url: url,
+          method: "GET"
+        }).task.then(res => {
+          this.setData({
+            openid: res.data.openid,
+          })
+        }).then(res => {
+          db.collection('user').where({
+            openid: this.data.openid
+          }).get().then(res => {
 
-    // 测试用，获取login code
-    wx.login({
-      success: (res) => {
-        console.log(res)
+            // 如果是已知账户
+            if (res.data != null) {
+              // 获取初始数据 
+              this.getData()
+            }
+            // 如果是新账号
+            else {
+              // 注册该账号
+
+            }
+          })
+          
+
+
+        })
+        
       }
     })
+
 
     // 初始化语言
     var lan = wx.getStorageSync("languageVersion");
@@ -152,6 +184,90 @@ Page({
    * Global method
    */
 
+  // 初始化数据
+  async getData(openid){
+
+    await this.getUserInfo()
+
+    await this.getProjectInfo()
+
+    for (var idx in this.data.project) {
+      await this.getTaskInfo(this.data.project[idx]._id)
+      console.log(this.data.project[idx])
+    }
+    
+  },
+  
+  // 获取user信息
+  getUserInfo() {
+    return new Promise((resolve, reject) => {
+      db.collection('user')
+      .where({
+        openid: _.eq(this.data.openid)
+      })
+      .get()
+      .then(res => {
+        this.setData({
+          user: res.data[0]
+        })
+        resolve("成功获取用户数据");
+      })
+      .catch(err => {
+        reject("请求用户信息失败")
+      })  
+    })
+    
+  },
+
+  // 获取项目信息
+  getProjectInfo() {
+    return new Promise((resolve, reject) => {
+      db.collection('project')
+      .where(_.or([
+        {
+          houseOwner: _.eq(this.data.user._id)
+        },
+        {
+          projectManager: _.eq(this.data.user._id)
+        }
+      ]))
+      .get()
+      .then(res => {
+        this.setData({
+          project: this.data.project.concat(res.data[0])
+        })
+        resolve("成功获取项目信息")
+      })
+      .catch(err => {
+        reject("请求项目信息失败")
+      })}
+    )},
+
+  // 获取任务信息
+  getTaskInfo(projectId) {
+    return new Promise((resolve, reject) => {
+      db.collection('task')
+      .where({
+        belongTo: _.eq(projectId)
+      })
+      .get()
+      .then(res => {
+        console.log(res)
+        for (var idx in res.data) {
+          this.setData({
+            task: this.data.task.concat(res.data[idx])
+          })
+        }
+        
+        // this.data.task.push(res.data[0])
+        resolve("成功获取任务信息")
+      })
+      .catch(err => {
+        reject("请求任务信息失败")
+      })
+    })
+  },
+
   // 更改tab选项时对应的逻辑
   onChangeTab(event) {
     this.setData({ active: event.detail });
@@ -173,6 +289,14 @@ Page({
   },
 
 
+  /**
+   * Create Project page's method
+   */
+  clickNewProject(event) {
+    wx.navigateTo({
+      url: '../project/newProject/newProject',
+    })
+  },
 
   /**
    * Message page's method
@@ -183,10 +307,9 @@ Page({
     })
   },
 
+  // 点击通知
   clickNotification(event) {
-    // wx.navigateTo({
-      // url: '',
-    // })
+
   },
 
 
@@ -213,13 +336,17 @@ Page({
     })
   },
 
+  clickNewProject(event) {
+    wx.navigateTo({
+      url: '../project/newProject/newProject',
+    })
+  },
 
    
   /**
    * Dashboard page's method
    */
   clickTask(event) {
-    console.log(event.target)
     wx.navigateTo({
       url: '../project/taskInfo/taskInfo?id=' +  event.currentTarget.dataset.id,
     })
@@ -266,36 +393,5 @@ Page({
     })
   },
 
-  getData(){
-    wx.cloud.database().collection('messageList').get()
-      .then(res => {
-        this.setData({
-          messageList: res.data
-        })
-      })
-      .catch(err => {
-        console.log('请求失败', err)
-      }),
-
-    wx.cloud.database().collection('project').get()
-      .then(res => {
-        this.setData({
-          project: res.data
-        })
-      })
-      .catch(err => {
-        console.log('请求失败', err)
-      }),
-
-    wx.cloud.database().collection('taskList').get()
-      .then(res => {
-        this.setData({
-          taskList: res.data
-        })
-      })
-      .catch(err => {
-        console.log('请求失败', err)
-      })
-  }
-
+  
 })

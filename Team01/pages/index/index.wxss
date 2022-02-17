@@ -12,7 +12,11 @@
   * Projects page's css
   */
 
-
+.createNewProjectForTest {
+  display: flex;
+  padding: 50rpx;
+  margin: 0;
+}
 
 
 /**
@@ -60,4 +64,10 @@
 
 .userNickName {
   padding-left: 80rpx;
+}
+
+.signOut {
+  display: flex;
+  padding: 50rpx;
+  margin: 0;
 }

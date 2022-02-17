@@ -3,9 +3,11 @@ const languageUtils = require("../../../language/languageUtils");
 
 import * as echarts from '../../../ec-canvas/echarts';
 
-const app = getApp()
+const app = getApp();
 
-var id = ''
+var id = '';
+
+const db = wx.cloud.database();
 
 // line 5-441: function initChart() 甘特图填充信息
 function initChart(canvas, width, height, dpr) {
@@ -400,42 +402,33 @@ Page({
    * 页面的初始数据
    */
   data: {
-    owner: '',
-    startTime: '',
-    endTime: '',
-    projectDescription: '',
-    stateDescription: '',
-    currentState: '',
+
+    // Project Information's data
     task: [],
-    unstarted: 0,
-    processing: 0,
-    completed: 0,
-    total: 0,
-    delayed: 0,
-    /*name: "project1",
-    owner: "Loc",
-    startTime: "2022-01-10",
-    endTime: "2023-02-20",
-    projectDescription: "None",
-    stateDescription: "None",
-    currentState: "Normal",
-    task: [],
-    unstarted: 5,
-    processing: 1,
-    completed: 1,
-    total: 7,
-    delayed: 0,*/
+    taskState: [],
+
+    // Task state 数据格式
+        // 0 - unstarted
+        // 1 - progressing
+        // 2 - finished
+        // 3 - delayed
+        // 4 - reworking
+        // * 5 - accepted
+    unstarted: [],
+    progressing: [],
+    completed: [],
+    delayed: [],
+    reworking: [],
+    accepted: [],
 
     navbar: [],
-    // navbar: ['Project Information', 'Task Management', 'Gantt Diagram'],
     currentTab: 0,
-    query: {},
     dictionary: {},
     language: 0,
 
 
     project: {},
-    name: '',
+    owner: "",
 
     // Task Management's data
     // These data should be filled in when the page is loaded
@@ -443,7 +436,7 @@ Page({
     notStartedTask: [],
     finishedTask: [],
     // for collapse bar
-    activeNames: ['1'],
+    activeNames: [],
 
     //gantt diagram
     ec: {
@@ -458,9 +451,65 @@ Page({
     this.setData({
       currentTab: e.currentTarget.dataset.idx
     })
-    app.globalData.currentTab = e.currentTarget.dataset.idx;
+    if (this.data.currentTab == 1) {
+      db.collection("task")
+      .where({
+        belongTo: id,
+        state: 0
+      })
+      .get().then(res => {
+        this.setData({
+          unstarted: res.data
+        })
+      })
+
+      db.collection("task")
+      .where({
+        belongTo: id,
+        state: 1
+      })
+      .get().then(res => {
+        this.setData({
+          progressing: res.data
+        })
+      })
+
+      db.collection("task")
+      .where({
+        belongTo: id,
+        state: 2
+      })
+      .get().then(res => {
+        this.setData({
+          completed: res.data
+        })
+      })
+
+      db.collection("task")
+      .where({
+        belongTo: id,
+        state: 3
+      })
+      .get().then(res => {
+        this.setData({
+          delayed: res.data
+        })
+      })
+
+      db.collection("task")
+      .where({
+        belongTo: id,
+        state: 4
+      })
+      .get().then(res => {
+        this.setData({
+          reworking: res.data
+        })
+      })
+    }
   },
 
+  
   initLanguage() {
     var self = this;
     //获取当前小程序语言版本所对应的字典变量
@@ -472,33 +521,66 @@ Page({
     });
   },
 
+  
+  getDetail(){
+    db.collection('project')
+      .doc(id)
+      .get({
+        success: res => {
+
+          this.setData({
+            project: res.data,
+            name: res.data.name
+          }),
+
+          wx.setNavigationBarTitle({
+            title: this.data.name,
+          }),
+
+          this.getProjectManager()
+          // this.getTaskState()
+        },
+        fail: function(err) {
+          console.log(err)
+        }
+      })
+    
+  },
+
+  getProjectManager() {
+    var ownerId = this.data.project.projectManager
+    db.collection("user")
+    .doc(ownerId)
+    .get({
+      success: res => {
+        this.setData({
+          owner: res.data.name
+        })
+      }
+    })
+  },
 
   // Project Information's method
 
   onDateDisplay() {
-    console.log("show")
     this.setData({ show: true });
   },
 
-  onClose() {
+  onDateClose() {
     this.setData({ show: false });
   },
 
   formatDate(date) {
     date = new Date(date);
-    return `${date.getMonth() + 1}/${date.getDate()}`;
+    // return `${date.getMonth() + 1}/${date.getDate()}`;
+    return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
   },
 
-  onConfirm(event) {
+  onDateConfirm(event) {
     const [start, end] = event.detail;
-    this.setData({
-      startTime: this.formatDate(start),
-      endTime: this.formatDate(end),
-      show: false,
-      date: `${this.formatDate(start)} - ${this.formatDate(end)}`,
-    });
+    this.onDateClose();
 
-    //调用云函数
+    //调用云函数，更新数据库中日期
     wx.cloud.callFunction({
       name: 'updateProjectDate',
       data:{
@@ -507,12 +589,14 @@ Page({
         endTime: `${end.getFullYear()}-${end.getMonth() + 1}-${end.getDate()}`
       }
     }).then(res => {
-      console.log('调用云函数成功', res),
+      console.log('project日期更新成功', res),
       this.getDetail()
     }).catch(res => {
-      console.log('调用云函数失败', res)
+      console.log('project日期更新失败', res)
     })
   },
+
+  // Task Management's method
 
   onChange(event) {
     this.setData({
@@ -520,9 +604,18 @@ Page({
     });
   },
 
-  clickNewProject(event) {
+  clickNewTask(event) {
     wx.navigateTo({
       url: '../newTask/newTask',
+    })
+  },
+
+   /**
+   * Create Comment page's method
+   */
+  clickAddComment(event) {
+    wx.navigateTo({
+      url: '../addComment/addComment',
     })
   },
 
@@ -544,49 +637,14 @@ Page({
       navbar: [this.data.dictionary.project_info, this.data.dictionary.task_management, this.data.dictionary.gantt_diagram]
     })
 
-    // 根据project name获取此project信息，并填充到query
-    // 包含owner，起止时间，描述，当前状态，各类task的数量
-    this.setData ({
-      query: options
-    })
-
+    // 获取当前project的id
     id = options.id
-    console.log(options)
 
+    // 从数据库中根据id获取数据
     this.getDetail()
-    
+
   },
 
-  getDetail(){
-    wx.cloud.database().collection('project')
-      .doc(id)
-      .get()
-      .then(res => {
-        this.setData({
-          project: res.data,
-          owner: res.data.owner,
-          startTime: res.data.startTime,
-          endTime: res.data.endTime,
-          projectDescription: res.data.projectDescription,
-          stateDescription: res.data.stateDescription,
-          currentState: res.data.currentState,
-          task: res.data.task,
-          unstarted: res.data.unstarted,
-          processing: res.data.processing,
-          completed: res.data.completed,
-          total: res.data.total,
-          delayed: res.data.delayed,
-        }),
-
-        wx.setNavigationBarTitle({
-          title: res.data.name,
-        })
-
-      })
-      .catch(err => {
-        console.log('请求失败', err)
-      })
-  },
 
   /**
    * 生命周期函数--监听页面初次渲染完成

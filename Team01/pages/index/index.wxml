@@ -16,7 +16,7 @@
   </van-cell-group>
 
   <van-cell-group inset style="padding: 30rpx;" title="{{dictionary.recent_message}}">
-    <view wx:for="{{messageList}}">
+    <view wx:for="{{messageList}}" wx:key="index">
       <van-cell  title="{{item.sender}}" clickable="true" bindtap="clickMessage" label="{{item.content}}" value="{{item.timeStamp}}" id="{{item.sender}}" class="messageForTest"/>
     </view>
   </van-cell-group>
@@ -28,20 +28,19 @@
 <view wx:elif="{{active == 1}}">
 
   <van-cell-group inset style="padding: 30rpx;">
-    <van-cell center title="{{dictionary.my_task}}" icon="user-o" clickable="true" bindtap="clickMyTask"/>
-    <van-cell center title=" {{dictionary.statistic_report}}" icon="bar-chart-o" clickable="true" bindtap="clickStatisticReport"/>
+    <van-cell center title="{{dictionary.my_task}}" icon="user-o" clickable="true" bindtap="clickMyTask" class="myTaskForTest"/>
+    <van-cell center title=" {{dictionary.statistic_report}}" icon="bar-chart-o" clickable="true" bindtap="clickStatisticReport" class="statisticReportForTest"/>
   </van-cell-group>
 
   <van-cell-group inset style="padding: 30rpx;" title="{{dictionary.project_list}}">
-    <view wx:for="{{project}}">
-      <van-cell icon="todo-list-o" title="{{item.name}}" clickable="true" bindtap="clickProject" data-id="{{item._id}}"/>
+    <view wx:for="{{project}}" wx:key="index">
+      <van-cell icon="todo-list-o" title="{{item.name}}" clickable="true" bindtap="clickProject" data-id="{{item._id}}" class="projectForTest"/>
     </view>
   </van-cell-group>
 
   <van-sticky offset-top="{{ 570 }}">
-  <van-button hairline plain round block type="info" bindtap="clickNewProject">{{dictionary.create_new_project}}</van-button>
+  <van-button hairline plain round block type="info" bindtap="clickNewProject" class="createNewProjectForTest">{{dictionary.create_new_project}}</van-button>
 </van-sticky>
-
 </view>
 
 
@@ -52,20 +51,25 @@
   <van-cell-group style="padding: 30rpx;" inset >
     <van-cell title="{{dictionary.today_task}}" icon="todo-list-o" />
 
-    <view wx:for="{{taskList}}">
+    <view wx:for="{{task}}" wx:key="index">
       <van-cell title="{{item.name}}" label="{{item.startTime}} - {{item.endTime}}" clickable="true" bindtap="clickTask" data-id="{{item._id}}" class="taskForTest"> 
+
         <view slot="">
           <view wx:if="{{item.state==0}}">
-            <view class="notStartedGroup">
-              <image src="/images/NotStartedIcon.png" mode="widthFix" style="width: 40rpx;"></image>
-              <view class="imageDiscription">NotStarted</view>
-            </view>
+            <van-tag color="#D3D3D3" icon="fail" size="medium"><van-icon name="close"/>Unstarted</van-tag>
           </view>
+
           <view wx:elif="{{item.state==1}}">
-            <van-tag color="#F5DEB3" text-color="black" size="medium" >{{item.state}}</van-tag>
+            <van-tag color="#87CEFA" size="medium"><van-icon name="play"></van-icon>Progressing</van-tag>
           </view>
           <view wx:elif="{{item.state==2}}">
-            <van-tag color="#32CD32" text-color="black" size="medium" >{{item.state}}</van-tag>
+            <van-tag color="#32CD32" size="medium"><van-icon name="passed" />Finished</van-tag>
+          </view>
+          <view wx:elif="{{item.state==3}}">
+            <van-tag color="#ffe1e1" text-color="#ad0000"  size="medium"><van-icon name="warning-o" />Delayed</van-tag>
+          </view>
+          <view wx:elif="{{item.state==4}}">
+            <van-tag color="#ffe1e1" text-color="#ad0000"  size="medium"><van-icon name="replay" />Reworking</van-tag>
           </view>
         </view>
       </van-cell>      
@@ -100,15 +104,15 @@
 
 </van-cell-group>
 
-<van-cell-group inset style="padding: 30rpx;">
-  <van-cell center icon="setting-o"/>
-  <van-cell center title="{{dictionary.invite_member}}" is-link icon="" clickable="true" bindtap="onInviteMember"/>
-  <van-cell center title="{{dictionary.language}}" value="{{languageList[language]}}" icon="" is-link clickable="true" bindtap="onChangeLan"/>
-</van-cell-group>
+  <van-cell-group inset style="padding: 30rpx;">
+    <van-cell center icon="setting-o"/>
+    <van-cell center title="{{dictionary.invite_member}}" is-link icon="" clickable="true" bindtap="onInviteMember"/>
+    <van-cell center title="{{dictionary.language}}" value="{{languageList[language]}}" icon="" is-link clickable="true" bindtap="onChangeLan" class="settingForTest"/>
+  </van-cell-group>
 
 <!-- 底部悬浮登出按钮 -->
 <van-sticky offset-top="{{ 570 }}">
-  <van-button hairline plain round block color="#DC143C" type="primary">{{dictionary.sign_out}}</van-button>
+  <van-button hairline plain round block color="#DC143C" class="signOut" type="primary">{{dictionary.sign_out}}</van-button>
 </van-sticky>
 
 </view>

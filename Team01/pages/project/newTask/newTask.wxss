@@ -3,10 +3,6 @@
     color:gray;
     font-size:15px;
 }
-.form {
-    margin: 0rpx;
-    padding: 0 10rpx;
-  }
 
 .submitBtn {
   display: flex;

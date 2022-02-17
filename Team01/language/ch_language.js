@@ -52,9 +52,33 @@ var Languague = {
     completed: "已完成",
     delayed: "延误",
     unstarted: "未开始",
-    processing: "进行中",
+    progressing: "进行中",
     total: "全部",
     create_new_task: "新建任务",
+    add_comment: "添加评论",
+
+    // Task information page
+    basic_info: "基本信息",
+    belong_to: "所属项目",
+    stage_of_project: "项目状态",
+    priority: "优先级",
+    tag: "标签",
+    participant: "参与者",
+    reworking: "重加工",
+
+    // New task page
+    task_name: "任务名称",
+    cancel: "取消",
+    select_priority: "选择优先级",
+
+    // New project
+    project_name: "项目名称",
+    choose_template: "选择模板",
+    house_owner: "房屋主人",
+   
+    // Comment page
+    comment_title:"反馈",
+    select_feedback:"选择反馈类型",
 
    },
 };

@@ -1,5 +1,7 @@
 // pages/project/taskInfo/taskInfo.js
 
+const languageUtils = require("../../../language/languageUtils");
+
 var id = ''
 
 Page({
@@ -9,51 +11,53 @@ Page({
    */
   data: {
 
+    // 存放双语
+    dictionary: {},
+    language: 0,
+    languageList: ["简体中文", "English"],
+    
+    
     taskPage: {},
+    belongTo: "",
 
-    /*
-    belongTo: [],
-    stageOfProject: "",
-    tag: "",
-    participants: [],
-    
-
-    
-    startTime: '1/16',
-    endTime: '5/12',*/
     dateShow: false,
-
     priorityShow: false,
+
     priority: [
       {
-        name: 'highest',
+        name: 'Highest',
       },
       {
-        name: 'high'
+        name: 'High'
       },
       {
-        name: 'normal'
+        name: 'Normal'
       },
       {
-        name: 'low'
+        name: 'Low'
       },
       {
-        name: 'lowest'
+        name: 'Lowest'
       },
     ],
-
-    data: '',
-    show: false
-
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+
+    // 初始化语言
+    var lan = wx.getStorageSync("languageVersion");
+    this.initLanguage();
+    this.setData({
+      language: lan
+    })
+
+    // 获得当前task的id
     id = options.id
 
+    // 根据id获得对应数据
     this.getDetail()
 
   },
@@ -106,22 +110,26 @@ Page({
   onShareAppMessage: function () {
 
   },
+
   onDateDisplay() {
-    this.setData({ show: true });
+    this.setData({ dateShow: true });
   },
+
   onClose() {
-    this.setData({ show: false });
+    this.setData({ dateShow: false });
   },
+  
   formatDate(date) {
     date = new Date(date);
     return `${date.getMonth() + 1}/${date.getDate()}`;
   },
+  
   onConfirm(event) {
     const [start, end] = event.detail;
     this.setData({
       startTime: this.formatDate(start),
       endTime: this.formatDate(end),
-      show: false,
+      dateShow: false,
       date: `${this.formatDate(start)} - ${this.formatDate(end)}`,
     });
 
@@ -134,47 +142,18 @@ Page({
         endTime: `${end.getFullYear()}-${end.getMonth() + 1}-${end.getDate()}`
       }
     }).then(res => {
-      console.log('调用云函数成功', res),
+      console.log('修改task日期成功', res),
       this.getDetail()
     }).catch(res => {
-      console.log('调用云函数失败', res)
+      console.log('修改task日期失败', res)
     })
   },
 
-  
-  // onDateDisplay() {
-  //   this.setData({ dateShow: true });
-  // },
-
-  // onDateClose() {
-  //   this.setData({ dateShow: false });
-  // },
-
-  // formatDate(date) {
-  //   date = new Date(date);
-  //   return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
-  // },
-
-  // onConfirmStartTime(event) {
-  //   this.setData({
-  //     dateShow: false,
-  //     startTime: this.formatDate(event.detail),
-  //   });
-  // },
-  
-  // onConfirmEndTime(event) {
-  //   this.setData({
-  //     dateShow: false,
-  //     endTime: this.formatDate(event.detail),
-  //   });
-  // },
-
   getDetail(){
-    wx.cloud.database().collection('taskList')
+    wx.cloud.database().collection('task')
       .doc(id)
       .get()
       .then(res => {
-
         wx.setNavigationBarTitle({
           title: res.data.name,
         }),
@@ -187,10 +166,33 @@ Page({
       .catch(err => {
         console.log('请求失败', err)
       })
+      .then(res => {
+        console.log(this.data.taskPage.belongTo)
+        wx.cloud.database().collection('project')
+        .doc(this.data.taskPage.belongTo)
+        .get()
+        .then(res => {
+          this.setData({
+            belongTo: res.data.name
+          })
+        })
+      })
+
+
+
   },
 
   onPriorityClose() {
     this.setData({priorityShow: false})
+  },
+
+     /**
+   * Create Comment page's method
+   */
+  clickAddComment(event) {
+    wx.navigateTo({
+      url: '../addComment/addComment',
+    })
   },
 
   onPrioritySelect(e) {
@@ -207,10 +209,10 @@ Page({
         currentPriority: e.detail.name
       }
     }).then(res => {
-      console.log('调用云函数成功', res),
+      console.log('修改task优先级成功', res),
       this.getDetail()
     }).catch(res => {
-      console.log('调用云函数失败', res)
+      console.log('修改task优先级失败', res)
     })
 
   },
@@ -220,5 +222,17 @@ Page({
     this.setData({
       priorityShow: true
     })
-  }
+  },
+
+  // 初始化语言
+  initLanguage() {
+    var self = this;
+    //获取当前小程序语言版本所对应的字典变量
+    var lang = languageUtils.languageVersion();
+
+    // 页面显示
+    self.setData({
+      dictionary: lang.lang.index,
+    });
+  },
 })

@@ -14,45 +14,37 @@
       "list": [
         {
           "name": "",
-          "pathName": "pages/project/taskInfo/taskInfo",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "",
-          "pathName": "pages/project/statisticReport/statisticReport",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "",
-          "pathName": "pages/project/testDiagram/testDiagram",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "",
           "pathName": "pages/project/projectInfo/projectInfo",
-          "query": "",
+          "query": "id=ea7958376208b87a01d5af7316867c94",
           "scene": null
         },
-        {
-          "name": "",
-          "pathName": "pages/project/newProject/newProject",
-          "query": "",
-          "scene": null
+        "game": {
+            "list": []
         },
-        {
-          "name": "",
-          "pathName": "pages/message/message/message",
-          "query": "",
-          "scene": null
+        "gamePlugin": {
+            "list": []
         },
-        {
-          "name": "",
-          "pathName": "pages/project/task/task",
-          "query": "",
-          "scene": null
+        "miniprogram": {
+            "list": [
+                {
+                    "name": "",
+                    "pathName": "pages/project/projectInfo/projectInfo",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "",
+                    "pathName": "pages/project/newTask/newTask",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "",
+                    "pathName": "pages/project/addComment/addComment",
+                    "query": "",
+                    "scene": null
+                }
+            ]
         }
       ]
     }

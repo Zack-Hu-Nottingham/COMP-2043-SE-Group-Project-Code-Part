@@ -1,53 +1,92 @@
 // pages/project/newTask/newTask.js
 import Toast from '../../../miniprogram_npm/@vant/weapp/toast/toast'
+const languageUtils = require("../../../language/languageUtils");
+
 var app = getApp()
 Page({
     /**
      * 页面的初始数据
      */
     data: {
+        
+        // 存放双语
+        dictionary: {},
+        language: 0,
+        languageList: ["简体中文", "English"],
+        
         name: "",
         details: "",
+
+        // Task state 数据格式
+        // 0 - unstarted
+        // 1 - progressing
+        // 2 - finished
+        // 3 - delayed
+        // 4 - reworking
+        // * 5 - accepted
+
         "taskState":[{
-            "name": "Not started"
+            "name": "Unstarted",
+            "value": '0',
         },{
-            "name": "Progressing"
+            "name": "Progressing",
+            "value": '1',
         },{
-            "name": "Need to rework"
+            "name": "Finished",
+            "value": '2',
         },{
-            "name": "Finished"
+            "name": "Accepted",
+            "value": '5'
         },{
-            "name": "Accepted"
+            "name": "Reworking",
+            "value": '4',
         }],
-        "priority":[{
-            "name": "Highest"
-        },{
-            "name": "Higher"
-        },{
-            "name": "Medium"
-        },{
-            "name": "Lower"
-        },{
-            "name": "Lowest"
-        }],
-        selectedPriority: "Medium",
-        selectedState: "Not started",
+
+        selectedPriority: '',
+        selectedState: '',
         isLoading: false,
-        show: false,
-        show2: false,
-        startTime: new Date().getTime(),
-        endTime: new Date().getTime(),
-        ST: "",
-        ET: "",
-        project: "",
+        showDate: false,
+
+        startTime: '',
+        endTime: '',
+        
+        belongTo: "",
         Owner: [],
-        fileList: []
+        fileList: [],
+
+        showPriority: false,
+        prioritys: [{
+            "name": "high",
+            "value": '0'
+        },{
+            "name": "normal",
+            "value": '1'
+        },{
+            "name": "low",
+            "value": '2'
+        }],
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad: function (options) {
+    onLoad: function (options) {   
+        
+        this.setData({
+            belongTo: options.id
+        })
+        
+        // 初始化语言
+        var lan = wx.getStorageSync("languageVersion");
+        this.initLanguage();
+        this.setData({
+            language: lan
+        })
+
+        // 设置
+        wx.setNavigationBarTitle({
+          title: this.data.dictionary.create_new_task,
+        })
     },
 
     /**
@@ -98,78 +137,80 @@ Page({
     onShareAppMessage: function () {
 
     },
+
+    // Type the task name
     typeName: function(e){
         this.setData({
             name: e.detail
         })
     },
+
+    // Type task details
     typeDetails: function(e){
         this.setData({
             details: e.detail
         })
     },
-    changeST: function(e){
-        var CT = new Date(e.detail)
-        console.log(e.detail)
-        this.setData({
-            startTime: e.detail,
-            ST: CT.getFullYear() + "-" + (Number(CT.getMonth()) + 1) + "-" + CT.getDate()
-        });
-    },
-    changeET: function(e){
-        var CT = new Date(e.detail)
-        console.log(e.detail)
-        this.setData({
-            endTime: e.detail,
-            ET: CT.getFullYear() + "-" + (Number(CT.getMonth()) + 1) + "-" + CT.getDate()
-        });
+
+    // Change start/end time
+    showDatePopup() {
+        this.setData({ showDate: true });
     },
 
-    showPopup() {
-        this.setData({ show: true });
+    onDateClose() {
+        this.setData({ showDate: false });
     },
-    onClose() {
-        this.setData({ show: false });
+    
+    formatDate(date) {
+        date = new Date(date);
+        return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
     },
-    showPopup2() {
-        this.setData({ show2: true });
-    },
-    onClose2() {
-        this.setData({ show2: false });
+    
+    onDateConfirm(event) {
+        const [start, end] = event.detail;
+        this.setData({
+            startTime: this.formatDate(start),
+            endTime: this.formatDate(end),
+            show: false,
+            date: `${this.formatDate(start)} - ${this.formatDate(end)}`,
+        });
+        this.onDateClose()
     },
 
-    changeState: function(){
-        var arr = this.data.taskState
-        var arrName = new Array()
-        for(var i in arr){
-            arrName.push(arr[i].name)
-        }
-        wx.showActionSheet({
-            itemList: arrName,
-            itemColor: "gray",
-            success: (res) =>{
-                this.setData({
-                    selectedState: arrName[res.tapIndex]
-                })
-            }
-        })
-    },
     changePriority: function(){
-        var arr = this.data.priority
-        var arrName = new Array()
-        for(var i in arr){
-            arrName.push(arr[i].name)
-        }
-        wx.showActionSheet({
-            itemList: arrName,
-            itemColor: "gray",
-            success: (res) =>{
-                this.setData({
-                    selectedPriority: arrName[res.tapIndex]
-                })
-            }
+        this.setData({
+            showPriority: true,
         })
     },
+
+    onClosePriority() {
+        this.setData({ showPriority: false });
+    },
+
+    onSelectPriority(event) {
+        // console.log(event.detail.value);
+        this.setData({
+            selectedPriority: this.data.prioritys[event.detail.value].name
+        })
+    },
+
+    upImg(){
+        var that = this;
+        wx.chooseImage({
+          count: 1,
+          success(res){
+            console.log(res);
+            wx.cloud.uploadFile({
+              cloudPath:'test/' + Math.floor(Math.random()*1000000),
+              filePath:res.tempFilePaths[0],
+              success(res){
+                console.log("成功",res);
+              }
+            })
+          }
+        })
+      },
+
     afterRead: function(event) {
         const { file } = event.detail;
         // 当设置 mutiple 为 true 时, file 为数组格式，否则为对象格式
@@ -186,13 +227,20 @@ Page({
           },
         });
       },
+
     formSubmit: function (e) {
         var that = this
-        if(this.data.name==""){
-            Toast('Name is null');
-        }
-        else if(this.data.startTime>this.data.endTime){
+        // if(this.data.name == ""){
+        //     Toast.fail('Name is null');
+        // }
+        if(this.data.startTime > this.data.endTime){
             Toast('Wrong time setting')
+        }
+        else if(this.data.startTime > this.data.endTime){
+            Toast('Wrong time setting')
+        }
+        else if (this.data.startTime == '' || this.data.endTime == '') {
+
         }
         // else if(this.data.project==""){
         //     Toast('No superior project');
@@ -249,5 +297,18 @@ Page({
                 } */
         }
         
-    }
+    },
+
+    // 初始化语言
+    initLanguage() {
+        var self = this;
+        //获取当前小程序语言版本所对应的字典变量
+        var lang = languageUtils.languageVersion();
+
+        // 页面显示
+        self.setData({
+        dictionary: lang.lang.index,
+        });
+    },
+
 })

@@ -52,9 +52,34 @@ var Languague = {
     completed: "Completed",
     delayed: "Delayed",
     unstarted: "Unstarted",
-    processing: "Processing",
+    progressing: "Progressing",
     total: "Total",
     create_new_task: "Create New Task",
+    add_comment: "Add Comment",
+
+    // Task information page
+    basic_info: "Basic Information",
+    belong_to: "Belong To",
+    stage_of_project: "Stage Of Project",
+    priority: "Priority",
+    tag: "Tag",
+    participant: "Participant",
+    reworking: "Reworking",
+
+    
+    // New task page
+    task_name: "Task Name",
+    cancel: "Cancel",
+    select_priority: "Select Priority",
+
+    // New project
+    project_name: "Project Name",
+    choose_template: "Choose Template",
+    house_owner: "House Owner",
+
+      // Comment page
+   comment_title:"Feedback",
+   select_feedback:"Select feedback type",
     
  },
 };

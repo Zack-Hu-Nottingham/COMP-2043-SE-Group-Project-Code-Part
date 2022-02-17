@@ -1,30 +1,59 @@
 // pages/project/newProject/newProject.js
 import Toast from '../../../miniprogram_npm/@vant/weapp/toast/toast'
+const languageUtils = require("../../../language/languageUtils");
+
 var app = getApp()
 Page({
     /**
      * 页面的初始数据
      */
     data: {
+        
+        // 存放双语
+        dictionary: {},
+        language: 0,
+        languageList: ["简体中文", "English"],
+
+        // 项目描述
         name: "",
-        details: "",
-        "visibility":[{
-            "name": "Private",
-            "value":"privateProject"
-        },{
-            "name": "Public",
-            "value":"publicProject"
-        }],
-        selectedTemplate: "Select",
-        selectedVisibility: "Private",
+        description: "",
+
+        startDate: "",
+        endDate: "",
+
+        // 模板选择
+        selectedTemplate: '',
+        selectedTemplateIndex: '1',
+        
+
         isLoading: false,
-        fileList: []
+        fileList: [],
+        
     },
+    
+     // 初始化语言
+     initLanguage() {
+        var self = this;
+        //获取当前小程序语言版本所对应的字典变量
+        var lang = languageUtils.languageVersion();
+
+        // 页面显示
+        self.setData({
+        dictionary: lang.lang.index,
+        });
+    },
+
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        // 初始化语言
+        var lan = wx.getStorageSync("languageVersion");
+        this.initLanguage();
+        this.setData({
+        language: lan
+        })
     },
 
     /**
@@ -75,35 +104,27 @@ Page({
     onShareAppMessage: function () {
 
     },
+
+    // 处理用户输入名字
     typeName: function(e){
         this.setData({
             name: e.detail
         })
     },
-    typeDetails: function(e){
+
+    // 处理用户输入描述
+    typeDescription: function(e){
         this.setData({
-            details: e.detail
+            description: e.detail
         })
     },
-    changeVisibility: function(){
-        var arr = this.data.visibility
-        var arrName = new Array()
-        for(var i in arr){
-            arrName.push(arr[i].name)
-        }
-        wx.showActionSheet({
-            itemList: arrName,
-            itemColor: "gray",
-            success: (res) =>{
-                this.setData({
-                    selectedVisibility: arrName[res.tapIndex]
-                })
-            }
-        })
-    },
+
+    // 选择模板
     selectTemplate: function(){
         wx.navigateTo({ url: '../projectTemplate/projectTemplate', })
     },
+    
+    // 读完文件后
     afterRead: function(event) {
         const { file } = event.detail;
         // 当设置 mutiple 为 true 时, file 为数组格式，否则为对象格式
@@ -120,21 +141,29 @@ Page({
           },
         });
       },
+
+    // 提交新项目
     formSubmit: function (e) {
-        var that = this
-        if(this.data.name==""){
+
+        // var that = this
+        // 数据校验
+        if (this.data.name == "") {
             Toast('Name is null');
         }
-        // else if(this.data.selectedTemplate=="Select"){
-        //     Toast('Template has not been selected');
-        // }
-        else if(this.data.details==""){
+        else if (this.data.description == "") {
             Toast('No detail description');
+        }
+        else if ( startDate == '' || endDate == '' ) {
+            Toast("")
         }
         else{
             this.setData({
                 isLoading: true
             })
+            // wx.showLoading({
+            //   title: 'title',
+            //   musk: true
+            // })
             setTimeout(function(){
                 Toast({
                     forbidClick: 'true',
@@ -148,11 +177,52 @@ Page({
                 })
             },2400)
             setTimeout(function(){
-                wx.switchTab({
-                  url: '../project/project',
+                wx.navigateTo({
+                  url: '../../index/index',
                 })
             },2500)
         }
         
     },
+
+    // calendar 的配套method
+    onDateDisplay() {
+        this.setData({ show: true });
+    },
+    
+    onDateClose() {
+        this.setData({ show: false });
+    },
+
+    formatDate(date) {
+        date = new Date(date);
+        // return `${date.getMonth() + 1}/${date.getDate()}`;
+        return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+      },
+    
+      onDateConfirm(event) {
+        const [start, end] = event.detail;
+        this.setData({
+            startDate: this.formatDate(start),
+            endDate: this.formatDate(end)
+        })
+        this.onDateClose();
+
+    
+        // //调用云函数，更新数据库中日期
+        // wx.cloud.callFunction({
+        //   name: 'updateProjectDate',
+        //   data:{
+        //     id: id,
+        //     startTime: `${start.getFullYear()}-${start.getMonth() + 1}-${start.getDate()}`,
+        //     endTime: `${end.getFullYear()}-${end.getMonth() + 1}-${end.getDate()}`
+        //   }
+        // }).then(res => {
+        //   console.log('project日期更新成功', res),
+        //   this.getDetail()
+        // }).catch(res => {
+        //   console.log('project日期更新失败', res)
+        // })
+      },
+
 })
