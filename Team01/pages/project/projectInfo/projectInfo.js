@@ -3,9 +3,11 @@ const languageUtils = require("../../../language/languageUtils");
 
 import * as echarts from '../../../ec-canvas/echarts';
 
-const app = getApp()
+const app = getApp();
 
-var id = ''
+var id = '';
+
+const db = wx.cloud.database();
 
 // line 5-441: function initChart() 甘特图填充信息
 function initChart(canvas, width, height, dpr) {
@@ -402,18 +404,22 @@ Page({
   data: {
 
     // Project Information's data
-    owner: '',
-    startTime: '',
-    endTime: '',
-    projectDescription: '',
-    stateDescription: '',
-    currentState: '',
     task: [],
+    taskState: [],
+
+    // Task state 数据格式
+        // 0 - unstarted
+        // 1 - progressing
+        // 2 - finished
+        // 3 - delayed
+        // 4 - reworking
+        // * 5 - accepted
     unstarted: [],
-    processing: [],
+    progressing: [],
     completed: [],
-    total: [],
-    delayed: 0,
+    delayed: [],
+    reworking: [],
+    accepted: [],
 
     navbar: [],
     currentTab: 0,
@@ -422,7 +428,7 @@ Page({
 
 
     project: {},
-    name: '',
+    owner: "",
 
     // Task Management's data
     // These data should be filled in when the page is loaded
@@ -430,7 +436,7 @@ Page({
     notStartedTask: [],
     finishedTask: [],
     // for collapse bar
-    activeNames: ['1'],
+    activeNames: [],
 
     //gantt diagram
     ec: {
@@ -445,9 +451,65 @@ Page({
     this.setData({
       currentTab: e.currentTarget.dataset.idx
     })
-    app.globalData.currentTab = e.currentTarget.dataset.idx;
+    if (this.data.currentTab == 1) {
+      db.collection("task")
+      .where({
+        belongTo: id,
+        state: 0
+      })
+      .get().then(res => {
+        this.setData({
+          unstarted: res.data
+        })
+      })
+
+      db.collection("task")
+      .where({
+        belongTo: id,
+        state: 1
+      })
+      .get().then(res => {
+        this.setData({
+          progressing: res.data
+        })
+      })
+
+      db.collection("task")
+      .where({
+        belongTo: id,
+        state: 2
+      })
+      .get().then(res => {
+        this.setData({
+          completed: res.data
+        })
+      })
+
+      db.collection("task")
+      .where({
+        belongTo: id,
+        state: 3
+      })
+      .get().then(res => {
+        this.setData({
+          delayed: res.data
+        })
+      })
+
+      db.collection("task")
+      .where({
+        belongTo: id,
+        state: 4
+      })
+      .get().then(res => {
+        this.setData({
+          reworking: res.data
+        })
+      })
+    }
   },
 
+  
   initLanguage() {
     var self = this;
     //获取当前小程序语言版本所对应的字典变量
@@ -459,37 +521,44 @@ Page({
     });
   },
 
+  
   getDetail(){
-    wx.cloud.database().collection('project')
+    db.collection('project')
       .doc(id)
-      .get()
-      .then(res => {
-        this.setData({
-          project: res.data,
-          owner: res.data.owner,
-          startTime: res.data.startTime,
-          endTime: res.data.endTime,
-          projectDescription: res.data.projectDescription,
-          stateDescription: res.data.stateDescription,
-          currentState: res.data.currentState,
-          task: res.data.task,
-          unstarted: res.data.unstarted,
-          processing: res.data.processing,
-          completed: res.data.completed,
-          total: res.data.total,
-          delayed: res.data.delayed,
-        }),
+      .get({
+        success: res => {
 
-        wx.setNavigationBarTitle({
-          title: res.data.name,
-        })
+          this.setData({
+            project: res.data,
+            name: res.data.name
+          }),
 
+          wx.setNavigationBarTitle({
+            title: this.data.name,
+          }),
+
+          this.getProjectManager()
+          // this.getTaskState()
+        },
+        fail: function(err) {
+          console.log(err)
+        }
       })
-      .catch(err => {
-        console.log('请求失败', err)
-      })
+    
   },
 
+  getProjectManager() {
+    var ownerId = this.data.project.projectManager
+    db.collection("user")
+    .doc(ownerId)
+    .get({
+      success: res => {
+        this.setData({
+          owner: res.data.name
+        })
+      }
+    })
+  },
 
   // Project Information's method
 
@@ -526,6 +595,8 @@ Page({
       console.log('project日期更新失败', res)
     })
   },
+
+  // Task Management's method
 
   onChange(event) {
     this.setData({
@@ -572,11 +643,6 @@ Page({
     // 从数据库中根据id获取数据
     this.getDetail()
 
-    // 设置navbar的名称
-    wx.setNavigationBarTitle({
-      title: this.data.name,
-    })
-    
   },
 
 

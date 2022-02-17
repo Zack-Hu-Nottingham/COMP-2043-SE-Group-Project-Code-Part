@@ -52,7 +52,7 @@ var Languague = {
     completed: "Completed",
     delayed: "Delayed",
     unstarted: "Unstarted",
-    processing: "Processing",
+    progressing: "Progressing",
     total: "Total",
     create_new_task: "Create New Task",
     add_comment: "Add Comment",
@@ -64,6 +64,8 @@ var Languague = {
     priority: "Priority",
     tag: "Tag",
     participant: "Participant",
+    reworking: "Reworking",
+
     
     // New task page
     task_name: "Task Name",

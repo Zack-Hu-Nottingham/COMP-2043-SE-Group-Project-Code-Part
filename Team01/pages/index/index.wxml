@@ -16,7 +16,7 @@
   </van-cell-group>
 
   <van-cell-group inset style="padding: 30rpx;" title="{{dictionary.recent_message}}">
-    <view wx:for="{{messageList}}">
+    <view wx:for="{{messageList}}" wx:key="index">
       <van-cell  title="{{item.sender}}" clickable="true" bindtap="clickMessage" label="{{item.content}}" value="{{item.timeStamp}}" id="{{item.sender}}" class="messageForTest"/>
     </view>
   </van-cell-group>
@@ -33,7 +33,7 @@
   </van-cell-group>
 
   <van-cell-group inset style="padding: 30rpx;" title="{{dictionary.project_list}}">
-    <view wx:for="{{project}}">
+    <view wx:for="{{project}}" wx:key="index">
       <van-cell icon="todo-list-o" title="{{item.name}}" clickable="true" bindtap="clickProject" data-id="{{item._id}}" class="projectForTest"/>
     </view>
   </van-cell-group>
@@ -51,8 +51,9 @@
   <van-cell-group style="padding: 30rpx;" inset >
     <van-cell title="{{dictionary.today_task}}" icon="todo-list-o" />
 
-    <view wx:for="{{task}}">
+    <view wx:for="{{task}}" wx:key="index">
       <van-cell title="{{item.name}}" label="{{item.startTime}} - {{item.endTime}}" clickable="true" bindtap="clickTask" data-id="{{item._id}}" class="taskForTest"> 
+
         <view slot="">
           <view wx:if="{{item.state==0}}">
             <van-tag color="#D3D3D3" icon="fail" size="medium"><van-icon name="close"/>Unstarted</van-tag>

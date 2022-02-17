@@ -52,7 +52,7 @@ var Languague = {
     completed: "已完成",
     delayed: "延误",
     unstarted: "未开始",
-    processing: "进行中",
+    progressing: "进行中",
     total: "全部",
     create_new_task: "新建任务",
     add_comment: "添加评论",
@@ -64,6 +64,7 @@ var Languague = {
     priority: "优先级",
     tag: "标签",
     participant: "参与者",
+    reworking: "重加工",
 
     // New task page
     task_name: "任务名称",

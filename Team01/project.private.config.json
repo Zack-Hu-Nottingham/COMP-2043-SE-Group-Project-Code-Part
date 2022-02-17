@@ -1,8 +1,22 @@
 {
-    "setting": {},
-    "condition": {
-        "plugin": {
-            "list": []
+  "setting": {},
+  "condition": {
+    "plugin": {
+      "list": []
+    },
+    "game": {
+      "list": []
+    },
+    "gamePlugin": {
+      "list": []
+    },
+    "miniprogram": {
+      "list": [
+        {
+          "name": "",
+          "pathName": "pages/project/projectInfo/projectInfo",
+          "query": "id=ea7958376208b87a01d5af7316867c94",
+          "scene": null
         },
         "game": {
             "list": []
@@ -44,5 +58,7 @@
                 }
             ]
         }
+      ]
     }
+  }
 }
