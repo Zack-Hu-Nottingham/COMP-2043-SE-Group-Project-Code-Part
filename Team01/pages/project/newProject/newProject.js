@@ -3,6 +3,8 @@ import Toast from '../../../miniprogram_npm/@vant/weapp/toast/toast'
 const languageUtils = require("../../../language/languageUtils");
 
 var app = getApp()
+
+const db = wx.cloud.database();
 Page({
     /**
      * 页面的初始数据
@@ -28,6 +30,8 @@ Page({
 
         isLoading: false,
         fileList: [],
+        owner: [],
+        participant: [],
         
     },
     
@@ -118,34 +122,67 @@ Page({
             description: e.detail
         })
     },
+    
+    changeOwner(){
+        wx.navigateTo({
+          url: '../../contact/contactList/contactList',
+        })
+    },
 
     // 选择模板
     selectTemplate: function(){
         wx.navigateTo({ url: '../projectTemplate/projectTemplate', })
     },
-    
-    // 读完文件后
-    afterRead: function(event) {
-        const { file } = event.detail;
-        // 当设置 mutiple 为 true 时, file 为数组格式，否则为对象格式
-        wx.uploadFile({
-          url: 'https://example.weixin.qq.com/upload', // 仅为示例，非真实的接口地址
-          filePath: file.url,
-          name: 'file',
-          formData: { user: 'test' },
+    upload(){
+        //把this赋值给that，就相当于that的作用域是全局的。
+        let that = this;
+        wx.chooseImage({
+          // count: 1,
+          sizeType: ['original', 'compressed'],
+          sourceType: ['album', 'camera'],
           success(res) {
-            // 上传完成需要更新 fileList
-            const { fileList = [] } = this.data;
-            fileList.push({ ...file, url: res.data });
-            this.setData({ fileList });
-          },
-        });
+            console.log("成功选择图片",res);
+            that.uploadImage(res.tempFilePaths[0]);
+          }
+        })
       },
+
+    uploadImage(fileURL) {
+        wx.cloud.uploadFile({
+          cloudPath: 'feedBack/'+ new Date().getTime() +'.png', // 上传至云端的路径
+          filePath: fileURL, // 小程序临时文件路径
+          success: res => {
+            var fileList = this.data.fileList;
+            fileList.push({url: res.fileID,name: fileURL,deletable: true});
+            this.setData({ fileList: fileList });
+            console.log("图片上传成功",res)
+          },
+          fail: console.error
+        })
+    },
 
     // 提交新项目
     formSubmit: function (e) {
 
-        var that = this
+        db.collection('project').add({
+            // data 字段表示需新增的 JSON 数据
+            data: {
+                // _id: 'todo-identifiant-aleatoire', // 可选自定义 _id，在此处场景下用数据库自动分配的就可以了
+                name: this.data.name,
+                startTime: this.data.startDate,
+                endTime: this.data.endDate,
+                owner: this.data.owner,
+                participant: this.data.participant,
+                template: this.data.selectedTemplate,
+                projectDescription: this.data.description,
+            },
+            success: function(res) {
+              // res 是一个对象，其中有 _id 字段标记刚创建的记录的 id
+              console.log(res)
+            }
+          })
+
+        // var that = this
         // 数据校验
         if (this.data.name == "") {
             Toast('Name is null');
@@ -175,10 +212,6 @@ Page({
             this.setData({
                 isLoading: true,
             })
-            // wx.showLoading({
-            //   title: 'title',
-            //   musk: true
-            // })
             setTimeout(function(){
                 Toast({
                     forbidClick: 'true',

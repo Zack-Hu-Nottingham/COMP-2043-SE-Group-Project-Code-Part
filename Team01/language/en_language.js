@@ -12,7 +12,7 @@ var Languague = {
 
     // project page
     my_task: "My Task",
-    statistic_report: "Statistics Reort",
+    statistic_report: "Statistics Report",
     project_list: "Projects",
     create_new_project: "Create New Project",
 

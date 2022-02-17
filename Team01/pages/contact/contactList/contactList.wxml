@@ -18,7 +18,7 @@
       value-class="value-class"
       clickable
       data-index="{{ index }}"
-      bind:click="toggle"
+      bindtouchstart="bindTouchStart" bindtouchend="bindTouchEnd" bindlongpress="bindLongTap" bindtap="toggle"
       label="{{ item.position }}"
     >
       <van-checkbox

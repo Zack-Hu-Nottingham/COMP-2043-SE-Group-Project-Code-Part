@@ -193,40 +193,34 @@ Page({
             selectedPriority: this.data.prioritys[event.detail.value].name
         })
     },
-
-    upImg(){
-        var that = this;
+    
+    upload(){
+        //把this赋值给that，就相当于that的作用域是全局的。
+        let that = this;
         wx.chooseImage({
-          count: 1,
-          success(res){
-            console.log(res);
-            wx.cloud.uploadFile({
-              cloudPath:'test/' + Math.floor(Math.random()*1000000),
-              filePath:res.tempFilePaths[0],
-              success(res){
-                console.log("成功",res);
-              }
-            })
+          // count: 1,
+          sizeType: ['original', 'compressed'],
+          sourceType: ['album', 'camera'],
+          success(res) {
+            console.log("成功选择图片",res);
+            that.uploadImage(res.tempFilePaths[0]);
           }
         })
       },
 
-    afterRead: function(event) {
-        const { file } = event.detail;
-        // 当设置 mutiple 为 true 时, file 为数组格式，否则为对象格式
-        wx.uploadFile({
-          url: 'https://example.weixin.qq.com/upload', // 仅为示例，非真实的接口地址
-          filePath: file.url,
-          name: 'file',
-          formData: { user: 'test' },
-          success(res) {
-            // 上传完成需要更新 fileList
-            const { fileList = [] } = this.data;
-            fileList.push({ ...file, url: res.data });
-            this.setData({ fileList });
+    uploadImage(fileURL) {
+        wx.cloud.uploadFile({
+          cloudPath: 'feedBack/'+ new Date().getTime() +'.png', // 上传至云端的路径
+          filePath: fileURL, // 小程序临时文件路径
+          success: res => {
+            var fileList = this.data.fileList;
+            fileList.push({url: res.fileID,name: fileURL,deletable: true});
+            this.setData({ fileList: fileList });
+            console.log("图片上传成功",res)
           },
-        });
-      },
+          fail: console.error
+        })
+    },
 
     formSubmit: function (e) {
         var that = this

@@ -1,12 +1,16 @@
 <!--pages/project/addComment/addComment.wxml-->
+<form bindsubmit="formSubmit" report-submit="true">
 <van-cell-group inset style="padding: 30rpx">
   <van-cell title="Feedback" is-link size="large" value="{{selectedFeedback}}" bindtap="changeFeedback" />
   <van-field label="Description" value="{{ details }}" type="textarea" placeholder="(less than 500 words)" size="large" maxlength="500" input-align="right" autosize bind:change="typeDetails" />
 </van-cell-group>
 
+<!--Upload related images-->
+<van-uploader class="uploader" file-list="{{ fileList }}" bindtap="upload" deletable="{{ true }}" max-count="8"/>
+
 <!--Submit-->    
 <van-sticky offset-top="{{ 600 }}">
-<van-button plain round block loading="{{isLoading}}" disabled="{{isLoading}}" class="submitBtn" color="#1296db" type="primary" size="normal" form-type="submit">{{dictionary.submit_feedback}}</van-button>
+<van-button plain round block loading="{{isLoading}}" disabled="{{isLoading}}" class="submitBtn" color="#1296db" type="primary" size="normal" form-type="submit" >{{dictionary.submit_feedback}}</van-button>
 </van-sticky>
 
 
@@ -19,3 +23,4 @@
   bind:close="onCloseFeedback"
   bind:select="onSelectFeedback"
 />
+</form>
