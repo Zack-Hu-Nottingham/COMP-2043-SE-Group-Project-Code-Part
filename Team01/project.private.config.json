@@ -29,6 +29,18 @@
                     "pathName": "pages/project/addComment/addComment",
                     "query": "",
                     "scene": null
+                },
+                {
+                    "name": "",
+                    "pathName": "pages/contact/contactList/contactList",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "",
+                    "pathName": "pages/project/addComment/addComment",
+                    "query": "",
+                    "scene": null
                 }
             ]
         }

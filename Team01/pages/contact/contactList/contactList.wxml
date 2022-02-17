@@ -19,6 +19,7 @@
       clickable
       data-index="{{ index }}"
       bind:click="toggle"
+      bind:longtap="longTap"
       label="{{ item.position }}"
     >
       <van-checkbox

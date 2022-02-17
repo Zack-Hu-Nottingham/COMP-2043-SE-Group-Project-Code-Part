@@ -1,4 +1,5 @@
 // pages/project/addComment/addComment.js
+const languageUtils = require("../../../language/languageUtils");
 Page({
 
     /**
@@ -22,6 +23,8 @@ Page({
             "name": "Task need rework",
             "value": '2'
         }],
+        fileList: [],
+        imageURL: '',
 
     },
 
@@ -105,6 +108,34 @@ Page({
         // console.log(event.detail.value);
         this.setData({
             selectedFeedback: this.data.feedbackValue[event.detail.value].name
+        })
+    },
+
+    upload(){
+        //把this赋值给that，就相当于that的作用域是全局的。
+        let that = this;
+        wx.chooseImage({
+          // count: 1,
+          sizeType: ['original', 'compressed'],
+          sourceType: ['album', 'camera'],
+          success(res) {
+            console.log("成功选择图片",res);
+            that.uploadImage(res.tempFilePaths[0]);
+          }
+        })
+      },
+
+    uploadImage(fileURL) {
+        wx.cloud.uploadFile({
+          cloudPath: 'feedBack/'+ new Date().getTime() +'.png', // 上传至云端的路径
+          filePath: fileURL, // 小程序临时文件路径
+          success: res => {
+            var fileList = this.data.fileList;
+            fileList.push({url: res.fileID,name: fileURL,deletable: true});
+            this.setData({ fileList: fileList });
+            console.log("图片上传成功",res)
+          },
+          fail: console.error
         })
     },
 

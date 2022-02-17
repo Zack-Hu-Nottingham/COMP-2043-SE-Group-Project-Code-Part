@@ -24,7 +24,7 @@
     </van-cell-group>
 
 <!--Upload related images-->
-<van-uploader class="uploader" file-list="{{ fileList }}" bindtap="upImg" />
+<van-uploader class="uploader" file-list="{{ fileList }}" bindtap="upload" />
 <!-- <van-uploader class="uploader" file-list="{{ fileList }}" bind:after-read="afterRead" /> -->
 
 <!--Submit-->    

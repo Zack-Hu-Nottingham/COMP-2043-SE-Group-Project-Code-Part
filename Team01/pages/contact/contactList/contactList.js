@@ -1,4 +1,5 @@
 // pages/contact/contactList/contactList.js
+import Toast from '../../../miniprogram_npm/@vant/weapp/toast/toast'
 Page({
     // Additional feature: 已被选中的项目在下次展示时会置顶显示（云端调取）
     data: {
@@ -33,6 +34,7 @@ Page({
         name: 'vvv',
         position: 'Construction Team',
     },],
+    contactNumber: '18663358058',
     },
   
     onChange(event) {
@@ -47,6 +49,20 @@ Page({
       const checkbox = this.selectComponent(`.checkboxes-${index}`);
       checkbox.toggle();
     },
+
+    longTap: function (e) {
+        var contactNumber = this.data.contactNumber
+        console.log("long tap")
+        wx.setClipboardData({
+            data: contactNumber,
+        })
+        Toast('Success')
+        // wx.showModal({
+        //   title: '提示',
+        //   content: '长按事件被触发',
+        //   showCancel: false
+        // })
+  },
   
     noop() {},
   });
