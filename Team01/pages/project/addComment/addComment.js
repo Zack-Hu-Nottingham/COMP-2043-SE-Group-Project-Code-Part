@@ -37,7 +37,7 @@ Page({
         var pages = getCurrentPages();
         var currPage = pages[pages.length - 1];   //当前页面
         var prevPage = pages[pages.length - 2];  //上一个页面
-
+        // console.log(prevPage.data.id);
         
         // 初始化语言
         var lan = wx.getStorageSync("languageVersion");
@@ -104,14 +104,11 @@ Page({
     },
 
     formSubmit: function (e) {
-        
-
         var feedBack = {type: this.data.selectedIndex, details: this.data.details, files: this.data.fileList};
-        console.log(feedBack);
         for(var i = 0; i< this.data.fileList.length; i++ ){
             this.uploadImage(this.data.fileList[i].url);
         }
-        
+        // 上传数据：
     },
 
 

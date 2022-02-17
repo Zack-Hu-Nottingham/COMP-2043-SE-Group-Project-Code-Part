@@ -78,7 +78,7 @@ Page({
           db.collection('user').where({
             openid: this.data.openid
           }).get().then(res => {
-
+            console.log(res.data)
             // 如果是已知账户
             if (res.data != null) {
               // 获取初始数据 

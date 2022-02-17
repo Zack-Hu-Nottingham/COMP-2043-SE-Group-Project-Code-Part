@@ -3,6 +3,8 @@ import Toast from '../../../miniprogram_npm/@vant/weapp/toast/toast'
 const languageUtils = require("../../../language/languageUtils");
 
 var app = getApp()
+
+const db = wx.cloud.database();
 Page({
     /**
      * 页面的初始数据
@@ -28,6 +30,8 @@ Page({
 
         isLoading: false,
         fileList: [],
+        owner: [],
+        participant: [],
         
     },
     
@@ -118,6 +122,12 @@ Page({
             description: e.detail
         })
     },
+    
+    changeOwner(){
+        wx.navigateTo({
+          url: '../../contact/contactList/contactList',
+        })
+    },
 
     // 选择模板
     selectTemplate: function(){
@@ -153,6 +163,24 @@ Page({
 
     // 提交新项目
     formSubmit: function (e) {
+
+        db.collection('project').add({
+            // data 字段表示需新增的 JSON 数据
+            data: {
+                // _id: 'todo-identifiant-aleatoire', // 可选自定义 _id，在此处场景下用数据库自动分配的就可以了
+                name: this.data.name,
+                startTime: this.data.startDate,
+                endTime: this.data.endDate,
+                owner: this.data.owner,
+                participant: this.data.participant,
+                template: this.data.selectedTemplate,
+                projectDescription: this.data.description,
+            },
+            success: function(res) {
+              // res 是一个对象，其中有 _id 字段标记刚创建的记录的 id
+              console.log(res)
+            }
+          })
 
         // var that = this
         // 数据校验
