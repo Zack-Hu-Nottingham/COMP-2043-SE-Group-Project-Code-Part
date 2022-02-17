@@ -1,3 +1,10 @@
+<!-- Dialog -->
+<van-dialog id="van-dialog" bind:getuserinfo="getuserinfo" />
+
+<!-- Toast -->
+<van-toast id="van-toast" />
+
+
 <!-- Bottom tabbar -->
 <van-tabbar active="{{ active }}" bind:change="onChangeTab">
   <van-tabbar-item icon="chat-o">{{dictionary.message_page}}</van-tabbar-item>

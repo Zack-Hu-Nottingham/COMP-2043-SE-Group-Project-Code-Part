@@ -1,3 +1,8 @@
+import Dialog from '../../miniprogram_npm/@vant/weapp/dialog/dialog';
+import Toast from '../../miniprogram_npm/@vant/weapp/toast/toast';
+
+const app = getApp();
+
 const languageUtils = require("../../language/languageUtils");
 const db = wx.cloud.database();
 const _ = db.command;
@@ -15,6 +20,8 @@ Page({
      */
     openid: "",
     user: [],
+    userInfo: {},
+
     active: 2,
     pageName: ['Message', 'Project', 'Dashboard', 'More'],
 
@@ -65,36 +72,61 @@ Page({
 
     wx.login()
     .then(res => {
+
+      // showLoading
+      Toast.loading({
+        message: 'Loading...',
+        forbidClick: true,
+        mask: true,
+      });
+      
       if (res.code) { 
+        // 根据获取的code换取用户openid
         var url = "https://api.weixin.qq.com/sns/jscode2session?appid=wxd4b06f2e9673ed00&secret=909d4ff30ed2d6e828f73e55a63cd862&js_code=" + res.code + "&grant_type=authorization_code";
         lib.request({
           url: url,
           method: "GET"
         }).task.then(res => {
+
+          // 设置全局的openid
+          app.globalData.userInfo.openid = res.data.openid
           this.setData({
-            openid: res.data.openid,
+            openid: res.data.openid
           })
+          
         }).then(res => {
+
+          // 访问数据库，判断该用户是否已经注册
           db.collection('user').where({
-            openid: this.data.openid
+            _openid: app.globalData.userInfo.openid
           }).get().then(res => {
 
             // 如果是已知账户
-            if (res.data != null) {
-              // 获取初始数据 
+            if (res.data.length != 0) {
               this.getData()
+
+              Toast({
+                type: 'success',
+                message: 'Logged in',
+                onClose: () => {
+                },
+              });
             }
+
             // 如果是新账号
             else {
-              // 注册该账号
+              Toast.clear()
 
+              // 获取账号信息，并注册该账号
+              Dialog.confirm({
+                context: this,
+                title: 'Registration',
+                message: 'Your nickName & phone would be used for registration',
+                confirmButtonOpenType: "getUserInfo", // 按钮的微信开放能力
+              })
             }
           })
-          
-
-
         })
-        
       }
     })
 
@@ -109,20 +141,8 @@ Page({
     // 载入时设置初始页面的navBar title
     wx.setNavigationBarTitle({
       title: this.data.pageName[this.data.active],
-    }),
-
-    // 推荐使用wx.getUserProfile获取用户信息，开发者每次通过该接口获取用户个人信息均需用户确认，开发者妥善保管用户快速填写的头像昵称，避免重复弹窗
-    wx.getUserProfile({
-      desc: '展示用户信息', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
-      success: (res) => {
-        console.log(res)
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true,
-          name: res.userInfo.userNickName
-        })
-      }
     })
+
   },
 
   /**
@@ -184,10 +204,44 @@ Page({
    * Global method
    */
 
+  // 获得用户信息
+  getuserinfo(e) {
+    console.log(e)
+    wx.setStorageSync('userInfo', e.detail.userInfo)
+    app.globalData.userInfo = e.detail.userInfo
+    this.setData({
+      userInfo: e.detail.userInfo
+    })
+
+    // wx.getUserInfo的返回兼容
+    wx.setStorageSync('encryptedData', e.detail.encryptedData)
+    wx.setStorageSync('iv', e.detail.iv)
+    //拿到用户信息后 获取 用户手机号
+
+
+    // 拿到数据后写入数据库
+    db.collection("user").add({
+      data: {
+        name: this.data.userInfo.nickName,
+        // openid: this.data.openid
+      }
+    })
+    .then(res => {
+      console.log(res)
+
+      Toast.success("Successfully registered")
+      // 获取数据
+      this.getData()
+    })
+
+
+  },
+
+
   // 初始化数据
   async getData(openid){
 
-    await this.getUserInfo()
+    await this.getInfo()
 
     await this.getProjectInfo()
 
@@ -199,14 +253,15 @@ Page({
   },
   
   // 获取user信息
-  getUserInfo() {
+  getInfo() {
     return new Promise((resolve, reject) => {
       db.collection('user')
       .where({
-        openid: _.eq(this.data.openid)
+        _openid: _.eq(this.data.openid)
       })
       .get()
       .then(res => {
+        console.log(res)
         this.setData({
           user: res.data[0]
         })
@@ -225,14 +280,16 @@ Page({
       db.collection('project')
       .where(_.or([
         {
-          houseOwner: _.eq(this.data.user._id)
+          houseOwner: _.eq(this.data.user._openid)
         },
         {
-          projectManager: _.eq(this.data.user._id)
+          projectManager: _.eq(this.data.user._openid)
         }
       ]))
       .get()
       .then(res => {
+        console.log("res = ")
+        console.log(res)
         this.setData({
           project: this.data.project.concat(res.data[0])
         })
