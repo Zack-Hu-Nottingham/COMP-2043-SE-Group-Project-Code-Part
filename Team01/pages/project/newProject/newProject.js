@@ -166,51 +166,51 @@ Page({
         if (this.data.name == "") {
             Toast('Name is null');
         }
+        else if (this.data.startDate == "" || this.data.endDate == "") {
+            Toast('No start Date or end Date');
+        }
         else if (this.data.description == "") {
             Toast('No detail description');
-        }
-        else if ( startDate == '' || endDate == '' ) {
-            Toast('No time set')
-        }
+        }  
         else{
-            db.collection('project').add({
-                // data 字段表示需新增的 JSON 数据
-                data: {
-                    // _id: 'todo-identifiant-aleatoire', // 可选自定义 _id，在此处场景下用数据库自动分配的就可以了
+            wx.cloud.database().collection('project')
+              .add({
+                data:{
                     name: this.data.name,
                     startTime: this.data.startDate,
                     endTime: this.data.endDate,
-                    owner: this.data.owner,
-                    participant: this.data.participant,
-                    template: this.data.selectedTemplate,
-                    projectDescription: this.data.description,
-                },
-                success: function(res) {
-                  // res 是一个对象，其中有 _id 字段标记刚创建的记录的 id
-                    console.log(res)
-                    this.setData({
-                        isLoading: true
-                    })
-                    setTimeout(function(){
-                        Toast({
-                            forbidClick: 'true',
-                            type: 'success',
-                            message: 'Success!',
-                        });
-                    },1500)
-                    setTimeout(function(){
-                        that.setData({
-                            isLoading: false
-                        })
-                    },2400)
-                    setTimeout(function(){
-                        wx.navigateTo({
-                        url: '../../index/index',
-                        })
-                    },2500)
+                    projectDescription: this.data.description
                 }
               })
-
+              .then(res => {
+                console.log('添加成功', res)
+              })
+              .catch(res => {
+                console.log('添加失败', res) 
+              })
+            this.setData({
+                isLoading: true,
+            })
+            setTimeout(function(){
+                Toast({
+                    forbidClick: 'true',
+                    type: 'success',
+                    message: 'Success!',
+                  });
+            },1500)
+            setTimeout(function(){
+                that.setData({
+                    isLoading: false
+                })
+            },2400)
+            setTimeout(function(){
+                let pages = getCurrentPages();
+                let project = pages[pages.length - 2];
+                project.go_update();
+                wx.navigateBack({
+                  delta: 1
+                })
+            },2500)
         }
         
 

@@ -736,6 +736,10 @@ Page({
     }).catch(res => {
       console.log('调用云函数失败', res)
     })
+  },
+
+  go_update(){
+    this.getDetail()
   }
 
 })

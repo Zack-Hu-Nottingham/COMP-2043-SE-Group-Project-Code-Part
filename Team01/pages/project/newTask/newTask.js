@@ -224,9 +224,9 @@ Page({
 
     formSubmit: function (e) {
         var that = this
-        // if(this.data.name == ""){
-        //     Toast.fail('Name is null');
-        // }
+        if(this.data.name == ""){
+            Toast.fail('Name is null');
+        }
         if(this.data.startTime > this.data.endTime){
             Toast('Wrong time setting')
         }
@@ -246,6 +246,24 @@ Page({
             Toast('No detail description');
         }
         else{
+            wx.cloud.database().collection('task')
+              .add({
+                data:{
+                    belongTo: this.data.belongTo,
+                    name: this.data.name,
+                    startTime: this.data.startTime,
+                    endTime: this.data.endTime,
+                    description: this.data.description,
+                    currentPriority: this.data.selectedPriority,
+                }
+              })
+              .then(res => {
+                console.log('添加成功', res)
+              })
+              .catch(res => {
+                console.log('添加失败', res) 
+              })
+
             this.setData({
                 isLoading: true
             })
@@ -262,8 +280,14 @@ Page({
                 })
             },2400)
             setTimeout(function(){
-                wx.navigateTo({
+                /*wx.navigateTo({
                   url: '../task/task',
+                })*/
+                let pages = getCurrentPages();
+                let project = pages[pages.length - 2];
+                project.go_update();
+                wx.navigateBack({
+                  delta: 1
                 })
             },2500)
             /*wx.request({

@@ -288,11 +288,14 @@ Page({
       ]))
       .get()
       .then(res => {
-        console.log("res = ")
-        console.log(res)
-        this.setData({
-          project: this.data.project.concat(res.data[0])
-        })
+        // console.log("res = ")
+        // console.log(res)
+        if (res.data.length != 0) {
+          this.setData({
+            project: this.data.project.concat(res.data[0])
+          })
+        }
+        
         resolve("成功获取项目信息")
       })
       .catch(err => {
@@ -450,5 +453,9 @@ Page({
     })
   },
 
+  // 更新数据
+  go_update(){
+    this.getData()
+  }
   
 })
