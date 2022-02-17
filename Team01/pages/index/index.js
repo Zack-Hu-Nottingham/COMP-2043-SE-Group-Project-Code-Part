@@ -36,12 +36,9 @@ Page({
     messageList: [],
 
 
-
-
     /**
      * Projects page's data
      */
-
     project: [],
 
 

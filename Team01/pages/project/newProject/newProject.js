@@ -191,24 +191,21 @@ Page({
             this.setData({
                 isLoading: true,
             })
-            setTimeout(function(){
+            setTimeout(res =>{
                 Toast({
                     forbidClick: 'true',
                     type: 'success',
                     message: 'Success!',
                   });
             },1500)
-            setTimeout(function(){
-                that.setData({
+            setTimeout(res =>{
+                this.setData({
                     isLoading: false
                 })
             },2400)
-            setTimeout(function(){
-                let pages = getCurrentPages();
-                let project = pages[pages.length - 2];
-                project.go_update();
-                wx.navigateBack({
-                  delta: 1
+            setTimeout(res =>{
+                wx.navigateTo({
+                  url: '../../index/index',
                 })
             },2500)
         }
