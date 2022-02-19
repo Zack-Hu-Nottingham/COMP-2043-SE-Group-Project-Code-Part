@@ -1,7 +1,7 @@
 // pages/project/taskInfo/taskInfo.js
 
 const languageUtils = require("../../../language/languageUtils");
-
+const db = wx.cloud.database();
 var id = ''
 
 Page({

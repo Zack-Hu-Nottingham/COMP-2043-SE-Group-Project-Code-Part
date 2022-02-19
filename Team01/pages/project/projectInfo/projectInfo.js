@@ -585,7 +585,6 @@ Page({
   onDateConfirm(event) {
     const [start, end] = event.detail;
     this.onDateClose();
-
     //调用云函数，更新数据库中日期
     wx.cloud.callFunction({
       name: 'updateProjectDate',
@@ -703,7 +702,7 @@ Page({
 
   onProjectBlur: function(e){
     console.log(e.detail.value)
-
+    
     wx.cloud.callFunction({
       name: 'updateProjectDescription',
       data:{

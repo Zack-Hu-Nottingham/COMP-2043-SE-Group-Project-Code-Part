@@ -22,13 +22,13 @@
     <van-cell title="{{dictionary.owner}}" value="{{ owner }}" />
     <van-cell title="{{dictionary.start_time}}" is-link value="{{ project.startTime }}" bindtap="onDateDisplay" class="projectInfoStartTimeForTest"/>
     <van-cell title="{{dictionary.end_time}}" is-link value="{{ project.endTime }}" bindtap="onDateDisplay" class="projectInfoEndTimeForTest"/>
-    <van-field model:value="{{ project.projectDescription }}" right clearable label="{{ dictionary.description }}" type="textarea" placeholder="{{ project.projectDescription }}" border="{{ false }}" class="projectInfoDescriptionForTest"></van-field>
+    <van-field model:value="{{ project.projectDescription }}" right clearable label="{{ dictionary.description }}" type="textarea" placeholder="{{ project.projectDescription }}" border="{{ false }}" class="projectInfoDescriptionForTest" bind:blur="onProjectBlur"></van-field>
   </van-cell-group>
 
   <van-cell-group inset title="{{dictionary.state_information}}">
     <van-cell title="{{dictionary.current_state}}" value="{{ project.currentState }}" />
     <van-field model:value="{{ project.stateDescription }}" center clearable label="{{dictionary.description}}"
-    placeholder="{{project.stateDescription}}" border="{{ false }}" class="projectInfoStateDescriptionForTest"></van-field>
+    placeholder="{{project.stateDescription}}" border="{{ false }}" class="projectInfoStateDescriptionForTest" bind:blur="onStateBlur"></van-field>
   </van-cell-group>
 
   <van-cell-group inset title="{{dictionary.task_progress}}">
