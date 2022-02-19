@@ -20,6 +20,10 @@ App({
     })
   },
   globalData: {
-    userInfo: null
+    userInfo: {
+      openid: "",
+      isManager: 0,
+      phone: ""
+    }
   }
 })

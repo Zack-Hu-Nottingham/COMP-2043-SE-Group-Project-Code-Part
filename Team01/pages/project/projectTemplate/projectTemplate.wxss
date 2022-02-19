@@ -1,3 +1,10 @@
 .cell-group {
     padding: 5rpx;
+<<<<<<< HEAD
 }
+=======
+}
+.value-class {
+    flex: none !important;
+  }
+>>>>>>> main

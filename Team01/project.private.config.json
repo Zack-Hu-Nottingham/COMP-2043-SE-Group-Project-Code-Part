@@ -14,9 +14,55 @@
       "list": [
         {
           "name": "",
+<<<<<<< HEAD
           "pathName": "pages/project/taskInfo/taskInfo",
           "query": "",
           "scene": null
+=======
+          "pathName": "pages/project/projectInfo/projectInfo",
+          "query": "id=ea7958376208b87a01d5af7316867c94",
+          "scene": null
+        },
+        "game": {
+            "list": []
+        },
+        "gamePlugin": {
+            "list": []
+        },
+        "miniprogram": {
+            "list": [
+                {
+                    "name": "",
+                    "pathName": "pages/project/projectInfo/projectInfo",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "",
+                    "pathName": "pages/project/newTask/newTask",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "",
+                    "pathName": "pages/project/addComment/addComment",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "",
+                    "pathName": "pages/contact/contactList/contactList",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "",
+                    "pathName": "pages/project/addComment/addComment",
+                    "query": "",
+                    "scene": null
+                }
+            ]
+>>>>>>> main
         }
       ]
     }

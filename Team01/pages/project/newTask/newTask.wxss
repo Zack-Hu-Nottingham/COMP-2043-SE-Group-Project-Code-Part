@@ -3,10 +3,13 @@
     color:gray;
     font-size:15px;
 }
+<<<<<<< HEAD
 .form {
     margin: 0rpx;
     padding: 0 10rpx;
   }
+=======
+>>>>>>> main
 
 .submitBtn {
   display: flex;

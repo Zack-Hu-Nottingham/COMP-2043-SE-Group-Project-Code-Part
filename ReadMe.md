@@ -1,8 +1,12 @@
-### Dev Convention
+# Dev Convention
 
 
 
-#### 颜色
+
+</br>
+
+
+### 颜色
 
 颜色参考：https://www.sioe.cn/yingyong/yanse-rgb-16/
 
@@ -16,120 +20,101 @@
 
 背景色：#efefef
 
+</br>
 
 
 
 
-#### 页面格式
+
+
+### 页面格式
 
  标题栏文字(navigationBarTitleText)：统一显示当前页面功能
+ 
+</br>
 
 
 
 
 
-
-#### 代码规范
+### 代码规范
 
 - 尽量使用Vant Weapp组件库
 - 外层同级组件之间空行
 - px->rpx
 - 格式居中：alignment
 
+</br>
 
 
 
 
-
-#### 数据格式
-
+### 数据格式
 ```
-project {
-	name: "",
-	startTime: "",
-	endTime: "",
-	task: [],
-	owner: "", //responsible person
-	member: [], //paticipant
-	stage: "",
-	template: "", //project template
-	
-	//number of tasks:
-  unstarted: "",
-  processing: "",
-  completed: "",
-  total: "",
-  delayed: "",
-	
-	//unnecessary:
-	visibility: "", 
-	description: "", //Notes or detailed description
-}
+task stage: 
+0 - unstarted
+1 - progressing
+2 - finished
+3 - delayed
+4 - reworking
 
-task {
-  name: "",
-  startTime: "",
-  endTime: "",
-  subtask: [],
-	belongTo: "",
-  member: [],
-  state: "",
-  stage: "", //stage of the subordinate project
-  
-	//unnecessary:
-	priority: "",
-	description: "",
-	//number of subtasks:
-  unstarted: "",
-  processing: "",
-  completed: "",
-  total: "",
-  delayed: "",
-}
-
-subtask {
-  name: "",
-  startTime: "",
-  endTime: "",
-  member: [],
-  state: "",
-  stage: "", //stage of the subordinate project
-	belongTo: "",
-	
-	//unnecessary:
-	description: "",
-}
-
-"priority":[{
-            "name": "Highest",
-            "value": 1,
-        },{
-            "name": "Higher",
-            "value": 2,
-        },{
-            "name": "Normal",
-            "value": 3,
-        },{
-            "name": "Lower",
-            "value": 4,
-        },{
-            "name": "Lowest",
-            "value": 5,
-        }],
-
-"stage":[{
-						"name": "Unstarted",
-						"value":"0"
-        },{
-            "name": "Progressing",
-            "value":"1"
-        },{
-            "name": "Need to rework",
-            "value":"2"
-        },{
-            "name": "Completed",
-            "value":"3"
-        }],
-
+task priority:
+0 - low
+1 - normal
+2 - high
 ```
+
+</br>
+
+### 数据库对象及属性
+```
+<!-- For project -->
+{
+    "_id": "",
+    "name": "",
+    "houseOwner": "",
+    "projectManager": "",
+    "startTime": "",
+    "endTime": "",
+    "projectDescription": "None",
+    "stateDescription": "None",
+    "task": [],
+    "unstarted": [],
+    "processing": [],
+    "completed": [],
+    "delayed": [],
+    "currentState": "Normal"
+}
+
+<!-- For task -->
+{
+    "_id": "",
+    "name": "",
+    "startTime": "",
+    "endTime": "",
+    "state": 0,
+    "currentPriority": "Normal",
+    "descriptions": "",
+    "participants": [],
+    "tag": [],
+    "stageOfProject": "",
+    "belongTo": ""
+}
+
+<!-- For house owner -->
+{
+    "_id": "",
+    "name": "",
+    "project": "",
+    "projectManager": ""
+}
+
+<!-- For project manager -->
+{
+    "_id": "",
+    "name": "",
+    "project": [],
+}
+```
+
 

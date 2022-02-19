@@ -1,55 +1,33 @@
 /**index.wxss**/
-page{
+page {
   display: flex;
   flex-direction: column;
   height: 100%;
 }
 
-.foo {
-  width: 80%;
-  height: 60rpx;
-  /* line-height: 60rpx; */
-  color: white;
-  /* display:block; */
-  margin:0 auto;
-  /* margin-top: 80rpx; */
-  background-color: #eeeeee;
-  border-radius: 60rpx;
-  font-size: 32rpx;
-  bottom: 50rpx;
-  position: fixed;
-  display: flex;
-  left: 70rpx;
-  justify-content: center;
-  align-items: center;
-}
 
-.createNewTask {
-  position: fixed; 
-  width: 240rpx;
-  height: 70rpx;
-  line-height: 70rpx;
+.createNewProjectForTest {
   display: flex; 
-  flex-direction: row; 
-  bottom: 70rpx; 
-  border: solid 2rpx #efefef;
-  width: 100%;
-  justify-content: center; 
-
-  align-items: center;
+  padding: 50rpx;
+  margin: 0;
 }
 
-.suspendV {
-  height: 200rpx;
+.container {
   background-color: white;
-  display: flex;
   align-items: center;
-  justify-content: center;
+  margin: 33rpx;
+  margin-top: 0rpx;
+  padding: 20rpx;
+  height: 420rpx;
+  border-radius: 20rpx;
+}
 
-  position: fixed;
-  left: 0rpx;
-  right: 0rpx;
-  bottom: 0rpx;
+.circle {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 50rpx;
+  width: 80%;
 }
 
 .taskInfo {
@@ -58,10 +36,7 @@ page{
   font-size: 20rpx;
   justify-content: space-between;
   border-top: 2rpx solid #efefef;
-
-  /* width: 15%; */
-  padding: 30rpx;
-  color: #808080;
+  width: 90%;
 }
 
 .taskInfoDetail {
@@ -71,53 +46,20 @@ page{
   justify-content: center;
 }
 
-.discription {
-  padding: 10rpx;
-  color: #dcdcdc;
-}
-
-.state {
-  color: 	#4169E1;
-}
-
-.separator {
-  background-color: #efefef;
-  height: 20rpx;
-  margin: 0rpx;
-}
-
-.container {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  
-  border-top: 2rpx solid #efefef;
-  color: #696969;  
-  padding: 30rpx;
-
-}
-
 .block {
   margin: 20rpx;
   margin-bottom: 10rpx;
 }
 
-.block .title {
-  color: #DCDCDC;
-  border-top: 2rpx #efefef;
-  /* margin: 20rpx; */
-  padding: 10rpx;
 
-}
 
+/* Nav bar style */
 .navbar{
   flex: none;
   display: flex;
   background: #fff;
   font-size: 25rpx;
   color: #bbbbbb;
-  border-top: 4rpx solid #efefef ;
   align-content: flex-start;
   /* justify-content: space-between; */
 }
@@ -147,4 +89,32 @@ page{
   background: #908df5;
 }
 
+<<<<<<< HEAD:Team01/pages/project/projectInfo/projectInfo.wxss
 
+=======
+/* Gantt Diagram style */
+ec-canvas {
+  width: 100%;
+  height: 100%;
+}
+
+.gantt {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+} 
+
+.addComment {
+  display: flex;
+  padding: 50rpx;
+  margin: 0;
+}
+>>>>>>> main:Team01/pages/projectInfo/projectInfo.wxss

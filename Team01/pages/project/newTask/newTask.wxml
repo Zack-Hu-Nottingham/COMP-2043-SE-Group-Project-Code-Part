@@ -1,4 +1,5 @@
 <!--pages/project/newTask/newTask.wxml-->
+<<<<<<< HEAD
 <form bindsubmit="formSubmit" report-submit>
 <view class="form">
     <!--Set Task Information-->
@@ -45,3 +46,52 @@
 
 </form>
 <van-toast id="van-toast" />
+=======
+
+    <!--Set Task Information-->
+    <van-cell-group inset style="padding: 10rpx;">
+        <van-field label="{{dictionary.task_name}}" value="{{ name }}" size="large" input-align="right" placeholder="Enter name..." bind:change="typeName"/>
+    </van-cell-group>
+    
+    <van-cell-group inset style="padding: 10rpx;">
+        <van-cell title="{{dictionary.start_time}}" is-link size="large" value="{{startTime}}" bindtap="showDatePopup" />
+        <van-cell title="{{dictionary.end_time}}" is-link size="large" value="{{endTime}}" bindtap="showDatePopup" />
+    </van-cell-group>
+
+    <!--Set other information-->
+    <van-cell-group inset style="padding: 10rpx;">
+        <van-cell title="{{dictionary.owner}}" is-link size="large" value="{{owner}}" bindtap="changeOwner" />
+        <van-cell title="{{dictionary.participant}}" is-link size="large" value="{{follower}}" bindtap="changeFollower" />
+        <van-cell title="{{dictionary.priority}}" is-link size="large" value="{{selectedPriority}}" bindtap="changePriority" />
+    </van-cell-group>
+
+
+    <!--Description-->
+    <van-cell-group inset style="padding: 10rpx;">
+        <van-field label="{{dictionary.description}}" value="{{ details }}" type="textarea" placeholder="(less than 500 words)" size="large" maxlength="500" input-align="right" autosize bind:change="typeDetails" />
+    </van-cell-group>
+
+<!--Upload related images-->
+<van-uploader class="uploader" file-list="{{ fileList }}" bindtap="upload" />
+<!-- <van-uploader class="uploader" file-list="{{ fileList }}" bind:after-read="afterRead" /> -->
+
+<!--Submit-->    
+<van-button plain round block loading="{{isLoading}}" disabled="{{isLoading}}" class="submitBtn" color="#1296db" type="primary" size="normal" form-type="submit" bindtap="formSubmit">{{dictionary.create_new_task}}</van-button>
+
+
+<!-- Toast -->
+<van-toast id="van-toast" />
+
+<!-- Choose priority -->
+<van-action-sheet
+  show="{{ showPriority }}"
+  title="{{ dictionary.select_priority }}"
+  actions="{{ prioritys }}"
+  cancel-text="{{ dictionary.cancel }}"
+  bind:close="onClosePriority"
+  bind:select="onSelectPriority"
+/>
+
+<!--Set Time-->
+<van-calendar show="{{ showDate }}" title="choose period" type="range" bind:close="onDateClose" bind:confirm="onDateConfirm"/>
+>>>>>>> main

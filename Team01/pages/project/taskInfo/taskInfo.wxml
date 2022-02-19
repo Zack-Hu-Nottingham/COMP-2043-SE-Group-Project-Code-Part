@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 <van-cell-group inset style="padding: 30rpx" title="Basic information">
   <van-cell title="Start time" is-link value="{{taskPage.startTime}}" bindtap="onDateDisplay" />
@@ -15,17 +16,47 @@
     border="{{ false }}"
   >
   </van-field>
+=======
+<van-cell-group inset style="padding: 30rpx">
+  <van-cell title="{{dictionary.task_name}}" value="{{taskPage.name}}" />
+</van-cell-group>
+
+
+<van-cell-group inset style="padding: 30rpx" >
+  <van-cell title="{{dictionary.start_time}}" is-link value="{{taskPage.startTime}}" bindtap="onDateDisplay" class="startTimeForTest"/>
+  <van-cell title="{{dictionary.end_time}}" is-link value="{{taskPage.endTime}}" bindtap="onDateDisplay" />
+</van-cell-group>
+
+<van-cell-group inset style="padding: 30rpx">
+  <van-cell title="{{dictionary.belong_to}}" value="{{belongTo}}" />
+  <van-cell title="{{dictionary.stage_of_project}}" value="{{taskPage.stageOfProject}}" />
+  <van-field model:value="{{taskPage.description}}" input-align="right" clearable label="{{dictionary.description}}" placeholder="{{taskPage.description}}" border="{{ false }}">
+  </van-field>
+  <van-cell title="{{dictionary.current_state}}" value="{{taskPage.state}}" />
+>>>>>>> main
 </van-cell-group>
 
 
 
 <van-cell-group inset style="padding: 30rpx">
+<<<<<<< HEAD
   <van-cell title="Stage Of Project" value="{{taskPage.stageOfProject}}" />
   <van-cell title="Priority" is-link value="{{taskPage.currentPriority}}" bindtap="clickPriority" />
   <van-cell title="Tag" is-link value="{{taskPage.tag}}" />
   <van-cell title="Participant" is-link value="{{taskPage.participant}}" />
 </van-cell-group>
 
+=======
+  <van-cell title="{{dictionary.priority}}" is-link value="{{taskPage.currentPriority}}" bindtap="clickPriority" />
+  <van-cell title="{{dictionary.tag}}" is-link value="{{taskPage.tag}}" />
+  <van-cell title="{{dictionary.participant}}" is-link value="{{taskPage.participant}}" />
+</van-cell-group>
+
+<van-sticky offset-top="{{ 570 }}">
+  <van-button hairline plain round block type="info" bindtap="clickAddComment" class="addComment">{{dictionary.add_comment}}</van-button>
+</van-sticky>
+
+>>>>>>> main
 <van-action-sheet
   show="{{ priorityShow }}"
   actions="{{ priority }}"
@@ -34,7 +65,11 @@
 />
 
 <van-calendar
+<<<<<<< HEAD
   show="{{ show }}"
+=======
+  show="{{ dateShow }}"
+>>>>>>> main
   title="choose period"
   type="range"
   bind:close="onClose"

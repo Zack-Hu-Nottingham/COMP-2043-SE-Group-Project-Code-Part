@@ -1,10 +1,16 @@
 // pages/project/newProject/projectTemplate/projectTemplate.js
+<<<<<<< HEAD
+=======
+var app = getApp()
+
+>>>>>>> main
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
+<<<<<<< HEAD
         templates:[{
             "name": "template1",
             "content": "cement project",
@@ -16,6 +22,26 @@ Page({
             "useFrq": "2",
             "id": "1"
         },]
+=======
+        // 基于房型对模板进行分类
+        templates:[{
+            name: "Townhouse Decoration", // 联排别墅
+            content: "More info...",
+            useFrq: "7", // 使用频率（记录使用次数，数组按照使用频率进行排序）
+            id: '1'
+        },{
+            name: "Detached Villa Decoration", // 独立式别墅
+            content: "More info...",
+            useFrq: "6",
+            id: '2'
+        },{
+            name: "Garden Villa Decoration", // 花园洋房式住宅
+            content: "More info...",
+            useFrq: "4",
+            id: '3'
+        },],
+        radio: '1',
+>>>>>>> main
 
     },
 
@@ -75,7 +101,34 @@ Page({
 
     },
 
+<<<<<<< HEAD
     onChange: function(event) {
       console.log(event)
+=======
+    onChange(event) {
+        this.setData({
+          radio: event.detail,
+        });
+      },
+    
+    onClick(event) {
+        var pages = getCurrentPages();
+        var currPage = pages[pages.length - 1];   //当前页面
+        var prevPage = pages[pages.length - 2];  //上一个页面
+        var templates = this.data.templates;
+        var i;
+        const { name } = event.currentTarget.dataset;
+        this.setData({
+          radio: name,
+        });
+        for(i=0;i<templates.length;i++){
+            if(name == i+1){
+                prevPage.setData({
+                    selectedTemplate: templates[i].name,
+                    selectedTemplateIndex: i,
+                });
+            }
+        }
+>>>>>>> main
     },
 })
