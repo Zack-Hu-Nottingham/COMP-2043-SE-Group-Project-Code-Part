@@ -2,7 +2,7 @@
 
 <van-cell-group inset title="{{dictionary.current_lan}}" style="padding: 20rpx;">
   <van-cell title="{{languageList[language]}}" >
-    <view slot="">
+    <view>
       <van-icon name="success" color="green"/>
     </view>
   </van-cell>

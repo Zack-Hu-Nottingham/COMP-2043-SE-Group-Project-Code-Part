@@ -3,8 +3,6 @@ import Toast from '../../../miniprogram_npm/@vant/weapp/toast/toast'
 const languageUtils = require("../../../language/languageUtils");
 const app = getApp();
 const db = wx.cloud.database();
-var id = '';
-// let userInfo = app.globalData.userInfo;
 
 Page({
 
@@ -19,6 +17,10 @@ Page({
         selectedFeedback: '',
         selectedIndex: '',
 
+        //feedback type:
+        // 0 - Project Delay
+        // 1 - Task Delay
+        // 2 - Task need rework
         showFeedback: false,
         feedbackValue: [{
             "name": "Project Delay",
@@ -33,6 +35,7 @@ Page({
         fileList: [],
         details: '',
         feedback: [],
+        id: '',
 
         isLoading: false,
 
@@ -90,17 +93,15 @@ Page({
     },
 
     upload(){
-        var that = this;
         wx.chooseImage({
           count: 1,
           sizeType: ['original', 'compressed'],
           sourceType: ['album', 'camera'],
-          success(res) {
+          success:res => {
             var fileList = that.data.fileList;
             fileList.push({url: res.tempFilePaths[0]});
-            that.setData({ fileList: fileList });
+            this.setData({ fileList: fileList });
             console.log("成功选择图片",fileList);
-            // that.uploadImage(res.tempFilePaths[0]);
           }
         })
       },
@@ -128,7 +129,10 @@ Page({
             this.data.feedback.push({
                 type: this.data.selectedIndex, 
                 details: this.data.details, 
-                fileList: this.data.fileList
+                fileList: this.data.fileList,
+                owner: app.globalData.userInfo.openid,
+                id: this.data.id,
+                createTime: new Date(),
             })
             console.log(this.data.feedback)
             db.collection('project').doc(this.data.id).update({

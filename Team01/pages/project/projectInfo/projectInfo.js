@@ -6,8 +6,8 @@ import * as echarts from '../../../ec-canvas/echarts';
 const app = getApp();
 
 var id = '';
-
 const db = wx.cloud.database();
+const _ = db.command;
 
 // line 5-441: function initChart() 甘特图填充信息
 function initChart(canvas, width, height, dpr) {
@@ -447,12 +447,12 @@ Page({
   },
 
   // Global method
-
   navbarTap: function(e) {
     this.setData({
       currentTab: e.currentTarget.dataset.idx
     })
     if (this.data.currentTab == 1) {
+
       db.collection("task")
       .where({
         belongTo: id,
@@ -531,7 +531,9 @@ Page({
 
           this.setData({
             project: res.data,
-            name: res.data.name
+            name: res.data.name,
+            fileList: res.data.fileList,
+            feedback: res.data.feedback,
           }),
 
           wx.setNavigationBarTitle({
@@ -539,7 +541,6 @@ Page({
           }),
 
           this.getProjectManager()
-          // this.getTaskState()
         },
         fail: function(err) {
           console.log(err)
@@ -549,16 +550,20 @@ Page({
   },
 
   getProjectManager() {
-    var ownerId = this.data.project.projectManager
-    db.collection("user")
-    .doc(ownerId)
-    .get({
-      success: res => {
+    return new Promise((resolve, reject) => {
+    db.collection('user')
+      .where({
+        _openid: _.eq(this.data.project.projectManager)
+      })
+      .get()
+      .then(res => {
+        console.log(res)
         this.setData({
-          owner: res.data.name
+          owner: res.data[0].name
         })
-      }
+      })
     })
+    
   },
 
   // Project Information's method
@@ -618,9 +623,6 @@ Page({
         wx.navigateTo({
           url: '../addComment/addComment?id=' + id
         })
-    // wx.navigateTo({
-    //   url: '../addComment/addComment',
-    // })
   },
 
 
@@ -654,14 +656,6 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
-    function capitalizeFirstLetter(string) {
-      return string.charAt(0).toUpperCase() + string.slice(1);
-    }
-
-    wx.setNavigationBarTitle({
-      title: capitalizeFirstLetter(this.data.name) 
-    })
 
   },
 

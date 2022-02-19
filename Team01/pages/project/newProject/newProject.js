@@ -133,33 +133,32 @@ Page({
     selectTemplate: function(){
         wx.navigateTo({ url: '../projectTemplate/projectTemplate', })
     },
+    
     upload(){
-        //把this赋值给that，就相当于that的作用域是全局的。
-        let that = this;
         wx.chooseImage({
-          // count: 1,
+          count: 1,
           sizeType: ['original', 'compressed'],
           sourceType: ['album', 'camera'],
-          success(res) {
-            console.log("成功选择图片",res);
-            that.uploadImage(res.tempFilePaths[0]);
+          success:res => {
+            var fileList = that.data.fileList;
+            fileList.push({url: res.tempFilePaths[0]});
+            this.setData({ fileList: fileList });
+            console.log("成功选择图片",fileList);
           }
         })
       },
 
     uploadImage(fileURL) {
         wx.cloud.uploadFile({
-          cloudPath: 'project/' + app.globalData.userInfo.openid + '/' + new Date().getTime() +'.png',
+          cloudPath: 'feedback/'+ this.data.id + '/' + new Date().getTime() +'.png', // 上传至云端的路径
           filePath: fileURL, // 小程序临时文件路径
           success: res => {
-            var fileList = this.data.fileList;
-            fileList.push({url: res.fileID,name: fileURL,deletable: true});
-            this.setData({ fileList: fileList });
             console.log("图片上传成功",res)
           },
           fail: console.error
         })
     },
+
 
     // 提交新项目
     formSubmit: function (e) {
