@@ -24,3 +24,5 @@
   bind:select="onSelectFeedback"
 />
 </form>
+
+<van-toast id="van-toast" />

@@ -615,9 +615,12 @@ Page({
    * Create Comment page's method
    */
   clickAddComment(event) {
-    wx.navigateTo({
-      url: '../addComment/addComment',
-    })
+        wx.navigateTo({
+          url: '../addComment/addComment?id=' + id
+        })
+    // wx.navigateTo({
+    //   url: '../addComment/addComment',
+    // })
   },
 
 

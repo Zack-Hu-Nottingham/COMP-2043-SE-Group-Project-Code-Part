@@ -1,8 +1,8 @@
 // pages/project/newProject/newProject.js
 import Toast from '../../../miniprogram_npm/@vant/weapp/toast/toast'
 const languageUtils = require("../../../language/languageUtils");
+var app = getApp();
 
-var app = getApp()
 
 const db = wx.cloud.database();
 Page({
@@ -149,7 +149,7 @@ Page({
 
     uploadImage(fileURL) {
         wx.cloud.uploadFile({
-          cloudPath: 'feedBack/'+ new Date().getTime() +'.png', // 上传至云端的路径
+          cloudPath: 'project/' + app.globalData.userInfo.openid + '/' + new Date().getTime() +'.png',
           filePath: fileURL, // 小程序临时文件路径
           success: res => {
             var fileList = this.data.fileList;
@@ -167,7 +167,7 @@ Page({
             Toast('Name is null');
         }
         else if (this.data.startDate == "" || this.data.endDate == "") {
-            Toast('No start Date or end Date');
+            Toast('No date setting');
         }
         else if (this.data.description == "") {
             Toast('No detail description');
@@ -179,7 +179,13 @@ Page({
                     name: this.data.name,
                     startTime: this.data.startDate,
                     endTime: this.data.endDate,
-                    projectDescription: this.data.description
+                    projectDescription: this.data.description,
+                    projectManager: app.globalData.userInfo.openid,
+                    template: this.data.selectedTemplate,
+                    houseOwner: this.data.owner,
+                    participant: this.data.participant,
+                    feedback: [],
+                    fileList: this.data.fileList,
                 }
               })
               .then(res => {
@@ -188,7 +194,16 @@ Page({
               .catch(res => {
                 console.log('添加失败', res) 
               })
-            this.setData({
+
+              this.action();
+              
+        }
+        
+    },
+    action(){
+
+              //提交动画
+              this.setData({
                 isLoading: true,
             })
             setTimeout(res =>{
@@ -208,10 +223,6 @@ Page({
                   url: '../../index/index',
                 })
             },2500)
-        }
-        
-
-        
     },
 
     // calendar 的配套method
