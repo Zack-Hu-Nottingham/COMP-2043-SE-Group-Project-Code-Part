@@ -729,7 +729,7 @@ Page({
       }
     }).then(res => {
       console.log('调用云函数成功', res),
-      this.getDetail()
+      this.go_update();
     }).catch(res => {
       console.log('调用云函数失败', res)
     })

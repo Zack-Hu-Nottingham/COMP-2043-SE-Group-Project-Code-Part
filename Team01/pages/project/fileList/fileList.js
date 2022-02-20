@@ -14,6 +14,7 @@ Page({
         details: '',
         createTime: '',
         ownerId: '',
+        sponsor:'',
 
     },
 
@@ -44,8 +45,8 @@ Page({
           wx.setNavigationBarTitle({
             title: this.data.name,
           }),
-
-          this.getProjectManager()
+          console.log(this.data.ownerId)
+          this.getOwner();
         },
         fail: function(err) {
           console.log(err)
@@ -56,13 +57,12 @@ Page({
         return new Promise((resolve, reject) => {
         db.collection('user')
           .where({
-            _openid: _.eq(this.data.project.projectManager)
+            _openid: _.eq(this.data.ownerId)
           })
           .get()
           .then(res => {
-            console.log(res)
             this.setData({
-              owner: res.data[0].name
+              sponsor: res.data[0].name
             })
           })
         })
