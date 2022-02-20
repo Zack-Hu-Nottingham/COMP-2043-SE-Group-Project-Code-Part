@@ -735,10 +735,10 @@ Page({
         projectDescription: e.detail.value
       }
     }).then(res => {
-      console.log('调用云函数成功', res),
+      console.log('调用云函数修改项目描述成功', res),
       this.getDetail()
     }).catch(res => {
-      console.log('调用云函数失败', res)
+      console.log('调用云函数修改项目描述失败', res)
     })
   },
 
@@ -752,10 +752,10 @@ Page({
         stateDescription: e.detail.value
       }
     }).then(res => {
-      console.log('调用云函数成功', res),
+      console.log('调用云函数修改项目状态描述成功', res),
       this.getDetail()
     }).catch(res => {
-      console.log('调用云函数失败', res)
+      console.log('调用云函数修改项目状态描述失败', res)
     })
   },
 
