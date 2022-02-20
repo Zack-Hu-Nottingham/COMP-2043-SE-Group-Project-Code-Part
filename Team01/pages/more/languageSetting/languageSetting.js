@@ -20,6 +20,44 @@ Page({
 
   onChangeLan(event) {
 
+    Dialog.confirm({
+      context: this,
+      title: this.data.dictionary.change_lan_confirm,
+      confirmButtonText: this.data.dictionary.confirm,
+      cancelButtonText: this.data.dictionary.cancel,
+    })
+      .then(() => {
+        // on confirm
+        
+        this.setData({
+          language: event.target.id
+        })
+        
+        languageUtils.changLanguage()
+        
+        this.initLanguage()
+        
+        Toast.success(this.data.dictionary.success_change)
+
+      })
+      .catch(() => {
+        // on cancel
+        return
+      });
+    
+    // if (this.data.language == 0) {
+    //   wx.setStorage({
+    //     key: "languageVersion",
+    //     data: 1,
+    //   });
+    // } else if (this.data.language == 1) {
+    //   wx.setStorage({
+    //     key: "languageVersion",
+    //     data: 0,
+    //   });
+    // }
+
+    
     // Dialog.confirm({
     //   context: this,
     //   // title: this.data.dictionary.change_lan_confirm,
@@ -33,25 +71,7 @@ Page({
     //     return
     //   });
     
-    // if (this.data.language == 0) {
-    //   wx.setStorage({
-    //     key: "languageVersion",
-    //     data: 1,
-    //   });
-    // } else if (this.data.language == 1) {
-    //   wx.setStorage({
-    //     key: "languageVersion",
-    //     data: 0,
-    //   });
-    // }
-    
 
-    this.setData({
-      language: event.target.id
-    })
-    languageUtils.changLanguage()
-    this.initLanguage()
-    Toast.success(this.data.dictionary.success_change)
   },
 
   // 初始化语言
@@ -70,7 +90,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    
     Dialog.confirm({
+      title:'修改语言',
       context: this,
       // title: this.data.dictionary.change_lan_confirm,
       // message: '弹窗内容',

@@ -197,6 +197,23 @@ Page({
     })
   },
 
+  onTaskDescriptionBlur: function(e){
+    console.log(e.detail.value)
+
+    wx.cloud.callFunction({
+      name: 'updateTaskDescription',
+      data:{
+        id: id,
+        descriptions: e.detail.value
+      }
+    }).then(res => {
+      console.log('调用云函数修改任务描述成功', res),
+      this.getDetail()
+    }).catch(res => {
+      console.log('调用云函数修改任务描述失败', res)
+    })
+  },
+
   onPrioritySelect(e) {
     // console.log(e.detail.name)
     this.setData({
