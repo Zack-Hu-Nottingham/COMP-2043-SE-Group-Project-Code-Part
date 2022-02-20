@@ -10,12 +10,12 @@
         "pages/project/newProject/newProject",
         "pages/project/statisticReport/statisticReport",
         "pages/project/fileList/fileList",
+        "pages/project/contactList/contactList",
         "pages/more/more/more",
         "pages/more/setting/setting",
         "pages/more/moreInfo/moreInfo",
         "pages/more/languageSetting/languageSetting",
-        "pages/more/test/test",
-        "pages/contact/contactList/contactList"
+        "pages/more/test/test"
     ],
     "window": {
         "backgroundTextStyle": "light",

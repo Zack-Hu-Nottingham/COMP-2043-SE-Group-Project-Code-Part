@@ -59,18 +59,20 @@ Page({
         this.setData({
         language: lan
         })
-
-        console.log(prevPage.data.houseOwner)
-
-
     },
   
     onChange(event) {
-        console.log(event.detail)
-      this.setData({
-        result: event.detail,
-      });
+
+    //   this.setData({
+    //     result: event.detail,
+    //   });
+      // console.log(this.data.result);
+      for(var i=0; i<event.detail.length; i++){
+          this.data.result.push(this.data.list[i].id);
+      }
+      console.log(this.data.result);
     },
+
     bindTouchStart: function(e) {
         this.startTime = e.timeStamp;
     },
