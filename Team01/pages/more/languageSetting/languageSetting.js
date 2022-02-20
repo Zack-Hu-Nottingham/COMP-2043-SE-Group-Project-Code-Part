@@ -71,6 +71,7 @@ Page({
    */
   onLoad: function (options) {
     Dialog.confirm({
+      title:'修改语言',
       context: this,
       // title: this.data.dictionary.change_lan_confirm,
       // message: '弹窗内容',

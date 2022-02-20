@@ -26,20 +26,16 @@
 
   .van-popup{
     display: flex;
+    flex-direction: column;
     border-radius: 4%;
   } 
-  .vab-field{
-    display: flex;
+  .van-field{
+
+    justify-content:center;
     align-items: center;
   }
 
   .van-button{
-    display: flex;
-    align-items: center; 
-    justify-content:center;
     width: 80%;
-  }
-
-  .van-dialog{
-    display: table;
+    border: 20rpx coral;
   }
