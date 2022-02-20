@@ -428,7 +428,8 @@ Page({
 
 
     project: {},
-    owner: "",
+    houseOwner: {},
+    projectManager: {},
     feedback: [],
 
     // Task Management's data
@@ -540,6 +541,7 @@ Page({
             title: this.data.name,
           }),
 
+          this.getHouseOwner()
           this.getProjectManager()
         },
         fail: function(err) {
@@ -547,6 +549,22 @@ Page({
         }
       })
     
+  },
+
+  getHouseOwner() {
+    return new Promise((resolve, reject) => {
+    db.collection('user')
+      .where({
+        _openid: _.eq(this.data.project.houseOwner)
+      })
+      .get()
+      .then(res => {
+        // console.log(res.data[0])
+        this.setData({
+          houseOwner: res.data[0]
+        })
+      })
+    })
   },
 
   getProjectManager() {
@@ -557,13 +575,12 @@ Page({
       })
       .get()
       .then(res => {
-        console.log(res)
+        // console.log(res.data[0])
         this.setData({
-          owner: res.data[0].name
+          projectManager: res.data[0]
         })
       })
     })
-    
   },
 
   // Project Information's method
