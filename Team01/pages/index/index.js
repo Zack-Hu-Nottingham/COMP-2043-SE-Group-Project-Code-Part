@@ -496,6 +496,28 @@ Page({
             .catch(err => {
               console.log('请求失败', err)
             })
+          }else if(this.data.currentTime > res.data[idx].startTime && this.data.currentTime < res.data[idx].endTime){
+            wx.cloud.database().collection('task')
+            .doc(res.data[idx]._id)
+            .update({
+              data: {
+                state: 1,
+              }
+            })
+            .catch(err => {
+              console.log('请求失败', err)
+            })
+          }else if(this.data.currentTime > res.data[idx].endTime){
+            wx.cloud.database().collection('task')
+            .doc(res.data[idx]._id)
+            .update({
+              data: {
+                state: 3,
+              }
+            })
+            .catch(err => {
+              console.log('请求失败', err)
+            })
           }
         }
         // this.data.task.push(res.data[0])
