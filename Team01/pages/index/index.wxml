@@ -58,7 +58,7 @@
   <van-cell-group style="padding: 30rpx;" inset >
     <van-cell title="{{dictionary.today_task}}" icon="todo-list-o" />
 
-    <view wx:for="{{task}}" wx:key="index">
+    <view wx:for="{{todaysTask}}" wx:key="index">
       <van-cell title="{{item.name}}" label="{{item.startTime}} - {{item.endTime}}" clickable="true" bindtap="clickTask" data-id="{{item._id}}" class="taskForTest"> 
 
         <view>
