@@ -1,8 +1,8 @@
 // pages/project/newProject/newProject.js
 import Toast from '../../../miniprogram_npm/@vant/weapp/toast/toast'
 const languageUtils = require("../../../language/languageUtils");
+var app = getApp();
 
-var app = getApp()
 
 const db = wx.cloud.database();
 Page({
@@ -133,33 +133,32 @@ Page({
     selectTemplate: function(){
         wx.navigateTo({ url: '../projectTemplate/projectTemplate', })
     },
+    
     upload(){
-        //把this赋值给that，就相当于that的作用域是全局的。
-        let that = this;
         wx.chooseImage({
-          // count: 1,
+          count: 1,
           sizeType: ['original', 'compressed'],
           sourceType: ['album', 'camera'],
-          success(res) {
-            console.log("成功选择图片",res);
-            that.uploadImage(res.tempFilePaths[0]);
+          success:res => {
+            var fileList = that.data.fileList;
+            fileList.push({url: res.tempFilePaths[0]});
+            this.setData({ fileList: fileList });
+            console.log("成功选择图片",fileList);
           }
         })
       },
 
     uploadImage(fileURL) {
         wx.cloud.uploadFile({
-          cloudPath: 'feedBack/'+ new Date().getTime() +'.png', // 上传至云端的路径
+          cloudPath: 'feedback/'+ this.data.id + '/' + new Date().getTime() +'.png', // 上传至云端的路径
           filePath: fileURL, // 小程序临时文件路径
           success: res => {
-            var fileList = this.data.fileList;
-            fileList.push({url: res.fileID,name: fileURL,deletable: true});
-            this.setData({ fileList: fileList });
             console.log("图片上传成功",res)
           },
           fail: console.error
         })
     },
+
 
     // 提交新项目
     formSubmit: function (e) {
@@ -167,7 +166,7 @@ Page({
             Toast('Name is null');
         }
         else if (this.data.startDate == "" || this.data.endDate == "") {
-            Toast('No start Date or end Date');
+            Toast('No date setting');
         }
         else if (this.data.description == "") {
             Toast('No detail description');
@@ -179,7 +178,13 @@ Page({
                     name: this.data.name,
                     startTime: this.data.startDate,
                     endTime: this.data.endDate,
-                    projectDescription: this.data.description
+                    projectDescription: this.data.description,
+                    projectManager: app.globalData.userInfo.openid,
+                    template: this.data.selectedTemplate,
+                    houseOwner: this.data.owner,
+                    participant: this.data.participant,
+                    feedback: [],
+                    fileList: this.data.fileList,
                 }
               })
               .then(res => {
@@ -188,33 +193,35 @@ Page({
               .catch(res => {
                 console.log('添加失败', res) 
               })
-            this.setData({
+
+              this.action();
+              
+        }
+        
+    },
+    action(){
+
+              //提交动画
+              this.setData({
                 isLoading: true,
             })
-            setTimeout(function(){
+            setTimeout(res =>{
                 Toast({
                     forbidClick: 'true',
                     type: 'success',
                     message: 'Success!',
                   });
             },1500)
-            setTimeout(function(){
-                that.setData({
+            setTimeout(res =>{
+                this.setData({
                     isLoading: false
                 })
             },2400)
-            setTimeout(function(){
-                let pages = getCurrentPages();
-                let project = pages[pages.length - 2];
-                project.go_update();
-                wx.navigateBack({
-                  delta: 1
+            setTimeout(res =>{
+                wx.navigateTo({
+                  url: '../../index/index',
                 })
             },2500)
-        }
-        
-
-        
     },
 
     // calendar 的配套method

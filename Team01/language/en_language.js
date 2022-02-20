@@ -39,10 +39,11 @@ var Languague = {
     change_lan_confirm: "Confirm change language",
     
     // Project information page
+    project_manager: "Project Manager",
     project_info: "Project Information",
     task_management: "Task Management",
     gantt_diagram: "Gantt Diagram",
-    owner: "Owner",
+    owner: "House Owner",
     start_time: "Start Time",
     end_time: "End Time",
     description: "Description",

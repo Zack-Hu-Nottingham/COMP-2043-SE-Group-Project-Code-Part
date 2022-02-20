@@ -14,7 +14,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    date: "",
     /**
      * Global data
      */
@@ -36,12 +36,9 @@ Page({
     messageList: [],
 
 
-
-
     /**
      * Projects page's data
      */
-
     project: [],
 
 
@@ -49,7 +46,7 @@ Page({
      * Dashboard page's data
      */
     task:[],
-
+    todaysTask:[],
 
     /**
      * More page's data
@@ -292,7 +289,7 @@ Page({
         // console.log(res)
         if (res.data.length != 0) {
           this.setData({
-            project: this.data.project.concat(res.data[0])
+            project: this.data.project.concat(res.data)
           })
         }
         
@@ -328,6 +325,41 @@ Page({
     })
   },
 
+  getTodaysTask() {
+    //获取日期
+    var myDate = new Date();
+
+    var year = myDate.getFullYear();    //获取完整的年份(4位,1970-????)
+    var month = myDate.getMonth() + 1;       //获取当前月份(0-11,0代表1月)
+    var day = myDate.getDate();        //获取当前日(1-31)
+    date = year + "" + month + "" + day
+    console.log(this.data.date)
+    for (var idx in this.data.task) {
+      var startTime = this.data.task[idx].startTime
+      var endTime = this.data.task[idx].endTime
+      var newStartTime = ""
+      var newEndTime = ""
+      for(var i in startTime) {
+        if(startTime[i] != '-'){
+          newStartTime.add(startTime[i])
+        }
+      }
+      for(var j in endTime) {
+        if(endTime[i] != '-'){
+          newEndTime.add(endTime[i])
+        }
+      }
+      var currentDate = new Date(date)
+      var startDate = new Date(newStartTime)
+      var endDate = new Date(newEndTime)
+      if(currentDate >= startDate && currentDate <= endDate) {
+        this.setData({
+          todaysTask: this.data.todaysTask.concat(res.data.task[idx])
+        })
+        console.log(this.data.todaysTask)
+      }
+    }
+  },
   // 更改tab选项时对应的逻辑
   onChangeTab(event) {
     this.setData({ active: event.detail });

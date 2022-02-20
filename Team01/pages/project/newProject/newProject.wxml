@@ -32,7 +32,6 @@
 <!--Submit-->    
 <van-button plain round block loading="{{isLoading}}" disabled="{{isLoading}}" class="submitBtn" color="#1296db" type="primary" size="normal" form-type="submit" bindtap="formSubmit">{{dictionary.create_new_project}}</van-button>
 
-
 <van-toast id="van-toast" />
 
 <!-- pop up calendar -->

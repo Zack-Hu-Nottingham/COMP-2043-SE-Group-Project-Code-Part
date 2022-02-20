@@ -6,8 +6,8 @@ import * as echarts from '../../../ec-canvas/echarts';
 const app = getApp();
 
 var id = '';
-
 const db = wx.cloud.database();
+const _ = db.command;
 
 // line 5-441: function initChart() 甘特图填充信息
 function initChart(canvas, width, height, dpr) {
@@ -428,7 +428,8 @@ Page({
 
 
     project: {},
-    owner: "",
+    houseOwner: {},
+    projectManager: {},
     feedback: [],
 
     // Task Management's data
@@ -447,12 +448,12 @@ Page({
   },
 
   // Global method
-
   navbarTap: function(e) {
     this.setData({
       currentTab: e.currentTarget.dataset.idx
     })
     if (this.data.currentTab == 1) {
+
       db.collection("task")
       .where({
         belongTo: id,
@@ -531,15 +532,17 @@ Page({
 
           this.setData({
             project: res.data,
-            name: res.data.name
+            name: res.data.name,
+            fileList: res.data.fileList,
+            feedback: res.data.feedback,
           }),
 
           wx.setNavigationBarTitle({
             title: this.data.name,
           }),
 
+          this.getHouseOwner()
           this.getProjectManager()
-          // this.getTaskState()
         },
         fail: function(err) {
           console.log(err)
@@ -548,16 +551,35 @@ Page({
     
   },
 
-  getProjectManager() {
-    var ownerId = this.data.project.projectManager
-    db.collection("user")
-    .doc(ownerId)
-    .get({
-      success: res => {
+  getHouseOwner() {
+    return new Promise((resolve, reject) => {
+    db.collection('user')
+      .where({
+        _openid: _.eq(this.data.project.houseOwner)
+      })
+      .get()
+      .then(res => {
+        // console.log(res.data[0])
         this.setData({
-          owner: res.data.name
+          houseOwner: res.data[0]
         })
-      }
+      })
+    })
+  },
+
+  getProjectManager() {
+    return new Promise((resolve, reject) => {
+    db.collection('user')
+      .where({
+        _openid: _.eq(this.data.project.projectManager)
+      })
+      .get()
+      .then(res => {
+        // console.log(res.data[0])
+        this.setData({
+          projectManager: res.data[0]
+        })
+      })
     })
   },
 
@@ -580,7 +602,6 @@ Page({
   onDateConfirm(event) {
     const [start, end] = event.detail;
     this.onDateClose();
-
     //调用云函数，更新数据库中日期
     wx.cloud.callFunction({
       name: 'updateProjectDate',
@@ -615,9 +636,9 @@ Page({
    * Create Comment page's method
    */
   clickAddComment(event) {
-    wx.navigateTo({
-      url: '../addComment/addComment',
-    })
+        wx.navigateTo({
+          url: '../addComment/addComment?id=' + id
+        })
   },
 
 
@@ -651,14 +672,6 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
-    function capitalizeFirstLetter(string) {
-      return string.charAt(0).toUpperCase() + string.slice(1);
-    }
-
-    wx.setNavigationBarTitle({
-      title: capitalizeFirstLetter(this.data.name) 
-    })
 
   },
 
@@ -706,7 +719,7 @@ Page({
 
   onProjectBlur: function(e){
     console.log(e.detail.value)
-
+    
     wx.cloud.callFunction({
       name: 'updateProjectDescription',
       data:{
@@ -714,10 +727,10 @@ Page({
         projectDescription: e.detail.value
       }
     }).then(res => {
-      console.log('调用云函数成功', res),
+      console.log('调用云函数修改项目描述成功', res),
       this.getDetail()
     }).catch(res => {
-      console.log('调用云函数失败', res)
+      console.log('调用云函数修改项目描述失败', res)
     })
   },
 
@@ -731,10 +744,10 @@ Page({
         stateDescription: e.detail.value
       }
     }).then(res => {
-      console.log('调用云函数成功', res),
+      console.log('调用云函数修改项目状态描述成功', res),
       this.getDetail()
     }).catch(res => {
-      console.log('调用云函数失败', res)
+      console.log('调用云函数修改项目状态描述失败', res)
     })
   },
 

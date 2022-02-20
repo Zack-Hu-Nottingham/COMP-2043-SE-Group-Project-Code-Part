@@ -39,10 +39,11 @@ var Languague = {
      change_lan_confirm: "确认切换语言",
 
     // Project information page
+    project_manager: "项目管理者",
     project_info: "项目信息",
     task_management: "任务管理",
     gantt_diagram: "甘特图",
-    owner: "负责人",
+    owner: "房屋主人",
     start_time: "开始时间",
     end_time: "结束时间",
     description: "描述",
