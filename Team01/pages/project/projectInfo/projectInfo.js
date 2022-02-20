@@ -428,6 +428,7 @@ Page({
 
 
     project: {},
+    userInfo: {},
     houseOwner: {},
     projectManager: {},
     feedback: [],
@@ -452,6 +453,8 @@ Page({
     this.setData({
       currentTab: e.currentTarget.dataset.idx
     })
+
+    // 载入task management页面的数据
     if (this.data.currentTab == 1) {
 
       db.collection("task")
@@ -664,6 +667,11 @@ Page({
 
     // 从数据库中根据id获取数据
     this.getDetail()
+
+    // 获取userInfo
+    this.setData({
+      userInfo: app.globalData.userInfo
+    })
 
   },
 
