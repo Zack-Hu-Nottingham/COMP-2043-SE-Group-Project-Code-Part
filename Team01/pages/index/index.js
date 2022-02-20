@@ -19,7 +19,6 @@ Page({
      * Global data
      */
     openid: "",
-    user: [],
     userInfo: {},
 
     active: 2,
@@ -51,7 +50,6 @@ Page({
     /**
      * More page's data
      */
-    userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     canIUseGetUserProfile: false,
@@ -246,6 +244,8 @@ Page({
       await this.getTaskInfo(this.data.project[idx]._id)
       console.log(this.data.project[idx])
     }
+
+    this.getTodaysTask()
     
   },
   
@@ -260,8 +260,11 @@ Page({
       .then(res => {
         console.log(res)
         this.setData({
-          user: res.data[0]
+          userInfo: res.data[0]
         })
+        app.globalData.userInfo = res.data[0]
+        console.log("app data")
+        console.log(app.globalData.userInfo)
         resolve("成功获取用户数据");
       })
       .catch(err => {
@@ -277,16 +280,14 @@ Page({
       db.collection('project')
       .where(_.or([
         {
-          houseOwner: _.eq(this.data.user._openid)
+          houseOwner: _.eq(this.data.userInfo._openid)
         },
         {
-          projectManager: _.eq(this.data.user._openid)
+          _openid: _.eq(this.data.userInfo._openid)
         }
       ]))
       .get()
       .then(res => {
-        // console.log("res = ")
-        // console.log(res)
         if (res.data.length != 0) {
           this.setData({
             project: this.data.project.concat(res.data)
@@ -316,7 +317,6 @@ Page({
           })
         }
         
-        // this.data.task.push(res.data[0])
         resolve("成功获取任务信息")
       })
       .catch(err => {
@@ -332,8 +332,10 @@ Page({
     var year = myDate.getFullYear();    //获取完整的年份(4位,1970-????)
     var month = myDate.getMonth() + 1;       //获取当前月份(0-11,0代表1月)
     var day = myDate.getDate();        //获取当前日(1-31)
-    date = year + "" + month + "" + day
-    console.log(this.data.date)
+    var date = year + "" + month + "" + day
+
+    console.log(date)
+
     for (var idx in this.data.task) {
       var startTime = this.data.task[idx].startTime
       var endTime = this.data.task[idx].endTime
@@ -341,17 +343,22 @@ Page({
       var newEndTime = ""
       for(var i in startTime) {
         if(startTime[i] != '-'){
-          newStartTime.add(startTime[i])
+          newStartTime.concat(startTime[i])
         }
       }
       for(var j in endTime) {
         if(endTime[i] != '-'){
-          newEndTime.add(endTime[i])
+          newEndTime.concat(endTime[i])
         }
       }
       var currentDate = new Date(date)
       var startDate = new Date(newStartTime)
       var endDate = new Date(newEndTime)
+
+      console.log("current date = " + currentDate)
+      console.log("current date = " + currentDate)
+      console.log("current date = " + currentDate)
+
       if(currentDate >= startDate && currentDate <= endDate) {
         this.setData({
           todaysTask: this.data.todaysTask.concat(res.data.task[idx])
@@ -360,6 +367,7 @@ Page({
       }
     }
   },
+
   // 更改tab选项时对应的逻辑
   onChangeTab(event) {
     this.setData({ active: event.detail });
@@ -479,7 +487,6 @@ Page({
 
   // 点击language展示选项
   onChangeLan(event) {
-    console.log('check')
     wx.navigateTo({
       url: '../more/languageSetting/languageSetting',
     })
