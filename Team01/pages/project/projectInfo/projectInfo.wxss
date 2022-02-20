@@ -119,3 +119,7 @@ ec-canvas {
   display: flex;
   padding: 0 0 5% 5%;
 }
+
+.projectDelay {
+  background-color: red;
+}

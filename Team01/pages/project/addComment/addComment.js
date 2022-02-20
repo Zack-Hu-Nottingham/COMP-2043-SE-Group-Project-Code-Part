@@ -48,6 +48,7 @@ Page({
         this.setData({
             id: options.id,
         })
+        // console.log(this.data.createTime);
         db.collection('project').doc(options.id).get().then(res => {
             // res.data 包含该记录的数据
             this.setData({
@@ -98,7 +99,7 @@ Page({
           sizeType: ['original', 'compressed'],
           sourceType: ['album', 'camera'],
           success:res => {
-            var fileList = that.data.fileList;
+            var fileList = this.data.fileList;
             fileList.push({url: res.tempFilePaths[0]});
             this.setData({ fileList: fileList });
             console.log("成功选择图片",fileList);
@@ -132,7 +133,7 @@ Page({
                 fileList: this.data.fileList,
                 owner: app.globalData.userInfo.openid,
                 id: this.data.id,
-                createTime: new Date(),
+                createTime: this.formatDate(new Date()),
             })
             console.log(this.data.feedback)
             db.collection('project').doc(this.data.id).update({
@@ -188,4 +189,10 @@ Page({
         dictionary: lang.lang.index,
         });
     },
+
+    formatDate(date) {
+        date = new Date(date);
+        // return `${date.getMonth() + 1}/${date.getDate()}`;
+        return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+      },
 })

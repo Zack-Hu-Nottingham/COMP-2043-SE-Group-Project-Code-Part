@@ -1,10 +1,19 @@
 // pages/project/fileList/fileList.js
+const db = wx.cloud.database();
+const _ = db.command;
+
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
+        fileList: [],
+        name: 'Detail images',
+        feedbackType: '',
+        details: '',
+        createTime: '',
+        ownerId: '',
 
     },
 
@@ -12,8 +21,53 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        db.collection('project')
+      .doc(options.id)
+      .get({
+        success: res => {
+            var type = 'Project Delay';
+            if(res.data.feedback[options.index].type==2){
+                type = 'Task Need Rework';
+            }
+            else if(res.data.feedback[options.index].type==1){
+                type = 'Task Delay';
+            }
 
+          this.setData({
+            fileList: res.data.feedback[options.index].fileList,
+            details: res.data.feedback[options.index].details,
+            createTime: res.data.feedback[options.index].createTime,
+            feedbackType: type,
+            ownerId: res.data.feedback[options.index].owner,
+          }),
+
+          wx.setNavigationBarTitle({
+            title: this.data.name,
+          }),
+
+          this.getProjectManager()
+        },
+        fail: function(err) {
+          console.log(err)
+        }
+      })
     },
+    getOwner() {
+        return new Promise((resolve, reject) => {
+        db.collection('user')
+          .where({
+            _openid: _.eq(this.data.project.projectManager)
+          })
+          .get()
+          .then(res => {
+            console.log(res)
+            this.setData({
+              owner: res.data[0].name
+            })
+          })
+        })
+        
+      },
 
     /**
      * 生命周期函数--监听页面初次渲染完成
