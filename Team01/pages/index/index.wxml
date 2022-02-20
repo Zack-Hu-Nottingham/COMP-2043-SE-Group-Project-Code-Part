@@ -61,7 +61,7 @@
     <view wx:for="{{task}}" wx:key="index">
       <van-cell title="{{item.name}}" label="{{item.startTime}} - {{item.endTime}}" clickable="true" bindtap="clickTask" data-id="{{item._id}}" class="taskForTest"> 
 
-        <view slot="">
+        <view>
           <view wx:if="{{item.state==0}}">
             <van-tag color="#D3D3D3" icon="fail" size="medium"><van-icon name="close"/>Unstarted</van-tag>
           </view>
@@ -104,7 +104,7 @@
   </van-cell>
   <van-cell center title="{{dictionary.position}}" value="{{position}}" />
   <van-cell center title="{{dictionary.more}}" clickable="true" bindtap="onMoreInfo" class="moreInfoForTest">
-    <view slot="">
+    <view>
       <van-icon name="ellipsis" />
     </view>
   </van-cell>

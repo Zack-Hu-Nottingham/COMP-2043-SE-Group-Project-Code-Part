@@ -1,22 +1,8 @@
 {
-  "setting": {},
-  "condition": {
-    "plugin": {
-      "list": []
-    },
-    "game": {
-      "list": []
-    },
-    "gamePlugin": {
-      "list": []
-    },
-    "miniprogram": {
-      "list": [
-        {
-          "name": "",
-          "pathName": "pages/project/projectInfo/projectInfo",
-          "query": "id=ea7958376208b87a01d5af7316867c94",
-          "scene": null
+    "setting": {},
+    "condition": {
+        "plugin": {
+            "list": []
         },
         "game": {
             "list": []
@@ -28,37 +14,17 @@
             "list": [
                 {
                     "name": "",
+                    "pathName": "pages/project/addComment/addComment",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "",
                     "pathName": "pages/project/projectInfo/projectInfo",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "name": "",
-                    "pathName": "pages/project/newTask/newTask",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "name": "",
-                    "pathName": "pages/project/addComment/addComment",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "name": "",
-                    "pathName": "pages/contact/contactList/contactList",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "name": "",
-                    "pathName": "pages/project/addComment/addComment",
-                    "query": "",
+                    "query": "id=41ae62ef62109766075768126b3b70c0",
                     "scene": null
                 }
             ]
         }
-      ]
     }
-  }
 }

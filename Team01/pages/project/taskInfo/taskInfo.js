@@ -1,7 +1,8 @@
 // pages/project/taskInfo/taskInfo.js
 
 const languageUtils = require("../../../language/languageUtils");
-
+const db = wx.cloud.database();
+const _ = db.command;
 var id = ''
 
 Page({
@@ -126,12 +127,13 @@ Page({
   
   onConfirm(event) {
     const [start, end] = event.detail;
-    this.setData({
-      startTime: this.formatDate(start),
-      endTime: this.formatDate(end),
-      dateShow: false,
-      date: `${this.formatDate(start)} - ${this.formatDate(end)}`,
-    });
+    this.onClose();
+    // this.setData({
+    //   startTime: this.formatDate(start),
+    //   endTime: this.formatDate(end),
+    //   dateShow: false,
+    //   date: `${this.formatDate(start)} - ${this.formatDate(end)}`,
+    // });
 
     //调用云函数
     wx.cloud.callFunction({
@@ -150,7 +152,7 @@ Page({
   },
 
   getDetail(){
-    wx.cloud.database().collection('task')
+    db.collection('task')
       .doc(id)
       .get()
       .then(res => {
@@ -168,7 +170,7 @@ Page({
       })
       .then(res => {
         console.log(this.data.taskPage.belongTo)
-        wx.cloud.database().collection('project')
+       db.collection('project')
         .doc(this.data.taskPage.belongTo)
         .get()
         .then(res => {

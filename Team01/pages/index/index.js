@@ -36,12 +36,9 @@ Page({
     messageList: [],
 
 
-
-
     /**
      * Projects page's data
      */
-
     project: [],
 
 
@@ -292,7 +289,7 @@ Page({
         // console.log(res)
         if (res.data.length != 0) {
           this.setData({
-            project: this.data.project.concat(res.data[0])
+            project: this.data.project.concat(res.data)
           })
         }
         
