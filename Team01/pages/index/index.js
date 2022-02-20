@@ -281,6 +281,9 @@ Page({
         },
         {
           projectManager: _.eq(this.data.user._openid)
+        },
+        {
+          _openid: _.eq(this.data.user._openid)
         }
       ]))
       .get()
@@ -288,9 +291,11 @@ Page({
         // console.log("res = ")
         // console.log(res)
         if (res.data.length != 0) {
-          this.setData({
-            project: this.data.project.concat(res.data[0])
-          })
+          for (var idx in res.data) {
+            this.setData({
+              project: this.data.project.concat(res.data[idx])
+            })  
+          }
         }
         
         resolve("成功获取项目信息")
