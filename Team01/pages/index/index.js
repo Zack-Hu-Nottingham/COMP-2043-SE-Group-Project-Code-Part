@@ -283,13 +283,11 @@ Page({
           houseOwner: _.eq(this.data.userInfo._openid)
         },
         {
-          projectManager: _.eq(this.data.userInfo._openid)
+          _openid: _.eq(this.data.userInfo._openid)
         }
       ]))
       .get()
       .then(res => {
-        // console.log("res = ")
-        // console.log(res)
         if (res.data.length != 0) {
           this.setData({
             project: this.data.project.concat(res.data)
@@ -319,7 +317,6 @@ Page({
           })
         }
         
-        // this.data.task.push(res.data[0])
         resolve("成功获取任务信息")
       })
       .catch(err => {
@@ -490,7 +487,6 @@ Page({
 
   // 点击language展示选项
   onChangeLan(event) {
-    console.log('check')
     wx.navigateTo({
       url: '../more/languageSetting/languageSetting',
     })

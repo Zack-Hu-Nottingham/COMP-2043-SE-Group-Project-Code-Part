@@ -22,6 +22,7 @@ var Languague = {
      // more page
      user_name: "用户名",
      position: "职位",
+     identity: "身份",
      setting: "设置",
      more: "更多",
      sign_out: "登出",
@@ -30,6 +31,8 @@ var Languague = {
      more: "更多信息",
      setting: "设置",
      user_info: "用户信息",
+     confirm: "确认",
+     cancel: "取消",
 
      // language setting page
      current_lan: "当前语言",

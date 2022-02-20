@@ -100,12 +100,18 @@
 
 <van-cell-group inset>
   <van-cell center icon="user-o" />
-  <!-- title="{{dictionary.user_info}}" -->
   <van-cell center title="{{dictionary.user_name}}">
       <open-data type="userNickName"></open-data>
   </van-cell>
-  <van-cell center title="{{dictionary.position}}" value="{{position}}" />
-  <van-cell center title="{{dictionary.more}}" clickable="true" bindtap="onMoreInfo" class="moreInfoForTest">
+
+  <view wx:if="{{userInfo.isManager == 1}}">
+    <van-cell center title="{{ dictionary.identity }}" value="{{ dictionary.project_manager }}" />
+  </view>
+  <view wx:else>
+    <van-cell center title="{{ dictionary.identity }}" value="{{ dictionary.house_owner }}" />
+  </view>
+
+  <van-cell center title="{{ dictionary.more }}" clickable="true" bindtap="onMoreInfo" class="moreInfoForTest">
     <view>
       <van-icon name="ellipsis" />
     </view>

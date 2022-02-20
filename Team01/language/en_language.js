@@ -23,6 +23,7 @@ var Languague = {
     user_name: "User name",
     position: "Possition",
     setting: "Setting",
+    identity: "Identity",
     more: "More",
     sign_out: "Sign Out",
     invite_member: "Invite Member",
@@ -30,6 +31,9 @@ var Languague = {
     more: "More Information",
     setting: "Setting",
     user_info: "User Info",
+    confirm: "Confirm",
+    cancel: "Cancel",
+
 
      // language setting page
     current_lan: "Current language",
