@@ -7,11 +7,12 @@ cloud.init({
 
 // 云函数入口函数
 exports.main = async (event, context) => {
-  return cloud.database().collection('taskList')
+  return cloud.database().collection('task')
     .doc(event.id)
     .update({
     data: {
-      currentPriority: event.currentPriority
+      currentPriority: event.currentPriority,
+      state: event.state
       }
     })
 }

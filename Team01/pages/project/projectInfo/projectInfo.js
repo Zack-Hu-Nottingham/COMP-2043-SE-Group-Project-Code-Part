@@ -429,7 +429,6 @@ Page({
 
     project: {},
     owner: "",
-    feedback: [],
 
     // Task Management's data
     // These data should be filled in when the page is loaded
@@ -607,7 +606,7 @@ Page({
 
   clickNewTask(event) {
     wx.navigateTo({
-      url: '../newTask/newTask',
+      url: '../newTask/newTask?id=' + id,
     })
   },
 

@@ -34,7 +34,10 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-
+        var pages = getCurrentPages();
+        var currPage = pages[pages.length - 1];   //当前页面
+        var prevPage = pages[pages.length - 2];  //上一个页面
+        // console.log(prevPage.data.id);
         
         // 初始化语言
         var lan = wx.getStorageSync("languageVersion");
@@ -101,21 +104,11 @@ Page({
     },
 
     formSubmit: function (e) {
-        var pages = getCurrentPages();
-        var currPage = pages[pages.length - 1];   //当前页面
-        var prevPage = pages[pages.length - 2];  //上一个页面
-
         var feedBack = {type: this.data.selectedIndex, details: this.data.details, files: this.data.fileList};
         for(var i = 0; i< this.data.fileList.length; i++ ){
             this.uploadImage(this.data.fileList[i].url);
         }
-
-        var prevPageFeedback = prevPage.data.feedBack;
-        prevPageFeedback.push(feedBack);
         // 上传数据：
-        prevPage.setData({
-            feedBack: prevPageFeedback,
-        })
     },
 
 
