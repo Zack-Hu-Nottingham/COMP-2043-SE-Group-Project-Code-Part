@@ -14,7 +14,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    date: "",
+  
     /**
      * Global data
      */
@@ -244,9 +244,7 @@ Page({
       await this.getTaskInfo(this.data.project[idx]._id)
       console.log(this.data.project[idx])
     }
-
     this.getTodaysTask()
-    
   },
   
   // 获取user信息
@@ -327,43 +325,18 @@ Page({
 
   getTodaysTask() {
     //获取日期
-    var myDate = new Date();
-
-    var year = myDate.getFullYear();    //获取完整的年份(4位,1970-????)
-    var month = myDate.getMonth() + 1;       //获取当前月份(0-11,0代表1月)
-    var day = myDate.getDate();        //获取当前日(1-31)
-    var date = year + "" + month + "" + day
-
-    console.log(date)
-
+    var currentDate = new Date();
+    currentDate.toLocaleDateString();     //获取当前日期
+  
     for (var idx in this.data.task) {
-      var startTime = this.data.task[idx].startTime
-      var endTime = this.data.task[idx].endTime
-      var newStartTime = ""
-      var newEndTime = ""
-      for(var i in startTime) {
-        if(startTime[i] != '-'){
-          newStartTime.concat(startTime[i])
-        }
-      }
-      for(var j in endTime) {
-        if(endTime[i] != '-'){
-          newEndTime.concat(endTime[i])
-        }
-      }
-      var currentDate = new Date(date)
-      var startDate = new Date(newStartTime)
-      var endDate = new Date(newEndTime)
-
-      console.log("current date = " + currentDate)
-      console.log("current date = " + currentDate)
-      console.log("current date = " + currentDate)
+      var startDate = new Date(this.data.task[idx].startTime)
+      var endDate = new Date(this.data.task[idx].endTime)
+      
 
       if(currentDate >= startDate && currentDate <= endDate) {
         this.setData({
-          todaysTask: this.data.todaysTask.concat(res.data.task[idx])
+          todaysTask: this.data.todaysTask.concat(this.data.task[idx])
         })
-        console.log(this.data.todaysTask)
       }
     }
   },

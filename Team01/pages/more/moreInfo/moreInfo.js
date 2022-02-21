@@ -1,6 +1,7 @@
 // pages/more/moreInfo/moreInfo.js
 
 import Dialog from '../../../miniprogram_npm/@vant/weapp/dialog/dialog';
+import Toast from '../../../miniprogram_npm/@vant/weapp/toast/toast';
 
 const app = getApp();
 
@@ -106,17 +107,31 @@ Page({
     onShareAppMessage: function () {
 
     },
+   // forNotice: function (e) {
+     // Dialog.confirm({
+       // title:'是否修改',
+        //customStyle:'display= flex;flex-direction: column;',
+        //context: this,
+        // title: this.data.dictionary.change_lan_confirm,
+        // message: '弹窗内容',
+     // })
+        //.then(() => {
+          // on confirm
+       // })
+       // .catch(() => {
+          // on cancel
+         // return
+        //});
+
+    //}
     forNotice: function (e) {
-      Dialog.alert({
-        message: '已保存',
-        theme: 'round-button',
-        width: '300rpx',
-        height: '100%',
-        messageAlign: 'center'
-      }).then(() => {
-        // on close
+      Toast({
+        type: 'success',
+        message: '提交成功',
+        onClose: () => {
+           this.setData({ show: false});
+          //console.log('执行OnClose函数');
+        },
       });
-
     }
-
 })
