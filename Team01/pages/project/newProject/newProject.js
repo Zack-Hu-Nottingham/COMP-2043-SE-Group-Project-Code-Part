@@ -1,10 +1,12 @@
 // pages/project/newProject/newProject.js
 import Toast from '../../../miniprogram_npm/@vant/weapp/toast/toast'
+
 const languageUtils = require("../../../language/languageUtils");
+
 var app = getApp();
 
-
 const db = wx.cloud.database();
+
 Page({
     /**
      * 页面的初始数据
@@ -32,7 +34,83 @@ Page({
         fileList: [],
         owner: [],
         participant: [],
-        
+
+        project: "",
+        task: [],
+        template: [{
+          name: "泥水进场",
+          description: "泥水进场包含第一次放样和墙体堆筑",
+          belongTo: this.data.project,
+          currentPriority: "Normal",
+          startTime: "",
+          endTime: "",
+          participant: "",
+          state: 0,
+          tag: [],
+          duration: 2,
+
+        }, {
+          name: "水电布管",
+          description: "水电布管包含第二次精放样和水电施工",
+          belongTo: this.data.project,
+          currentPriority: "Normal",
+          startTime: "",
+          endTime: "",
+          participant: "",
+          state: 0,
+          tag: [],
+          duration: 2,
+
+        }, {
+          name: "木作工程",
+          description: "木作工程包含土木施工",
+          belongTo: this.data.project,
+          currentPriority: "Normal",
+          startTime: "",
+          endTime: "",
+          participant: "",
+          state: 0,
+          tag: [],
+          duration: 2,
+
+        }, {
+          name: "泥水工程",
+          description: "泥水工程包含地暖地面找平和瓷砖、石材进场",
+          belongTo: this.data.project,
+          currentPriority: "Normal",
+          startTime: "",
+          endTime: "",
+          participant: "",
+          state: 0,
+          tag: [],
+          duration: 2,
+
+        }, {
+          name: "油漆工程",
+          description: "油漆工程包含油工施工、成品安装、油漆修补",
+          belongTo: this.data.project,
+          currentPriority: "Normal",
+          startTime: "",
+          endTime: "",
+          participant: "",
+          state: 0,
+          tag: [],
+          duration: 2,
+
+        }, {
+          name: "后期安装项目",
+          description: "后期安装项目包含验收、软装摆场",
+          belongTo: this.data.project,
+          currentPriority: "Normal",
+          startTime: "",
+          endTime: "",
+          participant: "",
+          state: 0,
+          tag: [],
+          duration: 2,
+          
+          
+        }]
     },
     
      // 初始化语言
@@ -172,56 +250,76 @@ Page({
             Toast('No detail description');
         }  
         else{
-            wx.cloud.database().collection('project')
-              .add({
-                data:{
-                    name: this.data.name,
-                    startTime: this.data.startDate,
-                    endTime: this.data.endDate,
-                    projectDescription: this.data.description,
-                    projectManager: app.globalData.userInfo.openid,
-                    template: this.data.selectedTemplate,
-                    houseOwner: this.data.owner,
-                    participant: this.data.participant,
-                    feedback: [],
-                    fileList: this.data.fileList,
-                }
-              })
-              .then(res => {
-                console.log('添加成功', res)
-              })
-              .catch(res => {
-                console.log('添加失败', res) 
+          // 根据输入先创建一个项目，此时task列表为空
+          wx.cloud.database().collection('project')
+            .add({
+              data:{
+                  name: this.data.name,
+                  startTime: this.data.startDate,
+                  endTime: this.data.endDate,
+                  projectDescription: this.data.description,
+                  projectManager: app.globalData.userInfo.openid,
+                  template: this.data.selectedTemplate,
+                  houseOwner: this.data.owner,
+                  participant: this.data.participant,
+                  feedback: [],
+                  fileList: this.data.fileList,
+
+                  completed: [],
+                  delayed: [],
+                  task: [],
+                  unstarted: [],
+                  progressing: [],
+
+              }
+            })
+            .then(res => {
+              this.setData({
+                project: res._id
               })
 
-              this.action();
+              // 根据模板创建新的子task
+              this.createTask()
+              .then(() => {
+
+              })
+              .catch(() => {
+
+              })
+
+            })
+            .catch(res => {
+              console.log('新建项目失败，请联系管理员', res) 
+            })
+
+            // this.action();
               
         }
         
     },
-    action(){
 
-              //提交动画
-              this.setData({
-                isLoading: true,
-            })
-            setTimeout(res =>{
-                Toast({
-                    forbidClick: 'true',
-                    type: 'success',
-                    message: 'Success!',
-                  });
-            },1500)
-            setTimeout(res =>{
-                this.setData({
-                    isLoading: false
-                })
-            },2400)
-            setTimeout(res =>{
-                wx.navigateTo({
-                  url: '../../index/index',
-                })
-            },2500)
+    action(){
+      //提交动画
+      this.setData({
+        isLoading: true,
+      })
+      setTimeout(res =>{
+          Toast({
+              forbidClick: 'true',
+              type: 'success',
+              message: 'Success!',
+            });
+      },1500)
+      setTimeout(res =>{
+          this.setData({
+              isLoading: false
+          })
+      },2400)
+      setTimeout(res =>{
+          wx.navigateTo({
+            url: '../../index/index',
+          })
+      },2500)
     },
 
     // calendar 的配套method
@@ -234,34 +332,67 @@ Page({
     },
 
     formatDate(date) {
-        date = new Date(date);
-        // return `${date.getMonth() + 1}/${date.getDate()}`;
-        return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
-      },
-    
-      onDateConfirm(event) {
-        const [start, end] = event.detail;
-        this.setData({
-            startDate: this.formatDate(start),
-            endDate: this.formatDate(end)
-        })
-        this.onDateClose();
+      date = new Date(date);
+      // return `${date.getMonth() + 1}/${date.getDate()}`;
+      return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+    },
+  
+    onDateConfirm(event) {
+      const [start, end] = event.detail;
+      this.setData({
+          startDate: this.formatDate(start),
+          endDate: this.formatDate(end)
+      })
+      this.onDateClose();
 
-    
-        // //调用云函数，更新数据库中日期
-        // wx.cloud.callFunction({
-        //   name: 'updateProjectDate',
-        //   data:{
-        //     id: id,
-        //     startTime: `${start.getFullYear()}-${start.getMonth() + 1}-${start.getDate()}`,
-        //     endTime: `${end.getFullYear()}-${end.getMonth() + 1}-${end.getDate()}`
-        //   }
-        // }).then(res => {
-        //   console.log('project日期更新成功', res),
-        //   this.getDetail()
-        // }).catch(res => {
-        //   console.log('project日期更新失败', res)
-        // })
-      },
+  
+      // //调用云函数，更新数据库中日期
+      // wx.cloud.callFunction({
+      //   name: 'updateProjectDate',
+      //   data:{
+      //     id: id,
+      //     startTime: `${start.getFullYear()}-${start.getMonth() + 1}-${start.getDate()}`,
+      //     endTime: `${end.getFullYear()}-${end.getMonth() + 1}-${end.getDate()}`
+      //   }
+      // }).then(res => {
+      //   console.log('project日期更新成功', res),
+      //   this.getDetail()
+      // }).catch(res => {
+      //   console.log('project日期更新失败', res)
+      // })
+    },
+
+    modifyTemplate() {
+
+    },
+
+    createTask() {
+      return new Promise((resolve, reject) => {
+        db.collection('task')
+        .add({
+          data: {
+            name: "",
+            description: "",
+            belongTo: this.data.project,
+            currentPriority: "",
+            startTime: "",
+            endTime: "",
+            participant: "",
+            state: 0,
+            tag: [],
+          }
+        })
+        .then(res => {
+          this.setData({
+            task: this.data.task.concat(res._id)
+          })
+          resolve()
+        })
+        .catch(res => { 
+          reject()
+        })
+      })
+      
+    },
 
 })

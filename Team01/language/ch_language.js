@@ -22,6 +22,7 @@ var Languague = {
      // more page
      user_name: "用户名",
      position: "职位",
+     identity: "身份",
      setting: "设置",
      more: "更多",
      sign_out: "登出",
@@ -30,6 +31,8 @@ var Languague = {
      more: "更多信息",
      setting: "设置",
      user_info: "用户信息",
+     confirm: "确认",
+     cancel: "取消",
 
      // language setting page
      current_lan: "当前语言",
@@ -39,10 +42,11 @@ var Languague = {
      change_lan_confirm: "确认切换语言",
 
     // Project information page
+    project_manager: "项目管理者",
     project_info: "项目信息",
     task_management: "任务管理",
     gantt_diagram: "甘特图",
-    owner: "负责人",
+    owner: "房屋主人",
     start_time: "开始时间",
     end_time: "结束时间",
     description: "描述",

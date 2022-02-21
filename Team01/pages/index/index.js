@@ -14,12 +14,11 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+  
     /**
      * Global data
      */
     openid: "",
-    user: [],
     userInfo: {},
 
     active: 2,
@@ -46,12 +45,11 @@ Page({
      * Dashboard page's data
      */
     task:[],
-
+    todaysTask:[],
 
     /**
      * More page's data
      */
-    userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     canIUseGetUserProfile: false,
@@ -246,7 +244,7 @@ Page({
       await this.getTaskInfo(this.data.project[idx]._id)
       console.log(this.data.project[idx])
     }
-    
+    this.getTodaysTask()
   },
   
   // 获取user信息
@@ -260,8 +258,11 @@ Page({
       .then(res => {
         console.log(res)
         this.setData({
-          user: res.data[0]
+          userInfo: res.data[0]
         })
+        app.globalData.userInfo = res.data[0]
+        console.log("app data")
+        console.log(app.globalData.userInfo)
         resolve("成功获取用户数据");
       })
       .catch(err => {
@@ -277,16 +278,14 @@ Page({
       db.collection('project')
       .where(_.or([
         {
-          houseOwner: _.eq(this.data.user._openid)
+          houseOwner: _.eq(this.data.userInfo._openid)
         },
         {
-          projectManager: _.eq(this.data.user._openid)
+          _openid: _.eq(this.data.userInfo._openid)
         }
       ]))
       .get()
       .then(res => {
-        // console.log("res = ")
-        // console.log(res)
         if (res.data.length != 0) {
           this.setData({
             project: this.data.project.concat(res.data)
@@ -316,13 +315,30 @@ Page({
           })
         }
         
-        // this.data.task.push(res.data[0])
         resolve("成功获取任务信息")
       })
       .catch(err => {
         reject("请求任务信息失败")
       })
     })
+  },
+
+  getTodaysTask() {
+    //获取日期
+    var currentDate = new Date();
+    currentDate.toLocaleDateString();     //获取当前日期
+  
+    for (var idx in this.data.task) {
+      var startDate = new Date(this.data.task[idx].startTime)
+      var endDate = new Date(this.data.task[idx].endTime)
+      
+
+      if(currentDate >= startDate && currentDate <= endDate) {
+        this.setData({
+          todaysTask: this.data.todaysTask.concat(this.data.task[idx])
+        })
+      }
+    }
   },
 
   // 更改tab选项时对应的逻辑
@@ -444,7 +460,6 @@ Page({
 
   // 点击language展示选项
   onChangeLan(event) {
-    console.log('check')
     wx.navigateTo({
       url: '../more/languageSetting/languageSetting',
     })

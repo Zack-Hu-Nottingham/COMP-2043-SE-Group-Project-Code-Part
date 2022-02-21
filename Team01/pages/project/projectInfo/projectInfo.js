@@ -428,7 +428,9 @@ Page({
 
 
     project: {},
-    owner: "",
+    userInfo: {},
+    houseOwner: {},
+    projectManager: {},
     feedback: [],
 
     // Task Management's data
@@ -451,6 +453,8 @@ Page({
     this.setData({
       currentTab: e.currentTarget.dataset.idx
     })
+
+    // 载入task management页面的数据
     if (this.data.currentTab == 1) {
 
       db.collection("task")
@@ -540,6 +544,7 @@ Page({
             title: this.data.name,
           }),
 
+          this.getHouseOwner()
           this.getProjectManager()
         },
         fail: function(err) {
@@ -547,6 +552,22 @@ Page({
         }
       })
     
+  },
+
+  getHouseOwner() {
+    return new Promise((resolve, reject) => {
+    db.collection('user')
+      .where({
+        _openid: _.eq(this.data.project.houseOwner)
+      })
+      .get()
+      .then(res => {
+        // console.log(res.data[0])
+        this.setData({
+          houseOwner: res.data[0]
+        })
+      })
+    })
   },
 
   getProjectManager() {
@@ -557,13 +578,12 @@ Page({
       })
       .get()
       .then(res => {
-        console.log(res)
+        // console.log(res.data[0])
         this.setData({
-          owner: res.data[0].name
+          projectManager: res.data[0]
         })
       })
     })
-    
   },
 
   // Project Information's method
@@ -585,7 +605,6 @@ Page({
   onDateConfirm(event) {
     const [start, end] = event.detail;
     this.onDateClose();
-
     //调用云函数，更新数据库中日期
     wx.cloud.callFunction({
       name: 'updateProjectDate',
@@ -649,6 +668,11 @@ Page({
     // 从数据库中根据id获取数据
     this.getDetail()
 
+    // 获取userInfo
+    this.setData({
+      userInfo: app.globalData.userInfo
+    })
+
   },
 
 
@@ -703,7 +727,7 @@ Page({
 
   onProjectBlur: function(e){
     console.log(e.detail.value)
-
+    
     wx.cloud.callFunction({
       name: 'updateProjectDescription',
       data:{
@@ -711,10 +735,10 @@ Page({
         projectDescription: e.detail.value
       }
     }).then(res => {
-      console.log('调用云函数成功', res),
+      console.log('调用云函数修改项目描述成功', res),
       this.getDetail()
     }).catch(res => {
-      console.log('调用云函数失败', res)
+      console.log('调用云函数修改项目描述失败', res)
     })
   },
 
@@ -728,10 +752,10 @@ Page({
         stateDescription: e.detail.value
       }
     }).then(res => {
-      console.log('调用云函数成功', res),
-      this.go_update();
+      console.log('调用云函数修改项目状态描述成功', res),
+      this.getDetail()
     }).catch(res => {
-      console.log('调用云函数失败', res)
+      console.log('调用云函数修改项目状态描述失败', res)
     })
   },
 
