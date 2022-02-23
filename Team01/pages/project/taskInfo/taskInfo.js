@@ -1,8 +1,7 @@
 // pages/project/taskInfo/taskInfo.js
 
 const languageUtils = require("../../../language/languageUtils");
-const db = wx.cloud.database();
-const _ = db.command;
+
 var id = ''
 
 Page({
@@ -127,13 +126,12 @@ Page({
   
   onConfirm(event) {
     const [start, end] = event.detail;
-    this.onClose();
-    // this.setData({
-    //   startTime: this.formatDate(start),
-    //   endTime: this.formatDate(end),
-    //   dateShow: false,
-    //   date: `${this.formatDate(start)} - ${this.formatDate(end)}`,
-    // });
+    this.setData({
+      startTime: this.formatDate(start),
+      endTime: this.formatDate(end),
+      dateShow: false,
+      date: `${this.formatDate(start)} - ${this.formatDate(end)}`,
+    });
 
     //调用云函数
     wx.cloud.callFunction({
@@ -152,7 +150,7 @@ Page({
   },
 
   getDetail(){
-    db.collection('task')
+    wx.cloud.database().collection('task')
       .doc(id)
       .get()
       .then(res => {
@@ -170,7 +168,7 @@ Page({
       })
       .then(res => {
         console.log(this.data.taskPage.belongTo)
-       db.collection('project')
+        wx.cloud.database().collection('project')
         .doc(this.data.taskPage.belongTo)
         .get()
         .then(res => {
@@ -194,23 +192,6 @@ Page({
   clickAddComment(event) {
     wx.navigateTo({
       url: '../addComment/addComment',
-    })
-  },
-
-  onTaskDescriptionBlur: function(e){
-    console.log(e.detail.value)
-
-    wx.cloud.callFunction({
-      name: 'updateTaskDescription',
-      data:{
-        id: id,
-        descriptions: e.detail.value
-      }
-    }).then(res => {
-      console.log('调用云函数修改任务描述成功', res),
-      this.getDetail()
-    }).catch(res => {
-      console.log('调用云函数修改任务描述失败', res)
     })
   },
 

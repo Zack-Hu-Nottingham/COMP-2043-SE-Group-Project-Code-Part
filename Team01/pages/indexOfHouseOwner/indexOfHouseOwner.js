@@ -286,12 +286,6 @@ Page({
         {
           houseOwner: _.eq(this.data.user._openid)
         },
-        {
-          projectManager: _.eq(this.data.user._openid)
-        },
-        {
-          _openid: _.eq(this.data.user._openid)
-        }
       ]))
       .get()
       .then(res => {
@@ -356,32 +350,6 @@ Page({
     });
   },
 
-
-  /**
-   * Create Project page's method
-   */
-  clickNewProject(event) {
-    wx.navigateTo({
-      url: '../project/newProject/newProject',
-    })
-  },
-
-  /**
-   * Message page's method
-   */
-  clickMessage(event) {
-    wx.navigateTo({
-      url: '../message/message/message?sender=' + event.target.id,
-    })
-  },
-
-  // 点击通知
-  clickNotification(event) {
-
-  },
-
-
-
    
   /**
    * Project page's method
@@ -392,9 +360,10 @@ Page({
     })
   },
 
-  clickStatisticReport(event) {
+  clickProjectReport(event) {
+    console.log(this.data.project[0]._id)
     wx.navigateTo({
-      url: '../project/statisticReport/statisticReport',
+      url: '../project/projectReport/projectReport?id=' + this.data.project[0]._id,
     })
   },
 

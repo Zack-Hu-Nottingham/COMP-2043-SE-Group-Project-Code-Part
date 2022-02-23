@@ -7,56 +7,18 @@
 
 <!-- Bottom tabbar -->
 <van-tabbar active="{{ active }}" bind:change="onChangeTab">
-  <van-tabbar-item icon="chat-o">{{dictionary.message_page}}</van-tabbar-item>
-  <van-tabbar-item icon="notes-o">{{dictionary.project_page}}</van-tabbar-item>
   <van-tabbar-item icon="home-o">{{dictionary.dashboard_page}}</van-tabbar-item>
   <van-tabbar-item icon="friends-o">{{dictionary.more_page}}</van-tabbar-item>
 </van-tabbar>
 
-
-<!-- Message page -->
-<view wx:if="{{active == 0}}">
-  <van-cell-group inset style="padding: 30rpx;">
-    <van-cell center title="{{dictionary.notification}}" icon="bullhorn-o" size="large" label="{{messageList[0].sender}}: {{messageList[0].content}}" value="{{messageList[0].timeStamp}}" clickable="true" bindtap="clickNotification" >
-    </van-cell>
-  </van-cell-group>
-
-  <van-cell-group inset style="padding: 30rpx;" title="{{dictionary.recent_message}}">
-    <view wx:for="{{messageList}}" wx:key="index">
-      <van-cell  title="{{item.sender}}" clickable="true" bindtap="clickMessage" label="{{item.content}}" value="{{item.timeStamp}}" id="{{item.sender}}" class="messageForTest"/>
-    </view>
-  </van-cell-group>
-</view>
-
-
-
-<!-- Projects page -->
-<view wx:elif="{{active == 1}}">
-
-  <van-cell-group inset style="padding: 30rpx;">
-    <van-cell center title="{{dictionary.my_task}}" icon="user-o" clickable="true" bindtap="clickMyTask" class="myTaskForTest"/>
-    <van-cell center title=" {{dictionary.statistic_report}}" icon="bar-chart-o" clickable="true" bindtap="clickStatisticReport" class="statisticReportForTest"/>
-  </van-cell-group>
-
-  <van-cell-group inset style="padding: 30rpx;" title="{{dictionary.project_list}}">
-    <view wx:for="{{project}}" wx:key="index">
-      <van-cell icon="todo-list-o" title="{{item.name}}" clickable="true" bindtap="clickProject" data-id="{{item._id}}" class="projectForTest"/>
-    </view>
-  </van-cell-group>
-
-  <van-sticky offset-top="{{ 570 }}">
-  <van-button hairline plain round block type="info" bindtap="clickNewProject" class="createNewProjectForTest">{{dictionary.create_new_project}}</van-button>
-</van-sticky>
-</view>
-
-
-
 <!-- Dashboard page -->
-<view wx:elif="{{active == 2}}">
+<view wx:if="{{active == 0}}">
 
-  <van-cell-group style="padding: 30rpx;" inset >
-    <van-cell title="{{dictionary.today_task}}" icon="todo-list-o" />
+  <van-cell-group inset style="padding: 30rpx;">
+    <van-cell center title=" {{dictionary.statistic_report}}" icon="bar-chart-o" clickable="true" bindtap="clickProjectReport" class="statisticReportForTest"/>
+  </van-cell-group>
 
+  <van-cell-group inset style="padding: 30rpx;" title="{{dictionary.task_list}}">
     <view wx:for="{{task}}" wx:key="index">
       <van-cell title="{{item.name}}" label="{{item.startTime}} - {{item.endTime}}" clickable="true" bindtap="clickTask" data-id="{{item._id}}" class="taskForTest"> 
 
@@ -87,7 +49,7 @@
 
 
 <!-- More page -->
-<view wx:elif="{{active == 3}}">
+<view wx:elif="{{active == 1}}">
 
 <view wx:if="{{canIUseOpenData}}">
   <view class="userinfo-avatar">

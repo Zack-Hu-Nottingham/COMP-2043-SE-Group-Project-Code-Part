@@ -1,8 +1,8 @@
 // pages/contact/contactList/contactList.js
 const languageUtils = require("../../../language/languageUtils");
 const app = getApp();
+var id = '';
 const db = wx.cloud.database();
-const _ = db.command;
 Page({
     // Additional feature: 已被选中的项目在下次展示时会置顶显示（云端调取）
     data: {
@@ -11,23 +11,47 @@ Page({
         languageList: ["简体中文", "English"],
         result: [],
         owners: [],
-        // isManager: 
-        // 0 - House Owner
-        // 1 - Project Manager
-        // 2 - follower
-        list: [],
+        list: [{
+          //user data
+          _id: '1',
+          name: 'zzz',
+          position: 'Project Manager',
+          isProjectManager: '1',
+          contactNumber: '186',
+      },{
+        //user data
+        _id: '2',
+        name: 'yyy',
+        position: 'House Owner',
+        isProjectManager: '0',
+        contactNumber: '186',
+    },{
+        //user data
+        _id: '3',
+        name: 'xxx',
+        position: 'Construction Team',
+        isProjectManager: '2',
+        contactNumber: '186',
+    },{
+        //user data
+        _id: '4',
+        name: 'www',
+        position: 'Construction Team',
+        isProjectManager: '2',
+        contactNumber: '186',
+    },{
+        //user data
+        _id: '5',
+        name: 'vvv',
+        position: 'Construction Team',
+        contactNumber: '186',
+    },],
     },
 
-    onLoad(options){
-        //按首字母顺序排序联系人列表(先英后中)
-        db.collection('user')
-        .orderBy('name','asc')
-        .get()
-        .then(res => {
-            console.log(res.data)
-        })
-
-        this.getList(options.index);
+    onLoad(){
+        var pages = getCurrentPages();
+        var currPage = pages[pages.length - 1];   //当前页面
+        var prevPage = pages[pages.length - 2];  //上一个页面
 
         // 初始化语言
         var lan = wx.getStorageSync("languageVersion");
@@ -35,36 +59,18 @@ Page({
         this.setData({
         language: lan
         })
-    },
 
-    getList(index){
-        return new Promise((resolve, reject) => {
-            db.collection('user')
-            .where({
-              isManager: _.eq(parseInt(index))
-            })
-            .get()
-            .then(res => {
-              console.log(res)
-              this.setData({
-                list: res.data
-              })
-            })
-          })
+        console.log(prevPage.data.houseOwner)
+
+
     },
   
     onChange(event) {
-
-    //   this.setData({
-    //     result: event.detail,
-    //   });
-      // console.log(this.data.result);
-      for(var i=0; i<event.detail.length; i++){
-          this.data.result.push(this.data.list[i].id);
-      }
-      console.log(this.data.result);
+        console.log(event.detail)
+      this.setData({
+        result: event.detail,
+      });
     },
-
     bindTouchStart: function(e) {
         this.startTime = e.timeStamp;
     },
@@ -83,7 +89,7 @@ Page({
     bindLongTap: function (event) {
         const { index } = event.currentTarget.dataset;
         wx.setClipboardData({
-            data: this.data.list[index].phone,success: function () {
+            data: this.data.list[index].contactNumber,success: function () {
               wx.showToast({
                 title: '已复制用户电话',
                 icon: 'none',

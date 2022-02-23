@@ -18,12 +18,12 @@ var Languague = {
 
     // dashboard page
     today_task: "Today's Task",
+    task_list: "Task List",
 
     // more page
     user_name: "User name",
     position: "Possition",
     setting: "Setting",
-    identity: "Identity",
     more: "More",
     sign_out: "Sign Out",
     invite_member: "Invite Member",
@@ -31,9 +31,6 @@ var Languague = {
     more: "More Information",
     setting: "Setting",
     user_info: "User Info",
-    confirm: "Confirm",
-    cancel: "Cancel",
-
 
      // language setting page
     current_lan: "Current language",
@@ -43,15 +40,13 @@ var Languague = {
     change_lan_confirm: "Confirm change language",
     
     // Project information page
-    project_manager: "Project Manager",
     project_info: "Project Information",
     task_management: "Task Management",
     gantt_diagram: "Gantt Diagram",
-    owner: "House Owner",
+    owner: "Owner",
     start_time: "Start Time",
     end_time: "End Time",
     description: "Description",
-    description_hint: "less than 500 words",
     state_information: "State Information",
     current_state: "Current State",
     task_progress: "Task Progress",
@@ -86,11 +81,6 @@ var Languague = {
       // Comment page
    comment_title:"Feedback",
    select_feedback:"Select feedback type",
-   submitErrMsg1:"Feedback type is null",
-   submitErrMsg2:"Description is null",
-   feedback_type0:"Project Delay",
-   feedback_type1:"Task Delay",
-   feedback_type2:"Task need rework",
     
  },
 };

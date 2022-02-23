@@ -18,11 +18,11 @@ var Languague = {
 
      // dashboard page
      today_task: "今天的任务",
+     task_list: "任务列表",
 
      // more page
      user_name: "用户名",
      position: "职位",
-     identity: "身份",
      setting: "设置",
      more: "更多",
      sign_out: "登出",
@@ -31,8 +31,6 @@ var Languague = {
      more: "更多信息",
      setting: "设置",
      user_info: "用户信息",
-     confirm: "确认",
-     cancel: "取消",
 
      // language setting page
      current_lan: "当前语言",
@@ -42,15 +40,13 @@ var Languague = {
      change_lan_confirm: "确认切换语言",
 
     // Project information page
-    project_manager: "项目管理者",
     project_info: "项目信息",
     task_management: "任务管理",
     gantt_diagram: "甘特图",
-    owner: "房屋主人",
+    owner: "负责人",
     start_time: "开始时间",
     end_time: "结束时间",
     description: "描述",
-    description_hint: "少于500字",
     state_information: "状态信息",
     current_state: "当前状态",
     task_progress: "任务进度",
@@ -84,11 +80,6 @@ var Languague = {
     // Comment page
     comment_title:"反馈",
     select_feedback:"选择反馈类型",
-    submitErrMsg1:"反馈类型为空",
-    submitErrMsg2:"描述为空",
-    feedback_type0:"项目延期",
-    feedback_type1:"任务延期",
-    feedback_type2:"任务需返工",
 
    },
 };

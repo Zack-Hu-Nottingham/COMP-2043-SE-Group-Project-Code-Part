@@ -1,9 +1,5 @@
 // pages/project/addComment/addComment.js
-import Toast from '../../../miniprogram_npm/@vant/weapp/toast/toast'
 const languageUtils = require("../../../language/languageUtils");
-const app = getApp();
-const db = wx.cloud.database();
-
 Page({
 
     /**
@@ -18,52 +14,36 @@ Page({
         selectedIndex: '',
 
         showFeedback: false,
-        feedbackType: [],
+        feedbackValue: [{
+            "name": "Project Delay",
+            "value": '0'
+        },{
+            "name": "Task Delay",
+            "value": '1'
+        },{
+            "name": "Task need rework",
+            "value": '2'
+        }],
         fileList: [],
+        imageURL: '',
         details: '',
-        feedback: [],
-        id: '',
-
-        isLoading: false,
 
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad: function (options) { 
-        this.setData({
-            id: options.id,
-        })
-        // console.log(this.data.createTime);
-        db.collection('project').doc(options.id).get().then(res => {
-            // res.data 包含该记录的数据
-            this.setData({
-                feedback: res.data.feedback,
-            })
-          })
+    onLoad: function (options) {
+        var pages = getCurrentPages();
+        var currPage = pages[pages.length - 1];   //当前页面
+        var prevPage = pages[pages.length - 2];  //上一个页面
+        // console.log(prevPage.data.id);
         
         // 初始化语言
         var lan = wx.getStorageSync("languageVersion");
         this.initLanguage();
         this.setData({
             language: lan
-        })
-        this.setData({
-            //feedback type:
-            // 0 - Project Delay
-            // 1 - Task Delay
-            // 2 - Task need rework
-            feedbackType: [{
-                "name": this.data.dictionary.feedback_type0,
-                "value": '0'
-            },{
-                "name": this.data.dictionary.feedback_type1,
-                "value": '1'
-            },{
-                "name": this.data.dictionary.feedback_type2,
-                "value": '2'
-            }],
         })
 
         // 设置
@@ -91,28 +71,30 @@ Page({
     onSelectFeedback(event) {
         // console.log(event.detail.value);
         this.setData({
-            selectedFeedback: this.data.feedbackType[event.detail.value].name,
-            selectedIndex: this.data.feedbackType[event.detail.value].value,
+            selectedFeedback: this.data.feedbackValue[event.detail.value].name,
+            selectedIndex: this.data.feedbackValue[event.detail.value].value,
         })
     },
 
     upload(){
+        var that = this;
         wx.chooseImage({
           count: 1,
           sizeType: ['original', 'compressed'],
           sourceType: ['album', 'camera'],
-          success:res => {
-            var fileList = this.data.fileList;
+          success(res) {
+            var fileList = that.data.fileList;
             fileList.push({url: res.tempFilePaths[0]});
-            this.setData({ fileList: fileList });
+            that.setData({ fileList: fileList });
             console.log("成功选择图片",fileList);
+            // that.uploadImage(res.tempFilePaths[0]);
           }
         })
       },
 
     uploadImage(fileURL) {
         wx.cloud.uploadFile({
-          cloudPath: 'feedback/'+ this.data.id + '/' + new Date().getTime() +'.png', // 上传至云端的路径
+          cloudPath: 'feedBack/'+ new Date().getTime() +'.png', // 上传至云端的路径
           filePath: fileURL, // 小程序临时文件路径
           success: res => {
             console.log("图片上传成功",res)
@@ -121,64 +103,13 @@ Page({
         })
     },
 
-
     formSubmit: function (e) {
-        if (this.data.selectedIndex == ''){
-            Toast(this.data.dictionary.submitErrMsg1)
+        var feedBack = {type: this.data.selectedIndex, details: this.data.details, files: this.data.fileList};
+        for(var i = 0; i< this.data.fileList.length; i++ ){
+            this.uploadImage(this.data.fileList[i].url);
         }
-        else if (this.data.details == ''){
-            Toast(this.data.dictionary.submitErrMsg2)
-        }
-        else {
-            this.data.feedback.push({
-                type: this.data.feedbackType[this.data.selectedIndex], //反馈类型
-                description: this.data.details, //反馈描述
-                fileList: this.data.fileList, //文件列表
-                owner: app.globalData.userInfo.openid, //创建人
-                belongTo: this.data.id, //所属项目/任务
-                createTime: this.formatDate(new Date()),
-            })
-            console.log(this.data.feedback)
-            db.collection('project').doc(this.data.id).update({
-                // data 传入需要局部更新的数据
-                data: {
-                  feedback: this.data.feedback
-                },
-                success: function(res) {
-                  console.log(res.data.feedback)
-                }
-              })
-    
-            for(var i = 0; i< this.data.fileList.length; i++ ){
-                this.uploadImage(this.data.fileList[i].url);
-            }
-            this.action();
-        }
-
+        // 上传数据：
     },
-    action: function(e){
-        this.setData({
-            isLoading: true,
-        })
-        setTimeout(res =>{
-            Toast({
-                forbidClick: 'true',
-                type: 'success',
-                message: 'Success!',
-              });
-        },1500)
-        setTimeout(res =>{
-            this.setData({
-                isLoading: false
-            })
-        },2400)
-        setTimeout(res =>{
-            wx.navigateBack({
-              delta: 1,
-            })
-        },2500)
-    },
-
 
 
     // 初始化语言
@@ -192,10 +123,4 @@ Page({
         dictionary: lang.lang.index,
         });
     },
-
-    formatDate(date) {
-        date = new Date(date);
-        // return `${date.getMonth() + 1}/${date.getDate()}`;
-        return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
-      },
 })
