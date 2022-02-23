@@ -23,7 +23,7 @@
     <van-cell title="{{ dictionary.project_manager }}" value="{{ projectManager.name }}" />
     
     <view wx:if="{{userInfo.isManager == 1}}">
-      <van-field model:value="{{ project.projectDescription }}" right clearable label="{{ dictionary.description }}" type="textarea" placeholder="{{ project.projectDescription }}" border="{{ false }}" class="projectInfoDescriptionForTest" bind:blur="onProjectBlur"></van-field>
+      <van-field model:value="{{ project.projectDescription }}" right clearable label="{{ dictionary.description }}" type="textarea" placeholder="{{ project.projectDescription }}" border="{{ false }}" class="projectInfoDescriptionForTest" bind:blur="onProjectBlur" autosize></van-field>
     </view>
 
     <view wx:else>

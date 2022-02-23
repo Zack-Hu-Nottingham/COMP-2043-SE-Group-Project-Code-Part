@@ -17,21 +17,8 @@ Page({
         selectedFeedback: '',
         selectedIndex: '',
 
-        //feedback type:
-        // 0 - Project Delay
-        // 1 - Task Delay
-        // 2 - Task need rework
         showFeedback: false,
-        feedbackValue: [{
-            "name": "Project Delay",
-            "value": '0'
-        },{
-            "name": "Task Delay",
-            "value": '1'
-        },{
-            "name": "Task need rework",
-            "value": '2'
-        }],
+        feedbackType: [],
         fileList: [],
         details: '',
         feedback: [],
@@ -62,6 +49,22 @@ Page({
         this.setData({
             language: lan
         })
+        this.setData({
+            //feedback type:
+            // 0 - Project Delay
+            // 1 - Task Delay
+            // 2 - Task need rework
+            feedbackType: [{
+                "name": this.data.dictionary.feedback_type0,
+                "value": '0'
+            },{
+                "name": this.data.dictionary.feedback_type1,
+                "value": '1'
+            },{
+                "name": this.data.dictionary.feedback_type2,
+                "value": '2'
+            }],
+        })
 
         // 设置
         wx.setNavigationBarTitle({
@@ -88,8 +91,8 @@ Page({
     onSelectFeedback(event) {
         // console.log(event.detail.value);
         this.setData({
-            selectedFeedback: this.data.feedbackValue[event.detail.value].name,
-            selectedIndex: this.data.feedbackValue[event.detail.value].value,
+            selectedFeedback: this.data.feedbackType[event.detail.value].name,
+            selectedIndex: this.data.feedbackType[event.detail.value].value,
         })
     },
 
@@ -121,18 +124,18 @@ Page({
 
     formSubmit: function (e) {
         if (this.data.selectedIndex == ''){
-            Toast('Feedback type is null')
+            Toast(this.data.dictionary.submitErrMsg1)
         }
         else if (this.data.details == ''){
-            Toast('Description is null')
+            Toast(this.data.dictionary.submitErrMsg2)
         }
         else {
             this.data.feedback.push({
-                type: this.data.selectedIndex, 
-                details: this.data.details, 
-                fileList: this.data.fileList,
-                owner: app.globalData.userInfo.openid,
-                id: this.data.id,
+                type: this.data.feedbackType[this.data.selectedIndex], //反馈类型
+                description: this.data.details, //反馈描述
+                fileList: this.data.fileList, //文件列表
+                owner: app.globalData.userInfo.openid, //创建人
+                belongTo: this.data.id, //所属项目/任务
                 createTime: this.formatDate(new Date()),
             })
             console.log(this.data.feedback)

@@ -35,6 +35,12 @@
                     "pathName": "pages/project/contactList/contactList",
                     "query": "",
                     "scene": null
+                },
+                {
+                    "name": "",
+                    "pathName": "pages/project/newProject/newProject",
+                    "query": "",
+                    "scene": null
                 }
             ]
         }

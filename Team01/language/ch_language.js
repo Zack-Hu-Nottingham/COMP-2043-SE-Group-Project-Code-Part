@@ -50,6 +50,7 @@ var Languague = {
     start_time: "开始时间",
     end_time: "结束时间",
     description: "描述",
+    description_hint: "少于500字",
     state_information: "状态信息",
     current_state: "当前状态",
     task_progress: "任务进度",
@@ -83,6 +84,11 @@ var Languague = {
     // Comment page
     comment_title:"反馈",
     select_feedback:"选择反馈类型",
+    submitErrMsg1:"反馈类型为空",
+    submitErrMsg2:"描述为空",
+    feedback_type0:"项目延期",
+    feedback_type1:"任务延期",
+    feedback_type2:"任务需返工",
 
    },
 };

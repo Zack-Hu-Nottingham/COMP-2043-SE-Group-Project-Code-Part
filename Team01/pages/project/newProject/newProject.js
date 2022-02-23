@@ -34,6 +34,8 @@ Page({
         fileList: [],
         houseOwner: "",
         participant: [],
+        ownerPage: 0,
+        participantPage: 2,
 
         project: "",
         task: [],
@@ -110,7 +112,7 @@ Page({
           duration: 2,
           
           
-        }]
+        // }]
     },
     
      // 初始化语言
@@ -203,9 +205,15 @@ Page({
     
     changeOwner(){
         wx.navigateTo({
-          url: '../../contact/contactList/contactList',
+          url: '../../project/contactList/contactList?index='+this.data.ownerPage,
         })
     },
+
+    changeFollower(){
+      wx.navigateTo({
+        url: '../../project/contactList/contactList?index='+this.data.participantPage,
+      })
+  },
 
     // 选择模板
     selectTemplate: function(){
@@ -218,7 +226,7 @@ Page({
           sizeType: ['original', 'compressed'],
           sourceType: ['album', 'camera'],
           success:res => {
-            var fileList = that.data.fileList;
+            var fileList = this.data.fileList;
             fileList.push({url: res.tempFilePaths[0]});
             this.setData({ fileList: fileList });
             console.log("成功选择图片",fileList);
