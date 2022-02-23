@@ -1,2 +1,2 @@
 <!--pages/project/testDiagram/testDiagram.wxml-->
-<text>pages/project/testDiagram/testDiagram.wxml</text>
+<web-view src="https://www.highcharts.com.cn/samples/highcharts/hc-others/x-range"></web-view>
