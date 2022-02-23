@@ -429,8 +429,8 @@ Page({
 
     project: {},
     userInfo: {},
-    houseOwner: {},
-    projectManager: {},
+    houseOwner: "",
+    projectManager: "",
     feedback: [],
 
     // Task Management's data
@@ -574,7 +574,7 @@ Page({
     return new Promise((resolve, reject) => {
     db.collection('user')
       .where({
-        _openid: _.eq(this.data.project.projectManager)
+        _openid: _.eq(this.data.project._openid)
       })
       .get()
       .then(res => {
