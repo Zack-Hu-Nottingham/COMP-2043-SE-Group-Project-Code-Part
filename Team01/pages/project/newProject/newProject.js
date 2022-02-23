@@ -112,7 +112,7 @@ Page({
           duration: 2,
           
           
-        // }]
+        }]
     },
     
      // 初始化语言
@@ -383,7 +383,7 @@ Page({
 
     createTaskAccordingToTemplate(idx) {
       return new Promise((resolve, reject) => {
-        db.collection('testTask')
+        db.collection('task')
         .add({
           data: this.data.template[idx]
         })
