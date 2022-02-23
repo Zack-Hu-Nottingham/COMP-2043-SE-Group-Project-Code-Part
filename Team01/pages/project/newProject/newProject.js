@@ -32,88 +32,87 @@ Page({
 
         isLoading: false,
         fileList: [],
-        owner: [],
+        houseOwner: "",
         participant: [],
         ownerPage: 0,
         participantPage: 2,
 
         project: "",
         task: [],
-        template: [],
-        // template: [{
-        //   name: "泥水进场",
-        //   description: "泥水进场包含第一次放样和墙体堆筑",
-        //   belongTo: this.data.project,
-        //   currentPriority: "Normal",
-        //   startTime: "",
-        //   endTime: "",
-        //   participant: "",
-        //   state: 0,
-        //   tag: [],
-        //   duration: 2,
+        template: [{
+          name: "泥水进场",
+          description: "泥水进场包含第一次放样和墙体堆筑",
+          belongTo: "",
+          currentPriority: "Normal",
+          startTime: "",
+          endTime: "",
+          participant: "",
+          state: 0,
+          tag: [],
+          duration: 2,
 
-        // }, {
-        //   name: "水电布管",
-        //   description: "水电布管包含第二次精放样和水电施工",
-        //   belongTo: this.data.project,
-        //   currentPriority: "Normal",
-        //   startTime: "",
-        //   endTime: "",
-        //   participant: "",
-        //   state: 0,
-        //   tag: [],
-        //   duration: 2,
+        }, {
+          name: "水电布管",
+          description: "水电布管包含第二次精放样和水电施工",
+          belongTo: "",
+          currentPriority: "Normal",
+          startTime: "",
+          endTime: "",
+          participant: "",
+          state: 0,
+          tag: [],
+          duration: 2,
 
-        // }, {
-        //   name: "木作工程",
-        //   description: "木作工程包含土木施工",
-        //   belongTo: this.data.project,
-        //   currentPriority: "Normal",
-        //   startTime: "",
-        //   endTime: "",
-        //   participant: "",
-        //   state: 0,
-        //   tag: [],
-        //   duration: 2,
+        }, {
+          name: "木作工程",
+          description: "木作工程包含土木施工",
+          belongTo: "",
+          currentPriority: "Normal",
+          startTime: "",
+          endTime: "",
+          participant: "",
+          state: 0,
+          tag: [],
+          duration: 2,
 
-        // }, {
-        //   name: "泥水工程",
-        //   description: "泥水工程包含地暖地面找平和瓷砖、石材进场",
-        //   belongTo: this.data.project,
-        //   currentPriority: "Normal",
-        //   startTime: "",
-        //   endTime: "",
-        //   participant: "",
-        //   state: 0,
-        //   tag: [],
-        //   duration: 2,
+        }, {
+          name: "泥水工程",
+          description: "泥水工程包含地暖地面找平和瓷砖、石材进场",
+          belongTo: "",
+          currentPriority: "Normal",
+          startTime: "",
+          endTime: "",
+          participant: "",
+          state: 0,
+          tag: [],
+          duration: 2,
 
-        // }, {
-        //   name: "油漆工程",
-        //   description: "油漆工程包含油工施工、成品安装、油漆修补",
-        //   belongTo: this.data.project,
-        //   currentPriority: "Normal",
-        //   startTime: "",
-        //   endTime: "",
-        //   participant: "",
-        //   state: 0,
-        //   tag: [],
-        //   duration: 2,
+        }, {
+          name: "油漆工程",
+          description: "油漆工程包含油工施工、成品安装、油漆修补",
+          belongTo: "",
+          currentPriority: "Normal",
+          startTime: "",
+          endTime: "",
+          participant: "",
+          state: 0,
+          tag: [],
+          duration: 2,
 
-        // }, {
-        //   name: "后期安装项目",
-        //   description: "后期安装项目包含验收、软装摆场",
-        //   belongTo: this.data.project,
-        //   currentPriority: "Normal",
-        //   startTime: "",
-        //   endTime: "",
-        //   participant: "",
-        //   state: 0,
-        //   tag: [],
-        //   duration: 2,
+        }, {
+          name: "后期安装项目",
+          description: "后期安装项目包含验收、软装摆场",
+          belongTo: "",
+          currentPriority: "Normal",
+          startTime: "",
+          endTime: "",
+          participant: "",
+          state: 0,
+          tag: [],
+          duration: 2,
           
           
-        // }]
+        }]
     },
     
      // 初始化语言
@@ -269,7 +268,7 @@ Page({
                   projectDescription: this.data.description,
                   projectManager: app.globalData.userInfo.openid,
                   template: this.data.selectedTemplate,
-                  houseOwner: this.data.owner,
+                  houseOwner: this.data.houseOwner,
                   participant: this.data.participant,
                   feedback: [],
                   fileList: this.data.fileList,
@@ -290,7 +289,7 @@ Page({
               // 根据模板创建新的子task
               this.createTask()
               .then(() => {
-
+                this.action();
               })
               .catch(() => {
 
@@ -301,7 +300,6 @@ Page({
               console.log('新建项目失败，请联系管理员', res) 
             })
 
-            this.action();
               
         }
         
@@ -371,25 +369,23 @@ Page({
       // })
     },
 
+      // modify the template accordingly
     modifyTemplate() {
+      for(var idx in this.data.template) {
+        this.data.template[idx].belongTo = this.data.project
+
+        // 修改时间
+        this.data.template[idx].startTime = this.data.template[idx].startTime
+        this.data.template[idx].endTime = this.data.template[idx].endTime
+      }
 
     },
 
-    createTask() {
+    createTaskAccordingToTemplate(idx) {
       return new Promise((resolve, reject) => {
-        db.collection('task')
+        db.collection('testTask')
         .add({
-          data: {
-            name: "",
-            description: "",
-            belongTo: this.data.project,
-            currentPriority: "",
-            startTime: "",
-            endTime: "",
-            participant: "",
-            state: 0,
-            tag: [],
-          }
+          data: this.data.template[idx]
         })
         .then(res => {
           this.setData({
@@ -402,6 +398,22 @@ Page({
         })
       })
       
+    },
+
+    async createTask() {
+      this.modifyTemplate()
+      for(var idx in this.data.template) {
+        console.log(idx)
+        await this.createTaskAccordingToTemplate(idx)
+      }
+      db.collection('project')
+      .doc(this.data.project)
+      .update({
+        data: {
+          task: this.data.task,
+          unstarted: this.data.task
+        }
+      })
     },
 
 })
