@@ -51,6 +51,7 @@ var Languague = {
     start_time: "Start Time",
     end_time: "End Time",
     description: "Description",
+    description_hint: "less than 500 words",
     state_information: "State Information",
     current_state: "Current State",
     task_progress: "Task Progress",
@@ -85,6 +86,11 @@ var Languague = {
       // Comment page
    comment_title:"Feedback",
    select_feedback:"Select feedback type",
+   submitErrMsg1:"Feedback type is null",
+   submitErrMsg2:"Description is null",
+   feedback_type0:"Project Delay",
+   feedback_type1:"Task Delay",
+   feedback_type2:"Task need rework",
     
  },
 };

@@ -34,83 +34,86 @@ Page({
         fileList: [],
         owner: [],
         participant: [],
+        ownerPage: 0,
+        participantPage: 2,
 
         project: "",
         task: [],
-        template: [{
-          name: "泥水进场",
-          description: "泥水进场包含第一次放样和墙体堆筑",
-          belongTo: this.data.project,
-          currentPriority: "Normal",
-          startTime: "",
-          endTime: "",
-          participant: "",
-          state: 0,
-          tag: [],
-          duration: 2,
+        template: [],
+        // template: [{
+        //   name: "泥水进场",
+        //   description: "泥水进场包含第一次放样和墙体堆筑",
+        //   belongTo: this.data.project,
+        //   currentPriority: "Normal",
+        //   startTime: "",
+        //   endTime: "",
+        //   participant: "",
+        //   state: 0,
+        //   tag: [],
+        //   duration: 2,
 
-        }, {
-          name: "水电布管",
-          description: "水电布管包含第二次精放样和水电施工",
-          belongTo: this.data.project,
-          currentPriority: "Normal",
-          startTime: "",
-          endTime: "",
-          participant: "",
-          state: 0,
-          tag: [],
-          duration: 2,
+        // }, {
+        //   name: "水电布管",
+        //   description: "水电布管包含第二次精放样和水电施工",
+        //   belongTo: this.data.project,
+        //   currentPriority: "Normal",
+        //   startTime: "",
+        //   endTime: "",
+        //   participant: "",
+        //   state: 0,
+        //   tag: [],
+        //   duration: 2,
 
-        }, {
-          name: "木作工程",
-          description: "木作工程包含土木施工",
-          belongTo: this.data.project,
-          currentPriority: "Normal",
-          startTime: "",
-          endTime: "",
-          participant: "",
-          state: 0,
-          tag: [],
-          duration: 2,
+        // }, {
+        //   name: "木作工程",
+        //   description: "木作工程包含土木施工",
+        //   belongTo: this.data.project,
+        //   currentPriority: "Normal",
+        //   startTime: "",
+        //   endTime: "",
+        //   participant: "",
+        //   state: 0,
+        //   tag: [],
+        //   duration: 2,
 
-        }, {
-          name: "泥水工程",
-          description: "泥水工程包含地暖地面找平和瓷砖、石材进场",
-          belongTo: this.data.project,
-          currentPriority: "Normal",
-          startTime: "",
-          endTime: "",
-          participant: "",
-          state: 0,
-          tag: [],
-          duration: 2,
+        // }, {
+        //   name: "泥水工程",
+        //   description: "泥水工程包含地暖地面找平和瓷砖、石材进场",
+        //   belongTo: this.data.project,
+        //   currentPriority: "Normal",
+        //   startTime: "",
+        //   endTime: "",
+        //   participant: "",
+        //   state: 0,
+        //   tag: [],
+        //   duration: 2,
 
-        }, {
-          name: "油漆工程",
-          description: "油漆工程包含油工施工、成品安装、油漆修补",
-          belongTo: this.data.project,
-          currentPriority: "Normal",
-          startTime: "",
-          endTime: "",
-          participant: "",
-          state: 0,
-          tag: [],
-          duration: 2,
+        // }, {
+        //   name: "油漆工程",
+        //   description: "油漆工程包含油工施工、成品安装、油漆修补",
+        //   belongTo: this.data.project,
+        //   currentPriority: "Normal",
+        //   startTime: "",
+        //   endTime: "",
+        //   participant: "",
+        //   state: 0,
+        //   tag: [],
+        //   duration: 2,
 
-        }, {
-          name: "后期安装项目",
-          description: "后期安装项目包含验收、软装摆场",
-          belongTo: this.data.project,
-          currentPriority: "Normal",
-          startTime: "",
-          endTime: "",
-          participant: "",
-          state: 0,
-          tag: [],
-          duration: 2,
+        // }, {
+        //   name: "后期安装项目",
+        //   description: "后期安装项目包含验收、软装摆场",
+        //   belongTo: this.data.project,
+        //   currentPriority: "Normal",
+        //   startTime: "",
+        //   endTime: "",
+        //   participant: "",
+        //   state: 0,
+        //   tag: [],
+        //   duration: 2,
           
           
-        }]
+        // }]
     },
     
      // 初始化语言
@@ -203,9 +206,15 @@ Page({
     
     changeOwner(){
         wx.navigateTo({
-          url: '../../contact/contactList/contactList',
+          url: '../../project/contactList/contactList?index='+this.data.ownerPage,
         })
     },
+
+    changeFollower(){
+      wx.navigateTo({
+        url: '../../project/contactList/contactList?index='+this.data.participantPage,
+      })
+  },
 
     // 选择模板
     selectTemplate: function(){
@@ -218,7 +227,7 @@ Page({
           sizeType: ['original', 'compressed'],
           sourceType: ['album', 'camera'],
           success:res => {
-            var fileList = that.data.fileList;
+            var fileList = this.data.fileList;
             fileList.push({url: res.tempFilePaths[0]});
             this.setData({ fileList: fileList });
             console.log("成功选择图片",fileList);
@@ -292,7 +301,7 @@ Page({
               console.log('新建项目失败，请联系管理员', res) 
             })
 
-            // this.action();
+            this.action();
               
         }
         

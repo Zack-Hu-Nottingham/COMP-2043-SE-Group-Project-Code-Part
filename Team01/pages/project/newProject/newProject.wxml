@@ -22,7 +22,7 @@
 
     <!--Description-->
     <van-cell-group inset style="padding: 10rpx;">
-        <van-field label="{{dictionary.description}}" value="{{ description }}" type="textarea" placeholder="(less than 500 words)" size="large" maxlength="500" input-align="right" autosize bind:change="typeDescription" />
+        <van-field label="{{dictionary.description}}" value="{{ description }}" type="textarea" placeholder="({{dictionary.description_hint}})" size="large" maxlength="500" input-align="right" autosize bind:change="typeDescription" />
     </van-cell-group>
 </view>
 
