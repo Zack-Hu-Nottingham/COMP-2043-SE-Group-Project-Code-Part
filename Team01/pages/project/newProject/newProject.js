@@ -66,8 +66,8 @@ Page({
           tag: [],
           duration: 2,
           location: "上海市浦东新区花园石桥路28弄汤臣一品5栋409室",
-          workingArea: "",
-          taskDescription: "",
+          workingArea: "卫生间",
+          taskDescription: "1.kjfkldsajflkds 2.jfdklajdfklsda",
 
         }, {
           name: "木作工程",

@@ -66,6 +66,7 @@ Page({
                 type: 'success',
                 message: 'Logged in',
                 onClose: () => {
+                  // House Owner
                   if (identity == 0) {
                     // wx.navigateTo({
                     //   url: 'url',
@@ -74,10 +75,14 @@ Page({
                     //   fail: (res) => {},
                     //   complete: (res) => {},
                     // })
+
+                    // Project Manager
                   } else if (identity == 1) {
                     // wx.navigateTo({
                     //   url: 'url',
                     // })
+
+                    // Worker
                   } else if (identity == 2) {
                     wx.navigateTo({
                       url: '../indexForWorker/indexForWorker',
