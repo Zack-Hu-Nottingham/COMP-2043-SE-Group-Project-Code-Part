@@ -1,48 +1,66 @@
 {
-    "setting": {},
-    "condition": {
-        "plugin": {
-            "list": []
+  "setting": {},
+  "condition": {
+    "plugin": {
+      "list": []
+    },
+    "game": {
+      "list": []
+    },
+    "gamePlugin": {
+      "list": []
+    },
+    "miniprogram": {
+      "list": [
+        {
+          "name": "",
+          "pathName": "pages/project/projectInfo/projectInfo",
+          "query": "id=617ef50c621093c906db799e794baf10",
+          "scene": null
         },
-        "game": {
-            "list": []
+        {
+          "name": "",
+          "pathName": "pages/project/fileList/fileList",
+          "query": "id=617ef50c621093c906db799e794baf10&index=6",
+          "scene": null
         },
-        "gamePlugin": {
-            "list": []
+        {
+          "name": "",
+          "pathName": "pages/project/addComment/addComment",
+          "query": "",
+          "scene": null
         },
-        "miniprogram": {
-            "list": [
-                {
-                    "name": "",
-                    "pathName": "pages/project/projectInfo/projectInfo",
-                    "query": "id=617ef50c621093c906db799e794baf10",
-                    "scene": null
-                },
-                {
-                    "name": "",
-                    "pathName": "pages/project/fileList/fileList",
-                    "query": "id=617ef50c621093c906db799e794baf10&index=6",
-                    "scene": null
-                },
-                {
-                    "name": "",
-                    "pathName": "pages/project/addComment/addComment",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "name": "",
-                    "pathName": "pages/project/contactList/contactList",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "name": "",
-                    "pathName": "pages/project/newProject/newProject",
-                    "query": "",
-                    "scene": null
-                }
-            ]
+        {
+          "name": "",
+          "pathName": "pages/project/contactList/contactList",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/project/newProject/newProject",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/indexForWorker/indexForWorker",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/more/languageSetting/languageSetting",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/index/index",
+          "query": "",
+          "scene": null
         }
+      ]
     }
+  }
 }

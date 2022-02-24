@@ -33,6 +33,7 @@ var Languague = {
      user_info: "用户信息",
      confirm: "确认",
      cancel: "取消",
+     worker: "工人",
 
      // language setting page
      current_lan: "当前语言",
@@ -90,6 +91,9 @@ var Languague = {
     feedback_type1:"任务延期",
     feedback_type2:"任务需返工",
 
+    // index for worker
+   project: ["项目一", "项目二", "项目三", "项目四", "项目五"],
+   
    },
 };
 

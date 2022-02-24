@@ -1,0 +1,89 @@
+<!-- Dialog -->
+<van-dialog id="van-dialog" bind:getuserinfo="getuserinfo" />
+
+<!-- Toast -->
+<van-toast id="van-toast" />
+
+
+<!-- Bottom tabbar -->
+<van-tabbar active="{{ active }}" bind:change="onChangeTab">
+  <van-tabbar-item icon="home-o">{{dictionary.dashboard_page}}</van-tabbar-item>
+  <van-tabbar-item icon="friends-o">{{dictionary.more_page}}</van-tabbar-item>
+</van-tabbar>
+
+
+<!-- Dashboard page -->
+<view wx:if="{{active == 0}}">
+
+  <view wx:for="{{projectInfo}}" wx:key="index" wx:for-item="project" wx:for-index="idx">
+    <van-cell-group style="padding-bottom: 30rpx;" inset title="{{dictionary.project[idx]}}" >
+      <van-cell title="{{project.name}}" clickable bindtap="clickProject" id="{{project._id}}" icon="todo-list-o" is-link size="large"/>
+      <view wx:for="{{projectTask[idx]}}" wx:key="index">
+        <van-cell title="{{item.name}}" label="{{item.startTime}} - {{item.endTime}}" clickable="true" bindtap="clickTask" data-id="{{item._id}}" class="taskForTest">
+
+          <view>
+            <view wx:if="{{item.state==0}}">
+              <van-tag color="#D3D3D3" icon="fail" size="medium"><van-icon name="close"/>Unstarted</van-tag>
+            </view>
+            <view wx:elif="{{item.state==1}}">
+              <van-tag color="#87CEFA" size="medium"><van-icon name="play"></van-icon>Progressing</van-tag>
+            </view>
+            <view wx:elif="{{item.state==2}}">
+              <van-tag color="#32CD32" size="medium"><van-icon name="passed" />Finished</van-tag>
+            </view>
+            <view wx:elif="{{item.state==3}}">
+              <van-tag color="#ffe1e1" text-color="#ad0000"  size="medium"><van-icon name="warning-o" />Delayed</van-tag>
+            </view>
+            <view wx:elif="{{item.state==4}}">
+              <van-tag color="#ffe1e1" text-color="#ad0000"  size="medium"><van-icon name="replay" />Reworking</van-tag>
+            </view>
+          </view>
+
+        </van-cell>      
+
+      </view>
+    </van-cell-group>
+
+  </view>
+
+</view>
+
+
+
+<!-- More page -->
+<view wx:elif="{{active == 1}}">
+
+<view wx:if="{{canIUseOpenData}}">
+  <view class="userinfo-avatar">
+    <open-data type="userAvatarUrl"></open-data>
+  </view>
+</view>
+
+<van-cell-group inset>
+  <van-cell center icon="user-o" />
+  <van-cell center title="{{dictionary.user_name}}">
+      <open-data type="userNickName"></open-data>
+  </van-cell>
+
+  <van-cell center title="{{ dictionary.identity }}" value="{{ dictionary.worker }}" />
+
+  <van-cell center title="{{ dictionary.more }}" clickable="true" bindtap="onMoreInfo" class="moreInfoForTest">
+    <view>
+      <van-icon name="ellipsis" />
+    </view>
+  </van-cell>
+
+</van-cell-group>
+
+  <van-cell-group inset style="padding: 30rpx;">
+    <van-cell center icon="setting-o"/>
+    <!-- <van-cell center title="{{dictionary.invite_member}}" is-link icon="" clickable="true" bindtap="onInviteMember"/> -->
+    <van-cell center title="{{dictionary.language}}" value="{{languageList[language]}}" icon="" is-link clickable="true" bindtap="onChangeLan" class="settingForTest"/>
+  </van-cell-group>
+
+<!-- 底部悬浮登出按钮 -->
+<!-- <van-sticky offset-top="{{ 570 }}">
+  <van-button hairline plain round block color="#DC143C" class="signOut" type="primary">{{dictionary.sign_out}}</van-button>
+</van-sticky> -->
+
+</view>

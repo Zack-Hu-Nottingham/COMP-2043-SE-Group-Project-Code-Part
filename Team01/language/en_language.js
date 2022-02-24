@@ -33,7 +33,7 @@ var Languague = {
     user_info: "User Info",
     confirm: "Confirm",
     cancel: "Cancel",
-
+    worker: "Worker",
 
      // language setting page
     current_lan: "Current language",
@@ -91,7 +91,10 @@ var Languague = {
    feedback_type0:"Project Delay",
    feedback_type1:"Task Delay",
    feedback_type2:"Task need rework",
-    
+
+    // index for worker
+    project: ["Project One", "Project Two", "Project Three", "Project Four", "Project Five"],
+       
  },
 };
 
