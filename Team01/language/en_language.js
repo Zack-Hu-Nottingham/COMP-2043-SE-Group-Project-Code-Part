@@ -19,6 +19,7 @@ var Languague = {
     // dashboard page
     today_task: "Today's Task",
     task_list: "Task List",
+    filter: "filter",
 
     // more page
     user_name: "User name",

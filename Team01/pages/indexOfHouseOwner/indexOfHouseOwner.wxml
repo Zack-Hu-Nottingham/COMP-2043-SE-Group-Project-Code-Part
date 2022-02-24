@@ -18,7 +18,31 @@
     <van-cell center title=" {{dictionary.statistic_report}}" icon="bar-chart-o" clickable="true" bindtap="clickProjectReport" class="statisticReportForTest"/>
   </van-cell-group>
 
+ 
   <van-cell-group inset style="padding: 30rpx;" title="{{dictionary.task_list}}">
+    <van-cell title="{{dictionary.filter}}" is-link value="{{filter}}" bindtap="clickFilter" />
+
+    <van-action-sheet
+      show="{{ filterShow }}"
+      actions="{{ Filter }}"
+      bind:close="onFilterClose"
+      bind:select="onFilterSelect"
+    />
+
+    <van-calendar
+      show="{{ dateShow }}"
+      title="choose period"
+      bind:close="onClose"
+      bind:confirm="onConfirm"
+    />
+
+    <van-action-sheet
+      show="{{ priorityShow }}"
+      actions="{{ priority }}"
+      bind:close="onPriorityClose"
+      bind:select="onPrioritySelect"
+    />
+
     <view wx:for="{{task}}" wx:key="index">
       <van-cell title="{{item.name}}" label="{{item.startTime}} - {{item.endTime}}" clickable="true" bindtap="clickTask" data-id="{{item._id}}" class="taskForTest"> 
 
