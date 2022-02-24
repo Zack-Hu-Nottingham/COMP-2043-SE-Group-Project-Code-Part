@@ -12,7 +12,7 @@ exports.main = async (event, context) => {
     .update({
     data: {
       currentPriority: event.currentPriority,
-      state: event.state
+      //state: event.state
       }
     })
 }

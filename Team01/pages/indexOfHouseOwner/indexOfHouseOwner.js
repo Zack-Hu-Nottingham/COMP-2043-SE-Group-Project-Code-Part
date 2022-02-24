@@ -64,6 +64,43 @@ Page({
 
     currentTime: "",
 
+    date: "",
+    dateShow: false,
+    filter: "",
+    filterShow: false,
+    choosePriority: "",
+    priorityShow: false,
+
+    Filter: [
+      {
+        name: 'Normal',
+      },
+      {
+        name: 'Time',
+      },
+      {
+        name: 'Priority'
+      },
+    ],
+
+    priority: [
+      {
+        name: 'Highest',
+      },
+      {
+        name: 'High'
+      },
+      {
+        name: 'Normal'
+      },
+      {
+        name: 'Low'
+      },
+      {
+        name: 'Lowest'
+      },
+    ],
+
   },
 
 
@@ -498,5 +535,130 @@ Page({
     })
 
   },
+
+  clickFilter() {
+    // console.log("click")
+    this.setData({
+      filterShow: true
+    })
+  },
+
+  onFilterClose() {
+    this.setData({filterShow: false})
+  },
+
+  onFilterSelect(e) {
+    this.setData({
+      filter: e.detail.name 
+    })
+    if(this.data.filter == 'Normal'){
+      this.setData({
+        task: [],
+      });
+      for (var idx in this.data.project) {
+        this.getTaskInfo(this.data.project[idx]._id)
+      }
+    }
+    else if(this.data.filter == 'Time'){
+      this.onDateDisplay()
+    }
+    else if(this.data.filter == 'Priority'){
+      this.onPriorityDisplay()
+    }
+  },
+
+
+  onDateDisplay() {
+    this.setData({ dateShow: true });
+  },
+
+  onClose() {
+    this.setData({ dateShow: false });
+  },
+  
+  formatDate(date) {
+    date = new Date(date);
+    return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+  },
+  onConfirm(event) {
+    const chooseDate = event.detail;
+    this.setData({
+      dateShow: false,
+      date: `${this.formatDate(chooseDate)}`,
+      task: [],
+    });
+    for (var idx in this.data.project) {
+      this.timeFilter(this.data.date, this.data.project[idx]._id)
+    }
+  },
+
+  timeFilter(date, projectId){
+    return new Promise((resolve, reject) => {
+      db.collection('task')
+      .where({
+        belongTo: _.eq(projectId),
+        endTime: _.eq(date)
+      })
+      .get()
+      .then(res => {
+        console.log(res)
+        for (var idx in res.data) {
+          this.setData({
+            task: this.data.task.concat(res.data[idx])
+          })
+        }
+        // this.data.task.push(res.data[0])
+        resolve("成功获取任务信息")
+      })
+      .catch(err => {
+        reject("请求任务信息失败")
+      })
+    })
+  },
+
+  onPriorityDisplay() {
+    this.setData({ priorityShow: true });
+  },
+
+  onPriorityClose() {
+    this.setData({priorityShow: false})
+  },
+
+  onPrioritySelect(e) {
+    // console.log(e.detail.name)
+    this.setData({
+      task: [],
+      choosePriority: e.detail.name 
+    })
+
+    for (var idx in this.data.project) {
+      this.priorityFilter(this.data.choosePriority, this.data.project[idx]._id)
+    }
+  },
+
+  priorityFilter(priority, projectId){
+    return new Promise((resolve, reject) => {
+      db.collection('task')
+      .where({
+        belongTo: _.eq(projectId),
+        currentPriority: _.eq(priority)
+      })
+      .get()
+      .then(res => {
+        console.log(res)
+        for (var idx in res.data) {
+          this.setData({
+            task: this.data.task.concat(res.data[idx])
+          })
+        }
+        // this.data.task.push(res.data[0])
+        resolve("成功获取任务信息")
+      })
+      .catch(err => {
+        reject("请求任务信息失败")
+      })
+    })
+  },
+
 
 })
