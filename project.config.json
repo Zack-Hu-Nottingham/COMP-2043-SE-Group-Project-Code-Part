@@ -1,18 +1,12 @@
 {
-  "cloudfunctionRoot": "cloud/",
   "description": "项目配置文件",
   "packOptions": {
-    "ignore": [
-      {
-        "type": "file",
-        "value": ".eslintrc.js"
-      }
-    ]
+    "ignore": []
   },
   "setting": {
-    "urlCheck": false,
-    "es6": false,
-    "enhance": true,
+    "urlCheck": true,
+    "es6": true,
+    "enhance": false,
     "postcss": true,
     "preloadBackgroundData": false,
     "minified": true,
@@ -27,7 +21,6 @@
     "checkSiteMap": true,
     "uploadWithSourceMap": true,
     "compileHotReLoad": false,
-    "lazyloadPlaceholderEnable": false,
     "useMultiFrameRuntime": true,
     "useApiHook": true,
     "useApiHostProcess": true,
@@ -37,20 +30,19 @@
       "outputPath": ""
     },
     "enableEngineNative": false,
-    "useIsolateContext": false,
+    "bundle": false,
+    "useIsolateContext": true,
+    "useCompilerModule": true,
+    "userConfirmedUseCompilerModuleSwitch": false,
     "userConfirmedBundleSwitch": false,
     "packNpmManually": false,
     "packNpmRelationList": [],
-    "minifyWXSS": true,
-    "disableUseStrict": false,
-    "minifyWXML": true,
-    "showES6CompileOption": false,
-    "useCompilerPlugins": false
+    "minifyWXSS": true
   },
   "compileType": "miniprogram",
   "libVersion": "2.22.0",
   "appid": "wxd4b06f2e9673ed00",
-  "projectname": "Team01",
+  "projectname": "GRP",
   "debugOptions": {
     "hidedInDevtools": []
   },
