@@ -1,2 +1,244 @@
-<!--pages/project/projectInfoForWorker/projectInfoForWorker.wxml-->
-<text>pages/project/projectInfoForWorker/projectInfoForWorker.wxml</text>
+<!-- Nav bar -->
+<van-sticky offset-top="{{ 0 }}">
+  <view class="navbar">
+    <text wx:for="{{navbar}}" wx:key="index" data-idx="{{index}}" class="item {{currentTab==index ? 'active' : ''}}" wx:key="unique" bindtap="navbarTap">{{item}}</text>
+  </view>
+</van-sticky>
+
+<!-- pop up calendar -->
+<van-calendar
+  show="{{ show }}"
+  title="choose period"
+  type="range"
+  bind:close="onDateClose"
+  bind:confirm="onDateConfirm"
+/>
+
+
+<!-- Subpages -->
+<view wx:if="{{ currentTab == 0 }}">
+
+  <van-cell-group inset title="{{dictionary.project_info}}">
+    <van-cell title="{{ dictionary.owner }}" value="{{ houseOwner.name }}" />
+    <van-cell title="{{ dictionary.project_manager }}" value="{{ projectManager.name }}" />
+    
+    <view wx:if="{{userInfo.isManager == 1}}">
+      <van-field model:value="{{ project.projectDescription }}" right clearable label="{{ dictionary.description }}" type="textarea" placeholder="{{ project.projectDescription }}" border="{{ false }}" class="projectInfoDescriptionForTest" bind:blur="onProjectBlur" autosize></van-field>
+    </view>
+
+    <view wx:else>
+      <van-cell title="{{ dictionary.description }}" value="{{ project.projectDescription }}"class="projectInfoDescriptionForTest" />
+    </view>
+  </van-cell-group>
+
+  <van-cell-group inset title="{{dictionary.state_information}}">
+    <view wx:if="{{userInfo.isManager == 1}}">
+      <van-cell title="{{dictionary.start_time}}" is-link value="{{ project.startTime }}" bindtap="onDateDisplay" class="projectInfoStartTimeForTest"/>
+      <van-cell title="{{dictionary.end_time}}" is-link value="{{ project.endTime }}" bindtap="onDateDisplay" class="projectInfoEndTimeForTest"/>
+    </view>
+
+    <view wx:else>
+      <van-cell title="{{dictionary.start_time}}" value="{{ project.startTime }}" class="projectInfoStartTimeForTest"/>
+      <van-cell title="{{dictionary.end_time}}" value="{{ project.endTime }}"  class="projectInfoEndTimeForTest"/>
+    </view>
+
+    <van-cell title="{{dictionary.current_state}}" value="{{ project.currentState }}" />
+    <van-field model:value="{{ project.stateDescription }}" center clearable label="{{dictionary.description}}"
+    placeholder="{{project.stateDescription}}" border="{{ false }}" class="projectInfoStateDescriptionForTest" bind:blur="onStateBlur"></van-field>
+  </van-cell-group>
+
+  <van-cell-group inset title="{{dictionary.task_progress}}">
+  </van-cell-group>
+  <view class="container">
+    <view class="circle">
+      <van-circle value="{{(project.completed.length/project.task.length)*100}}" layer-color="#eeeeee"         color="#4169E1">
+        {{(project.completed.length/project.task.length)%1*100}}%<view></view>{{dictionary.completed}}
+      </van-circle>
+
+      <van-circle value="{{(project.delayed.length/project.task.length)*100}}" layer-color="#eeeeee" color="#FF4500">
+        {{(project.delayed.length/project.task.length)%1*100}}%<view></view> {{dictionary.delayed}}
+      </van-circle>
+    </view>
+    
+    <view class="taskInfo">
+      <view class="taskInfoDetail">
+        <view style="font-size: 35rpx; color: #696969;">{{ project.unstarted.length }}</view>
+        <view>{{dictionary.unstarted}}</view>
+      </view>
+
+
+      <view class="taskInfoDetail">
+        <view style="font-size: 35rpx; color: #FFA500;">{{ project.progressing.length }}</view>
+        <view>{{dictionary.progressing}}</view>
+      </view>
+
+      <view class="taskInfoDetail">
+        <view style="font-size: 35rpx; color: 	#FF4500;">{{ project.completed.length }}</view>
+        <view>{{dictionary.completed}}</view>
+      </view>
+
+      <view class="taskInfoDetail" style="padding-left: 40rpx ; border-left: 2rpx solid #efefef;">
+        <view style="font-size: 35rpx; color: #696969; ">{{ project.task.length }}</view>
+        <view>{{dictionary.total}}</view>
+      </view>
+
+      <view class="taskInfoDetail">
+        <view style="font-size: 35rpx; color:#FF4500;">{{ project.delayed.length }}</view>
+        <view>{{dictionary.delayed}}</view>
+      </view>
+
+    </view>
+  </view>
+
+  <!--Upload related images-->
+  <van-uploader class="uploader" file-list="{{ fileList }}" bindtap="upload" deletable="{{ true }}" max-count="8"/>
+
+  <van-divider />
+
+  <van-sticky offset-top="{{ 0 }}">
+    <van-button hairline plain round block type="info" bindtap="clickAddComment" class="addComment">{{dictionary.add_comment}}</van-button>
+  </van-sticky>
+ 
+  <van-cell-group inset class="cell-group" wx:for="{{ feedback }}" wx:key="index">
+  <view wx:if="{{item.type==0}}" class="projectDelay">
+    <van-cell  title="Project Delay" label="{{item.details}}" clickable
+      link-type="navigateTo" url="/pages/project/fileList/fileList?id={{item.id}}&index={{index}}">{{item.createTime}}</van-cell>
+  </view>
+  <view wx:elif="{{item.type==1}}" class="taskDelay">
+    <van-cell title="Task Delay" label="{{item.details}}" clickable
+      link-type="navigateTo" url="/pages/project/fileList/fileList?id={{item.id}}&index={{index}}">{{item.createTime}}</van-cell>
+  </view>
+  <view wx:elif="{{item.type==2}}" class="taskNeedRework">
+    <van-cell title="Task need rework" label="{{item.details}}" clickable
+      link-type="navigateTo" url="/pages/project/fileList/fileList?id={{item.id}}&index={{index}}">{{item.createTime}}</van-cell>
+  </view>
+    
+  </van-cell-group> 
+
+
+</view>
+
+
+
+<!-- Task Management -->
+<view wx:elif="{{currentTab==1}}">
+  <!-- // 0 - unstarted
+        // 1 - progressing
+        // 2 - finished
+        // 3 - delayed
+        // 4 - reworking
+        // * 5 - accepted -->
+<van-collapse value="{{ activeNames }}" bind:change="onChange">
+
+  <van-collapse-item title="{{dictionary.progressing}}" name="progressing" class="releaseStartedItemForTest">
+
+    <view wx:for="{{ progressing }}" wx:key="index">
+      <van-cell clickable
+        label="{{ item.startTime }} — {{ item.endTime }} "
+        title="{{ item.name }}"
+        link-type="navigateTo"
+        url="/pages/project/taskInfo/taskInfo?id={{item._id}}">
+        
+          <view>
+            <van-tag color="#87CEFA" size="medium"><van-icon name="play"></van-icon>Progressing</van-tag>
+          </view>
+        </van-cell>
+    </view>
+    
+  </van-collapse-item>
+
+
+  <van-collapse-item title="{{dictionary.reworking}}" name="reworking">
+
+    <view wx:for="{{ reworking }}" wx:key="index">
+      <van-cell clickable
+        label="{{ item.startTime }} — {{ item.endTime }} "
+        title="{{ item.name }}"
+        link-type="navigateTo"
+        url="/pages/project/taskInfo/taskInfo?id={{item._id}}">
+
+          <view>
+            <van-tag color="#ffe1e1" text-color="#ad0000"  size="medium"><van-icon name="replay" />Reworking</van-tag>
+          </view>
+
+        </van-cell>
+    </view>
+
+</van-collapse-item>
+
+
+  <van-collapse-item title="{{dictionary.delayed}}" name="delayed">
+
+    <view wx:for="{{ delayed }}" wx:key="index">
+      <van-cell clickable
+        label="{{ item.startTime }} — {{ item.endTime }} "
+        title="{{item.name}}"
+        link-type="navigateTo"
+        url="/pages/project/taskInfo/taskInfo?id={{item._id}}">
+
+          <view>
+            <van-tag color="#ffe1e1" text-color="#ad0000"  size="medium"><van-icon name="warning-o" />Delayed</van-tag>
+          </view>
+
+        </van-cell>
+    </view>
+
+  </van-collapse-item>
+
+
+  <van-collapse-item title="{{dictionary.unstarted}}" name="unstarted">
+
+    <view wx:for="{{ unstarted }}" wx:key="index">
+      <van-cell clickable
+        label="{{ item.startTime }} — {{ item.endTime }} "
+        title="{{ item.name }}"
+        link-type="navigateTo"
+        url="/pages/project/taskInfo/taskInfo?id={{item._id}}">
+
+          <view>
+            <van-tag color="#D3D3D3" icon="fail" size="medium"><van-icon name="close"/>Unstarted</van-tag>
+          </view>
+
+      </van-cell>
+    </view>
+
+  </van-collapse-item>
+
+
+  <van-collapse-item title="{{dictionary.completed}}" name="completed">
+
+    <view wx:for="{{ completed }}" wx:key="index">
+      <van-cell clickable
+        label="{{ item.startTime }} — {{ item.endTime }} "
+        title="{{ item.name }}"
+        link-type="navigateTo"
+        url="/pages/project/taskInfo/taskInfo?id={{item._id}}">
+
+          <view>
+            <van-tag color="#32CD32" size="medium"><van-icon name="passed" />Finished</van-tag>
+          </view>
+
+      </van-cell>
+    </view>
+
+  </van-collapse-item>
+
+</van-collapse>
+
+<!-- Create new task -->
+<van-sticky offset-top="{{ 600 }}">
+  <van-button hairline plain round block type="info" bindtap="clickNewTask" class="createNewProjectForTest">{{dictionary.create_new_task}}</van-button>
+
+</van-sticky>
+
+</view>
+
+
+
+<!-- Gantt Diagram -->
+<view wx:else>
+  <view class="gantt">
+  <ec-canvas id="mychart-dom-graph" canvas-id="mychart-graph" ec="{{ ec }}"></ec-canvas>
+  </view>
+</view>
+

@@ -50,6 +50,10 @@ var Languague = {
     owner: "房屋主人",
     start_time: "开始时间",
     end_time: "结束时间",
+    
+    expected_start_time: "预期开始时间",
+    expected_end_time: "预期结束时间",
+
     description: "描述",
     description_hint: "少于500字",
     state_information: "状态信息",
@@ -92,8 +96,14 @@ var Languague = {
     feedback_type2:"任务需返工",
 
     // index for worker
-   project: ["项目一", "项目二", "项目三", "项目四", "项目五"],
-   
+    project: ["项目一", "项目二", "项目三", "项目四", "项目五"],
+    task_description: "任务描述",
+    task_state: ["未开始", "进行中", "已完成", "已延期", "重做中"],
+    location: "施工地点",
+    construction_area: "施工区域",
+    construction_requirements: "施工要求",
+    start_construction: "开始施工",
+    finish_construction: "结束施工",
    },
 };
 

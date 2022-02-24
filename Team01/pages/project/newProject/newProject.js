@@ -50,6 +50,9 @@ Page({
           state: 0,
           tag: [],
           duration: 2,
+          location: "上海市浦东新区花园石桥路28弄汤臣一品5栋409室",
+          workingArea: "整栋房屋",
+          taskDescription: "",
 
         }, {
           name: "水电布管",
@@ -62,6 +65,9 @@ Page({
           state: 0,
           tag: [],
           duration: 2,
+          location: "上海市浦东新区花园石桥路28弄汤臣一品5栋409室",
+          workingArea: "",
+          taskDescription: "",
 
         }, {
           name: "木作工程",
@@ -74,6 +80,9 @@ Page({
           state: 0,
           tag: [],
           duration: 2,
+          location: "上海市浦东新区花园石桥路28弄汤臣一品5栋409室",
+          workingArea: "",
+          taskDescription: "",
 
         }, {
           name: "泥水工程",
@@ -86,6 +95,9 @@ Page({
           state: 0,
           tag: [],
           duration: 2,
+          location: "上海市浦东新区花园石桥路28弄汤臣一品5栋409室",
+          workingArea: "",
+          taskDescription: "",
 
         }, {
           name: "油漆工程",
@@ -98,6 +110,9 @@ Page({
           state: 0,
           tag: [],
           duration: 2,
+          location: "上海市浦东新区花园石桥路28弄汤臣一品5栋409室",
+          workingArea: "",
+          taskDescription: "",
 
         }, {
           name: "后期安装项目",
@@ -110,6 +125,9 @@ Page({
           state: 0,
           tag: [],
           duration: 2,
+          location: "上海市浦东新区花园石桥路28弄汤臣一品5栋409室",
+          workingArea: "",
+          taskDescription: "",
           
           
         }]

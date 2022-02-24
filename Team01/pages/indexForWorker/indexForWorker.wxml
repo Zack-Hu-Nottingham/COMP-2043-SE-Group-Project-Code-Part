@@ -23,19 +23,19 @@
 
           <view>
             <view wx:if="{{item.state==0}}">
-              <van-tag color="#D3D3D3" icon="fail" size="medium"><van-icon name="close"/>Unstarted</van-tag>
+              <van-tag color="#D3D3D3" icon="fail" size="medium"><van-icon name="close"/>{{dictionary.task_state[0]}}</van-tag>
             </view>
             <view wx:elif="{{item.state==1}}">
-              <van-tag color="#87CEFA" size="medium"><van-icon name="play"></van-icon>Progressing</van-tag>
+              <van-tag color="#87CEFA" size="medium"><van-icon name="play"></van-icon>{{dictionary.task_state[1]}}</van-tag>
             </view>
             <view wx:elif="{{item.state==2}}">
-              <van-tag color="#32CD32" size="medium"><van-icon name="passed" />Finished</van-tag>
+              <van-tag color="#32CD32" size="medium"><van-icon name="passed" />{{dictionary.task_state[2]}}</van-tag>
             </view>
             <view wx:elif="{{item.state==3}}">
-              <van-tag color="#ffe1e1" text-color="#ad0000"  size="medium"><van-icon name="warning-o" />Delayed</van-tag>
+              <van-tag color="#ffe1e1" text-color="#ad0000"  size="medium"><van-icon name="warning-o" />{{dictionary.task_state[3]}}</van-tag>
             </view>
             <view wx:elif="{{item.state==4}}">
-              <van-tag color="#ffe1e1" text-color="#ad0000"  size="medium"><van-icon name="replay" />Reworking</van-tag>
+              <van-tag color="#ffe1e1" text-color="#ad0000"  size="medium"><van-icon name="replay" />{{dictionary.task_state[4]}}</van-tag>
             </view>
           </view>
 

@@ -50,6 +50,8 @@ var Languague = {
     owner: "House Owner",
     start_time: "Start Time",
     end_time: "End Time",
+    expected_start_time: "Expected Start Time",
+    expected_end_time: "Expected End Time",
     description: "Description",
     description_hint: "less than 500 words",
     state_information: "State Information",
@@ -94,7 +96,13 @@ var Languague = {
 
     // index for worker
     project: ["Project One", "Project Two", "Project Three", "Project Four", "Project Five"],
-       
+    task_description: "Task Description",
+    task_state: ["Unstarted", "Progressing", "Finished", "Delayed", "Reworking"],
+    location: "Location",
+    construction_area: "Construction Area",
+    construction_requirements: "Construction Requirements",
+    start_construction: "Start Construction",
+    finish_construction: "Finish Construction",
  },
 };
 
