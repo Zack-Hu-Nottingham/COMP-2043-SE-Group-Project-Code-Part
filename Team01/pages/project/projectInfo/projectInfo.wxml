@@ -237,8 +237,9 @@
 
 <!-- Gantt Diagram -->
 <view wx:else>
-  <view class="gantt">
+  <!-- <view class="gantt">
   <ec-canvas id="mychart-dom-graph" canvas-id="mychart-graph" ec="{{ ec }}"></ec-canvas>
-  </view>
+  </view> -->
+  
 </view>
 
