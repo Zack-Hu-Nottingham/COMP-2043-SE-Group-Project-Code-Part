@@ -1,6 +1,8 @@
 {
     "pages": [
+        "pages/indexForProjectManager/indexForProjectManager",
         "pages/index/index",
+
         "pages/dashboard/dashboard/dashboard",
         "pages/project/projectInfo/projectInfo",
         "pages/project/testDiagram/testDiagram",
