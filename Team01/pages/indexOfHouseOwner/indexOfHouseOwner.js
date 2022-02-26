@@ -22,8 +22,8 @@ Page({
     user: [],
     userInfo: {},
 
-    active: 2,
-    pageName: ['Message', 'Project', 'Dashboard', 'More'],
+    active: 0,
+    pageName: ['Dashboard', 'More'],
 
     // 存放双语
     dictionary: {},
