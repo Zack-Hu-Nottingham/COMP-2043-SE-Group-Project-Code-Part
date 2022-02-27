@@ -204,7 +204,7 @@ Page({
       name: 'updateTaskDescription',
       data:{
         id: id,
-        descriptions: e.detail.value
+        taskDescriptions: e.detail.value
       }
     }).then(res => {
       console.log('调用云函数修改任务描述成功', res),

@@ -11,7 +11,7 @@
 <van-cell-group inset style="padding: 30rpx">
   <van-cell title="{{dictionary.belong_to}}" value="{{belongTo}}" />
   <van-cell title="{{dictionary.stage_of_project}}" value="{{taskPage.stageOfProject}}" />
-  <van-field model:value="{{taskPage.descriptions}}" input-align="right" clearable label="{{dictionary.description}}" placeholder="{{taskPage.descriptions}}" border="{{ false }}" bind:blur="onTaskDescriptionBlur">
+  <van-field model:value="{{taskPage.taskDescriptions}}" input-align="right" clearable label="{{dictionary.description}}" placeholder="{{taskPage.taskDescriptions}}" border="{{ false }}" bind:blur="onTaskDescriptionBlur">
   </van-field>
   <van-cell title="{{dictionary.current_state}}" value="{{taskPage.state}}" />
 </van-cell-group>
