@@ -212,26 +212,6 @@ Page({
     return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
   },
 
-  onDateConfirm(event) {
-    const [start, end] = event.detail;
-    this.onDateClose();
-
-    //调用云函数，更新数据库中日期
-    wx.cloud.callFunction({
-      name: 'updateProjectDate',
-      data:{
-        id: id,
-        startTime: `${start.getFullYear()}-${start.getMonth() + 1}-${start.getDate()}`,
-        endTime: `${end.getFullYear()}-${end.getMonth() + 1}-${end.getDate()}`
-      }
-    }).then(res => {
-      console.log('project日期更新成功', res),
-      this.getDetail()
-    }).catch(res => {
-      console.log('project日期更新失败', res)
-    })
-  },
-
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
