@@ -240,6 +240,8 @@ Page({
 
     await this.getProjectInfo()
 
+    await this.getFeedbackInfo()
+
     for (var idx in this.data.project) {
       await this.getTaskInfo(this.data.project[idx]._id)
       // console.log(this.data.project[idx])
@@ -299,6 +301,8 @@ Page({
       })}
     )},
 
+
+
   // 获取任务信息
   getTaskInfo(projectId) {
     return new Promise((resolve, reject) => {
@@ -340,6 +344,41 @@ Page({
       }
     }
   },
+
+   // 获取反馈信息
+   getFeedbackInfo() {
+    return new Promise((resolve, reject) => {
+      db.collection('project')
+      .where({
+        _openid: _.eq(this.data.userInfo._openid),
+        feedback: _.exists(true)
+      })
+      .field({
+        feedback:true
+      })
+      .orderBy('feedback.createTime', 'desc')
+      .get()
+      .then(res => {
+        // console.log(res)
+      
+        if (res.data.length != 0) {
+          for (var idx in res.data) {
+            this.setData({
+              messageList: this.data.messageList.concat(res.data[idx].feedback)
+            })
+          }
+          
+        }
+        
+        resolve("成功获取项目信息")
+        console.log('成功获取项目信息',this.data.messageList)
+      })
+      .catch(err => {
+        console.log('请求项目信息失败', err)
+        //reject("请求项目信息失败")
+      })}
+      
+    )},
 
   // 更改tab选项时对应的逻辑
   onChangeTab(event) {
