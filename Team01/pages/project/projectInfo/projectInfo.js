@@ -63,6 +63,33 @@ Page({
 
   },
 
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+
+    // 初始化语言
+    var lan = wx.getStorageSync("languageVersion");
+    this.initLanguage();
+    this.setData({
+      language: lan
+    })
+
+    // 设置navbar
+    this.setData({
+      navbar: [this.data.dictionary.project_info, this.data.dictionary.task_management, this.data.dictionary.gantt_diagram]
+    })
+
+    // 获取当前project的id
+    id = options.id
+
+    // 从数据库中根据id获取数据
+    this.getDetail()
+
+
+  },
+
+
   // Global method
   navbarTap: function(e) {
     this.setData({
@@ -258,33 +285,43 @@ Page({
         })
   },
 
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-
-    // 初始化语言
-    var lan = wx.getStorageSync("languageVersion");
-    this.initLanguage();
-    this.setData({
-      language: lan
+  onProjectBlur: function(e){
+    // console.log(e.detail.value)
+    
+    wx.cloud.callFunction({
+      name: 'updateProjectDescription',
+      data:{
+        id: id,
+        projectDescription: e.detail.value
+      }
+    }).then(res => {
+      console.log('调用云函数修改项目描述成功', res),
+      this.getDetail()
+    }).catch(res => {
+      console.log('调用云函数修改项目描述失败', res)
     })
-
-    // 设置navbar
-    this.setData({
-      navbar: [this.data.dictionary.project_info, this.data.dictionary.task_management, this.data.dictionary.gantt_diagram]
-    })
-
-    // 获取当前project的id
-    id = options.id
-
-    // 从数据库中根据id获取数据
-    this.getDetail()
-
-
   },
 
+  onStateBlur: function(e){
+    // console.log(e.detail.value)
+
+    wx.cloud.callFunction({
+      name: 'updateProjectDescription',
+      data:{
+        id: id,
+        stateDescription: e.detail.value
+      }
+    }).then(res => {
+      console.log('调用云函数修改项目状态描述成功', res),
+      this.getDetail()
+    }).catch(res => {
+      console.log('调用云函数修改项目状态描述失败', res)
+    })
+  },
+
+  go_update(){
+    this.getDetail()
+  },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -335,43 +372,6 @@ Page({
 
   },
 
-  onProjectBlur: function(e){
-    // console.log(e.detail.value)
-    
-    wx.cloud.callFunction({
-      name: 'updateProjectDescription',
-      data:{
-        id: id,
-        projectDescription: e.detail.value
-      }
-    }).then(res => {
-      console.log('调用云函数修改项目描述成功', res),
-      this.getDetail()
-    }).catch(res => {
-      console.log('调用云函数修改项目描述失败', res)
-    })
-  },
-
-  onStateBlur: function(e){
-    // console.log(e.detail.value)
-
-    wx.cloud.callFunction({
-      name: 'updateProjectDescription',
-      data:{
-        id: id,
-        stateDescription: e.detail.value
-      }
-    }).then(res => {
-      console.log('调用云函数修改项目状态描述成功', res),
-      this.getDetail()
-    }).catch(res => {
-      console.log('调用云函数修改项目状态描述失败', res)
-    })
-  },
-
-  go_update(){
-    this.getDetail()
-  }
 
 })
 
