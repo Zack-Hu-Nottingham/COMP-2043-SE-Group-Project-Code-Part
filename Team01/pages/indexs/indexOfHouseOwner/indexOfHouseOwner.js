@@ -1,12 +1,12 @@
-import Dialog from '../../miniprogram_npm/@vant/weapp/dialog/dialog';
-import Toast from '../../miniprogram_npm/@vant/weapp/toast/toast';
+import Dialog from '../../../miniprogram_npm/@vant/weapp/dialog/dialog';
+import Toast from '../../../miniprogram_npm/@vant/weapp/toast/toast';
 
 const app = getApp();
 
-const languageUtils = require("../../language/languageUtils");
+const languageUtils = require("../../../language/languageUtils");
 const db = wx.cloud.database();
 const _ = db.command;
-const lib = require('../../utils/util');
+const lib = require('../../../utils/util');
 
 Page({
 

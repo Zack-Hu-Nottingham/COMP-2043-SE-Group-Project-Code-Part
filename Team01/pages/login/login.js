@@ -68,24 +68,20 @@ Page({
                 onClose: () => {
                   // House Owner
                   if (identity == 0) {
-                    // wx.navigateTo({
-                    //   url: 'url',
-                    //   events: events,
-                    //   success: (result) => {},
-                    //   fail: (res) => {},
-                    //   complete: (res) => {},
-                    // })
-
+                    wx.navigateTo({
+                      url: '../indexs/indexOfHouseOwner/indexOfHouseOwner',
+                    })
+                   
                     // Project Manager
                   } else if (identity == 1) {
-                    // wx.navigateTo({
-                    //   url: 'url',
-                    // })
-
+                    wx.navigateTo({
+                      url: '../indexs/indexForProjectManager/indexForProjectManager',
+                    })
+                   
                     // Worker
                   } else if (identity == 2) {
                     wx.navigateTo({
-                      url: '../indexForWorker/indexForWorker',
+                      url: '../indexs/indexForWorker/indexForWorker',
                     })
                   }
                 },
@@ -140,7 +136,7 @@ Page({
 
       // 跳转房主界面
       wx.navigateTo({
-        // url: 'url',
+        url: '../indexs/indexOfHouseOwner/indexOfHouseOwner',
       })
     })
 

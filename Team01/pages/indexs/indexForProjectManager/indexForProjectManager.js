@@ -1,12 +1,12 @@
-import Dialog from '../../miniprogram_npm/@vant/weapp/dialog/dialog';
-import Toast from '../../miniprogram_npm/@vant/weapp/toast/toast';
+import Dialog from '../../../miniprogram_npm/@vant/weapp/dialog/dialog';
+import Toast from '../../../miniprogram_npm/@vant/weapp/toast/toast';
 
 const app = getApp();
 
-const languageUtils = require("../../language/languageUtils");
+const languageUtils = require("../../../language/languageUtils");
 const db = wx.cloud.database();
 const _ = db.command;
-const lib = require('../../utils/util');
+const lib = require('../../../utils/util');
 
 Page({
 
@@ -282,21 +282,12 @@ Page({
   getProjectInfo() {
     return new Promise((resolve, reject) => {
       db.collection('project')
-      .where(_.or([
-        {
-          houseOwner: _.eq(this.data.user._openid)
-        },
-        {
-          projectManager: _.eq(this.data.user._openid)
-        },
+      .where(
         {
           _openid: _.eq(this.data.user._openid)
-        }
-      ]))
+        })
       .get()
       .then(res => {
-        console.log("res = ")
-        console.log(res)
         if (res.data.length != 0) {
           for (var idx in res.data) {
             this.setData({
@@ -317,17 +308,9 @@ Page({
   getProjectInfo() {
     return new Promise((resolve, reject) => {
       db.collection('project')
-      .where(_.or([
-        {
-          houseOwner: _.eq(this.data.user._openid)
-        },
-        {
-          projectManager: _.eq(this.data.user._openid)
-        },
-        {
+      .where({
           _openid: _.eq(this.data.user._openid)
-        }
-      ]))
+        })
       .get()
       .then(res => {
         console.log("res = ")
