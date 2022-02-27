@@ -64,7 +64,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    // getApp.setWatcher(this);
     wx.login()
     .then(res => {
 
@@ -84,7 +84,7 @@ Page({
         }).task.then(res => {
 
           // 设置全局的openid
-          app.globalData.userInfo.openid = res.data.openid
+          app.globalData.userInfo._openid = res.data.openid
           this.setData({
             openid: res.data.openid
           })
@@ -93,9 +93,9 @@ Page({
 
           // 访问数据库，判断该用户是否已经注册
           db.collection('user').where({
-            _openid: app.globalData.userInfo.openid
+            _openid: app.globalData.userInfo._openid
           }).get().then(res => {
-            console.log(res.data)
+            // console.log(res.data)
             // 如果是已知账户
             if (res.data.length != 0) {
               this.getData()
@@ -151,6 +151,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    // this.getFeedbackInfo();
     var lan = wx.getStorageSync("languageVersion");
     this.initLanguage();
     this.setData({
@@ -176,7 +177,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+      this.getFeedbackInfo();
   },
 
   /**
@@ -201,7 +202,7 @@ Page({
 
   // 获得用户信息
   getuserinfo(e) {
-    console.log(e)
+    // console.log(e)
     wx.setStorageSync('userInfo', e.detail.userInfo)
     app.globalData.userInfo = e.detail.userInfo
     this.setData({
@@ -222,7 +223,7 @@ Page({
       }
     })
     .then(res => {
-      console.log(res)
+      // console.log(res)
 
       Toast.success("Successfully registered")
       // 获取数据
@@ -240,9 +241,11 @@ Page({
 
     await this.getProjectInfo()
 
+    await this.getFeedbackInfo()
+
     for (var idx in this.data.project) {
       await this.getTaskInfo(this.data.project[idx]._id)
-      console.log(this.data.project[idx])
+      // console.log(this.data.project[idx])
     }
     this.getTodaysTask()
   },
@@ -256,13 +259,13 @@ Page({
       })
       .get()
       .then(res => {
-        console.log(res)
+        // console.log(res)
         this.setData({
           userInfo: res.data[0]
         })
         app.globalData.userInfo = res.data[0]
-        console.log("app data")
-        console.log(app.globalData.userInfo)
+        // console.log("app data")
+        // console.log(app.globalData.userInfo)
         resolve("成功获取用户数据");
       })
       .catch(err => {
@@ -299,6 +302,8 @@ Page({
       })}
     )},
 
+
+
   // 获取任务信息
   getTaskInfo(projectId) {
     return new Promise((resolve, reject) => {
@@ -308,7 +313,7 @@ Page({
       })
       .get()
       .then(res => {
-        console.log(res)
+        // console.log(res)
         for (var idx in res.data) {
           this.setData({
             task: this.data.task.concat(res.data[idx])
@@ -340,6 +345,41 @@ Page({
       }
     }
   },
+
+   // 获取反馈信息
+   getFeedbackInfo() {
+    return new Promise((resolve, reject) => {
+      db.collection('project')
+      .where({
+        _openid: _.eq(this.data.userInfo._openid),
+        feedback: _.exists(true)
+      })
+      .field({
+        feedback:true
+      })
+      .orderBy('feedback.createTime', 'desc')
+      .get()
+      .then(res => {
+        // console.log(res)
+      
+        if (res.data.length != 0) {
+          for (var idx in res.data) {
+            this.setData({
+              messageList: this.data.messageList.concat(res.data[idx].feedback)
+            })
+          }
+          
+        }
+        
+        resolve("成功获取项目信息")
+        console.log('成功获取项目信息',this.data.messageList)
+      })
+      .catch(err => {
+        console.log('请求项目信息失败', err)
+        //reject("请求项目信息失败")
+      })}
+      
+    )},
 
   // 更改tab选项时对应的逻辑
   onChangeTab(event) {
@@ -436,7 +476,7 @@ Page({
     wx.getUserProfile({
       desc: '展示用户信息', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
       success: (res) => {
-        console.log(res)
+        // console.log(res)
         this.setData({
           userInfo: res.userInfo,
           hasUserInfo: true

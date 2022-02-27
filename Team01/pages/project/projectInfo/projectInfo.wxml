@@ -91,7 +91,7 @@
   </view>
 
   <!--Upload related images-->
-  <van-uploader class="uploader" file-list="{{ fileList }}" bindtap="upload" deletable="{{ true }}" max-count="8"/>
+  <van-uploader class="uploader" file-list="{{ fileList }}" bindtap="upload" deletable="{{ true }}" max-count="8" bind:delete="deleteImg"/>
 
   <van-divider />
 
@@ -99,18 +99,11 @@
     <van-button hairline plain round block type="info" bindtap="clickAddComment" class="addComment">{{dictionary.add_comment}}</van-button>
   </van-sticky>
  
+ <!-- feedback -->
   <van-cell-group inset class="cell-group" wx:for="{{ feedback }}" wx:key="index">
-  <view wx:if="{{item.type==0}}" class="projectDelay">
-    <van-cell  title="Project Delay" label="{{item.details}}" clickable
-      link-type="navigateTo" url="/pages/project/fileList/fileList?id={{item.id}}&index={{index}}">{{item.createTime}}</van-cell>
-  </view>
-  <view wx:elif="{{item.type==1}}" class="taskDelay">
-    <van-cell title="Task Delay" label="{{item.details}}" clickable
-      link-type="navigateTo" url="/pages/project/fileList/fileList?id={{item.id}}&index={{index}}">{{item.createTime}}</van-cell>
-  </view>
-  <view wx:elif="{{item.type==2}}" class="taskNeedRework">
-    <van-cell title="Task need rework" label="{{item.details}}" clickable
-      link-type="navigateTo" url="/pages/project/fileList/fileList?id={{item.id}}&index={{index}}">{{item.createTime}}</van-cell>
+  <view class="projectDelay">
+    <van-cell  title="{{item.type.name}}" label="{{item.details}}" clickable
+      link-type="navigateTo" url="/pages/project/fileList/fileList?id={{item.belongTo}}&index={{index}}">{{item.createTime}}</van-cell>
   </view>
     
   </van-cell-group> 

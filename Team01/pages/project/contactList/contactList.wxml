@@ -2,12 +2,12 @@
 <!-- 搜索联系人（筛选条件：职位/姓名） -->
 <van-search
   value="{{ value }}"
-  placeholder="Please enter key word"
-  use-action-slot
-  bind:change="onChange"
-  bind:search="onSearch"
-><view slot="action" bind:tap="onClick">搜索</view></van-search>
+  placeholder="{{ dictionary.enter_keyword }}"
+  use-action-slot 
+  bind:change="onSearchChange"
+><view slot="action" bind:tap="onSearch">{{ dictionary.search }}</view></van-search>
 
+<!-- <view class="selected">上次保存选择：{{ owners }}</view> -->
 <!-- 选择联系人添加至需要的列表中 -->
 <van-checkbox-group value="{{ result }}" bind:change="onChange">
   <van-cell-group>

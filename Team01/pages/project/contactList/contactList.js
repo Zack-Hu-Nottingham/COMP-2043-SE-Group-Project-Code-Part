@@ -15,19 +15,28 @@ Page({
         // 0 - House Owner
         // 1 - Project Manager
         // 2 - follower
+        initial: [],
         list: [],
+        pageIndex: '',
+        searchKey: "",
     },
 
     onLoad(options){
+
+        // console.log(options.index)
+
         //按首字母顺序排序联系人列表(先英后中)
         db.collection('user')
         .orderBy('name','asc')
         .get()
         .then(res => {
-            console.log(res.data)
+            // console.log(res.data)
         })
 
         this.getList(options.index);
+        this.setData({
+          pageIndex: options.index,
+        })
 
         // 初始化语言
         var lan = wx.getStorageSync("languageVersion");
@@ -45,24 +54,42 @@ Page({
             })
             .get()
             .then(res => {
-              console.log(res)
+              // console.log(res)
               this.setData({
+                initial: res.data,
                 list: res.data
               })
             })
           })
     },
+
+    /*监听搜索输入框的值*/
+    onSearchChange(event){
+      // console.log(event.detail)
+      this.setData({
+        searchKey: event.detail
+      })
+    },
+    /*输入框搜索商品*/
+    onSearch(){
+      var newList = [];
+      for(var i=0;i<this.data.initial.length;i++){
+        if(this.data.initial[i].name.indexOf(this.data.searchKey)>=0){
+          newList.push(this.data.initial[i]);
+        }
+      }
+      this.setData({
+        list: newList
+      })
+      // console.log(newList)
+    },
   
     onChange(event) {
-
-    //   this.setData({
-    //     result: event.detail,
-    //   });
-      // console.log(this.data.result);
-      for(var i=0; i<event.detail.length; i++){
-          this.data.result.push(this.data.list[i].id);
-      }
-      console.log(this.data.result);
+      this.setData({
+        result: event.detail,
+      });
+      
+      //console.log(this.data.owners);
     },
 
     bindTouchStart: function(e) {
@@ -80,20 +107,19 @@ Page({
         }
     },
 
-    bindLongTap: function (event) {
+    bindLongTap(event) {
         const { index } = event.currentTarget.dataset;
         wx.setClipboardData({
-            data: this.data.list[index].phone,success: function () {
+            data: this.data.list[index].phone,
+            success: res => {
               wx.showToast({
-                title: '已复制用户电话',
+                title: this.data.dictionary.copy_phone_confirm,
                 icon: 'none',
                 duration: 1000,
               })
-            }
+            },
         })
   },
-    
-  
     noop() {},
 
 
@@ -114,16 +140,29 @@ Page({
         var currPage = pages[pages.length - 1];   //当前页面
         var prevPage = pages[pages.length - 2];  //上一个页面
 
-        var owners = this.data.owners;
-
-        for(var i=0;i<this.data.result.length;i++){
-            owners.push(this.data.list[this.data.result[i]]);
+        for(var i=0; i<this.data.result.length; i++){
+          db.collection('user')
+              .where({
+                _id: _.eq(this.data.result[i])
+              })
+              .get()
+              .then(res => {
+                this.data.owners.push(res.data[0].name)
+              })
         }
+        // console.log(this.data.owners)
 
-        prevPage.setData({
-            owner: this.data.results
-            // 传回他们的id，并在父页面编译id查询到姓名------
+      // 传回姓名
+      if(this.data.pageIndex==0){
+          prevPage.setData({
+            owner: this.data.owners
         })
+      }
+      else{
+          prevPage.setData({
+            participant: this.data.owners
+        })
+      }
 
     }
   });

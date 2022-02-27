@@ -90,6 +90,15 @@ var Languague = {
     feedback_type1:"任务延期",
     feedback_type2:"任务需返工",
 
+    // contact list page
+    copy_phone_confirm: "已复制用户电话",
+    search: "搜索",
+    enter_keyword: "请输入关键字",
+
+    // Toast message
+    null_name: "名称为空",
+    null_date_setting: "未设置日期",
+    null_template_setting: "未选择模板",
    },
 };
 

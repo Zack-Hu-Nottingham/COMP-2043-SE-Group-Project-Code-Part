@@ -22,7 +22,7 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        db.collection('project')
+      db.collection('project')
       .doc(options.id)
       .get({
         success: res => {
@@ -45,7 +45,7 @@ Page({
           wx.setNavigationBarTitle({
             title: this.data.name,
           }),
-          console.log(this.data.ownerId)
+          // console.log(this.data.ownerId)
           this.getOwner();
         },
         fail: function(err) {

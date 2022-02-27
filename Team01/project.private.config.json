@@ -38,7 +38,7 @@
                 },
                 {
                     "name": "",
-                    "pathName": "pages/project/newProject/newProject",
+                    "pathName": "pages/index/index",
                     "query": "",
                     "scene": null
                 },
@@ -51,6 +51,18 @@
                 {
                     "name": "",
                     "pathName": "pages/project/addComment/addComment",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "",
+                    "pathName": "pages/project/newProject/newProject",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "",
+                    "pathName": "pages/project/testDiagram/testDiagram",
                     "query": "",
                     "scene": null
                 }

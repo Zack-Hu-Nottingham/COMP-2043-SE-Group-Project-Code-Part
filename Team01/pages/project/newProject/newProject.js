@@ -33,6 +33,7 @@ Page({
         isLoading: false,
         fileList: [],
         houseOwner: "",
+        owner: [],
         participant: [],
         ownerPage: 0,
         participantPage: 2,
@@ -140,55 +141,6 @@ Page({
         })
     },
 
-    /**
-     * 生命周期函数--监听页面初次渲染完成
-     */
-    onReady: function () {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面显示
-     */
-    onShow: function () {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面隐藏
-     */
-    onHide: function () {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面卸载
-     */
-    onUnload: function () {
-
-    },
-
-    /**
-     * 页面相关事件处理函数--监听用户下拉动作
-     */
-    onPullDownRefresh: function () {
-
-    },
-
-    /**
-     * 页面上拉触底事件的处理函数
-     */
-    onReachBottom: function () {
-
-    },
-
-    /**
-     * 用户点击右上角分享
-     */
-    onShareAppMessage: function () {
-
-    },
-
     // 处理用户输入名字
     typeName: function(e){
         this.setData({
@@ -209,7 +161,7 @@ Page({
         })
     },
 
-    changeFollower(){
+    changeParticipant(){
       wx.navigateTo({
         url: '../../project/contactList/contactList?index='+this.data.participantPage,
       })
@@ -249,14 +201,17 @@ Page({
     // 提交新项目
     formSubmit: function (e) {
         if (this.data.name == "") {
-            Toast('Name is null');
+            Toast(this.data.dictionary.null_name);
         }
         else if (this.data.startDate == "" || this.data.endDate == "") {
-            Toast('No date setting');
+            Toast(this.data.dictionary.null_date_setting);
         }
         else if (this.data.description == "") {
-            Toast('No detail description');
-        }  
+            Toast(this.data.dictionary.submitErrMsg2);
+        }
+        else if(this.data.selectedTemplate == ""){
+            Toast(this.data.dictionary.null_template_setting)
+        }
         else{
           // 根据输入先创建一个项目，此时task列表为空
           wx.cloud.database().collection('project')
@@ -266,7 +221,7 @@ Page({
                   startTime: this.data.startDate,
                   endTime: this.data.endDate,
                   projectDescription: this.data.description,
-                  projectManager: app.globalData.userInfo.openid,
+                  projectManager: app.globalData.userInfo._openid,
                   template: this.data.selectedTemplate,
                   houseOwner: this.data.houseOwner,
                   participant: this.data.participant,
@@ -299,6 +254,7 @@ Page({
             .catch(res => {
               console.log('新建项目失败，请联系管理员', res) 
             })
+            this.action();
 
               
         }
@@ -352,21 +308,6 @@ Page({
       })
       this.onDateClose();
 
-  
-      // //调用云函数，更新数据库中日期
-      // wx.cloud.callFunction({
-      //   name: 'updateProjectDate',
-      //   data:{
-      //     id: id,
-      //     startTime: `${start.getFullYear()}-${start.getMonth() + 1}-${start.getDate()}`,
-      //     endTime: `${end.getFullYear()}-${end.getMonth() + 1}-${end.getDate()}`
-      //   }
-      // }).then(res => {
-      //   console.log('project日期更新成功', res),
-      //   this.getDetail()
-      // }).catch(res => {
-      //   console.log('project日期更新失败', res)
-      // })
     },
 
       // modify the template accordingly
@@ -403,7 +344,7 @@ Page({
     async createTask() {
       this.modifyTemplate()
       for(var idx in this.data.template) {
-        console.log(idx)
+        // console.log(idx)
         await this.createTaskAccordingToTemplate(idx)
       }
       db.collection('project')
@@ -415,5 +356,12 @@ Page({
         }
       })
     },
-
+    deleteImg(event) {
+      const delIndex = event.detail.index
+      const { fileList } = this.data
+      fileList.splice(delIndex, 1)
+      this.setData({
+        fileList
+      })
+    }
 })
