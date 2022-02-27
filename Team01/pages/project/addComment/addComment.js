@@ -38,7 +38,7 @@ Page({
             id: options.id,
         })
         // console.log(this.data.createTime);
-        db.collection('project').doc(options.id).get().then(res => {
+        db.collection('task').doc(options.id).get().then(res => {
             // res.data 包含该记录的数据
             this.setData({
                 feedback: res.data.feedback,
