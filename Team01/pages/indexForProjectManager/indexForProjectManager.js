@@ -45,10 +45,10 @@ Page({
     project: [],
 
 
-    /**
-     * Dashboard page's data
-     */
-    task:[],
+    // /**
+    //  * Dashboard page's data
+    //  */
+    // task:[],
 
 
     /**
@@ -279,6 +279,41 @@ Page({
   },
 
   // 获取项目信息
+  getProjectInfo() {
+    return new Promise((resolve, reject) => {
+      db.collection('project')
+      .where(_.or([
+        {
+          houseOwner: _.eq(this.data.user._openid)
+        },
+        {
+          projectManager: _.eq(this.data.user._openid)
+        },
+        {
+          _openid: _.eq(this.data.user._openid)
+        }
+      ]))
+      .get()
+      .then(res => {
+        console.log("res = ")
+        console.log(res)
+        if (res.data.length != 0) {
+          for (var idx in res.data) {
+            this.setData({
+              project: this.data.project.concat(res.data[idx])
+            })  
+          }
+        }
+        
+        resolve("成功获取项目信息")
+      })
+      .catch(err => {
+        reject("请求项目信息失败")
+      })}
+    )},
+
+
+      // 获取反馈信息
   getProjectInfo() {
     return new Promise((resolve, reject) => {
       db.collection('project')
