@@ -64,7 +64,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    // getApp.setWatcher(this);
     wx.login()
     .then(res => {
 
@@ -151,6 +151,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    // this.getFeedbackInfo();
     var lan = wx.getStorageSync("languageVersion");
     this.initLanguage();
     this.setData({
@@ -176,7 +177,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+      this.getFeedbackInfo();
   },
 
   /**
