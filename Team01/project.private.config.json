@@ -53,6 +53,12 @@
                     "pathName": "pages/project/addComment/addComment",
                     "query": "",
                     "scene": null
+                },
+                {
+                    "name": "",
+                    "pathName": "pages/project/newProject/newProject",
+                    "query": "",
+                    "scene": null
                 }
             ]
         }

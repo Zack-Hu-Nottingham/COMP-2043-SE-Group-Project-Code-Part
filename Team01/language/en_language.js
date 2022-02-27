@@ -84,14 +84,23 @@ var Languague = {
     house_owner: "House Owner",
 
       // Comment page
-   comment_title:"Feedback",
-   select_feedback:"Select feedback type",
-   submitErrMsg1:"Feedback type is null",
-   submitErrMsg2:"Description is null",
-   feedback_type0:"Project Delay",
-   feedback_type1:"Task Delay",
-   feedback_type2:"Task need rework",
-    
+    comment_title:"Feedback",
+    select_feedback:"Select feedback type",
+    submitErrMsg1:"Feedback type is null",
+    submitErrMsg2:"Description is null",
+    feedback_type0:"Project Delay",
+    feedback_type1:"Task Delay",
+    feedback_type2:"Task need rework",
+
+    // contact list page
+    copy_phone_confirm: "Phone number has been copied",
+    search: "Search",
+    enter_keyword: "Please enter key word",
+
+    // Toast message
+    null_name: "Name is null",
+    null_date_setting: "No date setting",
+    null_template_setting: "No template selected",
  },
 };
 

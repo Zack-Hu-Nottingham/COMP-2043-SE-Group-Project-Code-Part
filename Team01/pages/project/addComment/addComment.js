@@ -53,8 +53,8 @@ Page({
                 })
               })
         }
-        console.log(options)
-        console.log(this.data.feedback);
+        // console.log(options)
+        // console.log(this.data.feedback);
  
         
         // 初始化语言
@@ -155,7 +155,7 @@ Page({
             for(var i = 0; i< this.data.fileList.length; i++ ){
                 this.uploadImage(this.data.fileList[i].url);
             }
-            console.log(this.data.feedback);
+            // console.log(this.data.feedback);
             this.updateDB();
             this.action();
         }

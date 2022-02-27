@@ -13,7 +13,7 @@
     <!--Set other information-->
     <van-cell-group inset style="padding: 10rpx;">
         <van-cell title="{{dictionary.house_owner}}" is-link size="large" value="{{owner}}" bindtap="changeOwner" />
-        <van-cell title="{{dictionary.participant}}" is-link size="large" value="{{follower}}" bindtap="changeFollower" />
+        <van-cell title="{{dictionary.participant}}" is-link size="large" value="{{participant}}" bindtap="changeParticipant" />
         <van-cell title="{{dictionary.choose_template}}" is-link size="large" value="{{selectedTemplate}}" bindtap="selectTemplate" />
     </van-cell-group>
 
@@ -27,7 +27,7 @@
 </view>
 
 <!--Upload related images-->
-<van-uploader class="uploader" file-list="{{ fileList }}" bind:after-read="upload" />
+<van-uploader catch:delete="delete" class="uploader" file-list="{{ fileList }}" bind:after-read="upload" />
 
 <!--Submit-->    
 <van-button plain round block loading="{{isLoading}}" disabled="{{isLoading}}" class="submitBtn" color="#1296db" type="primary" size="normal" form-type="submit" bindtap="formSubmit">{{dictionary.create_new_project}}</van-button>
