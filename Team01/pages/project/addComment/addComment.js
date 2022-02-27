@@ -230,4 +230,13 @@ Page({
         // return `${date.getMonth() + 1}/${date.getDate()}`;
         return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
       },
+
+    deleteImg(event) {
+        const delIndex = event.detail.index
+        const { fileList } = this.data
+        fileList.splice(delIndex, 1)
+        this.setData({
+          fileList
+        })
+      }
 })
