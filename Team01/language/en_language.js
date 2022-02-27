@@ -18,12 +18,13 @@ var Languague = {
 
     // dashboard page
     today_task: "Today's Task",
+    task_list: "Task List",
+    filter: "filter",
 
     // more page
     user_name: "User name",
     position: "Possition",
     setting: "Setting",
-    identity: "Identity",
     more: "More",
     sign_out: "Sign Out",
     invite_member: "Invite Member",
@@ -43,17 +44,15 @@ var Languague = {
     change_lan_confirm: "Confirm change language",
     
     // Project information page
-    project_manager: "Project Manager",
     project_info: "Project Information",
     task_management: "Task Management",
     gantt_diagram: "Gantt Diagram",
-    owner: "House Owner",
+    owner: "Owner",
     start_time: "Start Time",
     end_time: "End Time",
     expected_start_time: "Expected Start Time",
     expected_end_time: "Expected End Time",
     description: "Description",
-    description_hint: "less than 500 words",
     state_information: "State Information",
     current_state: "Current State",
     task_progress: "Task Progress",
@@ -103,6 +102,7 @@ var Languague = {
     construction_requirements: "Construction Requirements",
     start_construction: "Start Construction",
     finish_construction: "Finish Construction",
+    
  },
 };
 

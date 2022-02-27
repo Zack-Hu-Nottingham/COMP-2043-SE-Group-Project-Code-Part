@@ -19,7 +19,11 @@
         "pages/more/setting/setting",
         "pages/more/moreInfo/moreInfo",
         "pages/more/languageSetting/languageSetting",
-        "pages/more/test/test"
+        "pages/more/test/test",
+        
+        "pages/indexOfHouseOwner/indexOfHouseOwner",
+        "pages/contact/contactList/contactList",
+        "pages/project/projectReport/projectReport"
     ],
     "window": {
         "backgroundTextStyle": "light",
@@ -59,6 +63,6 @@
         "van-radio": "@vant/weapp/radio/index",
         "van-radio-group": "@vant/weapp/radio-group/index",
         "van-search": "@vant/weapp/search/index",
-        "van-dialog": "@vant/weapp/dialog/index"
+        "van-dialog": "@vant/weapp/dialog/index",
     }
 }

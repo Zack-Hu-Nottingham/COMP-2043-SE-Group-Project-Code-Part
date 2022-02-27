@@ -19,6 +19,7 @@
       clickable
       data-index="{{ index }}"
       bindtouchstart="bindTouchStart" bindtouchend="bindTouchEnd" bindlongpress="bindLongTap" bindtap="toggle"
+      label="{{ item.position }}"
     >
       <van-checkbox
         catch:tap="noop"
