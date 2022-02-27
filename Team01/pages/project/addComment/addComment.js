@@ -23,6 +23,7 @@ Page({
         details: '',
         feedback: [],
         id: '',
+        commentPage: '',
 
         isLoading: false,
 
@@ -34,14 +35,26 @@ Page({
     onLoad: function (options) { 
         this.setData({
             id: options.id,
+            commentPage: options.index,
         })
-        // console.log(this.data.createTime);
-        db.collection('task').doc(options.id).get().then(res => {
-            // res.data 包含该记录的数据
-            this.setData({
-                feedback: res.data.feedback,
-            })
-          })
+        if(this.data.commentPage=='0'){
+            db.collection('project').doc(options.id).get().then(res => {
+                // res.data 包含该记录的数据
+                this.setData({
+                    feedback: res.data.feedback,
+                })
+              })
+        }
+        else{
+            db.collection('task').doc(options.id).get().then(res => {
+                // res.data 包含该记录的数据
+                this.setData({
+                    feedback: res.data.feedback,
+                })
+              })
+        }
+        console.log(this.data.feedback);
+ 
         
         // 初始化语言
         var lan = wx.getStorageSync("languageVersion");

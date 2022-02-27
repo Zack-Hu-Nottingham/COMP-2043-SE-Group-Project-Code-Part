@@ -3,7 +3,8 @@
 const languageUtils = require("../../../language/languageUtils");
 const db = wx.cloud.database();
 const _ = db.command;
-var id = ''
+var id = '';
+var taskComment = '1'; //辨别addComment的页面中索引列表是task/project
 
 Page({
 
@@ -193,7 +194,7 @@ Page({
    */
   clickAddComment(event) {
     wx.navigateTo({
-      url: '../addComment/addComment',
+      url: '../addComment/addComment?id='+ id + '&index=' + taskComment,
     })
   },
 

@@ -299,6 +299,7 @@ Page({
             .catch(res => {
               console.log('新建项目失败，请联系管理员', res) 
             })
+            this.action();
 
               
         }
