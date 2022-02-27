@@ -14,7 +14,6 @@
 </van-tabbar>
 
 
-
 <!-- Message page -->
 <view wx:if="{{active == 0}}">
   <van-cell-group inset style="padding: 30rpx;">

@@ -42,6 +42,11 @@ Page({
                 feedback: res.data.feedback,
             })
           })
+
+        var pages = getCurrentPages();
+        var currPage = pages[pages.length - 1];   //当前页面
+        var prevPage = pages[pages.length - 2];  //上一个页面
+        // console.log(prevPage.data.id);
         
         // 初始化语言
         var lan = wx.getStorageSync("languageVersion");

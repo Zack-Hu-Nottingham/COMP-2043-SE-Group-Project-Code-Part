@@ -11,7 +11,8 @@ exports.main = async (event, context) => {
     .doc(event.id)
     .update({
     data: {
-      currentPriority: event.currentPriority
+      currentPriority: event.currentPriority,
+      state: event.state
       }
     })
 }

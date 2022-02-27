@@ -631,7 +631,7 @@ Page({
 
   clickNewTask(event) {
     wx.navigateTo({
-      url: '../newTask/newTask',
+      url: '../newTask/newTask?id=' + id,
     })
   },
 

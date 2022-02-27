@@ -6,7 +6,7 @@ const app = getApp();
 const languageUtils = require("../../language/languageUtils");
 const db = wx.cloud.database();
 const _ = db.command;
-const lib = require('../../utils/util')
+const lib = require('../../utils/util');
 
 Page({
 
@@ -35,9 +35,12 @@ Page({
     messageList: [],
 
 
+
+
     /**
      * Projects page's data
      */
+
     project: [],
 
 
@@ -56,6 +59,8 @@ Page({
     canIUseOpenData: wx.canIUse('open-data.type.userAvatarUrl') && wx.canIUse('open-data.type.userNickName'), // 如需尝试获取用户信息可改为false
     name: "",
     position: "Project Manager",
+
+    currentTime: "",
 
   },
 
@@ -236,6 +241,8 @@ Page({
   // 初始化数据
   async getData(openid){
 
+    await this.updateState()
+
     await this.getInfo()
 
     await this.getProjectInfo()
@@ -287,9 +294,11 @@ Page({
       .get()
       .then(res => {
         if (res.data.length != 0) {
-          this.setData({
-            project: this.data.project.concat(res.data)
-          })
+          for (var idx in res.data) {
+            this.setData({
+              project: this.data.project.concat(res.data[idx])
+            })  
+          }
         }
         
         resolve("成功获取项目信息")
@@ -467,7 +476,71 @@ Page({
 
   // 更新数据
   go_update(){
+    this.setData({
+      project: [],
+      task: [],
+    }),
     this.getData()
-  }
-  
+  },
+
+  updateState(){
+
+    const _currentTime = lib.formatDate(new Date());
+    this.setData({
+      currentTime: _currentTime
+    });
+    //console.log(this.data.currentTime)
+
+    new Promise((resolve, reject) => {
+      db.collection('task')
+      .get()
+      .then(res => {
+        //console.log(res)
+        for (var idx in res.data) {
+          if(this.data.currentTime < res.data[idx].startTime){
+            //console.log(res.data[idx].startTime)
+            wx.cloud.database().collection('task')
+            .doc(res.data[idx]._id)
+            .update({
+              data: {
+                state: 0,
+              }
+            })
+            .catch(err => {
+              console.log('请求失败', err)
+            })
+          }else if(this.data.currentTime > res.data[idx].startTime && this.data.currentTime < res.data[idx].endTime){
+            wx.cloud.database().collection('task')
+            .doc(res.data[idx]._id)
+            .update({
+              data: {
+                state: 1,
+              }
+            })
+            .catch(err => {
+              console.log('请求失败', err)
+            })
+          }else if(this.data.currentTime > res.data[idx].endTime){
+            wx.cloud.database().collection('task')
+            .doc(res.data[idx]._id)
+            .update({
+              data: {
+                state: 3,
+              }
+            })
+            .catch(err => {
+              console.log('请求失败', err)
+            })
+          }
+        }
+        // this.data.task.push(res.data[0])
+        resolve("成功获取任务信息")
+      })
+      .catch(err => {
+        reject("请求任务信息失败")
+      })
+    })
+
+  },
+
 })
