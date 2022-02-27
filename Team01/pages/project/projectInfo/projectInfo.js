@@ -44,7 +44,6 @@ Page({
 
 
     project: {},
-    userInfo: {},
     houseOwner: "",
     projectManager: "",
     feedback: [],
@@ -57,6 +56,10 @@ Page({
     // for collapse bar
     activeNames: [],
 
+    //gantt diagram
+    // ec: {
+    //   onInit: initChart
+    // }
 
   },
 
@@ -144,7 +147,6 @@ Page({
       .doc(id)
       .get({
         success: res => {
-
           this.setData({
             project: res.data,
             name: res.data.name,
@@ -252,7 +254,7 @@ Page({
    */
   clickAddComment(event) {
         wx.navigateTo({
-          url: '../addComment/addComment?id=' + id + '&index' + projectComment
+          url: '../addComment/addComment?id=' + id + '&index=' + projectComment
         })
   },
 
@@ -280,10 +282,6 @@ Page({
     // 从数据库中根据id获取数据
     this.getDetail()
 
-    // 获取userInfo
-    this.setData({
-      userInfo: app.globalData.userInfo
-    })
 
   },
 
@@ -338,7 +336,7 @@ Page({
   },
 
   onProjectBlur: function(e){
-    console.log(e.detail.value)
+    // console.log(e.detail.value)
     
     wx.cloud.callFunction({
       name: 'updateProjectDescription',
@@ -355,7 +353,7 @@ Page({
   },
 
   onStateBlur: function(e){
-    console.log(e.detail.value)
+    // console.log(e.detail.value)
 
     wx.cloud.callFunction({
       name: 'updateProjectDescription',

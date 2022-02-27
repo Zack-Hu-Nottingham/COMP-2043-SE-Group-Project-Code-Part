@@ -45,7 +45,7 @@ Page({
           wx.setNavigationBarTitle({
             title: this.data.name,
           }),
-          console.log(this.data.ownerId)
+          // console.log(this.data.ownerId)
           this.getOwner();
         },
         fail: function(err) {

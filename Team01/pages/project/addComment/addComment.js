@@ -53,6 +53,7 @@ Page({
                 })
               })
         }
+        console.log(options)
         console.log(this.data.feedback);
  
         
@@ -118,7 +119,7 @@ Page({
             var fileList = this.data.fileList;
             fileList.push({url: res.tempFilePaths[0]});
             this.setData({ fileList: fileList });
-            console.log("成功选择图片",fileList);
+            // console.log("成功选择图片",fileList);
           }
         })
       },
@@ -128,7 +129,7 @@ Page({
           cloudPath: 'feedback/'+ this.data.id + '/' + new Date().getTime() +'.png', // 上传至云端的路径
           filePath: fileURL, // 小程序临时文件路径
           success: res => {
-            console.log("图片上传成功",res)
+            // console.log("图片上传成功",res)
           },
           fail: console.error
         })
@@ -147,28 +148,44 @@ Page({
                 type: this.data.feedbackType[this.data.selectedIndex], //反馈类型
                 description: this.data.details, //反馈描述
                 fileList: this.data.fileList, //文件列表
-                owner: app.globalData.userInfo.openid, //创建人
+                owner: app.globalData.userInfo._openid, //创建人
                 belongTo: this.data.id, //所属项目/任务
                 createTime: this.formatDate(new Date()),
             })
-            console.log(this.data.feedback)
+            for(var i = 0; i< this.data.fileList.length; i++ ){
+                this.uploadImage(this.data.fileList[i].url);
+            }
+            console.log(this.data.feedback);
+            this.updateDB();
+            this.action();
+        }
+
+    },
+    updateDB(){
+        if(this.data.commentPage=='0'){
             db.collection('project').doc(this.data.id).update({
                 // data 传入需要局部更新的数据
                 data: {
                   feedback: this.data.feedback
                 },
                 success: function(res) {
-                  console.log(res.data.feedback)
+                  // console.log(res.data.feedback)
                 }
               })
-    
-            for(var i = 0; i< this.data.fileList.length; i++ ){
-                this.uploadImage(this.data.fileList[i].url);
-            }
-            this.action();
         }
-
+        else{
+            db.collection('task').doc(this.data.id).update({
+                // data 传入需要局部更新的数据
+                data: {
+                  feedback: this.data.feedback
+                },
+                success: function(res) {
+                  // console.log(res.data.feedback)
+                }
+              })
+        }
     },
+    
     action: function(e){
         this.setData({
             isLoading: true,

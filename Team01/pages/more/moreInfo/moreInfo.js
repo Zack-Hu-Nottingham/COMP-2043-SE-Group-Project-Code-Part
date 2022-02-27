@@ -41,7 +41,7 @@ Page({
         wx.getUserProfile({
             desc: '展示更多信息', // 声明获取用户更多信息
             success: (res) => {
-              console.log(res)
+              // console.log(res)
               this.setData({
                 userInfo: res.userInfo,
                 hasUserInfo: true,
@@ -54,7 +54,7 @@ Page({
           title: this.data.title
         })
         this.setData({
-          openid : app.globalData.userInfo.openid
+          openid : app.globalData.userInfo._openid
         })
 
     },

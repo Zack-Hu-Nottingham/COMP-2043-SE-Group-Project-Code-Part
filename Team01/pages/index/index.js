@@ -84,7 +84,7 @@ Page({
         }).task.then(res => {
 
           // 设置全局的openid
-          app.globalData.userInfo.openid = res.data.openid
+          app.globalData.userInfo._openid = res.data.openid
           this.setData({
             openid: res.data.openid
           })
@@ -93,9 +93,9 @@ Page({
 
           // 访问数据库，判断该用户是否已经注册
           db.collection('user').where({
-            _openid: app.globalData.userInfo.openid
+            _openid: app.globalData.userInfo._openid
           }).get().then(res => {
-            console.log(res.data)
+            // console.log(res.data)
             // 如果是已知账户
             if (res.data.length != 0) {
               this.getData()
@@ -201,7 +201,7 @@ Page({
 
   // 获得用户信息
   getuserinfo(e) {
-    console.log(e)
+    // console.log(e)
     wx.setStorageSync('userInfo', e.detail.userInfo)
     app.globalData.userInfo = e.detail.userInfo
     this.setData({
@@ -222,7 +222,7 @@ Page({
       }
     })
     .then(res => {
-      console.log(res)
+      // console.log(res)
 
       Toast.success("Successfully registered")
       // 获取数据
@@ -242,7 +242,7 @@ Page({
 
     for (var idx in this.data.project) {
       await this.getTaskInfo(this.data.project[idx]._id)
-      console.log(this.data.project[idx])
+      // console.log(this.data.project[idx])
     }
     this.getTodaysTask()
   },
@@ -256,13 +256,13 @@ Page({
       })
       .get()
       .then(res => {
-        console.log(res)
+        // console.log(res)
         this.setData({
           userInfo: res.data[0]
         })
         app.globalData.userInfo = res.data[0]
-        console.log("app data")
-        console.log(app.globalData.userInfo)
+        // console.log("app data")
+        // console.log(app.globalData.userInfo)
         resolve("成功获取用户数据");
       })
       .catch(err => {
@@ -308,7 +308,7 @@ Page({
       })
       .get()
       .then(res => {
-        console.log(res)
+        // console.log(res)
         for (var idx in res.data) {
           this.setData({
             task: this.data.task.concat(res.data[idx])
@@ -436,7 +436,7 @@ Page({
     wx.getUserProfile({
       desc: '展示用户信息', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
       success: (res) => {
-        console.log(res)
+        // console.log(res)
         this.setData({
           userInfo: res.userInfo,
           hasUserInfo: true

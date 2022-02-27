@@ -13,7 +13,7 @@ Page({
     wx.navigateTo({
       url: '../../project/taskInfo/taskInfo'
     })
-    console.log(e)
+    // console.log(e)
   },
 
   /**

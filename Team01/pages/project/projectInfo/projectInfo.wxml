@@ -100,16 +100,8 @@
   </van-sticky>
  
   <van-cell-group inset class="cell-group" wx:for="{{ feedback }}" wx:key="index">
-  <view wx:if="{{item.type==0}}" class="projectDelay">
-    <van-cell  title="Project Delay" label="{{item.details}}" clickable
-      link-type="navigateTo" url="/pages/project/fileList/fileList?id={{item.id}}&index={{index}}">{{item.createTime}}</van-cell>
-  </view>
-  <view wx:elif="{{item.type==1}}" class="taskDelay">
-    <van-cell title="Task Delay" label="{{item.details}}" clickable
-      link-type="navigateTo" url="/pages/project/fileList/fileList?id={{item.id}}&index={{index}}">{{item.createTime}}</van-cell>
-  </view>
-  <view wx:elif="{{item.type==2}}" class="taskNeedRework">
-    <van-cell title="Task need rework" label="{{item.details}}" clickable
+  <view class="projectDelay">
+    <van-cell  title="{{item.type.name}}" label="{{item.details}}" clickable
       link-type="navigateTo" url="/pages/project/fileList/fileList?id={{item.id}}&index={{index}}">{{item.createTime}}</van-cell>
   </view>
     

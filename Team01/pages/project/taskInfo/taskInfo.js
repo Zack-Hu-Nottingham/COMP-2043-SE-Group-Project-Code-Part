@@ -170,7 +170,7 @@ Page({
         console.log('请求失败', err)
       })
       .then(res => {
-        console.log(this.data.taskPage.belongTo)
+        // console.log(this.data.taskPage.belongTo)
        db.collection('project')
         .doc(this.data.taskPage.belongTo)
         .get()
@@ -199,7 +199,7 @@ Page({
   },
 
   onTaskDescriptionBlur: function(e){
-    console.log(e.detail.value)
+    // console.log(e.detail.value)
 
     wx.cloud.callFunction({
       name: 'updateTaskDescription',

@@ -24,7 +24,7 @@ Page({
         .orderBy('name','asc')
         .get()
         .then(res => {
-            console.log(res.data)
+            // console.log(res.data)
         })
 
         this.getList(options.index);
@@ -45,7 +45,7 @@ Page({
             })
             .get()
             .then(res => {
-              console.log(res)
+              // console.log(res)
               this.setData({
                 list: res.data
               })
@@ -62,7 +62,7 @@ Page({
       for(var i=0; i<event.detail.length; i++){
           this.data.result.push(this.data.list[i].id);
       }
-      console.log(this.data.result);
+      // console.log(this.data.result);
     },
 
     bindTouchStart: function(e) {

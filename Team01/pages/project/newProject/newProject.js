@@ -266,7 +266,7 @@ Page({
                   startTime: this.data.startDate,
                   endTime: this.data.endDate,
                   projectDescription: this.data.description,
-                  projectManager: app.globalData.userInfo.openid,
+                  projectManager: app.globalData.userInfo._openid,
                   template: this.data.selectedTemplate,
                   houseOwner: this.data.houseOwner,
                   participant: this.data.participant,
@@ -404,7 +404,7 @@ Page({
     async createTask() {
       this.modifyTemplate()
       for(var idx in this.data.template) {
-        console.log(idx)
+        // console.log(idx)
         await this.createTaskAccordingToTemplate(idx)
       }
       db.collection('project')
