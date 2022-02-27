@@ -27,6 +27,11 @@ Page({
         fileList: [],
         imageURL: '',
         details: '',
+        feedback: [],
+        id: '',
+        commentPage: '',
+
+        isLoading: false,
 
     },
 
@@ -36,19 +41,27 @@ Page({
     onLoad: function (options) { 
         this.setData({
             id: options.id,
+            commentPage: options.index,
         })
-        // console.log(this.data.createTime);
-        db.collection('task').doc(options.id).get().then(res => {
-            // res.data 包含该记录的数据
-            this.setData({
-                feedback: res.data.feedback,
-            })
-          })
-
-        var pages = getCurrentPages();
-        var currPage = pages[pages.length - 1];   //当前页面
-        var prevPage = pages[pages.length - 2];  //上一个页面
-        // console.log(prevPage.data.id);
+        if(this.data.commentPage=='0'){
+            db.collection('project').doc(options.id).get().then(res => {
+                // res.data 包含该记录的数据
+                this.setData({
+                    feedback: res.data.feedback,
+                })
+              })
+        }
+        else{
+            db.collection('task').doc(options.id).get().then(res => {
+                // res.data 包含该记录的数据
+                this.setData({
+                    feedback: res.data.feedback,
+                })
+              })
+        }
+        // console.log(options)
+        // console.log(this.data.feedback);
+ 
         
         // 初始化语言
         var lan = wx.getStorageSync("languageVersion");
@@ -96,9 +109,8 @@ Page({
           success(res) {
             var fileList = that.data.fileList;
             fileList.push({url: res.tempFilePaths[0]});
-            that.setData({ fileList: fileList });
-            console.log("成功选择图片",fileList);
-            // that.uploadImage(res.tempFilePaths[0]);
+            this.setData({ fileList: fileList });
+            // console.log("成功选择图片",fileList);
           }
         })
       },
@@ -108,7 +120,7 @@ Page({
           cloudPath: 'feedBack/'+ new Date().getTime() +'.png', // 上传至云端的路径
           filePath: fileURL, // 小程序临时文件路径
           success: res => {
-            console.log("图片上传成功",res)
+            // console.log("图片上传成功",res)
           },
           fail: console.error
         })
@@ -127,28 +139,46 @@ Page({
                 type: this.data.feedbackType[this.data.selectedIndex], //反馈类型
                 description: this.data.details, //反馈描述
                 fileList: this.data.fileList, //文件列表
-                owner: app.globalData.userInfo.openid, //创建人
+                owner: app.globalData.userInfo.name, //创建人
                 belongTo: this.data.id, //所属项目/任务
                 createTime: this.formatDate(new Date()),
             })
-            console.log(this.data.feedback)
+            for(var i = 0; i< this.data.fileList.length; i++ ){
+                this.uploadImage(this.data.fileList[i].url);
+            }
+            // console.log(this.data.feedback);
+            this.updateDB();
+            this.action();
+        }
+
+    },
+    updateDB(){
+        if(this.data.commentPage=='0'){
             db.collection('project').doc(this.data.id).update({
                 // data 传入需要局部更新的数据
                 data: {
                   feedback: this.data.feedback
                 },
                 success: function(res) {
-                  console.log(res.data.feedback)
+                    // const page = ('pages/index/index');
+                    // page.refresh();
+                  // console.log(res.data.feedback)
                 }
               })
-    
-            for(var i = 0; i< this.data.fileList.length; i++ ){
-                this.uploadImage(this.data.fileList[i].url);
-            }
-            this.action();
         }
-
+        else{
+            db.collection('task').doc(this.data.id).update({
+                // data 传入需要局部更新的数据
+                data: {
+                  feedback: this.data.feedback
+                },
+                success: function(res) {
+                  // console.log(res.data.feedback)
+                }
+              })
+        }
     },
+    
     action: function(e){
         this.setData({
             isLoading: true,
@@ -185,4 +215,19 @@ Page({
         dictionary: lang.lang.index,
         });
     },
+
+    formatDate(date) {
+        date = new Date(date);
+        // return `${date.getMonth() + 1}/${date.getDate()}`;
+        return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+      },
+
+    deleteImg(event) {
+        const delIndex = event.detail.index
+        const { fileList } = this.data
+        fileList.splice(delIndex, 1)
+        this.setData({
+          fileList
+        })
+      }
 })

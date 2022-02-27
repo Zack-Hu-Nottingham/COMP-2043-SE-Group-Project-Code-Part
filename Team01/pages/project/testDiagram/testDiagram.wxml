@@ -1,2 +1,2 @@
 <!--pages/project/testDiagram/testDiagram.wxml-->
-<web-view src="https://www.highcharts.com.cn/samples/highcharts/hc-others/x-range"></web-view>
+<web-view src="http://120.25.227.183/gantt/samples/01_initialization/02_load_json.html"></web-view>

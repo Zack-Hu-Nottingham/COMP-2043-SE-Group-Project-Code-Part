@@ -12,6 +12,24 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        wx.getUserProfile({
+            desc: '展示更多信息', // 声明获取用户更多信息
+            success: (res) => {
+              // console.log(res)
+              this.setData({
+                userInfo: res.userInfo,
+                hasUserInfo: true,
+                name: res.userInfo.userNickName,
+                
+              })
+            }
+          })
+        wx.setNavigationBarTitle({
+          title: this.data.title
+        })
+        this.setData({
+          openid : app.globalData.userInfo._openid
+        })
 
     },
 

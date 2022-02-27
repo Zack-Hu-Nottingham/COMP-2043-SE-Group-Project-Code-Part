@@ -50,10 +50,8 @@ var Languague = {
     owner: "负责人",
     start_time: "开始时间",
     end_time: "结束时间",
-    
     expected_start_time: "预期开始时间",
     expected_end_time: "预期结束时间",
-
     description: "描述",
     state_information: "状态信息",
     current_state: "当前状态",
@@ -98,6 +96,16 @@ var Languague = {
     construction_requirements: "施工要求",
     start_construction: "开始施工",
     finish_construction: "结束施工",
+
+    // contact list page
+    copy_phone_confirm: "已复制用户电话",
+    search: "搜索",
+    enter_keyword: "请输入关键字",
+
+    // Toast message
+    null_name: "名称为空",
+    null_date_setting: "未设置日期",
+    null_template_setting: "未选择模板",
    },
 };
 

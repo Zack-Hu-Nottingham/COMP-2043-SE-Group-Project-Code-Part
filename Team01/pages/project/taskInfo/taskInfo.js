@@ -1,8 +1,10 @@
 // pages/project/taskInfo/taskInfo.js
 
 const languageUtils = require("../../../language/languageUtils");
-
-var id = ''
+const db = wx.cloud.database();
+const _ = db.command;
+var id = '';
+var taskComment = '1'; //辨别addComment的页面中索引列表是task/project
 
 Page({
 
@@ -167,8 +169,8 @@ Page({
         console.log('请求失败', err)
       })
       .then(res => {
-        console.log(this.data.taskPage.belongTo)
-        wx.cloud.database().collection('project')
+        // console.log(this.data.taskPage.belongTo)
+       db.collection('project')
         .doc(this.data.taskPage.belongTo)
         .get()
         .then(res => {
@@ -191,12 +193,12 @@ Page({
    */
   clickAddComment(event) {
     wx.navigateTo({
-      url: '../addComment/addComment',
+      url: '../addComment/addComment?id='+ id + '&index=' + taskComment,
     })
   },
 
   onTaskDescriptionBlur: function(e){
-    console.log(e.detail.value)
+    // console.log(e.detail.value)
 
     wx.cloud.callFunction({
       name: 'updateTaskDescription',

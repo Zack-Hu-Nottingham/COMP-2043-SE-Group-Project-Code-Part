@@ -30,6 +30,7 @@ Page({
 
         isLoading: false,
         fileList: [],
+        houseOwner: "",
         owner: [],
         participant: [],
         ownerPage: 0,
@@ -156,55 +157,6 @@ Page({
         })
     },
 
-    /**
-     * 生命周期函数--监听页面初次渲染完成
-     */
-    onReady: function () {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面显示
-     */
-    onShow: function () {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面隐藏
-     */
-    onHide: function () {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面卸载
-     */
-    onUnload: function () {
-
-    },
-
-    /**
-     * 页面相关事件处理函数--监听用户下拉动作
-     */
-    onPullDownRefresh: function () {
-
-    },
-
-    /**
-     * 页面上拉触底事件的处理函数
-     */
-    onReachBottom: function () {
-
-    },
-
-    /**
-     * 用户点击右上角分享
-     */
-    onShareAppMessage: function () {
-
-    },
-
     // 处理用户输入名字
     typeName: function(e){
         this.setData({
@@ -224,6 +176,12 @@ Page({
           url: '../../contact/contactList/contactList',
         })
     },
+
+    changeParticipant(){
+      wx.navigateTo({
+        url: '../../project/contactList/contactList?index='+this.data.participantPage,
+      })
+  },
 
     // 选择模板
     selectTemplate: function(){
@@ -281,40 +239,53 @@ Page({
         var that = this
         // 数据校验
         if (this.data.name == "") {
-            Toast('Name is null');
+            Toast(this.data.dictionary.null_name);
         }
         else if (this.data.startDate == "" || this.data.endDate == "") {
-            Toast('No start Date or end Date');
+            Toast(this.data.dictionary.null_date_setting);
         }
         else if (this.data.description == "") {
-            Toast('No detail description');
-        }  
+            Toast(this.data.dictionary.submitErrMsg2);
+        }
+        else if(this.data.selectedTemplate == ""){
+            Toast(this.data.dictionary.null_template_setting)
+        }
         else{
-            wx.cloud.database().collection('project')
-              .add({
-                data:{
-                    name: this.data.name,
-                    startTime: this.data.startDate,
-                    endTime: this.data.endDate,
-                    projectDescription: this.data.description
-                }
+          // 根据输入先创建一个项目，此时task列表为空
+          wx.cloud.database().collection('project')
+            .add({
+              data:{
+                  name: this.data.name,
+                  startTime: this.data.startDate,
+                  endTime: this.data.endDate,
+                  projectDescription: this.data.description,
+                  projectManager: app.globalData.userInfo._openid,
+                  template: this.data.selectedTemplate,
+                  houseOwner: this.data.houseOwner,
+                  participant: this.data.participant,
+                  feedback: [],
+                  fileList: this.data.fileList,
+
+                  completed: [],
+                  delayed: [],
+                  task: [],
+                  unstarted: [],
+                  progressing: [],
+
+              }
+            })
+            // 新建项目成功，返还项目id
+            .then(res => {
+              this.setData({
+                project: res._id
               })
-              .then(res => {
-                console.log('添加成功', res)
-              })
-              .catch(res => {
-                console.log('添加失败', res) 
-              })
-            this.setData({
-                isLoading: true,
             })
             .catch(res => {
               console.log('新建项目失败，请联系管理员', res) 
             })
 
-              
+            this.action();
         }
-        
     },
 
     action(){
@@ -354,34 +325,73 @@ Page({
     },
 
     formatDate(date) {
-        date = new Date(date);
-        // return `${date.getMonth() + 1}/${date.getDate()}`;
-        return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
-      },
-    
-      onDateConfirm(event) {
-        const [start, end] = event.detail;
-        this.setData({
-            startDate: this.formatDate(start),
-            endDate: this.formatDate(end)
+      date = new Date(date);
+      // return `${date.getMonth() + 1}/${date.getDate()}`;
+      return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+    },
+  
+    onDateConfirm(event) {
+      const [start, end] = event.detail;
+      this.setData({
+          startDate: this.formatDate(start),
+          endDate: this.formatDate(end)
+      })
+      this.onDateClose();
+
+    },
+
+      // modify the template accordingly
+    modifyTemplate() {
+      for(var idx in this.data.template) {
+        this.data.template[idx].belongTo = this.data.project
+
+        // 修改时间
+        this.data.template[idx].startTime = this.data.template[idx].startTime
+        this.data.template[idx].endTime = this.data.template[idx].endTime
+      }
+
+    },
+
+    createTaskAccordingToTemplate(idx) {
+      return new Promise((resolve, reject) => {
+        db.collection('task')
+        .add({
+          data: this.data.template[idx]
+        })
+        .then(res => {
+          this.setData({
+            task: this.data.task.concat(res._id)
+          })
+          resolve()
+        })
+        .catch(res => { 
+          reject()
         })
         this.onDateClose();
-
+      })
+    },
     
-        // //调用云函数，更新数据库中日期
-        // wx.cloud.callFunction({
-        //   name: 'updateProjectDate',
-        //   data:{
-        //     id: id,
-        //     startTime: `${start.getFullYear()}-${start.getMonth() + 1}-${start.getDate()}`,
-        //     endTime: `${end.getFullYear()}-${end.getMonth() + 1}-${end.getDate()}`
-        //   }
-        // }).then(res => {
-        //   console.log('project日期更新成功', res),
-        //   this.getDetail()
-        // }).catch(res => {
-        //   console.log('project日期更新失败', res)
-        // })
-      },
-
+    async createTask() {
+      this.modifyTemplate()
+      for(var idx in this.data.template) {
+        // console.log(idx)
+        await this.createTaskAccordingToTemplate(idx)
+      }
+      db.collection('project')
+      .doc(this.data.project)
+      .update({
+        data: {
+          task: this.data.task,
+          unstarted: this.data.task
+        }
+      })
+    },
+    deleteImg(event) {
+      const delIndex = event.detail.index
+      const { fileList } = this.data
+      fileList.splice(delIndex, 1)
+      this.setData({
+        fileList
+      })
+    }
 })

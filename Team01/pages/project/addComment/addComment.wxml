@@ -6,7 +6,7 @@
 </van-cell-group>
 
 <!--Upload related images-->
-<van-uploader class="uploader" file-list="{{ fileList }}" bindtap="upload" deletable="{{ true }}" max-count="8"/>
+<van-uploader class="uploader" file-list="{{ fileList }}" bindtap="upload" deletable="{{ true }}" bind:delete="deleteImg" max-count="8"/>
 
 <!--Submit-->    
 <van-sticky offset-top="{{ 600 }}">

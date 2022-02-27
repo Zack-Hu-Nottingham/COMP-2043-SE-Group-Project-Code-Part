@@ -294,29 +294,7 @@ Page({
                   delta: 1
                 })
             },2500)
-            /*wx.request({
-                url: '接口路径',
-                header: {
-                "Content-Type": "application/x-www-form-urlencoded"
-                },
-                method: "POST",
-                data: { xingming: e.detail.value.xingming, xingbie: e.detail.value.xingbie, aihao: e.detail.value.aihao },
-                success: function (res) {
-                console.log(res.data);
-                if (res.data.status == 0) {
-                    wx.showToast({
-                    title: '提交失败！！！',
-                    icon: 'loading',
-                    duration: 1500
-                    })
-                } else {
-                    wx.showToast({
-                    title: '提交成功！！！',//这里打印出登录成功
-                    icon: 'success',
-                    duration: 1000
-                    })
-                }
-                } */
+            
         }
         
     },
@@ -332,5 +310,14 @@ Page({
         dictionary: lang.lang.index,
         });
     },
+
+    deleteImg(event) {
+        const delIndex = event.detail.index
+        const { fileList } = this.data
+        fileList.splice(delIndex, 1)
+        this.setData({
+          fileList
+        })
+      }
 
 })
