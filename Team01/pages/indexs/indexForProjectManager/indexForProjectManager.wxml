@@ -22,7 +22,8 @@
 
   <van-cell-group inset style="padding: 30rpx;" title="{{dictionary.recent_message}}">
     <view wx:for="{{messageList}}" wx:key="index">
-      <van-cell  title="{{item.owner}}" clickable="true" bindtap="clickMessage" label="{{item.type.name}}: {{item.description}}" value="{{item.createTime}}" id="{{item.owner}}" class="messageForTest"/>
+      <van-cell  title="{{item.owner}}" clickable
+      link-type="navigateTo" url="/pages/project/fileList/fileList?id={{item.belongTo}}&index={{index}}" label="{{item.type.name}}: {{item.description}}" value="{{item.createTime}}" id="{{item.owner}}" class="messageForTest"/>
     </view>
   </van-cell-group>
 </view>
