@@ -9,7 +9,7 @@ Page({
      */
     data: {
         fileList: [],
-        name: 'Detail images',
+        name: 'Details',
         feedbackType: '',
         details: '',
         createTime: '',
