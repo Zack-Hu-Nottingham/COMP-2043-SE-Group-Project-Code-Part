@@ -70,7 +70,7 @@ Page({
     })
 
     this.setData({
-      position: this.data.dictionary.worker
+      identity: this.data.dictionary.worker
     })
 
 

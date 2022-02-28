@@ -18,10 +18,6 @@ Page({
     /**
      * Global data
      */
-    openid: "",
-    user: [],
-    userInfo: {},
-
     active: 0,
     pageName: ['Message', 'Project', 'More'],
 
@@ -60,7 +56,7 @@ Page({
     canIUseGetUserProfile: false,
     canIUseOpenData: wx.canIUse('open-data.type.userAvatarUrl') && wx.canIUse('open-data.type.userNickName'), // 如需尝试获取用户信息可改为false
     name: "",
-    position: "Project Manager",
+    identity: "",
 
     currentTime: "",
 
@@ -84,9 +80,9 @@ Page({
     })
 
     this.setData({
-      position: this.data.dictionary.project_manager
+      identity: this.data.dictionary.project_manager
     })
-    console.log(app.globalData.userInfo)
+    this.getData(app.globalData.userInfo.openid)
 
   },
 
@@ -101,11 +97,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    var lan = wx.getStorageSync("languageVersion");
-    this.initLanguage();
-    this.setData({
-      language: lan
-    })
+
   },
 
   /**
@@ -148,49 +140,14 @@ Page({
   /**
    * Global method
    */
-
-  // 获得用户信息
-  getuserinfo(e) {
-    // console.log(e)
-    wx.setStorageSync('userInfo', e.detail.userInfo)
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo
-    })
-
-    // wx.getUserInfo的返回兼容
-    wx.setStorageSync('encryptedData', e.detail.encryptedData)
-    wx.setStorageSync('iv', e.detail.iv)
-    //拿到用户信息后 获取 用户手机号
-
-
-    // 拿到数据后写入数据库
-    db.collection("user").add({
-      data: {
-        name: this.data.userInfo.nickName,
-        // openid: this.data.openid
-      }
-    })
-    .then(res => {
-      // console.log(res)
-
-      Toast.success("Successfully registered")
-      // 获取数据
-      this.getData()
-    })
-
-
-  },
-
-
   // 初始化数据
   async getData(openid){
 
     await this.updateState()
 
-    await this.getInfo()
+    await this.getProjectInfo(openid)
 
-    await this.getProjectInfo()
+    await this.getFeedbackInfo(openid)
 
     for (var idx in this.data.project) {
       await this.getTaskInfo(this.data.project[idx]._id)
@@ -198,36 +155,14 @@ Page({
     }
     
   },
-  
-  // 获取user信息
-  getInfo() {
-    return new Promise((resolve, reject) => {
-      db.collection('user')
-      .where({
-        _openid: _.eq(this.data.openid)
-      })
-      .get()
-      .then(res => {
-        // console.log(res)
-        this.setData({
-          user: res.data[0]
-        })
-        resolve("成功获取用户数据");
-      })
-      .catch(err => {
-        reject("请求用户信息失败")
-      })  
-    })
-    
-  },
 
   // 获取项目信息
-  getProjectInfo() {
+  getProjectInfo(openid) {
     return new Promise((resolve, reject) => {
       db.collection('project')
       .where(
         {
-          _openid: _.eq(this.data.user._openid)
+          _openid: _.eq(openid)
         })
       .get()
       .then(res => {
@@ -248,11 +183,11 @@ Page({
 
 
       // 获取反馈信息
-  getProjectInfo() {
+  getProjectInfo(openid) {
     return new Promise((resolve, reject) => {
       db.collection('project')
       .where({
-          _openid: _.eq(this.data.user._openid)
+          _openid: _.eq(openid)
         })
       .get()
       .then(res => {
@@ -272,6 +207,7 @@ Page({
         reject("请求项目信息失败")
       })}
     )},
+
 
   // 获取任务信息
   getTaskInfo(projectId) {
@@ -297,6 +233,41 @@ Page({
     })
   },
 
+  // 获取反馈信息
+  getFeedbackInfo(openid) {
+    return new Promise((resolve, reject) => {
+      db.collection('project')
+      .where({
+        _openid: _.eq(openid),
+        feedback: _.exists(true)
+      })
+      .field({
+        feedback:true
+      })
+      .orderBy('feedback.createTime', 'desc')
+      .get()
+      .then(res => {
+        //console.log(res.data.length)
+      
+        if (res.data.length != 0) {
+          for (var idx in res.data) {
+            this.setData({
+              messageList: this.data.messageList.concat(res.data[idx].feedback)
+            })
+          }
+          
+        }
+        
+        resolve("成功获取项目信息")
+        console.log('成功获取项目信息',this.data.messageList)
+      })
+      .catch(err => {
+        console.log('请求项目信息失败', err)
+        //reject("请求项目信息失败")
+      })}
+      
+    )},
+
   // 更改tab选项时对应的逻辑
   onChangeTab(event) {
     this.setData({ active: event.detail });
@@ -315,16 +286,6 @@ Page({
     self.setData({
       dictionary: lang.lang.index,
     });
-  },
-
-
-  /**
-   * Create Project page's method
-   */
-  clickNewProject(event) {
-    wx.navigateTo({
-      url: '../project/newProject/newProject',
-    })
   },
 
   /**
@@ -355,29 +316,19 @@ Page({
 
   clickStatisticReport(event) {
     wx.navigateTo({
-      url: '../project/statisticReport/statisticReport',
+      url: '../../project/statisticReport/statisticReport',
     })
   },
 
   clickProject(event) {
     wx.navigateTo({
-      url: '../project/projectInfo/projectInfo?id=' +  event.currentTarget.dataset.id,
+      url: '../../project/projectInfo/projectInfo?id=' +  event.currentTarget.dataset.id,
     })
   },
 
   clickNewProject(event) {
     wx.navigateTo({
-      url: '../project/newProject/newProject',
-    })
-  },
-
-   
-  /**
-   * Dashboard page's method
-   */
-  clickTask(event) {
-    wx.navigateTo({
-      url: '../project/taskInfo/taskInfo?id=' +  event.currentTarget.dataset.id,
+      url: '../../project/newProject/newProject',
     })
   },
 
@@ -403,13 +354,13 @@ Page({
   
   onSetting: function(){
     wx.navigateTo({
-      url: '../more/setting/setting',
+      url: '../../more/setting/setting',
     })
   },
 
   onMoreInfo: function(){
     wx.navigateTo({
-      url: '../more/moreInfo/moreInfo',
+      url: '../../more/moreInfo/moreInfo',
     })
   },
 
@@ -418,7 +369,7 @@ Page({
   onChangeLan(event) {
     // console.log('check')
     wx.navigateTo({
-      url: '../more/languageSetting/languageSetting',
+      url: '../../more/languageSetting/languageSetting',
     })
   },
 
