@@ -21,6 +21,7 @@ Page({
     openid: "",
     user: [],
     userInfo: {},
+    isProjectEmpty: true,
 
     active: 0,
     pageName: ['Dashboard', 'More'],
@@ -108,6 +109,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+
+    this.getData();
+
     // 初始化语言
     var lan = wx.getStorageSync("languageVersion");
     this.initLanguage();
@@ -185,39 +189,6 @@ Page({
    * Global method
    */
 
-  // 获得用户信息
-  getuserinfo(e) {
-    // console.log(e)
-    wx.setStorageSync('userInfo', e.detail.userInfo)
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo
-    })
-
-    // wx.getUserInfo的返回兼容
-    wx.setStorageSync('encryptedData', e.detail.encryptedData)
-    wx.setStorageSync('iv', e.detail.iv)
-    //拿到用户信息后 获取 用户手机号
-
-
-    // 拿到数据后写入数据库
-    db.collection("user").add({
-      data: {
-        name: this.data.userInfo.nickName,
-        // openid: this.data.openid
-      }
-    })
-    .then(res => {
-      // console.log(res)
-
-      Toast.success("Successfully registered")
-      // 获取数据
-      this.getData()
-    })
-
-
-  },
-
 
   // 初始化数据
   async getData(openid){
@@ -263,21 +234,21 @@ Page({
       db.collection('project')
       .where(_.or([
         {
-          houseOwner: _.eq(this.data.user._openid)
+          houseOwner: _.eq(app.globalData.userInfo._openid)
         },
       ]))
       .get()
       .then(res => {
-        // console.log("res = ")
-        // console.log(res)
         if (res.data.length != 0) {
+          this.setData({
+            isProjectEmpty: false
+          })
           for (var idx in res.data) {
             this.setData({
               project: this.data.project.concat(res.data[idx])
             })  
           }
-        }
-        
+        } 
         resolve("成功获取项目信息")
       })
       .catch(err => {
@@ -340,10 +311,14 @@ Page({
   },
 
   clickProjectReport(event) {
-    // console.log(this.data.project[0]._id)
-    wx.navigateTo({
-      url: '../../project/projectReport/projectReport?id=' + this.data.project[0]._id,
-    })
+    // 如果项目为空，提示用户项目为空
+    if (this.data.isProjectEmpty) {
+      Toast(this.data.dictionary.no_project_error)
+    } else {
+      wx.navigateTo({
+        url: '../../project/projectReport/projectReport?id=' + this.data.project[0]._id,
+      })
+    }
   },
 
   
@@ -450,10 +425,16 @@ Page({
   },
 
   clickFilter() {
-    // console.log("click")
-    this.setData({
-      filterShow: true
-    })
+    if (this.data.isProjectEmpty) {
+      Toast({
+        message: this.data.dictionary.no_project_error,
+      })
+    } else {
+      this.setData({
+        filterShow: true
+      })
+    }
+    
   },
 
   onFilterClose() {
