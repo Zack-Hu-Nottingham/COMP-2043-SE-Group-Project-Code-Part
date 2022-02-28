@@ -97,7 +97,7 @@ Page({
   },
 
   getDetail(){
-    console.log(id)
+    // console.log(id)
     db.collection('project')
       .doc(id)
       .get({

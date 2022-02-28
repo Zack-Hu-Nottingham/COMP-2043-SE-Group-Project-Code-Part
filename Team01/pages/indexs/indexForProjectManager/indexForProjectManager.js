@@ -102,7 +102,7 @@ Page({
           db.collection('user').where({
             _openid: app.globalData.userInfo.openid
           }).get().then(res => {
-            console.log(res.data)
+            // console.log(res.data)
             // 如果是已知账户
             if (res.data.length != 0) {
               this.getData()
@@ -208,7 +208,7 @@ Page({
 
   // 获得用户信息
   getuserinfo(e) {
-    console.log(e)
+    // console.log(e)
     wx.setStorageSync('userInfo', e.detail.userInfo)
     app.globalData.userInfo = e.detail.userInfo
     this.setData({
@@ -229,7 +229,7 @@ Page({
       }
     })
     .then(res => {
-      console.log(res)
+      // console.log(res)
 
       Toast.success("Successfully registered")
       // 获取数据
@@ -251,7 +251,7 @@ Page({
 
     for (var idx in this.data.project) {
       await this.getTaskInfo(this.data.project[idx]._id)
-      console.log(this.data.project[idx])
+      // console.log(this.data.project[idx])
     }
     
   },
@@ -265,7 +265,7 @@ Page({
       })
       .get()
       .then(res => {
-        console.log(res)
+        // console.log(res)
         this.setData({
           user: res.data[0]
         })
@@ -313,8 +313,8 @@ Page({
         })
       .get()
       .then(res => {
-        console.log("res = ")
-        console.log(res)
+        // console.log("res = ")
+        // console.log(res)
         if (res.data.length != 0) {
           for (var idx in res.data) {
             this.setData({
@@ -339,7 +339,7 @@ Page({
       })
       .get()
       .then(res => {
-        console.log(res)
+        // console.log(res)
         for (var idx in res.data) {
           this.setData({
             task: this.data.task.concat(res.data[idx])
@@ -449,7 +449,7 @@ Page({
     wx.getUserProfile({
       desc: '展示用户信息', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
       success: (res) => {
-        console.log(res)
+        // console.log(res)
         this.setData({
           userInfo: res.userInfo,
           hasUserInfo: true
@@ -473,7 +473,7 @@ Page({
 
   // 点击language展示选项
   onChangeLan(event) {
-    console.log('check')
+    // console.log('check')
     wx.navigateTo({
       url: '../more/languageSetting/languageSetting',
     })

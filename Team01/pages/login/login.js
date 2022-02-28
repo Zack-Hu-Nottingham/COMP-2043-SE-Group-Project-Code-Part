@@ -56,7 +56,7 @@ Page({
           db.collection('user').where({
             _openid: app.globalData.userInfo.openid
           }).get().then(res => {
-            console.log(res.data)
+            // console.log(res.data)
             // 如果是已知账户
             if (res.data.length != 0) {
 
@@ -108,7 +108,7 @@ Page({
 
   // 获得用户信息
   getuserinfo(e) {
-    console.log(e)
+    // console.log(e)
     wx.setStorageSync('userInfo', e.detail.userInfo)
     app.globalData.userInfo = e.detail.userInfo
     this.setData({
@@ -130,7 +130,7 @@ Page({
       }
     })
     .then(res => {
-      console.log(res)
+      // console.log(res)
 
       Toast.success("Successfully registered")
 

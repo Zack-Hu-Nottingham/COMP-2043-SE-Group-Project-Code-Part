@@ -247,7 +247,7 @@ Page({
             Toast('No detail description');
         }
         else{
-            console.log(this.data.belongTo)
+            // console.log(this.data.belongTo)
             wx.cloud.database().collection('task')
               .add({
                 data:{
