@@ -16,21 +16,17 @@
 <!-- Message page -->
 <view wx:if="{{active == 0}}">
   <van-cell-group inset style="padding: 30rpx;">
-    <van-cell center title="{{dictionary.notification}}" icon="bullhorn-o" size="large" label="{{messageList[0].sender}}: {{messageList[0].content}}" value="{{messageList[0].timeStamp}}" clickable="true" bindtap="clickNotification" >
-    <!-- <van-cell center title="{{dictionary.notification}}" icon="bullhorn-o" size="large" label="house owner: Not satisfied" value="sss" clickable="true" bindtap="clickNotification" > -->
+    <van-cell center title="{{dictionary.notification}}" icon="bullhorn-o" size="large" label="{{messageList[0].type.name}}: {{messageList[0].description}}" value="{{messageList[0].createTime}}" clickable="true" bindtap="clickNotification" >
     </van-cell>
   </van-cell-group>
 
   <van-cell-group inset style="padding: 30rpx;" title="{{dictionary.recent_message}}">
     <view wx:for="{{messageList}}" wx:key="index">
-      <van-cell  title="{{item.sender}}" clickable="true" bindtap="clickMessage" label="{{item.content}}" value="{{item.timeStamp}}" id="{{item.sender}}" class="messageForTest"/>
-      <!-- <view wx:for="{{messageList}}" wx:key="index">
-      <van-cell  title="Lok" clickable="true" bindtap="clickMessage" label="Change the display of the home" value="10:20" id="lok" class="messageForTest"/>
-      <van-cell  title="Zack" clickable="true" bindtap="clickMessage" label="Need rework" value="2022/02/27" id="zack" class="messageForTest"/> -->
-      
+      <van-cell  title="{{item.owner}}" clickable="true" bindtap="clickMessage" label="{{item.type.name}}: {{item.description}}" value="{{item.createTime}}" id="{{item.owner}}" class="messageForTest"/>
     </view>
   </van-cell-group>
 </view>
+
 
 
 
