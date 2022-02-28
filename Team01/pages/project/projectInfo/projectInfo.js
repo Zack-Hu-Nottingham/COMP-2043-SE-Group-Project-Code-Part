@@ -184,7 +184,7 @@ Page({
           // this.getTaskState()
         },
         fail: function(err) {
-          console.log(err)
+          // console.log(err)
         }
       })
     
@@ -362,7 +362,7 @@ Page({
   },
 
   onProjectBlur: function(e){
-    console.log(e.detail.value)
+    // console.log(e.detail.value)
 
     wx.cloud.callFunction({
       name: 'updateProjectDescription',
@@ -379,7 +379,7 @@ Page({
   },
 
   onStateBlur: function(e){
-    console.log(e.detail.value)
+    // console.log(e.detail.value)
 
     wx.cloud.callFunction({
       name: 'updateProjectDescription',

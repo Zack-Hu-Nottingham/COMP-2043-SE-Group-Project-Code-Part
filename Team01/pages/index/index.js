@@ -91,7 +91,7 @@ Page({
         }).task.then(res => {
 
           // 设置全局的openid
-          app.globalData.userInfo._openid = res.data.openid
+          app.globalData.userInfo.openid = res.data._openid
           this.setData({
             openid: res.data.openid
           })
@@ -511,7 +511,7 @@ Page({
 
   // 点击language展示选项
   onChangeLan(event) {
-    console.log('check')
+    // console.log('check')
     wx.navigateTo({
       url: '../more/languageSetting/languageSetting',
     })
