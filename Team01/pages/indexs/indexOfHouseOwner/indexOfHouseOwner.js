@@ -387,36 +387,7 @@ Page({
     });
   },
 
-   
-  /**
-   * Project page's method
-   */
-  clickMyTask(event) {
-    wx.navigateTo({
-      url: '../project/taskInfo/taskInfo',
-    })
-  },
-
-  clickProjectReport(event) {
-    console.log(this.data.project[0]._id)
-    wx.navigateTo({
-      url: '../project/projectReport/projectReport?id=' + this.data.project[0]._id,
-    })
-  },
-
-  clickProject(event) {
-    wx.navigateTo({
-      url: '../project/projectInfo/projectInfo?id=' +  event.currentTarget.dataset.id,
-    })
-  },
-
-  clickNewProject(event) {
-    wx.navigateTo({
-      url: '../project/newProject/newProject',
-    })
-  },
-
-   
+      
   /**
    * Dashboard page's method
    */
@@ -426,6 +397,12 @@ Page({
     })
   },
 
+  clickProjectReport(event) {
+    console.log(this.data.project[0]._id)
+    wx.navigateTo({
+      url: '../../project/projectReport/projectReport?id=' + this.data.project[0]._id,
+    })
+  },
 
   
   /**
@@ -446,15 +423,9 @@ Page({
     })
   },
   
-  onSetting: function(){
-    wx.navigateTo({
-      url: '../more/setting/setting',
-    })
-  },
-
   onMoreInfo: function(){
     wx.navigateTo({
-      url: '../more/moreInfo/moreInfo',
+      url: '../../more/moreInfo/moreInfo',
     })
   },
 
@@ -463,7 +434,7 @@ Page({
   onChangeLan(event) {
     console.log('check')
     wx.navigateTo({
-      url: '../more/languageSetting/languageSetting',
+      url: '../../more/languageSetting/languageSetting',
     })
   },
 

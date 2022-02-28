@@ -23,7 +23,7 @@ var Languague = {
 
     // more page
     user_name: "User name",
-    position: "Possition",
+    identity: "Identity",
     setting: "Setting",
     more: "More",
     sign_out: "Sign Out",

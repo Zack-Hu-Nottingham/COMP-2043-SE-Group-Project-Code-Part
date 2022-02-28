@@ -23,7 +23,7 @@ var Languague = {
 
      // more page
      user_name: "用户名",
-     position: "职位",
+     identity: "职位",
      setting: "设置",
      more: "更多",
      sign_out: "登出",

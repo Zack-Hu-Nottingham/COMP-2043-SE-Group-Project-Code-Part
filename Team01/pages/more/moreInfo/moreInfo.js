@@ -1,4 +1,6 @@
 // pages/more/moreInfo/moreInfo.js
+const app = getApp()
+
 Page({
 
     /**

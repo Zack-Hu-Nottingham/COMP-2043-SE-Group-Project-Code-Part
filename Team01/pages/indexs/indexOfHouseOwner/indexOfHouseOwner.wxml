@@ -98,7 +98,6 @@
 
   <van-cell-group inset style="padding: 30rpx;">
     <van-cell center icon="setting-o"/>
-    <van-cell center title="{{dictionary.invite_member}}" is-link icon="" clickable="true" bindtap="onInviteMember"/>
     <van-cell center title="{{dictionary.language}}" value="{{languageList[language]}}" icon="" is-link clickable="true" bindtap="onChangeLan" class="settingForTest"/>
   </van-cell-group>
 
