@@ -19,6 +19,7 @@ Page({
      * Global data
      */
     userInfo: {},
+    isTaskEmpty: true,
 
     active: 0,
     pageName: ['Dashboard', 'More'],
@@ -142,6 +143,11 @@ Page({
     // 获取任务列表
     await this.getTaskList()
 
+    // 检查任务列表是否为空，如果为空则返回
+    if (this.data.isTaskEmpty) {
+      return
+    }
+
     // 根据任务列表获得每个任务的信息
     for (var item in this.data.taskList) {
       await this.getTaskInfo(this.data.taskList[item])
@@ -242,9 +248,14 @@ Page({
       })
       .get()
       .then(res => {
-        this.setData({
-          taskList: res.data[0].task
-        })
+        console.log(res.data[0].task)
+        if(res.data[0].task == []) {
+          this.setData({
+            taskList: res.data[0].task,
+            isTaskEmpty: false,
+          })
+        }
+        
         resolve("成功获取项目列表")
       })
       .catch(err => {

@@ -122,6 +122,8 @@ var Languague = {
     null_date_setting: "No date setting",
     null_template_setting: "No template selected",
     no_project_error: "You currently have no projects",
+    no_task_error: "You currently have no tasks",
+
 
  },
 };

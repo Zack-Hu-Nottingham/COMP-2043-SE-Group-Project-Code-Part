@@ -109,6 +109,7 @@ var Languague = {
     null_date_setting: "未设置日期",
     null_template_setting: "未选择模板",
     no_project_error: "您当前还没有项目",
+    no_task_error: "您当前还没有任务",
    },
 };
 
