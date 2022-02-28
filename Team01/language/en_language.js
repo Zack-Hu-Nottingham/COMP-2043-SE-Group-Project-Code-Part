@@ -18,12 +18,13 @@ var Languague = {
 
     // dashboard page
     today_task: "Today's Task",
+    task_list: "Task List",
+    filter: "filter",
 
     // more page
     user_name: "User name",
     position: "Possition",
     setting: "Setting",
-    identity: "Identity",
     more: "More",
     sign_out: "Sign Out",
     invite_member: "Invite Member",
@@ -33,7 +34,7 @@ var Languague = {
     user_info: "User Info",
     confirm: "Confirm",
     cancel: "Cancel",
-
+    worker: "Worker",
 
      // language setting page
     current_lan: "Current language",
@@ -43,15 +44,15 @@ var Languague = {
     change_lan_confirm: "Confirm change language",
     
     // Project information page
-    project_manager: "Project Manager",
     project_info: "Project Information",
     task_management: "Task Management",
     gantt_diagram: "Gantt Diagram",
-    owner: "House Owner",
+    owner: "Owner",
     start_time: "Start Time",
     end_time: "End Time",
+    expected_start_time: "Expected Start Time",
+    expected_end_time: "Expected End Time",
     description: "Description",
-    description_hint: "less than 500 words",
     state_information: "State Information",
     current_state: "Current State",
     task_progress: "Task Progress",
@@ -84,6 +85,23 @@ var Languague = {
     house_owner: "House Owner",
 
       // Comment page
+   comment_title:"Feedback",
+   select_feedback:"Select feedback type",
+   submitErrMsg1:"Feedback type is null",
+   submitErrMsg2:"Description is null",
+   feedback_type0:"Project Delay",
+   feedback_type1:"Task Delay",
+   feedback_type2:"Task need rework",
+
+    // index for worker
+    project: ["Project One", "Project Two", "Project Three", "Project Four", "Project Five"],
+    task_description: "Task Description",
+    task_state: ["Unstarted", "Progressing", "Finished", "Delayed", "Reworking"],
+    location: "Location",
+    construction_area: "Construction Area",
+    construction_requirements: "Construction Requirements",
+    start_construction: "Start Construction",
+    finish_construction: "Finish Construction",
     comment_title:"Feedback",
     select_feedback:"Select feedback type",
     submitErrMsg1:"Feedback type is null",

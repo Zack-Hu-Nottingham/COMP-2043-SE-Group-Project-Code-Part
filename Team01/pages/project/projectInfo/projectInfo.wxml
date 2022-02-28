@@ -16,35 +16,19 @@
 
 
 <!-- Subpages -->
-<view wx:if="{{ currentTab == 0 }}">
+<view wx:if="{{currentTab==0}}">
 
   <van-cell-group inset title="{{dictionary.project_info}}">
-    <van-cell title="{{ dictionary.owner }}" value="{{ houseOwner.name }}" />
-    <van-cell title="{{ dictionary.project_manager }}" value="{{ projectManager.name }}" />
-    
-    <view wx:if="{{userInfo.isManager == 1}}">
-      <van-field model:value="{{ project.projectDescription }}" right clearable label="{{ dictionary.description }}" type="textarea" placeholder="{{ project.projectDescription }}" border="{{ false }}" class="projectInfoDescriptionForTest" bind:blur="onProjectBlur" autosize></van-field>
-    </view>
-
-    <view wx:else>
-      <van-cell title="{{ dictionary.description }}" value="{{ project.projectDescription }}"class="projectInfoDescriptionForTest" />
-    </view>
+    <van-cell title="{{dictionary.owner}}" value="{{ owner }}" />
+    <van-cell title="{{dictionary.start_time}}" is-link value="{{ project.startTime }}" bindtap="onDateDisplay" class="projectInfoStartTimeForTest"/>
+    <van-cell title="{{dictionary.end_time}}" is-link value="{{ project.endTime }}" bindtap="onDateDisplay" class="projectInfoEndTimeForTest"/>
+    <van-field model:value="{{ project.projectDescription }}" right clearable label="{{ dictionary.description }}" type="textarea" placeholder="{{ project.projectDescription }}" border="{{ false }}" class="projectInfoDescriptionForTest"></van-field>
   </van-cell-group>
 
   <van-cell-group inset title="{{dictionary.state_information}}">
-    <view wx:if="{{userInfo.isManager == 1}}">
-      <van-cell title="{{dictionary.start_time}}" is-link value="{{ project.startTime }}" bindtap="onDateDisplay" class="projectInfoStartTimeForTest"/>
-      <van-cell title="{{dictionary.end_time}}" is-link value="{{ project.endTime }}" bindtap="onDateDisplay" class="projectInfoEndTimeForTest"/>
-    </view>
-
-    <view wx:else>
-      <van-cell title="{{dictionary.start_time}}" value="{{ project.startTime }}" class="projectInfoStartTimeForTest"/>
-      <van-cell title="{{dictionary.end_time}}" value="{{ project.endTime }}"  class="projectInfoEndTimeForTest"/>
-    </view>
-
     <van-cell title="{{dictionary.current_state}}" value="{{ project.currentState }}" />
     <van-field model:value="{{ project.stateDescription }}" center clearable label="{{dictionary.description}}"
-    placeholder="{{project.stateDescription}}" border="{{ false }}" class="projectInfoStateDescriptionForTest" bind:blur="onStateBlur"></van-field>
+    placeholder="{{project.stateDescription}}" border="{{ false }}" class="projectInfoStateDescriptionForTest"></van-field>
   </van-cell-group>
 
   <van-cell-group inset title="{{dictionary.task_progress}}">
@@ -132,7 +116,7 @@
         link-type="navigateTo"
         url="/pages/project/taskInfo/taskInfo?id={{item._id}}">
         
-          <view>
+          <view slot="">
             <van-tag color="#87CEFA" size="medium"><van-icon name="play"></van-icon>Progressing</van-tag>
           </view>
         </van-cell>
@@ -150,7 +134,7 @@
         link-type="navigateTo"
         url="/pages/project/taskInfo/taskInfo?id={{item._id}}">
 
-          <view>
+          <view slot="">
             <van-tag color="#ffe1e1" text-color="#ad0000"  size="medium"><van-icon name="replay" />Reworking</van-tag>
           </view>
 
@@ -169,7 +153,7 @@
         link-type="navigateTo"
         url="/pages/project/taskInfo/taskInfo?id={{item._id}}">
 
-          <view>
+          <view slot="">
             <van-tag color="#ffe1e1" text-color="#ad0000"  size="medium"><van-icon name="warning-o" />Delayed</van-tag>
           </view>
 
@@ -188,7 +172,7 @@
         link-type="navigateTo"
         url="/pages/project/taskInfo/taskInfo?id={{item._id}}">
 
-          <view>
+          <view slot="">
             <van-tag color="#D3D3D3" icon="fail" size="medium"><van-icon name="close"/>Unstarted</van-tag>
           </view>
 
@@ -207,7 +191,7 @@
         link-type="navigateTo"
         url="/pages/project/taskInfo/taskInfo?id={{item._id}}">
 
-          <view>
+          <view slot="">
             <van-tag color="#32CD32" size="medium"><van-icon name="passed" />Finished</van-tag>
           </view>
 

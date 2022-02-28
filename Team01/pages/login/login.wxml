@@ -1,0 +1,5 @@
+<!-- Dialog -->
+<van-dialog id="van-dialog" bind:getuserinfo="getuserinfo" />
+
+<!-- Toast -->
+<van-toast id="van-toast" />

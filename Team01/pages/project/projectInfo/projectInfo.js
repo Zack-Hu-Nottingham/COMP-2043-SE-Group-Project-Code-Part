@@ -8,7 +8,6 @@ const app = getApp();
 var id = '';
 var projectComment = '0'; //辨别addComment的页面中索引列表是task/project
 const db = wx.cloud.database();
-const _ = db.command;
 
 
 
@@ -91,14 +90,12 @@ Page({
 
 
   // Global method
+
   navbarTap: function(e) {
     this.setData({
       currentTab: e.currentTarget.dataset.idx
     })
-
-    // 载入task management页面的数据
     if (this.data.currentTab == 1) {
-
       db.collection("task")
       .where({
         belongTo: id,
@@ -176,17 +173,15 @@ Page({
         success: res => {
           this.setData({
             project: res.data,
-            name: res.data.name,
-            fileList: res.data.fileList,
-            feedback: res.data.feedback,
+            name: res.data.name
           }),
 
           wx.setNavigationBarTitle({
             title: this.data.name,
           }),
 
-          this.getHouseOwner()
           this.getProjectManager()
+          // this.getTaskState()
         },
         fail: function(err) {
           console.log(err)
@@ -195,35 +190,16 @@ Page({
     
   },
 
-  getHouseOwner() {
-    return new Promise((resolve, reject) => {
-    db.collection('user')
-      .where({
-        _openid: _.eq(this.data.project.houseOwner)
-      })
-      .get()
-      .then(res => {
-        // console.log(res.data[0])
-        this.setData({
-          houseOwner: res.data[0]
-        })
-      })
-    })
-  },
-
   getProjectManager() {
-    return new Promise((resolve, reject) => {
-    db.collection('user')
-      .where({
-        _openid: _.eq(this.data.project._openid)
-      })
-      .get()
-      .then(res => {
-        // console.log(res.data[0])
+    var ownerId = this.data.project.projectManager
+    db.collection("user")
+    .doc(ownerId)
+    .get({
+      success: res => {
         this.setData({
-          projectManager: res.data[0]
+          owner: res.data.name
         })
-      })
+      }
     })
   },
 
@@ -246,6 +222,7 @@ Page({
   onDateConfirm(event) {
     const [start, end] = event.detail;
     this.onDateClose();
+
     //调用云函数，更新数据库中日期
     wx.cloud.callFunction({
       name: 'updateProjectDate',
@@ -272,7 +249,7 @@ Page({
 
   clickNewTask(event) {
     wx.navigateTo({
-      url: '../newTask/newTask',
+      url: '../newTask/newTask?id=' + id,
     })
   },
 
@@ -336,6 +313,10 @@ Page({
    */
   onReady: function () {
 
+    wx.setNavigationBarTitle({
+      title: this.data.name
+    })
+
   },
 
   /**
@@ -380,6 +361,43 @@ Page({
 
   },
 
+  onProjectBlur: function(e){
+    console.log(e.detail.value)
+
+    wx.cloud.callFunction({
+      name: 'updateProjectDescription',
+      data:{
+        id: id,
+        projectDescription: e.detail.value
+      }
+    }).then(res => {
+      console.log('调用云函数成功', res),
+      this.getDetail()
+    }).catch(res => {
+      console.log('调用云函数失败', res)
+    })
+  },
+
+  onStateBlur: function(e){
+    console.log(e.detail.value)
+
+    wx.cloud.callFunction({
+      name: 'updateProjectDescription',
+      data:{
+        id: id,
+        stateDescription: e.detail.value
+      }
+    }).then(res => {
+      console.log('调用云函数成功', res),
+      this.getDetail()
+    }).catch(res => {
+      console.log('调用云函数失败', res)
+    })
+  },
+
+  go_update(){
+    this.getDetail()
+  }
 
 })
 

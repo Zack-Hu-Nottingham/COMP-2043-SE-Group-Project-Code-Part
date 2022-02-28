@@ -3,6 +3,7 @@ import Toast from '../../../miniprogram_npm/@vant/weapp/toast/toast'
 const languageUtils = require("../../../language/languageUtils");
 
 var app = getApp()
+
 Page({
     /**
      * 页面的初始数据
@@ -246,6 +247,7 @@ Page({
             Toast('No detail description');
         }
         else{
+            console.log(this.data.belongTo)
             wx.cloud.database().collection('task')
               .add({
                 data:{
@@ -286,6 +288,8 @@ Page({
                 let pages = getCurrentPages();
                 let project = pages[pages.length - 2];
                 project.go_update();
+                let index = pages[pages.length - 3];
+                index.go_update();
                 wx.navigateBack({
                   delta: 1
                 })

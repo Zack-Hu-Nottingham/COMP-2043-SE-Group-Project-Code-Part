@@ -1,8 +1,4 @@
-// pages/contact/contactList/contactList.js
-const languageUtils = require("../../../language/languageUtils");
-const app = getApp();
-const db = wx.cloud.database();
-const _ = db.command;
+// pages/project/contactList/contactList.js
 Page({
     // Additional feature: 已被选中的项目在下次展示时会置顶显示（云端调取）
     data: {

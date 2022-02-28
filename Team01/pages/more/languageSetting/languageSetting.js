@@ -44,34 +44,6 @@ Page({
         // on cancel
         return
       });
-    
-    // if (this.data.language == 0) {
-    //   wx.setStorage({
-    //     key: "languageVersion",
-    //     data: 1,
-    //   });
-    // } else if (this.data.language == 1) {
-    //   wx.setStorage({
-    //     key: "languageVersion",
-    //     data: 0,
-    //   });
-    // }
-
-    
-    // Dialog.confirm({
-    //   context: this,
-    //   // title: this.data.dictionary.change_lan_confirm,
-    //   // message: '弹窗内容',
-    // })
-    //   .then(() => {
-    //     // on confirm
-    //   })
-    //   .catch(() => {
-    //     // on cancel
-    //     return
-    //   });
-    
-
   },
 
   // 初始化语言
@@ -91,20 +63,6 @@ Page({
    */
   onLoad: function (options) {
     
-    Dialog.confirm({
-      title:'修改语言',
-      context: this,
-      // title: this.data.dictionary.change_lan_confirm,
-      // message: '弹窗内容',
-    })
-      .then(() => {
-        // on confirm
-      })
-      .catch(() => {
-        // on cancel
-        return
-      });
-
     var lan = wx.getStorageSync("languageVersion");
     this.initLanguage();
     this.setData({

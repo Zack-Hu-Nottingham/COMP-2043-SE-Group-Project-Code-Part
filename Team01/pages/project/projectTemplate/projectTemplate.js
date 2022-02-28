@@ -24,7 +24,7 @@ Page({
             useFrq: "4",
             id: '3'
         },],
-        radio: '',
+        radio: '1',
 
     },
 

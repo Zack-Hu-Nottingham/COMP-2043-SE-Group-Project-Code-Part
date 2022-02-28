@@ -1,0 +1,125 @@
+/**index.wxss**/
+page {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+
+.createNewProjectForTest {
+  display: flex; 
+  padding: 50rpx;
+  margin: 0;
+}
+
+.container {
+  background-color: white;
+  align-items: center;
+  margin: 33rpx;
+  margin-top: 0rpx;
+  padding: 20rpx;
+  height: 420rpx;
+  border-radius: 20rpx;
+}
+
+.circle {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 50rpx;
+  width: 80%;
+}
+
+.taskInfo {
+  display: flex;
+  flex-direction: row;
+  font-size: 20rpx;
+  justify-content: space-between;
+  border-top: 2rpx solid #efefef;
+  width: 90%;
+}
+
+.taskInfoDetail {
+  display: flex;
+  flex-direction: column; 
+  align-items: center; 
+  justify-content: center;
+}
+
+.block {
+  margin: 20rpx;
+  margin-bottom: 10rpx;
+}
+
+
+
+/* Nav bar style */
+.navbar{
+  flex: none;
+  display: flex;
+  background: #fff;
+  font-size: 25rpx;
+  color: #bbbbbb;
+  align-content: flex-start;
+  /* justify-content: space-between; */
+}
+
+.navbar .item{
+  position: relative;
+  flex: auto;
+  /* flex-wrap: wrap; */
+  text-align: center;
+  line-height: 80rpx;
+  width: 200rpx;
+
+}
+
+.navbar .item.active{
+  color: #908df5;
+}
+
+.navbar .item.active:after{
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 5rpx;
+  background: #908df5;
+}
+
+/* Gantt Diagram style */
+ec-canvas {
+  width: 100%;
+  height: 100%;
+}
+
+.gantt {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+} 
+
+.addComment {
+  display: flex;
+  padding: 50rpx;
+  margin: 0;
+}
+
+.uploader {
+  display: flex;
+  padding: 0 0 5% 5%;
+}
+
+.projectDelay {
+  background-color: red;
+}

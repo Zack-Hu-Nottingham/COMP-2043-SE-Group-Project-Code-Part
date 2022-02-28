@@ -1,0 +1,52 @@
+<van-cell-group inset style="padding: 30rpx">
+  <van-cell title="{{dictionary.task_name}}" value="{{taskPage.name}}" />
+  <van-cell title="{{dictionary.current_state}}" value="{{dictionary.task_state[taskPage.state]}}" />
+</van-cell-group>
+
+
+<van-cell-group inset style="padding: 30rpx" >
+  <van-cell title="{{dictionary.expected_start_time}}" is-link value="{{taskPage.startTime}}" bindtap="onDateDisplay" class="startTimeForTest"/>
+  <van-cell title="{{dictionary.expected_end_time}}" is-link value="{{taskPage.endTime}}" bindtap="onDateDisplay" />
+
+</van-cell-group>
+
+<van-cell-group inset style="padding: 30rpx">
+  <van-cell title="{{dictionary.belong_to}}" value="{{belongTo}}" />
+  <van-cell title="{{dictionary.priority}}" value="{{taskPage.currentPriority}}"/>
+  <van-cell title="{{dictionary.location}}" value="{{taskPage.location}}"></van-cell>
+  <van-cell title="{{dictionary.construction_area}}" value="{{taskPage.constructionArea}}"></van-cell>
+  <van-cell title="{{dictionary.construction_requirements}}" value="{{taskPage.constructionRequirements}}"></van-cell>
+</van-cell-group>
+
+<van-sticky offset-top="{{ 570 }}">
+  <view wx:if="{{taskPage.state == 0}}">
+    <van-button hairline round block type="primary" bindtap="startConstruction" class="addComment">{{dictionary.start_construction}}</van-button>
+  </view>
+  <view wx:if="{{taskPage.state == 1}}">
+    <van-button hairline round block type="primary" bindtap="finishConstruction" class="addComment">{{dictionary.finish_construction}}</van-button>
+  </view>
+  <view wx:if="{{taskPage.state == 2}}">
+    <van-button hairline disabled round block type="primary" class="addComment">{{dictionary.task_state[taskPage.state]}}</van-button>
+  </view>
+  <view wx:if="{{taskPage.state == 3}}">
+    <van-button hairline round block type="primary" bindtap="finishConstruction" class="addComment">{{dictionary.finish_construction}}</van-button>
+  </view>
+  <view wx:if="{{taskPage.state == 4}}">
+    <van-button hairline round block type="primary" bindtap="finishConstruction" class="addComment">{{dictionary.finish_construction}}</van-button>
+  </view>
+</van-sticky>
+
+<van-action-sheet
+  show="{{ priorityShow }}"
+  actions="{{ priority }}"
+  bind:close="onPriorityClose"
+  bind:select="onPrioritySelect"
+/>
+
+<van-calendar
+  show="{{ dateShow }}"
+  title="choose period"
+  type="range"
+  bind:close="onClose"
+  bind:confirm="onConfirm"
+/>
