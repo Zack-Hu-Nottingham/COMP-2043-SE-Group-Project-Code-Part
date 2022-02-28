@@ -23,7 +23,6 @@ App({
     userInfo: {
       openid: "",
       name: "",
-      identity: "",
       phone: ""
     }
   }

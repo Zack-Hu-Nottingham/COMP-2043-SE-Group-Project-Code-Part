@@ -69,6 +69,11 @@ Page({
       title: this.data.pageName[this.data.active],
     })
 
+    this.setData({
+      position: this.data.dictionary.worker
+    })
+
+
   },
 
   /**

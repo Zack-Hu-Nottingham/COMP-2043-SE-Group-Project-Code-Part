@@ -71,68 +71,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
-    wx.login()
-    .then(res => {
-
-      // showLoading
-      Toast.loading({
-        message: 'Loading...',
-        forbidClick: true,
-        mask: true,
-      });
-      
-      if (res.code) { 
-        // 根据获取的code换取用户openid
-        var url = "https://api.weixin.qq.com/sns/jscode2session?appid=wxd4b06f2e9673ed00&secret=909d4ff30ed2d6e828f73e55a63cd862&js_code=" + res.code + "&grant_type=authorization_code";
-        lib.request({
-          url: url,
-          method: "GET"
-        }).task.then(res => {
-
-          // 设置全局的openid
-          app.globalData.userInfo.openid = res.data.openid
-          this.setData({
-            openid: res.data.openid
-          })
-          
-        }).then(res => {
-
-          // 访问数据库，判断该用户是否已经注册
-          db.collection('user').where({
-            _openid: app.globalData.userInfo.openid
-          }).get().then(res => {
-            // console.log(res.data)
-            // 如果是已知账户
-            if (res.data.length != 0) {
-              this.getData()
-
-              Toast({
-                type: 'success',
-                message: 'Logged in',
-                onClose: () => {
-                },
-              });
-            }
-
-            // 如果是新账号
-            else {
-              Toast.clear()
-
-              // 获取账号信息，并注册该账号
-              Dialog.confirm({
-                context: this,
-                title: 'Registration',
-                message: 'Your nickName & phone would be used for registration',
-                confirmButtonOpenType: "getUserInfo", // 按钮的微信开放能力
-              })
-            }
-          })
-        })
-      }
-    })
-
-
     // 初始化语言
     var lan = wx.getStorageSync("languageVersion");
     this.initLanguage();
@@ -144,6 +82,11 @@ Page({
     wx.setNavigationBarTitle({
       title: this.data.pageName[this.data.active],
     })
+
+    this.setData({
+      position: this.data.dictionary.project_manager
+    })
+    console.log(app.globalData.userInfo)
 
   },
 
