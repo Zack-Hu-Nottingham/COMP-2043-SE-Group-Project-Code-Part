@@ -10,6 +10,7 @@ var Languague = {
     // message page
     notification: "Notification",
     recent_message: "Recent Message",
+    no_feedback: "No feedback",
 
     // project page
     my_task: "My Task",

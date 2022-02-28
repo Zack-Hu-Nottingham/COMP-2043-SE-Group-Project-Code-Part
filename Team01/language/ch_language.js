@@ -10,6 +10,7 @@ var Languague = {
      // message page
      notification: "通知",
      recent_message: "最近的消息",
+     no_feedback: "暂无反馈",
 
      // project page
      my_task: "我的任务",
