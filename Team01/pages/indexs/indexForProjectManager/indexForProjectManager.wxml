@@ -15,7 +15,7 @@
 
 <!-- Message page -->
 <view wx:if="{{active == 0}}">
-  <view wx:if="{{messageList.length == 0}}">
+  <view wx:if="{{messageList.length == 0}}" class="emptyFeedback">
     <van-empty description="{{dictionary.no_feedback}}" />
   </view>
 

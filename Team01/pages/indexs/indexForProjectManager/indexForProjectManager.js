@@ -147,7 +147,7 @@ Page({
 
     await this.getProjectInfo(openid)
 
-    await this.getFeedbackInfo(openid)
+    //await this.getFeedbackInfo(openid)
 
     for (var idx in this.data.project) {
       await this.getTaskInfo(this.data.project[idx]._id)
