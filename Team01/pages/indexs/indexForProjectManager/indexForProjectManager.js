@@ -60,7 +60,7 @@ Page({
     canIUseGetUserProfile: false,
     canIUseOpenData: wx.canIUse('open-data.type.userAvatarUrl') && wx.canIUse('open-data.type.userNickName'), // 如需尝试获取用户信息可改为false
     name: "",
-    position: "Project Manager",
+    identity: "",
 
     currentTime: "",
 
@@ -84,7 +84,7 @@ Page({
     })
 
     this.setData({
-      position: this.data.dictionary.project_manager
+      identity: this.data.dictionary.project_manager
     })
     console.log(app.globalData.userInfo)
 
@@ -355,16 +355,6 @@ Page({
     });
   },
 
-
-  /**
-   * Create Project page's method
-   */
-  clickNewProject(event) {
-    wx.navigateTo({
-      url: '../project/newProject/newProject',
-    })
-  },
-
   /**
    * Message page's method
    */
@@ -393,7 +383,7 @@ Page({
 
   clickStatisticReport(event) {
     wx.navigateTo({
-      url: '../project/statisticReport/statisticReport',
+      url: '../../project/statisticReport/statisticReport',
     })
   },
 
@@ -405,17 +395,7 @@ Page({
 
   clickNewProject(event) {
     wx.navigateTo({
-      url: '../project/newProject/newProject',
-    })
-  },
-
-   
-  /**
-   * Dashboard page's method
-   */
-  clickTask(event) {
-    wx.navigateTo({
-      url: '../project/taskInfo/taskInfo?id=' +  event.currentTarget.dataset.id,
+      url: '../../project/newProject/newProject',
     })
   },
 
@@ -441,13 +421,13 @@ Page({
   
   onSetting: function(){
     wx.navigateTo({
-      url: '../more/setting/setting',
+      url: '../../more/setting/setting',
     })
   },
 
   onMoreInfo: function(){
     wx.navigateTo({
-      url: '../more/moreInfo/moreInfo',
+      url: '../../more/moreInfo/moreInfo',
     })
   },
 
@@ -456,7 +436,7 @@ Page({
   onChangeLan(event) {
     // console.log('check')
     wx.navigateTo({
-      url: '../more/languageSetting/languageSetting',
+      url: '../../more/languageSetting/languageSetting',
     })
   },
 

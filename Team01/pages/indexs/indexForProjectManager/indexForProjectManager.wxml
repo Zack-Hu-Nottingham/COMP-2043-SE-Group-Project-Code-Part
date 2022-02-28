@@ -42,7 +42,7 @@
     </view>
   </van-cell-group>
 
-  <van-sticky offset-top="{{ 570 }}">
+  <van-sticky offset-top="{{ 560 }}">
   <van-button hairline plain round block type="info" bindtap="clickNewProject" class="createNewProjectForTest">{{dictionary.create_new_project}}</van-button>
 </van-sticky>
 </view>
@@ -63,7 +63,7 @@
   <van-cell center title="{{dictionary.user_name}}">
       <open-data type="userNickName"></open-data>
   </van-cell>
-  <van-cell center title="{{dictionary.position}}" value="{{position}}" />
+  <van-cell center title="{{dictionary.identity}}" value="{{identity}}" />
   <van-cell center title="{{dictionary.more}}" clickable="true" bindtap="onMoreInfo" class="moreInfoForTest">
     <view slot="">
       <van-icon name="ellipsis" />

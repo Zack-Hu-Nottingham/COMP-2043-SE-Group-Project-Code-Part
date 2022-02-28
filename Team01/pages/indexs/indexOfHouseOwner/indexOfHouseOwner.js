@@ -60,7 +60,7 @@ Page({
     canIUseGetUserProfile: false,
     canIUseOpenData: wx.canIUse('open-data.type.userAvatarUrl') && wx.canIUse('open-data.type.userNickName'), // 如需尝试获取用户信息可改为false
     name: "",
-    position: "",
+    identity: "",
 
     currentTime: "",
 
@@ -121,7 +121,7 @@ Page({
     })
 
     this.setData({
-      position: this.data.dictionary.house_owner
+      identity: this.data.dictionary.house_owner
     })
 
   },

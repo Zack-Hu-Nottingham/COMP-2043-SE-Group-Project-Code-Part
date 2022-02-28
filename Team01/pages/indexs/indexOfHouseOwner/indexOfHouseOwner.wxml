@@ -87,7 +87,7 @@
   <van-cell center title="{{dictionary.user_name}}">
       <open-data type="userNickName"></open-data>
   </van-cell>
-  <van-cell center title="{{dictionary.position}}" value="{{position}}" />
+  <van-cell center title="{{dictionary.identity}}" value="{{identity}}" />
   <van-cell center title="{{dictionary.more}}" clickable="true" bindtap="onMoreInfo" class="moreInfoForTest">
     <view slot="">
       <van-icon name="ellipsis" />
