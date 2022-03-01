@@ -71,7 +71,3 @@
     padding: 50rpx;
     margin: 0;
   }
-
-  .project {
-    /* margin-top: auto; */
-  }

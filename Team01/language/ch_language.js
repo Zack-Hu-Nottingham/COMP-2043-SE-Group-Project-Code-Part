@@ -1,6 +1,7 @@
 var Languague = {
   // 首页
    index: {
+     // page name
      message_page: "消息",
      project_page: "项目",
      dashboard_page: "首页",
@@ -23,7 +24,7 @@ var Languague = {
 
      // more page
      user_name: "用户名",
-     position: "职位",
+     identity: "职位",
      setting: "设置",
      more: "更多",
      sign_out: "登出",
@@ -35,6 +36,7 @@ var Languague = {
      confirm: "确认",
      cancel: "取消",
      worker: "工人",
+     project_manager: "项目经理",
 
      // language setting page
      current_lan: "当前语言",
@@ -81,7 +83,7 @@ var Languague = {
     // New project
     project_name: "项目名称",
     choose_template: "选择模板",
-    house_owner: "房屋主人",
+    house_owner: "业主",
    
     // Comment page
     comment_title:"反馈",

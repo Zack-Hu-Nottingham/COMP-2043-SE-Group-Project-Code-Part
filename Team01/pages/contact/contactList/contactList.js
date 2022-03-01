@@ -60,13 +60,13 @@ Page({
         language: lan
         })
 
-        console.log(prevPage.data.houseOwner)
+        // console.log(prevPage.data.houseOwner)
 
 
     },
   
     onChange(event) {
-        console.log(event.detail)
+        // console.log(event.detail)
       this.setData({
         result: event.detail,
       });

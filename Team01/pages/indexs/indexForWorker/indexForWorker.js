@@ -69,6 +69,11 @@ Page({
       title: this.data.pageName[this.data.active],
     })
 
+    this.setData({
+      identity: this.data.dictionary.worker
+    })
+
+
   },
 
   /**
@@ -240,7 +245,6 @@ Page({
         this.setData({
           taskList: res.data[0].task
         })
-        console
         resolve("成功获取项目列表")
       })
       .catch(err => {
@@ -251,7 +255,7 @@ Page({
 
   clickProject(projectId) {
     wx.navigateTo({
-      url: '../project/projectInfoForWorker/projectInfoForWorker?id='+projectId,
+      url: '../../project/projectInfoForWorker/projectInfoForWorker?id='+projectId,
     })
   },
 
@@ -281,7 +285,7 @@ Page({
    */
   clickTask(event) {
     wx.navigateTo({
-      url: '../project/taskInfoForWorker/taskInfoForWorker?id=' +  event.currentTarget.dataset.id,
+      url: '../../project/taskInfoForWorker/taskInfoForWorker?id=' +  event.currentTarget.dataset.id,
     })
   },
 
@@ -296,7 +300,7 @@ Page({
     wx.getUserProfile({
       desc: '展示用户信息', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
       success: (res) => {
-        console.log(res)
+        // console.log(res)
         this.setData({
           userInfo: res.userInfo,
           hasUserInfo: true
@@ -304,16 +308,10 @@ Page({
       }
     })
   },
-  
-  onSetting: function(){
-    wx.navigateTo({
-      url: '../more/setting/setting',
-    })
-  },
 
   onMoreInfo: function(){
     wx.navigateTo({
-      url: '../more/moreInfo/moreInfo',
+      url: '../../more/moreInfo/moreInfo',
     })
   },
 
@@ -321,7 +319,7 @@ Page({
   // 点击language展示选项
   onChangeLan(event) {
     wx.navigateTo({
-      url: '../more/languageSetting/languageSetting',
+      url: '../../more/languageSetting/languageSetting',
     })
   },
 

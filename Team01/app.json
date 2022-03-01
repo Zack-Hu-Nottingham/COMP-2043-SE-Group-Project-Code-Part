@@ -19,7 +19,6 @@
         "pages/project/fileList/fileList",
         "pages/project/contactList/contactList",
         "pages/more/more/more",
-        "pages/more/setting/setting",
         "pages/more/moreInfo/moreInfo",
         "pages/more/languageSetting/languageSetting",
         "pages/more/test/test",

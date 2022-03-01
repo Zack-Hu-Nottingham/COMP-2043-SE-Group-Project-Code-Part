@@ -60,7 +60,7 @@ Page({
     canIUseGetUserProfile: false,
     canIUseOpenData: wx.canIUse('open-data.type.userAvatarUrl') && wx.canIUse('open-data.type.userNickName'), // 如需尝试获取用户信息可改为false
     name: "",
-    position: "Project Manager",
+    identity: "",
 
     currentTime: "",
 
@@ -108,68 +108,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
-    wx.login()
-    .then(res => {
-
-      // showLoading
-      Toast.loading({
-        message: 'Loading...',
-        forbidClick: true,
-        mask: true,
-      });
-      
-      if (res.code) { 
-        // 根据获取的code换取用户openid
-        var url = "https://api.weixin.qq.com/sns/jscode2session?appid=wxd4b06f2e9673ed00&secret=909d4ff30ed2d6e828f73e55a63cd862&js_code=" + res.code + "&grant_type=authorization_code";
-        lib.request({
-          url: url,
-          method: "GET"
-        }).task.then(res => {
-
-          // 设置全局的openid
-          app.globalData.userInfo.openid = res.data.openid
-          this.setData({
-            openid: res.data.openid
-          })
-          
-        }).then(res => {
-
-          // 访问数据库，判断该用户是否已经注册
-          db.collection('user').where({
-            _openid: app.globalData.userInfo.openid
-          }).get().then(res => {
-            console.log(res.data)
-            // 如果是已知账户
-            if (res.data.length != 0) {
-              this.getData()
-
-              Toast({
-                type: 'success',
-                message: 'Logged in',
-                onClose: () => {
-                },
-              });
-            }
-
-            // 如果是新账号
-            else {
-              Toast.clear()
-
-              // 获取账号信息，并注册该账号
-              Dialog.confirm({
-                context: this,
-                title: 'Registration',
-                message: 'Your nickName & phone would be used for registration',
-                confirmButtonOpenType: "getUserInfo", // 按钮的微信开放能力
-              })
-            }
-          })
-        })
-      }
-    })
-
-
     // 初始化语言
     var lan = wx.getStorageSync("languageVersion");
     this.initLanguage();
@@ -180,6 +118,10 @@ Page({
     // 载入时设置初始页面的navBar title
     wx.setNavigationBarTitle({
       title: this.data.pageName[this.data.active],
+    })
+
+    this.setData({
+      identity: this.data.dictionary.house_owner
     })
 
   },
@@ -245,7 +187,7 @@ Page({
 
   // 获得用户信息
   getuserinfo(e) {
-    console.log(e)
+    // console.log(e)
     wx.setStorageSync('userInfo', e.detail.userInfo)
     app.globalData.userInfo = e.detail.userInfo
     this.setData({
@@ -266,7 +208,7 @@ Page({
       }
     })
     .then(res => {
-      console.log(res)
+      // console.log(res)
 
       Toast.success("Successfully registered")
       // 获取数据
@@ -288,7 +230,7 @@ Page({
 
     for (var idx in this.data.project) {
       await this.getTaskInfo(this.data.project[idx]._id)
-      console.log(this.data.project[idx])
+      // console.log(this.data.project[idx])
     }
     
   },
@@ -302,7 +244,7 @@ Page({
       })
       .get()
       .then(res => {
-        console.log(res)
+        // console.log(res)
         this.setData({
           user: res.data[0]
         })
@@ -326,8 +268,8 @@ Page({
       ]))
       .get()
       .then(res => {
-        console.log("res = ")
-        console.log(res)
+        // console.log("res = ")
+        // console.log(res)
         if (res.data.length != 0) {
           for (var idx in res.data) {
             this.setData({
@@ -352,7 +294,7 @@ Page({
       })
       .get()
       .then(res => {
-        console.log(res)
+        // console.log(res)
         for (var idx in res.data) {
           this.setData({
             task: this.data.task.concat(res.data[idx])
@@ -387,45 +329,22 @@ Page({
     });
   },
 
-   
-  /**
-   * Project page's method
-   */
-  clickMyTask(event) {
-    wx.navigateTo({
-      url: '../project/taskInfo/taskInfo',
-    })
-  },
-
-  clickProjectReport(event) {
-    console.log(this.data.project[0]._id)
-    wx.navigateTo({
-      url: '../project/projectReport/projectReport?id=' + this.data.project[0]._id,
-    })
-  },
-
-  clickProject(event) {
-    wx.navigateTo({
-      url: '../project/projectInfo/projectInfo?id=' +  event.currentTarget.dataset.id,
-    })
-  },
-
-  clickNewProject(event) {
-    wx.navigateTo({
-      url: '../project/newProject/newProject',
-    })
-  },
-
-   
+      
   /**
    * Dashboard page's method
    */
   clickTask(event) {
     wx.navigateTo({
-      url: '../project/taskInfo/taskInfo?id=' +  event.currentTarget.dataset.id,
+      url: '../../project/taskInfo/taskInfo?id=' +  event.currentTarget.dataset.id,
     })
   },
 
+  clickProjectReport(event) {
+    // console.log(this.data.project[0]._id)
+    wx.navigateTo({
+      url: '../../project/projectReport/projectReport?id=' + this.data.project[0]._id,
+    })
+  },
 
   
   /**
@@ -437,7 +356,7 @@ Page({
     wx.getUserProfile({
       desc: '展示用户信息', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
       success: (res) => {
-        console.log(res)
+        // console.log(res)
         this.setData({
           userInfo: res.userInfo,
           hasUserInfo: true
@@ -446,24 +365,18 @@ Page({
     })
   },
   
-  onSetting: function(){
-    wx.navigateTo({
-      url: '../more/setting/setting',
-    })
-  },
-
   onMoreInfo: function(){
     wx.navigateTo({
-      url: '../more/moreInfo/moreInfo',
+      url: '../../more/moreInfo/moreInfo',
     })
   },
 
 
   // 点击language展示选项
   onChangeLan(event) {
-    console.log('check')
+    // console.log('check')
     wx.navigateTo({
-      url: '../more/languageSetting/languageSetting',
+      url: '../../more/languageSetting/languageSetting',
     })
   },
 
@@ -601,7 +514,7 @@ Page({
       })
       .get()
       .then(res => {
-        console.log(res)
+        // console.log(res)
         for (var idx in res.data) {
           this.setData({
             task: this.data.task.concat(res.data[idx])
@@ -645,7 +558,7 @@ Page({
       })
       .get()
       .then(res => {
-        console.log(res)
+        // console.log(res)
         for (var idx in res.data) {
           this.setData({
             task: this.data.task.concat(res.data[idx])

@@ -87,7 +87,7 @@
   <van-cell center title="{{dictionary.user_name}}">
       <open-data type="userNickName"></open-data>
   </van-cell>
-  <van-cell center title="{{dictionary.position}}" value="{{position}}" />
+  <van-cell center title="{{dictionary.identity}}" value="{{identity}}" />
   <van-cell center title="{{dictionary.more}}" clickable="true" bindtap="onMoreInfo" class="moreInfoForTest">
     <view slot="">
       <van-icon name="ellipsis" />
@@ -98,7 +98,6 @@
 
   <van-cell-group inset style="padding: 30rpx;">
     <van-cell center icon="setting-o"/>
-    <van-cell center title="{{dictionary.invite_member}}" is-link icon="" clickable="true" bindtap="onInviteMember"/>
     <van-cell center title="{{dictionary.language}}" value="{{languageList[language]}}" icon="" is-link clickable="true" bindtap="onChangeLan" class="settingForTest"/>
   </van-cell-group>
 

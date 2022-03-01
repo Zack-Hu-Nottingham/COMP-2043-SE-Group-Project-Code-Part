@@ -38,25 +38,37 @@
         },
         {
           "name": "",
+          "pathName": "pages/index/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/project/testDiagram/testDiagram",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/project/addComment/addComment",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "",
           "pathName": "pages/project/newProject/newProject",
           "query": "",
           "scene": null
         },
         {
           "name": "",
-          "pathName": "pages/indexForWorker/indexForWorker",
+          "pathName": "pages/project/testDiagram/testDiagram",
           "query": "",
           "scene": null
         },
         {
           "name": "",
-          "pathName": "pages/more/languageSetting/languageSetting",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "",
-          "pathName": "pages/index/index",
+          "pathName": "pages/login/login",
           "query": "",
           "scene": null
         }

@@ -1,6 +1,7 @@
 var Languague = {
   // 首页
   index: {
+   // page name
     message_page: "Message",
     project_page: "Projects",
     dashboard_page: "Dashboard",
@@ -23,7 +24,7 @@ var Languague = {
 
     // more page
     user_name: "User name",
-    position: "Possition",
+    identity: "Identity",
     setting: "Setting",
     more: "More",
     sign_out: "Sign Out",
@@ -35,6 +36,7 @@ var Languague = {
     confirm: "Confirm",
     cancel: "Cancel",
     worker: "Worker",
+    project_manager: "Project Manager",
 
      // language setting page
     current_lan: "Current language",

@@ -1,4 +1,5 @@
 // pages/more/more.js
+const app = getApp();
 Page({
 
   /**
@@ -11,7 +12,7 @@ Page({
     canIUseGetUserProfile: false,
     canIUseOpenData: wx.canIUse('open-data.type.userAvatarUrl') && wx.canIUse('open-data.type.userNickName'), // 如需尝试获取用户信息可改为false
     name: "",
-    position: "Project Manager",
+    position: "",
   },
 
   /**
@@ -22,14 +23,16 @@ Page({
     wx.getUserProfile({
       desc: '展示用户信息', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
       success: (res) => {
-        // console.log(res)
         this.setData({
           userInfo: res.userInfo,
           hasUserInfo: true,
           name: res.userInfo.userNickName
         })
+        console.log(res)
       }
     })
+
+    // console.log(app.globalData.openid);
 
   },
 
