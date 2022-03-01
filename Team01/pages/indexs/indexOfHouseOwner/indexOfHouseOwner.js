@@ -306,7 +306,7 @@ Page({
    */
   clickTask(event) {
     wx.navigateTo({
-      url: '../project/taskInfo/taskInfo?id=' +  event.currentTarget.dataset.id,
+      url: '../../project/taskInfo/taskInfo?id=' +  event.currentTarget.dataset.id,
     })
   },
 

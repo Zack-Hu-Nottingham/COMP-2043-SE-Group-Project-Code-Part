@@ -36,7 +36,6 @@
 
 
 
-
 <!-- Projects page -->
 <view wx:elif="{{active == 1}}">
   <van-cell-group inset style="padding: 30rpx;">

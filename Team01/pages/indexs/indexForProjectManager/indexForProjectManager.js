@@ -97,7 +97,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
   },
 
   /**
@@ -207,7 +206,6 @@ Page({
         reject("请求项目信息失败")
       })}
     )},
-
 
   // 获取任务信息
   getTaskInfo(projectId) {
