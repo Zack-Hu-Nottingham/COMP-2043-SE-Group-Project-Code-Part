@@ -6,7 +6,6 @@
         "pages/indexs/indexOfHouseOwner/indexOfHouseOwner",
         "pages/project/taskInfoForWorker/taskInfoForWorker",
         "pages/project/projectInfoForWorker/projectInfoForWorker",
-        "pages/index/index",
         "pages/dashboard/dashboard/dashboard",
         "pages/project/projectInfo/projectInfo",
         "pages/project/testDiagram/testDiagram",
@@ -20,9 +19,7 @@
         "pages/more/more/more",
         "pages/more/moreInfo/moreInfo",
         "pages/more/languageSetting/languageSetting",
-        "pages/more/test/test",
-        "pages/contact/contactList/contactList",
-        "pages/project/projectReport/projectReport"
+        "pages/more/test/test"
     ],
     "window": {
         "backgroundTextStyle": "light",

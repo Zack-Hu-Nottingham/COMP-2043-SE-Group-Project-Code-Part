@@ -18,7 +18,7 @@ var Languague = {
     create_new_project: "Create New Project",
 
     // dashboard page
-    today_task: "Today's Task",
+    today_task: "Today's Task",     
     task_list: "Task List",
     filter: "filter",
 
@@ -46,6 +46,7 @@ var Languague = {
     change_lan_confirm: "Confirm change language",
     
     // Project information page
+    project_manager: "Project Manager",
     project_info: "Project Information",
     task_management: "Task Management",
     gantt_diagram: "Gantt Diagram",
@@ -55,6 +56,7 @@ var Languague = {
     expected_start_time: "Expected Start Time",
     expected_end_time: "Expected End Time",
     description: "Description",
+    description_hint: "less than 500 words",
     state_information: "State Information",
     current_state: "Current State",
     task_progress: "Task Progress",
@@ -88,23 +90,6 @@ var Languague = {
     description_hint: "less than 500 words",
 
       // Comment page
-   comment_title:"Feedback",
-   select_feedback:"Select feedback type",
-   submitErrMsg1:"Feedback type is null",
-   submitErrMsg2:"Description is null",
-   feedback_type0:"Project Delay",
-   feedback_type1:"Task Delay",
-   feedback_type2:"Task need rework",
-
-    // index for worker
-    project: ["Project One", "Project Two", "Project Three", "Project Four", "Project Five"],
-    task_description: "Task Description",
-    task_state: ["Unstarted", "Progressing", "Finished", "Delayed", "Reworking"],
-    location: "Location",
-    construction_area: "Construction Area",
-    construction_requirements: "Construction Requirements",
-    start_construction: "Start Construction",
-    finish_construction: "Finish Construction",
     comment_title:"Feedback",
     select_feedback:"Select feedback type",
     submitErrMsg1:"Feedback type is null",
@@ -122,6 +107,16 @@ var Languague = {
     null_name: "Name is null",
     null_date_setting: "No date setting",
     null_template_setting: "No template selected",
+    
+    // index for worker
+    project: ["Project One", "Project Two", "Project Three", "Project Four", "Project Five"],
+    task_description: "Task Description",
+    task_state: ["Unstarted", "Progressing", "Finished", "Delayed", "Reworking"],
+    location: "Location",
+    construction_area: "Construction Area",
+    construction_requirements: "Construction Requirements",
+    start_construction: "Start Construction",
+    finish_construction: "Finish Construction",
  },
 };
 

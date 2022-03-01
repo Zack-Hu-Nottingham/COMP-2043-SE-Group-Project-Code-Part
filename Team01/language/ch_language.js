@@ -46,6 +46,7 @@ var Languague = {
      change_lan_confirm: "确认切换语言",
 
     // Project information page
+    project_manager: "项目管理者",
     project_info: "项目信息",
     task_management: "任务管理",
     gantt_diagram: "甘特图",
@@ -55,6 +56,7 @@ var Languague = {
     expected_start_time: "预期开始时间",
     expected_end_time: "预期结束时间",
     description: "描述",
+    description_hint: "少于500字",
     state_information: "状态信息",
     current_state: "当前状态",
     task_progress: "任务进度",
@@ -89,16 +91,11 @@ var Languague = {
     // Comment page
     comment_title:"反馈",
     select_feedback:"选择反馈类型",
-
-    // index for worker
-    project: ["项目一", "项目二", "项目三", "项目四", "项目五"],
-    task_description: "任务描述",
-    task_state: ["未开始", "进行中", "已完成", "已延期", "重做中"],
-    location: "施工地点",
-    construction_area: "施工区域",
-    construction_requirements: "施工要求",
-    start_construction: "开始施工",
-    finish_construction: "结束施工",
+    submitErrMsg1:"反馈类型为空",
+    submitErrMsg2:"描述为空",
+    feedback_type0:"项目延期",
+    feedback_type1:"任务延期",
+    feedback_type2:"任务需返工",
 
     // contact list page
     copy_phone_confirm: "已复制用户电话",
@@ -109,6 +106,16 @@ var Languague = {
     null_name: "名称为空",
     null_date_setting: "未设置日期",
     null_template_setting: "未选择模板",
+
+    // index for worker
+    project: ["项目一", "项目二", "项目三", "项目四", "项目五"],
+    task_description: "任务描述",
+    task_state: ["未开始", "进行中", "已完成", "已延期", "重做中"],
+    location: "施工地点",
+    construction_area: "施工区域",
+    construction_requirements: "施工要求",
+    start_construction: "开始施工",
+    finish_construction: "结束施工",
    },
 };
 

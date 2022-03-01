@@ -1,10 +1,12 @@
 // pages/project/newProject/newProject.js
 import Toast from '../../../miniprogram_npm/@vant/weapp/toast/toast'
+
 const languageUtils = require("../../../language/languageUtils");
 
-var app = getApp()
+var app = getApp();
 
 const db = wx.cloud.database();
+
 Page({
     /**
      * 页面的初始数据
@@ -49,9 +51,6 @@ Page({
           state: 0,
           tag: [],
           duration: 2,
-          location: "上海市浦东新区花园石桥路28弄汤臣一品5栋409室",
-          workingArea: "整栋房屋",
-          taskDescription: "",
 
         }, {
           name: "水电布管",
@@ -64,9 +63,6 @@ Page({
           state: 0,
           tag: [],
           duration: 2,
-          location: "上海市浦东新区花园石桥路28弄汤臣一品5栋409室",
-          workingArea: "卫生间",
-          taskDescription: "1.kjfkldsajflkds 2.jfdklajdfklsda",
 
         }, {
           name: "木作工程",
@@ -79,9 +75,6 @@ Page({
           state: 0,
           tag: [],
           duration: 2,
-          location: "上海市浦东新区花园石桥路28弄汤臣一品5栋409室",
-          workingArea: "",
-          taskDescription: "",
 
         }, {
           name: "泥水工程",
@@ -94,9 +87,6 @@ Page({
           state: 0,
           tag: [],
           duration: 2,
-          location: "上海市浦东新区花园石桥路28弄汤臣一品5栋409室",
-          workingArea: "",
-          taskDescription: "",
 
         }, {
           name: "油漆工程",
@@ -109,9 +99,6 @@ Page({
           state: 0,
           tag: [],
           duration: 2,
-          location: "上海市浦东新区花园石桥路28弄汤臣一品5栋409室",
-          workingArea: "",
-          taskDescription: "",
 
         }, {
           name: "后期安装项目",
@@ -124,9 +111,6 @@ Page({
           state: 0,
           tag: [],
           duration: 2,
-          location: "上海市浦东新区花园石桥路28弄汤臣一品5栋409室",
-          workingArea: "",
-          taskDescription: "",
           
           
         }]
@@ -187,16 +171,17 @@ Page({
     selectTemplate: function(){
         wx.navigateTo({ url: '../projectTemplate/projectTemplate', })
     },
+    
     upload(){
-        //把this赋值给that，就相当于that的作用域是全局的。
-        let that = this;
         wx.chooseImage({
-          // count: 1,
+          count: 1,
           sizeType: ['original', 'compressed'],
           sourceType: ['album', 'camera'],
-          success(res) {
-            console.log("成功选择图片",res);
-            that.uploadImage(res.tempFilePaths[0]);
+          success:res => {
+            var fileList = this.data.fileList;
+            fileList.push({url: res.tempFilePaths[0]});
+            this.setData({ fileList: fileList });
+            console.log("成功选择图片",fileList);
           }
         })
       },
@@ -206,38 +191,15 @@ Page({
           cloudPath: 'project/'+ new Date().getTime() +'.png', // 上传至云端的路径
           filePath: fileURL, // 小程序临时文件路径
           success: res => {
-            var fileList = this.data.fileList;
-            fileList.push({url: res.fileID,name: fileURL,deletable: true});
-            this.setData({ fileList: fileList });
             console.log("图片上传成功",res)
           },
           fail: console.error
         })
     },
 
+
     // 提交新项目
     formSubmit: function (e) {
-
-        db.collection('project').add({
-            // data 字段表示需新增的 JSON 数据
-            data: {
-                // _id: 'todo-identifiant-aleatoire', // 可选自定义 _id，在此处场景下用数据库自动分配的就可以了
-                name: this.data.name,
-                startTime: this.data.startDate,
-                endTime: this.data.endDate,
-                owner: this.data.owner,
-                participant: this.data.participant,
-                template: this.data.selectedTemplate,
-                projectDescription: this.data.description,
-            },
-            success: function(res) {
-              // res 是一个对象，其中有 _id 字段标记刚创建的记录的 id
-              // console.log(res)
-            }
-          })
-
-        var that = this
-        // 数据校验
         if (this.data.name == "") {
             Toast(this.data.dictionary.null_name);
         }
@@ -274,18 +236,29 @@ Page({
 
               }
             })
-            // 新建项目成功，返还项目id
             .then(res => {
               this.setData({
                 project: res._id
               })
+
+              // 根据模板创建新的子task
+              this.createTask()
+              .then(() => {
+                this.action();
+              })
+              .catch(() => {
+
+              })
+
             })
             .catch(res => {
               console.log('新建项目失败，请联系管理员', res) 
             })
-
             this.action();
+
+              
         }
+        
     },
 
     action(){
@@ -306,11 +279,8 @@ Page({
           })
       },2400)
       setTimeout(res =>{
-          let pages = getCurrentPages();
-          let project = pages[pages.length - 2];
-          project.go_update();
-          wx.navigateBack({
-            delta: 1
+          wx.navigateTo({
+            url: '../../index/index',
           })
       },2500)
     },
@@ -367,10 +337,10 @@ Page({
         .catch(res => { 
           reject()
         })
-        this.onDateClose();
       })
+      
     },
-    
+
     async createTask() {
       this.modifyTemplate()
       for(var idx in this.data.template) {

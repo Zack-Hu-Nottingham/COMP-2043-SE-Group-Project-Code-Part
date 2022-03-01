@@ -1,4 +1,4 @@
-// pages/project/contactList/contactList.js
+// pages/contact/contactList/contactList.js
 const languageUtils = require("../../../language/languageUtils");
 const app = getApp();
 const db = wx.cloud.database();

@@ -1,5 +1,9 @@
 // pages/project/addComment/addComment.js
+import Toast from '../../../miniprogram_npm/@vant/weapp/toast/toast'
 const languageUtils = require("../../../language/languageUtils");
+const app = getApp();
+const db = wx.cloud.database();
+
 Page({
 
     /**
@@ -14,18 +18,8 @@ Page({
         selectedIndex: '',
 
         showFeedback: false,
-        feedbackValue: [{
-            "name": "Project Delay",
-            "value": '0'
-        },{
-            "name": "Task Delay",
-            "value": '1'
-        },{
-            "name": "Task need rework",
-            "value": '2'
-        }],
+        feedbackType: [],
         fileList: [],
-        imageURL: '',
         details: '',
         feedback: [],
         id: '',
@@ -69,6 +63,22 @@ Page({
         this.setData({
             language: lan
         })
+        this.setData({
+            //feedback type:
+            // 0 - Project Delay
+            // 1 - Task Delay
+            // 2 - Task need rework
+            feedbackType: [{
+                "name": this.data.dictionary.feedback_type0,
+                "value": '0'
+            },{
+                "name": this.data.dictionary.feedback_type1,
+                "value": '1'
+            },{
+                "name": this.data.dictionary.feedback_type2,
+                "value": '2'
+            }],
+        })
 
         // 设置
         wx.setNavigationBarTitle({
@@ -95,19 +105,18 @@ Page({
     onSelectFeedback(event) {
         // console.log(event.detail.value);
         this.setData({
-            selectedFeedback: this.data.feedbackValue[event.detail.value].name,
-            selectedIndex: this.data.feedbackValue[event.detail.value].value,
+            selectedFeedback: this.data.feedbackType[event.detail.value].name,
+            selectedIndex: this.data.feedbackType[event.detail.value].value,
         })
     },
 
     upload(){
-        var that = this;
         wx.chooseImage({
           count: 1,
           sizeType: ['original', 'compressed'],
           sourceType: ['album', 'camera'],
-          success(res) {
-            var fileList = that.data.fileList;
+          success:res => {
+            var fileList = this.data.fileList;
             fileList.push({url: res.tempFilePaths[0]});
             this.setData({ fileList: fileList });
             // console.log("成功选择图片",fileList);
@@ -117,7 +126,7 @@ Page({
 
     uploadImage(fileURL) {
         wx.cloud.uploadFile({
-          cloudPath: 'feedBack/'+ new Date().getTime() +'.png', // 上传至云端的路径
+          cloudPath: 'feedback/'+ this.data.id + '/' + new Date().getTime() +'.png', // 上传至云端的路径
           filePath: fileURL, // 小程序临时文件路径
           success: res => {
             // console.log("图片上传成功",res)

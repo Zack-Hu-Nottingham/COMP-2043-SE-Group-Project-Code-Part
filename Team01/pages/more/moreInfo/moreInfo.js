@@ -1,5 +1,9 @@
 // pages/more/moreInfo/moreInfo.js
-const app = getApp()
+
+import Dialog from '../../../miniprogram_npm/@vant/weapp/dialog/dialog';
+import Toast from '../../../miniprogram_npm/@vant/weapp/toast/toast';
+
+const app = getApp();
 
 Page({
 
@@ -7,8 +11,28 @@ Page({
      * 页面的初始数据
      */
     data: {
+        openid : "",
+        title:'More Information',
+        position:'project manager',
+        phonenumber: '10086',
+        weixinid:'10010',
+        userInfo: {},
+        hasUserInfo: false,
+        canIUse: wx.canIUse('button.open-type.getUserInfo'),
+        canIUseGetUserProfile: false,
+        canIUseOpenData: wx.canIUse('open-data.type.userAvatarUrl') && wx.canIUse('open-data.type.userNickName'), // 如需尝试获取用户信息可改为false
+        show: false,
+        value: '', 
 
     },
+    showPopup() {
+        this.setData({ show: true });
+    },
+    
+    onClose() {
+        this.setData({ show: false});
+    },
+
 
     /**
      * 生命周期函数--监听页面加载
@@ -82,5 +106,32 @@ Page({
      */
     onShareAppMessage: function () {
 
+    },
+   // forNotice: function (e) {
+     // Dialog.confirm({
+       // title:'是否修改',
+        //customStyle:'display= flex;flex-direction: column;',
+        //context: this,
+        // title: this.data.dictionary.change_lan_confirm,
+        // message: '弹窗内容',
+     // })
+        //.then(() => {
+          // on confirm
+       // })
+       // .catch(() => {
+          // on cancel
+         // return
+        //});
+
+    //}
+    forNotice: function (e) {
+      Toast({
+        type: 'success',
+        message: '提交成功',
+        onClose: () => {
+           this.setData({ show: false});
+          //console.log('执行OnClose函数');
+        },
+      });
     }
 })
