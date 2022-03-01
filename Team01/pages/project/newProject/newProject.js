@@ -280,7 +280,7 @@ Page({
       },2400)
       setTimeout(res =>{
           wx.navigateTo({
-            url: '../../index/index',
+            url: '../../indexs/indexForProjectManager/indexForProjectManager',
           })
       },2500)
     },

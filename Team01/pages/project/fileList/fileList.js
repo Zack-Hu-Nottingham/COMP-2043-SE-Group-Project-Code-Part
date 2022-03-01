@@ -8,7 +8,7 @@ Page({
      */
     data: {
         fileList: [],
-        name: 'Details',
+        navigationBar: 'Details',
         feedbackType: '',
         details: '',
         createTime: '',
@@ -42,7 +42,7 @@ Page({
           }),
 
           wx.setNavigationBarTitle({
-            title: this.data.name,
+            title: this.data.navigationBar,
           }),
           // console.log(this.data.ownerId)
           this.getOwner();
@@ -60,6 +60,7 @@ Page({
           })
           .get()
           .then(res => {
+            // console.log(res.data)
             this.setData({
               sponsor: res.data[0].name
             })

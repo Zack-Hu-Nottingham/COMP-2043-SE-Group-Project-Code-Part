@@ -169,8 +169,8 @@ Page({
                   feedback: this.data.feedback
                 },
                 success: function(res) {
-                    // const page = ('pages/index/index');
-                    // page.refresh();
+                    //const page = ('pages/index/index');
+                    //page.refresh();
                   // console.log(res.data.feedback)
                 }
               })

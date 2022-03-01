@@ -6,7 +6,6 @@
         "pages/indexs/indexOfHouseOwner/indexOfHouseOwner",
         "pages/project/taskInfoForWorker/taskInfoForWorker",
         "pages/project/projectInfoForWorker/projectInfoForWorker",
-        "pages/dashboard/dashboard/dashboard",
         "pages/project/projectInfo/projectInfo",
         "pages/project/testDiagram/testDiagram",
         "pages/project/taskInfo/taskInfo",
