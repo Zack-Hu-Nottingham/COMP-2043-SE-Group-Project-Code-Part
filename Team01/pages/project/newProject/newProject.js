@@ -173,7 +173,7 @@ Page({
     
     changeOwner(){
         wx.navigateTo({
-          url: '../../contact/contactList/contactList',
+          url: '../../project/contactList/contactList?index='+this.data.ownerPage,
         })
     },
 
@@ -203,7 +203,7 @@ Page({
 
     uploadImage(fileURL) {
         wx.cloud.uploadFile({
-          cloudPath: 'feedBack/'+ new Date().getTime() +'.png', // 上传至云端的路径
+          cloudPath: 'project/'+ new Date().getTime() +'.png', // 上传至云端的路径
           filePath: fileURL, // 小程序临时文件路径
           success: res => {
             var fileList = this.data.fileList;

@@ -84,6 +84,7 @@ var Languague = {
     project_name: "项目名称",
     choose_template: "选择模板",
     house_owner: "业主",
+    description_hint: "不超过200字",
    
     // Comment page
     comment_title:"反馈",

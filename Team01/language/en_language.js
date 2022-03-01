@@ -85,6 +85,7 @@ var Languague = {
     project_name: "Project Name",
     choose_template: "Choose Template",
     house_owner: "House Owner",
+    description_hint: "less than 500 words",
 
       // Comment page
    comment_title:"Feedback",

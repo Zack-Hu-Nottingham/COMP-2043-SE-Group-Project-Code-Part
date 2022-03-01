@@ -22,7 +22,7 @@
 
     <!--Description-->
     <van-cell-group inset style="padding: 10rpx;">
-        <van-field label="{{dictionary.description}}" value="{{ description }}" type="textarea" placeholder="(less than 500 words)" size="large" maxlength="500" input-align="right" autosize bind:change="typeDescription" />
+        <van-field label="{{dictionary.description}}" value="{{ description }}" type="textarea" placeholder="({{dictionary.description_hint}})" size="large" maxlength="500" input-align="right" autosize bind:change="typeDescription" />
     </van-cell-group>
 </view>
 
@@ -31,7 +31,6 @@
 
 <!--Submit-->    
 <van-button plain round block loading="{{isLoading}}" disabled="{{isLoading}}" class="submitBtn" color="#1296db" type="primary" size="normal" form-type="submit" bindtap="formSubmit">{{dictionary.create_new_project}}</van-button>
-
 
 <van-toast id="van-toast" />
 
