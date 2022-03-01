@@ -70,7 +70,7 @@ Page({
                   // House Owner
                   if (identity == 0) {
                     wx.navigateTo({
-                      url: '../indexs/indexOfHouseOwner/indexOfHouseOwner',
+                      url: '../indexs/indexOfHouseOwner/indexOfHouseOwner?openid=' + this.data.openid,
                     })
                    
                     // Project Manager
