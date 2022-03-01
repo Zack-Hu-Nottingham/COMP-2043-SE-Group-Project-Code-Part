@@ -10,6 +10,7 @@ var Languague = {
      // message page
      notification: "通知",
      recent_message: "最近的消息",
+     no_feedback: "暂无反馈",
 
      // project page
      my_task: "我的任务",
@@ -20,7 +21,7 @@ var Languague = {
      // dashboard page
      today_task: "今天的任务",
      task_list: "任务列表",
-     filter: "筛选",
+     filter: "排序",
 
      // more page
      user_name: "用户名",
@@ -116,6 +117,8 @@ var Languague = {
     construction_requirements: "施工要求",
     start_construction: "开始施工",
     finish_construction: "结束施工",
+    no_project_error: "您当前还没有项目",
+    no_task_error: "您当前还没有任务",
    },
 };
 

@@ -10,6 +10,7 @@ var Languague = {
     // message page
     notification: "Notification",
     recent_message: "Recent Message",
+    no_feedback: "No feedback",
 
     // project page
     my_task: "My Task",
@@ -117,6 +118,10 @@ var Languague = {
     construction_requirements: "Construction Requirements",
     start_construction: "Start Construction",
     finish_construction: "Finish Construction",
+    no_project_error: "You currently have no projects",
+    no_task_error: "You currently have no tasks",
+
+
  },
 };
 

@@ -15,6 +15,11 @@
 
 <!-- Message page -->
 <view wx:if="{{active == 0}}">
+  <view wx:if="{{messageList.length == 0}}" class="emptyFeedback">
+    <van-empty description="{{dictionary.no_feedback}}" />
+  </view>
+
+  <view wx:elif="{{amessageList.length != 0}}">
   <van-cell-group inset style="padding: 30rpx;">
     <van-cell center title="{{dictionary.notification}}" icon="bullhorn-o" size="large" label="{{messageList[0].type.name}}: {{messageList[0].description}}" value="{{messageList[0].createTime}}" clickable="true" bindtap="clickNotification" >
     </van-cell>
@@ -26,6 +31,7 @@
       link-type="navigateTo" url="/pages/project/fileList/fileList?id={{item.belongTo}}&index={{index}}" label="{{item.type.name}}: {{item.description}}" value="{{item.createTime}}" id="{{item.owner}}" class="messageForTest"/>
     </view>
   </van-cell-group>
+  </view>
 </view>
 
 
@@ -78,9 +84,5 @@
     <van-cell center title="{{dictionary.language}}" value="{{languageList[language]}}" icon="" is-link clickable="true" bindtap="onChangeLan" class="settingForTest"/>
   </van-cell-group>
 
-<!-- 底部悬浮登出按钮 -->
-<van-sticky offset-top="{{ 570 }}">
-  <van-button hairline plain round block color="#DC143C" class="signOut" type="primary">{{dictionary.sign_out}}</van-button>
-</van-sticky>
 
 </view>

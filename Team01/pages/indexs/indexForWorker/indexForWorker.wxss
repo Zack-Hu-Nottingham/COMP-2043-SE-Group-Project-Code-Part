@@ -1,13 +1,6 @@
 /**index.wxss**/
 
-
-/**
-  * Message page's css
-  */
-
-
-
-  
+ 
 /**
   * Projects page's css
   */
@@ -34,6 +27,10 @@
       padding: 10rpx;
   
       border-radius: 0.5ex;
+    }
+
+    .empty {
+      margin-top: 300rpx;
     }
   
   

@@ -20,11 +20,13 @@ Page({
      */
     active: 0,
     pageName: ['Message', 'Project', 'More'],
+    currentTime: "",
 
     // 存放双语
     dictionary: {},
     language: 0,
     languageList: ["简体中文", "English"],
+
 
     /**
      * Message page's data
@@ -32,19 +34,11 @@ Page({
     messageList: [],
 
 
-
-
     /**
      * Projects page's data
      */
 
     project: [],
-
-
-    // /**
-    //  * Dashboard page's data
-    //  */
-    // task:[],
 
 
     /**
@@ -57,8 +51,6 @@ Page({
     canIUseOpenData: wx.canIUse('open-data.type.userAvatarUrl') && wx.canIUse('open-data.type.userNickName'), // 如需尝试获取用户信息可改为false
     name: "",
     identity: "",
-
-    currentTime: "",
 
   },
 
@@ -97,6 +89,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    wx.hideHomeButton()
   },
 
   /**
@@ -139,6 +132,7 @@ Page({
   /**
    * Global method
    */
+
   // 初始化数据
   async getData(openid){
 
@@ -147,11 +141,6 @@ Page({
     await this.getProjectInfo(openid)
 
     await this.getFeedbackInfo(openid)
-
-    for (var idx in this.data.project) {
-      await this.getTaskInfo(this.data.project[idx]._id)
-      // console.log(this.data.project[idx])
-    }
     
   },
 
@@ -180,56 +169,6 @@ Page({
       })}
     )},
 
-
-      // 获取反馈信息
-  getProjectInfo(openid) {
-    return new Promise((resolve, reject) => {
-      db.collection('project')
-      .where({
-          _openid: _.eq(openid)
-        })
-      .get()
-      .then(res => {
-        // console.log("res = ")
-        // console.log(res)
-        if (res.data.length != 0) {
-          for (var idx in res.data) {
-            this.setData({
-              project: this.data.project.concat(res.data[idx])
-            })  
-          }
-        }
-        
-        resolve("成功获取项目信息")
-      })
-      .catch(err => {
-        reject("请求项目信息失败")
-      })}
-    )},
-
-  // 获取任务信息
-  getTaskInfo(projectId) {
-    return new Promise((resolve, reject) => {
-      db.collection('task')
-      .where({
-        belongTo: _.eq(projectId)
-      })
-      .get()
-      .then(res => {
-        // console.log(res)
-        for (var idx in res.data) {
-          this.setData({
-            task: this.data.task.concat(res.data[idx])
-          })
-        }
-        // this.data.task.push(res.data[0])
-        resolve("成功获取任务信息")
-      })
-      .catch(err => {
-        reject("请求任务信息失败")
-      })
-    })
-  },
 
   // 获取反馈信息
   getFeedbackInfo(openid) {
@@ -286,6 +225,8 @@ Page({
     });
   },
 
+
+
   /**
    * Message page's method
    */
@@ -295,22 +236,12 @@ Page({
     })
   },
 
-  // 点击通知
-  clickNotification(event) {
-
-  },
-
 
 
    
   /**
    * Project page's method
    */
-  // clickMyTask(event) {
-  //   wx.navigateTo({
-  //     url: '../project/taskInfo/taskInfo',
-  //   })
-  // },
 
   clickStatisticReport(event) {
     wx.navigateTo({
@@ -404,7 +335,7 @@ Page({
               }
             })
             .catch(err => {
-              console.log('请求失败', err)
+              console.log('请求修改项目状态失败', err)
             })
           }else if(this.data.currentTime > res.data[idx].startTime && this.data.currentTime < res.data[idx].endTime){
             wx.cloud.database().collection('task')
@@ -415,7 +346,7 @@ Page({
               }
             })
             .catch(err => {
-              console.log('请求失败', err)
+              console.log('请求修改项目状态失败', err)
             })
           }else if(this.data.currentTime > res.data[idx].endTime){
             wx.cloud.database().collection('task')
@@ -426,15 +357,16 @@ Page({
               }
             })
             .catch(err => {
-              console.log('请求失败', err)
+              console.log('请求修改项目状态失败', err)
             })
           }
         }
         // this.data.task.push(res.data[0])
-        resolve("成功获取任务信息")
+        resolve("成功修改项目状态")
       })
       .catch(err => {
-        reject("请求任务信息失败")
+        console.log(err)
+        reject("修改项目状态失败")
       })
     })
 

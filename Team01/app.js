@@ -21,9 +21,9 @@ App({
   },
   globalData: {
     userInfo: {
-      openid: "",
-      name: "",
-      phone: ""
+      // openid: "",
+      // name: "",
+      // phone: ""
     }
   }
 })

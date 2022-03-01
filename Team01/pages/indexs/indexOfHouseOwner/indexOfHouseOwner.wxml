@@ -101,9 +101,4 @@
     <van-cell center title="{{dictionary.language}}" value="{{languageList[language]}}" icon="" is-link clickable="true" bindtap="onChangeLan" class="settingForTest"/>
   </van-cell-group>
 
-<!-- 底部悬浮登出按钮 -->
-<van-sticky offset-top="{{ 570 }}">
-  <van-button hairline plain round block color="#DC143C" class="signOut" type="primary">{{dictionary.sign_out}}</van-button>
-</van-sticky>
-
 </view>
