@@ -18,7 +18,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-    userInfo: {}
   },
 
   /**
@@ -69,19 +68,18 @@ Page({
                 onClose: () => {
                   // House Owner
                   if (identity == 0) {
-                    wx.navigateTo({
+                    wx.redirectTo({
                       url: '../indexs/indexOfHouseOwner/indexOfHouseOwner?openid=' + this.data.openid,
                     })
-                   
                     // Project Manager
                   } else if (identity == 1) {
-                    wx.navigateTo({
+                    wx.redirectTo({
                       url: '../indexs/indexForProjectManager/indexForProjectManager',
                     })
                    
                     // Worker
                   } else if (identity == 2) {
-                    wx.navigateTo({
+                    wx.redirectTo({
                       url: '../indexs/indexForWorker/indexForWorker',
                     })
                   }
@@ -109,34 +107,33 @@ Page({
 
   // 获得用户信息
   getuserinfo(e) {
-    // console.log(e)
-    wx.setStorageSync('userInfo', e.detail.userInfo)
+
+    // wx.setStorageSync('userInfo', e.detail.userInfo)
     app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo
-    })
 
     // wx.getUserInfo的返回兼容
-    wx.setStorageSync('encryptedData', e.detail.encryptedData)
-    wx.setStorageSync('iv', e.detail.iv)
+    // wx.setStorageSync('encryptedData', e.detail.encryptedData)
+    // wx.setStorageSync('iv', e.detail.iv)
+    
     //拿到用户信息后 获取 用户手机号
 
 
     // 拿到数据后写入数据库
     db.collection("user").add({
       data: {
-        name: this.data.userInfo.nickName,
-        identity: 0
-        // openid: this.data.openid
+        nickName: e.detail.userInfo.nickName,
+        avatarUrl: e.detail.userInfo.avatarUrl,
+        identity: 0,
+        task: [],
+        project: []
       }
     })
     .then(res => {
-      // console.log(res)
 
       Toast.success("Successfully registered")
 
       // 跳转房主界面
-      wx.navigateTo({
+      wx.redirectTo({
         url: '../indexs/indexOfHouseOwner/indexOfHouseOwner',
       })
     })

@@ -1,4 +1,6 @@
 // pages/project/fileList/fileList.js
+const db = wx.cloud.database();
+const _ = db.command;
 Page({
 
     /**
@@ -6,7 +8,7 @@ Page({
      */
     data: {
         fileList: [],
-        name: 'Detail images',
+        name: 'Details',
         feedbackType: '',
         details: '',
         createTime: '',

@@ -14,25 +14,7 @@
       "list": [
         {
           "name": "",
-          "pathName": "pages/project/projectInfo/projectInfo",
-          "query": "id=617ef50c621093c906db799e794baf10",
-          "scene": null
-        },
-        {
-          "name": "",
-          "pathName": "pages/project/fileList/fileList",
-          "query": "id=617ef50c621093c906db799e794baf10&index=6",
-          "scene": null
-        },
-        {
-          "name": "",
-          "pathName": "pages/project/addComment/addComment",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "",
-          "pathName": "pages/project/contactList/contactList",
+          "pathName": "pages/login/login",
           "query": "",
           "scene": null
         },
@@ -44,31 +26,7 @@
         },
         {
           "name": "",
-          "pathName": "pages/project/testDiagram/testDiagram",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "",
-          "pathName": "pages/project/addComment/addComment",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "",
-          "pathName": "pages/project/newProject/newProject",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "",
-          "pathName": "pages/project/testDiagram/testDiagram",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "",
-          "pathName": "pages/login/login",
+          "pathName": "pages/test/test",
           "query": "",
           "scene": null
         }
