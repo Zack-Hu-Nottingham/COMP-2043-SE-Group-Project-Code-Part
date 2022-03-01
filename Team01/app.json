@@ -23,7 +23,8 @@
         "pages/more/languageSetting/languageSetting",
         "pages/more/test/test",
         "pages/contact/contactList/contactList",
-        "pages/project/projectReport/projectReport"
+        "pages/project/projectReport/projectReport",
+        "pages/test/test"
     ],
     "window": {
         "backgroundTextStyle": "light",

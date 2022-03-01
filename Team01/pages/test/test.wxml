@@ -4,8 +4,9 @@
 <!-- Toast -->
 <van-toast id="van-toast" />
 
-这是登录页面
-{{here}}
-{{there}}
+这是登录页面<view></view>
+openid: {{openid}}<view></view>
+{{here}}<view></view>
+{{there}}<view></view>
 {{foo}}
 {{bar}}

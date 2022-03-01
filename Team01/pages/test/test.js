@@ -18,6 +18,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    openid: "",
     userInfo: {},
     here: "",
     there: "",
@@ -47,6 +48,9 @@ Page({
           url: url,
           method: "GET"
         }).task.then(res => {
+          this.setData({
+            here: "here"
+          })
 
           // 设置全局的openid
           app.globalData.userInfo.openid = res.data.openid
