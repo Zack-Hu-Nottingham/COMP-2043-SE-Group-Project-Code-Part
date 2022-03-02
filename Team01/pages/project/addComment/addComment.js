@@ -205,9 +205,14 @@ Page({
             })
         },2400)
         setTimeout(res =>{
-            wx.redirectTo({
-              url: '../../project/projectInfo/projectInfo?id=' + this.data.id,
-            })
+            var pages = getCurrentPages();
+            var currPage = pages[pages.length - 1];   //当前页面
+            var prevPage = pages[pages.length - 2];  //上一个页面
+            prevPage.updateComment();
+
+            wx.navigateBack({
+                delta: 1
+              })
         },2500)
     },
 

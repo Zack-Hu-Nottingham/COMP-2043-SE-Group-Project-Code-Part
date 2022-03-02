@@ -159,7 +159,6 @@ Page({
             Toast(this.data.dictionary.null_template_setting)
         }
         else{
-
           this.getOpenid(this.data.houseOwner);
           // 根据输入先创建一个项目，此时task列表为空
           wx.cloud.database().collection('project')
