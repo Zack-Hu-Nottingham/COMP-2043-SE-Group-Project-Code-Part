@@ -11,6 +11,7 @@ Page({
         templates:[{
             name: "Townhouse Decoration", // 联排别墅
             content: "More info...",
+            duration: 233,
             useFrq: "7", // 使用频率（记录使用次数，数组按照使用频率进行排序）
             id: '1'
         },{
@@ -105,6 +106,7 @@ Page({
                 prevPage.setData({
                     selectedTemplate: templates[i].name,
                     selectedTemplateIndex: i,
+                    duration: templates[i].duration
                 });
             }
         }

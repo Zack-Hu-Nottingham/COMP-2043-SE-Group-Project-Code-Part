@@ -31,7 +31,7 @@ Page({
         // 模板选择
         selectedTemplate: '',
         selectedTemplateIndex: '1',
-        
+        duration:0,
 
         isLoading: false,
         fileList: [],
@@ -252,16 +252,26 @@ Page({
     },
   
     onDateConfirm(event) {
-      const [start, end] = event.detail;
+      const start = event.detail;
+      var end = this.addDate(start, this.data.duration)
       this.setData({
           startDate: this.formatDate(start),
-          endDate: this.formatDate(end)
+          endDate: this.formatDate(end),
       })
       this.onDateClose();
-
+      
     },
 
-      // modify the template accordingly
+    //日期加减法  date参数为计算开始的日期，days为需要加的天数   
+    //格式:addDate('2017-1-11',20) 
+    addDate: function(date,days){ 
+      var d=new Date(date); 
+      d.setDate(d.getDate() + days); 
+      var m=d.getMonth() + 1; 
+      return d.getFullYear()+'-'+ m +'-'+d.getDate(); 
+    },    
+
+    // modify the template accordingly
     modifyTemplate() {
       for(var idx in this.data.template) {
         this.data.template[idx].belongTo = this.data.project

@@ -20,6 +20,8 @@ Page({
     totalUnstart: 0,
     totalProgressing: 0,
     totalCompleted: 0,
+    totalDelayed:0,
+    totalReworking:0,
     projects:[],
 
     project: [],
@@ -140,6 +142,14 @@ Page({
           }else if(res.data[idx].state == 2){
             this.setData({
               totalCompleted: this.data.totalCompleted + 1
+            })
+          }else if(res.data[idx].state == 3){
+            this.setData({
+              totalDelayed: this.data.totalDelayed + 1
+            })
+          }else if(res.data[idx].state == 4){
+            this.setData({
+              totalReworking: this.data.totalReworking + 1
             })
           }
           this.setData({

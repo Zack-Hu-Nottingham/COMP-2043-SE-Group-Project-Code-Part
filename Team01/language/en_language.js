@@ -87,6 +87,9 @@ var Languague = {
     // New project
     project_name: "Project Name",
     choose_template: "Choose Template",
+    expected_start_time: "Expected start time",
+    expetced_end_time: "Expected end time",
+    expected_duration:"Estimated duration of work",
     house_owner: "House Owner",
     description_hint: "less than 500 words",
 

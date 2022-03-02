@@ -48,18 +48,28 @@
   <van-cell border="{{ true }}" >
   <view class="parallin space-between">
     <view class="virtical">
-      <view style="color: black; font-size: large;">{{totalUnstart}}</view>
+      <view style="color: black; font-size: medium;">{{totalUnstart}}</view>
       <view>Unstart</view>
     </view>
 
     <view class="virtical">
-      <view style="color: rgb(255, 187, 0); font-size: large;">{{totalProgressing}}</view>
+      <view style="color: rgb(255, 187, 0); font-size: medium;">{{totalProgressing}}</view>
       <view>Processing</view>
     </view>
 
     <view class="virtical">
-      <view style="color: rgb(61, 90, 255); font-size: large;">{{totalCompleted}}</view>
+      <view style="color: rgb(61, 90, 255); font-size: medium;">{{totalCompleted}}</view>
       <view>Completed</view>
+    </view>
+
+    <view class="virtical">
+      <view style="color: rgb(255, 0, 0); font-size: medium;">{{totalDelayed}}</view>
+      <view>Delayed</view>
+    </view>
+
+    <view class="virtical">
+      <view style="color: rgb(0, 255, 127); font-size: medium;">{{totalReworking}}</view>
+      <view>Reworking</view>
     </view>
   </view>
   </van-cell>
