@@ -1,12 +1,12 @@
 <!--pages/more/more.wxml-->
 <view wx:if="{{canIUseOpenData}}">
       <view class="userinfo-avatar">
-        <open-data type="userAvatarUrl"></open-data>
+        <image src="{{userAvatarUrl}}"></image>
       </view>
 </view>
 <van-cell-group inset>
     <van-cell center title="User name">
-        <open-data type="userNickName"></open-data>
+        {{nickName}}
     </van-cell>
     <van-cell center title="Position" value="{{position}}" />
 </van-cell-group>
