@@ -68,8 +68,7 @@ Page({
     this.setData({
       userInfo: app.globalData.userInfo,
     })
-    this.getData(app.globalData.userInfo.openid)
-    // console.log(this.data.userInfo)
+    this.getData(app.globalData.userInfo._openid)
   },
 
   /**
@@ -155,7 +154,6 @@ Page({
             })  
           }
         }
-        
         resolve("成功获取项目信息")
       })
       .catch(err => {
@@ -190,10 +188,10 @@ Page({
         }
         
         resolve("成功获取项目信息")
-        console.log('成功获取项目信息',this.data.messageList)
+        console.log('成功获取项目消息',this.data.messageList)
       })
       .catch(err => {
-        console.log('请求项目信息失败', err)
+        console.log('请求项目消息失败', err)
         //reject("请求项目信息失败")
       })}
       
