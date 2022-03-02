@@ -367,7 +367,18 @@ Page({
       .then(res => {
         //console.log(res)
         for (var idx in res.data) {
-          if(this.data.currentTime < res.data[idx].startTime){
+          if(res.data[idx].startTime == ""){
+            wx.cloud.database().collection('task')
+            .doc(res.data[idx]._id)
+            .update({
+              data: {
+                state: 0,
+              }
+            })
+            .catch(err => {
+              console.log('请求修改任务状态失败', err)
+            })
+          }else if(this.data.currentTime < res.data[idx].startTime){
             //console.log(res.data[idx].startTime)
             wx.cloud.database().collection('task')
             .doc(res.data[idx]._id)
