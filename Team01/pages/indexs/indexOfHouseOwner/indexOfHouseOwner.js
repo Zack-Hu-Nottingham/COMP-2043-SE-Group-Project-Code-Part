@@ -62,21 +62,11 @@ Page({
     date: "",
     dateShow: false,
     filter: "",
-    filterShow: false,
+    filterShow: true,
     choosePriority: "",
     priorityShow: false,
 
-    Filter: [
-      {
-        name: 'Time',
-      },
-      {
-        name: 'Priority'
-      },
-      {
-        name: 'Cancel',
-      },
-    ],
+    Filter: ['Time', 'Priority'],
 
     // priority: [
     //   {
@@ -302,7 +292,7 @@ Page({
    */
   clickTask(event) {
     wx.navigateTo({
-      url: '../../project/taskInfo/taskInfo?id=' +  event.currentTarget.dataset.id,
+      url: '../../project/taskInfoForHouseOwner/taskInfoForHouseOwner?id=' +  event.currentTarget.dataset.id,
     })
   },
 
@@ -437,7 +427,7 @@ Page({
       })
     } else {
       this.setData({
-        filterShow: true
+        filterShow: false
       })
     }
     
@@ -569,4 +559,10 @@ Page({
     })
   },
 
+  listenerActionSheet: function() {
+    this.setData({
+      //取反
+        filterShow: !this.data.filterShow
+    });
+  }
 })

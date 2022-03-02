@@ -110,7 +110,7 @@ Page({
           }),
 
           wx.setNavigationBarTitle({
-            title: this.data.name,
+            title: "Data Report",
           })
         },
       })

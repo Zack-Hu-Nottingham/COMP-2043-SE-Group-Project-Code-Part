@@ -19,7 +19,9 @@
         "pages/more/more/more",
         "pages/more/moreInfo/moreInfo",
         "pages/more/languageSetting/languageSetting",
-        "pages/more/test/test"
+        "pages/more/test/test",
+        "pages/project/projectReport/projectReport",
+        "pages/project/taskInfoForHouseOwner/taskInfoForHouseOwner"
     ],
     "window": {
         "backgroundTextStyle": "light",
@@ -63,3 +65,4 @@
         "van-empty": "@vant/weapp/empty/index"
     }
 }
+
