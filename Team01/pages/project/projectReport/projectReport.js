@@ -49,7 +49,7 @@ Page({
 
 
     this.setData({
-        value: 43.9,
+        value: 0,
         projectNum: 1,
         totalTasks: 0,
         totalUnstart: 0,
@@ -128,19 +128,18 @@ Page({
           totalTasks: res.data.length
         })
         for (var idx in res.data) {
-          if(res.data.state == 0){
+          
+          if(res.data[idx].state == 0){
             this.setData({
-              totalUnstart: totalUnstart + 1
+              totalUnstart: this.data.totalUnstart + 1
             })
-          }
-          if(res.data.state == 1){
+          }else if(res.data[idx].state == 1){
             this.setData({
-              totalProgressing: totalProgressing + 1
+              totalProgressing: this.data.totalProgressing + 1
             })
-          }
-          if(res.data.state == 2){
+          }else if(res.data[idx].state == 2){
             this.setData({
-              totalCompleted: totalCompleted + 1
+              totalCompleted: this.data.totalCompleted + 1
             })
           }
           this.setData({

@@ -3,8 +3,6 @@ const languageUtils = require("../../../language/languageUtils");
 
 const app = getApp();
 
-var id = '';
-
 const db = wx.cloud.database();
 const _ = db.command;
 
@@ -36,7 +34,7 @@ Page({
       language: lan
     })
 
-    this.getData(app.globalData.userInfo.openid)
+    this.getData(app.globalData.userInfo._openid)
 
   },
 
@@ -93,19 +91,17 @@ Page({
         })
         
         for (var idx in res.data) {
-          if(res.data.state == 0){
+          if(res.data[idx].state == 0){
             this.setData({
               totalUnstart: this.data.totalUnstart + 1
             })
-          }
-          if(res.data.state == 1){
+          }else if(res.data[idx].state == 1){
             this.setData({
-              totalProgressing: totalProgressing + 1
+              totalProgressing: this.data.totalProgressing + 1
             })
-          }
-          if(res.data.state == 2){
+          }else if(res.data[idx].state == 2){
             this.setData({
-              totalCompleted: totalCompleted + 1
+              totalCompleted: this.data.totalCompleted + 1
             })
           }
 
