@@ -78,23 +78,23 @@ Page({
       },
     ],
 
-    priority: [
-      {
-        name: 'Highest',
-      },
-      {
-        name: 'High'
-      },
-      {
-        name: 'Normal'
-      },
-      {
-        name: 'Low'
-      },
-      {
-        name: 'Lowest'
-      },
-    ],
+    // priority: [
+    //   {
+    //     name: 'Highest',
+    //   },
+    //   {
+    //     name: 'High'
+    //   },
+    //   {
+    //     name: 'Normal'
+    //   },
+    //   {
+    //     name: 'Low'
+    //   },
+    //   {
+    //     name: 'Lowest'
+    //   },
+    // ],
 
   },
 
