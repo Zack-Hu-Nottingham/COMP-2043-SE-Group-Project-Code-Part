@@ -128,12 +128,13 @@ Page({
   
   onConfirm(event) {
     const [start, end] = event.detail;
-    this.setData({
-      startTime: this.formatDate(start),
-      endTime: this.formatDate(end),
-      dateShow: false,
-      date: `${this.formatDate(start)} - ${this.formatDate(end)}`,
-    });
+    this.onClose();
+    // this.setData({
+    //   startTime: this.formatDate(start),
+    //   endTime: this.formatDate(end),
+    //   dateShow: false,
+    //   date: `${this.formatDate(start)} - ${this.formatDate(end)}`,
+    // });
 
     //调用云函数
     wx.cloud.callFunction({
@@ -152,7 +153,7 @@ Page({
   },
 
   getDetail(){
-    wx.cloud.database().collection('task')
+    db.collection('task')
       .doc(id)
       .get()
       .then(res => {
@@ -204,7 +205,7 @@ Page({
       name: 'updateTaskDescription',
       data:{
         id: id,
-        taskDescriptions: e.detail.value
+        descriptions: e.detail.value
       }
     }).then(res => {
       console.log('调用云函数修改任务描述成功', res),

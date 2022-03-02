@@ -1,4 +1,12 @@
 // pages/project/statisticReport/statisticReport.js
+const languageUtils = require("../../../language/languageUtils");
+
+const app = getApp();
+
+const db = wx.cloud.database();
+const _ = db.command;
+
+
 Page({
 
   /**
@@ -11,47 +19,114 @@ Page({
     totalUnstart: 0,
     totalProgressing: 0,
     totalCompleted: 0,
-    projects:[]
+    projects:[],
+
+    language: 0,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var lan = wx.getStorageSync("languageVersion");
+    this.initLanguage();
     this.setData({
-        value: 43.9,
-        projectNum: 3,
-        totalTasks: 57,
-        totalUnstart: 20,
-        totalProgressing: 12,
-        totalCompleted:25,
-        projects:[{
-          name: "Project1",
-          taskNum: 18,
-          unstart: 5,
-          processing: 5,
-          completed: 8,
-          percentage: 44.4,
-          color: "#ffd700"
-        },{
-          name: "Project2",
-          taskNum: 15,
-          unstart: 2,
-          processing: 1,
-          completed: 12,
-          percentage: 80,
-          color: "#00bfff"
-        },{
-          name: "Project3",
-          taskNum: 24,
-          unstart: 13,
-          processing: 6,
-          completed: 5,
-          percentage: 20.8,
-          color: "#32cd32"
-        }]
+      language: lan
     })
 
+    this.getData(app.globalData.userInfo._openid)
+
+  },
+
+  // 初始化数据
+  async getData(openid){
+
+    await this.getProjectInfo(openid)
+
+    for (var idx in this.data.projects) {
+      await this.getTaskInfo(this.data.projects[idx]._id)
+    }
+    
+  },
+
+  // 获取项目信息
+  getProjectInfo(openid) {
+    return new Promise((resolve, reject) => {
+      db.collection('project')
+      .where(
+        {
+          _openid: _.eq(openid)
+        })
+      .get()
+      .then(res => {
+        if (res.data.length != 0) {
+          this.setData({
+            projectNum: res.data.length
+          })
+          for (var idx in res.data) {
+            this.setData({
+              projects: this.data.projects.concat(res.data[idx])
+            })  
+          }
+        }
+        
+        resolve("成功获取项目信息")
+      })
+      .catch(err => {
+        reject("请求项目信息失败")
+      })}
+    )},
+
+  // 获取任务信息
+  getTaskInfo(projectId) {
+    return new Promise((resolve, reject) => {
+      db.collection('task')
+      .where({
+        belongTo: _.eq(projectId)
+      })
+      .get()
+      .then(res => {
+        this.setData({
+          totalTasks:res.data.length
+        })
+        
+        for (var idx in res.data) {
+          if(res.data[idx].state == 0){
+            this.setData({
+              totalUnstart: this.data.totalUnstart + 1
+            })
+          }else if(res.data[idx].state == 1){
+            this.setData({
+              totalProgressing: this.data.totalProgressing + 1
+            })
+          }else if(res.data[idx].state == 2){
+            this.setData({
+              totalCompleted: this.data.totalCompleted + 1
+            })
+          }
+
+          this.setData({
+            value: ((100 * this.data.totalCompleted) / this.data.totalTasks).toFixed(2)
+          })
+        }
+
+        resolve("成功获取任务信息")
+      })
+      .catch(err => {
+        reject("请求任务信息失败")
+      })
+    })
+  },
+
+  initLanguage() {
+    var self = this;
+    //获取当前小程序语言版本所对应的字典变量
+    var lang = languageUtils.languageVersion();
+
+    // 页面显示
+    self.setData({
+      dictionary: lang.lang.index,
+    });
   },
 
   /**

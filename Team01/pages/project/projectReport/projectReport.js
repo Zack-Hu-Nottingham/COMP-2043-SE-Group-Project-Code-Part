@@ -49,7 +49,7 @@ Page({
 
 
     this.setData({
-        value: 43.9,
+        value: 0,
         projectNum: 1,
         totalTasks: 0,
         totalUnstart: 0,
@@ -124,72 +124,29 @@ Page({
       })
       .get()
       .then(res => {
-        for (var idx in res.data) {
-          this.setData({
-            totalTasks: res.data.length
-          })
-        }
-        // this.data.task.push(res.data[0])
-        resolve("成功获取任务信息")
-      })
-      .catch(err => {
-        
-      })
-
-      db.collection('task')
-      .where({
-        belongTo: _.eq(Id),
-        state: _.eq(0)
-      })
-      .get()
-      .then(res => {
-        for (var idx in res.data) {
-          this.setData({
-            totalUnstart: res.data.length
-          })
-        }
-        // this.data.task.push(res.data[0])
-        resolve("成功获取任务信息")
-      })
-      .catch(err => {
-        
-      })
-
-    db.collection('task')
-      .where({
-        belongTo: _.eq(Id),
-        state: _.eq(1)
-      })
-      .get()
-      .then(res => {
-        for (var idx in res.data) {
-          this.setData({
-            totalProgressing: res.data.length
-          })
-        }
-        // this.data.task.push(res.data[0])
-        resolve("成功获取任务信息")
-      })
-      .catch(err => {
-        
-      })
-
-    db.collection('task')
-      .where({
-        belongTo: _.eq(Id),
-        state: _.eq(2)
-      })
-      .get()
-      .then(res => {
-        for (var idx in res.data) {
-          this.setData({
-            totalCompleted: res.data.length,
-          })
-        }
         this.setData({
-          value: ((100 * res.data.length) / this.data.totalTasks).toFixed(2)
+          totalTasks: res.data.length
         })
-        // this.data.task.push(res.data[0])
+        for (var idx in res.data) {
+          
+          if(res.data[idx].state == 0){
+            this.setData({
+              totalUnstart: this.data.totalUnstart + 1
+            })
+          }else if(res.data[idx].state == 1){
+            this.setData({
+              totalProgressing: this.data.totalProgressing + 1
+            })
+          }else if(res.data[idx].state == 2){
+            this.setData({
+              totalCompleted: this.data.totalCompleted + 1
+            })
+          }
+          this.setData({
+            value: ((100 * this.data.totalCompleted) / this.data.totalTasks).toFixed(2)
+          })
+        }
+        
         resolve("成功获取任务信息")
       })
       .catch(err => {

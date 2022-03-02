@@ -84,19 +84,17 @@
 <!-- More page -->
 <view wx:elif="{{active == 1}}">
 
-<view wx:if="{{canIUseOpenData}}">
-  <view class="userinfo-avatar">
-    <open-data type="userAvatarUrl"></open-data>
-  </view>
+<view class="userinfo-avatar">
+  <image src="{{userInfo.avatarUrl}}"></image>
 </view>
 
 <van-cell-group inset>
   <van-cell center icon="user-o" />
   <!-- title="{{dictionary.user_info}}" -->
   <van-cell center title="{{dictionary.user_name}}">
-      <open-data type="userNickName"></open-data>
+      {{userInfo.nickName}}
   </van-cell>
-  <van-cell center title="{{dictionary.identity}}" value="{{identity}}" />
+  <van-cell center title="{{dictionary.identity}}" value="{{dictionary.house_owner}}" />
   <van-cell center title="{{dictionary.more}}" clickable="true" bindtap="onMoreInfo" class="moreInfoForTest">
     <view slot="">
       <van-icon name="ellipsis" />

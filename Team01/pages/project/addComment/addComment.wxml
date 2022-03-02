@@ -1,8 +1,8 @@
 <!--pages/project/addComment/addComment.wxml-->
 <form bindsubmit="formSubmit" report-submit="true">
 <van-cell-group inset style="padding: 30rpx">
-  <van-cell title="Feedback" is-link size="large" value="{{selectedFeedback}}" bindtap="changeFeedback" />
-  <van-field label="Description" value="{{ details }}" type="textarea" placeholder="(less than 500 words)" size="large" maxlength="500" input-align="right" autosize bind:change="typeDetails" />
+  <van-cell title="{{dictionary.select_feedback}}" is-link size="large" value="{{selectedFeedback}}" bindtap="changeFeedback" />
+  <van-field label="{{dictionary.description}}" value="{{ details }}" type="textarea" placeholder="({{dictionary.description_hint}})" size="large" maxlength="500" input-align="right" autosize bind:change="typeDetails" />
 </van-cell-group>
 
 <!--Upload related images-->
@@ -18,9 +18,11 @@
 <van-action-sheet
   show="{{ showFeedback }}"
   title="{{ dictionary.select_feedback }}"
-  actions="{{ feedbackValue }}"
+  actions="{{ feedbackType }}"
   cancel-text="{{ dictionary.cancel }}"
   bind:close="onCloseFeedback"
   bind:select="onSelectFeedback"
 />
 </form>
+
+<van-toast id="van-toast" />

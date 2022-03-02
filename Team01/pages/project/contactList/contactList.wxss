@@ -1,1 +1,10 @@
-/* pages/project/contactList/contactList.wxss */
+/* pages/contact/contactList/contactList.wxss */
+.value-class {
+    flex: none !important;
+  }
+
+.selected {
+  padding: 2%;
+  align-content: center;
+  font-size: small;
+}

@@ -1,1 +1,5 @@
 /* pages/project/fileList/fileList.wxss */
+.uploader {
+    display: flex;
+    padding: 5%;
+  }

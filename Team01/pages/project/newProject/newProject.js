@@ -1,10 +1,14 @@
 // pages/project/newProject/newProject.js
 import Toast from '../../../miniprogram_npm/@vant/weapp/toast/toast'
+
 const languageUtils = require("../../../language/languageUtils");
 
-var app = getApp()
+const templateLib = require("../../../template/template.js");
 
 const db = wx.cloud.database();
+
+var app = getApp();
+
 Page({
     /**
      * 页面的初始数据
@@ -40,98 +44,7 @@ Page({
         task: [],
 
         currentPhaseDescription: ["阶段1", "阶段2", "阶段3", "阶段4", "阶段5", "阶段6", "阶段7", "阶段8", "阶段9", "阶段10", "阶段11", "阶段12", "阶段13", "阶段14"],
-        template: [{
-          name: "泥水进场",
-          description: "泥水进场包含第一次放样和墙体堆筑",
-          belongTo: "",
-          currentPriority: "Normal",
-          startTime: "",
-          endTime: "",
-          participant: "",
-          state: 0,
-          tag: [],
-          duration: 2,
-          location: "上海市浦东新区花园石桥路28弄汤臣一品5栋409室",
-          workingArea: "整栋房屋",
-          taskDescription: "",
-
-        }, {
-          name: "水电布管",
-          description: "水电布管包含第二次精放样和水电施工",
-          belongTo: "",
-          currentPriority: "Normal",
-          startTime: "",
-          endTime: "",
-          participant: "",
-          state: 0,
-          tag: [],
-          duration: 2,
-          location: "上海市浦东新区花园石桥路28弄汤臣一品5栋409室",
-          workingArea: "卫生间",
-          taskDescription: "1.kjfkldsajflkds 2.jfdklajdfklsda",
-
-        }, {
-          name: "木作工程",
-          description: "木作工程包含土木施工",
-          belongTo: "",
-          currentPriority: "Normal",
-          startTime: "",
-          endTime: "",
-          participant: "",
-          state: 0,
-          tag: [],
-          duration: 2,
-          location: "上海市浦东新区花园石桥路28弄汤臣一品5栋409室",
-          workingArea: "",
-          taskDescription: "",
-
-        }, {
-          name: "泥水工程",
-          description: "泥水工程包含地暖地面找平和瓷砖、石材进场",
-          belongTo: "",
-          currentPriority: "Normal",
-          startTime: "",
-          endTime: "",
-          participant: "",
-          state: 0,
-          tag: [],
-          duration: 2,
-          location: "上海市浦东新区花园石桥路28弄汤臣一品5栋409室",
-          workingArea: "",
-          taskDescription: "",
-
-        }, {
-          name: "油漆工程",
-          description: "油漆工程包含油工施工、成品安装、油漆修补",
-          belongTo: "",
-          currentPriority: "Normal",
-          startTime: "",
-          endTime: "",
-          participant: "",
-          state: 0,
-          tag: [],
-          duration: 2,
-          location: "上海市浦东新区花园石桥路28弄汤臣一品5栋409室",
-          workingArea: "",
-          taskDescription: "",
-
-        }, {
-          name: "后期安装项目",
-          description: "后期安装项目包含验收、软装摆场",
-          belongTo: "",
-          currentPriority: "Normal",
-          startTime: "",
-          endTime: "",
-          participant: "",
-          state: 0,
-          tag: [],
-          duration: 2,
-          location: "上海市浦东新区花园石桥路28弄汤臣一品5栋409室",
-          workingArea: "",
-          taskDescription: "",
-          
-          
-        }]
+        template: templateLib.template,
     },
     
      // 初始化语言
@@ -175,7 +88,7 @@ Page({
     
     changeOwner(){
         wx.navigateTo({
-          url: '../../contact/contactList/contactList',
+          url: '../../project/contactList/contactList?index='+this.data.ownerPage,
         })
     },
 
@@ -189,38 +102,34 @@ Page({
     selectTemplate: function(){
         wx.navigateTo({ url: '../projectTemplate/projectTemplate', })
     },
-
     upload(){
         wx.chooseImage({
-          // count: 1,
+          count: 1,
           sizeType: ['original', 'compressed'],
           sourceType: ['album', 'camera'],
-          
-          success: res => {
-            console.log("成功选择图片",res);
-            this.uploadImage(res.tempFilePaths[0]);
+          success:res => {
+            var fileList = this.data.fileList;
+            fileList.push({url: res.tempFilePaths[0]});
+            this.setData({ fileList: fileList });
+            console.log("成功选择图片",fileList);
           }
         })
       },
 
     uploadImage(fileURL) {
         wx.cloud.uploadFile({
-          cloudPath: 'feedBack/'+ new Date().getTime() +'.png', // 上传至云端的路径
+          cloudPath: 'project/'+ new Date().getTime() +'.png', // 上传至云端的路径
           filePath: fileURL, // 小程序临时文件路径
           success: res => {
-            var fileList = this.data.fileList;
-            fileList.push({url: res.fileID,name: fileURL,deletable: true});
-            this.setData({ fileList: fileList });
             console.log("图片上传成功",res)
           },
           fail: console.error
         })
     },
 
+
     // 提交新项目
     formSubmit: function (e) {
-
-        // 数据校验
         if (this.data.name == "") {
             Toast(this.data.dictionary.null_name);
         }
@@ -266,7 +175,6 @@ Page({
 
               }
             })
-            // 新建项目成功，返还项目id
             .then(res => {
               this.setData({
                 project: res._id
@@ -279,8 +187,11 @@ Page({
             .catch(res => {
               console.log('新建项目失败，请联系管理员', res) 
             })
+            this.action();
 
+              
         }
+        
     },
 
     action(){
@@ -366,8 +277,9 @@ Page({
           reject()
         })
       })
+      
     },
-    
+
     async createTask() {
 
       this.modifyTemplate()

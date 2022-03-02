@@ -14,7 +14,7 @@
     <van-cell
       wx:for="{{ list }}"
       wx:key="index"
-      title="{{ item.name }}"
+      title="{{ item.nickName }}"
       value-class="value-class"
       clickable
       data-index="{{ index }}"
