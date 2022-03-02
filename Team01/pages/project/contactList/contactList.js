@@ -1,4 +1,7 @@
 // pages/project/contactList/contactList.js
+const db = wx.cloud.database();
+const _ = db.command;
+
 Page({
     // Additional feature: 已被选中的项目在下次展示时会置顶显示（云端调取）
     data: {
