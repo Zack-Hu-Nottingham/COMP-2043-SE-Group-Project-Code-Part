@@ -58,8 +58,11 @@ Page({
             // console.log(res.data)
             // 如果是已知账户
             if (res.data.length != 0) {
+              app.globalData.userInfo = res.data[0];
+              console.log(app.globalData.userInfo)
+
               // 设置全局身份信息
-              app.globalData.userInfo.name = res.data[0].name;
+              //app.globalData.userInfo.name = res.data[0].name;
               var identity = res.data[0].identity;
 
               Toast({
