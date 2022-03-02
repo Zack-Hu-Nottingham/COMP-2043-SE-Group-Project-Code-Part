@@ -1,5 +1,5 @@
-// pages/contact/contactList/contactList.js
-const languageUtils = require("../../../language/languageUtils");
+// pages/project/houseOwnerList/houseOwnerList.js
+const languageUtils = require("../../../../language/languageUtils");
 const app = getApp();
 const db = wx.cloud.database();
 const _ = db.command;
@@ -17,11 +17,10 @@ Page({
         // 2 - follower
         initial: [],
         list: [],
-        pageIndex: '',
         searchKey: "",
     },
 
-    onLoad(options){
+    onLoad(){
 
         // console.log(options.index)
 
@@ -33,10 +32,7 @@ Page({
             // console.log(res.data)
         })
 
-        this.getList(options.index);
-        this.setData({
-          pageIndex: options.index,
-        })
+        this.getList();
 
         // 初始化语言
         var lan = wx.getStorageSync("languageVersion");
@@ -46,11 +42,11 @@ Page({
         })
     },
 
-    getList(index){
+    getList(){
         return new Promise((resolve, reject) => {
             db.collection('user')
             .where({
-              identity: _.eq(parseInt(index))
+              identity: _.eq(0)
             })
             .get()
             .then(res => {
@@ -153,16 +149,8 @@ Page({
         // console.log(this.data.owners)
 
       // 传回姓名
-      if(this.data.pageIndex==0){
-          prevPage.setData({
-            owner: this.data.owners
-        })
-      }
-      else{
-          prevPage.setData({
+      prevPage.setData({
             participant: this.data.owners
-        })
-      }
-
+      })
     }
   });

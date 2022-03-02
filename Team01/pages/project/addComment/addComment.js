@@ -205,8 +205,8 @@ Page({
             })
         },2400)
         setTimeout(res =>{
-            wx.navigateBack({
-              delta: 1,
+            wx.redirectTo({
+              url: '../../project/projectInfo/projectInfo?id=' + this.data.id,
             })
         },2500)
     },

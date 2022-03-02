@@ -88,13 +88,13 @@ Page({
     
     changeOwner(){
         wx.navigateTo({
-          url: '../../project/contactList/contactList?index='+this.data.ownerPage,
+          url: '../../project/contactList/houseOwnerList/houseOwnerList?',
         })
     },
 
     changeParticipant(){
       wx.navigateTo({
-        url: '../../project/contactList/contactList?index='+this.data.participantPage,
+        url: '../../project/contactList/participantList/participantList',
       })
   },
 
