@@ -67,7 +67,7 @@
   <van-cell center title="{{dictionary.user_name}}">
       {{userInfo.nickName}}
   </van-cell>
-  <van-cell center title="{{dictionary.identity}}" value="{{identity}}" />
+  <van-cell center title="{{dictionary.identity}}" value="{{dictionary.project_manager}}" />
   <van-cell center title="{{dictionary.more}}" clickable="true" bindtap="onMoreInfo" class="moreInfoForTest">
     <view slot="">
       <van-icon name="ellipsis" />

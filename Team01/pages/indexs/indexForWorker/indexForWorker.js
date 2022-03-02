@@ -41,10 +41,6 @@ Page({
     /**
      * More page's data
      */
-    hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    canIUseGetUserProfile: false,
-    canIUseOpenData: wx.canIUse('open-data.type.userAvatarUrl') && wx.canIUse('open-data.type.userNickName'), // 如需尝试获取用户信息可改为false
 
   },
 
@@ -54,8 +50,7 @@ Page({
    */
   onLoad: function (options) {
   
-    this.data.userInfo = app.globalData.userInfo
-
+    
     this.getData()
 
     // 初始化语言
@@ -71,9 +66,8 @@ Page({
     })
 
     this.setData({
-      identity: this.data.dictionary.worker
+      userInfo: app.globalData.userInfo
     })
-
 
   },
 
