@@ -17,6 +17,7 @@ var Languague = {
      statistic_report: "数据报告",
      project_list: "项目列表",
      create_new_project: "新建项目",
+     comment_list: "评论列表",
 
      // dashboard page
      today_task: "今天的任务",
@@ -97,6 +98,8 @@ var Languague = {
     feedback_type0:"项目延期",
     feedback_type1:"任务延期",
     feedback_type2:"任务需返工",
+    create_comment:"新建评论",
+
 
     // contact list page
     copy_phone_confirm: "已复制用户电话",

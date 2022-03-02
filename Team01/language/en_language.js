@@ -17,6 +17,7 @@ var Languague = {
     statistic_report: "Statistics Report",
     project_list: "Projects",
     create_new_project: "Create New Project",
+    comment_list: "评论列表",
 
     // dashboard page
     today_task: "Today's Task",     
@@ -98,6 +99,7 @@ var Languague = {
     feedback_type0:"Project Delay",
     feedback_type1:"Task Delay",
     feedback_type2:"Task need rework",
+    create_comment:"Create comment",
 
     // contact list page
     copy_phone_confirm: "Phone number has been copied",

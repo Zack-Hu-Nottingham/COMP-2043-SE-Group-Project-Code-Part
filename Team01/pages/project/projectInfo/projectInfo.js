@@ -327,6 +327,21 @@ Page({
       fileList
     })
   },
+  updateComment(){
+    db.collection('project')
+    .doc(id)
+    .get({
+      success: res => {
+        this.setData({
+          feedback: res.data.feedback,
+        });
+      },
+      fail: function(err) {
+        // console.log(err)
+      }
+    })
+
+  },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
