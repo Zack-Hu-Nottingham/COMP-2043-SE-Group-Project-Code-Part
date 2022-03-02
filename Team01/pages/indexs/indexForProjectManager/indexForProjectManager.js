@@ -67,10 +67,9 @@ Page({
 
     this.setData({
       userInfo: app.globalData.userInfo,
-      identity: this.data.dictionary.project_manager
     })
     this.getData(app.globalData.userInfo.openid)
-    console.log(this.data.userInfo)
+    // console.log(this.data.userInfo)
   },
 
   /**
