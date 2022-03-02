@@ -229,13 +229,12 @@ Page({
   getProjectInfo(openid) {
     return new Promise((resolve, reject) => {
       db.collection('project')
-      .where(_.or([
-        {
+      .where({
           houseOwner: _.eq(openid)
-        },
-      ]))
+        })
       .get()
       .then(res => {
+        console.log(res)
         if (res.data.length != 0) {
           this.setData({
             isProjectEmpty: false
