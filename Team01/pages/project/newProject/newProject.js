@@ -40,6 +40,8 @@ Page({
 
         project: "",
         task: [],
+
+        currentPhaseDescription: ["阶段1", "阶段2", "阶段3", "阶段4", "阶段5", "阶段6", "阶段7", "阶段8", "阶段9", "阶段10", "阶段11", "阶段12", "阶段13", "阶段14"],
         template: [{
           name: "泥水进场",
           description: "泥水进场包含第一次放样和墙体堆筑",
@@ -171,7 +173,6 @@ Page({
     selectTemplate: function(){
         wx.navigateTo({ url: '../projectTemplate/projectTemplate', })
     },
-    
     upload(){
         wx.chooseImage({
           count: 1,
@@ -218,21 +219,30 @@ Page({
             .add({
               data:{
                   name: this.data.name,
+                  
                   startTime: this.data.startDate,
                   endTime: this.data.endDate,
+                  
                   projectDescription: this.data.description,
+
                   projectManager: app.globalData.userInfo._openid,
-                  template: this.data.selectedTemplate,
                   houseOwner: this.data.houseOwner,
                   participant: this.data.participant,
+
                   feedback: [],
                   fileList: this.data.fileList,
+                  template: this.data.selectedTemplate,
 
                   completed: [],
                   delayed: [],
                   task: [],
                   unstarted: [],
                   progressing: [],
+
+                  currentPhase: 0,
+                  currentPhaseDescription: this.data.currentPhaseDescription,
+                  feedback: [],
+                  fileList: [],
 
               }
             })
@@ -241,15 +251,9 @@ Page({
                 project: res._id
               })
 
-              // 根据模板创建新的子task
               this.createTask()
-              .then(() => {
-                this.action();
-              })
-              .catch(() => {
-
-              })
-
+              this.action();
+              
             })
             .catch(res => {
               console.log('新建项目失败，请联系管理员', res) 
@@ -279,9 +283,15 @@ Page({
           })
       },2400)
       setTimeout(res =>{
-          wx.navigateTo({
-            url: '../../indexs/indexForProjectManager/indexForProjectManager',
-          })
+        wx.redirectTo({
+          url: '../../indexs/indexForProjectManager/indexForProjectManager',
+        })
+          // let pages = getCurrentPages();
+          // let project = pages[pages.length - 2];
+          // project.go_update();
+          // wx.navigateBack({
+          //   delta: 1
+          // })
       },2500)
     },
 
@@ -342,11 +352,14 @@ Page({
     },
 
     async createTask() {
+
       this.modifyTemplate()
+      
       for(var idx in this.data.template) {
         // console.log(idx)
         await this.createTaskAccordingToTemplate(idx)
       }
+
       db.collection('project')
       .doc(this.data.project)
       .update({
@@ -356,6 +369,7 @@ Page({
         }
       })
     },
+
     deleteImg(event) {
       const delIndex = event.detail.index
       const { fileList } = this.data
