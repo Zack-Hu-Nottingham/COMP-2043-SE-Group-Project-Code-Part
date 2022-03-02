@@ -71,3 +71,7 @@
     padding: 50rpx;
     margin: 0;
   }
+
+  .redCancel{
+    color: red
+  }

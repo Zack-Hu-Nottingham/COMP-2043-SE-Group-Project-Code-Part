@@ -1,0 +1,58 @@
+<van-cell-group inset style="padding: 30rpx">
+  <van-cell title="{{dictionary.task_name}}" value="{{taskPage.name}}" />
+</van-cell-group>
+
+
+<van-cell-group inset style="padding: 30rpx" >
+  <van-cell title="{{dictionary.start_time}}" value="{{taskPage.startTime}}"/>
+  <van-cell title="{{dictionary.end_time}}" value="{{taskPage.endTime}}"/>
+</van-cell-group>
+
+<van-cell-group inset style="padding: 30rpx">
+  <van-cell title="{{dictionary.belong_to}}" value="{{belongTo}}" />
+  <van-cell title="{{dictionary.stage_of_project}}" value="{{taskPage.stageOfProject}}" />
+  <van-field model:value="{{taskPage.taskDescriptions}}" input-align="right" clearable label="{{dictionary.description}}" placeholder="{{taskPage.taskDescriptions}}" border="{{ false }}" bind:blur="onTaskDescriptionBlur">
+  </van-field>
+  <view wx:if="{{taskPage.state == 0}}">
+    <van-cell title="{{dictionary.current_state}}" value="Unstarted" />
+  </view>
+  <view wx:if="{{taskPage.state == 1}}">
+    <van-cell title="{{dictionary.current_state}}" value="Progressing" />
+  </view>
+  <view wx:if="{{taskPage.state == 2}}">
+    <van-cell title="{{dictionary.current_state}}" value="Finished" />
+  </view>
+  <view wx:if="{{taskPage.state == 3}}">
+    <van-cell title="{{dictionary.current_state}}" value="Delayed" />
+  </view>
+  <view wx:if="{{taskPage.state == 4}}">
+    <van-cell title="{{dictionary.current_state}}" value="Reworking" />
+  </view>
+</van-cell-group>
+
+
+
+<van-cell-group inset style="padding: 30rpx">
+  <van-cell title="{{dictionary.priority}}" is-link value="{{taskPage.currentPriority}}" bindtap="clickPriority" />
+  <van-cell title="{{dictionary.tag}}" is-link value="{{taskPage.tag}}" />
+  <van-cell title="{{dictionary.participant}}" is-link value="{{taskPage.participant}}" />
+</van-cell-group>
+
+<van-sticky offset-top="{{ 570 }}">
+  <van-button hairline plain round block type="info" bindtap="clickAddComment" class="addComment">{{dictionary.add_comment}}</van-button>
+</van-sticky>
+
+<van-action-sheet
+  show="{{ priorityShow }}"
+  actions="{{ priority }}"
+  bind:close="onPriorityClose"
+  bind:select="onPrioritySelect"
+/>
+
+<van-calendar
+  show="{{ dateShow }}"
+  title="choose period"
+  type="range"
+  bind:close="onClose"
+  bind:confirm="onConfirm"
+/>

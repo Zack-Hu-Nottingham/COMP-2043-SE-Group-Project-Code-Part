@@ -22,12 +22,21 @@
   <van-cell-group inset style="padding: 30rpx;" title="{{dictionary.task_list}}">
     <van-cell title="{{dictionary.filter}}" is-link value="{{filter}}" bindtap="clickFilter" />
 
-    <van-action-sheet
+    <!-- <van-action-sheet
       show="{{ filterShow }}"
       actions="{{ Filter }}"
       bind:close="onFilterClose"
       bind:select="onFilterSelect"
-    />
+    /> -->
+    
+    <!--默认action-sheet为隐藏，由button触发-->
+    <action-sheet hidden="{{filterShow}}" bindchange="listenerActionSheet" >
+      <block wx:for-items="{{Filter}}" > 
+          <action-sheet-item >{{item}}</action-sheet-item>
+      </block>
+      <!--自动隐藏action-sheet-->
+      <action-sheet-cancel class="redCancel">cancel</action-sheet-cancel>
+    </action-sheet>
 
     <van-calendar
       show="{{ dateShow }}"
