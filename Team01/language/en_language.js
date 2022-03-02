@@ -90,7 +90,7 @@ var Languague = {
     house_owner: "House Owner",
     description_hint: "less than 500 words",
 
-      // Comment page
+    // Comment page
     comment_title:"Feedback",
     select_feedback:"Select feedback type",
     submitErrMsg1:"Feedback type is null",

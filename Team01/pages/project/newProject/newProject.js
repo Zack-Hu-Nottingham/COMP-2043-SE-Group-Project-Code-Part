@@ -3,9 +3,11 @@ import Toast from '../../../miniprogram_npm/@vant/weapp/toast/toast'
 
 const languageUtils = require("../../../language/languageUtils");
 
-var app = getApp();
+const templateLib = require("../../../template/template.js");
 
 const db = wx.cloud.database();
+
+var app = getApp();
 
 Page({
     /**
@@ -42,80 +44,7 @@ Page({
         task: [],
 
         currentPhaseDescription: ["阶段1", "阶段2", "阶段3", "阶段4", "阶段5", "阶段6", "阶段7", "阶段8", "阶段9", "阶段10", "阶段11", "阶段12", "阶段13", "阶段14"],
-        template: [{
-          name: "泥水进场",
-          description: "泥水进场包含第一次放样和墙体堆筑",
-          belongTo: "",
-          currentPriority: "Normal",
-          startTime: "",
-          endTime: "",
-          participant: "",
-          state: 0,
-          tag: [],
-          duration: 2,
-
-        }, {
-          name: "水电布管",
-          description: "水电布管包含第二次精放样和水电施工",
-          belongTo: "",
-          currentPriority: "Normal",
-          startTime: "",
-          endTime: "",
-          participant: "",
-          state: 0,
-          tag: [],
-          duration: 2,
-
-        }, {
-          name: "木作工程",
-          description: "木作工程包含土木施工",
-          belongTo: "",
-          currentPriority: "Normal",
-          startTime: "",
-          endTime: "",
-          participant: "",
-          state: 0,
-          tag: [],
-          duration: 2,
-
-        }, {
-          name: "泥水工程",
-          description: "泥水工程包含地暖地面找平和瓷砖、石材进场",
-          belongTo: "",
-          currentPriority: "Normal",
-          startTime: "",
-          endTime: "",
-          participant: "",
-          state: 0,
-          tag: [],
-          duration: 2,
-
-        }, {
-          name: "油漆工程",
-          description: "油漆工程包含油工施工、成品安装、油漆修补",
-          belongTo: "",
-          currentPriority: "Normal",
-          startTime: "",
-          endTime: "",
-          participant: "",
-          state: 0,
-          tag: [],
-          duration: 2,
-
-        }, {
-          name: "后期安装项目",
-          description: "后期安装项目包含验收、软装摆场",
-          belongTo: "",
-          currentPriority: "Normal",
-          startTime: "",
-          endTime: "",
-          participant: "",
-          state: 0,
-          tag: [],
-          duration: 2,
-          
-          
-        }]
+        template: templateLib.template,
     },
     
      // 初始化语言
