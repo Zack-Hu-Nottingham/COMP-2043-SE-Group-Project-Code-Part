@@ -38,6 +38,8 @@ Page({
 
         project: "",
         task: [],
+
+        currentPhaseDescription: ["阶段1", "阶段2", "阶段3", "阶段4", "阶段5", "阶段6", "阶段7", "阶段8", "阶段9", "阶段10", "阶段11", "阶段12", "阶段13", "阶段14"],
         template: [{
           name: "泥水进场",
           description: "泥水进场包含第一次放样和墙体堆筑",
@@ -187,16 +189,16 @@ Page({
     selectTemplate: function(){
         wx.navigateTo({ url: '../projectTemplate/projectTemplate', })
     },
+
     upload(){
-        //把this赋值给that，就相当于that的作用域是全局的。
-        let that = this;
         wx.chooseImage({
           // count: 1,
           sizeType: ['original', 'compressed'],
           sourceType: ['album', 'camera'],
-          success(res) {
+          
+          success: res => {
             console.log("成功选择图片",res);
-            that.uploadImage(res.tempFilePaths[0]);
+            this.uploadImage(res.tempFilePaths[0]);
           }
         })
       },
@@ -218,25 +220,6 @@ Page({
     // 提交新项目
     formSubmit: function (e) {
 
-        db.collection('project').add({
-            // data 字段表示需新增的 JSON 数据
-            data: {
-                // _id: 'todo-identifiant-aleatoire', // 可选自定义 _id，在此处场景下用数据库自动分配的就可以了
-                name: this.data.name,
-                startTime: this.data.startDate,
-                endTime: this.data.endDate,
-                owner: this.data.owner,
-                participant: this.data.participant,
-                template: this.data.selectedTemplate,
-                projectDescription: this.data.description,
-            },
-            success: function(res) {
-              // res 是一个对象，其中有 _id 字段标记刚创建的记录的 id
-              // console.log(res)
-            }
-          })
-
-        var that = this
         // 数据校验
         if (this.data.name == "") {
             Toast(this.data.dictionary.null_name);
@@ -256,21 +239,30 @@ Page({
             .add({
               data:{
                   name: this.data.name,
+                  
                   startTime: this.data.startDate,
                   endTime: this.data.endDate,
+                  
                   projectDescription: this.data.description,
+
                   projectManager: app.globalData.userInfo._openid,
-                  template: this.data.selectedTemplate,
                   houseOwner: this.data.houseOwner,
                   participant: this.data.participant,
+
                   feedback: [],
                   fileList: this.data.fileList,
+                  template: this.data.selectedTemplate,
 
                   completed: [],
                   delayed: [],
                   task: [],
                   unstarted: [],
                   progressing: [],
+
+                  currentPhase: 0,
+                  currentPhaseDescription: this.data.currentPhaseDescription,
+                  feedback: [],
+                  fileList: [],
 
               }
             })
@@ -279,12 +271,15 @@ Page({
               this.setData({
                 project: res._id
               })
+
+              this.createTask()
+              this.action();
+              
             })
             .catch(res => {
               console.log('新建项目失败，请联系管理员', res) 
             })
 
-            this.action();
         }
     },
 
@@ -306,12 +301,15 @@ Page({
           })
       },2400)
       setTimeout(res =>{
-          let pages = getCurrentPages();
-          let project = pages[pages.length - 2];
-          project.go_update();
-          wx.navigateBack({
-            delta: 1
-          })
+        wx.redirectTo({
+          url: '../../indexs/indexForProjectManager/indexForProjectManager',
+        })
+          // let pages = getCurrentPages();
+          // let project = pages[pages.length - 2];
+          // project.go_update();
+          // wx.navigateBack({
+          //   delta: 1
+          // })
       },2500)
     },
 
@@ -367,16 +365,18 @@ Page({
         .catch(res => { 
           reject()
         })
-        this.onDateClose();
       })
     },
     
     async createTask() {
+
       this.modifyTemplate()
+      
       for(var idx in this.data.template) {
         // console.log(idx)
         await this.createTaskAccordingToTemplate(idx)
       }
+
       db.collection('project')
       .doc(this.data.project)
       .update({
@@ -386,6 +386,7 @@ Page({
         }
       })
     },
+
     deleteImg(event) {
       const delIndex = event.detail.index
       const { fileList } = this.data
