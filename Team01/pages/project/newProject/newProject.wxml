@@ -12,7 +12,7 @@
 
     <!--Set other information-->
     <van-cell-group inset style="padding: 10rpx;">
-        <van-cell title="{{dictionary.house_owner}}" is-link size="large" value="{{owner}}" bindtap="changeOwner" />
+        <van-cell title="{{dictionary.house_owner}}" is-link size="large" value="{{houseOwner}}" bindtap="changeOwner" />
         <van-cell title="{{dictionary.participant}}" is-link size="large" value="{{participant}}" bindtap="changeParticipant" />
         <van-cell title="{{dictionary.choose_template}}" is-link size="large" value="{{selectedTemplate}}" bindtap="selectTemplate" />
     </van-cell-group>

@@ -6,6 +6,7 @@ const languageUtils = require("../../../language/languageUtils");
 const templateLib = require("../../../template/template.js");
 
 const db = wx.cloud.database();
+const _ = db.command;
 
 var app = getApp();
 
@@ -35,10 +36,8 @@ Page({
         isLoading: false,
         fileList: [],
         houseOwner: "",
-        owner: [],
+        houseOwner_openid: '',
         participant: [],
-        ownerPage: 0,
-        participantPage: 2,
 
         project: "",
         task: [],
@@ -70,6 +69,7 @@ Page({
         this.setData({
         language: lan
         })
+        console.log(this.getOpenid('Lokkk'));
     },
 
     // 处理用户输入名字
@@ -127,9 +127,26 @@ Page({
         })
     },
 
+    getOpenid(name){
+      return new Promise((resolve, reject) => {
+        db.collection('user')
+        .where({
+          nickName: _.eq(name)
+        })
+        .get()
+        .then(res => {
+          this.setData({
+            houseOwner_openid:res.data[0]._openid,
+          })
+        })
+      })
+    },
+
 
     // 提交新项目
     formSubmit: function (e) {
+      this.getOpenid(this.data.houseOwner);
+      
         if (this.data.name == "") {
             Toast(this.data.dictionary.null_name);
         }
@@ -155,7 +172,7 @@ Page({
                   projectDescription: this.data.description,
 
                   projectManager: app.globalData.userInfo._openid,
-                  houseOwner: this.data.houseOwner,
+                  houseOwner: this.data.houseOwner_openid,
                   participant: this.data.participant,
 
                   feedback: [],
@@ -215,12 +232,6 @@ Page({
         wx.redirectTo({
           url: '../../indexs/indexForProjectManager/indexForProjectManager',
         })
-          // let pages = getCurrentPages();
-          // let project = pages[pages.length - 2];
-          // project.go_update();
-          // wx.navigateBack({
-          //   delta: 1
-          // })
       },2500)
     },
 
