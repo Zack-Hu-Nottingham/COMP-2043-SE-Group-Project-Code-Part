@@ -196,19 +196,16 @@ Page({
   },
 
   getHouseOwner() {
-    return new Promise((resolve, reject) => {
     db.collection('user')
       .where({
         _openid: _.eq(this.data.project.houseOwner)
       })
       .get()
       .then(res => {
-        // console.log(res.data[0])
         this.setData({
           houseOwner: res.data[0]
         })
       })
-    })
   },
 
   getProjectManager() {

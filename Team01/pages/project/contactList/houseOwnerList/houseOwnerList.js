@@ -50,7 +50,7 @@ Page({
             })
             .get()
             .then(res => {
-              console.log(res)
+              // console.log(res)
               this.setData({
                 initial: res.data,
                 list: res.data

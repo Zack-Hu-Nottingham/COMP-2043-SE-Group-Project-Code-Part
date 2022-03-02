@@ -19,7 +19,7 @@
 <view wx:if="{{ currentTab == 0 }}">
 
   <van-cell-group inset title="{{dictionary.project_info}}">
-    <van-cell title="{{ dictionary.house_owner }}" value="{{ houseOwner.name }}" />
+    <van-cell title="{{ dictionary.house_owner }}" value="{{ houseOwner.nickName }}" />
     <van-cell title="{{ dictionary.project_manager }}" value="{{ projectManager.nickName }}" />
     
     <view wx:if="{{userInfo.isManager == 1}}">
