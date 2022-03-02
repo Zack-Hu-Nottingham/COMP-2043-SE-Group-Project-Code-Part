@@ -69,9 +69,8 @@ Page({
                   // House Owner
                   if (identity == 0) {
                     wx.redirectTo({
-                      url: '../indexs/indexOfHouseOwner/indexOfHouseOwner',
+                      url: '../indexs/indexOfHouseOwner/indexOfHouseOwner?openid=' + this.data.openid,
                     })
-                   
                     // Project Manager
                   } else if (identity == 1) {
                     wx.redirectTo({

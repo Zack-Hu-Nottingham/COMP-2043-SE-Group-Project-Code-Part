@@ -21,7 +21,7 @@ var Languague = {
      // dashboard page
      today_task: "今天的任务",
      task_list: "任务列表",
-     filter: "筛选",
+     filter: "排序",
 
      // more page
      user_name: "用户名",

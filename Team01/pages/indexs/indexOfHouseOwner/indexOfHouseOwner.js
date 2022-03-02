@@ -74,13 +74,13 @@ Page({
 
     Filter: [
       {
-        name: 'Normal',
-      },
-      {
         name: 'Time',
       },
       {
         name: 'Priority'
+      },
+      {
+        name: 'Cancel',
       },
     ],
 
@@ -125,7 +125,8 @@ Page({
     })
 
     this.setData({
-      identity: this.data.dictionary.house_owner
+      identity: this.data.dictionary.house_owner,
+      openid: options.openid
     })
 
   },
@@ -199,7 +200,7 @@ Page({
 
     await this.getInfo()
 
-    await this.getProjectInfo()
+    await this.getProjectInfo(this.data.openid)
 
     for (var idx in this.data.project) {
       await this.getTaskInfo(this.data.project[idx]._id)
@@ -231,12 +232,12 @@ Page({
   },
 
   // 获取项目信息
-  getProjectInfo() {
+  getProjectInfo(openid) {
     return new Promise((resolve, reject) => {
       db.collection('project')
       .where(_.or([
         {
-          houseOwner: _.eq(app.globalData.userInfo._openid)
+          houseOwner: _.eq(openid)
         },
       ]))
       .get()
@@ -376,7 +377,7 @@ Page({
               }
             })
             .catch(err => {
-              console.log('请求失败', err)
+              console.log('请求修改任务状态失败', err)
             })
           }else if(this.data.currentTime > res.data[idx].startTime && this.data.currentTime < res.data[idx].endTime){
             wx.cloud.database().collection('task')
@@ -387,7 +388,7 @@ Page({
               }
             })
             .catch(err => {
-              console.log('请求失败', err)
+              console.log('请求修改任务状态失败', err)
             })
           }else if(this.data.currentTime > res.data[idx].endTime){
             wx.cloud.database().collection('task')
@@ -398,7 +399,7 @@ Page({
               }
             })
             .catch(err => {
-              console.log('请求失败', err)
+              console.log('请求修改任务状态失败', err)
             })
           }
         }
@@ -433,54 +434,44 @@ Page({
     this.setData({
       filter: e.detail.name 
     })
-    if(this.data.filter == 'Normal'){
+    if(this.data.filter == 'Cancel'){
       this.setData({
         task: [],
+        filter: '' 
       });
       for (var idx in this.data.project) {
         this.getTaskInfo(this.data.project[idx]._id)
       }
     }
     else if(this.data.filter == 'Time'){
-      this.onDateDisplay()
+      this.onTimeSelect()
     }
     else if(this.data.filter == 'Priority'){
-      this.onPriorityDisplay()
+      this.onPrioritySelect()
     }
   },
 
-
-  onDateDisplay() {
-    this.setData({ dateShow: true });
-  },
-
-  onClose() {
-    this.setData({ dateShow: false });
-  },
   
-  formatDate(date) {
-    date = new Date(date);
-    return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
-  },
-  onConfirm(event) {
-    const chooseDate = event.detail;
+  // formatDate(date) {
+  //   date = new Date(date);
+  //   return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+  // },
+  onTimeSelect() {
     this.setData({
-      dateShow: false,
-      date: `${this.formatDate(chooseDate)}`,
       task: [],
     });
     for (var idx in this.data.project) {
-      this.timeFilter(this.data.date, this.data.project[idx]._id)
+      this.timeFilter(this.data.project[idx]._id)
     }
   },
 
-  timeFilter(date, projectId){
+  timeFilter(projectId){
     return new Promise((resolve, reject) => {
       db.collection('task')
       .where({
         belongTo: _.eq(projectId),
-        endTime: _.eq(date)
       })
+      .orderBy("endTime", 'asc')
       .get()
       .then(res => {
         // console.log(res)
@@ -498,42 +489,61 @@ Page({
     })
   },
 
-  onPriorityDisplay() {
-    this.setData({ priorityShow: true });
-  },
 
-  onPriorityClose() {
-    this.setData({priorityShow: false})
-  },
-
-  onPrioritySelect(e) {
-    // console.log(e.detail.name)
+  onPrioritySelect() {
     this.setData({
       task: [],
-      choosePriority: e.detail.name 
     })
 
     for (var idx in this.data.project) {
-      this.priorityFilter(this.data.choosePriority, this.data.project[idx]._id)
+      this.priorityFilter(this.data.project[idx]._id)
     }
   },
 
-  priorityFilter(priority, projectId){
-    return new Promise((resolve, reject) => {
-      db.collection('task')
+  priorityFilter(projectId){
+    new Promise((resolve, reject) => {
+    db.collection('task')
       .where({
         belongTo: _.eq(projectId),
-        currentPriority: _.eq(priority)
+        //currentPriority: _.eq('Highest')
       })
       .get()
       .then(res => {
-        // console.log(res)
         for (var idx in res.data) {
-          this.setData({
-            task: this.data.task.concat(res.data[idx])
-          })
+          if(res.data[idx].currentPriority == "Highest"){
+            this.setData({
+              task: this.data.task.concat(res.data[idx])
+            })
+          } 
         }
-        // this.data.task.push(res.data[0])
+        for (var idx in res.data) {
+          if(res.data[idx].currentPriority == "High"){
+            this.setData({
+              task: this.data.task.concat(res.data[idx])
+            })
+          } 
+        }
+        for (var idx in res.data) {
+          if(res.data[idx].currentPriority == "Normal"){
+            this.setData({
+              task: this.data.task.concat(res.data[idx])
+            })
+          } 
+        }
+        for (var idx in res.data) {
+          if(res.data[idx].currentPriority == "Low"){
+            this.setData({
+              task: this.data.task.concat(res.data[idx])
+            })
+          } 
+        }
+        for (var idx in res.data) {
+          if(res.data[idx].currentPriority == "Lowest"){
+            this.setData({
+              task: this.data.task.concat(res.data[idx])
+            })
+          } 
+        }
         resolve("成功获取任务信息")
       })
       .catch(err => {
@@ -541,6 +551,5 @@ Page({
       })
     })
   },
-
 
 })
