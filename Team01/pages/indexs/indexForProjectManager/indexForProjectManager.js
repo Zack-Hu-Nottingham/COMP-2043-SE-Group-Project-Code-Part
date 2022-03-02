@@ -295,7 +295,7 @@ Page({
     this.setData({
       currentTime: _currentTime
     });
-    //console.log(this.data.currentTime)
+    console.log(this.data.currentTime)
 
     new Promise((resolve, reject) => {
       db.collection('task')
@@ -303,48 +303,71 @@ Page({
       .then(res => {
         //console.log(res)
         for (var idx in res.data) {
-          if(this.data.currentTime < res.data[idx].startTime){
-            //console.log(res.data[idx].startTime)
-            wx.cloud.database().collection('task')
-            .doc(res.data[idx]._id)
-            .update({
+          if(res.data[idx].startTime == ''){
+            wx.cloud.callFunction({
+              name: 'updateState',
               data: {
-                state: 0,
+                id: res.data[idx]._id,
+                state: 0
               }
             })
-            .catch(err => {
-              console.log('请求修改项目状态失败', err)
+            .then(res=>{
+              console.log('请求修改任务状态成功', res)
             })
+            .catch(res => {
+              console.log('请求修改任务状态失败', res)
+            })
+          }else if(this.data.currentTime < res.data[idx].startTime){
+            wx.cloud.callFunction({
+              name: 'updateState',
+              data: {
+                id: res.data[idx]._id,
+                state: 0
+              }
+            })
+            .then(res=>{
+              console.log('请求修改任务状态成功', res)
+            })
+            .catch(res => {
+              console.log('请求修改任务状态失败', res)
+            })
+
           }else if(this.data.currentTime > res.data[idx].startTime && this.data.currentTime < res.data[idx].endTime){
-            wx.cloud.database().collection('task')
-            .doc(res.data[idx]._id)
-            .update({
+            wx.cloud.callFunction({
+              name: 'updateState',
               data: {
-                state: 1,
+                id: res.data[idx]._id,
+                state: 1
               }
             })
-            .catch(err => {
-              console.log('请求修改项目状态失败', err)
+            .then(res=>{
+              console.log('请求修改任务状态成功', res)
+            })
+            .catch(res => {
+              console.log('请求修改任务状态失败', res)
             })
           }else if(this.data.currentTime > res.data[idx].endTime){
-            wx.cloud.database().collection('task')
-            .doc(res.data[idx]._id)
-            .update({
+            wx.cloud.callFunction({
+              name: 'updateState',
               data: {
-                state: 3,
+                id: res.data[idx]._id,
+                state: 3
               }
             })
-            .catch(err => {
-              console.log('请求修改项目状态失败', err)
+            .then(res=>{
+              console.log('请求修改任务状态成功', res)
+            })
+            .catch(res => {
+              console.log('请求修改任务状态失败', res)
             })
           }
+
         }
         // this.data.task.push(res.data[0])
-        resolve("成功修改项目状态")
+        resolve("成功获取任务信息")
       })
       .catch(err => {
-        console.log(err)
-        reject("修改项目状态失败")
+        reject("请求任务信息失败")
       })
     })
 
