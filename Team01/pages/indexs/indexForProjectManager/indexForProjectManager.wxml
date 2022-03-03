@@ -18,16 +18,33 @@
     <van-empty description="{{dictionary.no_feedback}}" />
   </view>
 
-  <view wx:elif="{{amessageList.length != 0}}">
-  <van-cell-group inset style="padding: 30rpx;">
-    <van-cell center title="{{dictionary.notification}}" icon="bullhorn-o" size="large" label="{{messageList[0].type.name}}: {{messageList[0].description}}" value="{{messageList[0].createTime}}" clickable="true" bindtap="clickNotification" >
-    </van-cell>
-  </van-cell-group>
+  <view wx:elif="{{messageList.length != 0}}">
+    <view wx:if="{{messageList[0].isRead == 0}}" class="notReadMessage">
+      <van-cell-group inset style="padding: 30rpx;" class="notReadMessage">
+        <van-cell center title="{{dictionary.notification}}" icon="bullhorn-o" size="large" label="{{messageList[0].type.name}}: {{messageList[0].description}}" value="{{messageList[0].createTime}}" clickable="true" bindtap="clickNotification" class="notReadMessage">
+       </van-cell>
+     </van-cell-group>
+    </view>
+
+    <view wx:elif="{{messageList[0].isRead != 0}}">
+      <van-cell-group inset style="padding: 30rpx;">
+        <van-cell center title="{{dictionary.notification}}" icon="bullhorn-o" size="large" label="{{messageList[0].type.name}}: {{messageList[0].description}}" value="{{messageList[0].createTime}}" clickable="true" bindtap="clickNotification" >
+       </van-cell>
+     </van-cell-group>
+    </view>
 
   <van-cell-group inset style="padding: 30rpx;" title="{{dictionary.recent_message}}">
+  
     <view wx:for="{{messageList}}" wx:key="index">
-      <van-cell  title="{{item.owner}}" clickable
-      link-type="navigateTo" url="/pages/project/fileList/fileList?id={{item.belongTo}}&index={{index}}" label="{{item.type.name}}: {{item.description}}" value="{{item.createTime}}" id="{{item.owner}}" class="messageForTest"/>
+      <view wx:if="{{item.isRead == 0}}" class="notReadMessage">
+        <van-cell  title="{{item.owner}}" clickable
+        link-type="navigateTo" url="/pages/project/fileList/fileList?id={{item.belongTo}}&index={{index}}" label="{{item.type.name}}: {{item.description}}" value="{{item.createTime}}" id="{{item.owner}}" class="messageForTest"/>
+      </view>
+
+      <view wx:elif="{{item.isRead != 0}}" >
+        <van-cell  title="{{item.owner}}" clickable
+        link-type="navigateTo" url="/pages/project/fileList/fileList?id={{item.belongTo}}&index={{index}}" label="{{item.type.name}}: {{item.description}}" value="{{item.createTime}}" id="{{item.owner}}" class="messageForTest"/>
+      </view>
     </view>
   </van-cell-group>
   </view>

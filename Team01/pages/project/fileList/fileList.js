@@ -17,12 +17,8 @@ Page({
 
         feedback:[],
         navigationBar: 'Details',
-        fileList: [],
-        feedbackType: '',
-        details: '',
-        createTime: '',
-        ownerId: '',
-        owner:'',
+        belongTo: {},
+        feedbackBelongTo: '',
 
     },
 
@@ -40,37 +36,46 @@ Page({
         id = options.id;
         index = options.index;
 
-        // this.getDetailsFromTask();
-        db.collection('task')
-        .doc(id)
-        .field({
-          feedback: true,
-        })
-        .get({
-          success: res => {
-              // console.log(res.data.feedback[parseInt(index)])
-              this.setData({
-                feedback: res.data.feedback[parseInt(index)],
-              });
-              // console.log(this.data.feedback)
-          },
-          fail: function(err) {
-            //console.log('cannot find')
-          }
-        })
-        //console.log(this.data.feedback)
-
-
-
+        this.init();
         this.getType();
 
         wx.setNavigationBarTitle({
           title: this.data.navigationBar,
         });
     },
-    getType(){
+    async init(){
+      await this.getDetailsFromTask();
+      await this.getBelongToAndPhase();
+      await this.getBelongTo();
+    },
 
-      console.log(this.data.feedback.belongTo)
+    getDetailsFromTask(){
+      return new Promise((resolve, reject) => {
+      db.collection('task')
+      .doc(id)
+      .field({
+        feedback: true,
+      })
+      .get({
+        success: res => {
+            // console.log(res.data.feedback[parseInt(index)])
+            this.setData({
+              feedback: res.data.feedback[parseInt(index)],
+            });
+            //console.log(this.data.feedback)
+
+            resolve(res.data);
+        },
+        fail: function(err) {
+          reject(err);
+          //console.log('cannot find')
+        }
+      })
+      })
+    },
+    getType(){
+      return new Promise((resolve, reject) => {
+      // console.log(this.data.feedback)
       var type = this.data.dictionary.feedback_type0;
       if(this.data.feedback.type==2){
           type = this.data.dictionary.feedback_type2;
@@ -81,11 +86,12 @@ Page({
       this.setData({
         feedbackType: type,
       });
+    })
 
     },
-    getBelongTo(){
+    getBelongToAndPhase(){
       return new Promise((resolve, reject) => {
-        console.log(this.data.feedback)
+        //console.log(this.data.feedback.belongTo)
         db.collection('task')
         .doc(this.data.feedback.belongTo)
         .field({
@@ -94,13 +100,39 @@ Page({
         })
         .get({
           success: res => {
-            console.log(res.data);
+            this.setData({
+              belongTo: res.data
+            })
+            resolve(res.data);
           },
           fail: function(err) {
-            // console.log(err)
+            //console.log(err)
+            reject(err);
           }
         })
       })
+    },
+    getBelongTo(){
+      return new Promise((resolve) => {
+        //console.log('getBelongTo')
+        db.collection('project')
+        .where({
+          _id: _.eq(this.data.belongTo.belongTo),
+        })
+        .field({
+          name: true,
+        })
+        .get({
+          success: res => {
+            // console.log(res.data[0].name)
+            this.setData({
+              feedbackBelongTo: res.data[0].name
+            })
+            resolve();
+          },
+        })
+      })
+
     },
 
     // 初始化语言
@@ -119,7 +151,7 @@ Page({
      * 生命周期函数--监听页面初次渲染完成
      */
     onReady: function () {
-
+     
     },
 
     /**
