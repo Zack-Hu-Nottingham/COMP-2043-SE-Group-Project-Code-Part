@@ -57,31 +57,31 @@ Page({
         totalUnstart: 0,
         totalProgressing: 0,
         totalCompleted: 0,
-        projects:[{
-          name: "Project1",
-          taskNum: 18,
-          unstart: 5,
-          processing: 5,
-          completed: 8,
-          percentage: 44.4,
-          color: "#ffd700"
-        },{
-          name: "Project2",
-          taskNum: 15,
-          unstart: 2,
-          processing: 1,
-          completed: 12,
-          percentage: 80,
-          color: "#00bfff"
-        },{
-          name: "Project3",
-          taskNum: 24,
-          unstart: 13,
-          processing: 6,
-          completed: 5,
-          percentage: 20.8,
-          color: "#32cd32"
-        }]
+        // projects:[{
+        //   name: "Project1",
+        //   taskNum: 18,
+        //   unstart: 5,
+        //   processing: 5,
+        //   completed: 8,
+        //   percentage: 44.4,
+        //   color: "#ffd700"
+        // },{
+        //   name: "Project2",
+        //   taskNum: 15,
+        //   unstart: 2,
+        //   processing: 1,
+        //   completed: 12,
+        //   percentage: 80,
+        //   color: "#00bfff"
+        // },{
+        //   name: "Project3",
+        //   taskNum: 24,
+        //   unstart: 13,
+        //   processing: 6,
+        //   completed: 5,
+        //   percentage: 20.8,
+        //   color: "#32cd32"
+        // }]
     })
 
   },

@@ -40,7 +40,7 @@
 </van-cell-group>
 
 <van-cell-group style="margin: 0 1rpx;" wx:for="{{projects}}" wx:key="index">
-  <van-cell title="{{ item.name }}" icon="todo-list">
+  <van-cell title="{{ item.name }}" icon="todo-list" clickable="true" bindtap="clickProject" data-id="{{item._id}}">
   Task numbers {{ item.task.length }}
   </van-cell>
   <van-cell>
