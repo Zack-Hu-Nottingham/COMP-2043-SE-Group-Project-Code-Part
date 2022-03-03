@@ -43,7 +43,7 @@ Page({
             this.setData({
               feedback: res.data.feedback[options.index],
             }),
-            console.log(this.data.feedback);
+            //console.log(this.data.feedback);
             this.getType();
             this.getBelongTo();
 
@@ -71,7 +71,20 @@ Page({
 
     },
     getBelongTo(){
-
+      db.collection('task')
+      .doc(this.data.feedback.belongTo)
+      .field({
+        belongTo: true,
+        phase: true,
+      })
+      .get({
+        success: res => {
+          console.log(res.data);
+        },
+        fail: function(err) {
+          // console.log(err)
+        }
+      })
     },
 
     // 初始化语言

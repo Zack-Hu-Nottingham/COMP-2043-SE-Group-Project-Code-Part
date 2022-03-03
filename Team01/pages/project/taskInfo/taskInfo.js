@@ -24,6 +24,7 @@ Page({
 
     dateShow: false,
     priorityShow: false,
+    feedback:[],
 
     priority: [
       {
@@ -61,6 +62,8 @@ Page({
 
     // 根据id获得对应数据
     this.getDetail()
+
+    this.updateComment();
 
   },
 
@@ -170,7 +173,7 @@ Page({
         console.log('请求失败', err)
       })
       .then(res => {
-        // console.log(this.data.taskPage.belongTo)
+        //console.log(this.data.taskPage.belongTo)
        db.collection('project')
         .doc(this.data.taskPage.belongTo)
         .get()
@@ -263,5 +266,23 @@ Page({
     this.setData({
       fileList
     })
+  },
+  updateComment(){
+    db.collection('task')
+    .doc(id)
+    .field({
+      feedback: true
+    })
+    .get({
+      success: res => {
+        this.setData({
+          feedback: res.data,
+        });
+      },
+      fail: function(err) {
+        // console.log(err)
+      }
+    })
+
   },
 })
