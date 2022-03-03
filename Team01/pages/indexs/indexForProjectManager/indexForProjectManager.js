@@ -46,8 +46,19 @@ Page({
      */
     userInfo: {},
 
+    changetip: '请输入新用户名',
+    name : "",
+    show: false,
+    value: '',
   },
 
+  showPopup() {
+    this.setData({ show: true });
+  },
+
+  onClose() {
+    this.setData({ show: false});
+  },
 
   /**
    * 生命周期函数--监听页面加载
@@ -67,7 +78,8 @@ Page({
 
     this.setData({
       userInfo: app.globalData.userInfo,
-      identity: this.data.dictionary.project_manager
+      identity: this.data.dictionary.project_manager,
+      name : app.globalData.userInfo.nickName
     })
     this.getData(app.globalData.userInfo.openid)
     console.log(this.data.userInfo)
@@ -358,4 +370,28 @@ Page({
 
   },
 
+  userNameInput:function(e){
+    this.setData({
+      value:e.detail.value
+    })
+  },
+
+  forNotice: function (e) {
+    let value= this.data.value;
+    if (value=='') {
+      Toast.fail('空用户名');
+    } else {
+      Toast({
+        type: 'success',
+        message: '提交成功',
+        onClose: () => {
+           this.setData({ 
+             show: false,
+             value: '',
+          });
+          //console.log('执行OnClose函数');
+        },
+      }); 
+    }
+  }
 })

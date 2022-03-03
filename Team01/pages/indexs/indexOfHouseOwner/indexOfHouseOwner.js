@@ -346,12 +346,6 @@ Page({
   /**
    * More page's method
    */
-  
-  onMoreInfo: function(){
-    wx.navigateTo({
-      url: '../../more/moreInfo/moreInfo',
-    })
-  },
 
   // 点击language展示选项
   onChangeLan(event) {
@@ -569,17 +563,28 @@ Page({
     })
   },
 
+  userNameInput:function(e){
+    this.setData({
+      value:e.detail.value
+    })
+  },
+
   forNotice: function (e) {
-    Toast({
-      type: 'success',
-      message: '提交成功',
-      onClose: () => {
-         this.setData({ 
-           show: false,
-           value: '',
-        });
-        //console.log('执行OnClose函数');
-      },
-    });
+    let value= this.data.value;
+    if (value=='') {
+      Toast.fail('空用户名');
+    } else {
+      Toast({
+        type: 'success',
+        message: '提交成功',
+        onClose: () => {
+           this.setData({ 
+             show: false,
+             value: '',
+          });
+          //console.log('执行OnClose函数');
+        },
+      }); 
+    }
   }  
 })

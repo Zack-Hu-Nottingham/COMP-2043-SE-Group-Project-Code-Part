@@ -46,8 +46,19 @@ Page({
     canIUseGetUserProfile: false,
     canIUseOpenData: wx.canIUse('open-data.type.userAvatarUrl') && wx.canIUse('open-data.type.userNickName'), // 如需尝试获取用户信息可改为false
 
+    changetip: '请输入新用户名',
+    name : "",
+    show: false,
+    value: '',
   },
 
+  showPopup() {
+    this.setData({ show: true });
+  },
+
+  onClose() {
+    this.setData({ show: false});
+  },
 
   /**
    * 生命周期函数--监听页面加载
@@ -71,7 +82,8 @@ Page({
     })
 
     this.setData({
-      identity: this.data.dictionary.worker
+      identity: this.data.dictionary.worker,
+      name : app.globalData.userInfo.nickName,
     })
 
 
@@ -327,12 +339,6 @@ Page({
     })
   },
 
-  onMoreInfo: function(){
-    wx.navigateTo({
-      url: '../../more/moreInfo/moreInfo',
-    })
-  },
-
 
   // 点击language展示选项
   onChangeLan(event) {
@@ -344,6 +350,31 @@ Page({
   // 更新数据
   go_update(){
     this.getData()
-  }
+  },
   
+  //更新用户名
+  userNameInput:function(e){
+    this.setData({
+      value:e.detail.value
+    })
+  },
+
+  forNotice: function (e) {
+    let value= this.data.value;
+    if (value=='') {
+      Toast.fail('空用户名');
+    } else {
+      Toast({
+        type: 'success',
+        message: '提交成功',
+        onClose: () => {
+           this.setData({ 
+             show: false,
+             value: '',
+          });
+          //console.log('执行OnClose函数');
+        },
+      }); 
+    }
+  } 
 })
