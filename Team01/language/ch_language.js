@@ -87,8 +87,8 @@ var Languague = {
     // New project
     project_name: "项目名称",
     choose_template: "选择模板",
-    expected_start_time: "选择开始时间",
-    expetced_end_time:"预计结束时间",
+    choose_start_time: "选择开始时间",
+   //  expetced_end_time:"预计结束时间",
     expected_duration:"预计工期时长",
     house_owner: "业主",
     description_hint: "不超过200字",
