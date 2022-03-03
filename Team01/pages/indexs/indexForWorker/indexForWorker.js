@@ -240,8 +240,9 @@ Page({
   },
 
   clickProject(projectId) {
+    console.log(projectId.currentTarget.id)
     wx.navigateTo({
-      url: '../../project/projectInfoForWorker/projectInfoForWorker?id='+projectId,
+      url: '../../project/projectInfoForWorker/projectInfoForWorker?id='+projectId.currentTarget.id,
     })
   },
 
