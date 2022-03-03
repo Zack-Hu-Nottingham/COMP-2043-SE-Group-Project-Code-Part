@@ -2,6 +2,8 @@
 const languageUtils = require("../../../language/languageUtils");
 const db = wx.cloud.database();
 const _ = db.command;
+var id = '';
+var index = '';
 Page({
 
     /**
@@ -13,7 +15,7 @@ Page({
         language: 0,
         languageList: ["简体中文", "English"],
 
-        feedback:{},
+        feedback:[],
         navigationBar: 'Details',
         fileList: [],
         feedbackType: '',
@@ -35,26 +37,48 @@ Page({
         this.setData({
             language: lan
         })
+        id = options.id;
+        index = options.index;
+        this.getDetailsFromTask();
 
+
+      this.getType();
+      this.getBelongTo();
+
+      wx.setNavigationBarTitle({
+        title: this.data.navigationBar,
+      });
+    },
+    getDetails(options){
       db.collection('project')
-      .doc(options.id)
+      .doc(id)
       .get({
         success: res => {
             this.setData({
-              feedback: res.data.feedback[options.index],
-            }),
+              feedback: res.data.feedback[parseInt(index)],
+            });
             //console.log(this.data.feedback);
-            this.getType();
-            this.getBelongTo();
-
-          wx.setNavigationBarTitle({
-            title: this.data.navigåationBar,
-          });
         },
         fail: function(err) {
-          // console.log(err)
+          this.getDetailsFromTask();
         }
       })
+    },
+    getDetailsFromTask(options){
+      db.collection('task')
+      .doc(id)
+      .get({
+        success: res => {
+            console.log(res.data.feedback[parseInt(index)])
+            this.setData({
+              feedback: res.data.feedback[parseInt(iindex)],
+            });
+        },
+        fail: function(err) {
+          //console.log('cannot find')
+        }
+      })
+      console.log(this.data.feedback)
     },
     getType(){
 
@@ -71,20 +95,20 @@ Page({
 
     },
     getBelongTo(){
-      db.collection('task')
-      .doc(this.data.feedback.belongTo)
-      .field({
-        belongTo: true,
-        phase: true,
-      })
-      .get({
-        success: res => {
-          console.log(res.data);
-        },
-        fail: function(err) {
-          // console.log(err)
-        }
-      })
+      // db.collection('task')
+      // .doc(this.data.feedback.belongTo)
+      // .field({
+      //   belongTo: true,
+      //   phase: true,
+      // })
+      // .get({
+      //   success: res => {
+      //     console.log(res.data);
+      //   },
+      //   fail: function(err) {
+      //     // console.log(err)
+      //   }
+      // })
     },
 
     // 初始化语言
