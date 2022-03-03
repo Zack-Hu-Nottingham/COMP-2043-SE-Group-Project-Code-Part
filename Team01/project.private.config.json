@@ -17,6 +17,18 @@
                     "pathName": "pages/project/projectInfo/projectInfo",
                     "query": "id=41ae62ef621f609b09f5abe205892429",
                     "scene": null
+                },
+                {
+                    "name": "",
+                    "pathName": "pages/project/testDiagram/testDiagram",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "",
+                    "pathName": "pages/project/fileList/fileList",
+                    "query": "id=41ae62ef621f609b09f5abe205892429&index=0",
+                    "scene": null
                 }
             ]
         }

@@ -148,7 +148,7 @@ Page({
                 type: this.data.feedbackType[this.data.selectedIndex], //反馈类型
                 description: this.data.details, //反馈描述
                 fileList: this.data.fileList, //文件列表
-                owner: app.globalData.userInfo.name, //创建人
+                owner: app.globalData.userInfo.nickName, //创建人
                 belongTo: this.data.id, //所属项目/任务
                 createTime: this.formatDate(new Date()),
             })

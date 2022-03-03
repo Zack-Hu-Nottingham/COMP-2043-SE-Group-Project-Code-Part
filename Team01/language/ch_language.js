@@ -102,7 +102,10 @@ var Languague = {
     feedback_type1:"任务延期",
     feedback_type2:"任务需返工",
     create_comment:"新建评论",
-
+    feedback_type:"反馈类型",
+    creater:"创建人",
+    create_time:"创建时间",
+    belong_to:"所属项目",
 
     // contact list page
     copy_phone_confirm: "已复制用户电话",

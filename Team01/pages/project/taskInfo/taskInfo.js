@@ -255,4 +255,13 @@ Page({
       dictionary: lang.lang.index,
     });
   },
+
+  deleteImg(event) {
+    const delIndex = event.detail.index
+    const { fileList } = this.data
+    fileList.splice(delIndex, 1)
+    this.setData({
+      fileList
+    })
+  },
 })

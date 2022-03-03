@@ -1,8 +1,9 @@
 <!--pages/project/fileList/fileList.wxml-->
 <van-cell-group inset style="padding: 30rpx">
-  <van-cell title="Feedback" size="large" value="{{feedbackType}}"/>
-  <van-cell title="Create Time" size="large" value="{{createTime}}"/>
-  <van-cell title="Sponsor" value="{{ sponsor }}" size="large"/>
-  <van-cell title="Description" value="{{ details }}" size="large"/>
+  <van-cell title="{{dictionary.belong_to}}" size="large" value="{{feedbackBelongTo}}"/>
+  <van-cell title="{{dictionary.feedback_type}}" size="large" value="{{feedbackType}}"/>
+  <van-cell title="{{dictionary.create_time}}" size="large" value="{{feedback.createTime}}"/>
+  <van-cell title="{{dictionary.creater}}" value="{{ feedback.owner }}" size="large"/>
+  <van-cell title="{{dictionary.description}}" value="{{ feedback.description }}" size="large"/>
 </van-cell-group>
-<van-uploader class="uploader" file-list="{{ fileList }}" bindtap="upload" max-count="8" disabled="{{true}}" deletable="{{false}}" show-upload="{{false}}"/>
+<van-uploader class="uploader" file-list="{{ feedback.fileList }}" bindtap="upload" max-count="8" disabled="{{true}}" deletable="{{false}}" show-upload="{{false}}"/>
