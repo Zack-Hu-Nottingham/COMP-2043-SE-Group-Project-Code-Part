@@ -11,7 +11,62 @@
             "list": []
         },
         "miniprogram": {
-            "list": []
+            "list": [
+                {
+                    "name": "",
+                    "pathName": "pages/project/projectInfo/projectInfo",
+                    "query": "id=41ae62ef621f609b09f5abe205892429",
+                    "scene": null
+                },
+                {
+                    "name": "",
+                    "pathName": "pages/project/testDiagram/testDiagram",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "",
+                    "pathName": "pages/project/fileList/fileList",
+                    "query": "id=41ae62ef621f609b09f5abe205892429&index=0",
+                    "scene": null
+                },
+                {
+                    "name": "",
+                    "pathName": "pages/project/taskInfo/taskInfo",
+                    "query": "id=5b049cc8622032ec0f0b75571797ace8",
+                    "scene": null
+                },
+                {
+                    "name": "",
+                    "pathName": "pages/project/taskInfo/taskInfo",
+                    "query": "id=54ad1eea622034c813fdd69624acc833",
+                    "scene": null
+                },
+                {
+                    "name": "",
+                    "pathName": "pages/project/fileList/fileList",
+                    "query": "id=17e3426e622034d6119c62f3432c79b5&index=0",
+                    "scene": null
+                },
+                {
+                    "name": "",
+                    "pathName": "pages/project/fileList/fileList",
+                    "query": "id=5b049cc8622034c80f0bb582383e7ed5&index=0",
+                    "scene": null
+                },
+                {
+                    "name": "",
+                    "pathName": "pages/project/taskInfo/taskInfo",
+                    "query": "id=617ef50c6220516409747d2677a5c985",
+                    "scene": null
+                },
+                {
+                    "name": "",
+                    "pathName": "pages/project/fileList/fileList",
+                    "query": "id=617ef50c6220516409747d2677a5c985&index=0",
+                    "scene": null
+                }
+            ]
         }
     }
 }

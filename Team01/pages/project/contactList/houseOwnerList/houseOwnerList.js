@@ -1,5 +1,5 @@
-// pages/contact/contactList/contactList.js
-const languageUtils = require("../../../language/languageUtils");
+// pages/project/houseOwnerList/houseOwnerList.js
+const languageUtils = require("../../../../language/languageUtils");
 const app = getApp();
 const db = wx.cloud.database();
 const _ = db.command;
@@ -9,19 +9,18 @@ Page({
         dictionary: {},
         language: 0,
         languageList: ["简体中文", "English"],
-        result: [],
-        owners: [],
         // isManager: 
         // 0 - House Owner
         // 1 - Project Manager
         // 2 - follower
         initial: [],
         list: [],
-        pageIndex: '',
         searchKey: "",
+        radio: '',
+        owner: "",
     },
 
-    onLoad(options){
+    onLoad(){
 
         // console.log(options.index)
 
@@ -33,10 +32,7 @@ Page({
             // console.log(res.data)
         })
 
-        this.getList(options.index);
-        this.setData({
-          pageIndex: options.index,
-        })
+        this.getList();
 
         // 初始化语言
         var lan = wx.getStorageSync("languageVersion");
@@ -46,11 +42,11 @@ Page({
         })
     },
 
-    getList(index){
+    getList(){
         return new Promise((resolve, reject) => {
             db.collection('user')
             .where({
-              identity: _.eq(parseInt(index))
+              identity: _.eq(0)
             })
             .get()
             .then(res => {
@@ -70,6 +66,7 @@ Page({
         searchKey: event.detail
       })
     },
+
     /*输入框搜索商品*/
     onSearch(){
       var newList = [];
@@ -83,28 +80,14 @@ Page({
       })
       // console.log(newList)
     },
-  
-    onChange(event) {
+
+    onClick(event){
+      const { name } = event.currentTarget.dataset;
       this.setData({
-        result: event.detail,
+        radio: name,
+        owner: this.data.list[name].nickName,
       });
-      
-      //console.log(this.data.owners);
-    },
-
-    bindTouchStart: function(e) {
-        this.startTime = e.timeStamp;
-    },
-    bindTouchEnd: function(e) {
-        this.endTime = e.timeStamp;
-    },
-
-    toggle(event) {
-        if(this.endTime  - this.startTime < 350) {
-            const { index } = event.currentTarget.dataset;
-            const checkbox = this.selectComponent(`.checkboxes-${index}`);
-            checkbox.toggle();
-        }
+      // console.log(this.data.owner);
     },
 
     bindLongTap(event) {
@@ -140,29 +123,9 @@ Page({
         var currPage = pages[pages.length - 1];   //当前页面
         var prevPage = pages[pages.length - 2];  //上一个页面
 
-        for(var i=0; i<this.data.result.length; i++){
-          db.collection('user')
-              .where({
-                _id: _.eq(this.data.result[i])
-              })
-              .get()
-              .then(res => {
-                this.data.owners.push(res.data[0].name)
-              })
-        }
-        // console.log(this.data.owners)
-
       // 传回姓名
-      if(this.data.pageIndex==0){
-          prevPage.setData({
-            owner: this.data.owners
-        })
-      }
-      else{
-          prevPage.setData({
-            participant: this.data.owners
-        })
-      }
-
+      prevPage.setData({
+        houseOwner: this.data.owner
+      })
     }
   });

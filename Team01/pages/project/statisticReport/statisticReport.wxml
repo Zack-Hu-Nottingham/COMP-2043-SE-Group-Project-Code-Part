@@ -40,14 +40,14 @@
 </van-cell-group>
 
 <van-cell-group style="margin: 0 1rpx;" wx:for="{{projects}}" wx:key="index">
-  <van-cell title="{{ item.name }}" icon="todo-list">
-  Task numbers {{ item.taskNum }}
+  <van-cell title="{{ item.name }}" icon="todo-list" clickable="true" bindtap="clickProject" data-id="{{item._id}}">
+  Task numbers {{ item.task.length }}
   </van-cell>
   <van-cell>
     <view class="space-around" style="font-size: small;">
-      <view>Unstart {{ item.unstart }}</view>
-      <view>Processing {{ item.processing }}</view>
-      <view>Completed {{ item.completed }}</view>
+      <view>Unstart {{ item.unstarted.length }}</view>
+      <view>Processing {{ item.progressing.length }}</view>
+      <view>Completed {{ item.completed.length }}</view>
     </view>
     <view class="progress">
       <van-progress percentage="{{ item.percentage }}" color="{{ item.color }}" show-pivot="{{false}}"/>

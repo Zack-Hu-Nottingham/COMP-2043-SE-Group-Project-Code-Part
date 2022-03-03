@@ -1,19 +1,28 @@
 // pages/project/fileList/fileList.js
+const languageUtils = require("../../../language/languageUtils");
 const db = wx.cloud.database();
 const _ = db.command;
+var id = '';
+var index = '';
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
-        fileList: [],
+        // 存放双语
+        dictionary: {},
+        language: 0,
+        languageList: ["简体中文", "English"],
+
+        feedback:[],
         navigationBar: 'Details',
+        fileList: [],
         feedbackType: '',
         details: '',
         createTime: '',
         ownerId: '',
-        sponsor:'',
+        owner:'',
 
     },
 
@@ -21,53 +30,90 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-      db.collection('project')
-      .doc(options.id)
-      .get({
-        success: res => {
-            var type = 'Project Delay';
-            if(res.data.feedback[options.index].type==2){
-                type = 'Task Need Rework';
-            }
-            else if(res.data.feedback[options.index].type==1){
-                type = 'Task Delay';
-            }
 
-          this.setData({
-            fileList: res.data.feedback[options.index].fileList,
-            details: res.data.feedback[options.index].details,
-            createTime: res.data.feedback[options.index].createTime,
-            feedbackType: type,
-            ownerId: res.data.feedback[options.index].owner,
-          }),
+        // 初始化语言
+        var lan = wx.getStorageSync("languageVersion");
+        this.initLanguage();
+        this.setData({
+            language: lan
+        })
+        id = options.id;
+        index = options.index;
 
-          wx.setNavigationBarTitle({
-            title: this.data.navigationBar,
-          }),
-          // console.log(this.data.ownerId)
-          this.getOwner();
-        },
-        fail: function(err) {
-          // console.log(err)
-        }
+        // this.getDetailsFromTask();
+        db.collection('task')
+        .doc(id)
+        .field({
+          feedback: true,
+        })
+        .get({
+          success: res => {
+              // console.log(res.data.feedback[parseInt(index)])
+              this.setData({
+                feedback: res.data.feedback[parseInt(index)],
+              });
+              // console.log(this.data.feedback)
+          },
+          fail: function(err) {
+            //console.log('cannot find')
+          }
+        })
+        //console.log(this.data.feedback)
+
+
+
+        this.getType();
+
+        wx.setNavigationBarTitle({
+          title: this.data.navigationBar,
+        });
+    },
+    getType(){
+
+      console.log(this.data.feedback.belongTo)
+      var type = this.data.dictionary.feedback_type0;
+      if(this.data.feedback.type==2){
+          type = this.data.dictionary.feedback_type2;
+      }
+      else if(this.data.feedback.type==1){
+          type = this.data.dictionary.feedback_type0;
+      }
+      this.setData({
+        feedbackType: type,
+      });
+
+    },
+    getBelongTo(){
+      return new Promise((resolve, reject) => {
+        console.log(this.data.feedback)
+        db.collection('task')
+        .doc(this.data.feedback.belongTo)
+        .field({
+          belongTo: true,
+          phase: true,
+        })
+        .get({
+          success: res => {
+            console.log(res.data);
+          },
+          fail: function(err) {
+            // console.log(err)
+          }
+        })
       })
     },
-    getOwner() {
-        return new Promise((resolve, reject) => {
-        db.collection('user')
-          .where({
-            _openid: _.eq(this.data.ownerId)
-          })
-          .get()
-          .then(res => {
-            // console.log(res.data)
-            this.setData({
-              sponsor: res.data[0].name
-            })
-          })
-        })
-        
-      },
+
+    // 初始化语言
+    initLanguage() {
+      var self = this;
+      //获取当前小程序语言版本所对应的字典变量
+      var lang = languageUtils.languageVersion();
+
+      // 页面显示
+      self.setData({
+      dictionary: lang.lang.index,
+      });
+  },
 
     /**
      * 生命周期函数--监听页面初次渲染完成

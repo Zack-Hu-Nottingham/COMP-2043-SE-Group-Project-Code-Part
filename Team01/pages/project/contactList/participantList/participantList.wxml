@@ -1,4 +1,4 @@
-<!--pages/contact/contactList/contactList.wxml-->
+<!--pages/project/participantList/participantList.wxml-->
 <!-- 搜索联系人（筛选条件：职位/姓名） -->
 <van-search
   value="{{ value }}"

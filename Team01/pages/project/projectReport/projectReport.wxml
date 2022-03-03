@@ -12,9 +12,9 @@
 <view>
   <van-cell-group inset title="{{dictionary.project_info}}">
     <van-cell title="{{dictionary.owner}}" value="{{ owner }}" />
-    <van-cell title="{{dictionary.start_time}}" value="{{ project.startTime }}" class="projectInfoStartTimeForTest"/>
-    <van-cell title="{{dictionary.end_time}}" value="{{ project.endTime }}" class="projectInfoEndTimeForTest"/>
-    <van-field model:value="{{ project.projectDescription }}" right clearable label="{{ dictionary.description }}" type="textarea" placeholder="{{ project.projectDescription }}" border="{{ false }}" class="projectInfoDescriptionForTest"></van-field>
+    <van-cell title="{{dictionary.start_time}}" value="{{ project.startTime }}"/>
+    <van-cell title="{{dictionary.end_time}}" value="{{ project.endTime }}"/>
+    <van-cell model:value="{{ project.projectDescription }}" title="{{ dictionary.description }}" type="textarea" placeholder="{{ project.projectDescription }}" border="{{ false }}" class="projectInfoDescriptionForTest"></van-cell>
   </van-cell-group>
 
   <van-cell-group inset title="{{dictionary.state_information}}">
@@ -48,18 +48,28 @@
   <van-cell border="{{ true }}" >
   <view class="parallin space-between">
     <view class="virtical">
-      <view style="color: black; font-size: large;">{{totalUnstart}}</view>
+      <view style="color: black; font-size: medium;">{{totalUnstart}}</view>
       <view>Unstart</view>
     </view>
 
     <view class="virtical">
-      <view style="color: rgb(255, 187, 0); font-size: large;">{{totalProgressing}}</view>
+      <view style="color: rgb(255, 187, 0); font-size: medium;">{{totalProgressing}}</view>
       <view>Processing</view>
     </view>
 
     <view class="virtical">
-      <view style="color: rgb(61, 90, 255); font-size: large;">{{totalCompleted}}</view>
+      <view style="color: rgb(61, 90, 255); font-size: medium;">{{totalCompleted}}</view>
       <view>Completed</view>
+    </view>
+
+    <view class="virtical">
+      <view style="color: rgb(255, 0, 0); font-size: medium;">{{totalDelayed}}</view>
+      <view>Delayed</view>
+    </view>
+
+    <view class="virtical">
+      <view style="color: rgb(0, 255, 127); font-size: medium;">{{totalReworking}}</view>
+      <view>Reworking</view>
     </view>
   </view>
   </van-cell>

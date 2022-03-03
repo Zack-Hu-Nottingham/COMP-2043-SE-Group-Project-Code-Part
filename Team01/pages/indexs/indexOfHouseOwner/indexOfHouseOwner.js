@@ -56,19 +56,13 @@ Page({
      * More page's data
      */
     userInfo: {},
-    hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    canIUseGetUserProfile: false,
-    canIUseOpenData: wx.canIUse('open-data.type.userAvatarUrl') && wx.canIUse('open-data.type.userNickName'), // 如需尝试获取用户信息可改为false
-    name: "",
-    identity: "",
 
     currentTime: "",
 
     date: "",
     dateShow: false,
     filter: "",
-    filterShow: false,
+    filterShow: true,
     choosePriority: "",
     priorityShow: false,
 
@@ -77,36 +71,7 @@ Page({
     show: false,
     value: '', 
 
-    Filter: [
-      {
-        name: 'Time',
-      },
-      {
-        name: 'Priority'
-      },
-      {
-        name: 'Cancel',
-      },
-    ],
-
-    priority: [
-      {
-        name: 'Highest',
-      },
-      {
-        name: 'High'
-      },
-      {
-        name: 'Normal'
-      },
-      {
-        name: 'Low'
-      },
-      {
-        name: 'Lowest'
-      },
-    ],
-
+    Filter: ['Time', 'Priority'],
   },
 
   showPopup() {
@@ -140,6 +105,7 @@ Page({
       identity: this.data.dictionary.house_owner,
       openid: options.openid,
       name : app.globalData.userInfo.nickName,
+      userInfo: app.globalData.userInfo,
     })
 
   },
@@ -253,13 +219,12 @@ Page({
   getProjectInfo(openid) {
     return new Promise((resolve, reject) => {
       db.collection('project')
-      .where(_.or([
-        {
+      .where({
           houseOwner: _.eq(openid)
-        },
-      ]))
+        })
       .get()
       .then(res => {
+        console.log(res)
         if (res.data.length != 0) {
           this.setData({
             isProjectEmpty: false
@@ -327,7 +292,7 @@ Page({
    */
   clickTask(event) {
     wx.navigateTo({
-      url: '../../project/taskInfo/taskInfo?id=' +  event.currentTarget.dataset.id,
+      url: '../../project/taskInfoForHouseOwner/taskInfoForHouseOwner?id=' +  event.currentTarget.dataset.id,
     })
   },
 
@@ -370,7 +335,7 @@ Page({
     this.setData({
       currentTime: _currentTime
     });
-    //console.log(this.data.currentTime)
+    console.log(this.data.currentTime)
 
     new Promise((resolve, reject) => {
       db.collection('task')
@@ -378,41 +343,70 @@ Page({
       .then(res => {
         //console.log(res)
         for (var idx in res.data) {
-          if(this.data.currentTime < res.data[idx].startTime){
-            //console.log(res.data[idx].startTime)
-            wx.cloud.database().collection('task')
-            .doc(res.data[idx]._id)
-            .update({
+
+          if(res.data.state == 2 || res.data.state == 4){
+            continue;
+          }
+
+          if(res.data[idx].startTime == ''){
+            wx.cloud.callFunction({
+              name: 'updateState',
               data: {
-                state: 0,
+                id: res.data[idx]._id,
+                state: 0
               }
             })
-            .catch(err => {
-              console.log('请求修改任务状态失败', err)
+            .then(res=>{
+              console.log('请求修改任务状态成功', res)
             })
+            .catch(res => {
+              console.log('请求修改任务状态失败', res)
+            })
+          }else if(this.data.currentTime < res.data[idx].startTime){
+            wx.cloud.callFunction({
+              name: 'updateState',
+              data: {
+                id: res.data[idx]._id,
+                state: 0
+              }
+            })
+            .then(res=>{
+              console.log('请求修改任务状态成功', res)
+            })
+            .catch(res => {
+              console.log('请求修改任务状态失败', res)
+            })
+
           }else if(this.data.currentTime > res.data[idx].startTime && this.data.currentTime < res.data[idx].endTime){
-            wx.cloud.database().collection('task')
-            .doc(res.data[idx]._id)
-            .update({
+            wx.cloud.callFunction({
+              name: 'updateState',
               data: {
-                state: 1,
+                id: res.data[idx]._id,
+                state: 1
               }
             })
-            .catch(err => {
-              console.log('请求修改任务状态失败', err)
+            .then(res=>{
+              console.log('请求修改任务状态成功', res)
+            })
+            .catch(res => {
+              console.log('请求修改任务状态失败', res)
             })
           }else if(this.data.currentTime > res.data[idx].endTime){
-            wx.cloud.database().collection('task')
-            .doc(res.data[idx]._id)
-            .update({
+            wx.cloud.callFunction({
+              name: 'updateState',
               data: {
-                state: 3,
+                id: res.data[idx]._id,
+                state: 3
               }
             })
-            .catch(err => {
-              console.log('请求修改任务状态失败', err)
+            .then(res=>{
+              console.log('请求修改任务状态成功', res)
+            })
+            .catch(res => {
+              console.log('请求修改任务状态失败', res)
             })
           }
+
         }
         // this.data.task.push(res.data[0])
         resolve("成功获取任务信息")
@@ -431,7 +425,7 @@ Page({
       })
     } else {
       this.setData({
-        filterShow: true
+        filterShow: false
       })
     }
     
@@ -445,16 +439,7 @@ Page({
     this.setData({
       filter: e.detail.name 
     })
-    if(this.data.filter == 'Cancel'){
-      this.setData({
-        task: [],
-        filter: '' 
-      });
-      for (var idx in this.data.project) {
-        this.getTaskInfo(this.data.project[idx]._id)
-      }
-    }
-    else if(this.data.filter == 'Time'){
+    if(this.data.filter == 'Time'){
       this.onTimeSelect()
     }
     else if(this.data.filter == 'Priority'){
@@ -586,5 +571,12 @@ Page({
         },
       }); 
     }
-  }  
+  },
+    
+  listenerActionSheet: function() {
+    this.setData({
+      //取反
+        filterShow: !this.data.filterShow
+    });
+  }
 })

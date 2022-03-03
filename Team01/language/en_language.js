@@ -17,6 +17,7 @@ var Languague = {
     statistic_report: "Statistics Report",
     project_list: "Projects",
     create_new_project: "Create New Project",
+    comment_list: "评论列表",
 
     // dashboard page
     today_task: "Today's Task",     
@@ -56,6 +57,7 @@ var Languague = {
     end_time: "End Time",
     expected_start_time: "Expected Start Time",
     expected_end_time: "Expected End Time",
+    current_phase: "Current Phase",
     description: "Description",
     description_hint: "less than 500 words",
     state_information: "State Information",
@@ -87,10 +89,13 @@ var Languague = {
     // New project
     project_name: "Project Name",
     choose_template: "Choose Template",
+    choose_start_time: "Choose start time",
+    expetced_end_time: "Expected end time",
+    expected_duration:"Estimated duration of work",
     house_owner: "House Owner",
     description_hint: "less than 500 words",
 
-      // Comment page
+    // Comment page
     comment_title:"Feedback",
     select_feedback:"Select feedback type",
     submitErrMsg1:"Feedback type is null",
@@ -98,6 +103,11 @@ var Languague = {
     feedback_type0:"Project Delay",
     feedback_type1:"Task Delay",
     feedback_type2:"Task need rework",
+    create_comment:"Create comment",
+    feedback_type:"Feedback Type",
+    creater:"Creater",
+    create_time:"Create Time",
+    belong_to:"Belong To",
 
     // contact list page
     copy_phone_confirm: "Phone number has been copied",
@@ -120,7 +130,8 @@ var Languague = {
     finish_construction: "Finish Construction",
     no_project_error: "You currently have no projects",
     no_task_error: "You currently have no tasks",
-
+    phase_name: ["现场交底拆改、界面处理", "图纸深化", "拆除", "一次放样", "墙体砌筑", "二次精放样", "水电施工", "木工施工", "地暖、地面找平", "瓷砖、石材", "油工施工", "成品安装", "油漆修补", "杂物处理", "验收、软装摆场", "其他"],
+    current_phase_description: ["阶段1", "阶段2", "阶段3", "阶段4", "阶段5", "阶段6", "阶段7", "阶段8", "阶段9", "阶段10", "阶段11", "阶段12", "阶段13", "阶段14", "阶段15", "阶段16"],
 
  },
 };

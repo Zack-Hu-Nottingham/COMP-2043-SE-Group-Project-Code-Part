@@ -17,6 +17,7 @@ var Languague = {
      statistic_report: "数据报告",
      project_list: "项目列表",
      create_new_project: "新建项目",
+     comment_list: "评论列表",
 
      // dashboard page
      today_task: "今天的任务",
@@ -56,6 +57,7 @@ var Languague = {
     end_time: "结束时间",
     expected_start_time: "预期开始时间",
     expected_end_time: "预期结束时间",
+    current_phase: "当前阶段",
     description: "描述",
     description_hint: "少于500字",
     state_information: "状态信息",
@@ -86,6 +88,9 @@ var Languague = {
     // New project
     project_name: "项目名称",
     choose_template: "选择模板",
+    choose_start_time: "选择开始时间",
+    expetced_end_time:"预计结束时间",
+    expected_duration:"预计工期时长",
     house_owner: "业主",
     description_hint: "不超过200字",
    
@@ -97,6 +102,11 @@ var Languague = {
     feedback_type0:"项目延期",
     feedback_type1:"任务延期",
     feedback_type2:"任务需返工",
+    create_comment:"新建评论",
+    feedback_type:"反馈类型",
+    creater:"创建人",
+    create_time:"创建时间",
+    belong_to:"所属项目",
 
     // contact list page
     copy_phone_confirm: "已复制用户电话",
@@ -119,6 +129,8 @@ var Languague = {
     finish_construction: "结束施工",
     no_project_error: "您当前还没有项目",
     no_task_error: "您当前还没有任务",
+    phase_name: ["现场交底拆改、界面处理", "图纸深化", "拆除", "一次放样", "墙体砌筑", "二次精放样", "水电施工", "木工施工", "地暖、地面找平", "瓷砖、石材", "油工施工", "成品安装", "油漆修补", "杂物处理", "验收、软装摆场", "其他"],
+    current_phase_description: ["阶段1", "阶段2", "阶段3", "阶段4", "阶段5", "阶段6", "阶段7", "阶段8", "阶段9", "阶段10", "阶段11", "阶段12", "阶段13", "阶段14", "阶段15", "阶段16"],
    },
 };
 

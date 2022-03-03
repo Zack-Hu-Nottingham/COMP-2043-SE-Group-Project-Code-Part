@@ -148,9 +148,10 @@ Page({
                 type: this.data.feedbackType[this.data.selectedIndex], //反馈类型
                 description: this.data.details, //反馈描述
                 fileList: this.data.fileList, //文件列表
-                owner: app.globalData.userInfo.name, //创建人
+                owner: app.globalData.userInfo.nickName, //创建人
                 belongTo: this.data.id, //所属项目/任务
                 createTime: this.formatDate(new Date()),
+                isRead: 0,
             })
             for(var i = 0; i< this.data.fileList.length; i++ ){
                 this.uploadImage(this.data.fileList[i].url);
@@ -205,9 +206,14 @@ Page({
             })
         },2400)
         setTimeout(res =>{
+            var pages = getCurrentPages();
+            var currPage = pages[pages.length - 1];   //当前页面
+            var prevPage = pages[pages.length - 2];  //上一个页面
+            prevPage.updateComment();
+
             wx.navigateBack({
-              delta: 1,
-            })
+                delta: 1
+              })
         },2500)
     },
 

@@ -6,15 +6,19 @@
     </van-cell-group>
     
     <van-cell-group inset style="padding: 10rpx;">
-        <van-cell title="{{dictionary.start_time}}" is-link size="large" value="{{startDate}}" bindtap="onDateDisplay" />
-        <van-cell title="{{dictionary.end_time}}" is-link size="large" value="{{endDate}}" bindtap="onDateDisplay" />
+        <van-cell title="{{dictionary.choose_template}}" is-link size="large" value="{{selectedTemplate}}" bindtap="selectTemplate" />
+        <van-cell title="{{dictionary.expected_duration}}" size="large" value="{{duration}}"/>
     </van-cell-group>
 
+    <van-cell-group inset style="padding: 10rpx;">
+        <van-cell title="{{dictionary.choose_start_time}}" is-link size="large" value="{{startDate}}" bindtap="onDateDisplay" />
+        <van-cell title="{{dictionary.expected_end_time}}" size="large" value="{{endDate}}"/>
+    </van-cell-group>
+    
     <!--Set other information-->
     <van-cell-group inset style="padding: 10rpx;">
-        <van-cell title="{{dictionary.house_owner}}" is-link size="large" value="{{owner}}" bindtap="changeOwner" />
+        <van-cell title="{{dictionary.house_owner}}" is-link size="large" value="{{houseOwner}}" bindtap="changeOwner" />
         <van-cell title="{{dictionary.participant}}" is-link size="large" value="{{participant}}" bindtap="changeParticipant" />
-        <van-cell title="{{dictionary.choose_template}}" is-link size="large" value="{{selectedTemplate}}" bindtap="selectTemplate" />
     </van-cell-group>
 
     <!--Set Time-->
@@ -38,7 +42,6 @@
 <van-calendar
   show="{{ show }}"
   title="choose period"
-  type="range"
   bind:close="onDateClose"
   bind:confirm="onDateConfirm"
 />

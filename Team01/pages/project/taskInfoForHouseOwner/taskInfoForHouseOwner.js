@@ -24,7 +24,6 @@ Page({
 
     dateShow: false,
     priorityShow: false,
-    feedback:[],
 
     priority: [
       {
@@ -62,8 +61,6 @@ Page({
 
     // 根据id获得对应数据
     this.getDetail()
-
-    this.updateComment();
 
   },
 
@@ -131,13 +128,12 @@ Page({
   
   onConfirm(event) {
     const [start, end] = event.detail;
-    this.onClose();
-    // this.setData({
-    //   startTime: this.formatDate(start),
-    //   endTime: this.formatDate(end),
-    //   dateShow: false,
-    //   date: `${this.formatDate(start)} - ${this.formatDate(end)}`,
-    // });
+    this.setData({
+      startTime: this.formatDate(start),
+      endTime: this.formatDate(end),
+      dateShow: false,
+      date: `${this.formatDate(start)} - ${this.formatDate(end)}`,
+    });
 
     //调用云函数
     wx.cloud.callFunction({
@@ -156,7 +152,7 @@ Page({
   },
 
   getDetail(){
-    db.collection('task')
+    wx.cloud.database().collection('task')
       .doc(id)
       .get()
       .then(res => {
@@ -173,7 +169,7 @@ Page({
         console.log('请求失败', err)
       })
       .then(res => {
-        //console.log(this.data.taskPage.belongTo)
+        // console.log(this.data.taskPage.belongTo)
        db.collection('project')
         .doc(this.data.taskPage.belongTo)
         .get()
@@ -208,7 +204,7 @@ Page({
       name: 'updateTaskDescription',
       data:{
         id: id,
-        descriptions: e.detail.value
+        taskDescriptions: e.detail.value
       }
     }).then(res => {
       console.log('调用云函数修改任务描述成功', res),
@@ -257,33 +253,5 @@ Page({
     self.setData({
       dictionary: lang.lang.index,
     });
-  },
-
-  deleteImg(event) {
-    const delIndex = event.detail.index
-    const { fileList } = this.data
-    fileList.splice(delIndex, 1)
-    this.setData({
-      fileList
-    })
-  },
-  updateComment(){
-    db.collection('task')
-    .doc(id)
-    .field({
-      feedback: true
-    })
-    .get({
-      success: res => {
-        this.setData({
-          feedback: res.data.feedback,
-        });
-        // console.log(this.data.feedback)
-      },
-      fail: function(err) {
-        // console.log(err)
-      }
-    })
-
   },
 })
