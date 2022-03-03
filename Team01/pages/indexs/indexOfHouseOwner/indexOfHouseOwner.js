@@ -441,16 +441,7 @@ Page({
     this.setData({
       filter: e.detail.name 
     })
-    if(this.data.filter == 'Cancel'){
-      this.setData({
-        task: [],
-        filter: '' 
-      });
-      for (var idx in this.data.project) {
-        this.getTaskInfo(this.data.project[idx]._id)
-      }
-    }
-    else if(this.data.filter == 'Time'){
+    if(this.data.filter == 'Time'){
       this.onTimeSelect()
     }
     else if(this.data.filter == 'Priority'){
