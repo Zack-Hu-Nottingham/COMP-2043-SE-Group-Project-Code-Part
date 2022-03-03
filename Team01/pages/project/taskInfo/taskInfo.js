@@ -276,8 +276,9 @@ Page({
     .get({
       success: res => {
         this.setData({
-          feedback: res.data,
+          feedback: res.data.feedback,
         });
+        // console.log(this.data.feedback)
       },
       fail: function(err) {
         // console.log(err)

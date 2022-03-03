@@ -1,8 +1,6 @@
 // pages/projectInfo/projectInfo.js
 const languageUtils = require("../../../language/languageUtils");
 
-import * as echarts from '../../../ec-canvas/echarts';
-
 const app = getApp();
 
 var id = '';
