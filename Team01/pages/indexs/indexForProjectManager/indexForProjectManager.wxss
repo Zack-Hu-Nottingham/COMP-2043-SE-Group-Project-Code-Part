@@ -8,6 +8,12 @@
     margin-top: 300rpx;
   }
 
+  .notReadMessage {
+    background-color: #ee0a24 !important; 
+  
+  }
+
+
 
   
 /**
