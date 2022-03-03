@@ -90,7 +90,7 @@ var Languague = {
     project_name: "Project Name",
     choose_template: "Choose Template",
     choose_start_time: "Choose start time",
-   //  expetced_end_time: "Expected end time",
+    expetced_end_time: "Expected end time",
     expected_duration:"Estimated duration of work",
     house_owner: "House Owner",
     description_hint: "less than 500 words",

@@ -295,7 +295,7 @@ Page({
     this.setData({
       currentTime: _currentTime
     });
-    console.log(this.data.currentTime)
+    // console.log(this.data.currentTime)
 
     new Promise((resolve, reject) => {
       db.collection('task')

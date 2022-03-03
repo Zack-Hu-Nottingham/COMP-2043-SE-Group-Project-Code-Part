@@ -39,49 +39,38 @@ Page({
         })
         id = options.id;
         index = options.index;
-        this.getDetailsFromTask();
+
+        // this.getDetailsFromTask();
+        db.collection('task')
+        .doc(id)
+        .field({
+          feedback: true,
+        })
+        .get({
+          success: res => {
+              // console.log(res.data.feedback[parseInt(index)])
+              this.setData({
+                feedback: res.data.feedback[parseInt(index)],
+              });
+              // console.log(this.data.feedback)
+          },
+          fail: function(err) {
+            //console.log('cannot find')
+          }
+        })
+        //console.log(this.data.feedback)
 
 
-      this.getType();
-      this.getBelongTo();
 
-      wx.setNavigationBarTitle({
-        title: this.data.navigationBar,
-      });
-    },
-    getDetails(options){
-      db.collection('project')
-      .doc(id)
-      .get({
-        success: res => {
-            this.setData({
-              feedback: res.data.feedback[parseInt(index)],
-            });
-            //console.log(this.data.feedback);
-        },
-        fail: function(err) {
-          this.getDetailsFromTask();
-        }
-      })
-    },
-    getDetailsFromTask(options){
-      db.collection('task')
-      .doc(id)
-      .get({
-        success: res => {
-            console.log(res.data.feedback[parseInt(index)])
-            this.setData({
-              feedback: res.data.feedback[parseInt(iindex)],
-            });
-        },
-        fail: function(err) {
-          //console.log('cannot find')
-        }
-      })
-      console.log(this.data.feedback)
+        this.getType();
+
+        wx.setNavigationBarTitle({
+          title: this.data.navigationBar,
+        });
     },
     getType(){
 
+      console.log(this.data.feedback.belongTo)
       var type = this.data.dictionary.feedback_type0;
       if(this.data.feedback.type==2){
           type = this.data.dictionary.feedback_type2;
@@ -95,20 +84,23 @@ Page({
 
     },
     getBelongTo(){
-      // db.collection('task')
-      // .doc(this.data.feedback.belongTo)
-      // .field({
-      //   belongTo: true,
-      //   phase: true,
-      // })
-      // .get({
-      //   success: res => {
-      //     console.log(res.data);
-      //   },
-      //   fail: function(err) {
-      //     // console.log(err)
-      //   }
-      // })
+      return new Promise((resolve, reject) => {
+        console.log(this.data.feedback)
+        db.collection('task')
+        .doc(this.data.feedback.belongTo)
+        .field({
+          belongTo: true,
+          phase: true,
+        })
+        .get({
+          success: res => {
+            console.log(res.data);
+          },
+          fail: function(err) {
+            // console.log(err)
+          }
+        })
+      })
     },
 
     // 初始化语言
