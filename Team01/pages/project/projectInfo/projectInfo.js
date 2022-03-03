@@ -90,65 +90,65 @@ Page({
     // 从数据库中根据id获取数据
     this.getDetail()
 
-    // //获取数据库条数:unstarted
-    // db.collection('task').where({
-    //   belongTo: id,
-    //   state: 0
-    // }).count().then(res => {
-    //   console.log(res.total);
+    //获取数据库条数:unstarted
+    db.collection('task').where({
+      belongTo: id,
+      state: 0
+    }).count().then(res => {
+      console.log(res.total);
       
-    //   this.setData({
-    //     countState0Result : res.total
-    //   })
-    // })
+      this.setData({
+        countState0Result : res.total
+      })
+    })
 
-    // //获取数据库条数:processing
-    // db.collection('task').where({
-    //   belongTo: id,
-    //   state: 1
-    // }).count().then(res => {
-    //   console.log(res.total);
+    //获取数据库条数:processing
+    db.collection('task').where({
+      belongTo: id,
+      state: 1
+    }).count().then(res => {
+      console.log(res.total);
       
-    //   this.setData({
-    //     countState1Result : res.total
-    //   })
-    // })
+      this.setData({
+        countState1Result : res.total
+      })
+    })
 
-    // //获取数据库条数:completed
-    // db.collection('task').where({
-    //   belongTo: id,
-    //   state: 2
-    // }).count().then(res => {
-    //   console.log(res.total);
+    //获取数据库条数:completed
+    db.collection('task').where({
+      belongTo: id,
+      state: 2
+    }).count().then(res => {
+      console.log(res.total);
       
-    //   this.setData({
-    //     countState2Result : res.total
-    //   })
-    // })
+      this.setData({
+        countState2Result : res.total
+      })
+    })
      
-    // //获取数据库条数:delayed
-    // db.collection('task').where({
-    //   belongTo: id,
-    //   state: 3
-    // }).count().then(res => {
-    //   console.log(res.total);
+    //获取数据库条数:delayed
+    db.collection('task').where({
+      belongTo: id,
+      state: 3
+    }).count().then(res => {
+      console.log(res.total);
       
-    //   this.setData({
-    //     countState3Result : res.total
-    //   })
-    // })
+      this.setData({
+        countState3Result : res.total
+      })
+    })
       
-    // //获取数据库条数:reworking
-    // db.collection('task').where({
-    //   belongTo: id,
-    //   state: 4
-    // }).count().then(res => {
-    //   console.log(res.total);
+    //获取数据库条数:reworking
+    db.collection('task').where({
+      belongTo: id,
+      state: 4
+    }).count().then(res => {
+      console.log(res.total);
       
-    //   this.setData({
-    //     countState4Result : res.total
-    //   })
-    // })
+      this.setData({
+        countState4Result : res.total
+      })
+    })
 
 
   },
@@ -164,187 +164,187 @@ Page({
     // 载入task management页面的数据
     if (this.data.currentTab == 1) {
 
-      // var countState0Result = 0;
-      // db.collection("task").where({
-      //   belongTo: id,
-      //   state: 0
-      // }).count();
-      
-      
+
+      const state0BatchTimes = Math.ceil(this.data.countState0Result / 20)
+      //console.log(state0BatchTimes)
+      var arraypro=[]
+      var x0 = 0;
+    //初次循环获取云端数据库的分次数的promise数组
+      for (let i = 0; i < state0BatchTimes; i++) {
+        db.collection("task").where({
+          belongTo: id,
+          state: 0
+        }).skip(i*20).get().then(res => {
+            x0++;
+            //console.log(x0);
+            for (let j = 0; j < res.data.length; j++) {
+              arraypro.push(res.data[j])
+            }
+            console.log(arraypro);
+            if(x0==state0BatchTimes){
+              this.setData({
+                unstarted : arraypro
+              })
+            }
+          })
+          
+        
       }
-      //console.log(this.data.countState0Result)
-//       const state0BatchTimes = Math.ceil(this.data.countState0Result / 20)
-//       //console.log(state0BatchTimes)
-//       var arraypro=[]
-//       var x0 = 0;
-//     //初次循环获取云端数据库的分次数的promise数组
-//     for (let i = 0; i < state0BatchTimes; i++) {
-//       db.collection("task").where({
-//         belongTo: id,
-//         state: 0
-//       }).skip(i*20).get().then(res => {
-//           x0++;
-//           for (let j = 0; j < res.data.length; j++) {
-//             arraypro.push(res.data[j])
-//           }
-//         })
-        
-//         if(x1==state0BatchTimes){
-//           this.setData({
-//             unstarted : arraypro0
-//           })
-//         }
-//       }
 
     
 
       
-//       const state1BatchTimes = Math.ceil(this.data.countState1Result / 20)
-//       var arraypro1=[]
-//       var x1 = 0
-//     //初次循环获取云端数据库的分次数的promise数组
-//     for (let i = 0; i < state1BatchTimes; i++) {
-//       db.collection("task").where({
-//         belongTo: id,
-//         state: 1
-//       }).skip(i*20).get().then(res => {
-//           x1++;
-//           for (let j = 0; j < res.data.length; j++) {
-//             arraypro1.push(res.data[j])
-//           }
-//         })
-        
-//         if(x1==state1BatchTimes){
-//           this.setData({
-//             progressing : arraypro1
-//           })
-//         }
-//       }
-
-    
-    
-//     const state2BatchTimes = Math.ceil(this.data.countState2Result / 20)
-//     var arraypro2=[]
-//     var x2 = 0
-//   //初次循环获取云端数据库的分次数的promise数组
-//   for (let i = 0; i < state2BatchTimes; i++) {
-//     db.collection("task").where({
-//       belongTo: id,
-//       state: 2
-//     }).skip(i*20).get().then(res => {
-//         x2++;
-//         for (let j = 0; j < res.data.length; j++) {
-//           arraypro2.push(res.data[j])
-//         }
-//       })
-      
-//       if(x2==state2BatchTimes){
-//         this.setData({
-//           completed : arraypro2
-//         })
-//       }
-//     }
-
-  
-  
-//   const state3BatchTimes = Math.ceil(this.data.countState3Result / 20)
-//   var arraypro3=[]
-//   var x3 = 0
-// //初次循环获取云端数据库的分次数的promise数组
-// for (let i = 0; i < state3BatchTimes; i++) {
-//   db.collection("task").where({
-//     belongTo: id,
-//     state: 3
-//   }).skip(i*20).get().then(res => {
-//       x3++;
-//       for (let j = 0; j < res.data.length; j++) {
-//         arraypro3.push(res.data[j])
-//       }
-//     })
-    
-//     if(x3==state3BatchTimes){
-//       this.setData({
-//         delayed : arraypro3
-//       })
-//     }
-//   }
-
-// const state4BatchTimes = Math.ceil(this.data.countState4Result / 20)
-// var arraypro4=[]
-// var x4 = 0
-// //初次循环获取云端数据库的分次数的promise数组
-// for (let i = 0; i < state4BatchTimes; i++) {
-// db.collection("task").where({
-//   belongTo: id,
-//   state: 4
-// }).skip(i*20).get().then(res => {
-//     x4++;
-//     for (let j = 0; j < res.data.length; j++) {
-//       arraypro4.push(res.data[j])
-//     }
-//   })
-  
-//   if(x4==state4BatchTimes){
-//     this.setData({
-//       reworking : arraypro4
-//     })
-//   }
-// }
-
-      db.collection("task")
-      .where({
-        belongTo: id,
-        state: 0
-      })
-      .get().then(res => {
-        this.setData({
-          unstarted: res.data
-        })
-      })
-
-      db.collection("task")
-      .where({
+      const state1BatchTimes = Math.ceil(this.data.countState1Result / 20)
+      var arraypro1=[]
+      var x1 = 0
+    //初次循环获取云端数据库的分次数的promise数组
+    for (let i = 0; i < state1BatchTimes; i++) {
+      db.collection("task").where({
         belongTo: id,
         state: 1
-      })
-      .get().then(res => {
-        this.setData({
-          progressing: res.data
+      }).skip(i*20).get().then(res => {
+          x1++;
+          for (let j = 0; j < res.data.length; j++) {
+            arraypro1.push(res.data[j])
+          }
+          if(x1==state1BatchTimes){
+            this.setData({
+              progressing : arraypro1
+            })
+          }
         })
-      })
+        
+        
+      }
 
-      db.collection("task")
-      .where({
-        belongTo: id,
-        state: 2
+    
+    
+    const state2BatchTimes = Math.ceil(this.data.countState2Result / 20)
+    var arraypro2=[]
+    var x2 = 0
+  //初次循环获取云端数据库的分次数的promise数组
+  for (let i = 0; i < state2BatchTimes; i++) {
+    db.collection("task").where({
+      belongTo: id,
+      state: 2
+    }).skip(i*20).get().then(res => {
+        x2++;
+        for (let j = 0; j < res.data.length; j++) {
+          arraypro2.push(res.data[j])
+        }
+        if(x2==state2BatchTimes){
+          this.setData({
+            completed : arraypro2
+          })
+        }
       })
-      .get().then(res => {
-        this.setData({
-          completed: res.data
-        })
-      })
+      
+      
+    }
 
-      db.collection("task")
-      .where({
-        belongTo: id,
-        state: 3
-      })
-      .get().then(res => {
+  
+  
+  const state3BatchTimes = Math.ceil(this.data.countState3Result / 20)
+  var arraypro3=[]
+  var x3 = 0
+//初次循环获取云端数据库的分次数的promise数组
+for (let i = 0; i < state3BatchTimes; i++) {
+  db.collection("task").where({
+    belongTo: id,
+    state: 3
+  }).skip(i*20).get().then(res => {
+      x3++;
+      for (let j = 0; j < res.data.length; j++) {
+        arraypro3.push(res.data[j])
+      }
+      if(x3==state3BatchTimes){
         this.setData({
-          delayed: res.data
+          delayed : arraypro3
         })
-      })
+      }
+    })
+    
+    
+  }
 
-      db.collection("task")
-      .where({
-        belongTo: id,
-        state: 4
+const state4BatchTimes = Math.ceil(this.data.countState4Result / 20)
+var arraypro4=[]
+var x4 = 0
+//初次循环获取云端数据库的分次数的promise数组
+for (let i = 0; i < state4BatchTimes; i++) {
+db.collection("task").where({
+  belongTo: id,
+  state: 4
+}).skip(i*20).get().then(res => {
+    x4++;
+    for (let j = 0; j < res.data.length; j++) {
+      arraypro4.push(res.data[j])
+    }
+    if(x4==state4BatchTimes){
+      this.setData({
+        reworking : arraypro4
       })
-      .get().then(res => {
-        this.setData({
-          reworking: res.data
-        })
-      })
+    }
+  })
+  
+ 
+}
+    }
+
+      // db.collection("task")
+      // .where({
+      //   belongTo: id,
+      //   state: 0
+      // })
+      // .get().then(res => {
+      //   this.setData({
+      //     unstarted: res.data
+      //   })
+      // })
+
+      // db.collection("task")
+      // .where({
+      //   belongTo: id,
+      //   state: 1
+      // })
+      // .get().then(res => {
+      //   this.setData({
+      //     progressing: res.data
+      //   })
+      // })
+
+      // db.collection("task")
+      // .where({
+      //   belongTo: id,
+      //   state: 2
+      // })
+      // .get().then(res => {
+      //   this.setData({
+      //     completed: res.data
+      //   })
+      // })
+
+      // db.collection("task")
+      // .where({
+      //   belongTo: id,
+      //   state: 3
+      // })
+      // .get().then(res => {
+      //   this.setData({
+      //     delayed: res.data
+      //   })
+      // })
+
+      // db.collection("task")
+      // .where({
+      //   belongTo: id,
+      //   state: 4
+      // })
+      // .get().then(res => {
+      //   this.setData({
+      //     reworking: res.data
+      //   })
+      // })
     
     
   },
