@@ -215,17 +215,17 @@ Page({
     return new Promise((resolve, reject) => {
       db.collection('user')
       .where({
-        _openid: _.eq(this.data.userInfo.openid)
+        _openid: _.eq(this.data.userInfo._openid)
       })
       .get()
       .then(res => {
         console.log(res.data[0].task)
-        if(res.data[0].task == []) {
+        if(res.data[0].task != []) {
           this.setData({
             taskList: res.data[0].task,
             isTaskEmpty: false,
           })
-        }
+        } 
         
         resolve("成功获取项目列表")
       })
