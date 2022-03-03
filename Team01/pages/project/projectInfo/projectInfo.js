@@ -58,10 +58,6 @@ Page({
     countState2Result:0,
     countState3Result:0,
     countState4Result:0,
-    //gantt diagram
-    // ec: {
-    //   onInit: initChart
-    // }
 
   },
 
@@ -510,14 +506,7 @@ db.collection("task").where({
   go_update(){
     this.getDetail()
   },
-  deleteImg(event) {
-    const delIndex = event.detail.index
-    const { fileList } = this.data
-    fileList.splice(delIndex, 1)
-    this.setData({
-      fileList
-    })
-  },
+  
   updateComment(){
     db.collection('project')
     .doc(id)
@@ -532,6 +521,37 @@ db.collection("task").where({
       }
     })
 
+  },
+  deleteImg(event) {
+    const delIndex = event.detail.index
+    const { fileList } = this.data
+    fileList.splice(delIndex, 1)
+    this.setData({
+      fileList
+    })
+  },
+  upload(){
+    wx.chooseImage({
+      sizeType: ['original', 'compressed'],
+      sourceType: ['album', 'camera'],
+      success:res => {
+        var fileList = this.data.fileList;
+        fileList.push({url: res.tempFilePaths[0]});
+        this.setData({ fileList: fileList });
+        // console.log("成功选择图片",fileList);
+      }
+    })
+  },
+
+  uploadImage(fileURL) {
+      wx.cloud.uploadFile({
+        cloudPath: 'feedback/'+ this.data.id + '/' + this.data.feedback_id + '/' + new Date().getTime() +'.png', // 上传至云端的路径
+        filePath: fileURL, // 小程序临时文件路径
+        success: res => {
+          // console.log("图片上传成功",res)
+        },
+        fail: console.error
+      })
   },
 
   /**

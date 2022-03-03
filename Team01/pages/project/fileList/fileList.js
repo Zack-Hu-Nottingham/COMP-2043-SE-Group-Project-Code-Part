@@ -17,8 +17,8 @@ Page({
 
         feedback:[],
         navigationBar: 'Details',
-        belongTo: {},
         feedbackBelongTo: '',
+        creater: '',
 
     },
 
@@ -26,6 +26,7 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+      // console.log(options)
 
         // 初始化语言
         var lan = wx.getStorageSync("languageVersion");
@@ -33,77 +34,70 @@ Page({
         this.setData({
             language: lan
         })
-        id = options.id;
-        index = options.index;
-
-        this.init();
-        this.getType();
+        db.collection('feedback')
+        .where({
+          _id: options.id
+        })
+        .get({
+          success: res =>{
+            // console.log(res.data)
+            this.setData({
+              feedback: res.data[0]
+            })
+          }
+        })
+        this.getBelongTo();
 
         wx.setNavigationBarTitle({
           title: this.data.navigationBar,
         });
     },
-    async init(){
-      await this.getDetailsFromTask();
-      await this.getBelongToAndPhase();
-      await this.getBelongTo();
-    },
 
-    getDetailsFromTask(){
-      return new Promise((resolve, reject) => {
-      db.collection('task')
-      .doc(id)
-      .field({
-        feedback: true,
-      })
-      .get({
-        success: res => {
-            // console.log(res.data.feedback[parseInt(index)])
-            this.setData({
-              feedback: res.data.feedback[parseInt(index)],
-            });
-            //console.log(this.data.feedback)
-
-            resolve(res.data);
-        },
-        fail: function(err) {
-          reject(err);
-          //console.log('cannot find')
-        }
-      })
-      })
-    },
-    getType(){
-      return new Promise((resolve, reject) => {
-      // console.log(this.data.feedback)
-      var type = this.data.dictionary.feedback_type0;
-      if(this.data.feedback.type==2){
-          type = this.data.dictionary.feedback_type2;
-      }
-      else if(this.data.feedback.type==1){
-          type = this.data.dictionary.feedback_type0;
-      }
-      this.setData({
-        feedbackType: type,
-      });
-    })
-
-    },
-    getBelongToAndPhase(){
+    getBelongTo(){
       return new Promise((resolve, reject) => {
         //console.log(this.data.feedback.belongTo)
         db.collection('task')
-        .doc(this.data.feedback.belongTo)
+        .where({
+          _id: this.data.feedback.belongTo
+        })
         .field({
           belongTo: true,
           phase: true,
         })
         .get({
           success: res => {
-            this.setData({
-              belongTo: res.data
+            // console.log(res.data[0])
+            this.getPhase(res.data[0].phase);
+            db.collection('project')
+            .where({
+              _id:res.data[0].belongTo
             })
-            resolve(res.data);
+            .field({
+              name: true,
+            })
+            .get({
+              success: res => {
+                // console.log(res.data[0])
+                this.setData({
+                  feedbackBelongTo:res.data[0].name,
+                })
+                //console.log(this.data.feedback)
+                db.collection('user')
+                .where({
+                  _openid: this.data.feedback._openid
+                })
+                .field({
+                  nickName: true
+                })
+                .get({
+                  success: res=>{
+                    this.setData({
+                      creater:res.data[0].nickName
+                    })
+                  }
+                })
+              }
+            })
           },
           fail: function(err) {
             //console.log(err)
@@ -112,27 +106,11 @@ Page({
         })
       })
     },
-    getBelongTo(){
-      return new Promise((resolve) => {
-        //console.log('getBelongTo')
-        db.collection('project')
-        .where({
-          _id: _.eq(this.data.belongTo.belongTo),
-        })
-        .field({
-          name: true,
-        })
-        .get({
-          success: res => {
-            // console.log(res.data[0].name)
-            this.setData({
-              feedbackBelongTo: res.data[0].name
-            })
-            resolve();
-          },
-        })
+    getPhase(index){
+      // console.log(index)
+      this.setData({
+        phase: this.data.dictionary.current_phase_description[parseInt(index)]
       })
-
     },
 
     // 初始化语言

@@ -175,7 +175,6 @@ Page({
                   houseOwner: this.data.houseOwner_openid,
                   participant: this.data.participant,
 
-                  feedback: [],
                   fileList: this.data.fileList,
                   template: this.data.selectedTemplate,
 
@@ -187,7 +186,7 @@ Page({
 
                   currentPhase: 0,
                   currentPhaseDescription: this.data.currentPhaseDescription,
-                  feedback: [],
+                  // feedback: [],
                   fileList: [],
 
               }

@@ -190,7 +190,6 @@ Page({
       db.collection('task')
       .where({
         _openid: _.eq(openid),
-        
         feedback: _.exists(true)
       })
       .field({
@@ -252,23 +251,28 @@ Page({
   },
 
   clickToChangeIsRead(event) {
-    const x = 1;
-    console.log(event)
-    db.collection('task').where({
-      _id: event.currentTarget.dataset.taskid
-    }).update({
-      // data 传入需要局部更新的数据
-      data: {
-        feedback:{
-          isRead:x
-        }
-      }
-    }).then(res => {
-      console.log('修改isRead成功', res)
+    // // console.log(event.currentTarget.dataset)
+    // // console.log(event.currentTarget.dataset.taskid)
+    // db.collection('task')
+    // .where({
+    //   _id: event.currentTarget.dataset.taskid
+    // })
+    // .update({
+    //   // data 传入需要局部更新的数据
+    //   data: {
+    //     feedback:{
+    //       0:{
+    //         isRead: 1
+    //       }
+    //     }
+    //   },
+    // })
+    // .then(res => {
+    //   console.log('修改isRead成功', res)
       
-    }).catch(res => {
-      console.log('修改isRead失败', res)
-    })
+    // }).catch(res => {
+    //   console.log('修改isRead失败', res)
+    // })
   
   },
 
