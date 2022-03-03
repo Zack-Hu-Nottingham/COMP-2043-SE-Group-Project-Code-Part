@@ -37,6 +37,7 @@ Page({
     messageList: [],
 
 
+
     /**
      * Projects page's data
      */
@@ -248,6 +249,27 @@ Page({
     wx.navigateTo({
       url: '../message/message/message?sender=' + event.target.id,
     })
+  },
+
+  clickToChangeIsRead(event) {
+    const x = 1;
+    console.log(event)
+    db.collection('task').where({
+      _id: event.currentTarget.dataset.taskid
+    }).update({
+      // data 传入需要局部更新的数据
+      data: {
+        feedback:{
+          isRead:x
+        }
+      }
+    }).then(res => {
+      console.log('修改isRead成功', res)
+      
+    }).catch(res => {
+      console.log('修改isRead失败', res)
+    })
+  
   },
 
 
