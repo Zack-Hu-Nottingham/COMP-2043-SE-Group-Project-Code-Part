@@ -303,6 +303,11 @@ Page({
       .then(res => {
         //console.log(res)
         for (var idx in res.data) {
+
+          if(res.data.state == 2 || res.data.state == 4){
+            continue;
+          }
+
           if(res.data[idx].startTime == ''){
             wx.cloud.callFunction({
               name: 'updateState',
