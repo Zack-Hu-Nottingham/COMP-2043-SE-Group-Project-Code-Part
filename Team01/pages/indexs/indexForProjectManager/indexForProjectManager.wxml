@@ -4,7 +4,6 @@
 <!-- Toast -->
 <van-toast id="van-toast" />
 
-
 <!-- Bottom tabbar -->
 <van-tabbar active="{{ active }}" bind:change="onChangeTab">
   <van-tabbar-item icon="chat-o">{{dictionary.message_page}}</van-tabbar-item>
@@ -69,17 +68,17 @@
   <van-popup show="{{ show }}" custom-style="width:75%; height: 30%;"bind:close="onClose">
 
 <van-cell-group style="padding-top: 80rpx">
-<van-field model:value="{{ value }}" label="旧用户名" left-icon="contact" placeholder="{{ name }}" disabled border="{{ false }}">
-</van-field>
+  <van-field model:value="{{ value }}" label="旧用户名" left-icon="contact" placeholder="{{ name }}" disabled border="{{ false }}">
+  </van-field>
 
-<van-field value="{{ value }}" label="新用户名" left-icon="contact" placeholder="{{ changetip }}" bindinput='userNameInput' border="{{ false }}">
-</van-field>
- </van-cell-group>
+  <van-field value="{{ value }}" label="新用户名" left-icon="contact" placeholder="{{ changetip }}" bindinput='userNameInput' border="{{ false }}">
+  </van-field>
+</van-cell-group>
+
  <van-button class="van-button" round style="padding-top: 40rpx;padding-left:20% ;" type="info" bindtap="forNotice" >保存</van-button>
  <!--
  <van-dialog useslot id="van-dialog"></van-dialog>
 -->
- <van-toast id="van-toast" />
 </van-popup>
 
   <van-cell center title="{{dictionary.identity}}" value="{{identity}}" />

@@ -4,8 +4,11 @@ import Toast from '../../../miniprogram_npm/@vant/weapp/toast/toast';
 const app = getApp();
 
 const languageUtils = require("../../../language/languageUtils");
+
 const db = wx.cloud.database();
+
 const _ = db.command;
+
 const lib = require('../../../utils/util');
 
 Page({
@@ -277,18 +280,6 @@ Page({
   /**
    * More page's method
    */
-  
-  onSetting: function(){
-    wx.navigateTo({
-      url: '../../more/setting/setting',
-    })
-  },
-
-  onMoreInfo: function(){
-    wx.navigateTo({
-      url: '../../more/moreInfo/moreInfo',
-    })
-  },
 
 
   // 点击language展示选项
