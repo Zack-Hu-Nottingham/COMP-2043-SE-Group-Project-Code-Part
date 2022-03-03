@@ -93,6 +93,11 @@
       <van-icon name="ellipsis" />
     </view>
   </van-cell>
+  <van-cell center title="邀请用户" clickable="true" bindtap="onShareAppMessage">
+    <van-button round class="button-share" open-type="share"> 
+      <van-icon name="friends-o" />
+    </van-button>
+  </van-cell>
 
 </van-cell-group>
 
@@ -100,5 +105,6 @@
     <van-cell center icon="setting-o"/>
     <van-cell center title="{{dictionary.language}}" value="{{languageList[language]}}" icon="" is-link clickable="true" bindtap="onChangeLan" class="settingForTest"/>
   </van-cell-group>
+
 
 </view>

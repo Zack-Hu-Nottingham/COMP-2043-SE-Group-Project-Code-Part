@@ -182,8 +182,13 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-
+  onShareAppMessage: function (e) {
+    return{
+      title:'', //自定义标题
+      path: '', //好友点击后跳转页面 
+      desc: '', // 描述
+      imageUrl: '' //分享的图片路径
+    }
   },
 
 
@@ -334,7 +339,6 @@ Page({
       url: '../../more/moreInfo/moreInfo',
     })
   },
-
 
   // 点击language展示选项
   onChangeLan(event) {

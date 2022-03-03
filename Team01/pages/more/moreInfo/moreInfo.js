@@ -11,11 +11,11 @@ Page({
      * 页面的初始数据
      */
     data: {
-        openid : "",
+        changetip: '请输入新用户名',
+        name : "",
         title:'More Information',
         position:'project manager',
-        phonenumber: '10086',
-        weixinid:'10010',
+        phonenumber: '86',
         userInfo: {},
         hasUserInfo: false,
         canIUse: wx.canIUse('button.open-type.getUserInfo'),
@@ -53,8 +53,9 @@ Page({
         wx.setNavigationBarTitle({
           title: this.data.title
         })
+
         this.setData({
-          openid : app.globalData.userInfo._openid
+          name : app.globalData.userInfo.nickName,
         })
 
     },
@@ -125,11 +126,15 @@ Page({
 
     //}
     forNotice: function (e) {
+ 
       Toast({
         type: 'success',
         message: '提交成功',
         onClose: () => {
-           this.setData({ show: false});
+           this.setData({ 
+             show: false,
+             changetip: "",
+          });
           //console.log('执行OnClose函数');
         },
       });

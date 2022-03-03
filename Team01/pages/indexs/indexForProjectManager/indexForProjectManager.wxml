@@ -75,7 +75,11 @@
       <van-icon name="ellipsis" />
     </view>
   </van-cell>
-
+  <van-cell center title="邀请用户" clickable="true" bindtap="onShareAppMessage">
+    <van-button round class="button-share" open-type="share"> 
+      <van-icon name="friends-o" />
+    </van-button>
+  </van-cell>
 </van-cell-group>
 
   <van-cell-group inset style="padding: 30rpx;">
