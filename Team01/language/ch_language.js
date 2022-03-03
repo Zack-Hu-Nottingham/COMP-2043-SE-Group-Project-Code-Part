@@ -57,6 +57,7 @@ var Languague = {
     end_time: "结束时间",
     expected_start_time: "预期开始时间",
     expected_end_time: "预期结束时间",
+    current_phase: "当前阶段",
     description: "描述",
     description_hint: "少于500字",
     state_information: "状态信息",
