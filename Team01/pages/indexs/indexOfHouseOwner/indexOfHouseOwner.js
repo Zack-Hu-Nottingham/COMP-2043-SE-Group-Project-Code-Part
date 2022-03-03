@@ -66,28 +66,21 @@ Page({
     choosePriority: "",
     priorityShow: false,
 
+    changetip: '请输入新用户名',
+    name : "",
+    show: false,
+    value: '', 
+
     Filter: ['Time', 'Priority'],
-
-    // priority: [
-    //   {
-    //     name: 'Highest',
-    //   },
-    //   {
-    //     name: 'High'
-    //   },
-    //   {
-    //     name: 'Normal'
-    //   },
-    //   {
-    //     name: 'Low'
-    //   },
-    //   {
-    //     name: 'Lowest'
-    //   },
-    // ],
-
   },
 
+  showPopup() {
+    this.setData({ show: true });
+  },
+
+  onClose() {
+    this.setData({ show: false});
+  },
 
   /**
    * 生命周期函数--监听页面加载
@@ -109,8 +102,10 @@ Page({
     })
 
     this.setData({
+      identity: this.data.dictionary.house_owner,
+      openid: options.openid,
+      name : app.globalData.userInfo.nickName,
       userInfo: app.globalData.userInfo,
-      openid: options.openid
     })
 
   },
@@ -166,8 +161,13 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-
+  onShareAppMessage: function (e) {
+    return{
+      title:'', //自定义标题
+      path: '', //好友点击后跳转页面 
+      desc: '', // 描述
+      imageUrl: '' //分享的图片路径
+    }
   },
 
 
@@ -311,13 +311,6 @@ Page({
   /**
    * More page's method
    */
-  
-  onMoreInfo: function(){
-    wx.navigateTo({
-      url: '../../more/moreInfo/moreInfo',
-    })
-  },
-
 
   // 点击language展示选项
   onChangeLan(event) {
@@ -555,6 +548,31 @@ Page({
     })
   },
 
+  userNameInput:function(e){
+    this.setData({
+      value:e.detail.value
+    })
+  },
+
+  forNotice: function (e) {
+    let value= this.data.value;
+    if (value=='') {
+      Toast.fail('空用户名');
+    } else {
+      Toast({
+        type: 'success',
+        message: '提交成功',
+        onClose: () => {
+           this.setData({ 
+             show: false,
+             value: '',
+          });
+          //console.log('执行OnClose函数');
+        },
+      }); 
+    }
+  },
+    
   listenerActionSheet: function() {
     this.setData({
       //取反

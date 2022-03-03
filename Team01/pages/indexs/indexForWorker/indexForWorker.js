@@ -44,8 +44,19 @@ Page({
      * More page's data
      */
 
+    changetip: '请输入新用户名',
+    name : "",
+    show: false,
+    value: '',
   },
 
+  showPopup() {
+    this.setData({ show: true });
+  },
+
+  onClose() {
+    this.setData({ show: false});
+  },
 
   /**
    * 生命周期函数--监听页面加载
@@ -71,6 +82,19 @@ Page({
     wx.setNavigationBarTitle({
       title: this.data.pageName[this.data.active],
     })
+
+    this.setData({
+      identity: this.data.dictionary.worker,
+      name : app.globalData.userInfo.nickName,
+    })
+
+
+  },
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
 
   },
 
@@ -102,6 +126,17 @@ Page({
 
   },
 
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function (e) {
+    return{
+      title:'', //自定义标题
+      path: '', //好友点击后跳转页面 
+      desc: '', // 描述
+      imageUrl: '' //分享的图片路径
+    }
+  },
 
 
 
@@ -240,8 +275,9 @@ Page({
   },
 
   clickProject(projectId) {
+    console.log(projectId.currentTarget.id)
     wx.navigateTo({
-      url: '../../project/projectInfoForWorker/projectInfoForWorker?id='+projectId,
+      url: '../../project/projectInfoForWorker/projectInfoForWorker?id='+projectId.currentTarget.id,
     })
   },
 
@@ -282,12 +318,6 @@ Page({
    */
   
 
-  onMoreInfo: function(){
-    wx.navigateTo({
-      url: '../../more/moreInfo/moreInfo',
-    })
-  },
-
 
   // 点击language展示选项
   onChangeLan(event) {
@@ -299,6 +329,31 @@ Page({
   // 更新数据
   go_update(){
     this.getData()
-  }
+  },
   
+  //更新用户名
+  userNameInput:function(e){
+    this.setData({
+      value:e.detail.value
+    })
+  },
+
+  forNotice: function (e) {
+    let value= this.data.value;
+    if (value=='') {
+      Toast.fail('空用户名');
+    } else {
+      Toast({
+        type: 'success',
+        message: '提交成功',
+        onClose: () => {
+           this.setData({ 
+             show: false,
+             value: '',
+          });
+          //console.log('执行OnClose函数');
+        },
+      }); 
+    }
+  } 
 })

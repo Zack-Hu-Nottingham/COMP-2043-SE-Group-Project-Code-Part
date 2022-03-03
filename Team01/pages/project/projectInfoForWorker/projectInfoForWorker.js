@@ -144,7 +144,6 @@ Page({
    */
   onLoad: function (options) {
 
-    console.log(options.stringify())
 
     // 初始化语言
     var lan = wx.getStorageSync("languageVersion");
@@ -158,11 +157,6 @@ Page({
 
     // 从数据库中根据id获取数据
     this.getDetail()
-
-    // 获取userInfo
-    this.setData({
-      userInfo: app.globalData.userInfo
-    })
 
   },
 
