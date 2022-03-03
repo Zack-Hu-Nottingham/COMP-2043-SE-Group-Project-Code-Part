@@ -53,6 +53,18 @@
                     "pathName": "pages/project/fileList/fileList",
                     "query": "id=5b049cc8622034c80f0bb582383e7ed5&index=0",
                     "scene": null
+                },
+                {
+                    "name": "",
+                    "pathName": "pages/project/taskInfo/taskInfo",
+                    "query": "id=617ef50c6220516409747d2677a5c985",
+                    "scene": null
+                },
+                {
+                    "name": "",
+                    "pathName": "pages/project/fileList/fileList",
+                    "query": "id=617ef50c6220516409747d2677a5c985&index=0",
+                    "scene": null
                 }
             ]
         }

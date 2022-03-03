@@ -165,9 +165,10 @@ Page({
   // 获取反馈信息
   getFeedbackInfo(openid) {
     return new Promise((resolve, reject) => {
-      db.collection('project')
+      db.collection('task')
       .where({
         _openid: _.eq(openid),
+        
         feedback: _.exists(true)
       })
       .field({
@@ -295,7 +296,7 @@ Page({
     this.setData({
       currentTime: _currentTime
     });
-    console.log(this.data.currentTime)
+    // console.log(this.data.currentTime)
 
     new Promise((resolve, reject) => {
       db.collection('task')
@@ -303,6 +304,11 @@ Page({
       .then(res => {
         //console.log(res)
         for (var idx in res.data) {
+
+          if(res.data.state == 2 || res.data.state == 4){
+            continue;
+          }
+
           if(res.data[idx].startTime == ''){
             wx.cloud.callFunction({
               name: 'updateState',

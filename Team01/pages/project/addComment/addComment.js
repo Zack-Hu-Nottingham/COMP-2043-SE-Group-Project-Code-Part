@@ -151,6 +151,7 @@ Page({
                 owner: app.globalData.userInfo.nickName, //创建人
                 belongTo: this.data.id, //所属项目/任务
                 createTime: this.formatDate(new Date()),
+                isRead: 0,
             })
             for(var i = 0; i< this.data.fileList.length; i++ ){
                 this.uploadImage(this.data.fileList[i].url);
