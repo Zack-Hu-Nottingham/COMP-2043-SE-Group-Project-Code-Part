@@ -570,14 +570,13 @@ Page({
   },
 
   forNotice: function (e) {
- 
     Toast({
       type: 'success',
       message: '提交成功',
       onClose: () => {
          this.setData({ 
            show: false,
-           changetip: '',
+           value: '',
         });
         //console.log('执行OnClose函数');
       },
