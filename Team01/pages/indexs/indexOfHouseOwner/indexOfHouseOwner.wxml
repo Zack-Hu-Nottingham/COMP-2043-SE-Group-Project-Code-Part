@@ -84,9 +84,26 @@
 <van-cell-group inset>
   <van-cell center icon="user-o" />
   <!-- title="{{dictionary.user_info}}" -->
-  <van-cell center title="{{dictionary.user_name}}">
+  <van-cell center title="{{dictionary.user_name}}" is-link bind:click="showPopup">
       <open-data type="userNickName"></open-data>
   </van-cell>
+  
+  <van-popup show="{{ show }}" custom-style="width:75%; height: 30%;"bind:close="onClose">
+
+<van-cell-group style="padding-top: 80rpx">
+  <van-field model:value="{{ value }}" label="旧用户名" left-icon="contact" placeholder="{{ name }}" disabled border="{{ false }}">
+  </van-field>
+  
+  <van-field value="{{ value }}" label="新用户名" left-icon="contact" placeholder="{{ changetip }}" autosize border="{{ false }}">
+  </van-field>
+</van-cell-group>
+<van-button class="van-button" round style="padding-top: 40rpx;padding-left:20% ;" type="info" bindtap="forNotice" >保存</van-button>
+<!--
+  <van-dialog useslot id="van-dialog"></van-dialog>
+-->
+<van-toast id="van-toast" />
+</van-popup>
+  
   <van-cell center title="{{dictionary.identity}}" value="{{identity}}" />
   <van-cell center title="{{dictionary.more}}" clickable="true" bindtap="onMoreInfo" class="moreInfoForTest">
     <view slot="">

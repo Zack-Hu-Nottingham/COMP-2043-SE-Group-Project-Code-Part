@@ -72,6 +72,11 @@ Page({
     choosePriority: "",
     priorityShow: false,
 
+    changetip: '请输入新用户名',
+    name : "",
+    show: false,
+    value: '', 
+
     Filter: [
       {
         name: 'Time',
@@ -104,6 +109,13 @@ Page({
 
   },
 
+  showPopup() {
+    this.setData({ show: true });
+  },
+
+  onClose() {
+    this.setData({ show: false});
+  },
 
   /**
    * 生命周期函数--监听页面加载
@@ -126,7 +138,8 @@ Page({
 
     this.setData({
       identity: this.data.dictionary.house_owner,
-      openid: options.openid
+      openid: options.openid,
+      name : app.globalData.userInfo.nickName,
     })
 
   },
@@ -556,4 +569,18 @@ Page({
     })
   },
 
+  forNotice: function (e) {
+ 
+    Toast({
+      type: 'success',
+      message: '提交成功',
+      onClose: () => {
+         this.setData({ 
+           show: false,
+           changetip: '',
+        });
+        //console.log('执行OnClose函数');
+      },
+    });
+  }  
 })
