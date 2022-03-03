@@ -165,9 +165,10 @@ Page({
   // 获取反馈信息
   getFeedbackInfo(openid) {
     return new Promise((resolve, reject) => {
-      db.collection('project')
+      db.collection('task')
       .where({
         _openid: _.eq(openid),
+        
         feedback: _.exists(true)
       })
       .field({

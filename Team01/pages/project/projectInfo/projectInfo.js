@@ -178,7 +178,7 @@ Page({
             for (let j = 0; j < res.data.length; j++) {
               arraypro.push(res.data[j])
             }
-            console.log(arraypro);
+            //console.log(arraypro);
             if(x0==state0BatchTimes){
               this.setData({
                 unstarted : arraypro
