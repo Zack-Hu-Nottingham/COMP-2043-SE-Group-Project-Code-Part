@@ -1,4 +1,5 @@
 // pages/project/fileList/fileList.js
+const languageUtils = require("../../../language/languageUtils");
 const db = wx.cloud.database();
 const _ = db.command;
 Page({
@@ -7,13 +8,19 @@ Page({
      * 页面的初始数据
      */
     data: {
-        fileList: [],
+        // 存放双语
+        dictionary: {},
+        language: 0,
+        languageList: ["简体中文", "English"],
+
+        feedback:{},
         navigationBar: 'Details',
+        fileList: [],
         feedbackType: '',
         details: '',
         createTime: '',
         ownerId: '',
-        sponsor:'',
+        owner:'',
 
     },
 
@@ -21,53 +28,63 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+
+        // 初始化语言
+        var lan = wx.getStorageSync("languageVersion");
+        this.initLanguage();
+        this.setData({
+            language: lan
+        })
+
       db.collection('project')
       .doc(options.id)
       .get({
         success: res => {
-            var type = 'Project Delay';
-            if(res.data.feedback[options.index].type==2){
-                type = 'Task Need Rework';
-            }
-            else if(res.data.feedback[options.index].type==1){
-                type = 'Task Delay';
-            }
-
-          this.setData({
-            fileList: res.data.feedback[options.index].fileList,
-            details: res.data.feedback[options.index].details,
-            createTime: res.data.feedback[options.index].createTime,
-            feedbackType: type,
-            ownerId: res.data.feedback[options.index].owner,
-          }),
+            this.setData({
+              feedback: res.data.feedback[options.index],
+            }),
+            console.log(this.data.feedback);
+            this.getType();
+            this.getBelongTo();
 
           wx.setNavigationBarTitle({
-            title: this.data.navigationBar,
-          }),
-          // console.log(this.data.ownerId)
-          this.getOwner();
+            title: this.data.navigåationBar,
+          });
         },
         fail: function(err) {
           // console.log(err)
         }
       })
     },
-    getOwner() {
-        return new Promise((resolve, reject) => {
-        db.collection('user')
-          .where({
-            _openid: _.eq(this.data.ownerId)
-          })
-          .get()
-          .then(res => {
-            // console.log(res.data)
-            this.setData({
-              sponsor: res.data[0].name
-            })
-          })
-        })
-        
-      },
+    getType(){
+
+      var type = this.data.dictionary.feedback_type0;
+      if(this.data.feedback.type==2){
+          type = this.data.dictionary.feedback_type2;
+      }
+      else if(this.data.feedback.type==1){
+          type = this.data.dictionary.feedback_type0;
+      }
+      this.setData({
+        feedbackType: type,
+      });
+
+    },
+    getBelongTo(){
+
+    },
+
+    // 初始化语言
+    initLanguage() {
+      var self = this;
+      //获取当前小程序语言版本所对应的字典变量
+      var lang = languageUtils.languageVersion();
+
+      // 页面显示
+      self.setData({
+      dictionary: lang.lang.index,
+      });
+  },
 
     /**
      * 生命周期函数--监听页面初次渲染完成

@@ -227,7 +227,7 @@ Page({
             taskList: res.data[0].task,
             isTaskEmpty: false,
           })
-        }
+        } 
         
         resolve("成功获取项目列表")
       })

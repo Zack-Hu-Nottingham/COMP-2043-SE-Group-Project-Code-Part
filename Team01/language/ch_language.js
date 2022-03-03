@@ -87,7 +87,7 @@ var Languague = {
     // New project
     project_name: "项目名称",
     choose_template: "选择模板",
-    expected_start_time: "预计开始时间",
+    expected_start_time: "选择开始时间",
     expetced_end_time:"预计结束时间",
     expected_duration:"预计工期时长",
     house_owner: "业主",
@@ -102,7 +102,10 @@ var Languague = {
     feedback_type1:"任务延期",
     feedback_type2:"任务需返工",
     create_comment:"新建评论",
-
+    feedback_type:"反馈类型",
+    creater:"创建人",
+    create_time:"创建时间",
+    belong_to:"所属项目",
 
     // contact list page
     copy_phone_confirm: "已复制用户电话",

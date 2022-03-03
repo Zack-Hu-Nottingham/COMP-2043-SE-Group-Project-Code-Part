@@ -88,7 +88,7 @@ var Languague = {
     // New project
     project_name: "Project Name",
     choose_template: "Choose Template",
-    expected_start_time: "Expected start time",
+    expected_start_time: "Choose start time",
     expetced_end_time: "Expected end time",
     expected_duration:"Estimated duration of work",
     house_owner: "House Owner",
@@ -103,6 +103,10 @@ var Languague = {
     feedback_type1:"Task Delay",
     feedback_type2:"Task need rework",
     create_comment:"Create comment",
+    feedback_type:"Feedback Type",
+    creater:"Creater",
+    create_time:"Create Time",
+    belong_to:"Belong To",
 
     // contact list page
     copy_phone_confirm: "Phone number has been copied",
