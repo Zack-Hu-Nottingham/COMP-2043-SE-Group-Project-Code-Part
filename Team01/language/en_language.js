@@ -103,6 +103,10 @@ var Languague = {
     feedback_type1:"Task Delay",
     feedback_type2:"Task need rework",
     create_comment:"Create comment",
+    feedback_type:"Feedback Type",
+    creater:"Creater",
+    create_time:"Create Time",
+    belong_to:"Belong To",
 
     // contact list page
     copy_phone_confirm: "Phone number has been copied",

@@ -163,6 +163,7 @@ Page({
 
   // 获取项目简要信息
   getProjectInfo(projectId) {
+    console.log(projectId)
     return new Promise((resolve, reject) => {
       db.collection('project')
       .doc(projectId)
@@ -213,6 +214,7 @@ Page({
   
   // 获取任务列表
   getTaskList() {
+    
     return new Promise((resolve, reject) => {
       db.collection('user')
       .where({
@@ -232,7 +234,8 @@ Page({
       })
       .catch(err => {
         reject("请求项目列表失败")
-      })}
+      })
+    }
     )
   },
 
