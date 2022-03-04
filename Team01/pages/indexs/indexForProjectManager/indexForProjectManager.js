@@ -120,7 +120,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    wx.stopPullDownRefresh()
   },
 
   /**
@@ -187,15 +187,11 @@ Page({
   // 获取反馈信息
   getFeedbackInfo(openid) {
     return new Promise((resolve, reject) => {
-      db.collection('task')
+      db.collection('feedback')
       .where({
         _openid: _.eq(openid),
-        feedback: _.exists(true)
       })
-      .field({
-        feedback:true
-      })
-      .orderBy('feedback.createTime', 'desc')
+      .orderBy('createTime', 'desc')
       .get()
       .then(res => {
         //console.log(res.data.length)
@@ -203,7 +199,7 @@ Page({
         if (res.data.length != 0) {
           for (var idx in res.data) {
             this.setData({
-              messageList: this.data.messageList.concat(res.data[idx].feedback)
+              messageList: this.data.messageList.concat(res.data[idx])
             })
           }
           
@@ -251,28 +247,25 @@ Page({
   },
 
   clickToChangeIsRead(event) {
-    // // console.log(event.currentTarget.dataset)
-    // // console.log(event.currentTarget.dataset.taskid)
-    // db.collection('task')
-    // .where({
-    //   _id: event.currentTarget.dataset.taskid
-    // })
-    // .update({
-    //   // data 传入需要局部更新的数据
-    //   data: {
-    //     feedback:{
-    //       0:{
-    //         isRead: 1
-    //       }
-    //     }
-    //   },
-    // })
-    // .then(res => {
-    //   console.log('修改isRead成功', res)
+    console.log(event)
+    // console.log(event.currentTarget.dataset.taskid)
+    db.collection('feedback')
+    .where({
+      _id: event.currentTarget.dataset.taskid
+    })
+    .update({
+      // data 传入需要局部更新的数据
+      data: {
+          isRead:1
+        }
+     
+    })
+    .then(res => {
+      console.log('修改isRead成功', res)
       
-    // }).catch(res => {
-    //   console.log('修改isRead失败', res)
-    // })
+    }).catch(res => {
+      console.log('修改isRead失败', res)
+    })
   
   },
 
