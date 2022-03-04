@@ -183,37 +183,55 @@ Page({
       })}
     )},
 
-
-  // 获取反馈信息
-  getFeedbackInfo(openid) {
-    return new Promise((resolve, reject) => {
-      db.collection('feedback')
-      .where({
-        _openid: _.eq(openid),
-      })
-      .orderBy('createTime', 'desc')
-      .get()
-      .then(res => {
-        //console.log(res.data.length)
-      
-        if (res.data.length != 0) {
-          for (var idx in res.data) {
+      getFeedbackInfo(openid){
+        return new Promise((resolve, reject) =>{
+          db.collection('feedback')
+          .orderBy('feedback.createTime', 'desc')
+          .get()
+          .then(res =>{
+            // console.log(res.data)
             this.setData({
-              messageList: this.data.messageList.concat(res.data[idx])
+              messageList: res.data
             })
-          }
-          
-        }
-        
-        resolve("成功获取项目信息")
-        console.log('成功获取项目消息',this.data.messageList)
-      })
-      .catch(err => {
-        console.log('请求项目消息失败', err)
-        //reject("请求项目信息失败")
-      })}
+          })
+        })
+      },
+
+  // // 获取反馈信息
+  // getFeedbackInfo(openid) {
+  //   return new Promise((resolve, reject) => {
+  //     db.collection('task')
+  //     .where({
+  //       _openid: _.eq(openid),
+  //       feedback: _.exists(true)
+  //     })
+  //     .field({
+  //       feedback:true
+  //     })
+  //     .orderBy('feedback.createTime', 'desc')
+  //     .get()
+  //     .then(res => {
+  //       //console.log(res.data.length)
       
-    )},
+  //       if (res.data.length != 0) {
+  //         for (var idx in res.data) {
+  //           this.setData({
+  //             messageList: this.data.messageList.concat(res.data[idx].feedback)
+  //           })
+  //         }
+          
+  //       }
+        
+  //       resolve("成功获取项目信息")
+  //       console.log('成功获取项目消息',this.data.messageList)
+  //     })
+  //     .catch(err => {
+  //       console.log('请求项目消息失败', err)
+  //       //reject("请求项目信息失败")
+  //     })
+  //   }
+      
+  //   )},
 
   // 更改tab选项时对应的逻辑
   onChangeTab(event) {

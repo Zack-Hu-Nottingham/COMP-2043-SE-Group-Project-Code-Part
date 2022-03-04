@@ -10,8 +10,8 @@
 
 <van-cell-group inset style="padding: 30rpx">
   <van-cell title="{{dictionary.belong_to}}" value="{{belongTo}}" />
-  <van-cell title="{{dictionary.stage_of_project}}" value="{{taskPage.stageOfProject}}" />
-  <van-field model:value="{{taskPage.descriptions}}" input-align="right" clearable label="{{dictionary.description}}" placeholder="{{taskPage.descriptions}}" border="{{ false }}" bind:blur="onTaskDescriptionBlur">
+  <van-cell title="{{dictionary.stage_of_project}}" value="{{taskPage.state}}" />
+  <van-field model:value="{{taskPage.taskDescription}}" input-align="right" clearable label="{{dictionary.description}}" placeholder="{{taskPage.descriptions}}" border="{{ false }}" bind:blur="onTaskDescriptionBlur">
   </van-field>
   <van-cell title="{{dictionary.current_state}}" value="{{taskPage.state}}" />
 </van-cell-group>
@@ -32,10 +32,10 @@
  
  <!-- feedback -->
  <van-cell-group  title="{{dictionary.comment_list}}">
-  <van-cell-group inset class="cell-group" wx:for="{{ feedback }}" wx:key="index">
+  <van-cell-group inset class="cell-group" wx:for="{{feedback}}" wx:key="index">
   <view class="projectDelay">
-    <van-cell  title="{{item.type.name}}" label="{{item.details}}" clickable
-      link-type="navigateTo" url="/pages/project/fileList/fileList?id={{item.belongTo}}&index={{index}}">{{item.createTime}}</van-cell>
+    <van-cell  title="{{item.type.name}}" label="{{item.description}}" clickable
+      link-type="navigateTo" url="/pages/project/fileList/fileList?id={{item._id}}">{{item.createTime}}</van-cell>
   </view>
   </van-cell-group> </van-cell-group>
 

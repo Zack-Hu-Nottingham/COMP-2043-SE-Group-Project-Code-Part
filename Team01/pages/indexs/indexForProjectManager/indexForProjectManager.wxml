@@ -38,7 +38,7 @@
     <view wx:for="{{messageList}}" wx:key="index">
       <view wx:if="{{item.isRead == 0}}" class="notReadMessage">
         <van-cell  title="{{item.owner}}" clickable
-        link-type="navigateTo" url="/pages/project/fileList/fileList?id={{item.belongTo}}&index={{index}}" label="{{item.type.name}}: {{item.description}}" value="{{item.createTime}}" id="{{item.owner}}" class="messageForTest" bindtap="clickToChangeIsRead" data-isRead="{{item.isRead}}" data-taskID="{{item._id}}"/>
+        link-type="navigateTo" url="/pages/project/fileList/fileList?id={{item._id}}" label="{{item.type.name}}: {{item.description}}" value="{{item.createTime}}" id="{{item.owner}}" class="messageForTest" bindtap="clickToChangeIsRead" data-isRead="{{item.isRead}}" data-taskID="{{item.belongTo}}"/>
       </view>
 
       <view wx:elif="{{item.isRead != 0}}" >

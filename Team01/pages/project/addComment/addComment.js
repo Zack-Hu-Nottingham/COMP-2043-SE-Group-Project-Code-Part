@@ -161,7 +161,10 @@ Page({
     },
     updateDB(){
 
-            this.data.feedback.push(this.data.feedback_id);
+            this.data.feedback.push({
+                _id: this.data.feedback_id,
+                createTime: this.formatDate(new Date()),
+            });
             
             db.collection('task').doc(this.data.id).update({
                 // data 传入需要局部更新的数据

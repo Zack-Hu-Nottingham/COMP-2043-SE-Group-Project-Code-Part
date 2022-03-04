@@ -63,7 +63,7 @@ Page({
     // 根据id获得对应数据
     this.getDetail()
 
-    this.updateComment();
+    // this.updateComment();
 
   },
 
@@ -154,38 +154,30 @@ Page({
       console.log('修改task日期失败', res)
     })
   },
+  
 
   getDetail(){
+    //根据task_id查询task的name和task信息
+    //return new Promise(function (resolve) {
     db.collection('task')
       .doc(id)
-      .get()
-      .then(res => {
-        wx.setNavigationBarTitle({
-          title: res.data.name,
-        }),
-
-        this.setData({
-          taskPage: res.data,
-        })
-
-      })
-      .catch(err => {
-        console.log('请求失败', err)
-      })
-      .then(res => {
-        //console.log(this.data.taskPage.belongTo)
-       db.collection('project')
-        .doc(this.data.taskPage.belongTo)
-        .get()
-        .then(res => {
+      .get({
+        success: res => {
+          // console.log(res.data)
           this.setData({
-            belongTo: res.data.name
-          })
-        })
+            taskPage: res.data,
+            belongTo: res.data.belongTo,
+          });
+          wx.setNavigationBarTitle({
+            title: res.data.name,
+          });
+          this.updateComment(res.data.feedback)
+        },
+        fail: err => {
+          console.log('拉取任务信息请求失败', err)
+        }
       })
-
-
-
+    //})
   },
 
   onPriorityClose() {
@@ -267,23 +259,46 @@ Page({
       fileList
     })
   },
-  updateComment(){
-    db.collection('task')
-    .doc(id)
-    .field({
-      feedback: true
-    })
-    .get({
-      success: res => {
-        this.setData({
-          feedback: res.data.feedback,
-        });
-        // console.log(this.data.feedback)
-      },
-      fail: function(err) {
-        // console.log(err)
-      }
-    })
+  updateComment(list){
+    var newList = [];
+    // console.log(list)
+    for(var i=0; i< list.length; i++){
+      db.collection('feedback')
+      .where({
+        _id: list[i]._id
+      })
+      .get({
+        success: res =>{
+          // console.log(res.data)
+          newList.push(res.data[0])
+          // console.log(newList)
+          this.setData({
+            feedback: newList
+          })
+        }
+      })
+    }
+    // console.log(this.data.feedback)
 
+  },
+  getList(list){
+    var newList = [];
+    // console.log(list)
+    for(var i=0; i< list.length; i++){
+      db.collection('feedback')
+      .where({
+        _id: list[i]._id
+      })
+      .get({
+        success: res =>{
+          newList.push(res.data[0])
+          // console.log(newList)
+        }
+      })
+    }
+    this.setData({
+      feedback: newList
+    })
+    // console.log(this.data.feedback)
   },
 })

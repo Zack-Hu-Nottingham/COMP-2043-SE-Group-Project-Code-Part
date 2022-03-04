@@ -11,7 +11,14 @@
             "list": []
         },
         "miniprogram": {
-            "list": []
+            "list": [
+                {
+                    "name": "",
+                    "pathName": "pages/project/taskInfo/taskInfo",
+                    "query": "id=5b049cc86220c0720f212d8a2485bc4f",
+                    "scene": null
+                }
+            ]
         }
     }
 }
