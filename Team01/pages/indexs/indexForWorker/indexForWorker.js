@@ -257,8 +257,7 @@ Page({
       })
       .get()
       .then(res => {
-        console.log(res.data[0].task)
-        if(res.data[0].task != []) {
+        if(res.data[0].task.length != 0) {
           this.setData({
             taskList: res.data[0].task,
             isTaskEmpty: false,
@@ -275,7 +274,7 @@ Page({
   },
 
   clickProject(projectId) {
-    console.log(projectId.currentTarget.id)
+    // console.log(projectId.currentTarget.id)
     wx.navigateTo({
       url: '../../project/projectInfoForWorker/projectInfoForWorker?id='+projectId.currentTarget.id,
     })

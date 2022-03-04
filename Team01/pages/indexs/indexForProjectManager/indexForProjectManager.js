@@ -21,7 +21,7 @@ Page({
     /**
      * Global data
      */
-    active: 0,
+    active: 1,
     pageName: ['Message', 'Project', 'More'],
     currentTime: "",
 
