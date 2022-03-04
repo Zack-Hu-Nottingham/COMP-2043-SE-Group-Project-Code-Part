@@ -89,7 +89,7 @@ Page({
       belongTo: id,
       state: 0
     }).count().then(res => {
-      console.log(res.total);
+      console.log('unstarted: '+ res.total);
       
       this.setData({
         countState0Result : res.total
@@ -101,7 +101,7 @@ Page({
       belongTo: id,
       state: 1
     }).count().then(res => {
-      console.log(res.total);
+      console.log('processing: '+ res.total);
       
       this.setData({
         countState1Result : res.total
@@ -113,7 +113,7 @@ Page({
       belongTo: id,
       state: 2
     }).count().then(res => {
-      console.log(res.total);
+      console.log('completed: '+res.total);
       
       this.setData({
         countState2Result : res.total
@@ -125,7 +125,7 @@ Page({
       belongTo: id,
       state: 3
     }).count().then(res => {
-      console.log(res.total);
+      console.log('delayed: '+res.total);
       
       this.setData({
         countState3Result : res.total
@@ -137,7 +137,7 @@ Page({
       belongTo: id,
       state: 4
     }).count().then(res => {
-      console.log(res.total);
+      console.log('reworking: '+ res.total);
       
       this.setData({
         countState4Result : res.total
@@ -154,11 +154,16 @@ Page({
     this.setData({
       currentTab: e.currentTarget.dataset.idx
     })
+    console.log(this.data.currentTab)
+    if(this.data.currentTab == 2){
+      console.log('success')
+      wx.navigateTo({
+        url: '../testDiagram/testDiagram',
+      })
+    }
 
     // 载入task management页面的数据
     if (this.data.currentTab == 1) {
-
-
       const state0BatchTimes = Math.ceil(this.data.countState0Result / 20)
       //console.log(state0BatchTimes)
       var arraypro=[]
@@ -284,6 +289,7 @@ db.collection("task").where({
  
 }
     }
+    
 
       // db.collection("task")
       // .where({
@@ -639,6 +645,11 @@ db.collection("task").where({
 
   go_update(){
     this.getDetail()
+  },
+  goToGanttChart(){
+    wx.navigateTo({
+      url: '../testDiagram/testDiagram',
+    })
   }
 
 })
