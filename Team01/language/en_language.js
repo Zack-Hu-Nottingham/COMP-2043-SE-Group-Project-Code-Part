@@ -6,6 +6,8 @@ var Languague = {
     project_page: "Projects",
     dashboard_page: "Dashboard",
     more_page: "More",
+    task_info: "Task Information",
+    project_info: "Project Information",
 
     // message page
     notification: "Notification",
