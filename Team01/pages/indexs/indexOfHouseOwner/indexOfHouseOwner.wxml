@@ -30,7 +30,7 @@
     /> -->
     
     <!--默认action-sheet为隐藏，由排序栏触发-->
-    <action-sheet hidden="{{filterShow}}" bindchange="listenerActionSheet" >
+    <action-sheet hidden="{{filterShow}}" bindchange="listenerActionSheet">
       <block wx:for-items="{{Filter}}"> 
         <action-sheet-item bindtap="onFilterSelect" data-name="{{item}}">{{item}}</action-sheet-item>
       </block>

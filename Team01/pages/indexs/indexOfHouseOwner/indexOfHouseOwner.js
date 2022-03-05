@@ -461,6 +461,7 @@ Page({
   },
 
   onFilterSelect(e) {
+    console.log(e.currentTarget.dataset.name),
     this.setData({
       filterShow: !this.data.filterShow,
       filter: e.currentTarget.dataset.name
