@@ -72,6 +72,9 @@ Page({
     value: '', 
 
     Filter: ['Time', 'Priority'],
+
+    totalTask: 0,
+    updateIndex: 1,
   },
 
   showPopup() {
@@ -180,13 +183,15 @@ Page({
   // 初始化数据
   async getData(openid){
 
-    await this.updateState()
+    
 
     await this.getInfo()
 
     await this.getProjectInfo(this.data.openid)
+    
 
     for (var idx in this.data.project) {
+      await this.updateState(this.data.project[idx]._id)
       await this.getTaskInfo(this.data.project[idx]._id)
       // console.log(this.data.project[idx])
     }
@@ -329,7 +334,7 @@ Page({
     this.getData()
   },
 
-  updateState(){
+  updateState(ID){
 
     const _currentTime = lib.formatDate(new Date());
     this.setData({
@@ -337,84 +342,104 @@ Page({
     });
     console.log(this.data.currentTime)
 
-    new Promise((resolve, reject) => {
-      db.collection('task')
-      .get()
+    db.collection('task')
+      .where({
+        belongTo: ID,
+      })
+      .count()
       .then(res => {
-        //console.log(res)
-        for (var idx in res.data) {
+        this.setData({
+          totalTask: res.total,
+        })
+        this.setData({
+          updateIndex: this.data.totalTask / 20,
+        })
+        console.log(this.data.totalTask)
+        console.log(parseInt(this.data.updateIndex))
 
-          if(res.data.state == 2 || res.data.state == 4){
-            continue;
-          }
-
-          if(res.data[idx].startTime == ''){
-            wx.cloud.callFunction({
-              name: 'updateState',
-              data: {
-                id: res.data[idx]._id,
-                state: 0
+        for(var i = 0; i <= parseInt(this.data.updateIndex); i++){
+          db.collection('task')
+          .skip(i*20)
+          .get()
+          .then(res => {
+            //console.log(res)
+            for (var idx in res.data) {
+  
+              if(res.data.state == 2 || res.data.state == 4){
+                continue;
               }
-            })
-            .then(res=>{
-              console.log('请求修改任务状态成功', res)
-            })
-            .catch(res => {
-              console.log('请求修改任务状态失败', res)
-            })
-          }else if(this.data.currentTime < res.data[idx].startTime){
-            wx.cloud.callFunction({
-              name: 'updateState',
-              data: {
-                id: res.data[idx]._id,
-                state: 0
+  
+              if(res.data[idx].startTime == ''){
+                wx.cloud.callFunction({
+                  name: 'updateState',
+                  data: {
+                    id: res.data[idx]._id,
+                    state: 0
+                  }
+                })
+                .then(res=>{
+                  console.log('请求修改任务状态成功', res)
+                })
+                .catch(res => {
+                  console.log('请求修改任务状态失败', res)
+                })
+              }else if(this.data.currentTime < res.data[idx].startTime){
+                wx.cloud.callFunction({
+                  name: 'updateState',
+                  data: {
+                    id: res.data[idx]._id,
+                    state: 0
+                  }
+                })
+                .then(res=>{
+                  console.log('请求修改任务状态成功', res)
+                })
+                .catch(res => {
+                  console.log('请求修改任务状态失败', res)
+                })
+  
+              }else if(this.data.currentTime > res.data[idx].startTime && this.data.currentTime < res.data[idx].endTime){
+                wx.cloud.callFunction({
+                  name: 'updateState',
+                  data: {
+                    id: res.data[idx]._id,
+                    state: 1
+                  }
+                })
+                .then(res=>{
+                  console.log('请求修改任务状态成功', res)
+                })
+                .catch(res => {
+                  console.log('请求修改任务状态失败', res)
+                })
+              }else if(this.data.currentTime > res.data[idx].endTime){
+                wx.cloud.callFunction({
+                  name: 'updateState',
+                  data: {
+                    id: res.data[idx]._id,
+                    state: 3
+                  }
+                })
+                .then(res=>{
+                  console.log('请求修改任务状态成功', res)
+                })
+                .catch(res => {
+                  console.log('请求修改任务状态失败', res)
+                })
               }
-            })
-            .then(res=>{
-              console.log('请求修改任务状态成功', res)
-            })
-            .catch(res => {
-              console.log('请求修改任务状态失败', res)
-            })
-
-          }else if(this.data.currentTime > res.data[idx].startTime && this.data.currentTime < res.data[idx].endTime){
-            wx.cloud.callFunction({
-              name: 'updateState',
-              data: {
-                id: res.data[idx]._id,
-                state: 1
-              }
-            })
-            .then(res=>{
-              console.log('请求修改任务状态成功', res)
-            })
-            .catch(res => {
-              console.log('请求修改任务状态失败', res)
-            })
-          }else if(this.data.currentTime > res.data[idx].endTime){
-            wx.cloud.callFunction({
-              name: 'updateState',
-              data: {
-                id: res.data[idx]._id,
-                state: 3
-              }
-            })
-            .then(res=>{
-              console.log('请求修改任务状态成功', res)
-            })
-            .catch(res => {
-              console.log('请求修改任务状态失败', res)
-            })
-          }
-
+  
+            }
+            // this.data.task.push(res.data[0])
+          })
         }
-        // this.data.task.push(res.data[0])
-        resolve("成功获取任务信息")
+
+        console.log("成功获取任务信息")
       })
       .catch(err => {
-        reject("请求任务信息失败")
+        console.log("请求任务信息失败")
       })
-    })
+
+      
 
   },
 
@@ -437,7 +462,8 @@ Page({
 
   onFilterSelect(e) {
     this.setData({
-      filter: e.detail.name 
+      filterShow: !this.data.filterShow,
+      filter: e.currentTarget.dataset.name
     })
     if(this.data.filter == 'Time'){
       this.onTimeSelect()
