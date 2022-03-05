@@ -436,8 +436,10 @@ Page({
   },
 
   onFilterSelect(e) {
+    console.log(e.currentTarget.dataset.name),
     this.setData({
-      filter: e.detail.name 
+      filterShow: !this.data.filterShow,
+      filter: e.currentTarget.dataset.name
     })
     if(this.data.filter == 'Time'){
       this.onTimeSelect()
