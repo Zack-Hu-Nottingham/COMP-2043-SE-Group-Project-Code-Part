@@ -14,6 +14,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    projectManager:'',
     value: 0,
     projectNum: 0,
     totalTasks: 0,
@@ -83,7 +84,7 @@ Page({
         //   color: "#32cd32"
         // }]
     })
-
+   
   },
 
 
@@ -114,6 +115,8 @@ Page({
           wx.setNavigationBarTitle({
             title: "Data Report",
           })
+
+          this.getProjectManager()
         },
       })
   },
@@ -237,6 +240,21 @@ Page({
     return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
   },
 
+  getProjectManager() {
+    return new Promise((resolve, reject) => {
+    db.collection('user')
+      .where({
+        _openid: _.eq(this.data.project._openid)
+      })
+      .get()
+      .then(res => {
+        console.log(res.data[0])
+        this.setData({
+          projectManager: res.data[0]
+        })
+      })
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

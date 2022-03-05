@@ -62,6 +62,7 @@ var Languague = {
     description_hint: "少于500字",
     state_information: "状态信息",
     current_state: "当前状态",
+    current_state_description: "当前状态描述",
     task_progress: "任务进度",
     completed: "已完成",
     delayed: "延误",

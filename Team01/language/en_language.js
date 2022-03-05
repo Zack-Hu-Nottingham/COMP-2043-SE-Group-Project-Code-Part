@@ -62,6 +62,7 @@ var Languague = {
     description_hint: "less than 500 words",
     state_information: "State Information",
     current_state: "Current State",
+    current_state_description: "Current State Description",
     task_progress: "Task Progress",
     completed: "Completed",
     delayed: "Delayed",

@@ -29,7 +29,7 @@
       bind:select="onFilterSelect"
     /> -->
     
-    <!--默认action-sheet为隐藏，由button触发-->
+    <!--默认action-sheet为隐藏，由排序栏触发-->
     <action-sheet hidden="{{filterShow}}" bindchange="listenerActionSheet" >
       <block wx:for-items="{{Filter}}"> 
           <action-sheet-item >{{item}}</action-sheet-item>
