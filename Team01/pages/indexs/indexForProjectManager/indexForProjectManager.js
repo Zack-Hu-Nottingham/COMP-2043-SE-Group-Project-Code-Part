@@ -4,8 +4,11 @@ import Toast from '../../../miniprogram_npm/@vant/weapp/toast/toast';
 const app = getApp();
 
 const languageUtils = require("../../../language/languageUtils");
+
 const db = wx.cloud.database();
+
 const _ = db.command;
+
 const lib = require('../../../utils/util');
 
 Page({
@@ -18,7 +21,7 @@ Page({
     /**
      * Global data
      */
-    active: 0,
+    active: 1,
     pageName: ['Message', 'Project', 'More'],
     currentTime: "",
 
@@ -34,6 +37,7 @@ Page({
     messageList: [],
 
 
+
     /**
      * Projects page's data
      */
@@ -46,8 +50,19 @@ Page({
      */
     userInfo: {},
 
+    changetip: '请输入新用户名',
+    name : "",
+    show: false,
+    value: '',
   },
 
+  showPopup() {
+    this.setData({ show: true });
+  },
+
+  onClose() {
+    this.setData({ show: false});
+  },
 
   /**
    * 生命周期函数--监听页面加载
@@ -67,6 +82,8 @@ Page({
 
     this.setData({
       userInfo: app.globalData.userInfo,
+      identity: this.data.dictionary.project_manager,
+      name : app.globalData.userInfo.nickName
     })
     this.getData(app.globalData.userInfo._openid)
   },
@@ -103,7 +120,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    wx.stopPullDownRefresh()
   },
 
   /**
@@ -116,8 +133,13 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-
+  onShareAppMessage: function (e) {
+    return{
+      title:'', //自定义标题
+      path: '', //好友点击后跳转页面 
+      desc: '', // 描述
+      imageUrl: '' //分享的图片路径
+    }
   },
 
 
@@ -161,41 +183,55 @@ Page({
       })}
     )},
 
-
-  // 获取反馈信息
-  getFeedbackInfo(openid) {
-    return new Promise((resolve, reject) => {
-      db.collection('project')
-      .where({
-        _openid: _.eq(openid),
-        feedback: _.exists(true)
-      })
-      .field({
-        feedback:true
-      })
-      .orderBy('feedback.createTime', 'desc')
-      .get()
-      .then(res => {
-        //console.log(res.data.length)
-      
-        if (res.data.length != 0) {
-          for (var idx in res.data) {
+      getFeedbackInfo(openid){
+        return new Promise((resolve, reject) =>{
+          db.collection('feedback')
+          .orderBy('feedback.createTime', 'desc')
+          .get()
+          .then(res =>{
+            // console.log(res.data)
             this.setData({
-              messageList: this.data.messageList.concat(res.data[idx].feedback)
+              messageList: res.data
             })
-          }
-          
-        }
-        
-        resolve("成功获取项目信息")
-        console.log('成功获取项目消息',this.data.messageList)
-      })
-      .catch(err => {
-        console.log('请求项目消息失败', err)
-        //reject("请求项目信息失败")
-      })}
+          })
+        })
+      },
+
+  // // 获取反馈信息
+  // getFeedbackInfo(openid) {
+  //   return new Promise((resolve, reject) => {
+  //     db.collection('task')
+  //     .where({
+  //       _openid: _.eq(openid),
+  //       feedback: _.exists(true)
+  //     })
+  //     .field({
+  //       feedback:true
+  //     })
+  //     .orderBy('feedback.createTime', 'desc')
+  //     .get()
+  //     .then(res => {
+  //       //console.log(res.data.length)
       
-    )},
+  //       if (res.data.length != 0) {
+  //         for (var idx in res.data) {
+  //           this.setData({
+  //             messageList: this.data.messageList.concat(res.data[idx].feedback)
+  //           })
+  //         }
+          
+  //       }
+        
+  //       resolve("成功获取项目信息")
+  //       console.log('成功获取项目消息',this.data.messageList)
+  //     })
+  //     .catch(err => {
+  //       console.log('请求项目消息失败', err)
+  //       //reject("请求项目信息失败")
+  //     })
+  //   }
+      
+  //   )},
 
   // 更改tab选项时对应的逻辑
   onChangeTab(event) {
@@ -228,6 +264,29 @@ Page({
     })
   },
 
+  clickToChangeIsRead(event) {
+    console.log(event)
+    // console.log(event.currentTarget.dataset.taskid)
+    db.collection('feedback')
+    .where({
+      _id: event.currentTarget.dataset.taskid
+    })
+    .update({
+      // data 传入需要局部更新的数据
+      data: {
+          isRead:1
+        }
+     
+    })
+    .then(res => {
+      console.log('修改isRead成功', res)
+      
+    }).catch(res => {
+      console.log('修改isRead失败', res)
+    })
+  
+  },
+
 
 
    
@@ -258,18 +317,6 @@ Page({
   /**
    * More page's method
    */
-  
-  onSetting: function(){
-    wx.navigateTo({
-      url: '../../more/setting/setting',
-    })
-  },
-
-  onMoreInfo: function(){
-    wx.navigateTo({
-      url: '../../more/moreInfo/moreInfo',
-    })
-  },
 
 
   // 点击language展示选项
@@ -295,7 +342,7 @@ Page({
     this.setData({
       currentTime: _currentTime
     });
-    console.log(this.data.currentTime)
+    // console.log(this.data.currentTime)
 
     new Promise((resolve, reject) => {
       db.collection('task')
@@ -303,6 +350,11 @@ Page({
       .then(res => {
         //console.log(res)
         for (var idx in res.data) {
+
+          if(res.data.state == 2 || res.data.state == 4){
+            continue;
+          }
+
           if(res.data[idx].startTime == ''){
             wx.cloud.callFunction({
               name: 'updateState',
@@ -373,4 +425,28 @@ Page({
 
   },
 
+  userNameInput:function(e){
+    this.setData({
+      value:e.detail.value
+    })
+  },
+
+  forNotice: function (e) {
+    let value= this.data.value;
+    if (value=='') {
+      Toast.fail('空用户名');
+    } else {
+      Toast({
+        type: 'success',
+        message: '提交成功',
+        onClose: () => {
+           this.setData({ 
+             show: false,
+             value: '',
+          });
+          //console.log('执行OnClose函数');
+        },
+      }); 
+    }
+  }
 })

@@ -9,9 +9,11 @@
         {{nickName}}
     </van-cell>
     <van-cell center title="Position" value="{{position}}" />
+
 </van-cell-group>
 
 <van-cell-group inset style="padding: 30rpx;">
     <van-cell center value="Setting" icon="setting-o" bindtap="onSetting"/>
     <van-cell center value="Moreinfo" icon="ellipsis" bindtap="onMoreInfo"/>
+
 </van-cell-group>

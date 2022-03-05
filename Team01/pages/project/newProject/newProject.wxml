@@ -11,8 +11,8 @@
     </van-cell-group>
 
     <van-cell-group inset style="padding: 10rpx;">
-        <van-cell title="{{dictionary.expected_start_time}}" is-link size="large" value="{{startDate}}" bindtap="onDateDisplay" />
-        <van-cell title="{{dictionary.expetced_end_time}}" size="large" value="{{endDate}}"/>
+        <van-cell title="{{dictionary.choose_start_time}}" is-link size="large" value="{{startDate}}" bindtap="onDateDisplay" />
+        <van-cell title="{{dictionary.expected_end_time}}" size="large" value="{{endDate}}"/>
     </van-cell-group>
     
     <!--Set other information-->

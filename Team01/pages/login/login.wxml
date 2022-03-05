@@ -3,9 +3,3 @@
 
 <!-- Toast -->
 <van-toast id="van-toast" />
-
-这是登录页面
-{{here}}
-{{there}}
-{{foo}}
-{{bar}}

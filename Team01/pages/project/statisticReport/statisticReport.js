@@ -46,6 +46,8 @@ Page({
     for (var idx in this.data.projects) {
       await this.getTaskInfo(this.data.projects[idx]._id)
     }
+
+    
     
   },
 
@@ -84,32 +86,62 @@ Page({
       .where({
         belongTo: _.eq(projectId)
       })
-      .get()
+      .count()
       .then(res => {
         this.setData({
-          totalTasks:res.data.length
+          totalTasks: res.total
         })
-        
-        for (var idx in res.data) {
-          if(res.data[idx].state == 0){
-            this.setData({
-              totalUnstart: this.data.totalUnstart + 1
-            })
-          }else if(res.data[idx].state == 1){
-            this.setData({
-              totalProgressing: this.data.totalProgressing + 1
-            })
-          }else if(res.data[idx].state == 2){
-            this.setData({
-              totalCompleted: this.data.totalCompleted + 1
-            })
-          }
+        resolve("成功获取任务信息")
+      })
+      .catch(err => {
+        reject("请求任务信息失败")
+      })
 
-          this.setData({
-            value: ((100 * this.data.totalCompleted) / this.data.totalTasks).toFixed(2)
-          })
-        }
+      db.collection('task')
+      .where({
+        belongTo: _.eq(projectId), 
+        state: 0,
+      })
+      .count()
+      .then(res => {
+        this.setData({
+          totalUnstart: res.total
+        })
+        resolve("成功获取任务信息")
+      })
+      .catch(err => {
+        reject("请求任务信息失败")
+      })
 
+      db.collection('task')
+      .where({
+        belongTo: _.eq(projectId), 
+        state: 1,
+      })
+      .count()
+      .then(res => {
+        this.setData({
+          totalProgressing: res.total
+        })
+        resolve("成功获取任务信息")
+      })
+      .catch(err => {
+        reject("请求任务信息失败")
+      })
+
+      db.collection('task')
+      .where({
+        belongTo: _.eq(projectId), 
+        state: 2,
+      })
+      .count()
+      .then(res => {
+        this.setData({
+          totalCompleted: res.total
+        })
+        this.setData({
+          value: ((100 * this.data.totalCompleted) / this.data.totalTasks).toFixed(2)
+        })
         resolve("成功获取任务信息")
       })
       .catch(err => {
@@ -127,6 +159,12 @@ Page({
     self.setData({
       dictionary: lang.lang.index,
     });
+  },
+
+  clickProject(event) {
+    wx.navigateTo({
+      url: '../../project/projectInfo/projectInfo?id=' +  event.currentTarget.dataset.id,
+    })
   },
 
   /**

@@ -14,8 +14,20 @@
             "list": [
                 {
                     "name": "",
+                    "pathName": "pages/project/taskInfo/taskInfo",
+                    "query": "id=5b049cc86220c0720f212d8a2485bc4f",
+                    "scene": null
+                },
+                {
+                    "name": "",
                     "pathName": "pages/project/projectInfo/projectInfo",
-                    "query": "id=41ae62ef621f609b09f5abe205892429",
+                    "query": "id=17e3426e6220c06011b6b26e18553a45",
+                    "scene": null
+                },
+                {
+                    "name": "",
+                    "pathName": "pages/project/testDiagram/testDiagram",
+                    "query": "",
                     "scene": null
                 }
             ]

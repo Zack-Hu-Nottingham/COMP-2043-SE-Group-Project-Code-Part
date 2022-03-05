@@ -4,9 +4,10 @@ import Toast from '../../../miniprogram_npm/@vant/weapp/toast/toast';
 const app = getApp();
 
 const languageUtils = require("../../../language/languageUtils");
+
 const db = wx.cloud.database();
+
 const _ = db.command;
-// const lib = require('../../utils/util')
 
 Page({
 
@@ -43,8 +44,19 @@ Page({
      * More page's data
      */
 
+    changetip: '请输入新用户名',
+    name : "",
+    show: false,
+    value: '',
   },
 
+  showPopup() {
+    this.setData({ show: true });
+  },
+
+  onClose() {
+    this.setData({ show: false});
+  },
 
   /**
    * 生命周期函数--监听页面加载
@@ -70,6 +82,19 @@ Page({
     wx.setNavigationBarTitle({
       title: this.data.pageName[this.data.active],
     })
+
+    this.setData({
+      identity: this.data.dictionary.worker,
+      name : app.globalData.userInfo.nickName,
+    })
+
+
+  },
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
 
   },
 
@@ -101,6 +126,17 @@ Page({
 
   },
 
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function (e) {
+    return{
+      title:'', //自定义标题
+      path: '', //好友点击后跳转页面 
+      desc: '', // 描述
+      imageUrl: '' //分享的图片路径
+    }
+  },
 
 
 
@@ -162,6 +198,7 @@ Page({
 
   // 获取项目简要信息
   getProjectInfo(projectId) {
+    console.log(projectId)
     return new Promise((resolve, reject) => {
       db.collection('project')
       .doc(projectId)
@@ -212,32 +249,34 @@ Page({
   
   // 获取任务列表
   getTaskList() {
+    
     return new Promise((resolve, reject) => {
       db.collection('user')
       .where({
-        _openid: _.eq(this.data.userInfo.openid)
+        _openid: _.eq(this.data.userInfo._openid)
       })
       .get()
       .then(res => {
-        console.log(res.data[0].task)
-        if(res.data[0].task == []) {
+        if(res.data[0].task.length != 0) {
           this.setData({
             taskList: res.data[0].task,
             isTaskEmpty: false,
           })
-        }
+        } 
         
         resolve("成功获取项目列表")
       })
       .catch(err => {
         reject("请求项目列表失败")
-      })}
+      })
+    }
     )
   },
 
   clickProject(projectId) {
+    // console.log(projectId.currentTarget.id)
     wx.navigateTo({
-      url: '../../project/projectInfoForWorker/projectInfoForWorker?id='+projectId,
+      url: '../../project/projectInfoForWorker/projectInfoForWorker?id='+projectId.currentTarget.id,
     })
   },
 
@@ -277,25 +316,6 @@ Page({
    * More page's method
    */
   
-  // getUserProfile(e) {
-  //   // 推荐使用wx.getUserProfile获取用户信息，开发者每次通过该接口获取用户个人信息均需用户确认，开发者妥善保管用户快速填写的头像昵称，避免重复弹窗
-  //   wx.getUserProfile({
-  //     desc: '展示用户信息', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
-  //     success: (res) => {
-  //       // console.log(res)
-  //       this.setData({
-  //         userInfo: res.userInfo,
-  //         hasUserInfo: true
-  //       })
-  //     }
-  //   })
-  // },
-
-  onMoreInfo: function(){
-    wx.navigateTo({
-      url: '../../more/moreInfo/moreInfo',
-    })
-  },
 
 
   // 点击language展示选项
@@ -308,6 +328,31 @@ Page({
   // 更新数据
   go_update(){
     this.getData()
-  }
+  },
   
+  //更新用户名
+  userNameInput:function(e){
+    this.setData({
+      value:e.detail.value
+    })
+  },
+
+  forNotice: function (e) {
+    let value= this.data.value;
+    if (value=='') {
+      Toast.fail('空用户名');
+    } else {
+      Toast({
+        type: 'success',
+        message: '提交成功',
+        onClose: () => {
+           this.setData({ 
+             show: false,
+             value: '',
+          });
+          //console.log('执行OnClose函数');
+        },
+      }); 
+    }
+  } 
 })

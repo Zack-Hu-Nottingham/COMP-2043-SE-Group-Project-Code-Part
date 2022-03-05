@@ -8,6 +8,11 @@
     margin-top: 300rpx;
   }
 
+  .notReadMessage {
+    --cell-background-color: antiquewhite ; 
+  }
+
+
 
   
 /**

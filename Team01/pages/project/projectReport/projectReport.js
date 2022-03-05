@@ -57,31 +57,31 @@ Page({
         totalUnstart: 0,
         totalProgressing: 0,
         totalCompleted: 0,
-        projects:[{
-          name: "Project1",
-          taskNum: 18,
-          unstart: 5,
-          processing: 5,
-          completed: 8,
-          percentage: 44.4,
-          color: "#ffd700"
-        },{
-          name: "Project2",
-          taskNum: 15,
-          unstart: 2,
-          processing: 1,
-          completed: 12,
-          percentage: 80,
-          color: "#00bfff"
-        },{
-          name: "Project3",
-          taskNum: 24,
-          unstart: 13,
-          processing: 6,
-          completed: 5,
-          percentage: 20.8,
-          color: "#32cd32"
-        }]
+        // projects:[{
+        //   name: "Project1",
+        //   taskNum: 18,
+        //   unstart: 5,
+        //   processing: 5,
+        //   completed: 8,
+        //   percentage: 44.4,
+        //   color: "#ffd700"
+        // },{
+        //   name: "Project2",
+        //   taskNum: 15,
+        //   unstart: 2,
+        //   processing: 1,
+        //   completed: 12,
+        //   percentage: 80,
+        //   color: "#00bfff"
+        // },{
+        //   name: "Project3",
+        //   taskNum: 24,
+        //   unstart: 13,
+        //   processing: 6,
+        //   completed: 5,
+        //   percentage: 20.8,
+        //   color: "#32cd32"
+        // }]
     })
 
   },
@@ -118,50 +118,108 @@ Page({
       })
   },
 
-  getTaskData(Id) {
+  getTaskData(projectId) {
     
-    db.collection('task')
+    return new Promise((resolve, reject) => {
+      db.collection('task')
       .where({
-        belongTo: _.eq(Id)
+        belongTo: _.eq(projectId)
       })
-      .get()
+      .count()
       .then(res => {
         this.setData({
-          totalTasks: res.data.length
+          totalTasks: res.total
         })
-        for (var idx in res.data) {
-          
-          if(res.data[idx].state == 0){
-            this.setData({
-              totalUnstart: this.data.totalUnstart + 1
-            })
-          }else if(res.data[idx].state == 1){
-            this.setData({
-              totalProgressing: this.data.totalProgressing + 1
-            })
-          }else if(res.data[idx].state == 2){
-            this.setData({
-              totalCompleted: this.data.totalCompleted + 1
-            })
-          }else if(res.data[idx].state == 3){
-            this.setData({
-              totalDelayed: this.data.totalDelayed + 1
-            })
-          }else if(res.data[idx].state == 4){
-            this.setData({
-              totalReworking: this.data.totalReworking + 1
-            })
-          }
-          this.setData({
-            value: ((100 * this.data.totalCompleted) / this.data.totalTasks).toFixed(2)
-          })
-        }
-        
         resolve("成功获取任务信息")
       })
       .catch(err => {
-        
+        reject("请求任务信息失败")
       })
+
+      db.collection('task')
+      .where({
+        belongTo: _.eq(projectId), 
+        state: 0,
+      })
+      .count()
+      .then(res => {
+        this.setData({
+          totalUnstart: res.total
+        })
+        resolve("成功获取任务信息")
+      })
+      .catch(err => {
+        reject("请求任务信息失败")
+      })
+
+      db.collection('task')
+      .where({
+        belongTo: _.eq(projectId), 
+        state: 1,
+      })
+      .count()
+      .then(res => {
+        this.setData({
+          totalProgressing: res.total
+        })
+        resolve("成功获取任务信息")
+      })
+      .catch(err => {
+        reject("请求任务信息失败")
+      })
+
+      db.collection('task')
+      .where({
+        belongTo: _.eq(projectId), 
+        state: 2,
+      })
+      .count()
+      .then(res => {
+        this.setData({
+          totalCompleted: res.total
+        })
+        this.setData({
+          value: ((100 * this.data.totalCompleted) / this.data.totalTasks).toFixed(2)
+        })
+        resolve("成功获取任务信息")
+      })
+      .catch(err => {
+        reject("请求任务信息失败")
+      })
+
+      db.collection('task')
+      .where({
+        belongTo: _.eq(projectId), 
+        state: 3,
+      })
+      .count()
+      .then(res => {
+        this.setData({
+          totalDelayed: res.total
+        })
+        resolve("成功获取任务信息")
+      })
+      .catch(err => {
+        reject("请求任务信息失败")
+      })
+
+      db.collection('task')
+      .where({
+        belongTo: _.eq(projectId), 
+        state: 4,
+      })
+      .count()
+      .then(res => {
+        this.setData({
+          totalReworking: res.total
+        })
+        resolve("成功获取任务信息")
+      })
+      .catch(err => {
+        reject("请求任务信息失败")
+      })
+
+    })
 
   },
 

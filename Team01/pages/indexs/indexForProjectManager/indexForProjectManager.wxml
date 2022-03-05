@@ -4,7 +4,6 @@
 <!-- Toast -->
 <van-toast id="van-toast" />
 
-
 <!-- Bottom tabbar -->
 <van-tabbar active="{{ active }}" bind:change="onChangeTab">
   <van-tabbar-item icon="chat-o">{{dictionary.message_page}}</van-tabbar-item>
@@ -19,16 +18,33 @@
     <van-empty description="{{dictionary.no_feedback}}" />
   </view>
 
-  <view wx:elif="{{amessageList.length != 0}}">
-  <van-cell-group inset style="padding: 30rpx;">
-    <van-cell center title="{{dictionary.notification}}" icon="bullhorn-o" size="large" label="{{messageList[0].type.name}}: {{messageList[0].description}}" value="{{messageList[0].createTime}}" clickable="true" bindtap="clickNotification" >
-    </van-cell>
-  </van-cell-group>
+  <view wx:elif="{{messageList.length != 0}}">
+    <view wx:if="{{messageList[0].isRead == 0}}" class="notReadMessage">
+      <van-cell-group inset style="padding: 30rpx;" class="notReadMessage">
+        <van-cell center title="{{dictionary.notification}}" icon="bullhorn-o" size="large" label="{{messageList[0].type.name}}: {{messageList[0].description}}" value="{{messageList[0].createTime}}" clickable="true" bindtap="clickToChangeIsRead" class="notReadMessage" data-taskID="{{messageList[0]._id}}">
+       </van-cell>
+     </van-cell-group>
+    </view>
+
+    <view wx:elif="{{messageList[0].isRead != 0}}">
+      <van-cell-group inset style="padding: 30rpx;">
+        <van-cell center title="{{dictionary.notification}}" icon="bullhorn-o" size="large" label="{{messageList[0].type.name}}: {{messageList[0].description}}" value="{{messageList[0].createTime}}" clickable="true" bindtap="clickToChangeIsRead" data-taskID="{{messageList[0]._id}}" >
+       </van-cell>
+     </van-cell-group>
+    </view>
 
   <van-cell-group inset style="padding: 30rpx;" title="{{dictionary.recent_message}}">
+  
     <view wx:for="{{messageList}}" wx:key="index">
-      <van-cell  title="{{item.owner}}" clickable
-      link-type="navigateTo" url="/pages/project/fileList/fileList?id={{item.belongTo}}&index={{index}}" label="{{item.type.name}}: {{item.description}}" value="{{item.createTime}}" id="{{item.owner}}" class="messageForTest"/>
+      <view wx:if="{{item.isRead == 0}}" class="notReadMessage">
+        <van-cell  title="{{item.owner}}" clickable
+        link-type="navigateTo" url="/pages/project/fileList/fileList?id={{item._id}}" label="{{item.type.name}}: {{item.description}}" value="{{item.createTime}}" id="{{item.owner}}" class="messageForTest" bindtap="clickToChangeIsRead" data-isRead="{{item.isRead}}" data-taskID="{{item._id}}"/>
+      </view>
+
+      <view wx:elif="{{item.isRead != 0}}" >
+        <van-cell  title="{{item.owner}}" clickable
+        link-type="navigateTo" url="/pages/project/fileList/fileList?id={{item.belongTo}}&index={{index}}" label="{{item.type.name}}: {{item.description}}" value="{{item.createTime}}" id="{{item.owner}}" class="messageForTest" bindtap="clickToChangeIsRead" data-isRead="{{item.isRead}}" data-taskID="{{item._id}}"/>
+      </view>
     </view>
   </van-cell-group>
   </view>
@@ -64,21 +80,34 @@
 <van-cell-group inset>
   <van-cell center icon="user-o" />
   <!-- title="{{dictionary.user_info}}" -->
-  <van-cell center title="{{dictionary.user_name}}">
-      {{userInfo.nickName}}
+  <van-cell center title="{{dictionary.user_name}}" is-link bind:click="showPopup" value="{{name}}">
   </van-cell>
-  <van-cell center title="{{dictionary.identity}}" value="{{dictionary.project_manager}}" />
-  <van-cell center title="{{dictionary.more}}" clickable="true" bindtap="onMoreInfo" class="moreInfoForTest">
-    <view slot="">
-      <van-icon name="ellipsis" />
-    </view>
-  </van-cell>
+  <van-popup show="{{ show }}" custom-style="width:75%; height: 30%;"bind:close="onClose">
 
+<van-cell-group style="padding-top: 80rpx">
+  <van-field model:value="{{ value }}" label="旧用户名" left-icon="contact" placeholder="{{ name }}" disabled border="{{ false }}">
+  </van-field>
+
+  <van-field value="{{ value }}" label="新用户名" left-icon="contact" placeholder="{{ changetip }}" bindinput='userNameInput' border="{{ false }}">
+  </van-field>
+</van-cell-group>
+
+ <van-button class="van-button" round style="padding-top: 40rpx;padding-left:20% ;" type="info" bindtap="forNotice" >保存</van-button>
+ <!--
+ <van-dialog useslot id="van-dialog"></van-dialog>
+-->
+</van-popup>
+
+  <van-cell center title="{{dictionary.identity}}" value="{{identity}}" />
+  <van-cell center title="邀请用户" clickable="true" bindtap="onShareAppMessage">
+    <van-button round class="button-share" open-type="share"> 
+      <van-icon name="friends-o" />
+    </van-button>
+  </van-cell>
 </van-cell-group>
 
   <van-cell-group inset style="padding: 30rpx;">
     <van-cell center icon="setting-o"/>
-    <van-cell center title="{{dictionary.invite_member}}" is-link icon="" clickable="true" bindtap="onInviteMember"/>
     <van-cell center title="{{dictionary.language}}" value="{{languageList[language]}}" icon="" is-link clickable="true" bindtap="onChangeLan" class="settingForTest"/>
   </van-cell-group>
 
