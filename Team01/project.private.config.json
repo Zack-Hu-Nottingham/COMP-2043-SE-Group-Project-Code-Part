@@ -53,6 +53,12 @@
                     "pathName": "pages/project/fileList/fileList",
                     "query": "id=617ef50c6224532609f99d537451fd2e",
                     "scene": null
+                },
+                {
+                    "name": "",
+                    "pathName": "pages/indexs/indexOfHouseOwner/indexOfHouseOwner",
+                    "query": "",
+                    "scene": null
                 }
             ]
         }
