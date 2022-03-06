@@ -169,10 +169,10 @@ Page({
             taskPage: res.data,
             belongTo: res.data.belongTo,
           });
+          this.updateComment(res.data.feedback)
           wx.setNavigationBarTitle({
             title: res.data.name,
           });
-          this.updateComment(res.data.feedback)
         },
         fail: err => {
           console.log('拉取任务信息请求失败', err)
@@ -269,25 +269,27 @@ Page({
   },
 
   updateComment(list){
-    var newList = [];
-    // console.log(list)
-    for(var i=0; i< list.length; i++){
-      db.collection('feedback')
-      .where({
-        _id: list[i]._id
-      })
-      .get({
-        success: res =>{
-          // console.log(res.data)
-          newList.push(res.data[0])
-          // console.log(newList)
-          this.setData({
-            feedback: newList
-          })
-        }
-      })
+    if(list){
+      var newList = [];
+      // console.log(list)
+      for(var i=0; i< list.length; i++){
+        db.collection('feedback')
+        .where({
+          _id: list[i]._id
+        })
+        .get({
+          success: res =>{
+            // console.log(res.data)
+            newList.push(res.data[0])
+            // console.log(newList)
+            this.setData({
+              feedback: newList
+            })
+          }
+        })
+      }
+      // console.log(this.data.feedback)
     }
-    // console.log(this.data.feedback)
 
   },
   getList(list){

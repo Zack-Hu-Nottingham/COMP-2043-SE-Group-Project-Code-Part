@@ -53,6 +53,7 @@ Page({
         
         belongTo: "",
         Owner: [],
+        participant: [],
         fileList: [],
         cloudPath: [],
 
@@ -243,6 +244,12 @@ Page({
           })
       },
 
+    changeParticipant(){
+      wx.navigateTo({
+        url: '../../project/contactList/participantList/participantList',
+      })
+  },
+
     formSubmit: function (e) {
         var that = this
         if(this.data.name == ""){
@@ -277,6 +284,7 @@ Page({
                     description: this.data.description,
                     currentPriority: this.data.selectedPriority,
                     cloudPath: [],
+                    participant: this.data.participant,
                 }
               })
               .then(res => {

@@ -373,6 +373,7 @@ for (let i = 0; i < state3BatchTimes; i++) {
             name: res.data.name,
             feedback: res.data.feedback,
           }),
+          console.log(res.data.cloudList)
           this.getFileList(res.data.cloudList);
 
           wx.setNavigationBarTitle({
@@ -399,6 +400,7 @@ for (let i = 0; i < state3BatchTimes; i++) {
         //console.log(res.tempFilePath)
       })
     }
+    console.log(newList)
     this.setData({
       fileList: newList
     })

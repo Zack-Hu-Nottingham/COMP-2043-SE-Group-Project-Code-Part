@@ -89,7 +89,7 @@ Page({
     
     changeOwner(){
         wx.navigateTo({
-          url: '../../project/contactList/houseOwnerList/houseOwnerList?',
+          url: '../../project/contactList/houseOwnerList/houseOwnerList',
         })
     },
 
