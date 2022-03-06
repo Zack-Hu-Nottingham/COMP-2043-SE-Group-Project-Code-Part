@@ -20,6 +20,9 @@ Page({
         feedbackBelongTo: '',
         creater: '',
 
+        show: false,
+        clickImg: '',
+
     },
 
     /**
@@ -43,7 +46,9 @@ Page({
             // console.log(res.data)
             this.setData({
               feedback: res.data[0]
-            })
+            });
+            // console.log(this.data.feedback)
+            // console.log(this.data.feedback.cloudList.length)
           }
         })
         this.getBelongTo();
@@ -124,6 +129,19 @@ Page({
       dictionary: lang.lang.index,
       });
   },
+
+    imgShow:function(event){
+    // console.log(event.currentTarget.dataset.src)
+      this.setData({
+        show: true,
+        clickImg: event.currentTarget.dataset.src
+      })
+    },
+    imgClose(){
+      this.setData({
+        show: false,
+      })
+    },
 
     /**
      * 生命周期函数--监听页面初次渲染完成

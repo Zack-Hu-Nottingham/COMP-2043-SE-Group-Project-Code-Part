@@ -158,7 +158,7 @@ Page({
     if(this.data.currentTab == 2){
       console.log('success')
       wx.navigateTo({
-        url: '../testDiagram/testDiagram',
+        url: '../testDiagram/testDiagram?id='+id,
       })
     }
 
@@ -646,11 +646,6 @@ db.collection("task").where({
   go_update(){
     this.getDetail()
   },
-  goToGanttChart(){
-    wx.navigateTo({
-      url: '../testDiagram/testDiagram',
-    })
-  }
 
 })
 

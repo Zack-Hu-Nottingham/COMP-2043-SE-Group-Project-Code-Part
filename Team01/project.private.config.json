@@ -27,7 +27,31 @@
                 {
                     "name": "",
                     "pathName": "pages/project/testDiagram/testDiagram",
-                    "query": "",
+                    "query": "id=17e3426e6220c06011b6b26e18553a45",
+                    "scene": null
+                },
+                {
+                    "name": "",
+                    "pathName": "pages/project/taskInfo/taskInfo",
+                    "query": "id=17e3426e622313c311f869285e7ad2d7",
+                    "scene": null
+                },
+                {
+                    "name": "",
+                    "pathName": "pages/project/addComment/addComment",
+                    "query": "id=17e3426e622313c311f869285e7ad2d7&index=1",
+                    "scene": null
+                },
+                {
+                    "name": "",
+                    "pathName": "pages/project/fileList/fileList",
+                    "query": "id=41ae62ef62231c760a812f241fd94ac1",
+                    "scene": null
+                },
+                {
+                    "name": "",
+                    "pathName": "pages/project/fileList/fileList",
+                    "query": "id=617ef50c6224532609f99d537451fd2e",
                     "scene": null
                 }
             ]
