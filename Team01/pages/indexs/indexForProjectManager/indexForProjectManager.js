@@ -189,7 +189,10 @@ Page({
       getFeedbackInfo(openid){
         return new Promise((resolve, reject) =>{
           db.collection('feedback')
-          .orderBy('feedback.createTime', 'desc')
+          .where({
+            _openid: _.eq(openid),
+          })
+          .orderBy('createTime', 'desc')
           .get()
           .then(res =>{
             // console.log(res.data)
