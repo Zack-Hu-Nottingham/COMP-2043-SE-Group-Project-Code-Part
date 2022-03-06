@@ -163,7 +163,7 @@ Page({
                 }
                 // 将本地cloudPath传到数据库 -> feedback_id ==> cloudList
                 this.updateDB();
-                // this.action();
+                this.action();
               })
               .catch(res => {
                 console.log('新建评论失败，请联系管理员', res) 

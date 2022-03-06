@@ -21,7 +21,7 @@
 
 </van-cell-group>
 
-<van-uploader file-list="{{ fileList }}" deletable="{{ true }}" bind:after-read="afterRead" />
+<van-uploader file-list="{{ fileList }}" deletable="{{ true }}" bind:after-read="afterRead" disabled="{{true}}"/>
 
 <van-sticky offset-top="{{ 50 }}">
   <view wx:if="{{taskPage.state == 0}}">

@@ -35,6 +35,7 @@ Page({
 
         isLoading: false,
         fileList: [],
+        cloudPath: [],
         houseOwner: "",
         houseOwner_openid: '',
         participant: [],
@@ -118,9 +119,15 @@ Page({
 
     uploadImage(fileURL) {
         wx.cloud.uploadFile({
-          cloudPath: 'project/'+ new Date().getTime() +'.png', // 上传至云端的路径
+          cloudPath: 'project/'+ this.data.project + '/' + new Date().getTime() + Math.floor(9*Math.random()) +'.png', // 上传至云端的路径
           filePath: fileURL, // 小程序临时文件路径
           success: res => {
+            var cloudList = this.data.cloudPath;
+            cloudList.push(res.fileID);
+            this.setData({
+                cloudPath: cloudList
+            })
+            this.updateCloudList();
             console.log("图片上传成功",res)
           },
           fail: console.error
@@ -175,7 +182,8 @@ Page({
                   houseOwner: this.data.houseOwner_openid,
                   participant: this.data.participant,
 
-                  fileList: this.data.fileList,
+                  //fileList: this.data.fileList,
+                  cloudList: [],
                   template: this.data.selectedTemplate,
 
                   completed: [],
@@ -195,6 +203,10 @@ Page({
               this.setData({
                 project: res._id
               })
+              for(var i = 0; i< this.data.fileList.length; i++ ){
+                this.uploadImage(this.data.fileList[i].url);
+              }
+              
 
               this.createTask()
               this.action();
@@ -208,6 +220,23 @@ Page({
               
         }
         
+    },
+    updateCloudList(){
+      // console.log(this.data.cloudPath)
+      db.collection('project')
+      .where({
+          _id: _.eq(this.data.project)
+      })
+      .update({
+          // data 传入需要局部更新的数据
+          data: {
+            // 表示将 done 字段置为 true
+            cloudList: this.data.cloudPath
+          },
+          success: function(res) {
+            console.log(res)
+          }
+        })
     },
 
     action(){
