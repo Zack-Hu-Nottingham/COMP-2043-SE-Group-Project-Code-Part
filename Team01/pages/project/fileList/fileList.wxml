@@ -6,4 +6,15 @@
   <van-cell title="{{dictionary.creater}}" value="{{ creater }}" size="large"/>
   <van-cell title="{{dictionary.description}}" value="{{ feedback.description }}" size="large"/>
 </van-cell-group>
-<van-uploader class="uploader" file-list="{{ feedback.fileList }}" bindtap="upload" max-count="8" disabled="{{true}}" deletable="{{false}}" show-upload="{{false}}"/>
+<!-- <van-uploader class="uploader" file-list="{{ feedback.cloudList }}" bindtap="upload" max-count="9" disabled="{{true}}" deletable="{{false}}" show-upload="{{false}}"/> -->
+<view class="img">
+<view class="fileList" wx:for="{{feedback.cloudList}}" wx:key="index" >
+<image mode='aspectFill' class="image" data-list="{{item}}" data-src="{{item}}" src="{{item}}" bind:tap="imgShow"></image>
+</view>
+</view>
+
+<van-overlay show="{{ show }}" bind:click="imgClose" >
+<view class="clickImg" >
+  <image src="{{clickImg}}"></image>
+</view>
+</van-overlay>

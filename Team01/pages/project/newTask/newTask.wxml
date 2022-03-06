@@ -13,8 +13,7 @@
     <!--Set other information-->
     <van-cell-group inset style="padding: 10rpx;">
         <van-cell title="{{dictionary.owner}}" is-link size="large" value="{{owner}}" bindtap="changeOwner" />
-        <van-cell title="{{dictionary.participant}}" is-link size="large" value="{{follower}}" bindtap="changeFollower" />
-        <van-cell title="{{dictionary.priority}}" is-link size="large" value="{{selectedPriority}}" bindtap="changePriority" />
+        <van-cell title="{{dictionary.participant}}" is-link size="large" value="{{participant}}" bindtap="changeParticipant" class="chooseParticipantForTest"/>
     </van-cell-group>
 
 
@@ -24,8 +23,7 @@
     </van-cell-group>
 
 <!--Upload related images-->
-<van-uploader class="uploader" file-list="{{ fileList }}" bindtap="upload" bind:delete="deleteImg"/>
-<!-- <van-uploader class="uploader" file-list="{{ fileList }}" bind:after-read="afterRead" /> -->
+<van-uploader class="uploader" file-list="{{ fileList }}" bindtap="upload" deletable="{{ true }}" bind:delete="deleteImg" max-count="9" disabled="{{true}}"/>
 
 <!--Submit-->    
 <van-button plain round block loading="{{isLoading}}" disabled="{{isLoading}}" class="submitBtn" color="#1296db" type="primary" size="normal" form-type="submit" bindtap="formSubmit">{{dictionary.create_new_task}}</van-button>

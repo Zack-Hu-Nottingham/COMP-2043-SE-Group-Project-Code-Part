@@ -25,6 +25,7 @@ Page({
     dateShow: false,
     priorityShow: false,
     feedback:[],
+    fileList:[],
 
     priority: [
       {
@@ -168,10 +169,10 @@ Page({
             taskPage: res.data,
             belongTo: res.data.belongTo,
           });
+          this.updateComment(res.data.feedback)
           wx.setNavigationBarTitle({
             title: res.data.name,
           });
-          this.updateComment(res.data.feedback)
         },
         fail: err => {
           console.log('拉取任务信息请求失败', err)
@@ -258,27 +259,37 @@ Page({
     this.setData({
       fileList
     })
+    db.collection('task').where({
+      _id: id
+    }).update({
+      data: {
+        cloudList: cloudList.splice(delIndex, 1)
+      }
+    })
   },
+
   updateComment(list){
-    var newList = [];
-    // console.log(list)
-    for(var i=0; i< list.length; i++){
-      db.collection('feedback')
-      .where({
-        _id: list[i]._id
-      })
-      .get({
-        success: res =>{
-          // console.log(res.data)
-          newList.push(res.data[0])
-          // console.log(newList)
-          this.setData({
-            feedback: newList
-          })
-        }
-      })
+    if(list){
+      var newList = [];
+      // console.log(list)
+      for(var i=0; i< list.length; i++){
+        db.collection('feedback')
+        .where({
+          _id: list[i]._id
+        })
+        .get({
+          success: res =>{
+            // console.log(res.data)
+            newList.push(res.data[0])
+            // console.log(newList)
+            this.setData({
+              feedback: newList
+            })
+          }
+        })
+      }
+      // console.log(this.data.feedback)
     }
-    // console.log(this.data.feedback)
 
   },
   getList(list){
@@ -300,5 +311,29 @@ Page({
       feedback: newList
     })
     // console.log(this.data.feedback)
+  },
+  upload(){
+    wx.chooseImage({
+      sizeType: ['original', 'compressed'],
+      sourceType: ['album', 'camera'],
+      success:res => {
+        var fileList = this.data.fileList;
+        fileList.push({url: res.tempFilePaths[0]});
+        this.setData({ fileList: fileList });
+        this.uploadImage(res.tempFilePaths[0]);
+        // console.log("成功选择图片",fileList);
+      }
+    })
+  },
+
+  uploadImage(fileURL) {
+      wx.cloud.uploadFile({
+        cloudPath: 'task/'+ id + '/' + new Date().getTime() + Math.floor(9*Math.random()) + '.png', // 上传至云端的路径
+        filePath: fileURL, // 小程序临时文件路径
+        success: res => {
+          // console.log("图片上传成功",res)
+        },
+        fail: console.error
+      })
   },
 })

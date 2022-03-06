@@ -3,6 +3,7 @@ import Toast from '../../../miniprogram_npm/@vant/weapp/toast/toast'
 const languageUtils = require("../../../language/languageUtils");
 const app = getApp();
 const db = wx.cloud.database();
+const _ = db.command;
 
 Page({
 
@@ -22,6 +23,7 @@ Page({
         showFeedback: false,
         feedbackType: [],
         fileList: [],
+        cloudPath: [],
         details: '',
         id: '',
         feedback_id: '',
@@ -33,7 +35,8 @@ Page({
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad: function (options) { 
+    onLoad: function (options) {
+
         this.setData({
             id: options.id,
             // commentPage: options.index,
@@ -113,15 +116,23 @@ Page({
 
     uploadImage(fileURL) {
         wx.cloud.uploadFile({
-          cloudPath: 'feedback/'+ this.data.id + '/' + this.data.feedback_id + '/' + new Date().getTime() +'.png', // 上传至云端的路径
+          cloudPath: 'feedback/'+ this.data.id + '/' + this.data.feedback_id + '/' + (new Date()).getTime() + Math.floor(9*Math.random()) +'.png', // 上传至云端的路径
           filePath: fileURL, // 小程序临时文件路径
           success: res => {
-            // console.log("图片上传成功",res)
+              // cloudPath: []
+            var cloudList = this.data.cloudPath;
+            cloudList.push(res.fileID);
+            this.setData({
+                cloudPath: cloudList
+            })
+            this.updateCloudList();
+            console.log("图片上传成功",res)
           },
-          fail: console.error
+          fail: res => {
+              console.log("图片上传失败", res)
+          }
         })
     },
-
 
     formSubmit: function (e) {
         if (this.data.selectedIndex == ''){
@@ -136,7 +147,7 @@ Page({
                 data:{
                     type: this.data.feedbackType[this.data.selectedIndex], //反馈类型
                     description: this.data.details, //反馈描述
-                    fileList: this.data.fileList, //文件列表
+                    cloudList: [], //云端文件列表
                     belongTo: this.data.id, //所属项目/任务
                     createTime: this.formatDate(new Date()),
                     isRead: 0,
@@ -150,6 +161,7 @@ Page({
                 for(var i = 0; i< this.data.fileList.length; i++ ){
                     this.uploadImage(this.data.fileList[i].url);
                 }
+                // 将本地cloudPath传到数据库 -> feedback_id ==> cloudList
                 this.updateDB();
                 this.action();
               })
@@ -158,6 +170,23 @@ Page({
               })
         }
 
+    },
+    updateCloudList(){
+        // console.log(this.data.cloudPath)
+        db.collection('feedback')
+        .where({
+            _id: _.eq(this.data.feedback_id)
+        })
+        .update({
+            // data 传入需要局部更新的数据
+            data: {
+              // 表示将 done 字段置为 true
+              cloudList: this.data.cloudPath
+            },
+            success: function(res) {
+              console.log(res)
+            }
+          })
     },
     updateDB(){
 

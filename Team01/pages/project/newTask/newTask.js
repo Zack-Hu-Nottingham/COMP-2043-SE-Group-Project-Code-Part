@@ -3,6 +3,7 @@ import Toast from '../../../miniprogram_npm/@vant/weapp/toast/toast'
 const languageUtils = require("../../../language/languageUtils");
 
 var app = getApp()
+var id = '';
 Page({
     /**
      * 页面的初始数据
@@ -52,7 +53,9 @@ Page({
         
         belongTo: "",
         Owner: [],
+        participant: [],
         fileList: [],
+        cloudPath: [],
 
         showPriority: false,
         prioritys: [{
@@ -193,34 +196,59 @@ Page({
             selectedPriority: this.data.prioritys[event.detail.value].name
         })
     },
-    
     upload(){
-        //把this赋值给that，就相当于that的作用域是全局的。
-        let that = this;
         wx.chooseImage({
-          // count: 1,
+          count: 1,
           sizeType: ['original', 'compressed'],
           sourceType: ['album', 'camera'],
-          success(res) {
-            console.log("成功选择图片",res);
-            that.uploadImage(res.tempFilePaths[0]);
+          success:res => {
+            var fileList = this.data.fileList;
+            fileList.push({url: res.tempFilePaths[0]});
+            this.setData({ fileList: fileList });
+            console.log("成功选择图片",fileList);
           }
         })
       },
 
     uploadImage(fileURL) {
         wx.cloud.uploadFile({
-          cloudPath: 'feedBack/'+ new Date().getTime() +'.png', // 上传至云端的路径
+          cloudPath: 'task/'+ id + '/' + new Date().getTime() + Math.floor(9*Math.random()) +'.png', // 上传至云端的路径
           filePath: fileURL, // 小程序临时文件路径
           success: res => {
-            var fileList = this.data.fileList;
-            fileList.push({url: res.fileID,name: fileURL,deletable: true});
-            this.setData({ fileList: fileList });
+            var cloudList = this.data.cloudPath;
+            cloudList.push(res.fileID);
+            this.setData({
+                cloudPath: cloudList
+            })
+            this.updateCloudList();
             console.log("图片上传成功",res)
           },
           fail: console.error
         })
     },
+    updateCloudList(){
+        // console.log(this.data.cloudPath)
+        db.collection('task')
+        .where({
+            _id: _.eq(id)
+        })
+        .update({
+            // data 传入需要局部更新的数据
+            data: {
+              // 表示将 done 字段置为 true
+              cloudList: this.data.cloudPath
+            },
+            success: function(res) {
+              console.log(res)
+            }
+          })
+      },
+
+    changeParticipant(){
+      wx.navigateTo({
+        url: '../../project/contactList/participantList/participantList',
+      })
+  },
 
     formSubmit: function (e) {
         var that = this
@@ -255,9 +283,16 @@ Page({
                     endTime: this.data.endTime,
                     description: this.data.description,
                     currentPriority: this.data.selectedPriority,
+                    cloudPath: [],
+                    participant: this.data.participant,
                 }
               })
               .then(res => {
+                id = res._id;
+                for(var i = 0; i< this.data.fileList.length; i++ ){
+                    this.uploadImage(this.data.fileList[i].url);
+                }
+
                 console.log('添加成功', res)
               })
               .catch(res => {

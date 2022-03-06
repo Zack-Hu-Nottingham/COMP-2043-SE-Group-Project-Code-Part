@@ -45,6 +45,7 @@ Page({
     houseOwner: "",
     projectManager: "",
     feedback: [],
+    fileList: [],
 
     // Task Management's data
     // These data should be filled in when the page is loaded
@@ -158,7 +159,7 @@ Page({
     if(this.data.currentTab == 2){
       console.log('success')
       wx.navigateTo({
-        url: '../testDiagram/testDiagram',
+        url: '../testDiagram/testDiagram?id='+id,
       })
     }
 
@@ -266,26 +267,26 @@ for (let i = 0; i < state3BatchTimes; i++) {
     
   }
 
-const state4BatchTimes = Math.ceil(this.data.countState4Result / 20)
-var arraypro4=[]
-var x4 = 0
-//初次循环获取云端数据库的分次数的promise数组
-for (let i = 0; i < state4BatchTimes; i++) {
-db.collection("task").where({
-  belongTo: id,
-  state: 4
-}).skip(i*20).get().then(res => {
-    x4++;
-    for (let j = 0; j < res.data.length; j++) {
-      arraypro4.push(res.data[j])
-    }
-    if(x4==state4BatchTimes){
-      this.setData({
-        reworking : arraypro4
-      })
-    }
-  })
-  
+  const state4BatchTimes = Math.ceil(this.data.countState4Result / 20)
+  var arraypro4=[]
+  var x4 = 0
+  //初次循环获取云端数据库的分次数的promise数组
+  for (let i = 0; i < state4BatchTimes; i++) {
+  db.collection("task").where({
+    belongTo: id,
+    state: 4
+  }).skip(i*20).get().then(res => {
+      x4++;
+      for (let j = 0; j < res.data.length; j++) {
+        arraypro4.push(res.data[j])
+      }
+      if(x4==state4BatchTimes){
+        this.setData({
+          reworking : arraypro4
+        })
+      }
+    })
+    
  
 }
     }
@@ -370,9 +371,10 @@ db.collection("task").where({
           this.setData({
             project: res.data,
             name: res.data.name,
-            fileList: res.data.fileList,
             feedback: res.data.feedback,
           }),
+          console.log(res.data.cloudList)
+          this.getFileList(res.data.cloudList);
 
           wx.setNavigationBarTitle({
             title: this.data.name,
@@ -386,6 +388,22 @@ db.collection("task").where({
         }
       })
     
+  },
+  getFileList(cloudPath){
+    // console.log(cloudPath)
+    var newList = [];
+    for(var i=0;i<cloudPath.length;i++){
+      wx.cloud.downloadFile({
+        fileID: cloudPath[i]
+      }).then(res => {
+        newList.push({"url": res.tempFilePath})
+        //console.log(res.tempFilePath)
+      })
+    }
+    console.log(newList)
+    this.setData({
+      fileList: newList
+    })
   },
 
   getHouseOwner() {
@@ -466,14 +484,6 @@ db.collection("task").where({
     })
   },
 
-   /**
-   * Create Comment page's method
-   */
-  clickAddComment(event) {
-        wx.navigateTo({
-          url: '../addComment/addComment?id=' + id + '&index=' + projectComment
-        })
-  },
 
   onProjectBlur: function(e){
     // console.log(e.detail.value)
@@ -535,7 +545,15 @@ db.collection("task").where({
     this.setData({
       fileList
     })
+    db.collection('project').where({
+      _id: id
+    }).update({
+      data: {
+        cloudList: cloudList.splice(delIndex, 1)
+      }
+    })
   },
+  
   upload(){
     wx.chooseImage({
       sizeType: ['original', 'compressed'],
@@ -544,6 +562,7 @@ db.collection("task").where({
         var fileList = this.data.fileList;
         fileList.push({url: res.tempFilePaths[0]});
         this.setData({ fileList: fileList });
+        this.uploadImage(res.tempFilePaths[0]);
         // console.log("成功选择图片",fileList);
       }
     })
@@ -551,7 +570,7 @@ db.collection("task").where({
 
   uploadImage(fileURL) {
       wx.cloud.uploadFile({
-        cloudPath: 'feedback/'+ this.data.id + '/' + this.data.feedback_id + '/' + new Date().getTime() +'.png', // 上传至云端的路径
+        cloudPath: 'project/'+ id + '/' + new Date().getTime() + Math.floor(9*Math.random()) + '.png', // 上传至云端的路径
         filePath: fileURL, // 小程序临时文件路径
         success: res => {
           // console.log("图片上传成功",res)
@@ -646,11 +665,6 @@ db.collection("task").where({
   go_update(){
     this.getDetail()
   },
-  goToGanttChart(){
-    wx.navigateTo({
-      url: '../testDiagram/testDiagram',
-    })
-  }
 
 })
 

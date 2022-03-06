@@ -36,12 +36,12 @@
   <van-cell-group inset style="padding: 30rpx;" title="{{dictionary.recent_message}}">
   
     <view wx:for="{{messageList}}" wx:key="index">
-      <view wx:if="{{item.isRead == 0}}" class="notReadMessage">
+      <view wx:if="{{item.isRead == 0}}" class="notReadMessage" class="messageForTest">
         <van-cell  title="{{item.owner}}" clickable
-        link-type="navigateTo" url="/pages/project/fileList/fileList?id={{item._id}}" label="{{item.type.name}}: {{item.description}}" value="{{item.createTime}}" id="{{item.owner}}" class="messageForTest" bindtap="clickToChangeIsRead" data-isRead="{{item.isRead}}" data-taskID="{{item._id}}"/>
+        link-type="navigateTo" url="/pages/project/fileList/fileList?id={{item._id}}" label="{{item.type.name}}: {{item.description}}" value="{{item.createTime}}" id="{{item.owner}}"  bindtap="clickToChangeIsRead" data-isRead="{{item.isRead}}" data-taskID="{{item._id}}" class="messageForTest"/>
       </view>
 
-      <view wx:elif="{{item.isRead != 0}}" >
+      <view wx:elif="{{item.isRead != 0}}" class="messageForTest" >
         <van-cell  title="{{item.owner}}" clickable
         link-type="navigateTo" url="/pages/project/fileList/fileList?id={{item.belongTo}}&index={{index}}" label="{{item.type.name}}: {{item.description}}" value="{{item.createTime}}" id="{{item.owner}}" class="messageForTest" bindtap="clickToChangeIsRead" data-isRead="{{item.isRead}}" data-taskID="{{item._id}}"/>
       </view>
@@ -60,7 +60,7 @@
 
   <van-cell-group inset style="padding: 30rpx;" title="{{dictionary.project_list}}">
     <view wx:for="{{project}}" wx:key="index">
-      <van-cell icon="todo-list-o" title="{{item.name}}" clickable="true" bindtap="clickProject" data-id="{{item._id}}" class="projectForTest"/>
+      <van-cell icon="todo-list-o" title="{{item.name}}" clickable="true" bindtap="clickProject" data-id="{{item._id}}" class="clickProjectForTest"/>
     </view>
   </van-cell-group>
 
