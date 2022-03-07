@@ -1,5 +1,5 @@
 // 云函数入口文件
-const cloud = require('wx-server-sdk')
+const cloud = require('../updateTaskDate/node_modules/wx-server-sdk')
 
 cloud.init({
   env: 'cloud1-2gqr09fl444e3a8c'
