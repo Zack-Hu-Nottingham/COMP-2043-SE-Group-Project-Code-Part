@@ -56,6 +56,18 @@
                 },
                 {
                     "name": "",
+                    "pathName": "pages/login/login",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "",
+                    "pathName": "pages/indexs/indexForWorker/indexForWorker",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "",
                     "pathName": "pages/indexs/indexOfHouseOwner/indexOfHouseOwner",
                     "query": "",
                     "scene": null
