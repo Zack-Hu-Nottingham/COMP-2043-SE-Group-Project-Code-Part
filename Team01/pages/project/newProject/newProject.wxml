@@ -1,8 +1,8 @@
 <!--pages/project/newTask/newTask.wxml-->
 <view class="form">
     <!--Set Task Information-->
-    <van-cell-group inset style="padding: 10rpx;">
-        <van-field label="{{dictionary.project_name}}" value="{{ name }}" size="large" input-align="right" placeholder="Enter name..." bind:change="typeName" class="projectNameForTest"/>
+    <van-cell-group inset style="padding: 10rpx;" class="projectNameForTest">
+        <van-field label="{{dictionary.project_name}}" value="{{ name }}" size="large" input-align="right" placeholder="Enter name..." bind:change="typeName" class="projectNameForTest1"/>
     </van-cell-group>
     
     <van-cell-group inset style="padding: 10rpx;">

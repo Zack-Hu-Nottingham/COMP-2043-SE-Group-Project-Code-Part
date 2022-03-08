@@ -186,22 +186,22 @@ Page({
       })}
     )},
 
-      getFeedbackInfo(openid){
-        return new Promise((resolve, reject) =>{
-          db.collection('feedback')
-          .where({
-            _openid: _.eq(openid),
-          })
-          .orderBy('createTime', 'desc')
-          .get()
-          .then(res =>{
-            // console.log(res.data)
-            this.setData({
-              messageList: res.data
-            })
+    getFeedbackInfo(openid){
+      return new Promise((resolve, reject) =>{
+        db.collection('feedback')
+        .where({
+          _openid: _.eq(openid),
+        })
+        .orderBy('createTime', 'desc')
+        .get()
+        .then(res =>{
+          // console.log(res.data)
+          this.setData({
+            messageList: res.data
           })
         })
-      },
+      })
+    },
 
   // // 获取反馈信息
   // getFeedbackInfo(openid) {
