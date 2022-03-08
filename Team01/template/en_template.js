@@ -680,8 +680,7 @@ var en_template = [{
   workingArea: "",
 }, {
   name: "Mid-term verification and acceptance",
-  taskDescription: "Client should be involved in the verification. At the moment all the wooden work
-  is supposed to be done.",
+  taskDescription: "Client should be involved in the verification. At the moment all the wooden work is supposed to be done.",
   belongTo: "",
   feedback: [],
   currentPriority: "Low",
