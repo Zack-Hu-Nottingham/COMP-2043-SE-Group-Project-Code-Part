@@ -2,8 +2,11 @@
 import Toast from '../../../miniprogram_npm/@vant/weapp/toast/toast'
 
 const languageUtils = require("../../../language/languageUtils");
+
 const db = wx.cloud.database();
+
 const _ = db.command;
+
 var id = ''
 
 Page({
@@ -100,14 +103,6 @@ Page({
       })
   },
 
-  /**
-   * Create Comment page's method
-   */
-  clickAddComment(event) {
-    wx.navigateTo({
-      url: '../addComment/addComment',
-    })
-  },
 
   // 初始化语言
   initLanguage() {
