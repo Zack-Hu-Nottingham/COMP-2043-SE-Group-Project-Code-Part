@@ -130,10 +130,12 @@ var Languague = {
     construction_area: "Construction Area",
     construction_requirements: "Construction Requirements",
     start_construction: "Start Construction",
+    upload_image_start_construction: "Upload image & Start construction",
+    upload_image_finish_construction: "Upload image & Finish construction",
     finish_construction: "Finish Construction",
     no_project_error: "You currently have no projects",
     no_task_error: "You currently have no tasks",
-    phase_name: ["现场交底拆改、界面处理", "图纸深化", "拆除", "一次放样", "墙体砌筑", "二次精放样", "水电施工", "木工施工", "地暖、地面找平", "瓷砖、石材", "油工施工", "成品安装", "油漆修补", "杂物处理", "验收、软装摆场", "其他"],
+    phase_name: ["现场交底拆改、界面处理", "Getting of more accurate and detailed design plan.", "Removal of unwanted walls.", "Construction setting out for first time.", "Wall Masonry.", "Construction setting out for second time.", "Construction of water and electricity", "Carpentry construction.", "Floor heating installation and floor leveling", "Tiling.", "Oiling construction", "Installation of furnitures.", "Paint repair.", "Clutter disposal.", "Final inspection.", "Other."],
     current_phase_description: ["阶段1", "阶段2", "阶段3", "阶段4", "阶段5", "阶段6", "阶段7", "阶段8", "阶段9", "阶段10", "阶段11", "阶段12", "阶段13", "阶段14", "阶段15", "阶段16"],
 
  },
