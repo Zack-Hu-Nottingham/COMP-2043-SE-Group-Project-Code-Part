@@ -34,11 +34,6 @@ Page({
      */
     messageList: [],
 
-
-    /**
-     * Projects page's data
-     */
-
     project: [],
 
 
@@ -94,6 +89,13 @@ Page({
    */
   onLoad: function (options) {
 
+    this.setData({
+      identity: this.data.dictionary.house_owner,
+      openid: options.openid,
+      name : app.globalData.userInfo.nickName,
+      userInfo: app.globalData.userInfo,
+    })
+
     this.getData();
 
     // 初始化语言
@@ -108,20 +110,7 @@ Page({
       title: this.data.pageName[this.data.active],
     })
 
-    this.setData({
-      identity: this.data.dictionary.house_owner,
-      openid: options.openid,
-      name : app.globalData.userInfo.nickName,
-      userInfo: app.globalData.userInfo,
-    })
     
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
   },
 
   /**
@@ -135,34 +124,6 @@ Page({
     this.setData({
       language: lan
     })
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
   },
 
   /**
@@ -199,14 +160,15 @@ Page({
   
   // 获取user信息
   getInfo() {
+    // console.log(app.globalData.userInfo._openid)
     return new Promise((resolve, reject) => {
       db.collection('user')
       .where({
-        _openid: _.eq(this.data.openid)
+        _openid: _.eq(app.globalData.userInfo._openid)
       })
       .get()
       .then(res => {
-        // console.log(res)
+        console.log(res)
         this.setData({
           user: res.data[0]
         })
@@ -261,7 +223,7 @@ Page({
             task: this.data.task.concat(res.data[idx])
           })
         }
-        console.log("成功获取任务信息")
+        // console.log("成功获取任务信息")
       })
       .catch(err => {
         console.log("请求任务信息失败")
@@ -407,7 +369,7 @@ Page({
               task: this.data.task.concat(res.data[idx])
             })
           }
-          console.log("成功获取任务信息")
+          // console.log("成功获取任务信息")
         })
         .catch(err => {
           console.log("请求任务信息失败")
@@ -444,7 +406,7 @@ Page({
               })
             }
           }
-          console.log("成功获取任务信息")
+          // console.log("成功获取任务信息")
         })
         .catch(err => {
           console.log("请求任务信息失败")
@@ -468,7 +430,7 @@ Page({
               })
             }
           }
-          console.log("成功获取任务信息")
+          // console.log("成功获取任务信息")
         })
         .catch(err => {
           console.log("请求任务信息失败")
@@ -492,7 +454,7 @@ Page({
               })
             }
           }
-          console.log("成功获取任务信息")
+          // console.log("成功获取任务信息")
         })
         .catch(err => {
           console.log("请求任务信息失败")
@@ -514,7 +476,7 @@ Page({
               task: this.data.task.concat(res.data[idx])
             })
           }
-          console.log("成功获取任务信息")
+          // console.log("成功获取任务信息")
         })
         .catch(err => {
           console.log("请求任务信息失败")
@@ -536,7 +498,7 @@ Page({
               task: this.data.task.concat(res.data[idx])
             })
           }
-          console.log("成功获取任务信息")
+          // console.log("成功获取任务信息")
         })
         .catch(err => {
           console.log("请求任务信息失败")

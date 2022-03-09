@@ -33,12 +33,15 @@
 </van-cell-group>
 
 
-
 <van-cell-group inset style="padding: 30rpx">
   <van-cell title="{{dictionary.priority}}" value="{{taskPage.currentPriority}}"/>
   <van-cell title="{{dictionary.tag}}" is-link value="{{taskPage.tag}}" />
   <van-cell title="{{dictionary.participant}}" value="{{participant.nickName}}" />
 </van-cell-group>
+
+
+<van-divider contentPosition="center">{{dictionary.related_photo}}</van-divider>
+
 
 <van-sticky offset-top="{{ 570 }}">
   <van-button hairline plain round block type="info" bindtap="clickAddComment" class="addComment">{{dictionary.add_comment}}</van-button>

@@ -84,6 +84,8 @@ var Languague = {
     tag: "Tag",
     participant: "Participant",
     reworking: "Reworking",
+    related_photo: "Related photos",
+
 
     
     // New task page

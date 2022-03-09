@@ -83,7 +83,8 @@ var Languague = {
     priority: "优先级",
     tag: "标签",
     participant: "参与者",
-    reworking: "重加工",
+   //  reworking: "重加工",
+    related_photo: "相关照片",
 
     // New task page
     task_name: "任务名称",
