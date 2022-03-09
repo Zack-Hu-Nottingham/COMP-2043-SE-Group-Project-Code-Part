@@ -21,7 +21,10 @@
         "pages/more/languageSetting/languageSetting",
         "pages/more/test/test",
         "pages/project/projectReport/projectReport",
-        "pages/project/taskInfoForHouseOwner/taskInfoForHouseOwner"
+        "pages/project/taskInfoForHouseOwner/taskInfoForHouseOwner",
+        "pages/project/projectTemplate/projectTemplate",
+        "pages/project/projectInfoForProjectManager/projectInfoForProjectManager",
+        "pages/project/taskInfoForProjectManager/taskInfoForProjectManager"
     ],
     "window": {
         "backgroundTextStyle": "light",
