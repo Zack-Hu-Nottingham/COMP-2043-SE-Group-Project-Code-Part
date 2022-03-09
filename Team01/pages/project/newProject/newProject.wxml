@@ -2,7 +2,7 @@
 <view class="form">
     <!--Set Task Information-->
     <van-cell-group inset style="padding: 10rpx;" class="projectNameForTest">
-        <van-field label="{{dictionary.project_name}}" value="{{ name }}" size="large" input-align="right" placeholder="Enter name..." bind:change="typeName" class="projectNameForTest1"/>
+        <van-field label="{{dictionary.project_name}}" value="{{ name }}" size="large" input-align="right" placeholder="{{dictionary.enter_name}}" bind:change="typeName" class="projectNameForTest1"/>
     </van-cell-group>
     
     <van-cell-group inset style="padding: 10rpx;">
@@ -22,7 +22,7 @@
     </van-cell-group>
 
     <!--Set Time-->
-    <van-calendar show="{{ show }}" title="choose period" type="range" bind:close="onClose" bind:confirm="onConfirm"/>
+    <van-calendar show="{{ show }}" title="{{dictionary.choose_period}}" type="range" bind:close="onClose" bind:confirm="onConfirm"/>
 
     <!--Description-->
     <van-cell-group inset style="padding: 10rpx;">
