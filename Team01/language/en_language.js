@@ -60,6 +60,7 @@ var Languague = {
     expected_start_time: "Expected Start Time",
     expected_end_time: "Expected End Time",
     current_phase: "Current Phase",
+    phase_description: "Phase Description",
     description: "Description",
     description_hint: "less than 500 words",
     state_information: "State Information",

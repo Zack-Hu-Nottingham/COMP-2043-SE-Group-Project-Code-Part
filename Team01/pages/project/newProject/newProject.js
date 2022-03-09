@@ -43,7 +43,6 @@ Page({
         project: "",
         task: [],
 
-        currentPhaseDescription: ["阶段1", "阶段2", "阶段3", "阶段4", "阶段5", "阶段6", "阶段7", "阶段8", "阶段9", "阶段10", "阶段11", "阶段12", "阶段13", "阶段14"],
         template: templateLib.template,
     },
     
@@ -193,7 +192,7 @@ Page({
                   progressing: [],
 
                   currentPhase: 0,
-                  currentPhaseDescription: this.data.currentPhaseDescription,
+                  // currentPhaseDescription: this.data.currentPhaseDescription,
                   // feedback: [],
                   fileList: [],
 

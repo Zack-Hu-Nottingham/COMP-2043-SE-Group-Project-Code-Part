@@ -389,6 +389,7 @@ for (let i = 0; i < state3BatchTimes; i++) {
       })
     
   },
+  
   getFileList(cloudPath){
     // console.log(cloudPath)
     var newList = [];

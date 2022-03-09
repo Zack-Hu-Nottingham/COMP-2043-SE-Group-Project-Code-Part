@@ -12,7 +12,6 @@ exports.main = async (event, context) => {
     .update({
     data: {
       projectDescription: event.projectDescription,
-      stateDescription: event.stateDescription
       }
     })
 }

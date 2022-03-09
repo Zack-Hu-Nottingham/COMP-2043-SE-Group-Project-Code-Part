@@ -25,7 +25,7 @@ Page({
     pageName: ['Message', 'Project', 'More'],
     currentTime: "",
 
-    // 存放双语
+    // Store bylingual settings
     dictionary: {},
     language: 0,
     languageList: ["简体中文", "English"],
@@ -35,7 +35,6 @@ Page({
      * Message page's data
      */
     messageList: [],
-
 
 
     /**
@@ -103,6 +102,19 @@ Page({
    */
   onShow: function () {
     wx.hideHomeButton()
+
+    // 初始化语言
+    var lan = wx.getStorageSync("languageVersion");
+    this.initLanguage();
+    this.setData({
+      language: lan
+    })
+
+    // 载入时设置初始页面的navBar title
+    wx.setNavigationBarTitle({
+      title: this.data.pageName[this.data.active],
+    })
+
   },
 
   /**
@@ -184,22 +196,23 @@ Page({
       })}
     )},
 
-    getFeedbackInfo(openid){
-      return new Promise((resolve, reject) =>{
-        db.collection('feedback')
-        .where({
-          _openid: _.eq(openid),
-        })
-        .orderBy('createTime', 'desc')
-        .get()
-        .then(res =>{
-          // console.log(res.data)
-          this.setData({
-            messageList: res.data
-          })
+  // Get feedback list
+  getFeedbackInfo(openid){
+    return new Promise((resolve, reject) =>{
+      db.collection('feedback')
+      .where({
+        _openid: _.eq(openid),
+      })
+      .orderBy('createTime', 'desc')
+      .get()
+      .then(res =>{
+        // console.log(res.data)
+        this.setData({
+          messageList: res.data
         })
       })
-    },
+    })
+  },
 
   // // 获取反馈信息
   // getFeedbackInfo(openid) {
@@ -268,6 +281,7 @@ Page({
     })
   },
 
+  // Click the message and change its state to isRead
   clickToChangeIsRead(event) {
     console.log(event)
     // console.log(event.currentTarget.dataset.taskid)
@@ -298,18 +312,21 @@ Page({
    * Project page's method
    */
 
+  // Click to view statistic report
   clickStatisticReport(event) {
     wx.navigateTo({
       url: '../../project/statisticReport/statisticReport',
     })
   },
 
+  // Click to view specific report
   clickProject(event) {
     wx.navigateTo({
-      url: '../../project/projectInfo/projectInfo?id=' +  event.currentTarget.dataset.id,
+      url: '../../project/projectInfoForProjectManager/projectInfoForProjectManager?id=' +  event.currentTarget.dataset.id,
     })
   },
 
+  // click to create new project
   clickNewProject(event) {
     wx.navigateTo({
       url: '../../project/newProject/newProject',
@@ -340,12 +357,14 @@ Page({
     this.getData()
   },
 
+  // Handle new user name
   userNameInput:function(e){
     this.setData({
       value:e.detail.value
     })
   },
 
+  // 
   forNotice: function (e) {
     let value= this.data.value;
     if (value=='') {
