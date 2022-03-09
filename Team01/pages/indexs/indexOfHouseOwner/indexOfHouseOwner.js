@@ -53,6 +53,8 @@ Page({
      */
     userInfo: {},
 
+    totalTask: 89,
+
     currentTime: "",
 
     date: "",
@@ -76,7 +78,6 @@ Page({
       }
     ],
 
-    totalTask: 0,
     updateIndex: 1,
   },
 
@@ -113,6 +114,7 @@ Page({
       name : app.globalData.userInfo.nickName,
       userInfo: app.globalData.userInfo,
     })
+    
   },
 
   /**
@@ -245,26 +247,46 @@ Page({
 
   // 获取任务信息
   getTaskInfo(projectId) {
-    return new Promise((resolve, reject) => {
-      db.collection('task')
+
+    for (let i = 0; i < Math.ceil(this.data.totalTask / 20); i++) {
+      db.collection("task")
       .where({
-        belongTo: _.eq(projectId)
+        belongTo: _.eq(projectId),
       })
+      .skip(i*20)
       .get()
       .then(res => {
-        // console.log(res)
         for (var idx in res.data) {
           this.setData({
             task: this.data.task.concat(res.data[idx])
           })
         }
-        // this.data.task.push(res.data[0])
-        resolve("成功获取任务信息")
+        console.log("成功获取任务信息")
       })
       .catch(err => {
-        reject("请求任务信息失败")
+        console.log("请求任务信息失败")
       })
-    })
+    }
+
+
+    // return new Promise((resolve, reject) => {
+    //   db.collection('task')
+    //   .where({
+    //     belongTo: _.eq(projectId)
+    //   })
+    //   .get()
+    //   .then(res => {
+    //     for (var idx in res.data) {
+    //       this.setData({
+    //         task: this.data.task.concat(res.data[idx])
+    //       })
+    //     }
+    //     resolve("成功获取任务信息")
+    //   })
+    //   .catch(err => {
+    //     reject("请求任务信息失败")
+    //   })
+    // })
   },
 
   // 更改tab选项时对应的逻辑
@@ -370,26 +392,28 @@ Page({
   },
 
   timeFilter(projectId){
-    return new Promise((resolve, reject) => {
+    for (let i = 0; i < Math.ceil(this.data.totalTask / 20); i++){
       db.collection('task')
-      .where({
-        belongTo: _.eq(projectId),
-      })
-      .orderBy("endTime", 'asc')
-      .get()
-      .then(res => {
-        // console.log(res)
-        for (var idx in res.data) {
-          this.setData({
-            task: this.data.task.concat(res.data[idx])
-          })
-        }
-        resolve("成功获取任务信息")
-      })
-      .catch(err => {
-        reject("请求任务信息失败")
-      })
-    })
+        .where({
+          belongTo: _.eq(projectId),
+        })
+        .orderBy("endTime", 'asc')
+        .skip(i*20)
+        .get()
+        .then(res => {
+          // console.log(res)
+          for (var idx in res.data) {
+            this.setData({
+              task: this.data.task.concat(res.data[idx])
+            })
+          }
+          console.log("成功获取任务信息")
+        })
+        .catch(err => {
+          console.log("请求任务信息失败")
+        })
+    }
+
   },
 
   onPrioritySelect() {
@@ -403,54 +427,122 @@ Page({
   },
 
   priorityFilter(projectId){
-    new Promise((resolve, reject) => {
-    db.collection('task')
-      .where({
-        belongTo: _.eq(projectId),
-      })
-      .get()
-      .then(res => {
-        for (var idx in res.data) {
-          if(res.data[idx].currentPriority == "Highest"){
+    for (let i = 0; i < Math.ceil(this.data.totalTask / 20); i++){
+      db.collection('task')
+        .where({
+          belongTo: _.eq(projectId),
+          //currentPriority: _.eq("Highest")
+        })
+        .skip(i*20)
+        .get()
+        .then(res => {
+          // console.log(res)
+          for (var idx in res.data) {
+            if(res.data[idx].currentPriority == "Highest"){
+              this.setData({
+                task: this.data.task.concat(res.data[idx])
+              })
+            }
+          }
+          console.log("成功获取任务信息")
+        })
+        .catch(err => {
+          console.log("请求任务信息失败")
+        })
+    }
+
+    for (let i = 0; i < Math.ceil(this.data.totalTask / 20); i++){
+      db.collection('task')
+        .where({
+          belongTo: _.eq(projectId),
+          //currentPriority: _.eq("High")
+        })
+        .skip(i*20)
+        .get()
+        .then(res => {
+          // console.log(res)
+          for (var idx in res.data) {
+            if(res.data[idx].currentPriority == "High"){
+              this.setData({
+                task: this.data.task.concat(res.data[idx])
+              })
+            }
+          }
+          console.log("成功获取任务信息")
+        })
+        .catch(err => {
+          console.log("请求任务信息失败")
+        })
+    }
+
+    for (let i = 0; i < Math.ceil(this.data.totalTask / 20); i++){
+      db.collection('task')
+        .where({
+          belongTo: _.eq(projectId),
+          //currentPriority: _.eq("Normal")
+        })
+        .skip(i*20)
+        .get()
+        .then(res => {
+          // console.log(res)
+          for (var idx in res.data) {
+            if(res.data[idx].currentPriority == "Normal"){
+              this.setData({
+                task: this.data.task.concat(res.data[idx])
+              })
+            }
+          }
+          console.log("成功获取任务信息")
+        })
+        .catch(err => {
+          console.log("请求任务信息失败")
+        })
+    }
+
+    for (let i = 0; i < Math.ceil(this.data.totalTask / 20); i++){
+      db.collection('task')
+        .where({
+          belongTo: _.eq(projectId),
+          currentPriority: _.eq("Low")
+        })
+        .skip(i*20)
+        .get()
+        .then(res => {
+          // console.log(res)
+          for (var idx in res.data) {
             this.setData({
               task: this.data.task.concat(res.data[idx])
             })
-          } 
-        }
-        for (var idx in res.data) {
-          if(res.data[idx].currentPriority == "High"){
+          }
+          console.log("成功获取任务信息")
+        })
+        .catch(err => {
+          console.log("请求任务信息失败")
+        })
+    }
+
+    for (let i = 0; i < Math.ceil(this.data.totalTask / 20); i++){
+      db.collection('task')
+        .where({
+          belongTo: _.eq(projectId),
+          currentPriority: _.eq("Lowest")
+        })
+        .skip(i*20)
+        .get()
+        .then(res => {
+          // console.log(res)
+          for (var idx in res.data) {
             this.setData({
               task: this.data.task.concat(res.data[idx])
             })
-          } 
-        }
-        for (var idx in res.data) {
-          if(res.data[idx].currentPriority == "Normal"){
-            this.setData({
-              task: this.data.task.concat(res.data[idx])
-            })
-          } 
-        }
-        for (var idx in res.data) {
-          if(res.data[idx].currentPriority == "Low"){
-            this.setData({
-              task: this.data.task.concat(res.data[idx])
-            })
-          } 
-        }
-        for (var idx in res.data) {
-          if(res.data[idx].currentPriority == "Lowest"){
-            this.setData({
-              task: this.data.task.concat(res.data[idx])
-            })
-          } 
-        }
-        resolve("成功获取任务信息")
-      })
-      .catch(err => {
-        reject("请求任务信息失败")
-      })
-    })
+          }
+          console.log("成功获取任务信息")
+        })
+        .catch(err => {
+          console.log("请求任务信息失败")
+        })
+    }
+
   },
 
   userNameInput:function(e){
