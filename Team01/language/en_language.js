@@ -17,6 +17,7 @@ var Languague = {
     // project page
     my_task: "My Task",
     statistic_report: "Statistics Report",
+    project_statistic_report: "Project's statistic report",
     project_list: "Projects",
     create_new_project: "Create New Project",
     comment_list: "评论列表",
@@ -117,6 +118,10 @@ var Languague = {
     create_time:"Create Time",
     belong_to:"Belong To",
 
+    // Statistic report page
+    project_number: "Project number: ",
+    task_number: "Task number: ",
+    
     // contact list page
     copy_phone_confirm: "Phone number has been copied",
     search: "Search",

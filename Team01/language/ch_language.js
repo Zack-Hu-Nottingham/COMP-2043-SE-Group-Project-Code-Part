@@ -17,6 +17,7 @@ var Languague = {
      // project page
      my_task: "我的任务",
      statistic_report: "数据报告",
+     project_statistic_report: "项目数据报告",
      project_list: "项目列表",
      create_new_project: "新建项目",
      comment_list: "评论列表",
@@ -115,6 +116,11 @@ var Languague = {
     create_time:"创建时间",
     belong_to:"所属项目",
 
+    // Statistic report page
+    project_number: "项目数量: ",
+    task_number: "任务数量: ",
+
+
     // contact list page
     copy_phone_confirm: "已复制用户电话",
     search: "搜索",
@@ -128,7 +134,7 @@ var Languague = {
     // index for worker
     project: ["项目一", "项目二", "项目三", "项目四", "项目五"],
     task_description: "任务描述",
-    task_state: ["未开始", "进行中", "已完成", "已延期", "重做中"],
+    task_state: ["未开始", "进行中", "已完成", "已延期"],
     location: "施工地点",
     construction_area: "施工区域",
     construction_requirements: "额外施工要求",

@@ -15,7 +15,7 @@
 <view wx:if="{{active == 0}}">
 
   <van-cell-group inset style="padding: 30rpx;">
-    <van-cell center title=" {{dictionary.statistic_report}}" icon="bar-chart-o" clickable="true" bindtap="clickProjectReport" class="statisticReportForTest"/>
+    <van-cell center title=" {{dictionary.project_statistic_report}}" icon="bar-chart-o" clickable="true" bindtap="clickProjectReport" class="statisticReportForTest"/>
   </van-cell-group>
 
  

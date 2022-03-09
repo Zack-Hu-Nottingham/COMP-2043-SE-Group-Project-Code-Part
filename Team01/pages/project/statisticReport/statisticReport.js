@@ -28,14 +28,16 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+
+    // Initialize language
     var lan = wx.getStorageSync("languageVersion");
     this.initLanguage();
     this.setData({
       language: lan
     })
 
+    // Get project list of current project manager
     this.getData(app.globalData.userInfo._openid)
-
   },
 
   // 初始化数据
@@ -46,8 +48,6 @@ Page({
     for (var idx in this.data.projects) {
       await this.getTaskInfo(this.data.projects[idx]._id)
     }
-
-    
     
   },
 
@@ -89,13 +89,15 @@ Page({
       .count()
       .then(res => {
         this.setData({
-          totalTasks: res.total
+          totalTasks: res.total + this.data.totalTasks
         })
         resolve("成功获取任务信息")
       })
       .catch(err => {
         reject("请求任务信息失败")
       })
+
+
 
       db.collection('task')
       .where({
@@ -105,13 +107,16 @@ Page({
       .count()
       .then(res => {
         this.setData({
-          totalUnstart: res.total
+          totalUnstart: res.total + this.data.totalUnstart
         })
+        console.log("添加未开始任务 res.total=" + res.total + " total = " + this.data.totalUnstart)
         resolve("成功获取任务信息")
       })
       .catch(err => {
         reject("请求任务信息失败")
       })
+
+
 
       db.collection('task')
       .where({
@@ -121,7 +126,7 @@ Page({
       .count()
       .then(res => {
         this.setData({
-          totalProgressing: res.total
+          totalProgressing: res.total + this.data.totalProgressing
         })
         resolve("成功获取任务信息")
       })
@@ -129,6 +134,8 @@ Page({
         reject("请求任务信息失败")
       })
 
+
+      
       db.collection('task')
       .where({
         belongTo: _.eq(projectId), 
@@ -137,7 +144,7 @@ Page({
       .count()
       .then(res => {
         this.setData({
-          totalCompleted: res.total
+          totalCompleted: res.total + this.data.totalCompleted
         })
         this.setData({
           value: ((100 * this.data.totalCompleted) / this.data.totalTasks).toFixed(2)
@@ -150,6 +157,7 @@ Page({
     })
   },
 
+  // Initialize the language
   initLanguage() {
     var self = this;
     //获取当前小程序语言版本所对应的字典变量
@@ -161,58 +169,11 @@ Page({
     });
   },
 
+  // Click specific project to view detail
   clickProject(event) {
     wx.navigateTo({
       url: '../../project/projectInfo/projectInfo?id=' +  event.currentTarget.dataset.id,
     })
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })

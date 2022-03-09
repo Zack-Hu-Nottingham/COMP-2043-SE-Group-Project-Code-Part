@@ -177,7 +177,7 @@ Page({
                   
                   projectDescription: this.data.description,
 
-                  projectManager: app.globalData.userInfo._openid,
+                  // projectManager: app.globalData.userInfo._openid,
                   houseOwner: this.data.houseOwner_openid,
                   participant: this.data.participant,
 
@@ -192,7 +192,6 @@ Page({
                   progressing: [],
 
                   currentPhase: 0,
-                  // currentPhaseDescription: this.data.currentPhaseDescription,
                   // feedback: [],
                   fileList: [],
 
