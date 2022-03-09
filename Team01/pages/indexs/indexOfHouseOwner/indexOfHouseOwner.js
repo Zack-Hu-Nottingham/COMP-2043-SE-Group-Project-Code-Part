@@ -57,8 +57,8 @@ Page({
 
     date: "",
     dateShow: false,
-    filter: "",
-    filterShow: true,
+    filter: '',
+    filterShow: false,
     choosePriority: "",
     priorityShow: false,
 
@@ -67,7 +67,14 @@ Page({
     show: false,
     value: '', 
 
-    Filter: ['Time', 'Priority'],
+    Filter: [
+      {
+        name: 'Time'
+      },
+      {
+        name: 'Priority'
+      }
+    ],
 
     totalTask: 0,
     updateIndex: 1,
@@ -330,7 +337,7 @@ Page({
       })
     } else {
       this.setData({
-        filterShow: false
+        filterShow: true
       })
     }
   },
@@ -342,12 +349,13 @@ Page({
   onFilterSelect(e) {
     this.setData({
       filterShow: !this.data.filterShow,
-      filter: e.currentTarget.dataset.name
+      filter: e.detail.value
     })
-    if(this.data.filter == 'Time'){
+   
+    if(this.data.filter = 'Time'){
       this.onTimeSelect()
     }
-    else if(this.data.filter == 'Priority'){
+    else if(this.data.filter = 'Priority'){
       this.onPrioritySelect()
     }
   },
