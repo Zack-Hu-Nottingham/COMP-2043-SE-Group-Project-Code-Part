@@ -40,20 +40,6 @@
       bind:select="onFilterSelect"
     />
 
-    <van-calendar
-      show="{{ dateShow }}"
-      title="choose period"
-      bind:close="onClose"
-      bind:confirm="onConfirm"
-    />
-
-    <van-action-sheet
-      show="{{ priorityShow }}"
-      actions="{{ priority }}"
-      bind:close="onPriorityClose"
-      bind:select="onPrioritySelect"
-    />
-
     <view wx:for="{{task}}" wx:key="index">
       <van-cell title="{{item.name}}" label="{{item.startTime}} - {{item.endTime}}" clickable="true" bindtap="clickTask" data-id="{{item._id}}" class="taskForTest"> 
 
