@@ -18,8 +18,8 @@
   </van-cell-group>
 
   <van-cell-group inset title="{{dictionary.state_information}}">
-    <van-cell title="{{dictionary.current_state}}" value="{{ project.currentPhase }}" />
-    <van-cell title="{{ dictionary.current_state_description }}" value="{{ project.currentPhaseDescription[project.currentPhase] }}"
+    <van-cell title="{{dictionary.current_phase}}" value="{{ dictionary.phase_name[project.currentPhase] }}" />
+    <van-cell title="{{dictionary.phase_description }}" value="{{ dictionary.current_phase_description[project.currentPhase] }}"
     placeholder="{{project.stateDescription}}" border="{{ false }}" ></van-cell>
   </van-cell-group>
 </view>

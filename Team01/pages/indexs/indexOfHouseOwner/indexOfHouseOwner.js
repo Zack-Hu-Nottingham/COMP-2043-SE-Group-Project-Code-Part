@@ -61,15 +61,7 @@ Page({
     name : "",
     value: '', 
 
-    Filter: [
-      {
-        name: 'Time'
-      },
-      {
-        name: 'Priority'
-      },
-      
-    ],
+    Filter: [],
 
     updateIndex: 1,
   },
@@ -96,7 +88,12 @@ Page({
     var lan = wx.getStorageSync("languageVersion");
     this.initLanguage();
     this.setData({
-      language: lan
+      language: lan,
+      Filter: [{
+          name: this.data.dictionary.time,
+        },{
+          name: this.data.dictionary.priority,
+        }],
     })
 
     // 载入时设置初始页面的navBar title
@@ -162,7 +159,6 @@ Page({
       })
       .get()
       .then(res => {
-        console.log(res)
         this.setData({
           user: res.data[0]
         })
@@ -340,7 +336,6 @@ Page({
         .skip(i*20)
         .get()
         .then(res => {
-          // console.log(res)
           for (var idx in res.data) {
             this.setData({
               task: this.data.task.concat(res.data[idx])
@@ -360,9 +355,10 @@ Page({
       task: [],
     })
 
-    for (var idx in this.data.project) {
-      this.priorityFilter(this.data.project[idx]._id)
-    }
+    this.priorityFilter(this.data.project._id)
+    // for (var idx in this.data.project) {
+    //   this.priorityFilter(this.data.project[idx]._id)
+    // }
   },
 
   priorityFilter(projectId){

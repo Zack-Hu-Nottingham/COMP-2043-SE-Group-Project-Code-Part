@@ -26,6 +26,9 @@ var Languague = {
     today_task: "Today's Task",     
     task_list: "Task List",
     filter: "Sort Task",
+    select_sort: "Select sort",
+    time: "Time",
+    priority: "Priority",
 
     // more page
     user_name: "User name",
@@ -86,8 +89,6 @@ var Languague = {
     reworking: "Reworking",
     related_photo: "Related photos",
 
-
-    
     // New task page
     task_name: "Task Name",
     cancel: "Cancel",

@@ -26,6 +26,9 @@ var Languague = {
      today_task: "今天的任务",
      task_list: "任务列表",
      filter: "排序",
+     select_sort: "选择排序方式",
+     time: "时间",
+     priority: "优先级",
 
      // more page
      user_name: "用户名",

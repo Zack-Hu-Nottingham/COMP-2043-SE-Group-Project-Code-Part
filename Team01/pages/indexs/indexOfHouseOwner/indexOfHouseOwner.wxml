@@ -21,13 +21,6 @@
  
   <van-cell-group inset style="padding: 30rpx;" title="{{dictionary.task_list}}">
     <van-cell title="{{dictionary.filter}}" is-link value="{{filter}}" bindtap="clickFilter" />
-
-    <!-- <van-action-sheet
-      show="{{ filterShow }}"
-      actions="{{ Filter }}"
-      bind:close="onFilterClose"
-      bind:select="onFilterSelect"
-    /> -->
     
     <!-- Choose Feedback -->
     <van-action-sheet
