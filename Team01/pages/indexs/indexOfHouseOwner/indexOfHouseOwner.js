@@ -9,12 +9,10 @@ const _ = db.command;
 const lib = require('../../../utils/util');
 
 Page({
-
   /**
    * 页面的初始数据
    */
   data: {
-
     /**
      * Global data
      */
@@ -35,8 +33,6 @@ Page({
      * Message page's data
      */
     messageList: [],
-
-
 
 
     /**
@@ -110,7 +106,6 @@ Page({
       name : app.globalData.userInfo.nickName,
       userInfo: app.globalData.userInfo,
     })
-
   },
 
   /**
@@ -183,13 +178,10 @@ Page({
   // 初始化数据
   async getData(openid){
 
-    
-
     await this.getInfo()
 
     await this.getProjectInfo(this.data.openid)
     
-
     for (var idx in this.data.project) {
       await this.getTaskInfo(this.data.project[idx]._id)
     }
@@ -227,7 +219,6 @@ Page({
         })
       .get()
       .then(res => {
-        console.log(res)
         if (res.data.length != 0) {
           this.setData({
             isProjectEmpty: false
@@ -342,7 +333,6 @@ Page({
         filterShow: false
       })
     }
-    
   },
 
   onFilterClose() {
@@ -350,7 +340,6 @@ Page({
   },
 
   onFilterSelect(e) {
-    console.log(e.currentTarget.dataset.name),
     this.setData({
       filterShow: !this.data.filterShow,
       filter: e.currentTarget.dataset.name
@@ -363,11 +352,6 @@ Page({
     }
   },
 
-  
-  // formatDate(date) {
-  //   date = new Date(date);
-  //   return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
-  // },
   onTimeSelect() {
     this.setData({
       task: [],
@@ -392,7 +376,6 @@ Page({
             task: this.data.task.concat(res.data[idx])
           })
         }
-        // this.data.task.push(res.data[0])
         resolve("成功获取任务信息")
       })
       .catch(err => {
@@ -400,7 +383,6 @@ Page({
       })
     })
   },
-
 
   onPrioritySelect() {
     this.setData({
@@ -417,7 +399,6 @@ Page({
     db.collection('task')
       .where({
         belongTo: _.eq(projectId),
-        //currentPriority: _.eq('Highest')
       })
       .get()
       .then(res => {

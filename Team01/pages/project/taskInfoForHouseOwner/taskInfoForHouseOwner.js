@@ -18,9 +18,10 @@ Page({
     language: 0,
     languageList: ["简体中文", "English"],
     
-    
+    project: [],
     taskPage: {},
     belongTo: "",
+    participant: '',
 
     dateShow: false,
     priorityShow: false,
@@ -163,7 +164,6 @@ Page({
         this.setData({
           taskPage: res.data,
         })
-
       })
       .catch(err => {
         console.log('请求失败', err)
@@ -175,13 +175,27 @@ Page({
         .get()
         .then(res => {
           this.setData({
+            project:res.data,
             belongTo: res.data.name
           })
         })
+        this.getParticipant()
       })
+  },
 
-
-
+  getParticipant() {
+    return new Promise((resolve, reject) => {
+    db.collection('user')
+      .where({
+        _openid: _.eq(this.data.taskPage.participant)
+      })
+      .get()
+      .then(res => {
+        this.setData({
+          participant: res.data[0]
+        })
+      })
+    })
   },
 
   onPriorityClose() {
@@ -228,7 +242,6 @@ Page({
         currentPriority: e.detail.name
       }
     }).then(res => {
-      console.log('修改task优先级成功', res),
       this.getDetail()
     }).catch(res => {
       console.log('修改task优先级失败', res)

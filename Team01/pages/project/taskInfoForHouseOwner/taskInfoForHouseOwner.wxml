@@ -10,9 +10,10 @@
 
 <van-cell-group inset style="padding: 30rpx">
   <van-cell title="{{dictionary.belong_to}}" value="{{belongTo}}" />
-  <van-cell title="{{dictionary.stage_of_project}}" value="{{taskPage.stageOfProject}}" />
-  <van-field model:value="{{taskPage.taskDescriptions}}" input-align="right" clearable label="{{dictionary.description}}" placeholder="{{taskPage.taskDescriptions}}" border="{{ false }}" bind:blur="onTaskDescriptionBlur">
-  </van-field>
+  <van-cell title="{{dictionary.current_state}}" value="{{ taskPage.phase }}" />
+  <van-cell title="{{ dictionary.current_state_description }}" value="{{ taskPage.taskDescription }}"
+  placeholder="{{project.stateDescription}}" border="{{ false }}" ></van-cell>
+  
   <view wx:if="{{taskPage.state == 0}}">
     <van-cell title="{{dictionary.current_state}}" value="Unstarted" />
   </view>
@@ -28,6 +29,7 @@
   <view wx:if="{{taskPage.state == 4}}">
     <van-cell title="{{dictionary.current_state}}" value="Reworking" />
   </view>
+
 </van-cell-group>
 
 
@@ -35,7 +37,7 @@
 <van-cell-group inset style="padding: 30rpx">
   <van-cell title="{{dictionary.priority}}" is-link value="{{taskPage.currentPriority}}" bindtap="clickPriority" />
   <van-cell title="{{dictionary.tag}}" is-link value="{{taskPage.tag}}" />
-  <van-cell title="{{dictionary.participant}}" is-link value="{{taskPage.participant}}" />
+  <van-cell title="{{dictionary.participant}}" value="{{participant.nickName}}" />
 </van-cell-group>
 
 <van-sticky offset-top="{{ 570 }}">

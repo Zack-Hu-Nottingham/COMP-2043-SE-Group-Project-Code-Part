@@ -31,9 +31,11 @@
     
     <!--默认action-sheet为隐藏，由排序栏触发-->
     <action-sheet hidden="{{filterShow}}" bindchange="listenerActionSheet">
-      <block wx:for-items="{{Filter}}"> 
+
+      <block wx:for-items="{{Filter}}" wx:key="Filter"> 
         <action-sheet-item bindtap="onFilterSelect" data-name="{{item}}">{{item}}</action-sheet-item>
       </block>
+
       <!--自动隐藏action-sheet-->
       <action-sheet-cancel class="redCancel">cancel</action-sheet-cancel>
     </action-sheet>
@@ -63,15 +65,19 @@
           <view wx:elif="{{item.state==1}}">
             <van-tag color="#87CEFA" size="medium"><van-icon name="play"></van-icon>Progressing</van-tag>
           </view>
+
           <view wx:elif="{{item.state==2}}">
             <van-tag color="#32CD32" size="medium"><van-icon name="passed" />Finished</van-tag>
           </view>
+
           <view wx:elif="{{item.state==3}}">
             <van-tag color="#ffe1e1" text-color="#ad0000"  size="medium"><van-icon name="warning-o" />Delayed</van-tag>
           </view>
+
           <view wx:elif="{{item.state==4}}">
             <van-tag color="#ffe1e1" text-color="#ad0000"  size="medium"><van-icon name="replay" />Reworking</van-tag>
           </view>
+
         </view>
       </van-cell>      
     </view>
@@ -90,7 +96,6 @@
 
 <van-cell-group inset>
   <van-cell center icon="user-o" />
-  <!-- title="{{dictionary.user_info}}" -->
   <van-cell center title="{{dictionary.user_name}}" is-link bind:click="showPopup"  value="{{name}}">
   </van-cell>
   
@@ -104,9 +109,6 @@
    </van-field>
     </van-cell-group>
     <van-button class="van-button" round style="padding-top: 40rpx;padding-left:20% ;" type="info" bindtap="forNotice" >保存</van-button>
-    <!--
-    <van-dialog useslot id="van-dialog"></van-dialog>
-  -->
     <van-toast id="van-toast" />
   </van-popup>
   
@@ -122,6 +124,5 @@
     <van-cell center icon="setting-o"/>
     <van-cell center title="{{dictionary.language}}" value="{{languageList[language]}}" icon="" is-link clickable="true" bindtap="onChangeLan" class="settingForTest"/>
   </van-cell-group>
-
 
 </view>
