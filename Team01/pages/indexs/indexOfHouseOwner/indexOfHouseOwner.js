@@ -56,12 +56,9 @@ Page({
     dateShow: false,
     filter: '',
     filterShow: false,
-    choosePriority: "",
-    priorityShow: false,
 
     changetip: '请输入新用户名',
     name : "",
-    show: false,
     value: '', 
 
     Filter: [
@@ -70,7 +67,8 @@ Page({
       },
       {
         name: 'Priority'
-      }
+      },
+      
     ],
 
     updateIndex: 1,
@@ -78,10 +76,6 @@ Page({
 
   showPopup() {
     this.setData({ show: true });
-  },
-
-  onClose() {
-    this.setData({ show: false});
   },
 
   /**
@@ -230,25 +224,6 @@ Page({
       })
     }
 
-
-    // return new Promise((resolve, reject) => {
-    //   db.collection('task')
-    //   .where({
-    //     belongTo: _.eq(projectId)
-    //   })
-    //   .get()
-    //   .then(res => {
-    //     for (var idx in res.data) {
-    //       this.setData({
-    //         task: this.data.task.concat(res.data[idx])
-    //       })
-    //     }
-    //     resolve("成功获取任务信息")
-    //   })
-    //   .catch(err => {
-    //     reject("请求任务信息失败")
-    //   })
-    // })
   },
 
   // 更改tab选项时对应的逻辑
@@ -333,13 +308,15 @@ Page({
   onFilterSelect(e) {
     this.setData({
       filterShow: !this.data.filterShow,
-      filter: e.detail.value
+      filter: e.detail.name
     })
+
+    console.log(e.detail.value)
    
-    if(this.data.filter = 'Time'){
+    if(this.data.filter == 'Time'){
       this.onTimeSelect()
     }
-    else if(this.data.filter = 'Priority'){
+    else if(this.data.filter == 'Priority'){
       this.onPrioritySelect()
     }
   },
@@ -393,12 +370,10 @@ Page({
       db.collection('task')
         .where({
           belongTo: _.eq(projectId),
-          //currentPriority: _.eq("Highest")
         })
         .skip(i*20)
         .get()
         .then(res => {
-          // console.log(res)
           for (var idx in res.data) {
             if(res.data[idx].currentPriority == "Highest"){
               this.setData({
@@ -417,12 +392,10 @@ Page({
       db.collection('task')
         .where({
           belongTo: _.eq(projectId),
-          //currentPriority: _.eq("High")
         })
         .skip(i*20)
         .get()
         .then(res => {
-          // console.log(res)
           for (var idx in res.data) {
             if(res.data[idx].currentPriority == "High"){
               this.setData({
@@ -441,12 +414,10 @@ Page({
       db.collection('task')
         .where({
           belongTo: _.eq(projectId),
-          //currentPriority: _.eq("Normal")
         })
         .skip(i*20)
         .get()
         .then(res => {
-          // console.log(res)
           for (var idx in res.data) {
             if(res.data[idx].currentPriority == "Normal"){
               this.setData({
@@ -465,16 +436,16 @@ Page({
       db.collection('task')
         .where({
           belongTo: _.eq(projectId),
-          currentPriority: _.eq("Low")
         })
         .skip(i*20)
         .get()
         .then(res => {
-          // console.log(res)
           for (var idx in res.data) {
-            this.setData({
-              task: this.data.task.concat(res.data[idx])
-            })
+            if(res.data[idx].currentPriority == "Low"){
+              this.setData({
+                task: this.data.task.concat(res.data[idx])
+              })
+            }
           }
           // console.log("成功获取任务信息")
         })
@@ -487,16 +458,16 @@ Page({
       db.collection('task')
         .where({
           belongTo: _.eq(projectId),
-          currentPriority: _.eq("Lowest")
         })
         .skip(i*20)
         .get()
         .then(res => {
-          // console.log(res)
           for (var idx in res.data) {
-            this.setData({
-              task: this.data.task.concat(res.data[idx])
-            })
+            if(res.data[idx].currentPriority == "Lowest"){
+              this.setData({
+                task: this.data.task.concat(res.data[idx])
+              })
+            }
           }
           // console.log("成功获取任务信息")
         })

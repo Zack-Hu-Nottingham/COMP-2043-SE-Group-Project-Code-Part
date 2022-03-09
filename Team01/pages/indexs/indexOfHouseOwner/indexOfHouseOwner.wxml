@@ -32,25 +32,12 @@
     <!-- Choose Feedback -->
     <van-action-sheet
       show="{{ filterShow }}"
-      title="{{ dictionary.select_sort }}"
       actions="{{ Filter }}"
+      title="{{ dictionary.select_sort }}"
       cancel-text="{{ dictionary.cancel }}"
+      bind:cancel="onFilterClose"
       bind:close="onFilterClose"
       bind:select="onFilterSelect"
-    />
-
-    <van-calendar
-      show="{{ dateShow }}"
-      title="choose period"
-      bind:close="onClose"
-      bind:confirm="onConfirm"
-    />
-
-    <van-action-sheet
-      show="{{ priorityShow }}"
-      actions="{{ priority }}"
-      bind:close="onPriorityClose"
-      bind:select="onPrioritySelect"
     />
 
     <view wx:for="{{task}}" wx:key="index">
@@ -80,6 +67,13 @@
         </view>
       </van-cell>      
     </view>
+
+    <van-cell-group inset style="padding: 30rpx;">
+    
+    </van-cell-group>
+    <van-cell-group inset style="padding: 30rpx;">
+    
+    </van-cell-group>
   </van-cell-group>
 
 </view>
