@@ -45,11 +45,10 @@ Page({
     // 获取当前project的id
     id = options.id
 
-    // 从数据库中根据id获取数据
-    this.getDetail()
-
     this.getTaskData(id)
 
+    // 从数据库中根据id获取数据
+    this.getDetail()
 
     this.setData({
         value: 0,

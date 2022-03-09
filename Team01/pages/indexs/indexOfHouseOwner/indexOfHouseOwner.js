@@ -75,7 +75,8 @@ Page({
       },
       {
         name: 'Priority'
-      }
+      },
+      
     ],
 
     updateIndex: 1,
@@ -371,13 +372,15 @@ Page({
   onFilterSelect(e) {
     this.setData({
       filterShow: !this.data.filterShow,
-      filter: e.detail.value
+      filter: e.detail.name
     })
+
+    console.log(e.detail.value)
    
-    if(this.data.filter = 'Time'){
+    if(this.data.filter == 'Time'){
       this.onTimeSelect()
     }
-    else if(this.data.filter = 'Priority'){
+    else if(this.data.filter == 'Priority'){
       this.onPrioritySelect()
     }
   },

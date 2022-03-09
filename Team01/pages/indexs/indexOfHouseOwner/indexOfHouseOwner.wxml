@@ -32,9 +32,10 @@
     <!-- Choose Feedback -->
     <van-action-sheet
       show="{{ filterShow }}"
-      title="{{ dictionary.select_sort }}"
       actions="{{ Filter }}"
+      title="{{ dictionary.select_sort }}"
       cancel-text="{{ dictionary.cancel }}"
+      bind:cancel="onFilterClose"
       bind:close="onFilterClose"
       bind:select="onFilterSelect"
     />
@@ -80,6 +81,13 @@
         </view>
       </van-cell>      
     </view>
+
+    <van-cell-group inset style="padding: 30rpx;">
+    
+    </van-cell-group>
+    <van-cell-group inset style="padding: 30rpx;">
+    
+    </van-cell-group>
   </van-cell-group>
 
 </view>
