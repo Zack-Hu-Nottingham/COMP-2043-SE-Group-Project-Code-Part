@@ -50,6 +50,8 @@ Page({
     name : "",
     show: false,
     value: '',
+    show1: false,
+    radio: '1',
   },
 
   showPopup() {
@@ -58,6 +60,18 @@ Page({
 
   onClose() {
     this.setData({ show: false});
+  },
+
+  showPopup1() {
+    this.setData({ show1: true });
+  },
+
+  onClose1() {
+    this.setData({ show1: false});
+  },
+
+  onChange(event) {
+    this.setData({ radio: event.detail, });
   },
 
   /**
@@ -372,15 +386,27 @@ Page({
 
   userNameInput:function(e){
     this.setData({
-      value:e.detail.value
+      value:e.detail
     })
   },
 
   forNotice: function (e) {
     let value= this.data.value;
+    var id = app.globalData.userInfo._openid;
     if (value=='') {
       Toast.fail('空用户名');
     } else {
+      wx.cloud.callFunction({
+        name:'updateuserName',
+        data:{
+          id:id,
+          nickName:value
+        },
+        success:function (res){
+          console.log("success" + value)
+        },
+        fail:console.error
+      })
       Toast({
         type: 'success',
         message: '提交成功',
@@ -392,6 +418,9 @@ Page({
           //console.log('执行OnClose函数');
         },
       }); 
+      this.setData({
+        name:value
+      }) 
     }
   }
 })
