@@ -41,11 +41,12 @@ Page({
             id: options.id,
             // commentPage: options.index,
         })
-            db.collection('task').doc(options.id).get().then(res => {
-                this.setData({
-                    feedback: res.data.feedback,
-                })
-              })
+
+        db.collection('task').doc(options.id).get().then(res => {
+            this.setData({
+                feedback: res.data.feedback,
+            })
+        })
  
         
         // 初始化语言

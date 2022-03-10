@@ -42,6 +42,7 @@
 
 <van-divider contentPosition="center">{{dictionary.related_photo}}</van-divider>
 
+<van-uploader file-list="{{ fileList }}" />
 
 <van-sticky offset-top="{{ 570 }}">
   <van-button hairline plain round block type="info" bindtap="clickAddComment" class="addComment">{{dictionary.add_comment}}</van-button>
