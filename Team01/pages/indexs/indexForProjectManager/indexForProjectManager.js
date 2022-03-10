@@ -54,14 +54,12 @@ Page({
     name : "",
     show: false,
     value: '',
-<<<<<<< HEAD
     show1: false,
     radio: '1',
-=======
 
     totalTask: 0,
     updateIndex: 1,
->>>>>>> d35058c221c79351cf436651f43d72385433e9c1
+
   },
 
   showPopup() {

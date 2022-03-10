@@ -101,7 +101,7 @@
    <van-field model:value="{{ value }}" label="新用户名" left-icon="contact" placeholder="{{ changetip }}" bindinput='userNameInput' border="{{ false }}">
    </van-field>
     </van-cell-group>
-    <van-button class="van-button" round style="padding-top: 40rpx;padding-left:20% ;" type="info" bindtap="forNotice" >保存</van-button>
+    <van-button class="van-button" plain round color="#1296db" type="primary" style="padding-top: 40rpx;padding-left:20% ;" bindtap="forNotice" >保存</van-button>
     <!--
     <van-dialog useslot id="van-dialog"></van-dialog>
   -->
@@ -118,7 +118,7 @@
       <van-radio style="padding-top: 20rpx;padding-left:20% ;" icon-size="55rpx" name="2">工人</van-radio>
       <van-radio style="padding-top: 20rpx;padding-left:20% ;" icon-size="55rpx" name="3">项目经理</van-radio>
     </van-radio-group>
-    <van-button class="button-share" round style="padding-top: 40rpx;padding-left:20% ;" open-type="share" type="info" bindtip="onShareAppMessage">分享</van-button>
+    <van-button class="button-share" plain round color="#1296db" type="primary" style="padding-top: 40rpx;padding-left:20% ;" open-type="share" bindtip="onShareAppMessage">分享</van-button>
   </van-popup>
 </van-cell-group>
 
