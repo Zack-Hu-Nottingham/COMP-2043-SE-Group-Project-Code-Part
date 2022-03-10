@@ -12,11 +12,13 @@ var app = getApp();
 
 Page({
     /**
-     * 页面的初始数据
-     */
+   * Initial data of page
+   */
     data: {
         
-        // 存放双语
+       /**
+   * Store bylingual settings
+   */
         dictionary: {},
         language: 0,
         languageList: ["简体中文", "English"],
