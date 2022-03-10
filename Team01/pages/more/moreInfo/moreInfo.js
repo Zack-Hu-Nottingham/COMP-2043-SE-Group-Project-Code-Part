@@ -7,136 +7,124 @@ const app = getApp();
 
 Page({
 
-    /**
-     * 页面的初始数据
-     */
-    data: {
-        changetip: '请输入新用户名',
-        name : "",
-        title:'More Information',
-        position:'project manager',
-        phonenumber: '86',
-        userInfo: {},
-        hasUserInfo: false,
-        canIUse: wx.canIUse('button.open-type.getUserInfo'),
-        canIUseGetUserProfile: false,
-        canIUseOpenData: wx.canIUse('open-data.type.userAvatarUrl') && wx.canIUse('open-data.type.userNickName'), // 如需尝试获取用户信息可改为false
-        show: false,
-        value: '', 
+  /**
+   * Initial data of page
+   */
+  data: {
+    changetip: '请输入新用户名',
+    name: "",
+    title: 'More Information',
+    position: 'project manager',
+    phonenumber: '86',
+    userInfo: {},
+    hasUserInfo: false,
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    canIUseGetUserProfile: false,
+    canIUseOpenData: wx.canIUse('open-data.type.userAvatarUrl') && wx.canIUse('open-data.type.userNickName'),
+    show: false,
+    value: '',
 
-    },
-    showPopup() {
-        this.setData({ show: true });
-    },
-    
-    onClose() {
-        this.setData({ show: false});
-    },
+  },
+  showPopup() {
+    this.setData({
+      show: true
+    });
+  },
+
+  onClose() {
+    this.setData({
+      show: false
+    });
+  },
 
 
-    /**
-     * 生命周期函数--监听页面加载
-     */
-    onLoad: function (options) {
-        wx.getUserProfile({
-            desc: '展示更多信息', // 声明获取用户更多信息
-            success: (res) => {
-              // console.log(res)
-              this.setData({
-                userInfo: res.userInfo,
-                hasUserInfo: true,
-                name: res.userInfo.userNickName,
-                
-              })
-            }
-          })
-        wx.setNavigationBarTitle({
-          title: this.data.title
-        })
-
+  /**
+   * Life cycle function - listens for page loads
+   */
+  onLoad: function (options) {
+    wx.getUserProfile({
+      desc: '展示更多信息',
+      success: (res) => {
+        // console.log(res)
         this.setData({
-          name : app.globalData.userInfo.nickName,
+          userInfo: res.userInfo,
+          hasUserInfo: true,
+          name: res.userInfo.userNickName,
+
         })
+      }
+    })
+    wx.setNavigationBarTitle({
+      title: this.data.title
+    })
 
-    },
+    this.setData({
+      name: app.globalData.userInfo.nickName,
+    })
 
-    /**
-     * 生命周期函数--监听页面初次渲染完成
-     */
-    onReady: function () {
+  },
 
-    },
+  /**
+   * Life cycle function - Listens for the page to complete its first rendering
+   */
+  onReady: function () {
 
-    /**
-     * 生命周期函数--监听页面显示
-     */
-    onShow: function () {
+  },
 
-    },
+  /**
+   * Life cycle function - Listens for page display
+   */
+  onShow: function () {
 
-    /**
-     * 生命周期函数--监听页面隐藏
-     */
-    onHide: function () {
+  },
 
-    },
+  /**
+   * Life cycle function - Listens for page hide
+   */
+  onHide: function () {
 
-    /**
-     * 生命周期函数--监听页面卸载
-     */
-    onUnload: function () {
+  },
 
-    },
+  /**
+   * Life cycle function - Listens for page unload
+   */
+  onUnload: function () {
 
-    /**
-     * 页面相关事件处理函数--监听用户下拉动作
-     */
-    onPullDownRefresh: function () {
+  },
 
-    },
+  /**
+   * Page-specific event handlers - listen for user pull actions
+   */
+  onPullDownRefresh: function () {
 
-    /**
-     * 页面上拉触底事件的处理函数
-     */
-    onReachBottom: function () {
+  },
 
-    },
+  /**
+   * A handler for a pull-down event on the page
+   */
+  onReachBottom: function () {
 
-    /**
-     * 用户点击右上角分享
-     */
-    onShareAppMessage: function () {
+  },
 
-    },
-   // forNotice: function (e) {
-     // Dialog.confirm({
-       // title:'是否修改',
-        //customStyle:'display= flex;flex-direction: column;',
-        //context: this,
-        // title: this.data.dictionary.change_lan_confirm,
-        // message: '弹窗内容',
-     // })
-        //.then(() => {
-          // on confirm
-       // })
-       // .catch(() => {
-          // on cancel
-         // return
-        //});
+  /**
+   * Users click on the upper right to share
+   */
+  onShareAppMessage: function () {
 
-    //}
-    forNotice: function (e) {
- 
-      Toast({
-        type: 'success',
-        message: '提交成功',
-        onClose: () => {
-           this.setData({ 
-             show: false,
-             changetip: "",
-          });
-          //console.log('执行OnClose函数');
-        },
-      });
-    }
+  },
+
+  forNotice: function (e) {
+
+    Toast({
+      type: 'success',
+      message: '提交成功',
+      onClose: () => {
+        this.setData({
+          show: false,
+          changetip: "",
+        });
+        //console.log('执行OnClose函数');
+      },
+    });
+  }
 })
