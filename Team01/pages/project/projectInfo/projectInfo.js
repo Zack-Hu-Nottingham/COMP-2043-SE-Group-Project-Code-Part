@@ -1,15 +1,13 @@
 // pages/projectInfo/projectInfo.js
 const languageUtils = require("../../../language/languageUtils");
 
-import * as echarts from '../../../ec-canvas/echarts';
-
 const app = getApp();
 
 var id = '';
 var projectComment = '0'; //辨别addComment的页面中索引列表是task/project
 const db = wx.cloud.database();
 const _ = db.command;
-
+const MAX_LIMIT = 20;
 
 
 Page({
@@ -47,6 +45,7 @@ Page({
     houseOwner: "",
     projectManager: "",
     feedback: [],
+    fileList: [],
 
     // Task Management's data
     // These data should be filled in when the page is loaded
@@ -55,11 +54,11 @@ Page({
     finishedTask: [],
     // for collapse bar
     activeNames: [],
-
-    //gantt diagram
-    // ec: {
-    //   onInit: initChart
-    // }
+    countState0Result:0,
+    countState1Result:0,
+    countState2Result:0,
+    countState3Result:0,
+    countState4Result:0,
 
   },
 
@@ -86,74 +85,269 @@ Page({
     // 从数据库中根据id获取数据
     this.getDetail()
 
+    //获取数据库条数:unstarted
+    db.collection('task').where({
+      belongTo: id,
+      state: 0
+    }).count().then(res => {
+      console.log('unstarted: '+ res.total);
+      
+      this.setData({
+        countState0Result : res.total
+      })
+    })
+
+    //获取数据库条数:processing
+    db.collection('task').where({
+      belongTo: id,
+      state: 1
+    }).count().then(res => {
+      console.log('processing: '+ res.total);
+      
+      this.setData({
+        countState1Result : res.total
+      })
+    })
+
+    //获取数据库条数:completed
+    db.collection('task').where({
+      belongTo: id,
+      state: 2
+    }).count().then(res => {
+      console.log('completed: '+res.total);
+      
+      this.setData({
+        countState2Result : res.total
+      })
+    })
+     
+    //获取数据库条数:delayed
+    db.collection('task').where({
+      belongTo: id,
+      state: 3
+    }).count().then(res => {
+      console.log('delayed: '+res.total);
+      
+      this.setData({
+        countState3Result : res.total
+      })
+    })
+      
+    //获取数据库条数:reworking
+    db.collection('task').where({
+      belongTo: id,
+      state: 4
+    }).count().then(res => {
+      console.log('reworking: '+ res.total);
+      
+      this.setData({
+        countState4Result : res.total
+      })
+    })
+
 
   },
 
+  
 
   // Global method
-  navbarTap: function(e) {
+    navbarTap: function(e) {
     this.setData({
       currentTab: e.currentTarget.dataset.idx
     })
+    console.log(this.data.currentTab)
+    if(this.data.currentTab == 2){
+      console.log('success')
+      wx.navigateTo({
+        url: '../testDiagram/testDiagram?id='+id,
+      })
+    }
 
     // 载入task management页面的数据
     if (this.data.currentTab == 1) {
+      const state0BatchTimes = Math.ceil(this.data.countState0Result / 20)
+      //console.log(state0BatchTimes)
+      var arraypro=[]
+      var x0 = 0;
+    //初次循环获取云端数据库的分次数的promise数组
+      for (let i = 0; i < state0BatchTimes; i++) {
+        db.collection("task").where({
+          belongTo: id,
+          state: 0
+        }).skip(i*20).get().then(res => {
+            x0++;
+            //console.log(x0);
+            for (let j = 0; j < res.data.length; j++) {
+              arraypro.push(res.data[j])
+            }
+            //console.log(arraypro);
+            if(x0==state0BatchTimes){
+              this.setData({
+                unstarted : arraypro
+              })
+            }
+          })
+          
+        
+      }
 
-      db.collection("task")
-      .where({
-        belongTo: id,
-        state: 0
-      })
-      .get().then(res => {
-        this.setData({
-          unstarted: res.data
-        })
-      })
+    
 
-      db.collection("task")
-      .where({
+      
+      const state1BatchTimes = Math.ceil(this.data.countState1Result / 20)
+      var arraypro1=[]
+      var x1 = 0
+    //初次循环获取云端数据库的分次数的promise数组
+    for (let i = 0; i < state1BatchTimes; i++) {
+      db.collection("task").where({
         belongTo: id,
         state: 1
-      })
-      .get().then(res => {
-        this.setData({
-          progressing: res.data
+      }).skip(i*20).get().then(res => {
+          x1++;
+          for (let j = 0; j < res.data.length; j++) {
+            arraypro1.push(res.data[j])
+          }
+          if(x1==state1BatchTimes){
+            this.setData({
+              progressing : arraypro1
+            })
+          }
         })
-      })
+        
+        
+      }
 
-      db.collection("task")
-      .where({
-        belongTo: id,
-        state: 2
+    
+    
+    const state2BatchTimes = Math.ceil(this.data.countState2Result / 20)
+    var arraypro2=[]
+    var x2 = 0
+  //初次循环获取云端数据库的分次数的promise数组
+  for (let i = 0; i < state2BatchTimes; i++) {
+    db.collection("task").where({
+      belongTo: id,
+      state: 2
+    }).skip(i*20).get().then(res => {
+        x2++;
+        for (let j = 0; j < res.data.length; j++) {
+          arraypro2.push(res.data[j])
+        }
+        if(x2==state2BatchTimes){
+          this.setData({
+            completed : arraypro2
+          })
+        }
       })
-      .get().then(res => {
-        this.setData({
-          completed: res.data
-        })
-      })
-
-      db.collection("task")
-      .where({
-        belongTo: id,
-        state: 3
-      })
-      .get().then(res => {
-        this.setData({
-          delayed: res.data
-        })
-      })
-
-      db.collection("task")
-      .where({
-        belongTo: id,
-        state: 4
-      })
-      .get().then(res => {
-        this.setData({
-          reworking: res.data
-        })
-      })
+      
+      
     }
+
+  
+  
+  const state3BatchTimes = Math.ceil(this.data.countState3Result / 20)
+  var arraypro3=[]
+  var x3 = 0
+//初次循环获取云端数据库的分次数的promise数组
+for (let i = 0; i < state3BatchTimes; i++) {
+  db.collection("task").where({
+    belongTo: id,
+    state: 3
+  }).skip(i*20).get().then(res => {
+      x3++;
+      for (let j = 0; j < res.data.length; j++) {
+        arraypro3.push(res.data[j])
+      }
+      if(x3==state3BatchTimes){
+        this.setData({
+          delayed : arraypro3
+        })
+      }
+    })
+    
+    
+  }
+
+  const state4BatchTimes = Math.ceil(this.data.countState4Result / 20)
+  var arraypro4=[]
+  var x4 = 0
+  //初次循环获取云端数据库的分次数的promise数组
+  for (let i = 0; i < state4BatchTimes; i++) {
+  db.collection("task").where({
+    belongTo: id,
+    state: 4
+  }).skip(i*20).get().then(res => {
+      x4++;
+      for (let j = 0; j < res.data.length; j++) {
+        arraypro4.push(res.data[j])
+      }
+      if(x4==state4BatchTimes){
+        this.setData({
+          reworking : arraypro4
+        })
+      }
+    })
+    
+ 
+}
+    }
+    
+
+      // db.collection("task")
+      // .where({
+      //   belongTo: id,
+      //   state: 0
+      // })
+      // .get().then(res => {
+      //   this.setData({
+      //     unstarted: res.data
+      //   })
+      // })
+
+      // db.collection("task")
+      // .where({
+      //   belongTo: id,
+      //   state: 1
+      // })
+      // .get().then(res => {
+      //   this.setData({
+      //     progressing: res.data
+      //   })
+      // })
+
+      // db.collection("task")
+      // .where({
+      //   belongTo: id,
+      //   state: 2
+      // })
+      // .get().then(res => {
+      //   this.setData({
+      //     completed: res.data
+      //   })
+      // })
+
+      // db.collection("task")
+      // .where({
+      //   belongTo: id,
+      //   state: 3
+      // })
+      // .get().then(res => {
+      //   this.setData({
+      //     delayed: res.data
+      //   })
+      // })
+
+      // db.collection("task")
+      // .where({
+      //   belongTo: id,
+      //   state: 4
+      // })
+      // .get().then(res => {
+      //   this.setData({
+      //     reworking: res.data
+      //   })
+      // })
+    
+    
   },
 
   
@@ -177,9 +371,10 @@ Page({
           this.setData({
             project: res.data,
             name: res.data.name,
-            fileList: res.data.fileList,
             feedback: res.data.feedback,
           }),
+          console.log(res.data.cloudList)
+          this.getFileList(res.data.cloudList);
 
           wx.setNavigationBarTitle({
             title: this.data.name,
@@ -194,21 +389,34 @@ Page({
       })
     
   },
+  getFileList(cloudPath){
+    // console.log(cloudPath)
+    var newList = [];
+    for(var i=0;i<cloudPath.length;i++){
+      wx.cloud.downloadFile({
+        fileID: cloudPath[i]
+      }).then(res => {
+        newList.push({"url": res.tempFilePath})
+        //console.log(res.tempFilePath)
+      })
+    }
+    console.log(newList)
+    this.setData({
+      fileList: newList
+    })
+  },
 
   getHouseOwner() {
-    return new Promise((resolve, reject) => {
     db.collection('user')
       .where({
         _openid: _.eq(this.data.project.houseOwner)
       })
       .get()
       .then(res => {
-        // console.log(res.data[0])
         this.setData({
           houseOwner: res.data[0]
         })
       })
-    })
   },
 
   getProjectManager() {
@@ -276,14 +484,6 @@ Page({
     })
   },
 
-   /**
-   * Create Comment page's method
-   */
-  clickAddComment(event) {
-        wx.navigateTo({
-          url: '../addComment/addComment?id=' + id + '&index=' + projectComment
-        })
-  },
 
   onProjectBlur: function(e){
     // console.log(e.detail.value)
@@ -322,6 +522,22 @@ Page({
   go_update(){
     this.getDetail()
   },
+  
+  updateComment(){
+    db.collection('project')
+    .doc(id)
+    .get({
+      success: res => {
+        this.setData({
+          feedback: res.data.feedback,
+        });
+      },
+      fail: function(err) {
+        // console.log(err)
+      }
+    })
+
+  },
   deleteImg(event) {
     const delIndex = event.detail.index
     const { fileList } = this.data
@@ -329,6 +545,38 @@ Page({
     this.setData({
       fileList
     })
+    db.collection('project').where({
+      _id: id
+    }).update({
+      data: {
+        cloudList: cloudList.splice(delIndex, 1)
+      }
+    })
+  },
+  
+  upload(){
+    wx.chooseImage({
+      sizeType: ['original', 'compressed'],
+      sourceType: ['album', 'camera'],
+      success:res => {
+        var fileList = this.data.fileList;
+        fileList.push({url: res.tempFilePaths[0]});
+        this.setData({ fileList: fileList });
+        this.uploadImage(res.tempFilePaths[0]);
+        // console.log("成功选择图片",fileList);
+      }
+    })
+  },
+
+  uploadImage(fileURL) {
+      wx.cloud.uploadFile({
+        cloudPath: 'project/'+ id + '/' + new Date().getTime() + Math.floor(9*Math.random()) + '.png', // 上传至云端的路径
+        filePath: fileURL, // 小程序临时文件路径
+        success: res => {
+          // console.log("图片上传成功",res)
+        },
+        fail: console.error
+      })
   },
 
   /**
@@ -416,7 +664,7 @@ Page({
 
   go_update(){
     this.getDetail()
-  }
+  },
 
 })
 

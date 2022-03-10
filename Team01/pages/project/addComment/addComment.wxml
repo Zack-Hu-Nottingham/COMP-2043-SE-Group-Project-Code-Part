@@ -6,11 +6,11 @@
 </van-cell-group>
 
 <!--Upload related images-->
-<van-uploader class="uploader" file-list="{{ fileList }}" bindtap="upload" deletable="{{ true }}" bind:delete="deleteImg" max-count="8"/>
+<van-uploader class="uploader" file-list="{{ fileList }}" bindtap="upload" deletable="{{ true }}" bind:delete="deleteImg" max-count="9" disabled="{{true}}"/>
 
 <!--Submit-->    
 <van-sticky offset-top="{{ 600 }}">
-<van-button plain round block loading="{{isLoading}}" disabled="{{isLoading}}" class="submitBtn" color="#1296db" type="primary" size="normal" form-type="submit" >{{dictionary.submit_feedback}}</van-button>
+<van-button plain round block loading="{{isLoading}}" disabled="{{isLoading}}" class="submitBtn" color="#1296db" type="primary" size="normal" form-type="submit" >{{dictionary.create_comment}}</van-button>
 </van-sticky>
 
 

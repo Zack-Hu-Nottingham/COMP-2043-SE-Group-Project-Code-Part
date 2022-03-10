@@ -77,7 +77,7 @@ Page({
                     // Project Manager
                   } else if (identity == 1) {
                     wx.redirectTo({
-                      url: '../indexs/indexForProjectManager/indexForProjectManager',
+                      url: '../indexs/indexForProjectManager/indexForProjectManager?openid=' + this.data.openid,
                     })
                    
                     // Worker

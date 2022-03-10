@@ -59,6 +59,10 @@
     box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);  
   }
   
+  .userinfo-avatar image{
+    width: 160rpx;
+    height: 160rpx;
+  }
   .userNickName {
     padding-left: 80rpx;
   }

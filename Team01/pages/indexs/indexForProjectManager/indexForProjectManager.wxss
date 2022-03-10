@@ -8,6 +8,11 @@
     margin-top: 300rpx;
   }
 
+  .notReadMessage {
+    --cell-background-color: antiquewhite ; 
+  }
+
+
 
   
 /**
@@ -79,18 +84,3 @@
   margin: 0;
 }
 
-.van-popup{
-  display: flex;
-  flex-direction: column;
-  border-radius: 4%;
-} 
-.van-field{
-
-  justify-content:center;
-  align-items: center;
-}
-
-.van-button{
-  width: 80%;
-  border: 20rpx coral;
-}

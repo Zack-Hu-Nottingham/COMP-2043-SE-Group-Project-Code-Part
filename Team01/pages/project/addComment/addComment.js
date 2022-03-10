@@ -3,6 +3,7 @@ import Toast from '../../../miniprogram_npm/@vant/weapp/toast/toast'
 const languageUtils = require("../../../language/languageUtils");
 const app = getApp();
 const db = wx.cloud.database();
+const _ = db.command;
 
 Page({
 
@@ -17,14 +18,16 @@ Page({
         selectedFeedback: '',
         selectedIndex: '',
 
+        feedback: [],
+
         showFeedback: false,
         feedbackType: [],
         fileList: [],
+        cloudPath: [],
         details: '',
-        feedback: [],
         id: '',
-        commentPage: '',
-
+        feedback_id: '',
+        // commentPage: '',
         isLoading: false,
 
     },
@@ -32,29 +35,17 @@ Page({
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad: function (options) { 
+    onLoad: function (options) {
+
         this.setData({
             id: options.id,
-            commentPage: options.index,
+            // commentPage: options.index,
         })
-        if(this.data.commentPage=='0'){
-            db.collection('project').doc(options.id).get().then(res => {
-                // res.data 包含该记录的数据
-                this.setData({
-                    feedback: res.data.feedback,
-                })
-              })
-        }
-        else{
             db.collection('task').doc(options.id).get().then(res => {
-                // res.data 包含该记录的数据
                 this.setData({
                     feedback: res.data.feedback,
                 })
               })
-        }
-        // console.log(options)
-        // console.log(this.data.feedback);
  
         
         // 初始化语言
@@ -112,7 +103,6 @@ Page({
 
     upload(){
         wx.chooseImage({
-          count: 1,
           sizeType: ['original', 'compressed'],
           sourceType: ['album', 'camera'],
           success:res => {
@@ -126,15 +116,23 @@ Page({
 
     uploadImage(fileURL) {
         wx.cloud.uploadFile({
-          cloudPath: 'feedback/'+ this.data.id + '/' + new Date().getTime() +'.png', // 上传至云端的路径
+          cloudPath: 'feedback/'+ this.data.id + '/' + this.data.feedback_id + '/' + (new Date()).getTime() + Math.floor(9*Math.random()) +'.png', // 上传至云端的路径
           filePath: fileURL, // 小程序临时文件路径
           success: res => {
-            // console.log("图片上传成功",res)
+              // cloudPath: []
+            var cloudList = this.data.cloudPath;
+            cloudList.push(res.fileID);
+            this.setData({
+                cloudPath: cloudList
+            })
+            this.updateCloudList();
+            console.log("图片上传成功",res)
           },
-          fail: console.error
+          fail: res => {
+              console.log("图片上传失败", res)
+          }
         })
     },
-
 
     formSubmit: function (e) {
         if (this.data.selectedIndex == ''){
@@ -144,48 +142,68 @@ Page({
             Toast(this.data.dictionary.submitErrMsg2)
         }
         else {
-            this.data.feedback.push({
-                type: this.data.feedbackType[this.data.selectedIndex], //反馈类型
-                description: this.data.details, //反馈描述
-                fileList: this.data.fileList, //文件列表
-                owner: app.globalData.userInfo.name, //创建人
-                belongTo: this.data.id, //所属项目/任务
-                createTime: this.formatDate(new Date()),
+            wx.cloud.database().collection('feedback')
+            .add({
+                data:{
+                    type: this.data.feedbackType[this.data.selectedIndex], //反馈类型
+                    description: this.data.details, //反馈描述
+                    cloudList: [], //云端文件列表
+                    belongTo: this.data.id, //所属项目/任务
+                    createTime: this.formatDate(new Date()),
+                    isRead: 0,
+                }
             })
-            for(var i = 0; i< this.data.fileList.length; i++ ){
-                this.uploadImage(this.data.fileList[i].url);
-            }
-            // console.log(this.data.feedback);
-            this.updateDB();
-            this.action();
+            .then(res => {
+                // console.log(res._id)
+                this.setData({
+                  feedback_id: res._id
+                })
+                for(var i = 0; i< this.data.fileList.length; i++ ){
+                    this.uploadImage(this.data.fileList[i].url);
+                }
+                // 将本地cloudPath传到数据库 -> feedback_id ==> cloudList
+                this.updateDB();
+                this.action();
+              })
+              .catch(res => {
+                console.log('新建评论失败，请联系管理员', res) 
+              })
         }
 
     },
+    updateCloudList(){
+        // console.log(this.data.cloudPath)
+        db.collection('feedback')
+        .where({
+            _id: _.eq(this.data.feedback_id)
+        })
+        .update({
+            // data 传入需要局部更新的数据
+            data: {
+              // 表示将 done 字段置为 true
+              cloudList: this.data.cloudPath
+            },
+            success: function(res) {
+              console.log(res)
+            }
+          })
+    },
     updateDB(){
-        if(this.data.commentPage=='0'){
-            db.collection('project').doc(this.data.id).update({
-                // data 传入需要局部更新的数据
-                data: {
-                  feedback: this.data.feedback
-                },
-                success: function(res) {
-                    //const page = ('pages/index/index');
-                    //page.refresh();
-                  // console.log(res.data.feedback)
-                }
-              })
-        }
-        else{
+
+            this.data.feedback.push({
+                _id: this.data.feedback_id,
+                createTime: this.formatDate(new Date()),
+            });
+            
             db.collection('task').doc(this.data.id).update({
                 // data 传入需要局部更新的数据
                 data: {
                   feedback: this.data.feedback
                 },
                 success: function(res) {
-                  // console.log(res.data.feedback)
+                  // console.log(res.data)
                 }
               })
-        }
     },
     
     action: function(e){
@@ -205,9 +223,14 @@ Page({
             })
         },2400)
         setTimeout(res =>{
+            var pages = getCurrentPages();
+            var currPage = pages[pages.length - 1];   //当前页面
+            var prevPage = pages[pages.length - 2];  //上一个页面
+            prevPage.updateComment();
+
             wx.navigateBack({
-              delta: 1,
-            })
+                delta: 1
+              })
         },2500)
     },
 

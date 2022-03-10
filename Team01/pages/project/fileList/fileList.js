@@ -1,19 +1,27 @@
 // pages/project/fileList/fileList.js
+const languageUtils = require("../../../language/languageUtils");
 const db = wx.cloud.database();
 const _ = db.command;
+var id = '';
+var index = '';
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
-        fileList: [],
+        // 存放双语
+        dictionary: {},
+        language: 0,
+        languageList: ["简体中文", "English"],
+
+        feedback:[],
         navigationBar: 'Details',
-        feedbackType: '',
-        details: '',
-        createTime: '',
-        ownerId: '',
-        sponsor:'',
+        feedbackBelongTo: '',
+        creater: '',
+
+        show: false,
+        clickImg: '',
 
     },
 
@@ -21,59 +29,125 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-      db.collection('project')
-      .doc(options.id)
-      .get({
-        success: res => {
-            var type = 'Project Delay';
-            if(res.data.feedback[options.index].type==2){
-                type = 'Task Need Rework';
-            }
-            else if(res.data.feedback[options.index].type==1){
-                type = 'Task Delay';
-            }
+      // console.log(options)
 
-          this.setData({
-            fileList: res.data.feedback[options.index].fileList,
-            details: res.data.feedback[options.index].details,
-            createTime: res.data.feedback[options.index].createTime,
-            feedbackType: type,
-            ownerId: res.data.feedback[options.index].owner,
-          }),
-
-          wx.setNavigationBarTitle({
-            title: this.data.navigationBar,
-          }),
-          // console.log(this.data.ownerId)
-          this.getOwner();
-        },
-        fail: function(err) {
-          // console.log(err)
-        }
-      })
-    },
-    getOwner() {
-        return new Promise((resolve, reject) => {
-        db.collection('user')
-          .where({
-            _openid: _.eq(this.data.ownerId)
-          })
-          .get()
-          .then(res => {
+        // 初始化语言
+        var lan = wx.getStorageSync("languageVersion");
+        this.initLanguage();
+        this.setData({
+            language: lan
+        })
+        db.collection('feedback')
+        .where({
+          _id: options.id
+        })
+        .get({
+          success: res =>{
             // console.log(res.data)
             this.setData({
-              sponsor: res.data[0].name
-            })
-          })
+              feedback: res.data[0]
+            });
+            // console.log(this.data.feedback)
+            // console.log(this.data.feedback.cloudList.length)
+          }
         })
-        
-      },
+        this.getBelongTo();
+
+        wx.setNavigationBarTitle({
+          title: this.data.navigationBar,
+        });
+    },
+
+    getBelongTo(){
+      return new Promise((resolve, reject) => {
+        //console.log(this.data.feedback.belongTo)
+        db.collection('task')
+        .where({
+          _id: this.data.feedback.belongTo
+        })
+        .field({
+          belongTo: true,
+          phase: true,
+        })
+        .get({
+          success: res => {
+            // console.log(res.data[0])
+            this.getPhase(res.data[0].phase);
+            db.collection('project')
+            .where({
+              _id:res.data[0].belongTo
+            })
+            .field({
+              name: true,
+            })
+            .get({
+              success: res => {
+                // console.log(res.data[0])
+                this.setData({
+                  feedbackBelongTo:res.data[0].name,
+                })
+                //console.log(this.data.feedback)
+                db.collection('user')
+                .where({
+                  _openid: this.data.feedback._openid
+                })
+                .field({
+                  nickName: true
+                })
+                .get({
+                  success: res=>{
+                    this.setData({
+                      creater:res.data[0].nickName
+                    })
+                  }
+                })
+              }
+            })
+          },
+          fail: function(err) {
+            //console.log(err)
+            reject(err);
+          }
+        })
+      })
+    },
+    getPhase(index){
+      // console.log(index)
+      this.setData({
+        phase: this.data.dictionary.current_phase_description[parseInt(index)]
+      })
+    },
+
+    // 初始化语言
+    initLanguage() {
+      var self = this;
+      //获取当前小程序语言版本所对应的字典变量
+      var lang = languageUtils.languageVersion();
+
+      // 页面显示
+      self.setData({
+      dictionary: lang.lang.index,
+      });
+  },
+
+    imgShow:function(event){
+    // console.log(event.currentTarget.dataset.src)
+      this.setData({
+        show: true,
+        clickImg: event.currentTarget.dataset.src
+      })
+    },
+    imgClose(){
+      this.setData({
+        show: false,
+      })
+    },
 
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
     onReady: function () {
-
+     
     },
 
     /**

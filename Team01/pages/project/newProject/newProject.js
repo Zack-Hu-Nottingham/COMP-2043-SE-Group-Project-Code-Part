@@ -3,9 +3,12 @@ import Toast from '../../../miniprogram_npm/@vant/weapp/toast/toast'
 
 const languageUtils = require("../../../language/languageUtils");
 
-var app = getApp();
+const templateLib = require("../../../template/template.js");
 
 const db = wx.cloud.database();
+const _ = db.command;
+
+var app = getApp();
 
 Page({
     /**
@@ -28,94 +31,20 @@ Page({
         // 模板选择
         selectedTemplate: '',
         selectedTemplateIndex: '1',
-        
+        duration:0,
 
         isLoading: false,
         fileList: [],
+        cloudPath: [],
         houseOwner: "",
-        owner: [],
+        houseOwner_openid: '',
         participant: [],
-        ownerPage: 0,
-        participantPage: 2,
 
         project: "",
         task: [],
 
         currentPhaseDescription: ["阶段1", "阶段2", "阶段3", "阶段4", "阶段5", "阶段6", "阶段7", "阶段8", "阶段9", "阶段10", "阶段11", "阶段12", "阶段13", "阶段14"],
-        template: [{
-          name: "泥水进场",
-          description: "泥水进场包含第一次放样和墙体堆筑",
-          belongTo: "",
-          currentPriority: "Normal",
-          startTime: "",
-          endTime: "",
-          participant: "",
-          state: 0,
-          tag: [],
-          duration: 2,
-
-        }, {
-          name: "水电布管",
-          description: "水电布管包含第二次精放样和水电施工",
-          belongTo: "",
-          currentPriority: "Normal",
-          startTime: "",
-          endTime: "",
-          participant: "",
-          state: 0,
-          tag: [],
-          duration: 2,
-
-        }, {
-          name: "木作工程",
-          description: "木作工程包含土木施工",
-          belongTo: "",
-          currentPriority: "Normal",
-          startTime: "",
-          endTime: "",
-          participant: "",
-          state: 0,
-          tag: [],
-          duration: 2,
-
-        }, {
-          name: "泥水工程",
-          description: "泥水工程包含地暖地面找平和瓷砖、石材进场",
-          belongTo: "",
-          currentPriority: "Normal",
-          startTime: "",
-          endTime: "",
-          participant: "",
-          state: 0,
-          tag: [],
-          duration: 2,
-
-        }, {
-          name: "油漆工程",
-          description: "油漆工程包含油工施工、成品安装、油漆修补",
-          belongTo: "",
-          currentPriority: "Normal",
-          startTime: "",
-          endTime: "",
-          participant: "",
-          state: 0,
-          tag: [],
-          duration: 2,
-
-        }, {
-          name: "后期安装项目",
-          description: "后期安装项目包含验收、软装摆场",
-          belongTo: "",
-          currentPriority: "Normal",
-          startTime: "",
-          endTime: "",
-          participant: "",
-          state: 0,
-          tag: [],
-          duration: 2,
-          
-          
-        }]
+        template: templateLib.template,
     },
     
      // 初始化语言
@@ -141,6 +70,7 @@ Page({
         this.setData({
         language: lan
         })
+        console.log(this.getOpenid('Lokkk'));
     },
 
     // 处理用户输入名字
@@ -159,13 +89,13 @@ Page({
     
     changeOwner(){
         wx.navigateTo({
-          url: '../../project/contactList/contactList?index='+this.data.ownerPage,
+          url: '../../project/contactList/houseOwnerList/houseOwnerList',
         })
     },
 
     changeParticipant(){
       wx.navigateTo({
-        url: '../../project/contactList/contactList?index='+this.data.participantPage,
+        url: '../../project/contactList/participantList/participantList',
       })
   },
 
@@ -189,18 +119,40 @@ Page({
 
     uploadImage(fileURL) {
         wx.cloud.uploadFile({
-          cloudPath: 'project/'+ new Date().getTime() +'.png', // 上传至云端的路径
+          cloudPath: 'project/'+ this.data.project + '/' + new Date().getTime() + Math.floor(9*Math.random()) +'.png', // 上传至云端的路径
           filePath: fileURL, // 小程序临时文件路径
           success: res => {
+            var cloudList = this.data.cloudPath;
+            cloudList.push(res.fileID);
+            this.setData({
+                cloudPath: cloudList
+            })
+            this.updateCloudList();
             console.log("图片上传成功",res)
           },
           fail: console.error
         })
     },
 
+    getOpenid(name){
+      return new Promise((resolve, reject) => {
+        db.collection('user')
+        .where({
+          nickName: _.eq(name)
+        })
+        .get()
+        .then(res => {
+          this.setData({
+            houseOwner_openid:res.data[0]._openid,
+          })
+        })
+      })
+    },
+
 
     // 提交新项目
     formSubmit: function (e) {
+
         if (this.data.name == "") {
             Toast(this.data.dictionary.null_name);
         }
@@ -214,6 +166,7 @@ Page({
             Toast(this.data.dictionary.null_template_setting)
         }
         else{
+          this.getOpenid(this.data.houseOwner);
           // 根据输入先创建一个项目，此时task列表为空
           wx.cloud.database().collection('project')
             .add({
@@ -226,11 +179,11 @@ Page({
                   projectDescription: this.data.description,
 
                   projectManager: app.globalData.userInfo._openid,
-                  houseOwner: this.data.houseOwner,
+                  houseOwner: this.data.houseOwner_openid,
                   participant: this.data.participant,
 
-                  feedback: [],
-                  fileList: this.data.fileList,
+                  //fileList: this.data.fileList,
+                  cloudList: [],
                   template: this.data.selectedTemplate,
 
                   completed: [],
@@ -241,7 +194,7 @@ Page({
 
                   currentPhase: 0,
                   currentPhaseDescription: this.data.currentPhaseDescription,
-                  feedback: [],
+                  // feedback: [],
                   fileList: [],
 
               }
@@ -250,6 +203,10 @@ Page({
               this.setData({
                 project: res._id
               })
+              for(var i = 0; i< this.data.fileList.length; i++ ){
+                this.uploadImage(this.data.fileList[i].url);
+              }
+              
 
               this.createTask()
               this.action();
@@ -263,6 +220,23 @@ Page({
               
         }
         
+    },
+    updateCloudList(){
+      // console.log(this.data.cloudPath)
+      db.collection('project')
+      .where({
+          _id: _.eq(this.data.project)
+      })
+      .update({
+          // data 传入需要局部更新的数据
+          data: {
+            // 表示将 done 字段置为 true
+            cloudList: this.data.cloudPath
+          },
+          success: function(res) {
+            console.log(res)
+          }
+        })
     },
 
     action(){
@@ -286,12 +260,6 @@ Page({
         wx.redirectTo({
           url: '../../indexs/indexForProjectManager/indexForProjectManager',
         })
-          // let pages = getCurrentPages();
-          // let project = pages[pages.length - 2];
-          // project.go_update();
-          // wx.navigateBack({
-          //   delta: 1
-          // })
       },2500)
     },
 
@@ -311,16 +279,26 @@ Page({
     },
   
     onDateConfirm(event) {
-      const [start, end] = event.detail;
+      const start = event.detail;
+      var end = this.addDate(start, this.data.duration)
       this.setData({
           startDate: this.formatDate(start),
-          endDate: this.formatDate(end)
+          endDate: this.formatDate(end),
       })
       this.onDateClose();
-
+      
     },
 
-      // modify the template accordingly
+    //日期加减法  date参数为计算开始的日期，days为需要加的天数   
+    //格式:addDate('2017-1-11',20) 
+    addDate: function(date,days){ 
+      var d=new Date(date); 
+      d.setDate(d.getDate() + days); 
+      var m=d.getMonth() + 1; 
+      return d.getFullYear()+'-'+ m +'-'+d.getDate(); 
+    },    
+
+    // modify the template accordingly
     modifyTemplate() {
       for(var idx in this.data.template) {
         this.data.template[idx].belongTo = this.data.project

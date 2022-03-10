@@ -4,9 +4,10 @@ import Toast from '../../../miniprogram_npm/@vant/weapp/toast/toast';
 const app = getApp();
 
 const languageUtils = require("../../../language/languageUtils");
+
 const db = wx.cloud.database();
+
 const _ = db.command;
-// const lib = require('../../utils/util')
 
 Page({
 
@@ -29,6 +30,7 @@ Page({
     language: 0,
     languageList: ["简体中文", "English"],
 
+
     /**
      * Dashboard page's data
      */
@@ -41,10 +43,6 @@ Page({
     /**
      * More page's data
      */
-    hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    canIUseGetUserProfile: false,
-    canIUseOpenData: wx.canIUse('open-data.type.userAvatarUrl') && wx.canIUse('open-data.type.userNickName'), // 如需尝试获取用户信息可改为false
 
     changetip: '请输入新用户名',
     name : "",
@@ -79,8 +77,12 @@ Page({
    */
   onLoad: function (options) {
   
-    this.data.userInfo = app.globalData.userInfo
-
+    // 设置当前用户
+    this.setData({
+      userInfo: app.globalData.userInfo
+    })
+    
+    // 获取worker数据
     this.getData()
 
     // 初始化语言
@@ -123,19 +125,6 @@ Page({
     })
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
@@ -168,7 +157,6 @@ Page({
   /**
    * Global method
    */
-
 
   // 初始化数据
   async getData(){
@@ -224,6 +212,7 @@ Page({
 
   // 获取项目简要信息
   getProjectInfo(projectId) {
+    console.log(projectId)
     return new Promise((resolve, reject) => {
       db.collection('project')
       .doc(projectId)
@@ -274,32 +263,34 @@ Page({
   
   // 获取任务列表
   getTaskList() {
+    
     return new Promise((resolve, reject) => {
       db.collection('user')
       .where({
-        _openid: _.eq(this.data.userInfo.openid)
+        _openid: _.eq(this.data.userInfo._openid)
       })
       .get()
       .then(res => {
-        console.log(res.data[0].task)
-        if(res.data[0].task == []) {
+        if(res.data[0].task.length != 0) {
           this.setData({
             taskList: res.data[0].task,
             isTaskEmpty: false,
           })
-        }
+        } 
         
         resolve("成功获取项目列表")
       })
       .catch(err => {
         reject("请求项目列表失败")
-      })}
+      })
+    }
     )
   },
 
   clickProject(projectId) {
+    // console.log(projectId.currentTarget.id)
     wx.navigateTo({
-      url: '../../project/projectInfoForWorker/projectInfoForWorker?id='+projectId,
+      url: '../../project/projectInfoForWorker/projectInfoForWorker?id='+projectId.currentTarget.id,
     })
   },
 
@@ -339,19 +330,6 @@ Page({
    * More page's method
    */
   
-  getUserProfile(e) {
-    // 推荐使用wx.getUserProfile获取用户信息，开发者每次通过该接口获取用户个人信息均需用户确认，开发者妥善保管用户快速填写的头像昵称，避免重复弹窗
-    wx.getUserProfile({
-      desc: '展示用户信息', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
-      success: (res) => {
-        // console.log(res)
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
-      }
-    })
-  },
 
 
   // 点击language展示选项

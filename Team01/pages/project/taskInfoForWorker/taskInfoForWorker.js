@@ -17,17 +17,17 @@ Page({
     language: 0,
     languageList: ["简体中文", "English"],
     
-    
+    // 存放照片
+    fileList: [{
+      url: 'https://img.yzcdn.cn/vant/leaf.jpg',
+      name: '图片1',
+    }],
+
     taskPage: {},
     belongTo: "",
 
-    dateShow: false,
-    priorityShow: false,
 
     priority: [
-      {
-        name: 'Highest',
-      },
       {
         name: 'High'
       },
@@ -36,10 +36,7 @@ Page({
       },
       {
         name: 'Low'
-      },
-      {
-        name: 'Lowest'
-      },
+      }
     ],
   },
 
@@ -61,34 +58,9 @@ Page({
     // 根据id获得对应数据
     this.getDetail()
 
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
+    wx.setNavigationBarTitle({
+      title: this.data.dictionary.task_info,
+    })
   },
 
   /**
@@ -98,78 +70,20 @@ Page({
     wx.stopPullDownRefresh()
   },
 
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  },
-
-  onDateDisplay() {
-    this.setData({ dateShow: true });
-  },
-
-  onClose() {
-    this.setData({ dateShow: false });
-  },
-  
-  formatDate(date) {
-    date = new Date(date);
-    return `${date.getMonth() + 1}/${date.getDate()}`;
-  },
-  
-  onConfirm(event) {
-    const [start, end] = event.detail;
-    this.onClose();
-    // this.setData({
-    //   startTime: this.formatDate(start),
-    //   endTime: this.formatDate(end),
-    //   dateShow: false,
-    //   date: `${this.formatDate(start)} - ${this.formatDate(end)}`,
-    // });
-
-    //调用云函数
-    wx.cloud.callFunction({
-      name: 'updateDate',
-      data:{
-        id: id,
-        startTime: `${start.getFullYear()}-${start.getMonth() + 1}-${start.getDate()}`,
-        endTime: `${end.getFullYear()}-${end.getMonth() + 1}-${end.getDate()}`
-      }
-    }).then(res => {
-      console.log('修改task日期成功', res),
-      this.getDetail()
-    }).catch(res => {
-      console.log('修改task日期失败', res)
-    })
-  },
-
+  // 获取任务对应信息
   getDetail(){
     db.collection('task')
       .doc(id)
       .get()
       .then(res => {
-        wx.setNavigationBarTitle({
-          title: res.data.name,
-        }),
-
         this.setData({
           taskPage: res.data,
         })
-
       })
       .catch(err => {
         console.log('请求失败', err)
       })
       .then(res => {
-        // console.log(this.data.taskPage.belongTo)
        db.collection('project')
         .doc(this.data.taskPage.belongTo)
         .get()
@@ -179,67 +93,14 @@ Page({
           })
         })
       })
-
-
-
   },
 
-  onPriorityClose() {
-    this.setData({priorityShow: false})
-  },
-
-     /**
+  /**
    * Create Comment page's method
    */
   clickAddComment(event) {
     wx.navigateTo({
       url: '../addComment/addComment',
-    })
-  },
-
-  onTaskDescriptionBlur: function(e){
-    // console.log(e.detail.value)
-
-    wx.cloud.callFunction({
-      name: 'updateTaskDescription',
-      data:{
-        id: id,
-        descriptions: e.detail.value
-      }
-    }).then(res => {
-      console.log('调用云函数修改任务描述成功', res),
-      this.getDetail()
-    }).catch(res => {
-      console.log('调用云函数修改任务描述失败', res)
-    })
-  },
-
-  onPrioritySelect(e) {
-    // console.log(e.detail.name)
-    this.setData({
-      currentPriority: e.detail.name 
-    }),
-
-    //调用云函数
-    wx.cloud.callFunction({
-      name: 'updateData',
-      data:{
-        id: id,
-        currentPriority: e.detail.name
-      }
-    }).then(res => {
-      console.log('修改task优先级成功', res),
-      this.getDetail()
-    }).catch(res => {
-      console.log('修改task优先级失败', res)
-    })
-
-  },
-
-  clickPriority() {
-    // console.log("click")
-    this.setData({
-      priorityShow: true
     })
   },
 
@@ -254,4 +115,40 @@ Page({
       dictionary: lang.lang.index,
     });
   },
+
+  // 
+  afterRead(event) {
+    const { file } = event.detail;
+    const { fileList = [] } = this.data;
+    fileList.push({ ...file });
+    this.setData({ fileList });
+  },
+
+  // 上传图片
+  uploadToCloud() {
+    wx.cloud.init();
+    const { fileList } = this.data;
+    if (!fileList.length) {
+      wx.showToast({ title: '请选择图片', icon: 'none' });
+    } else {
+      const uploadTasks = fileList.map((file, index) => this.uploadFilePromise(`my-photo${index}.png`, file));
+      Promise.all(uploadTasks)
+        .then(data => {
+          wx.showToast({ title: '上传成功', icon: 'none' });
+          const newFileList = data.map(item => ({ url: item.fileID }));
+          this.setData({ cloudPath: data, fileList: newFileList });
+        })
+        .catch(e => {
+          wx.showToast({ title: '上传失败', icon: 'none' });
+          console.log(e);
+        });
+    }
+  },
+
+  uploadFilePromise(fileName, chooseResult) {
+    return wx.cloud.uploadFile({
+      cloudPath: fileName,
+      filePath: chooseResult.url
+    });
+  }
 })

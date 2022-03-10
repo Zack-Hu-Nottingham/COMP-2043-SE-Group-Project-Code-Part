@@ -78,6 +78,21 @@ function request(params) {
   return { task, taskController };
 }
 
+function request_method(url, callback)
+{
+  wx.request({
+    url: url,
+    method: 'GET',
+    header: {
+      'Content-Type': 'application/json'
+    },
+    success: function (res) {
+      callback && callback(res.data);
+    }
+  });
+}
+
+
 
 module.exports = {
   formatTime: formatTime,
@@ -85,5 +100,6 @@ module.exports = {
   formatDate4YearMotchDay: formatDate4YearMotchDay,
   compareDate: compareDate,
   arrayContains: arrayContains,
-  request: request
+  request: request,
+  request_method:request_method,
 }

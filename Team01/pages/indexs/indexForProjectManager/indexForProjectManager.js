@@ -4,8 +4,11 @@ import Toast from '../../../miniprogram_npm/@vant/weapp/toast/toast';
 const app = getApp();
 
 const languageUtils = require("../../../language/languageUtils");
+
 const db = wx.cloud.database();
+
 const _ = db.command;
+
 const lib = require('../../../utils/util');
 
 Page({
@@ -18,7 +21,7 @@ Page({
     /**
      * Global data
      */
-    active: 0,
+    active: 1,
     pageName: ['Message', 'Project', 'More'],
     currentTime: "",
 
@@ -32,6 +35,7 @@ Page({
      * Message page's data
      */
     messageList: [],
+
 
 
     /**
@@ -50,8 +54,14 @@ Page({
     name : "",
     show: false,
     value: '',
+<<<<<<< HEAD
     show1: false,
     radio: '1',
+=======
+
+    totalTask: 0,
+    updateIndex: 1,
+>>>>>>> d35058c221c79351cf436651f43d72385433e9c1
   },
 
   showPopup() {
@@ -95,8 +105,7 @@ Page({
       identity: this.data.dictionary.project_manager,
       name : app.globalData.userInfo.nickName
     })
-    this.getData(app.globalData.userInfo.openid)
-    console.log(this.data.userInfo)
+    this.getData(app.globalData.userInfo._openid)
   },
 
   /**
@@ -131,7 +140,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    wx.stopPullDownRefresh()
   },
 
   /**
@@ -187,7 +196,6 @@ Page({
             })  
           }
         }
-        
         resolve("成功获取项目信息")
       })
       .catch(err => {
@@ -195,41 +203,58 @@ Page({
       })}
     )},
 
-
-  // 获取反馈信息
-  getFeedbackInfo(openid) {
-    return new Promise((resolve, reject) => {
-      db.collection('project')
-      .where({
-        _openid: _.eq(openid),
-        feedback: _.exists(true)
-      })
-      .field({
-        feedback:true
-      })
-      .orderBy('feedback.createTime', 'desc')
-      .get()
-      .then(res => {
-        //console.log(res.data.length)
-      
-        if (res.data.length != 0) {
-          for (var idx in res.data) {
+      getFeedbackInfo(openid){
+        return new Promise((resolve, reject) =>{
+          db.collection('feedback')
+          .where({
+            _openid: _.eq(openid),
+          })
+          .orderBy('createTime', 'desc')
+          .get()
+          .then(res =>{
+            // console.log(res.data)
             this.setData({
-              messageList: this.data.messageList.concat(res.data[idx].feedback)
+              messageList: res.data
             })
-          }
-          
-        }
-        
-        resolve("成功获取项目信息")
-        console.log('成功获取项目信息',this.data.messageList)
-      })
-      .catch(err => {
-        console.log('请求项目信息失败', err)
-        //reject("请求项目信息失败")
-      })}
+          })
+        })
+      },
+
+  // // 获取反馈信息
+  // getFeedbackInfo(openid) {
+  //   return new Promise((resolve, reject) => {
+  //     db.collection('task')
+  //     .where({
+  //       _openid: _.eq(openid),
+  //       feedback: _.exists(true)
+  //     })
+  //     .field({
+  //       feedback:true
+  //     })
+  //     .orderBy('feedback.createTime', 'desc')
+  //     .get()
+  //     .then(res => {
+  //       //console.log(res.data.length)
       
-    )},
+  //       if (res.data.length != 0) {
+  //         for (var idx in res.data) {
+  //           this.setData({
+  //             messageList: this.data.messageList.concat(res.data[idx].feedback)
+  //           })
+  //         }
+          
+  //       }
+        
+  //       resolve("成功获取项目信息")
+  //       console.log('成功获取项目消息',this.data.messageList)
+  //     })
+  //     .catch(err => {
+  //       console.log('请求项目消息失败', err)
+  //       //reject("请求项目信息失败")
+  //     })
+  //   }
+      
+  //   )},
 
   // 更改tab选项时对应的逻辑
   onChangeTab(event) {
@@ -262,6 +287,29 @@ Page({
     })
   },
 
+  clickToChangeIsRead(event) {
+    console.log(event)
+    // console.log(event.currentTarget.dataset.taskid)
+    db.collection('feedback')
+    .where({
+      _id: event.currentTarget.dataset.taskid
+    })
+    .update({
+      // data 传入需要局部更新的数据
+      data: {
+          isRead:1
+        }
+     
+    })
+    .then(res => {
+      console.log('修改isRead成功', res)
+      
+    }).catch(res => {
+      console.log('修改isRead失败', res)
+    })
+  
+  },
+
 
 
    
@@ -292,18 +340,6 @@ Page({
   /**
    * More page's method
    */
-  
-  onSetting: function(){
-    wx.navigateTo({
-      url: '../../more/setting/setting',
-    })
-  },
-
-  onMoreInfo: function(){
-    wx.navigateTo({
-      url: '../../more/moreInfo/moreInfo',
-    })
-  },
 
 
   // 点击language展示选项
@@ -329,58 +365,101 @@ Page({
     this.setData({
       currentTime: _currentTime
     });
-    //console.log(this.data.currentTime)
+    // console.log(this.data.currentTime)
 
-    new Promise((resolve, reject) => {
-      db.collection('task')
-      .get()
+    db.collection('task')
+      .count()
       .then(res => {
-        //console.log(res)
-        for (var idx in res.data) {
-          if(this.data.currentTime < res.data[idx].startTime){
-            //console.log(res.data[idx].startTime)
-            wx.cloud.database().collection('task')
-            .doc(res.data[idx]._id)
-            .update({
-              data: {
-                state: 0,
+        this.setData({
+          totalTask: res.total,
+        })
+        this.setData({
+          updateIndex: this.data.totalTask / 20,
+        })
+        console.log(this.data.totalTask)
+        console.log(parseInt(this.data.updateIndex))
+
+        for(var i = 0; i <= parseInt(this.data.updateIndex); i++){
+          db.collection('task')
+          .skip(i*20)
+          .get()
+          .then(res => {
+            //console.log(res)
+            for (var idx in res.data) {
+  
+              if(res.data.state == 2 || res.data.state == 4){
+                continue;
               }
-            })
-            .catch(err => {
-              console.log('请求修改项目状态失败', err)
-            })
-          }else if(this.data.currentTime > res.data[idx].startTime && this.data.currentTime < res.data[idx].endTime){
-            wx.cloud.database().collection('task')
-            .doc(res.data[idx]._id)
-            .update({
-              data: {
-                state: 1,
+  
+              if(res.data[idx].startTime == ''){
+                wx.cloud.callFunction({
+                  name: 'updateState',
+                  data: {
+                    id: res.data[idx]._id,
+                    state: 0
+                  }
+                })
+                .then(res=>{
+                  console.log('请求修改任务状态成功', res)
+                })
+                .catch(res => {
+                  console.log('请求修改任务状态失败', res)
+                })
+              }else if(this.data.currentTime < res.data[idx].startTime){
+                wx.cloud.callFunction({
+                  name: 'updateState',
+                  data: {
+                    id: res.data[idx]._id,
+                    state: 0
+                  }
+                })
+                .then(res=>{
+                  console.log('请求修改任务状态成功', res)
+                })
+                .catch(res => {
+                  console.log('请求修改任务状态失败', res)
+                })
+  
+              }else if(this.data.currentTime > res.data[idx].startTime && this.data.currentTime < res.data[idx].endTime){
+                wx.cloud.callFunction({
+                  name: 'updateState',
+                  data: {
+                    id: res.data[idx]._id,
+                    state: 1
+                  }
+                })
+                .then(res=>{
+                  console.log('请求修改任务状态成功', res)
+                })
+                .catch(res => {
+                  console.log('请求修改任务状态失败', res)
+                })
+              }else if(this.data.currentTime > res.data[idx].endTime){
+                wx.cloud.callFunction({
+                  name: 'updateState',
+                  data: {
+                    id: res.data[idx]._id,
+                    state: 3
+                  }
+                })
+                .then(res=>{
+                  console.log('请求修改任务状态成功', res)
+                })
+                .catch(res => {
+                  console.log('请求修改任务状态失败', res)
+                })
               }
-            })
-            .catch(err => {
-              console.log('请求修改项目状态失败', err)
-            })
-          }else if(this.data.currentTime > res.data[idx].endTime){
-            wx.cloud.database().collection('task')
-            .doc(res.data[idx]._id)
-            .update({
-              data: {
-                state: 3,
-              }
-            })
-            .catch(err => {
-              console.log('请求修改项目状态失败', err)
-            })
-          }
+  
+            }
+            // this.data.task.push(res.data[0])
+          })
         }
-        // this.data.task.push(res.data[0])
-        resolve("成功修改项目状态")
+
+        console.log("成功获取任务信息")
       })
       .catch(err => {
-        console.log(err)
-        reject("修改项目状态失败")
+        console.log("请求任务信息失败")
       })
-    })
 
   },
 

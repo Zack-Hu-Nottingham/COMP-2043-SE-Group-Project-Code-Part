@@ -24,8 +24,6 @@ Page({
 
     dateShow: false,
     priorityShow: false,
-    feedback:[],
-    fileList:[],
 
     priority: [
       {
@@ -63,8 +61,6 @@ Page({
 
     // 根据id获得对应数据
     this.getDetail()
-
-    // this.updateComment();
 
   },
 
@@ -132,13 +128,12 @@ Page({
   
   onConfirm(event) {
     const [start, end] = event.detail;
-    this.onClose();
-    // this.setData({
-    //   startTime: this.formatDate(start),
-    //   endTime: this.formatDate(end),
-    //   dateShow: false,
-    //   date: `${this.formatDate(start)} - ${this.formatDate(end)}`,
-    // });
+    this.setData({
+      startTime: this.formatDate(start),
+      endTime: this.formatDate(end),
+      dateShow: false,
+      date: `${this.formatDate(start)} - ${this.formatDate(end)}`,
+    });
 
     //调用云函数
     wx.cloud.callFunction({
@@ -155,30 +150,38 @@ Page({
       console.log('修改task日期失败', res)
     })
   },
-  
 
   getDetail(){
-    //根据task_id查询task的name和task信息
-    //return new Promise(function (resolve) {
-    db.collection('task')
+    wx.cloud.database().collection('task')
       .doc(id)
-      .get({
-        success: res => {
-          // console.log(res.data)
-          this.setData({
-            taskPage: res.data,
-            belongTo: res.data.belongTo,
-          });
-          this.updateComment(res.data.feedback)
-          wx.setNavigationBarTitle({
-            title: res.data.name,
-          });
-        },
-        fail: err => {
-          console.log('拉取任务信息请求失败', err)
-        }
+      .get()
+      .then(res => {
+        wx.setNavigationBarTitle({
+          title: res.data.name,
+        }),
+
+        this.setData({
+          taskPage: res.data,
+        })
+
       })
-    //})
+      .catch(err => {
+        console.log('请求失败', err)
+      })
+      .then(res => {
+        // console.log(this.data.taskPage.belongTo)
+       db.collection('project')
+        .doc(this.data.taskPage.belongTo)
+        .get()
+        .then(res => {
+          this.setData({
+            belongTo: res.data.name
+          })
+        })
+      })
+
+
+
   },
 
   onPriorityClose() {
@@ -201,7 +204,7 @@ Page({
       name: 'updateTaskDescription',
       data:{
         id: id,
-        descriptions: e.detail.value
+        taskDescriptions: e.detail.value
       }
     }).then(res => {
       console.log('调用云函数修改任务描述成功', res),
@@ -250,90 +253,5 @@ Page({
     self.setData({
       dictionary: lang.lang.index,
     });
-  },
-
-  deleteImg(event) {
-    const delIndex = event.detail.index
-    const { fileList } = this.data
-    fileList.splice(delIndex, 1)
-    this.setData({
-      fileList
-    })
-    db.collection('task').where({
-      _id: id
-    }).update({
-      data: {
-        cloudList: cloudList.splice(delIndex, 1)
-      }
-    })
-  },
-
-  updateComment(list){
-    if(list){
-      var newList = [];
-      // console.log(list)
-      for(var i=0; i< list.length; i++){
-        db.collection('feedback')
-        .where({
-          _id: list[i]._id
-        })
-        .get({
-          success: res =>{
-            // console.log(res.data)
-            newList.push(res.data[0])
-            // console.log(newList)
-            this.setData({
-              feedback: newList
-            })
-          }
-        })
-      }
-      // console.log(this.data.feedback)
-    }
-
-  },
-  getList(list){
-    var newList = [];
-    // console.log(list)
-    for(var i=0; i< list.length; i++){
-      db.collection('feedback')
-      .where({
-        _id: list[i]._id
-      })
-      .get({
-        success: res =>{
-          newList.push(res.data[0])
-          // console.log(newList)
-        }
-      })
-    }
-    this.setData({
-      feedback: newList
-    })
-    // console.log(this.data.feedback)
-  },
-  upload(){
-    wx.chooseImage({
-      sizeType: ['original', 'compressed'],
-      sourceType: ['album', 'camera'],
-      success:res => {
-        var fileList = this.data.fileList;
-        fileList.push({url: res.tempFilePaths[0]});
-        this.setData({ fileList: fileList });
-        this.uploadImage(res.tempFilePaths[0]);
-        // console.log("成功选择图片",fileList);
-      }
-    })
-  },
-
-  uploadImage(fileURL) {
-      wx.cloud.uploadFile({
-        cloudPath: 'task/'+ id + '/' + new Date().getTime() + Math.floor(9*Math.random()) + '.png', // 上传至云端的路径
-        filePath: fileURL, // 小程序临时文件路径
-        success: res => {
-          // console.log("图片上传成功",res)
-        },
-        fail: console.error
-      })
   },
 })

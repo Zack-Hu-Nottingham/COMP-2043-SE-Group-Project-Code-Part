@@ -3,3 +3,26 @@
     display: flex;
     padding: 5%;
   }
+
+.image {
+  display: flex;
+  margin: 5%;
+  width: 230rpx;
+  height: 190rpx;
+}
+.fileList {
+  flex-direction: row;
+  align-items: center;
+  display: flex;
+  float: left;
+  position: relative;
+}
+.clickImg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50%
+}
+.img {
+  margin: 4%;
+}
