@@ -18,17 +18,18 @@ Page({
      */
     onLoad: function (options) {
         id = options.id;
-        wx.cloud.callFunction({
-          name: 'uploadJSON',
-          data:{
-            id: id,
-            // localPath: ganttPATH,
-          }
-        }).then(res => {
-          console.log('gantt_json更新成功', res)
-        }).catch(res => {
-          console.log('gantt_json更新失败', res)
-        })
+
+        // wx.cloud.callFunction({
+        //   name: 'uploadJSON',
+        //   data:{
+        //     id: id,
+        //     // localPath: ganttPATH,
+        //   }
+        // }).then(res => {
+        //   console.log('gantt_json更新成功', res)
+        // }).catch(res => {
+        //   console.log('gantt_json更新失败', res)
+        // })
     },
 
     /**

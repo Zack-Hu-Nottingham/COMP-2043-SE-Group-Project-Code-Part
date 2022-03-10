@@ -145,6 +145,19 @@ Page({
       })
     })
 
+        //更新甘特图数据
+        wx.cloud.callFunction({
+          name: 'uploadJSON',
+          data:{
+            id: id,
+            // localPath: ganttPATH,
+          }
+        }).then(res => {
+          console.log('gantt_json更新成功', res)
+        }).catch(res => {
+          console.log('gantt_json更新失败', res)
+        })
+
 
   },
 
