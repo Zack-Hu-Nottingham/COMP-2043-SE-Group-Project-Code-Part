@@ -384,7 +384,7 @@ Page({
    */
   userNameInput: function (e) {
     this.setData({
-      value: e.detail.value
+      value: e.detail
     })
   },
 
@@ -393,6 +393,7 @@ Page({
    */
   forNotice: function (e) {
     let value = this.data.value;
+    var id = app.globalData.userInfo._openid;
     if (value == '') {
       Toast.fail('空用户名');
     } else {
