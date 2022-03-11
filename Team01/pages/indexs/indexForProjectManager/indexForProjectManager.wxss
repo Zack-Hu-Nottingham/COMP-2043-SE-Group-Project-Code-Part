@@ -84,3 +84,19 @@
   margin: 0;
 }
 
+.van-button{
+  width: 80%;
+  border: 20rpx coral;
+}
+
+.van-field{
+
+  justify-content:center;
+  align-items: center;
+}
+
+.van-popup{
+  display: flex;
+  flex-direction: column;
+  border-radius: 4%;
+} 
