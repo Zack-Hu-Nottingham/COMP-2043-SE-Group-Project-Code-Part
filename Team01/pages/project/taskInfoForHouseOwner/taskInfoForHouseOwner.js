@@ -59,6 +59,12 @@ Page({
     // 根据id获得对应数据
     this.getDetail()
 
+    this.getImage()
+
+  },
+
+  getImage() {
+    wx.cloud.downloadFile()
   },
 
   /**
@@ -265,36 +271,4 @@ Page({
   },
 
   
-  upload(){
-    wx.chooseImage({
-      sizeType: ['original', 'compressed'],
-      sourceType: ['album', 'camera'],
-      success:res => {
-        var fileList = this.data.fileList;
-        fileList.push({url: res.tempFilePaths[0]});
-        this.setData({ fileList: fileList });
-        // console.log("成功选择图片",fileList);
-      }
-    })
-  },
-
-uploadImage(fileURL) {
-    wx.cloud.uploadFile({
-      cloudPath: 'feedback/'+ this.data.id + '/' + this.data.feedback_id + '/' + (new Date()).getTime() + Math.floor(9*Math.random()) +'.png', // 上传至云端的路径
-      filePath: fileURL, // 小程序临时文件路径
-      success: res => {
-          // cloudPath: []
-        var cloudList = this.data.cloudPath;
-        cloudList.push(res.fileID);
-        this.setData({
-            cloudPath: cloudList
-        })
-        this.updateCloudList();
-        console.log("图片上传成功",res)
-      },
-      fail: res => {
-          console.log("图片上传失败", res)
-      }
-    })
-},
 })

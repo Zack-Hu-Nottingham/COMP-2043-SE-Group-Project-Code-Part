@@ -39,17 +39,18 @@ Page({
     this.setData({
       language: lan
     })
+    console.log(options.id)
     db.collection('feedback')
       .where({
         _id: options.id
       })
       .get({
         success: res => {
-          // console.log(res.data)
+          console.log(res.data)
           this.setData({
             feedback: res.data[0]
           });
-          // console.log(this.data.feedback)
+          console.log(this.data.feedback)
           // console.log(this.data.feedback.cloudList.length)
         }
       })
