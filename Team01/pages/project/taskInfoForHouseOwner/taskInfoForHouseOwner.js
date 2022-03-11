@@ -31,9 +31,7 @@ Page({
     dateShow: false,
     priorityShow: false,
 
-    priority: [{
-        name: 'Highest',
-      },
+    priority: [
       {
         name: 'High'
       },
@@ -42,11 +40,10 @@ Page({
       },
       {
         name: 'Low'
-      },
-      {
-        name: 'Lowest'
-      },
+      }
     ],
+
+    fileList: [],
   },
 
   /**
@@ -71,6 +68,12 @@ Page({
 
     this.getDetail()
 
+    this.getImage()
+
+  },
+
+  getImage() {
+    wx.cloud.downloadFile()
   },
 
   /**
@@ -285,4 +288,6 @@ Page({
       dictionary: lang.lang.index,
     });
   },
+
+  
 })
