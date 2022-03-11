@@ -24,8 +24,7 @@
         "pages/project/taskInfoForHouseOwner/taskInfoForHouseOwner",
         "pages/project/projectTemplate/projectTemplate",
         "pages/project/projectInfoForProjectManager/projectInfoForProjectManager",
-        "pages/project/taskInfoForProjectManager/taskInfoForProjectManager",
-        "cloud/updateUserName"
+        "pages/project/taskInfoForProjectManager/taskInfoForProjectManager"
     ],
     "window": {
         "backgroundTextStyle": "light",
