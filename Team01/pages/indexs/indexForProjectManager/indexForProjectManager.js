@@ -56,7 +56,7 @@ Page({
     name: "",
     show: false,
     value: '',
-    show1: false,
+    showInvite: false,
     radio: '1',
 
     totalTask: 0,
@@ -76,12 +76,12 @@ Page({
     });
   },
 
-  showPopup1() {
-    this.setData({ show1: true });
+  showPopupInvite() {
+    this.setData({ showInvite: true });
   },
 
-  onClose1() {
-    this.setData({ show1: false});
+  onCloseInvite() {
+    this.setData({ showInvite: false});
   },
 
   onChange(event) {

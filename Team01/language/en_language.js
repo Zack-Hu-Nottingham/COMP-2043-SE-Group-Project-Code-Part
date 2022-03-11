@@ -105,7 +105,7 @@ var Languague = {
     choose_template: "Choose Template",
     choose_start_time: "Choose start time",
     expetced_end_time: "Expected end time",
-    expected_duration:"Estimated duration of work",
+    expected_duration:"Estimated construction time",
     house_owner: "House Owner",
     description_hint: "less than 200 words",
     choose_period: "Choose period",
