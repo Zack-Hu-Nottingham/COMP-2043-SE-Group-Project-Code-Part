@@ -59,8 +59,11 @@ Page({
     filterShow: false,
 
     changetip: '请输入新用户名',
-    name: "",
+    name : "",
+    show: false,
+    show1: false,
     value: '',
+    radio: '1', 
 
     Filter: [],
 
@@ -72,6 +75,23 @@ Page({
       show: true
     });
   },
+
+  onClose() {
+    this.setData({ show: false});
+  },
+
+  showPopup1() {
+    this.setData({ show1: true });
+  },
+
+  onClose1() {
+    this.setData({ show1: false});
+  },
+
+  onChange(event) {
+    this.setData({ radio: event.detail, });
+  },
+
   /**
    * Life cycle function - listens for page loads
    */
@@ -128,6 +148,7 @@ Page({
    * Users click on the upper right to share
    */
   onShareAppMessage: function (e) {
+
     return {
       /**
        * Customized Title
@@ -515,17 +536,84 @@ Page({
 
   },
 
-  userNameInput: function (e) {
-    this.setData({
-      value: e.detail.value
+  priorityFilter(projectId){
+    new Promise((resolve, reject) => {
+    db.collection('task')
+      .where({
+        belongTo: _.eq(projectId),
+        //currentPriority: _.eq('Highest')
+      })
+      .get()
+      .then(res => {
+        for (var idx in res.data) {
+          if(res.data[idx].currentPriority == "Highest"){
+            this.setData({
+              task: this.data.task.concat(res.data[idx])
+            })
+          } 
+        }
+        for (var idx in res.data) {
+          if(res.data[idx].currentPriority == "High"){
+            this.setData({
+              task: this.data.task.concat(res.data[idx])
+            })
+          } 
+        }
+        for (var idx in res.data) {
+          if(res.data[idx].currentPriority == "Normal"){
+            this.setData({
+              task: this.data.task.concat(res.data[idx])
+            })
+          } 
+        }
+        for (var idx in res.data) {
+          if(res.data[idx].currentPriority == "Low"){
+            this.setData({
+              task: this.data.task.concat(res.data[idx])
+            })
+          } 
+        }
+        for (var idx in res.data) {
+          if(res.data[idx].currentPriority == "Lowest"){
+            this.setData({
+              task: this.data.task.concat(res.data[idx])
+            })
+          } 
+        }
+        resolve("成功获取任务信息")
+      })
+      .catch(err => {
+        reject("请求任务信息失败")
+      })
     })
   },
 
+  userNameInput:function(e){
+    // console.log(e.detail)
+    this.setData({
+      value:e.detail
+    })
+    // console.log(this.data.value)
+  },
+
   forNotice: function (e) {
-    let value = this.data.value;
-    if (value == '') {
+    let value= this.data.value;
+    var id = app.globalData.userInfo._openid;
+    // console.log(id)
+    if (value=='') {
       Toast.fail('空用户名');
     } else {
+      wx.cloud.callFunction({
+        name:'updateuserName',
+        data:{
+          id:id,
+          nickName:value
+        },
+        success:function (res){
+          console.log("success" + value)
+        },
+        fail:console.error
+      })
       Toast({
         type: 'success',
         message: '提交成功',
@@ -536,7 +624,10 @@ Page({
           });
           //console.log('执行OnClose函数');
         },
-      });
+      }); 
+      this.setData({
+        name:value
+      }) 
     }
   },
 

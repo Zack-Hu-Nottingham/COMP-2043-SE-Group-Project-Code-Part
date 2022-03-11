@@ -1,4 +1,6 @@
 <!--pages/project/statisticReport/statisticReport.wxml-->
+<wxs module="numberUtil" src="../../../utils/numberFormat.wxs"></wxs>
+
 
 <!-- pop up calendar -->
 <van-calendar
@@ -30,7 +32,7 @@
   <van-cell class="van-cell">
     <view class="parallin">
 
-      <van-circle class="circle" layer-color="#eeeeee" value="{{ value }}" clockwise="{{ false }}" stroke-width="6">Completed: {{value}}%</van-circle>
+      <van-circle class="circle" layer-color="#eeeeee" value="{{ value }}" clockwise="{{ false }}" stroke-width="6">Completed: {{numberUtil.numberFormat((totalCompleted/totalTasks)*100)}}%</van-circle>
       
       <view class="overall">
         <view style="margin: 10rpx;">

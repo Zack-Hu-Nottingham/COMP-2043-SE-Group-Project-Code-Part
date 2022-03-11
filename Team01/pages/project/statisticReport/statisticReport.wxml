@@ -1,9 +1,11 @@
+<wxs module="numberUtil" src="../../../utils/numberFormat.wxs"></wxs>
+
 <!--pages/project/statisticReport/statisticReport.wxml-->
 <van-cell-group style="margin: 0 1rpx;">
   <van-cell class="van-cell">
     <view class="parallin">
 
-      <van-circle class="circle" layer-color="#eeeeee" value="{{ value }}" clockwise="{{ false }}" stroke-width="6">{{dictionary.completed}} {{value}}%</van-circle>
+      <van-circle class="circle" layer-color="#eeeeee" value="{{100 * (totalCompleted / totalTasks)}}" clockwise="{{ false }}" stroke-width="6">{{dictionary.completed}} {{numberUtil.numberFormat((totalCompleted/totalTasks)*100)}}%</van-circle>
       
       <view class="overall">
         <view style="margin: 10rpx;">

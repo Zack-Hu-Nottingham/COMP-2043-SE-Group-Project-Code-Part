@@ -1,0 +1,9 @@
+var numberUtil = {
+  numberFormat: function (value) {
+          return value.toFixed(2)
+  }
+}
+
+module.exports = {
+  numberFormat: numberUtil.numberFormat//暴露接口调用
+}
