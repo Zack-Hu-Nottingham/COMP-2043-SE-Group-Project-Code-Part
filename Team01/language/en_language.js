@@ -9,6 +9,7 @@ var Languague = {
     task_info: "Task Information",
     project_info: "Project Information",
     page_name_for_pm: ['Message', 'Project', 'More'],
+    page_name: ['Dashboard', 'More'],
 
     // message page
     notification: "Notification",

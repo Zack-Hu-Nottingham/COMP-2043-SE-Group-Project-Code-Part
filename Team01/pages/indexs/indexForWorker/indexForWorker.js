@@ -21,9 +21,7 @@ Page({
      */
     userInfo: {},
     isTaskEmpty: true,
-
     active: 0,
-    pageName: ['Dashboard', 'More'],
 
     /**
      * Store bylingual settings
@@ -49,7 +47,6 @@ Page({
     changetip: '请输入新用户名',
     name: "",
     show: false,
-    show1: false,
     value: '',
     radio: '1', 
   },
@@ -64,14 +61,6 @@ Page({
     this.setData({
       show: false
     });
-  },
-
-  showPopup1() {
-    this.setData({ show1: true });
-  },
-
-  onClose1() {
-    this.setData({ show1: false});
   },
 
   onChange(event) {
@@ -108,7 +97,7 @@ Page({
      *  Set the initial navBar title of page at load time
      */
     wx.setNavigationBarTitle({
-      title: this.data.pageName[this.data.active],
+      title: this.data.dictionary.page_name[this.data.active],
     })
 
     this.setData({
@@ -338,7 +327,7 @@ Page({
       active: event.detail
     });
     wx.setNavigationBarTitle({
-      title: this.data.pageName[this.data.active],
+      title: this.data.dictionary.page_name[this.data.active],
     })
   },
 

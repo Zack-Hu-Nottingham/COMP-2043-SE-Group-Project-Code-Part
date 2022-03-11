@@ -104,9 +104,9 @@
   </van-popup>
   
   <van-cell center title="{{dictionary.identity}}" value="{{dictionary.house_owner}}" />
-  <van-cell center title="" >
+  <van-cell center title="" />
   <!-- <van-cell center title="邀请用户" clickable="true" is-link bind:click="showPopup1"> -->
-  </van-cell>
+  <!-- </van-cell> -->
   
   <!-- <van-popup show="{{ show1 }}" custom-style="width:75%; height: 32%;" bind:close="onClose1">
     <van-radio-group style="padding-left:20% ;"value="{{ radio }}" bind:change="onChange">
@@ -121,7 +121,8 @@
   <van-cell-group inset style="padding: 30rpx;">
     <van-cell center icon="setting-o"/>
     <van-cell center title="{{dictionary.language}}" value="{{languageList[language]}}" icon="" is-link clickable="true" bindtap="onChangeLan" class="settingForTest"/>
-    <!-- <van-cell center title="" > -->
+    <!-- <van-cell center icon="setting-o"/> -->
+    <van-cell center title="" />
 
   </van-cell-group>
 
