@@ -38,7 +38,6 @@ Page({
 
     project: [],
 
-
     /**
      * Dashboard page's data
      */

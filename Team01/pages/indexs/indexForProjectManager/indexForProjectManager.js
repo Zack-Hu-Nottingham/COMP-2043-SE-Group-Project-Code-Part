@@ -24,6 +24,7 @@ Page({
     active: 1,
     pageName: ['Message', 'Project', 'More'],
     currentTime: "",
+    isProjectEmpty: true,
 
     /**
      * Store bylingual settings
@@ -325,6 +326,9 @@ Page({
         .get()
         .then(res => {
           if (res.data.length != 0) {
+            this.setData({
+              isProjectEmpty: false
+            })
             for (var idx in res.data) {
               this.setData({
                 project: this.data.project.concat(res.data[idx])

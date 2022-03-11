@@ -54,19 +54,30 @@
 
 <!-- Projects page -->
 <view wx:elif="{{active == 1}}">
-  <van-cell-group inset style="padding: 30rpx;">
-    <van-cell center title=" {{dictionary.statistic_report}}" icon="bar-chart-o" clickable="true" bindtap="clickStatisticReport" class="statisticReportForTest"/>
-  </van-cell-group>
+  
+  <view wx:if="{{isProjectEmpty}}" style="margin-top: 300rpx;">
+    <van-empty description="{{dictionary.no_project_error}}" />
+  </view>
 
-  <van-cell-group inset style="padding: 30rpx;" title="{{dictionary.project_list}}">
-    <view wx:for="{{project}}" wx:key="index">
-      <van-cell icon="todo-list-o" title="{{item.name}}" clickable="true" bindtap="clickProject" data-id="{{item._id}}" class="clickProjectForTest"/>
-    </view>
-  </van-cell-group>
+  <view wx:else>
+  
+    <van-cell-group inset style="padding: 30rpx;">
+      <van-cell center title=" {{dictionary.statistic_report}}" icon="bar-chart-o" clickable="true" bindtap="clickStatisticReport" class="statisticReportForTest"/>
+    </van-cell-group>
 
+    <van-cell-group inset style="padding: 30rpx;" title="{{dictionary.project_list}}">      
+      <view wx:for="{{project}}" wx:key="index">
+        <van-cell icon="todo-list-o" title="{{item.name}}" clickable="true" bindtap="clickProject" data-id="{{item._id}}" class="clickProjectForTest"/>
+      </view>
+    </van-cell-group>
+
+  </view>
+
+  
   <van-sticky offset-top="{{ 560 }}">
-  <van-button hairline plain round block type="info" bindtap="clickNewProject" class="createNewProjectForTest">{{dictionary.create_new_project}}</van-button>
-</van-sticky>
+    <van-button hairline plain round block type="info" bindtap="clickNewProject" class="createNewProjectForTest">{{dictionary.create_new_project}}</van-button>
+  </van-sticky>
+
 </view>
 
 

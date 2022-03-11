@@ -42,6 +42,9 @@
 
 <van-divider contentPosition="center">{{dictionary.related_photo}}</van-divider>
 
+<view wx:for="{{fileList}}">
+  <!-- <van-image width="100rpx" height="100rpx" src="{{item.}}" /> -->
+</view>
 
 <van-sticky offset-top="{{ 570 }}">
   <van-button hairline plain round block type="info" bindtap="clickAddComment" class="addComment">{{dictionary.add_comment}}</van-button>
