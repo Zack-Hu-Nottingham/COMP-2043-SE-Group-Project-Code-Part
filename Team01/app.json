@@ -24,7 +24,8 @@
         "pages/project/taskInfoForHouseOwner/taskInfoForHouseOwner",
         "pages/project/projectTemplate/projectTemplate",
         "pages/project/projectInfoForProjectManager/projectInfoForProjectManager",
-        "pages/project/taskInfoForProjectManager/taskInfoForProjectManager"
+        "pages/project/taskInfoForProjectManager/taskInfoForProjectManager",
+        "cloud/updateUserName"
     ],
     "window": {
         "backgroundTextStyle": "light",
@@ -69,4 +70,3 @@
         "van-overlay": "@vant/weapp/overlay/index"
     }
 }
-
