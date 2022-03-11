@@ -6,39 +6,42 @@ var app = getApp()
 var id = '';
 Page({
     /**
-     * 页面的初始数据
+     * Initial data of page
      */
     data: {
-        
-        // 存放双语
+
+        /**
+         * Store bylingual settings
+         */
         dictionary: {},
         language: 0,
         languageList: ["简体中文", "English"],
-        
+
         name: "",
         details: "",
 
-        // Task state 数据格式
-        // 0 - unstarted
-        // 1 - progressing
-        // 2 - finished
-        // 3 - delayed
-        // 4 - reworking
-        // * 5 - accepted
-
-        "taskState":[{
+        /**
+         * Task state format
+         * 0 - unstarted
+         * 1 - progressing
+         * 2 - finished
+         * 3 - delayed
+         * 4 - reworking
+         * * 5 - accepted
+         */
+        "taskState": [{
             "name": "Unstarted",
             "value": '0',
-        },{
+        }, {
             "name": "Progressing",
             "value": '1',
-        },{
+        }, {
             "name": "Finished",
             "value": '2',
-        },{
+        }, {
             "name": "Accepted",
             "value": '5'
-        },{
+        }, {
             "name": "Reworking",
             "value": '4',
         }],
@@ -50,7 +53,7 @@ Page({
 
         startTime: '',
         endTime: '',
-        
+
         belongTo: "",
         Owner: [],
         participant: [],
@@ -61,114 +64,129 @@ Page({
         prioritys: [{
             "name": "high",
             "value": '0'
-        },{
+        }, {
             "name": "normal",
             "value": '1'
-        },{
+        }, {
             "name": "low",
             "value": '2'
         }],
     },
 
     /**
-     * 生命周期函数--监听页面加载
+     * Life cycle function - listens for page loads
      */
-    onLoad: function (options) {   
-        
+    onLoad: function (options) {
+
         this.setData({
             belongTo: options.id
         })
-        
-        // 初始化语言
+
+        /** 
+         *  Initial language
+         */
         var lan = wx.getStorageSync("languageVersion");
         this.initLanguage();
         this.setData({
             language: lan
         })
 
-        // 设置
+        /** 
+         * setting
+         */
         wx.setNavigationBarTitle({
-          title: this.data.dictionary.create_new_task,
+            title: this.data.dictionary.create_new_task,
         })
     },
 
     /**
-     * 生命周期函数--监听页面初次渲染完成
+     * Life cycle function - Listens for the page to complete its first rendering
      */
     onReady: function () {
 
     },
 
     /**
-     * 生命周期函数--监听页面显示
+     * Life cycle function - Listens for page display
      */
     onShow: function () {
 
     },
 
     /**
-     * 生命周期函数--监听页面隐藏
+     * Life cycle function - Listens for page hide
      */
     onHide: function () {
 
     },
 
     /**
-     * 生命周期函数--监听页面卸载
+     * Life cycle function - Listens for page unload
      */
     onUnload: function () {
 
     },
 
     /**
-     * 页面相关事件处理函数--监听用户下拉动作
+     * Page-specific event handlers - listen for user pull actions
      */
     onPullDownRefresh: function () {
 
     },
 
     /**
-     * 页面上拉触底事件的处理函数
+     * A handler for a pull-down event on the page
      */
     onReachBottom: function () {
 
     },
 
     /**
-     * 用户点击右上角分享
+     * Users click on the upper right to share
      */
     onShareAppMessage: function () {
 
     },
-
-    // Type the task name
-    typeName: function(e){
+    /**
+     * Type the task name
+     */
+    typeName: function (e) {
         this.setData({
             name: e.detail
         })
     },
 
-    // Type task details
-    typeDetails: function(e){
+
+    /**
+     * Type task details
+     */
+    typeDetails: function (e) {
         this.setData({
             details: e.detail
         })
     },
 
-    // Change start/end time
+
+    /**
+     *  Change start/end time
+     */
     showDatePopup() {
-        this.setData({ showDate: true });
+        this.setData({
+            showDate: true
+        });
     },
 
     onDateClose() {
-        this.setData({ showDate: false });
+        this.setData({
+            showDate: false
+        });
     },
-    
+
     formatDate(date) {
         date = new Date(date);
         return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
     },
-    
+
     onDateConfirm(event) {
         const [start, end] = event.detail;
         this.setData({
@@ -180,14 +198,16 @@ Page({
         this.onDateClose()
     },
 
-    changePriority: function(){
+    changePriority: function () {
         this.setData({
             showPriority: true,
         })
     },
 
     onClosePriority() {
-        this.setData({ showPriority: false });
+        this.setData({
+            showPriority: false
+        });
     },
 
     onSelectPriority(event) {
@@ -196,72 +216,76 @@ Page({
             selectedPriority: this.data.prioritys[event.detail.value].name
         })
     },
-    upload(){
+    upload() {
         wx.chooseImage({
-          count: 1,
-          sizeType: ['original', 'compressed'],
-          sourceType: ['album', 'camera'],
-          success:res => {
-            var fileList = this.data.fileList;
-            fileList.push({url: res.tempFilePaths[0]});
-            this.setData({ fileList: fileList });
-            console.log("成功选择图片",fileList);
-          }
+            count: 1,
+            sizeType: ['original', 'compressed'],
+            sourceType: ['album', 'camera'],
+            success: res => {
+                var fileList = this.data.fileList;
+                fileList.push({
+                    url: res.tempFilePaths[0]
+                });
+                this.setData({
+                    fileList: fileList
+                });
+                console.log("成功选择图片", fileList);
+            }
         })
-      },
+    },
 
     uploadImage(fileURL) {
         wx.cloud.uploadFile({
-          cloudPath: 'task/'+ id + '/' + new Date().getTime() + Math.floor(9*Math.random()) +'.png', // 上传至云端的路径
-          filePath: fileURL, // 小程序临时文件路径
-          success: res => {
-            var cloudList = this.data.cloudPath;
-            cloudList.push(res.fileID);
-            this.setData({
-                cloudPath: cloudList
-            })
-            this.updateCloudList();
-            console.log("图片上传成功",res)
-          },
-          fail: console.error
+            cloudPath: 'task/' + id + '/' + new Date().getTime() + Math.floor(9 * Math.random()) + '.png',
+            filePath: fileURL,
+            success: res => {
+                var cloudList = this.data.cloudPath;
+                cloudList.push(res.fileID);
+                this.setData({
+                    cloudPath: cloudList
+                })
+                this.updateCloudList();
+                console.log("图片上传成功", res)
+            },
+            fail: console.error
         })
     },
-    updateCloudList(){
+    updateCloudList() {
         // console.log(this.data.cloudPath)
         db.collection('task')
-        .where({
-            _id: _.eq(id)
-        })
-        .update({
-            // data 传入需要局部更新的数据
-            data: {
-              // 表示将 done 字段置为 true
-              cloudList: this.data.cloudPath
-            },
-            success: function(res) {
-              console.log(res)
-            }
-          })
-      },
+            .where({
+                _id: _.eq(id)
+            })
+            .update({
 
-    changeParticipant(){
-      wx.navigateTo({
-        url: '../../project/contactList/participantList/participantList',
-      })
-  },
+                data: {
+                    /**
+                     * change done to be true
+                     */
+                    cloudList: this.data.cloudPath
+                },
+                success: function (res) {
+                    console.log(res)
+                }
+            })
+    },
+
+    changeParticipant() {
+        wx.navigateTo({
+            url: '../../project/contactList/participantList/participantList',
+        })
+    },
 
     formSubmit: function (e) {
         var that = this
-        if(this.data.name == ""){
+        if (this.data.name == "") {
             Toast.fail('Name is null');
         }
-        if(this.data.startTime > this.data.endTime){
+        if (this.data.startTime > this.data.endTime) {
             Toast('Wrong time setting')
-        }
-        else if(this.data.startTime > this.data.endTime){
+        } else if (this.data.startTime > this.data.endTime) {
             Toast('Wrong time setting')
-        }
-        else if (this.data.startTime == '' || this.data.endTime == '') {
+        } else if (this.data.startTime == '' || this.data.endTime == '') {
 
         }
         // else if(this.data.project==""){
@@ -270,51 +294,50 @@ Page({
         // else if(this.data.Owner==""){
         //     Toast('None owner');
         // }
-        else if(this.data.details==""){
+        else if (this.data.details == "") {
             Toast('No detail description');
-        }
-        else{
+        } else {
             wx.cloud.database().collection('task')
-              .add({
-                data:{
-                    belongTo: this.data.belongTo,
-                    name: this.data.name,
-                    startTime: this.data.startTime,
-                    endTime: this.data.endTime,
-                    description: this.data.description,
-                    currentPriority: this.data.selectedPriority,
-                    cloudPath: [],
-                    participant: this.data.participant,
-                }
-              })
-              .then(res => {
-                id = res._id;
-                for(var i = 0; i< this.data.fileList.length; i++ ){
-                    this.uploadImage(this.data.fileList[i].url);
-                }
+                .add({
+                    data: {
+                        belongTo: this.data.belongTo,
+                        name: this.data.name,
+                        startTime: this.data.startTime,
+                        endTime: this.data.endTime,
+                        description: this.data.description,
+                        currentPriority: this.data.selectedPriority,
+                        cloudPath: [],
+                        participant: this.data.participant,
+                    }
+                })
+                .then(res => {
+                    id = res._id;
+                    for (var i = 0; i < this.data.fileList.length; i++) {
+                        this.uploadImage(this.data.fileList[i].url);
+                    }
 
-                console.log('添加成功', res)
-              })
-              .catch(res => {
-                console.log('添加失败', res) 
-              })
+                    console.log('添加成功', res)
+                })
+                .catch(res => {
+                    console.log('添加失败', res)
+                })
 
             this.setData({
                 isLoading: true
             })
-            setTimeout(function(){
+            setTimeout(function () {
                 Toast({
                     forbidClick: 'true',
                     type: 'success',
                     message: 'Success!',
-                  });
-            },1500)
-            setTimeout(function(){
+                });
+            }, 1500)
+            setTimeout(function () {
                 that.setData({
                     isLoading: false
                 })
-            },2400)
-            setTimeout(function(){
+            }, 2400)
+            setTimeout(function () {
                 /*wx.navigateTo({
                   url: '../task/task',
                 })*/
@@ -322,33 +345,40 @@ Page({
                 let project = pages[pages.length - 2];
                 project.go_update();
                 wx.navigateBack({
-                  delta: 1
+                    delta: 1
                 })
-            },2500)
-            
+            }, 2500)
+
         }
-        
+
     },
 
-    // 初始化语言
+    /** 
+     *  Initial language
+     */
     initLanguage() {
         var self = this;
-        //获取当前小程序语言版本所对应的字典变量
+        //Get the dictionary variable corresponding to the current language version of the applet
+
         var lang = languageUtils.languageVersion();
 
-        // 页面显示
+        /** 
+         * show the page
+         */
         self.setData({
-        dictionary: lang.lang.index,
+            dictionary: lang.lang.index,
         });
     },
 
     deleteImg(event) {
         const delIndex = event.detail.index
-        const { fileList } = this.data
+        const {
+            fileList
+        } = this.data
         fileList.splice(delIndex, 1)
         this.setData({
-          fileList
+            fileList
         })
-      }
+    }
 
 })

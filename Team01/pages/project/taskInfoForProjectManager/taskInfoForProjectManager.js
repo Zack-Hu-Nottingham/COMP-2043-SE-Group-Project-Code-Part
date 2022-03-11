@@ -4,31 +4,35 @@ const languageUtils = require("../../../language/languageUtils");
 const db = wx.cloud.database();
 const _ = db.command;
 var id = '';
-var taskComment = '1'; //辨别addComment的页面中索引列表是task/project
+/**
+ * Identify the index list in the page of addComment as task/project
+ */
+var taskComment = '1';
 
 Page({
 
   /**
-   * 页面的初始数据
+   * Initial data of page
    */
   data: {
 
-    // 存放双语
+    /**
+     * Store bylingual settings
+     */
     dictionary: {},
     language: 0,
     languageList: ["简体中文", "English"],
-    
-    
+
+
     taskPage: {},
     belongTo: "",
 
     dateShow: false,
     priorityShow: false,
-    feedback:[],
-    fileList:[],
+    feedback: [],
+    fileList: [],
 
-    priority: [
-      {
+    priority: [{
         name: 'Highest',
       },
       {
@@ -47,89 +51,93 @@ Page({
   },
 
   /**
-   * 生命周期函数--监听页面加载
+   * Life cycle function - listens for page loads
    */
   onLoad: function (options) {
 
-    // 初始化语言
+    /**
+     * Initial data of page
+     */
     var lan = wx.getStorageSync("languageVersion");
     this.initLanguage();
     this.setData({
       language: lan
     })
 
-    // 获得当前task的id
+    /**
+     * get task id
+     */
     id = options.id
 
-    // 根据id获得对应数据
+
     this.getDetail()
-
-    // this.updateComment();
-
   },
 
   /**
-   * 生命周期函数--监听页面初次渲染完成
+   * Life cycle function - Listens for the page to complete its first rendering
    */
   onReady: function () {
 
   },
 
   /**
-   * 生命周期函数--监听页面显示
+   * Life cycle function - Listens for page display
    */
   onShow: function () {
 
   },
-
   /**
-   * 生命周期函数--监听页面隐藏
+   * Life cycle function - Listens for page hide
    */
   onHide: function () {
 
   },
 
   /**
-   * 生命周期函数--监听页面卸载
+   * Life cycle function - Listens for page unload
    */
   onUnload: function () {
 
   },
 
   /**
-   * 页面相关事件处理函数--监听用户下拉动作
+   * Page-specific event handlers - listen for user pull actions
    */
   onPullDownRefresh: function () {
-    wx.stopPullDownRefresh()
+
   },
 
   /**
-   * 页面上拉触底事件的处理函数
+   * A handler for a pull-down event on the page
    */
   onReachBottom: function () {
 
   },
 
   /**
-   * 用户点击右上角分享
+   * Users click on the upper right to share
    */
   onShareAppMessage: function () {
 
   },
 
   onDateDisplay() {
-    this.setData({ dateShow: true });
+    this.setData({
+      dateShow: true
+    });
   },
 
   onClose() {
-    this.setData({ dateShow: false });
+    this.setData({
+      dateShow: false
+    });
   },
-  
+
   formatDate(date) {
     date = new Date(date);
     return `${date.getMonth() + 1}/${date.getDate()}`;
   },
-  
+
   onConfirm(event) {
     const [start, end] = event.detail;
     this.onClose();
@@ -140,25 +148,27 @@ Page({
     //   date: `${this.formatDate(start)} - ${this.formatDate(end)}`,
     // });
 
-    //调用云函数
+
     wx.cloud.callFunction({
       name: 'updateDate',
-      data:{
+      data: {
         id: id,
         startTime: `${start.getFullYear()}-${start.getMonth() + 1}-${start.getDate()}`,
         endTime: `${end.getFullYear()}-${end.getMonth() + 1}-${end.getDate()}`
       }
     }).then(res => {
       console.log('修改task日期成功', res),
-      this.getDetail()
+        this.getDetail()
     }).catch(res => {
       console.log('修改task日期失败', res)
     })
   },
-  
 
-  getDetail(){
-    //根据task_id查询task的name和task信息
+
+  getDetail() {
+    /**
+     * Query the name and task information of a task based on its task_id
+     */
     //return new Promise(function (resolve) {
     db.collection('task')
       .doc(id)
@@ -182,30 +192,32 @@ Page({
   },
 
   onPriorityClose() {
-    this.setData({priorityShow: false})
+    this.setData({
+      priorityShow: false
+    })
   },
 
-     /**
+  /**
    * Create Comment page's method
    */
   clickAddComment(event) {
     wx.navigateTo({
-      url: '../addComment/addComment?id='+ id + '&index=' + taskComment,
+      url: '../addComment/addComment?id=' + id + '&index=' + taskComment,
     })
   },
 
-  onTaskDescriptionBlur: function(e){
+  onTaskDescriptionBlur: function (e) {
     // console.log(e.detail.value)
 
     wx.cloud.callFunction({
       name: 'updateTaskDescription',
-      data:{
+      data: {
         id: id,
         descriptions: e.detail.value
       }
     }).then(res => {
       console.log('调用云函数修改任务描述成功', res),
-      this.getDetail()
+        this.getDetail()
     }).catch(res => {
       console.log('调用云函数修改任务描述失败', res)
     })
@@ -214,22 +226,22 @@ Page({
   onPrioritySelect(e) {
     // console.log(e.detail.name)
     this.setData({
-      currentPriority: e.detail.name 
-    }),
-
-    //调用云函数
-    wx.cloud.callFunction({
-      name: 'updateData',
-      data:{
-        id: id,
         currentPriority: e.detail.name
-      }
-    }).then(res => {
-      console.log('修改task优先级成功', res),
-      this.getDetail()
-    }).catch(res => {
-      console.log('修改task优先级失败', res)
-    })
+      }),
+
+
+      wx.cloud.callFunction({
+        name: 'updateData',
+        data: {
+          id: id,
+          currentPriority: e.detail.name
+        }
+      }).then(res => {
+        console.log('修改task优先级成功', res),
+          this.getDetail()
+      }).catch(res => {
+        console.log('修改task优先级失败', res)
+      })
 
   },
 
@@ -240,13 +252,19 @@ Page({
     })
   },
 
-  // 初始化语言
+  /** 
+   *  Initial language
+   */
   initLanguage() {
     var self = this;
-    //获取当前小程序语言版本所对应的字典变量
+    //Get the dictionary variable corresponding to the current language version of the applet
+
     var lang = languageUtils.languageVersion();
 
-    // 页面显示
+
+    /** 
+     * show the page
+     */
     self.setData({
       dictionary: lang.lang.index,
     });
@@ -254,7 +272,9 @@ Page({
 
   deleteImg(event) {
     const delIndex = event.detail.index
-    const { fileList } = this.data
+    const {
+      fileList
+    } = this.data
     fileList.splice(delIndex, 1)
     this.setData({
       fileList
@@ -268,58 +288,62 @@ Page({
     })
   },
 
-  updateComment(list){
-    if(list){
+  updateComment(list) {
+    if (list) {
       var newList = [];
       // console.log(list)
-      for(var i=0; i< list.length; i++){
+      for (var i = 0; i < list.length; i++) {
         db.collection('feedback')
-        .where({
-          _id: list[i]._id
-        })
-        .get({
-          success: res =>{
-            // console.log(res.data)
-            newList.push(res.data[0])
-            // console.log(newList)
-            this.setData({
-              feedback: newList
-            })
-          }
-        })
+          .where({
+            _id: list[i]._id
+          })
+          .get({
+            success: res => {
+              // console.log(res.data)
+              newList.push(res.data[0])
+              // console.log(newList)
+              this.setData({
+                feedback: newList
+              })
+            }
+          })
       }
       // console.log(this.data.feedback)
     }
 
   },
-  getList(list){
+  getList(list) {
     var newList = [];
     // console.log(list)
-    for(var i=0; i< list.length; i++){
+    for (var i = 0; i < list.length; i++) {
       db.collection('feedback')
-      .where({
-        _id: list[i]._id
-      })
-      .get({
-        success: res =>{
-          newList.push(res.data[0])
-          // console.log(newList)
-        }
-      })
+        .where({
+          _id: list[i]._id
+        })
+        .get({
+          success: res => {
+            newList.push(res.data[0])
+            // console.log(newList)
+          }
+        })
     }
     this.setData({
       feedback: newList
     })
     // console.log(this.data.feedback)
   },
-  upload(){
+  upload() {
     wx.chooseImage({
       sizeType: ['original', 'compressed'],
       sourceType: ['album', 'camera'],
-      success:res => {
+      success: res => {
         var fileList = this.data.fileList;
-        fileList.push({url: res.tempFilePaths[0]});
-        this.setData({ fileList: fileList });
+        fileList.push({
+          url: res.tempFilePaths[0]
+        });
+        this.setData({
+          fileList: fileList
+        });
         this.uploadImage(res.tempFilePaths[0]);
         // console.log("成功选择图片",fileList);
       }
@@ -327,13 +351,13 @@ Page({
   },
 
   uploadImage(fileURL) {
-      wx.cloud.uploadFile({
-        cloudPath: 'task/'+ id + '/' + new Date().getTime() + Math.floor(9*Math.random()) + '.png', // 上传至云端的路径
-        filePath: fileURL, // 小程序临时文件路径
-        success: res => {
-          // console.log("图片上传成功",res)
-        },
-        fail: console.error
-      })
+    wx.cloud.uploadFile({
+      cloudPath: 'task/' + id + '/' + new Date().getTime() + Math.floor(9 * Math.random()) + '.png',
+      filePath: fileURL,
+      success: res => {
+        // console.log("图片上传成功",res)
+      },
+      fail: console.error
+    })
   },
 })

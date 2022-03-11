@@ -8,13 +8,12 @@ var ganttPATH = '../../../ganttData/testData.json';
 Page({
 
     /**
-     * 页面的初始数据
+     * Initial data of page
      */
-    data: {
-    },
+    data: {},
 
     /**
-     * 生命周期函数--监听页面加载
+     * Life cycle function - listens for page loads
      */
     onLoad: function (options) {
         id = options.id;
@@ -33,51 +32,51 @@ Page({
     },
 
     /**
-     * 生命周期函数--监听页面初次渲染完成
+     * Life cycle function - Listens for the page to complete its first rendering
      */
     onReady: function () {
 
     },
 
     /**
-     * 生命周期函数--监听页面显示
+     * Life cycle function - Listens for page display
      */
     onShow: function () {
 
     },
-
     /**
-     * 生命周期函数--监听页面隐藏
+     * Life cycle function - Listens for page hide
      */
     onHide: function () {
 
     },
 
     /**
-     * 生命周期函数--监听页面卸载
+     * Life cycle function - Listens for page unload
      */
     onUnload: function () {
 
     },
 
     /**
-     * 页面相关事件处理函数--监听用户下拉动作
+     * Page-specific event handlers - listen for user pull actions
      */
     onPullDownRefresh: function () {
 
     },
 
     /**
-     * 页面上拉触底事件的处理函数
+     * A handler for a pull-down event on the page
      */
     onReachBottom: function () {
 
     },
 
     /**
-     * 用户点击右上角分享
+     * Users click on the upper right to share
      */
     onShareAppMessage: function () {
 
     }
+
 })

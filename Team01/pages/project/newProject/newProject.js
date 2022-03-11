@@ -11,308 +11,340 @@ const _ = db.command;
 var app = getApp();
 
 Page({
-    /**
+  /**
    * Initial data of page
    */
-    data: {
-        
-       /**
-   * Store bylingual settings
-   */
-        dictionary: {},
-        language: 0,
-        languageList: ["简体中文", "English"],
-
-        // 项目描述
-        name: "",
-        description: "",
-
-        startDate: "",
-        endDate: "",
-
-        // 模板选择
-        selectedTemplate: '',
-        selectedTemplateIndex: '1',
-        duration:0,
-
-        isLoading: false,
-        fileList: [],
-        cloudPath: [],
-        houseOwner: "",
-        houseOwner_openid: '',
-        participant: [],
-
-        project: "",
-        task: [],
-
-        template: templateLib.template,
-    },
-    
-     // 初始化语言
-     initLanguage() {
-        var self = this;
-        //获取当前小程序语言版本所对应的字典变量
-        var lang = languageUtils.languageVersion();
-
-        // 页面显示
-        self.setData({
-        dictionary: lang.lang.index,
-        });
-    },
-
+  data: {
 
     /**
-     * 生命周期函数--监听页面加载
+     * Store bylingual settings
      */
-    onLoad: function (options) {
-        // 初始化语言
-        var lan = wx.getStorageSync("languageVersion");
-        this.initLanguage();
-        this.setData({
-        language: lan
-        })
-        console.log(this.getOpenid('Lokkk'));
-    },
+    dictionary: {},
+    language: 0,
+    languageList: ["简体中文", "English"],
 
-    // 处理用户输入名字
-    typeName: function(e){
-        this.setData({
-            name: e.detail
-        })
-    },
+    /** 
+     *  project description
+     */
+    name: "",
+    description: "",
 
-    // 处理用户输入描述
-    typeDescription: function(e){
-        this.setData({
-            description: e.detail
-        })
-    },
-    
-    changeOwner(){
-        wx.navigateTo({
-          url: '../../project/contactList/houseOwnerList/houseOwnerList',
-        })
-    },
+    startDate: "",
+    endDate: "",
 
-    changeParticipant(){
-      wx.navigateTo({
-        url: '../../project/contactList/participantList/participantList',
-      })
+    /** 
+     *  choose template
+     */
+    selectedTemplate: '',
+    selectedTemplateIndex: '1',
+    duration: 0,
+
+    isLoading: false,
+    fileList: [],
+    cloudPath: [],
+    houseOwner: "",
+    houseOwner_openid: '',
+    participant: [],
+
+    project: "",
+    task: [],
+
+    template: templateLib.template,
   },
 
-    // 选择模板
-    selectTemplate: function(){
-        wx.navigateTo({ url: '../projectTemplate/projectTemplate', })
-    },
-    upload(){
-        wx.chooseImage({
-          count: 1,
-          sizeType: ['original', 'compressed'],
-          sourceType: ['album', 'camera'],
-          success:res => {
-            var fileList = this.data.fileList;
-            fileList.push({url: res.tempFilePaths[0]});
-            this.setData({ fileList: fileList });
-            console.log("成功选择图片",fileList);
-          }
+  /** 
+   *  Initial language
+   */
+  initLanguage() {
+    var self = this;
+    //Get the dictionary variable corresponding to the current language version of the applet
+    var lang = languageUtils.languageVersion();
+
+    /** 
+     * show the page
+     */
+    self.setData({
+      dictionary: lang.lang.index,
+    });
+  },
+
+
+  /**
+   * Life cycle function - listens for page loads
+   */
+  onLoad: function (options) {
+    /** 
+     *  Initial language
+     */
+    var lan = wx.getStorageSync("languageVersion");
+    this.initLanguage();
+    this.setData({
+      language: lan
+    })
+    console.log(this.getOpenid('Lokkk'));
+  },
+
+
+  typeName: function (e) {
+    this.setData({
+      name: e.detail
+    })
+  },
+
+  /** 
+   *  enter description
+   */
+  typeDescription: function (e) {
+    this.setData({
+      description: e.detail
+    })
+  },
+
+  changeOwner() {
+    wx.navigateTo({
+      url: '../../project/contactList/houseOwnerList/houseOwnerList',
+    })
+  },
+
+  changeParticipant() {
+    wx.navigateTo({
+      url: '../../project/contactList/participantList/participantList',
+    })
+  },
+
+  /** 
+   *  choose template
+   */
+  selectTemplate: function () {
+    wx.navigateTo({
+      url: '../projectTemplate/projectTemplate',
+    })
+  },
+  upload() {
+    wx.chooseImage({
+      count: 1,
+      sizeType: ['original', 'compressed'],
+      sourceType: ['album', 'camera'],
+      success: res => {
+        var fileList = this.data.fileList;
+        fileList.push({
+          url: res.tempFilePaths[0]
+        });
+        this.setData({
+          fileList: fileList
+        });
+        console.log("成功选择图片", fileList);
+      }
+    })
+  },
+
+  uploadImage(fileURL) {
+    wx.cloud.uploadFile({
+      cloudPath: 'project/' + this.data.project + '/' + new Date().getTime() + Math.floor(9 * Math.random()) + '.png',
+      filePath: fileURL,
+      success: res => {
+        var cloudList = this.data.cloudPath;
+        cloudList.push(res.fileID);
+        this.setData({
+          cloudPath: cloudList
         })
+        this.updateCloudList();
+        console.log("图片上传成功", res)
       },
+      fail: console.error
+    })
+  },
 
-    uploadImage(fileURL) {
-        wx.cloud.uploadFile({
-          cloudPath: 'project/'+ this.data.project + '/' + new Date().getTime() + Math.floor(9*Math.random()) +'.png', // 上传至云端的路径
-          filePath: fileURL, // 小程序临时文件路径
-          success: res => {
-            var cloudList = this.data.cloudPath;
-            cloudList.push(res.fileID);
-            this.setData({
-                cloudPath: cloudList
-            })
-            this.updateCloudList();
-            console.log("图片上传成功",res)
-          },
-          fail: console.error
-        })
-    },
-
-    getOpenid(name){
-      return new Promise((resolve, reject) => {
-        db.collection('user')
+  getOpenid(name) {
+    return new Promise((resolve, reject) => {
+      db.collection('user')
         .where({
           nickName: _.eq(name)
         })
         .get()
         .then(res => {
           this.setData({
-            houseOwner_openid:res.data[0]._openid,
+            houseOwner_openid: res.data[0]._openid,
           })
         })
-      })
-    },
+    })
+  },
 
 
-    // 提交新项目
-    formSubmit: function (e) {
+  /** 
+   * submit new project
+   */
+  formSubmit: function (e) {
 
-        if (this.data.name == "") {
-            Toast(this.data.dictionary.null_name);
-        }
-        else if (this.data.startDate == "" || this.data.endDate == "") {
-            Toast(this.data.dictionary.null_date_setting);
-        }
-        else if (this.data.description == "") {
-            Toast(this.data.dictionary.submitErrMsg2);
-        }
-        else if(this.data.selectedTemplate == ""){
-            Toast(this.data.dictionary.null_template_setting)
-        }
-        else{
-          this.getOpenid(this.data.houseOwner);
-          // 根据输入先创建一个项目，此时task列表为空
-          wx.cloud.database().collection('project')
-            .add({
-              data:{
-                  name: this.data.name,
-                  
-                  startTime: this.data.startDate,
-                  endTime: this.data.endDate,
-                  
-                  projectDescription: this.data.description,
+    if (this.data.name == "") {
+      Toast(this.data.dictionary.null_name);
+    } else if (this.data.startDate == "" || this.data.endDate == "") {
+      Toast(this.data.dictionary.null_date_setting);
+    } else if (this.data.description == "") {
+      Toast(this.data.dictionary.submitErrMsg2);
+    } else if (this.data.selectedTemplate == "") {
+      Toast(this.data.dictionary.null_template_setting)
+    } else {
+      this.getOpenid(this.data.houseOwner);
 
-                  // projectManager: app.globalData.userInfo._openid,
-                  houseOwner: this.data.houseOwner_openid,
-                  participant: this.data.participant,
-
-                  //fileList: this.data.fileList,
-                  cloudList: [],
-                  template: this.data.selectedTemplate,
-
-                  completed: [],
-                  delayed: [],
-                  task: [],
-                  unstarted: [],
-                  progressing: [],
-
-                  currentPhase: 0,
-                  // feedback: [],
-                  fileList: [],
-
-              }
-            })
-            .then(res => {
-              this.setData({
-                project: res._id
-              })
-              for(var i = 0; i< this.data.fileList.length; i++ ){
-                this.uploadImage(this.data.fileList[i].url);
-              }
-              
-
-              this.createTask()
-              this.action();
-              
-            })
-            .catch(res => {
-              console.log('新建项目失败，请联系管理员', res) 
-            })
-            this.action();
-
-              
-        }
-        
-    },
-    updateCloudList(){
-      // console.log(this.data.cloudPath)
-      db.collection('project')
-      .where({
-          _id: _.eq(this.data.project)
-      })
-      .update({
-          // data 传入需要局部更新的数据
+      wx.cloud.database().collection('project')
+        .add({
           data: {
-            // 表示将 done 字段置为 true
-            cloudList: this.data.cloudPath
-          },
-          success: function(res) {
-            console.log(res)
+            name: this.data.name,
+
+            startTime: this.data.startDate,
+            endTime: this.data.endDate,
+
+            projectDescription: this.data.description,
+
+            // projectManager: app.globalData.userInfo._openid,
+            houseOwner: this.data.houseOwner_openid,
+            participant: this.data.participant,
+
+            //fileList: this.data.fileList,
+            cloudList: [],
+            template: this.data.selectedTemplate,
+
+            completed: [],
+            delayed: [],
+            task: [],
+            unstarted: [],
+            progressing: [],
+
+            currentPhase: 0,
+            // feedback: [],
+            fileList: [],
+
           }
         })
-    },
-
-    action(){
-      //提交动画
-      this.setData({
-        isLoading: true,
-      })
-      setTimeout(res =>{
-          Toast({
-              forbidClick: 'true',
-              type: 'success',
-              message: 'Success!',
-            });
-      },1500)
-      setTimeout(res =>{
+        .then(res => {
           this.setData({
-              isLoading: false
+            project: res._id
           })
-      },2400)
-      setTimeout(res =>{
-        wx.redirectTo({
-          url: '../../indexs/indexForProjectManager/indexForProjectManager',
+          for (var i = 0; i < this.data.fileList.length; i++) {
+            this.uploadImage(this.data.fileList[i].url);
+          }
+
+
+          this.createTask()
+          this.action();
+
         })
-      },2500)
-    },
+        .catch(res => {
+          console.log('新建项目失败，请联系管理员', res)
+        })
+      this.action();
 
-    // calendar 的配套method
-    onDateDisplay() {
-        this.setData({ show: true });
-    },
-    
-    onDateClose() {
-        this.setData({ show: false });
-    },
 
-    formatDate(date) {
-      date = new Date(date);
-      // return `${date.getMonth() + 1}/${date.getDate()}`;
-      return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
-    },
-  
-    onDateConfirm(event) {
-      const start = event.detail;
-      var end = this.addDate(start, this.data.duration)
-      this.setData({
-          startDate: this.formatDate(start),
-          endDate: this.formatDate(end),
+    }
+
+  },
+  updateCloudList() {
+    // console.log(this.data.cloudPath)
+    db.collection('project')
+      .where({
+        _id: _.eq(this.data.project)
       })
-      this.onDateClose();
-      
-    },
+      .update({
+        /** 
+         *  set part of data
+         */
+        data: {
+          /** 
+           * set done to be true
+           */
+          cloudList: this.data.cloudPath
+        },
+        success: function (res) {
+          console.log(res)
+        }
+      })
+  },
 
-    //日期加减法  date参数为计算开始的日期，days为需要加的天数   
-    //格式:addDate('2017-1-11',20) 
-    addDate: function(date,days){ 
-      var d=new Date(date); 
-      d.setDate(d.getDate() + days); 
-      var m=d.getMonth() + 1; 
-      return d.getFullYear()+'-'+ m +'-'+d.getDate(); 
-    },    
+  action() {
+    /** 
+     *  animation of submission
+     */
+    this.setData({
+      isLoading: true,
+    })
+    setTimeout(res => {
+      Toast({
+        forbidClick: 'true',
+        type: 'success',
+        message: 'Success!',
+      });
+    }, 1500)
+    setTimeout(res => {
+      this.setData({
+        isLoading: false
+      })
+    }, 2400)
+    setTimeout(res => {
+      wx.redirectTo({
+        url: '../../indexs/indexForProjectManager/indexForProjectManager',
+      })
+    }, 2500)
+  },
 
-    // modify the template accordingly
-    modifyTemplate() {
-      for(var idx in this.data.template) {
-        this.data.template[idx].belongTo = this.data.project
 
-        // 修改时间
-        this.data.template[idx].startTime = this.data.template[idx].startTime
-        this.data.template[idx].endTime = this.data.template[idx].endTime
-      }
+  onDateDisplay() {
+    this.setData({
+      show: true
+    });
+  },
 
-    },
+  onDateClose() {
+    this.setData({
+      show: false
+    });
+  },
 
-    createTaskAccordingToTemplate(idx) {
-      return new Promise((resolve, reject) => {
-        db.collection('task')
+  formatDate(date) {
+    date = new Date(date);
+    // return `${date.getMonth() + 1}/${date.getDate()}`;
+    return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+  },
+
+  onDateConfirm(event) {
+    const start = event.detail;
+    var end = this.addDate(start, this.data.duration)
+    this.setData({
+      startDate: this.formatDate(start),
+      endDate: this.formatDate(end),
+    })
+    this.onDateClose();
+
+  },
+
+  /** 
+   *  Date addition and subtraction date parameter is the date the calculation starts, days is the number of days to be added  
+   * format :addDate('2017-1-11',20) 
+   */
+  addDate: function (date, days) {
+    var d = new Date(date);
+    d.setDate(d.getDate() + days);
+    var m = d.getMonth() + 1;
+    return d.getFullYear() + '-' + m + '-' + d.getDate();
+  },
+
+  // modify the template accordingly
+  modifyTemplate() {
+    for (var idx in this.data.template) {
+      this.data.template[idx].belongTo = this.data.project
+
+      /**
+       * change time
+       */
+      this.data.template[idx].startTime = this.data.template[idx].startTime
+      this.data.template[idx].endTime = this.data.template[idx].endTime
+    }
+
+  },
+
+  createTaskAccordingToTemplate(idx) {
+    return new Promise((resolve, reject) => {
+      db.collection('task')
         .add({
           data: this.data.template[idx]
         })
@@ -322,23 +354,23 @@ Page({
           })
           resolve()
         })
-        .catch(res => { 
+        .catch(res => {
           reject()
         })
-      })
-      
-    },
+    })
 
-    async createTask() {
+  },
 
-      this.modifyTemplate()
-      
-      for(var idx in this.data.template) {
-        // console.log(idx)
-        await this.createTaskAccordingToTemplate(idx)
-      }
+  async createTask() {
 
-      db.collection('project')
+    this.modifyTemplate()
+
+    for (var idx in this.data.template) {
+      // console.log(idx)
+      await this.createTaskAccordingToTemplate(idx)
+    }
+
+    db.collection('project')
       .doc(this.data.project)
       .update({
         data: {
@@ -346,14 +378,16 @@ Page({
           unstarted: this.data.task
         }
       })
-    },
+  },
 
-    deleteImg(event) {
-      const delIndex = event.detail.index
-      const { fileList } = this.data
-      fileList.splice(delIndex, 1)
-      this.setData({
-        fileList
-      })
-    }
+  deleteImg(event) {
+    const delIndex = event.detail.index
+    const {
+      fileList
+    } = this.data
+    fileList.splice(delIndex, 1)
+    this.setData({
+      fileList
+    })
+  }
 })
