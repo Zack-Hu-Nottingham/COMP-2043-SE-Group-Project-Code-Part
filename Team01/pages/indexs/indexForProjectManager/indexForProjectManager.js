@@ -394,6 +394,110 @@ Page({
       this.getData()
   },
 
+  updateState(){
+
+    const _currentTime = lib.formatDate(new Date());
+    this.setData({
+      currentTime: _currentTime
+    });
+    // console.log(this.data.currentTime)
+
+    db.collection('task')
+      .count()
+      .then(res => {
+        this.setData({
+          totalTask: res.total,
+        })
+        this.setData({
+          updateIndex: this.data.totalTask / 20,
+        })
+        console.log(this.data.totalTask)
+        console.log(parseInt(this.data.updateIndex))
+
+        for(var i = 0; i <= parseInt(this.data.updateIndex); i++){
+          db.collection('task')
+          .skip(i*20)
+          .get()
+          .then(res => {
+            //console.log(res)
+            for (var idx in res.data) {
+  
+              if(res.data.state == 2 || res.data.state == 4){
+                continue;
+              }
+  
+              if(res.data[idx].startTime == ''){
+                wx.cloud.callFunction({
+                  name: 'updateState',
+                  data: {
+                    id: res.data[idx]._id,
+                    state: 0
+                  }
+                })
+                .then(res=>{
+                  console.log('请求修改任务状态成功', res)
+                })
+                .catch(res => {
+                  console.log('请求修改任务状态失败', res)
+                })
+              }else if(this.data.currentTime < res.data[idx].startTime){
+                wx.cloud.callFunction({
+                  name: 'updateState',
+                  data: {
+                    id: res.data[idx]._id,
+                    state: 0
+                  }
+                })
+                .then(res=>{
+                  console.log('请求修改任务状态成功', res)
+                })
+                .catch(res => {
+                  console.log('请求修改任务状态失败', res)
+                })
+  
+              }else if(this.data.currentTime > res.data[idx].startTime && this.data.currentTime < res.data[idx].endTime){
+                wx.cloud.callFunction({
+                  name: 'updateState',
+                  data: {
+                    id: res.data[idx]._id,
+                    state: 1
+                  }
+                })
+                .then(res=>{
+                  console.log('请求修改任务状态成功', res)
+                })
+                .catch(res => {
+                  console.log('请求修改任务状态失败', res)
+                })
+              }else if(this.data.currentTime > res.data[idx].endTime){
+                wx.cloud.callFunction({
+                  name: 'updateState',
+                  data: {
+                    id: res.data[idx]._id,
+                    state: 3
+                  }
+                })
+                .then(res=>{
+                  console.log('请求修改任务状态成功', res)
+                })
+                .catch(res => {
+                  console.log('请求修改任务状态失败', res)
+                })
+              }
+  
+            }
+            // this.data.task.push(res.data[0])
+          })
+        }
+
+        console.log("成功获取任务信息")
+      })
+      .catch(err => {
+        console.log("请求任务信息失败")
+      })
+
+  },
+
   /** 
    * Handle new user name
    */
