@@ -8,6 +8,7 @@ var Languague = {
     more_page: "More",
     task_info: "Task Information",
     project_info: "Project Information",
+    page_name_for_pm: ['Message', 'Project', 'More'],
 
     // message page
     notification: "Notification",
@@ -20,7 +21,7 @@ var Languague = {
     project_statistic_report: "Project's statistic report",
     project_list: "Projects",
     create_new_project: "Create New Project",
-    comment_list: "评论列表",
+    comment_list: "Comment List",
 
     // dashboard page
     today_task: "Today's Task",     
@@ -45,6 +46,8 @@ var Languague = {
     cancel: "Cancel",
     worker: "Worker",
     project_manager: "Project Manager",
+    share: "Share",
+    save: "Save",
 
      // language setting page
     current_lan: "Current language",
@@ -147,8 +150,9 @@ var Languague = {
     upload_image_finish_construction: "Upload image & Finish construction",
     finish_construction: "Finish Construction",
     finished: "Finished",
-    no_project_error: "You currently have no projects",
-    no_task_error: "You currently have no tasks",
+    no_project_error: "No project",
+    no_assignment_error: "No assignment",
+    no_task_error: "No task",
     phase_name: ["现场交底拆改、界面处理", "Getting of more accurate and detailed design plan.", "Removal of redundant walls.", "Construction setting out for first time.", "Wall Masonry.", "Construction setting out for second time.", "Construction of water and electricity", "Carpentry construction.", "Floor heating installation and floor leveling", "Tiling.", "Oiling construction", "Installation of furnitures.", "Paint repair.", "Clutter disposal.", "Final inspection.", "Other."],
     current_phase_description: ["The project manager gives a technical explanation to the team workers involved in the construction in order to facilitate a more reasonable start of the construction and to avoid accidents caused by unclear explanation.", "阶段2", "Removal of redundant walls.", "First time of setting out, according to the position and height of the object on the design drawings, through specific instruments to confuct field tests.", "Masonry for walls as needed.", "Second time setting out, with higher accuracy.", "Placement of plumbing and electrical pipes.", "Carpenters carry out carpentry work according to the needs of users.", "Make sure the floor is level and then lay the floor heating.", "Laying of tile stone.", "Oiling construction", "Installation and placement of large pieces of furniture", "Repair of peeling paint produced during the installation of furinture", "Disposal of excess building debris in the house", "House owner leaded by project manager to inspect the house see if expectations are met.", "Other."],
 

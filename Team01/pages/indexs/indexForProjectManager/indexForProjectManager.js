@@ -22,7 +22,7 @@ Page({
      * Global data
      */
     active: 1,
-    pageName: ['Message', 'Project', 'More'],
+    // pageName: ['Message', 'Project', 'More'],
     currentTime: "",
     isProjectEmpty: true,
 
@@ -105,12 +105,11 @@ Page({
      *  Set the initial navBar title of page at load time
      */
     wx.setNavigationBarTitle({
-      title: this.data.pageName[this.data.active],
+      title: this.data.dictionary.page_name_for_pm[this.data.active],
     })
 
     this.setData({
       userInfo: app.globalData.userInfo,
-      identity: this.data.dictionary.project_manager,
       name: app.globalData.userInfo.nickName
     })
     this.getData(app.globalData.userInfo._openid)
@@ -142,7 +141,7 @@ Page({
      * Set the initial navBar title of page at load time 
      */
     wx.setNavigationBarTitle({
-      title: this.data.pageName[this.data.active],
+      title: this.data.dictionary.page_name_for_pm[this.data.active],
     })
 
   },
@@ -226,7 +225,7 @@ Page({
       active: event.detail
     });
     wx.setNavigationBarTitle({
-      title: this.data.pageName[this.data.active],
+      title: this.data.dictionary.page_name_for_pm[this.data.active],
     })
   },
   /** 

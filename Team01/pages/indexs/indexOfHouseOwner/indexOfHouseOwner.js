@@ -212,7 +212,6 @@ Page({
           reject("fail to get user data")
         })
     })
-
   },
 
   /**
