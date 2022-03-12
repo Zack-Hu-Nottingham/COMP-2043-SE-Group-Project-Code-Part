@@ -1,46 +1,32 @@
 {
-  "setting": {},
-  "condition": {
-    "plugin": {
-      "list": []
-    },
-    "game": {
-      "list": []
-    },
-    "gamePlugin": {
-      "list": []
-    },
-    "miniprogram": {
-      "list": [
-        {
-          "name": "",
-          "pathName": "pages/project/testDiagram/testDiagram",
-          "query": "id=17e3426e622475721219644a00409a31",
-          "launchMode": "default",
-          "scene": null
+    "setting": {},
+    "condition": {
+        "plugin": {
+            "list": []
         },
-        {
-          "name": "",
-          "pathName": "pages/project/projectInfo/projectInfo",
-          "query": "id=17e3426e622c7d231318b58a66e93e4c",
-          "scene": null,
-          "launchMode": "default"
+        "game": {
+            "list": []
         },
-        {
-          "name": "",
-          "pathName": "pages/project/taskInfoForProjectManager/taskInfoForProjectManager",
-          "query": "id=17e3426e622c7d231318b58a66e93e4c",
-          "launchMode": "default",
-          "scene": null
+        "gamePlugin": {
+            "list": []
         },
-        {
-          "name": "",
-          "pathName": "pages/project/taskInfoForHouseOwner/taskInfoForHouseOwner",
-          "query": "id=17e3426e622c7d231318b58a66e93e4c",
-          "launchMode": "default",
-          "scene": null
+        "miniprogram": {
+            "list": [
+                {
+                    "name": "",
+                    "pathName": "pages/project/testDiagram/testDiagram",
+                    "query": "id=17e3426e622475721219644a00409a31",
+                    "launchMode": "default",
+                    "scene": null
+                },
+                {
+                    "name": "",
+                    "pathName": "pages/project/projectInfo/projectInfo",
+                    "query": "id=17e3426e622475721219644a00409a31",
+                    "scene": null,
+                    "launchMode": "default"
+                }
+            ]
         }
-      ]
     }
-  }
 }

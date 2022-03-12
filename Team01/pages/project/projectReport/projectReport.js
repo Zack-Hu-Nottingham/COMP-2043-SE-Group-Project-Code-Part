@@ -22,6 +22,7 @@ Page({
     totalProgressing: 0,
     totalCompleted: 0,
     totalDelayed: 0,
+    totalReworking: 0,
     projects: [],
 
     project: [],
@@ -92,7 +93,7 @@ Page({
             }),
 
             wx.setNavigationBarTitle({
-              title: this.data.dictionary.my_project,
+              title: "Data Report",
             })
 
           this.getProjectManager()
@@ -184,6 +185,22 @@ Page({
           reject("请求任务信息失败")
         })
 
+      db.collection('task')
+        .where({
+          belongTo: _.eq(projectId),
+          state: 4,
+        })
+        .count()
+        .then(res => {
+          this.setData({
+            totalReworking: res.total
+          })
+          resolve("成功获取任务信息")
+        })
+        .catch(err => {
+          reject("请求任务信息失败")
+        })
+
     })
 
   },
@@ -220,31 +237,6 @@ Page({
         })
     })
   },
-
-  viewGantt() {
-    console.log(this.data.project._id)
-    /** 
-     *  update gantt
-     */
-    wx.cloud.callFunction({
-      name: 'uploadJSON',
-      data: {
-        id: this.data.project._id,
-        // localPath: ganttPATH,
-      }
-    }).then(res => {
-      console.log('gantt_json更新成功', res)
-    }).catch(res => {
-      console.log('gantt_json更新失败', res)
-    })
-
-    wx.navigateTo({
-      url: '../testDiagram/testDiagram?id=' + this.data.project._id,
-    })
-  },
-  
-
-
   /**
    * Life cycle function - Listens for the page to complete its first rendering
    */

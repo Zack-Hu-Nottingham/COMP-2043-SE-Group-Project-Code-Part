@@ -25,15 +25,15 @@
 <view wx:if="{{active == 0}}">
 
   <van-cell-group inset style="padding: 30rpx;">
-    <van-cell center title=" {{dictionary.my_project}}" icon="bar-chart-o" clickable="true" bindtap="clickProjectReport" class="statisticReportForTest"/>
+    <van-cell center title=" {{dictionary.project_statistic_report}}" icon="bar-chart-o" clickable="true" bindtap="clickProjectReport" class="statisticReportForTest"/>
   </van-cell-group>
 
-  <view wx:if="{{isProjectEmpty == true}}" style="margin-top: 220rpx;">
+  <view wx:if="isProjectEmpty" style="margin-top: 220rpx;">
     <van-empty description="{{dictionary.no_project_error}}" />
   </view>
 
   <view wx:else>
-    <van-cell-group inset title="{{dictionary.task_list}}">
+    <van-cell-group inset style="padding: 30rpx;" title="{{dictionary.task_list}}">
 
       <van-cell title="{{dictionary.filter}}" is-link value="{{filter}}" bindtap="clickFilter" />
       <view wx:for="{{task}}" wx:key="index">
@@ -62,16 +62,14 @@
           </view>
         </van-cell>      
       </view>
-    </van-cell-group>
-    
-    <!-- Three empty cell group to fix the bug on display -->
-    <van-cell-group inset style="padding: 30rpx;">
-    </van-cell-group>
-    
-    <van-cell-group inset style="padding: 30rpx;">
-    </van-cell-group>
-    
-    <van-cell-group inset style="padding: 30rpx;">
+
+      <!-- Two empty group to fix the bug on display     -->
+      <van-cell-group inset style="padding: 30rpx;">
+      </van-cell-group>
+      
+      <van-cell-group inset style="padding: 30rpx;">
+      </van-cell-group>
+
     </van-cell-group>
   </view>
 

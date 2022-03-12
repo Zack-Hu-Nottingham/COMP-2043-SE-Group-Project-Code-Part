@@ -22,6 +22,7 @@ Page({
      * Global data
      */
     active: 1,
+    // pageName: ['Message', 'Project', 'More'],
     currentTime: "",
     isProjectEmpty: true,
 

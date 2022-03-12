@@ -20,11 +20,9 @@ var Languague = {
      my_task: "我的任务",
      statistic_report: "数据报告",
      project_statistic_report: "项目数据报告",
-      my_project: "我的家装项目",
      project_list: "项目列表",
      create_new_project: "新建项目",
      comment_list: "评论列表",
-     view_gantt_diagram: "查看甘特图",
 
      // dashboard page
      today_task: "今天的任务",
@@ -100,7 +98,6 @@ var Languague = {
     participant: "参与者",
    //  reworking: "重加工",
     related_photo: "相关照片",
-    phase: "阶段",
 
     // New task page
     task_name: "任务名称",
