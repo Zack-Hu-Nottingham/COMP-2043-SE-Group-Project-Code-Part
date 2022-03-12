@@ -391,7 +391,7 @@ Page({
         .where({
           belongTo: _.eq(projectId),
         })
-        .orderBy("endTime", 'asc')
+        .orderBy("startTime", 'asc')
         .skip(i * 20)
         .get()
         .then(res => {
@@ -414,7 +414,7 @@ Page({
       task: [],
     })
 
-    this.priorityFilter(this.data.project._id)
+    this.priorityFilter(this.data.project[0]._id)
     // for (var idx in this.data.project) {
     //   this.priorityFilter(this.data.project[idx]._id)
     // }
