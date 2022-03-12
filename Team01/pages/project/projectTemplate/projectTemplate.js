@@ -6,60 +6,83 @@ const languageUtils = require("../../../language/languageUtils");
 Page({
 
     /**
-     * 页面的初始数据
+     * Initial data of page
      */
     data: {
-        
-        // 存放双语
+
+        /**
+         * Store bylingual settings
+         */
         dictionary: {},
         language: 0,
         languageList: ["简体中文", "English"],
 
-        // 基于房型对模板进行分类
-        templates:[{
-            name: "Townhouse Decoration", // 联排别墅
+
+        /**
+         * Classification of templates based on room type
+         */
+        templates: [{
+            /**
+             * Townhouses
+             */
+            name: "Townhouse Decoration",
             content: "More info...",
             duration: 233,
-            useFrq: "7", // 使用频率（记录使用次数，数组按照使用频率进行排序）
+            /**
+             * Frequency of use (record the number of times used, the array is sorted by frequency of use)
+             */
+            useFrq: "7",
             id: '1'
-        },{
-            name: "Detached Villa Decoration", // 独立式别墅
+        }, {
+            /**
+             * Freestanding Villas
+             */
+            name: "Detached Villa Decoration",
             content: "More info...",
-            duration: 198,
+            duration: 233,
             useFrq: "6",
             id: '2'
-        },{
-            name: "Garden Villa Decoration", // 花园洋房式住宅
+        }, {
+            /**
+             * Garden house style residence
+             */
+            name: "Garden Villa Decoration",
             content: "More info...",
-            duration: 211,
+            duration: 233,
             useFrq: "4",
             id: '3'
-        },],
+        }, ],
         radio: '',
 
     },
 
-     // 初始化语言
-     initLanguage() {
+    /** 
+     *  Initial language
+     */
+    initLanguage() {
         var self = this;
-        //获取当前小程序语言版本所对应的字典变量
+        //Get the dictionary variable corresponding to the current language version of the applet
         var lang = languageUtils.languageVersion();
 
-        // 页面显示
+        /** 
+         * show the page
+         */
         self.setData({
-        dictionary: lang.lang.index,
+            dictionary: lang.lang.index,
         });
     },
 
     /**
-     * 生命周期函数--监听页面加载
+     * Store bylingual settings
      */
     onLoad: function (options) {
-        // 初始化语言
+        /** 
+         *  Initial language
+         */
         var lan = wx.getStorageSync("languageVersion");
         this.initLanguage();
         this.setData({
-        language: lan
+            language: lan
         })
 
     },
@@ -68,22 +91,24 @@ Page({
 
     onChange(event) {
         this.setData({
-          radio: event.detail,
+            radio: event.detail,
         });
-      },
-    
+    },
+
     onClick(event) {
         var pages = getCurrentPages();
-        var currPage = pages[pages.length - 1];   //当前页面
-        var prevPage = pages[pages.length - 2];  //上一个页面
+        var currPage = pages[pages.length - 1];
+        var prevPage = pages[pages.length - 2];
         var templates = this.data.templates;
         var i;
-        const { name } = event.currentTarget.dataset;
+        const {
+            name
+        } = event.currentTarget.dataset;
         this.setData({
-          radio: name,
+            radio: name,
         });
-        for(i=0;i<templates.length;i++){
-            if(name == i+1){
+        for (i = 0; i < templates.length; i++) {
+            if (name == i + 1) {
                 prevPage.setData({
                     selectedTemplate: templates[i].name,
                     selectedTemplateIndex: i,

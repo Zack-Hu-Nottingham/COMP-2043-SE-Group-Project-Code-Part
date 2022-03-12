@@ -94,6 +94,13 @@
     border: 20rpx coral;
   }
 
+
+  .van-radio-group{
+
+    justify-content:center;
+    align-items: center
+  }
+
   .redCancel{
     color: red
   }

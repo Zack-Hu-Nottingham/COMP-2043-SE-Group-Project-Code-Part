@@ -5,7 +5,7 @@ const languageUtils = require("../../../language/languageUtils");
 
 const templateLib = require("../../../template/townhouse/Townhouse.js");
 
-const detachedLib = require("../../../template//detachedHouse/Detached_House.js");
+const detachedLib = require("../../../template/detachedHouse/Detached_House.js");
 
 const GardenLib = require("../../../template/gardenVilla/Garden_Villa.js");
 
@@ -117,7 +117,6 @@ Page({
       url: '../../project/contactList/participantList/participantList',
     })
   },
-
   /** 
    *  choose template
    */
@@ -322,7 +321,6 @@ Page({
       endDate: this.formatDate(end),
     })
     this.onDateClose();
-
   },
 
   /** 
@@ -365,7 +363,6 @@ Page({
           reject()
         })
     })
-
   },
 
   async createTask() {

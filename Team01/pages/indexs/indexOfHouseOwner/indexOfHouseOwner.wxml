@@ -4,12 +4,22 @@
 <!-- Toast -->
 <van-toast id="van-toast" />
 
-
 <!-- Bottom tabbar -->
 <van-tabbar active="{{ active }}" bind:change="onChangeTab">
   <van-tabbar-item icon="home-o">{{dictionary.dashboard_page}}</van-tabbar-item>
   <van-tabbar-item icon="friends-o">{{dictionary.more_page}}</van-tabbar-item>
 </van-tabbar>
+
+<!-- Sort the task -->
+<van-action-sheet
+  show="{{ filterShow }}"
+  actions="{{ Filter }}"
+  title="{{ dictionary.select_sort }}"
+  cancel-text="{{ dictionary.cancel }}"
+  bind:cancel="onFilterClose"
+  bind:close="onFilterClose"
+  bind:select="onFilterSelect"
+/>
 
 <!-- Dashboard page -->
 <view wx:if="{{active == 0}}">
@@ -18,56 +28,50 @@
     <van-cell center title=" {{dictionary.project_statistic_report}}" icon="bar-chart-o" clickable="true" bindtap="clickProjectReport" class="statisticReportForTest"/>
   </van-cell-group>
 
- 
-  <van-cell-group inset style="padding: 30rpx;" title="{{dictionary.task_list}}">
-    <van-cell title="{{dictionary.filter}}" is-link value="{{filter}}" bindtap="clickFilter" />
-    
-    <!-- Choose Feedback -->
-    <van-action-sheet
-      show="{{ filterShow }}"
-      actions="{{ Filter }}"
-      title="{{ dictionary.select_sort }}"
-      cancel-text="{{ dictionary.cancel }}"
-      bind:cancel="onFilterClose"
-      bind:close="onFilterClose"
-      bind:select="onFilterSelect"
-    />
+  <view wx:if="isProjectEmpty" style="margin-top: 220rpx;">
+    <van-empty description="{{dictionary.no_project_error}}" />
+  </view>
 
-    <view wx:for="{{task}}" wx:key="index">
-      <van-cell title="{{item.name}}" label="{{item.startTime}} - {{item.endTime}}" clickable="true" bindtap="clickTask" data-id="{{item._id}}" class="taskForTest"> 
+  <view wx:else>
+    <van-cell-group inset style="padding: 30rpx;" title="{{dictionary.task_list}}">
 
-        <view slot="">
-          <view wx:if="{{item.state==0}}">
-            <van-tag color="#D3D3D3" icon="fail" size="medium"><van-icon name="close"/>Unstarted</van-tag>
+      <van-cell title="{{dictionary.filter}}" is-link value="{{filter}}" bindtap="clickFilter" />
+      <view wx:for="{{task}}" wx:key="index">
+        <van-cell title="{{item.name}}" label="{{item.startTime}} - {{item.endTime}}" clickable="true" bindtap="clickTask" data-id="{{item._id}}" class="taskForTest"> 
+
+          <view slot="">
+            <view wx:if="{{item.state==0}}">
+              <van-tag color="#D3D3D3" icon="fail" size="medium"><van-icon name="close"/>Unstarted</van-tag>
+            </view>
+
+            <view wx:elif="{{item.state==1}}">
+              <van-tag color="#87CEFA" size="medium"><van-icon name="play"></van-icon>Progressing</van-tag>
+            </view>
+
+            <view wx:elif="{{item.state==2}}">
+              <van-tag color="#32CD32" size="medium"><van-icon name="passed" />Finished</van-tag>
+            </view>
+
+            <view wx:elif="{{item.state==3}}">
+              <van-tag color="#ffe1e1" text-color="#ad0000"  size="medium"><van-icon name="warning-o" />Delayed</van-tag>
+            </view>
+
+            <view wx:elif="{{item.state==4}}">
+              <van-tag color="#ffe1e1" text-color="#ad0000"  size="medium"><van-icon name="replay" />Reworking</van-tag>
+            </view>
           </view>
+        </van-cell>      
+      </view>
 
-          <view wx:elif="{{item.state==1}}">
-            <van-tag color="#87CEFA" size="medium"><van-icon name="play"></van-icon>Progressing</van-tag>
-          </view>
+      <!-- Two empty group to fix the bug on display     -->
+      <van-cell-group inset style="padding: 30rpx;">
+      </van-cell-group>
+      
+      <van-cell-group inset style="padding: 30rpx;">
+      </van-cell-group>
 
-          <view wx:elif="{{item.state==2}}">
-            <van-tag color="#32CD32" size="medium"><van-icon name="passed" />Finished</van-tag>
-          </view>
-
-          <view wx:elif="{{item.state==3}}">
-            <van-tag color="#ffe1e1" text-color="#ad0000"  size="medium"><van-icon name="warning-o" />Delayed</van-tag>
-          </view>
-
-          <view wx:elif="{{item.state==4}}">
-            <van-tag color="#ffe1e1" text-color="#ad0000"  size="medium"><van-icon name="replay" />Reworking</van-tag>
-          </view>
-
-        </view>
-      </van-cell>      
-    </view>
-
-    <van-cell-group inset style="padding: 30rpx;">
-    
     </van-cell-group>
-    <van-cell-group inset style="padding: 30rpx;">
-    
-    </van-cell-group>
-  </van-cell-group>
+  </view>
 
 </view>
 
@@ -82,33 +86,44 @@
 
 <van-cell-group inset>
   <van-cell center icon="user-o" />
-  <van-cell center title="{{dictionary.user_name}}" is-link bind:click="showPopup"  value="{{name}}">
-  </van-cell>
-  
+  <!-- title="{{dictionary.user_info}}" -->
+  <van-cell center title="{{dictionary.user_name}}" is-link bind:click="showPopup"  value="{{name}}"/>
   <van-popup show="{{ show }}" custom-style="width:75%; height: 30%;"bind:close="onClose">
 
    <van-cell-group style="padding-top: 80rpx">
-   <van-field model:value="{{ value }}" label="旧用户名" left-icon="contact" placeholder="{{ name }}" disabled border="{{ false }}">
+   <van-field label="旧用户名" left-icon="contact" placeholder="{{ name }}" disabled border="{{ false }}">
    </van-field>
   
-   <van-field value="{{ value }}" label="新用户名" left-icon="contact" placeholder="{{ changetip }}" bindinput='userNameInput' border="{{ false }}">
+   <van-field model:value="{{ value }}" label="新用户名" left-icon="contact" placeholder="{{ changetip }}" bindinput='userNameInput' border="{{ false }}">
    </van-field>
     </van-cell-group>
-    <van-button class="van-button" round style="padding-top: 40rpx;padding-left:20% ;" type="info" bindtap="forNotice" >保存</van-button>
+
+    <van-button class="van-button" plain round color="#1296db" type="primary" style="padding-top: 40rpx;padding-left:20% ;" bindtap="forNotice" >保存</van-button>
+    
     <van-toast id="van-toast" />
   </van-popup>
   
-  <van-cell center title="{{dictionary.identity}}" value="{{identity}}" />
-  <van-cell center title="邀请用户" clickable="true" bindtap="onShareAppMessage">
-    <van-button round class="button-share" open-type="share"> 
-      <van-icon name="friends-o" />
-    </van-button>
-  </van-cell>
+  <van-cell center title="{{dictionary.identity}}" value="{{dictionary.house_owner}}" />
+  <van-cell center title="" />
+  <!-- <van-cell center title="邀请用户" clickable="true" is-link bind:click="showPopup1"> -->
+  <!-- </van-cell> -->
+  
+  <!-- <van-popup show="{{ show1 }}" custom-style="width:75%; height: 32%;" bind:close="onClose1">
+    <van-radio-group style="padding-left:20% ;"value="{{ radio }}" bind:change="onChange">
+      <van-radio style="padding-top: 20rpx;padding-left:20% ;" icon-size="55rpx" name="1">业主</van-radio>
+      <van-radio style="padding-top: 20rpx;padding-left:20% ;" icon-size="55rpx" name="2">工人</van-radio>
+      <van-radio style="padding-top: 20rpx;padding-left:20% ;" icon-size="55rpx" name="3">项目经理</van-radio>
+    </van-radio-group>
+    <van-button class="button-share" plain round color="#1296db" type="primary" style="padding-top: 40rpx;padding-left:20% ;" open-type="share" bindtip="onShareAppMessage">分享</van-button>
+  </van-popup> -->
 </van-cell-group>
 
   <van-cell-group inset style="padding: 30rpx;">
     <van-cell center icon="setting-o"/>
     <van-cell center title="{{dictionary.language}}" value="{{languageList[language]}}" icon="" is-link clickable="true" bindtap="onChangeLan" class="settingForTest"/>
+    <!-- <van-cell center icon="setting-o"/> -->
+    <van-cell center title="" />
+
   </van-cell-group>
 
 </view>

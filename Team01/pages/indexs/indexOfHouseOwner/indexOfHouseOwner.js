@@ -10,7 +10,7 @@ const lib = require('../../../utils/util');
 
 Page({
   /**
-   * 页面的初始数据
+   * Initial data of page
    */
   data: {
     /**
@@ -24,7 +24,9 @@ Page({
     active: 0,
     pageName: ['Dashboard', 'More'],
 
-    // 存放双语
+    /**
+     * Store bylingual settings
+     */
     dictionary: {},
     language: 0,
     languageList: ["简体中文", "English"],
@@ -36,11 +38,10 @@ Page({
 
     project: [],
 
-
     /**
      * Dashboard page's data
      */
-    task:[],
+    task: [],
 
 
     /**
@@ -59,7 +60,10 @@ Page({
 
     changetip: '请输入新用户名',
     name : "",
-    value: '', 
+    show: false,
+    show1: false,
+    value: '',
+    radio: '1', 
 
     Filter: [],
 
@@ -67,45 +71,67 @@ Page({
   },
 
   showPopup() {
-    this.setData({ show: true });
+    this.setData({
+      show: true
+    });
+  },
+
+  onClose() {
+    this.setData({ show: false});
+  },
+
+  showPopup1() {
+    this.setData({ show1: true });
+  },
+
+  onClose1() {
+    this.setData({ show1: false});
+  },
+
+  onChange(event) {
+    this.setData({ radio: event.detail, });
   },
 
   /**
-   * 生命周期函数--监听页面加载
+   * Life cycle function - listens for page loads
    */
   onLoad: function (options) {
 
     this.setData({
       identity: this.data.dictionary.house_owner,
       openid: options.openid,
-      name : app.globalData.userInfo.nickName,
+      name: app.globalData.userInfo.nickName,
       userInfo: app.globalData.userInfo,
     })
 
     this.getData();
 
-    // 初始化语言
+
+    /** 
+     *  Initial language
+     */
     var lan = wx.getStorageSync("languageVersion");
     this.initLanguage();
     this.setData({
       language: lan,
       Filter: [{
-          name: this.data.dictionary.time,
-        },{
-          name: this.data.dictionary.priority,
-        }],
+        name: this.data.dictionary.time,
+      }, {
+        name: this.data.dictionary.priority,
+      }],
     })
 
-    // 载入时设置初始页面的navBar title
+    /** 
+     *  Set the initial navBar title of page at load time
+     */
     wx.setNavigationBarTitle({
       title: this.data.pageName[this.data.active],
     })
 
-    
-  },
 
+  },
   /**
-   * 生命周期函数--监听页面显示
+   * Life cycle function - Listens for the page to complete its first rendering
    */
   onShow: function () {
     wx.hideHomeButton()
@@ -117,15 +143,29 @@ Page({
     })
   },
 
+
   /**
-   * 用户点击右上角分享
+   * Users click on the upper right to share
    */
   onShareAppMessage: function (e) {
-    return{
-      title:'', //自定义标题
-      path: '', //好友点击后跳转页面 
-      desc: '', // 描述
-      imageUrl: '' //分享的图片路径
+
+    return {
+      /**
+       * Customized Title
+       */
+      title: '',
+      /**
+       * Jump page after friend click
+       */
+      path: '',
+      /**
+       * Discription
+       */
+      desc: '',
+      /**
+       * Path of shared images
+       */
+      imageUrl: ''
     }
   },
 
@@ -136,124 +176,140 @@ Page({
    */
 
 
-  // 初始化数据
-  async getData(openid){
+  /**
+   * Initialise data
+   */
+  async getData(openid) {
 
     await this.getInfo()
 
     await this.getProjectInfo(this.data.openid)
-    
+
     for (var idx in this.data.project) {
       await this.getTaskInfo(this.data.project[idx]._id)
     }
-    
+
   },
-  
-  // 获取user信息
+
+  /**
+   * get the user data
+   */
   getInfo() {
     // console.log(app.globalData.userInfo._openid)
     return new Promise((resolve, reject) => {
       db.collection('user')
-      .where({
-        _openid: _.eq(app.globalData.userInfo._openid)
-      })
-      .get()
-      .then(res => {
-        this.setData({
-          user: res.data[0]
+        .where({
+          _openid: _.eq(app.globalData.userInfo._openid)
         })
-        resolve("成功获取用户数据");
-      })
-      .catch(err => {
-        reject("请求用户信息失败")
-      })  
+        .get()
+        .then(res => {
+          this.setData({
+            user: res.data[0]
+          })
+          resolve("get user data successfully");
+        })
+        .catch(err => {
+          reject("fail to get user data")
+        })
     })
-    
   },
 
-  // 获取项目信息
+  /**
+   * Get project  information
+   */
   getProjectInfo(openid) {
     return new Promise((resolve, reject) => {
       db.collection('project')
-      .where({
+        .where({
           houseOwner: _.eq(openid)
         })
-      .get()
-      .then(res => {
-        if (res.data.length != 0) {
-          this.setData({
-            isProjectEmpty: false
-          })
-          for (var idx in res.data) {
+        .get()
+        .then(res => {
+          if (res.data.length != 0) {
             this.setData({
-              project: this.data.project.concat(res.data[idx])
-            })  
+              isProjectEmpty: false
+            })
+            for (var idx in res.data) {
+              this.setData({
+                project: this.data.project.concat(res.data[idx])
+              })
+            }
           }
-        } 
-        resolve("成功获取项目信息")
-      })
-      .catch(err => {
-        reject("请求项目信息失败")
-      })}
-    )},
+          resolve("Successful access to project information")
+        })
+        .catch(err => {
+          reject("Request for project information failed")
+        })
+    })
+  },
 
-  // 获取任务信息
+  /**
+   * Get task info
+   */
   getTaskInfo(projectId) {
 
     for (let i = 0; i < Math.ceil(this.data.totalTask / 20); i++) {
       db.collection("task")
-      .where({
-        belongTo: _.eq(projectId),
-      })
-      .skip(i*20)
-      .get()
-      .then(res => {
-        for (var idx in res.data) {
-          this.setData({
-            task: this.data.task.concat(res.data[idx])
-          })
-        }
-        // console.log("成功获取任务信息")
-      })
-      .catch(err => {
-        console.log("请求任务信息失败")
-      })
+        .where({
+          belongTo: _.eq(projectId),
+        })
+        .skip(i * 20)
+        .get()
+        .then(res => {
+          for (var idx in res.data) {
+            this.setData({
+              task: this.data.task.concat(res.data[idx])
+            })
+          }
+          // console.log("Successful access to task information")
+        })
+        .catch(err => {
+          console.log("failto access to task information")
+        })
     }
 
   },
 
-  // 更改tab选项时对应的逻辑
+  /** 
+   * Logic for changing tab options
+   */
   onChangeTab(event) {
-    this.setData({ active: event.detail });
+    this.setData({
+      active: event.detail
+    });
     wx.setNavigationBarTitle({
       title: this.data.pageName[this.data.active],
     })
   },
 
-  // 初始化语言
+  /** 
+   *  Initial language
+   */
   initLanguage() {
     var self = this;
-    //获取当前小程序语言版本所对应的字典变量
+    //Get the dictionary variable corresponding to the current language version of the applet
     var lang = languageUtils.languageVersion();
 
-    // 页面显示
+    /** 
+     * show the page
+     */
     self.setData({
       dictionary: lang.lang.index,
     });
   },
 
-      
+
   /**
    * Dashboard page's method
    */
   clickTask(event) {
     wx.navigateTo({
-      url: '../../project/taskInfoForHouseOwner/taskInfoForHouseOwner?id=' +  event.currentTarget.dataset.id,
+      url: '../../project/taskInfoForHouseOwner/taskInfoForHouseOwner?id=' + event.currentTarget.dataset.id,
     })
   },
 
   clickProjectReport(event) {
-    // 如果项目为空，提示用户项目为空
+
     if (this.data.isProjectEmpty) {
       Toast(this.data.dictionary.no_project_error)
     } else {
@@ -263,12 +319,14 @@ Page({
     }
   },
 
-  
+
   /**
    * More page's method
    */
 
-  // 点击language展示选项
+  /** 
+   * Click on the language to display option
+   */
   onChangeLan(event) {
     // console.log('check')
     wx.navigateTo({
@@ -276,13 +334,15 @@ Page({
     })
   },
 
-  // 更新数据
-  go_update(){
+  /** 
+   * Update data
+   */
+  go_update() {
     this.setData({
-      project: [],
-      task: [],
-    }),
-    this.getData()
+        project: [],
+        task: [],
+      }),
+      this.getData()
   },
 
   clickFilter() {
@@ -298,7 +358,9 @@ Page({
   },
 
   onFilterClose() {
-    this.setData({filterShow: false})
+    this.setData({
+      filterShow: false
+    })
   },
 
   onFilterSelect(e) {
@@ -309,8 +371,7 @@ Page({
 
     if(this.data.filter == 'Time'){
       this.onTimeSelect()
-    }
-    else if(this.data.filter == 'Priority'){
+    } else if (this.data.filter == 'Priority') {
       this.onPrioritySelect()
     }
   },
@@ -324,14 +385,14 @@ Page({
     }
   },
 
-  timeFilter(projectId){
-    for (let i = 0; i < Math.ceil(this.data.totalTask / 20); i++){
+  timeFilter(projectId) {
+    for (let i = 0; i < Math.ceil(this.data.totalTask / 20); i++) {
       db.collection('task')
         .where({
           belongTo: _.eq(projectId),
         })
         .orderBy("endTime", 'asc')
-        .skip(i*20)
+        .skip(i * 20)
         .get()
         .then(res => {
           for (var idx in res.data) {
@@ -342,7 +403,7 @@ Page({
           console.log("成功获取任务信息")
         })
         .catch(err => {
-          console.log("请求任务信息失败")
+          console.log("fail to get task info")
         })
     }
 
@@ -359,39 +420,39 @@ Page({
     // }
   },
 
-  priorityFilter(projectId){
-    for (let i = 0; i < Math.ceil(this.data.totalTask / 20); i++){
+  priorityFilter(projectId) {
+    for (let i = 0; i < Math.ceil(this.data.totalTask / 20); i++) {
       db.collection('task')
         .where({
           belongTo: _.eq(projectId),
         })
-        .skip(i*20)
+        .skip(i * 20)
         .get()
         .then(res => {
           for (var idx in res.data) {
-            if(res.data[idx].currentPriority == "Highest"){
+            if (res.data[idx].currentPriority == "Highest") {
               this.setData({
                 task: this.data.task.concat(res.data[idx])
               })
             }
           }
-          // console.log("成功获取任务信息")
+          // console.log("fail to get task info")
         })
         .catch(err => {
-          console.log("请求任务信息失败")
+          console.log("fail to get task info")
         })
     }
 
-    for (let i = 0; i < Math.ceil(this.data.totalTask / 20); i++){
+    for (let i = 0; i < Math.ceil(this.data.totalTask / 20); i++) {
       db.collection('task')
         .where({
           belongTo: _.eq(projectId),
         })
-        .skip(i*20)
+        .skip(i * 20)
         .get()
         .then(res => {
           for (var idx in res.data) {
-            if(res.data[idx].currentPriority == "High"){
+            if (res.data[idx].currentPriority == "High") {
               this.setData({
                 task: this.data.task.concat(res.data[idx])
               })
@@ -400,20 +461,20 @@ Page({
           // console.log("成功获取任务信息")
         })
         .catch(err => {
-          console.log("请求任务信息失败")
+          console.log("fail to get task info")
         })
     }
 
-    for (let i = 0; i < Math.ceil(this.data.totalTask / 20); i++){
+    for (let i = 0; i < Math.ceil(this.data.totalTask / 20); i++) {
       db.collection('task')
         .where({
           belongTo: _.eq(projectId),
         })
-        .skip(i*20)
+        .skip(i * 20)
         .get()
         .then(res => {
           for (var idx in res.data) {
-            if(res.data[idx].currentPriority == "Normal"){
+            if (res.data[idx].currentPriority == "Normal") {
               this.setData({
                 task: this.data.task.concat(res.data[idx])
               })
@@ -422,20 +483,20 @@ Page({
           // console.log("成功获取任务信息")
         })
         .catch(err => {
-          console.log("请求任务信息失败")
+          console.log("fail to get task info")
         })
     }
 
-    for (let i = 0; i < Math.ceil(this.data.totalTask / 20); i++){
+    for (let i = 0; i < Math.ceil(this.data.totalTask / 20); i++) {
       db.collection('task')
         .where({
           belongTo: _.eq(projectId),
         })
-        .skip(i*20)
+        .skip(i * 20)
         .get()
         .then(res => {
           for (var idx in res.data) {
-            if(res.data[idx].currentPriority == "Low"){
+            if (res.data[idx].currentPriority == "Low") {
               this.setData({
                 task: this.data.task.concat(res.data[idx])
               })
@@ -444,20 +505,20 @@ Page({
           // console.log("成功获取任务信息")
         })
         .catch(err => {
-          console.log("请求任务信息失败")
+          console.log("fail to get task info")
         })
     }
 
-    for (let i = 0; i < Math.ceil(this.data.totalTask / 20); i++){
+    for (let i = 0; i < Math.ceil(this.data.totalTask / 20); i++) {
       db.collection('task')
         .where({
           belongTo: _.eq(projectId),
         })
-        .skip(i*20)
+        .skip(i * 20)
         .get()
         .then(res => {
           for (var idx in res.data) {
-            if(res.data[idx].currentPriority == "Lowest"){
+            if (res.data[idx].currentPriority == "Lowest") {
               this.setData({
                 task: this.data.task.concat(res.data[idx])
               })
@@ -466,41 +527,111 @@ Page({
           // console.log("成功获取任务信息")
         })
         .catch(err => {
-          console.log("请求任务信息失败")
+          console.log("fail to get task info")
         })
     }
 
   },
 
-  userNameInput:function(e){
-    this.setData({
-      value:e.detail.value
+  priorityFilter(projectId){
+    new Promise((resolve, reject) => {
+    db.collection('task')
+      .where({
+        belongTo: _.eq(projectId),
+        //currentPriority: _.eq('Highest')
+      })
+      .get()
+      .then(res => {
+        for (var idx in res.data) {
+          if(res.data[idx].currentPriority == "Highest"){
+            this.setData({
+              task: this.data.task.concat(res.data[idx])
+            })
+          } 
+        }
+        for (var idx in res.data) {
+          if(res.data[idx].currentPriority == "High"){
+            this.setData({
+              task: this.data.task.concat(res.data[idx])
+            })
+          } 
+        }
+        for (var idx in res.data) {
+          if(res.data[idx].currentPriority == "Normal"){
+            this.setData({
+              task: this.data.task.concat(res.data[idx])
+            })
+          } 
+        }
+        for (var idx in res.data) {
+          if(res.data[idx].currentPriority == "Low"){
+            this.setData({
+              task: this.data.task.concat(res.data[idx])
+            })
+          } 
+        }
+        for (var idx in res.data) {
+          if(res.data[idx].currentPriority == "Lowest"){
+            this.setData({
+              task: this.data.task.concat(res.data[idx])
+            })
+          } 
+        }
+        resolve("成功获取任务信息")
+      })
+      .catch(err => {
+        reject("请求任务信息失败")
+      })
     })
+  },
+
+  userNameInput:function(e){
+    // console.log(e.detail)
+    this.setData({
+      value:e.detail
+    })
+    // console.log(this.data.value)
   },
 
   forNotice: function (e) {
     let value= this.data.value;
+    var id = app.globalData.userInfo._openid;
+    // console.log(id)
     if (value=='') {
       Toast.fail('空用户名');
     } else {
+      wx.cloud.callFunction({
+        name:'updateuserName',
+        data:{
+          id:id,
+          nickName:value
+        },
+        success:function (res){
+          console.log("success" + value)
+        },
+        fail:console.error
+      })
       Toast({
         type: 'success',
         message: '提交成功',
         onClose: () => {
-           this.setData({ 
-             show: false,
-             value: '',
+          this.setData({
+            show: false,
+            value: '',
           });
           //console.log('执行OnClose函数');
         },
       }); 
+      this.setData({
+        name:value
+      }) 
     }
   },
-    
-  listenerActionSheet: function() {
+
+  listenerActionSheet: function () {
     this.setData({
-      //取反
-        filterShow: !this.data.filterShow
+
+      filterShow: !this.data.filterShow
     });
   }
 })

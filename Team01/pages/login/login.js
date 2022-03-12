@@ -15,101 +15,115 @@ const _ = db.command;
 Page({
 
   /**
-   * 页面的初始数据
+   * Initial data of page
    */
-  data: {
-  },
+  data: {},
 
   /**
-   * 生命周期函数--监听页面加载
+   * Life cycle function - listens for page loads
    */
   onLoad: function (options) {
 
     wx.login()
-    .then(res => {
+      .then(res => {
+        /**
+         * showLoading
+         */
 
-      // showLoading
-      Toast.loading({
-        message: 'Loading...',
-        forbidClick: true,
-        mask: true,
-      });
-      
-      if (res.code) { 
-        // 根据获取的code换取用户openid
-        var url = "https://api.weixin.qq.com/sns/jscode2session?appid=wxd4b06f2e9673ed00&secret=909d4ff30ed2d6e828f73e55a63cd862&js_code=" + res.code + "&grant_type=authorization_code";
-        lib.request({
-          url: url,
-          method: "GET"
-        }).task.then(res => {
+        Toast.loading({
+          message: 'Loading...',
+          forbidClick: true,
+          mask: true,
+        });
 
-          // 设置全局的openid
-          app.globalData.userInfo.openid = res.data.openid
-          this.setData({
-            openid: res.data.openid
+        if (res.code) {
+
+          var url = "https://api.weixin.qq.com/sns/jscode2session?appid=wxd4b06f2e9673ed00&secret=909d4ff30ed2d6e828f73e55a63cd862&js_code=" + res.code + "&grant_type=authorization_code";
+          lib.request({
+            url: url,
+            method: "GET"
+          }).task.then(res => {
+
+            /**
+             * set global openid
+             */
+            app.globalData.userInfo.openid = res.data.openid
+            this.setData({
+              openid: res.data.openid
+            })
+
+          }).then(res => {
+
+            /**
+             * check whether the user has signed in
+             */
+            db.collection('user').where({
+              _openid: app.globalData.userInfo.openid
+            }).get().then(res => {
+              // console.log(res.data)
+
+              if (res.data.length != 0) {
+                app.globalData.userInfo = res.data[0];
+                // console.log(app.globalData.userInfo)
+
+                /**
+                 * set global id
+                 */
+                //app.globalData.userInfo.name = res.data[0].name;
+                var identity = res.data[0].identity;
+
+                Toast({
+                  type: 'success',
+                  message: 'Logged in',
+                  onClose: () => {
+                    // House Owner
+                    if (identity == 0) {
+                      wx.redirectTo({
+                        url: '../indexs/indexOfHouseOwner/indexOfHouseOwner?openid=' + this.data.openid,
+                      })
+                      // Project Manager
+                    } else if (identity == 1) {
+                      wx.redirectTo({
+                        url: '../indexs/indexForProjectManager/indexForProjectManager?openid=' + this.data.openid,
+                      })
+
+                      // Worker
+                    } else if (identity == 2) {
+                      wx.redirectTo({
+                        url: '../indexs/indexForWorker/indexForWorker',
+                      })
+                    }
+                  },
+                });
+              }
+
+              /**
+               * if is new account
+               */
+              else {
+                Toast.clear()
+
+                /**
+                 * get the info of new account
+                 */
+                Dialog.confirm({
+                  context: this,
+                  title: 'Registration',
+                  message: 'Your nickName & phone would be used for registration',
+                  confirmButtonOpenType: "getUserInfo",
+                })
+              }
+            })
           })
-          
-        }).then(res => {
-
-          // 访问数据库，判断该用户是否已经注册
-          db.collection('user').where({
-            _openid: app.globalData.userInfo.openid
-          }).get().then(res => {
-            // console.log(res.data)
-            // 如果是已知账户
-            if (res.data.length != 0) {
-              app.globalData.userInfo = res.data[0];
-              // console.log(app.globalData.userInfo)
-
-              // 设置全局身份信息
-              //app.globalData.userInfo.name = res.data[0].name;
-              var identity = res.data[0].identity;
-
-              Toast({
-                type: 'success',
-                message: 'Logged in',
-                onClose: () => {
-                  // House Owner
-                  if (identity == 0) {
-                    wx.redirectTo({
-                      url: '../indexs/indexOfHouseOwner/indexOfHouseOwner?openid=' + this.data.openid,
-                    })
-                    // Project Manager
-                  } else if (identity == 1) {
-                    wx.redirectTo({
-                      url: '../indexs/indexForProjectManager/indexForProjectManager?openid=' + this.data.openid,
-                    })
-                   
-                    // Worker
-                  } else if (identity == 2) {
-                    wx.redirectTo({
-                      url: '../indexs/indexForWorker/indexForWorker',
-                    })
-                  }
-                },
-              });
-            }
-
-            // 如果是新账号
-            else {
-              Toast.clear()
-
-              // 获取账号信息，并注册该账号
-              Dialog.confirm({
-                context: this,
-                title: 'Registration',
-                message: 'Your nickName & phone would be used for registration',
-                confirmButtonOpenType: "getUserInfo", // 按钮的微信开放能力
-              })
-            }
-          })
-        })
-      }
-    })
+        }
+      })
   },
 
-  // 获得用户信息
+  /**
+   * get user info
+   */
   getuserinfo(e) {
+
 
     // wx.setStorageSync('userInfo', e.detail.userInfo)
     app.globalData.userInfo = e.detail.userInfo
@@ -117,77 +131,83 @@ Page({
     // wx.getUserInfo的返回兼容
     // wx.setStorageSync('encryptedData', e.detail.encryptedData)
     // wx.setStorageSync('iv', e.detail.iv)
-    
+
     //拿到用户信息后 获取 用户手机号
 
 
-    // 拿到数据后写入数据库
+
+    /**
+     * write into db
+     */
     db.collection("user").add({
-      data: {
-        nickName: e.detail.userInfo.nickName,
-        avatarUrl: e.detail.userInfo.avatarUrl,
-        identity: 0,
-        task: [],
-        project: []
-      }
-    })
-    .then(res => {
-
-      Toast.success("Successfully registered")
-
-      // 跳转房主界面
-      wx.redirectTo({
-        url: '../indexs/indexOfHouseOwner/indexOfHouseOwner',
+        data: {
+          nickName: e.detail.userInfo.nickName,
+          avatarUrl: e.detail.userInfo.avatarUrl,
+          identity: 0,
+          task: [],
+          project: []
+        }
       })
-    })
+      .then(res => {
+
+        Toast.success("Successfully registered")
+
+
+        /**
+         * jump to house owner page
+         */
+        wx.redirectTo({
+          url: '../indexs/indexOfHouseOwner/indexOfHouseOwner',
+        })
+      })
 
 
 
   },
   /**
-   * 生命周期函数--监听页面初次渲染完成
+   * Life cycle function - Listens for the page to complete its first rendering
    */
   onReady: function () {
 
   },
 
   /**
-   * 生命周期函数--监听页面显示
+   * Life cycle function - Listens for page display
    */
   onShow: function () {
 
   },
 
   /**
-   * 生命周期函数--监听页面隐藏
+   * Life cycle function - Listens for page hide
    */
   onHide: function () {
 
   },
 
   /**
-   * 生命周期函数--监听页面卸载
+   * Life cycle function - Listens for page unload
    */
   onUnload: function () {
 
   },
 
   /**
-   * 页面相关事件处理函数--监听用户下拉动作
+   * Page-specific event handlers - listen for user pull actions
    */
   onPullDownRefresh: function () {
 
   },
 
   /**
-   * 页面上拉触底事件的处理函数
+   * A handler for a pull-down event on the page
    */
   onReachBottom: function () {
 
   },
 
   /**
-   * 用户点击右上角分享
+   * Users click on the upper right to share
    */
   onShareAppMessage: function () {
 

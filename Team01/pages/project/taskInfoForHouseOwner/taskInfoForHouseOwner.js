@@ -4,20 +4,25 @@ const languageUtils = require("../../../language/languageUtils");
 const db = wx.cloud.database();
 const _ = db.command;
 var id = '';
-var taskComment = '1'; //辨别addComment的页面中索引列表是task/project
+/**
+ * Identify the index list in the page of addComment as task/project
+ */
+var taskComment = '1';
 
 Page({
 
   /**
-   * 页面的初始数据
+   * Initial data of page
    */
   data: {
 
-    // 存放双语
+    /**
+     * Store bylingual settings
+     */
     dictionary: {},
     language: 0,
     languageList: ["简体中文", "English"],
-    
+
     project: [],
     taskPage: {},
     belongTo: "",
@@ -28,9 +33,6 @@ Page({
 
     priority: [
       {
-        name: 'Highest',
-      },
-      {
         name: 'High'
       },
       {
@@ -38,95 +40,107 @@ Page({
       },
       {
         name: 'Low'
-      },
-      {
-        name: 'Lowest'
-      },
+      }
     ],
+
+    fileList: [],
   },
 
   /**
-   * 生命周期函数--监听页面加载
+   * Life cycle function - listens for page loads
    */
   onLoad: function (options) {
 
-    // 初始化语言
+    /**
+     * Initial data of page
+     */
     var lan = wx.getStorageSync("languageVersion");
     this.initLanguage();
     this.setData({
       language: lan
     })
 
-    // 获得当前task的id
+    /**
+     * get task id
+     */
     id = options.id
 
-    // 根据id获得对应数据
+
     this.getDetail()
+
+    this.getImage()
 
   },
 
+  getImage() {
+    wx.cloud.downloadFile()
+  },
+
   /**
-   * 生命周期函数--监听页面初次渲染完成
+   * Life cycle function - Listens for the page to complete its first rendering
    */
   onReady: function () {
 
   },
 
   /**
-   * 生命周期函数--监听页面显示
+   * Life cycle function - Listens for page display
    */
   onShow: function () {
 
   },
-
   /**
-   * 生命周期函数--监听页面隐藏
+   * Life cycle function - Listens for page hide
    */
   onHide: function () {
 
   },
 
   /**
-   * 生命周期函数--监听页面卸载
+   * Life cycle function - Listens for page unload
    */
   onUnload: function () {
 
   },
 
   /**
-   * 页面相关事件处理函数--监听用户下拉动作
+   * Page-specific event handlers - listen for user pull actions
    */
   onPullDownRefresh: function () {
-    wx.stopPullDownRefresh()
+
   },
 
   /**
-   * 页面上拉触底事件的处理函数
+   * A handler for a pull-down event on the page
    */
   onReachBottom: function () {
 
   },
 
   /**
-   * 用户点击右上角分享
+   * Users click on the upper right to share
    */
   onShareAppMessage: function () {
 
   },
 
   onDateDisplay() {
-    this.setData({ dateShow: true });
+    this.setData({
+      dateShow: true
+    });
   },
 
   onClose() {
-    this.setData({ dateShow: false });
+    this.setData({
+      dateShow: false
+    });
   },
-  
+
   formatDate(date) {
     date = new Date(date);
     return `${date.getMonth() + 1}/${date.getDate()}`;
   },
-  
+
   onConfirm(event) {
     const [start, end] = event.detail;
     this.setData({
@@ -136,93 +150,95 @@ Page({
       date: `${this.formatDate(start)} - ${this.formatDate(end)}`,
     });
 
-    //调用云函数
+
     wx.cloud.callFunction({
       name: 'updateDate',
-      data:{
+      data: {
         id: id,
         startTime: `${start.getFullYear()}-${start.getMonth() + 1}-${start.getDate()}`,
         endTime: `${end.getFullYear()}-${end.getMonth() + 1}-${end.getDate()}`
       }
     }).then(res => {
       console.log('修改task日期成功', res),
-      this.getDetail()
+        this.getDetail()
     }).catch(res => {
       console.log('修改task日期失败', res)
     })
   },
 
-  getDetail(){
+  getDetail() {
     wx.cloud.database().collection('task')
       .doc(id)
       .get()
       .then(res => {
         wx.setNavigationBarTitle({
-          title: res.data.name,
-        }),
+            title: res.data.name,
+          }),
 
-        this.setData({
-          taskPage: res.data,
-        })
+          this.setData({
+            taskPage: res.data,
+          })
       })
       .catch(err => {
         console.log('请求失败', err)
       })
       .then(res => {
         // console.log(this.data.taskPage.belongTo)
-       db.collection('project')
-        .doc(this.data.taskPage.belongTo)
-        .get()
-        .then(res => {
-          this.setData({
-            project:res.data,
-            belongTo: res.data.name
+        db.collection('project')
+          .doc(this.data.taskPage.belongTo)
+          .get()
+          .then(res => {
+            this.setData({
+              project: res.data,
+              belongTo: res.data.name
+            })
           })
-        })
         this.getParticipant()
       })
   },
 
   getParticipant() {
     return new Promise((resolve, reject) => {
-    db.collection('user')
-      .where({
-        _openid: _.eq(this.data.taskPage.participant)
-      })
-      .get()
-      .then(res => {
-        this.setData({
-          participant: res.data[0]
+      db.collection('user')
+        .where({
+          _openid: _.eq(this.data.taskPage.participant)
         })
-      })
+        .get()
+        .then(res => {
+          this.setData({
+            participant: res.data[0]
+          })
+        })
     })
   },
 
   onPriorityClose() {
-    this.setData({priorityShow: false})
+    this.setData({
+      priorityShow: false
+    })
   },
 
-     /**
+  /**
    * Create Comment page's method
    */
   clickAddComment(event) {
     wx.navigateTo({
-      url: '../addComment/addComment?id='+ id + '&index=' + taskComment,
+      url: '../addComment/addComment?id=' + id + '&index=' + taskComment,
     })
   },
 
-  onTaskDescriptionBlur: function(e){
+  onTaskDescriptionBlur: function (e) {
     // console.log(e.detail.value)
 
     wx.cloud.callFunction({
       name: 'updateTaskDescription',
-      data:{
+      data: {
         id: id,
         taskDescriptions: e.detail.value
       }
     }).then(res => {
       console.log('调用云函数修改任务描述成功', res),
-      this.getDetail()
+        this.getDetail()
     }).catch(res => {
       console.log('调用云函数修改任务描述失败', res)
     })
@@ -231,21 +247,21 @@ Page({
   onPrioritySelect(e) {
     // console.log(e.detail.name)
     this.setData({
-      currentPriority: e.detail.name 
-    }),
-
-    //调用云函数
-    wx.cloud.callFunction({
-      name: 'updateData',
-      data:{
-        id: id,
         currentPriority: e.detail.name
-      }
-    }).then(res => {
-      this.getDetail()
-    }).catch(res => {
-      console.log('修改task优先级失败', res)
-    })
+      }),
+
+
+      wx.cloud.callFunction({
+        name: 'updateData',
+        data: {
+          id: id,
+          currentPriority: e.detail.name
+        }
+      }).then(res => {
+        this.getDetail()
+      }).catch(res => {
+        console.log('修改task优先级失败', res)
+      })
 
   },
 
@@ -255,16 +271,23 @@ Page({
       priorityShow: true
     })
   },
-
-  // 初始化语言
+  /** 
+   *  Initial language
+   */
   initLanguage() {
     var self = this;
-    //获取当前小程序语言版本所对应的字典变量
+    //Get the dictionary variable corresponding to the current language version of the applet
+
     var lang = languageUtils.languageVersion();
 
-    // 页面显示
+
+    /** 
+     * show the page
+     */
     self.setData({
       dictionary: lang.lang.index,
     });
   },
+
+  
 })

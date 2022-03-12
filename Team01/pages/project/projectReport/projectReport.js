@@ -11,19 +11,19 @@ const _ = db.command;
 Page({
 
   /**
-   * 页面的初始数据
+   * Initial data of page
    */
   data: {
-    projectManager:'',
+    projectManager: '',
     value: 0,
     projectNum: 0,
     totalTasks: 0,
     totalUnstart: 0,
     totalProgressing: 0,
     totalCompleted: 0,
-    totalDelayed:0,
-    totalReworking:0,
-    projects:[],
+    totalDelayed: 0,
+    totalReworking: 0,
+    projects: [],
 
     project: [],
 
@@ -32,7 +32,7 @@ Page({
   },
 
   /**
-   * 生命周期函数--监听页面加载
+   * Life cycle function - listens for page loads
    */
   onLoad: function (options) {
 
@@ -42,38 +42,44 @@ Page({
       language: lan
     })
 
-    // 获取当前project的id
+    /** 
+     *  get the id of project
+     */
     id = options.id
 
     this.getTaskData(id)
 
-    // 从数据库中根据id获取数据
+
     this.getDetail()
 
     this.setData({
-        value: 0,
-        projectNum: 1,
-        totalTasks: 0,
-        totalUnstart: 0,
-        totalProgressing: 0,
-        totalCompleted: 0,
+      value: 0,
+      projectNum: 1,
+      totalTasks: 0,
+      totalUnstart: 0,
+      totalProgressing: 0,
+      totalCompleted: 0,
     })
-   
+
   },
 
-
+  /** 
+   *  Initial language
+   */
   initLanguage() {
     var self = this;
-    //获取当前小程序语言版本所对应的字典变量
+    //Get the dictionary variable corresponding to the current language version of the applet
     var lang = languageUtils.languageVersion();
 
-    // 页面显示
+    /** 
+     * show the page
+     */
     self.setData({
       dictionary: lang.lang.index,
     });
   },
 
-  getDetail(){
+  getDetail() {
     // console.log(id)
     db.collection('project')
       .doc(id)
@@ -81,14 +87,14 @@ Page({
         success: res => {
 
           this.setData({
-            project: res.data,
-            //projects: this.data.project.concat(res.data),
-            name: res.data.name,
-          }),
+              project: res.data,
+              //projects: this.data.project.concat(res.data),
+              name: res.data.name,
+            }),
 
-          wx.setNavigationBarTitle({
-            title: "Data Report",
-          })
+            wx.setNavigationBarTitle({
+              title: "Data Report",
+            })
 
           this.getProjectManager()
         },
@@ -98,113 +104,117 @@ Page({
   getTaskData(projectId) {
     return new Promise((resolve, reject) => {
       db.collection('task')
-      .where({
-        belongTo: _.eq(projectId)
-      })
-      .count()
-      .then(res => {
-        this.setData({
-          totalTasks: res.total
+        .where({
+          belongTo: _.eq(projectId)
         })
-        resolve("成功获取任务信息")
-      })
-      .catch(err => {
-        reject("请求任务信息失败")
-      })
+        .count()
+        .then(res => {
+          this.setData({
+            totalTasks: res.total
+          })
+          resolve("成功获取任务信息")
+        })
+        .catch(err => {
+          reject("请求任务信息失败")
+        })
 
       db.collection('task')
-      .where({
-        belongTo: _.eq(projectId), 
-        state: 0,
-      })
-      .count()
-      .then(res => {
-        this.setData({
-          totalUnstart: res.total
+        .where({
+          belongTo: _.eq(projectId),
+          state: 0,
         })
-        resolve("成功获取任务信息")
-      })
-      .catch(err => {
-        reject("请求任务信息失败")
-      })
+        .count()
+        .then(res => {
+          this.setData({
+            totalUnstart: res.total
+          })
+          resolve("成功获取任务信息")
+        })
+        .catch(err => {
+          reject("请求任务信息失败")
+        })
 
       db.collection('task')
-      .where({
-        belongTo: _.eq(projectId), 
-        state: 1,
-      })
-      .count()
-      .then(res => {
-        this.setData({
-          totalProgressing: res.total
+        .where({
+          belongTo: _.eq(projectId),
+          state: 1,
         })
-        resolve("成功获取任务信息")
-      })
-      .catch(err => {
-        reject("请求任务信息失败")
-      })
+        .count()
+        .then(res => {
+          this.setData({
+            totalProgressing: res.total
+          })
+          resolve("成功获取任务信息")
+        })
+        .catch(err => {
+          reject("请求任务信息失败")
+        })
 
       db.collection('task')
-      .where({
-        belongTo: _.eq(projectId), 
-        state: 2,
-      })
-      .count()
-      .then(res => {
-        this.setData({
-          totalCompleted: res.total
+        .where({
+          belongTo: _.eq(projectId),
+          state: 2,
         })
-        this.setData({
-          value: ((100 * this.data.totalCompleted) / this.data.totalTasks).toFixed(2)
+        .count()
+        .then(res => {
+          this.setData({
+            totalCompleted: res.total
+          })
+          this.setData({
+            value: ((100 * this.data.totalCompleted) / this.data.totalTasks).toFixed(2)
+          })
+          resolve("成功获取任务信息")
         })
-        resolve("成功获取任务信息")
-      })
-      .catch(err => {
-        reject("请求任务信息失败")
-      })
+        .catch(err => {
+          reject("请求任务信息失败")
+        })
 
       db.collection('task')
-      .where({
-        belongTo: _.eq(projectId), 
-        state: 3,
-      })
-      .count()
-      .then(res => {
-        this.setData({
-          totalDelayed: res.total
+        .where({
+          belongTo: _.eq(projectId),
+          state: 3,
         })
-        resolve("成功获取任务信息")
-      })
-      .catch(err => {
-        reject("请求任务信息失败")
-      })
+        .count()
+        .then(res => {
+          this.setData({
+            totalDelayed: res.total
+          })
+          resolve("成功获取任务信息")
+        })
+        .catch(err => {
+          reject("请求任务信息失败")
+        })
 
       db.collection('task')
-      .where({
-        belongTo: _.eq(projectId), 
-        state: 4,
-      })
-      .count()
-      .then(res => {
-        this.setData({
-          totalReworking: res.total
+        .where({
+          belongTo: _.eq(projectId),
+          state: 4,
         })
-        resolve("成功获取任务信息")
-      })
-      .catch(err => {
-        reject("请求任务信息失败")
-      })
+        .count()
+        .then(res => {
+          this.setData({
+            totalReworking: res.total
+          })
+          resolve("成功获取任务信息")
+        })
+        .catch(err => {
+          reject("请求任务信息失败")
+        })
 
     })
 
   },
 
   onDateDisplay() {
-    this.setData({ show: true });
+    this.setData({
+      show: true
+    });
   },
 
   onDateClose() {
-    this.setData({ show: false });
+    this.setData({
+      show: false
+    });
   },
 
   formatDate(date) {
@@ -215,62 +225,61 @@ Page({
 
   getProjectManager() {
     return new Promise((resolve, reject) => {
-    db.collection('user')
-      .where({
-        _openid: _.eq(this.data.project._openid)
-      })
-      .get()
-      .then(res => {
-        this.setData({
-          projectManager: res.data[0]
+      db.collection('user')
+        .where({
+          _openid: _.eq(this.data.project._openid)
         })
-      })
+        .get()
+        .then(res => {
+          this.setData({
+            projectManager: res.data[0]
+          })
+        })
     })
   },
   /**
-   * 生命周期函数--监听页面初次渲染完成
+   * Life cycle function - Listens for the page to complete its first rendering
    */
   onReady: function () {
 
   },
 
   /**
-   * 生命周期函数--监听页面显示
+   * Life cycle function - Listens for page display
    */
   onShow: function () {
 
   },
-
   /**
-   * 生命周期函数--监听页面隐藏
+   * Life cycle function - Listens for page hide
    */
   onHide: function () {
 
   },
 
   /**
-   * 生命周期函数--监听页面卸载
+   * Life cycle function - Listens for page unload
    */
   onUnload: function () {
 
   },
 
   /**
-   * 页面相关事件处理函数--监听用户下拉动作
+   * Page-specific event handlers - listen for user pull actions
    */
   onPullDownRefresh: function () {
 
   },
 
   /**
-   * 页面上拉触底事件的处理函数
+   * A handler for a pull-down event on the page
    */
   onReachBottom: function () {
 
   },
 
   /**
-   * 用户点击右上角分享
+   * Users click on the upper right to share
    */
   onShareAppMessage: function () {
 

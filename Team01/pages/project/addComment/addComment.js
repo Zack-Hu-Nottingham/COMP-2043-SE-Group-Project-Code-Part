@@ -8,10 +8,12 @@ const _ = db.command;
 Page({
 
     /**
-     * 页面的初始数据
+     * Initial data of page
      */
     data: {
-        // 存放双语
+        /**
+         * Store bylingual settings
+         */
         dictionary: {},
         language: 0,
         languageList: ["简体中文", "English"],
@@ -33,7 +35,7 @@ Page({
     },
 
     /**
-     * 生命周期函数--监听页面加载
+     * Life cycle function - listens for page loads
      */
     onLoad: function (options) {
 
@@ -41,14 +43,16 @@ Page({
             id: options.id,
             // commentPage: options.index,
         })
-            db.collection('task').doc(options.id).get().then(res => {
-                this.setData({
-                    feedback: res.data.feedback,
-                })
-              })
- 
-        
-        // 初始化语言
+        db.collection('task').doc(options.id).get().then(res => {
+            this.setData({
+                feedback: res.data.feedback,
+            })
+        })
+
+
+        /** 
+         *  Initial language
+         */
         var lan = wx.getStorageSync("languageVersion");
         this.initLanguage();
         this.setData({
@@ -62,35 +66,39 @@ Page({
             feedbackType: [{
                 "name": this.data.dictionary.feedback_type0,
                 "value": '0'
-            },{
+            }, {
                 "name": this.data.dictionary.feedback_type1,
                 "value": '1'
-            },{
+            }, {
                 "name": this.data.dictionary.feedback_type2,
                 "value": '2'
             }],
         })
 
-        // 设置
+        /** 
+         *  setting
+         */
         wx.setNavigationBarTitle({
             title: this.data.dictionary.comment_title,
         })
     },
-    
-    typeDetails: function(e){
+
+    typeDetails: function (e) {
         this.setData({
             details: e.detail
         })
     },
 
-    changeFeedback: function(){
+    changeFeedback: function () {
         this.setData({
             showFeedback: true,
         })
     },
 
     onCloseFeedback() {
-        this.setData({ showFeedback: false });
+        this.setData({
+            showFeedback: false
+        });
     },
 
     onSelectFeedback(event) {
@@ -101,150 +109,189 @@ Page({
         })
     },
 
-    upload(){
+    upload() {
         wx.chooseImage({
-          sizeType: ['original', 'compressed'],
-          sourceType: ['album', 'camera'],
-          success:res => {
-            var fileList = this.data.fileList;
-            fileList.push({url: res.tempFilePaths[0]});
-            this.setData({ fileList: fileList });
-            // console.log("成功选择图片",fileList);
-          }
+            sizeType: ['original', 'compressed'],
+            sourceType: ['album', 'camera'],
+            success: res => {
+                var fileList = this.data.fileList;
+                fileList.push({
+                    url: res.tempFilePaths[0]
+                });
+                this.setData({
+                    fileList: fileList
+                });
+                // console.log("成功选择图片",fileList);
+            }
         })
-      },
+    },
 
     uploadImage(fileURL) {
         wx.cloud.uploadFile({
-          cloudPath: 'feedback/'+ this.data.id + '/' + this.data.feedback_id + '/' + (new Date()).getTime() + Math.floor(9*Math.random()) +'.png', // 上传至云端的路径
-          filePath: fileURL, // 小程序临时文件路径
-          success: res => {
-              // cloudPath: []
-            var cloudList = this.data.cloudPath;
-            cloudList.push(res.fileID);
-            this.setData({
-                cloudPath: cloudList
-            })
-            this.updateCloudList();
-            console.log("图片上传成功",res)
-          },
-          fail: res => {
-              console.log("图片上传失败", res)
-          }
+            /** 
+             *  path to upload to cloud
+             */
+            cloudPath: 'feedback/' + this.data.id + '/' + this.data.feedback_id + '/' + (new Date()).getTime() + Math.floor(9 * Math.random()) + '.png',
+            /** 
+             *  temporary path
+             */
+            filePath: fileURL,
+            success: res => {
+                // cloudPath: []
+                var cloudList = this.data.cloudPath;
+                cloudList.push(res.fileID);
+                this.setData({
+                    cloudPath: cloudList
+                })
+                this.updateCloudList();
+                console.log("图片上传成功", res)
+            },
+            fail: res => {
+                console.log("图片上传失败", res)
+            }
         })
     },
 
     formSubmit: function (e) {
-        if (this.data.selectedIndex == ''){
+        if (this.data.selectedIndex == '') {
             Toast(this.data.dictionary.submitErrMsg1)
-        }
-        else if (this.data.details == ''){
+        } else if (this.data.details == '') {
             Toast(this.data.dictionary.submitErrMsg2)
-        }
-        else {
+        } else {
             wx.cloud.database().collection('feedback')
-            .add({
-                data:{
-                    type: this.data.feedbackType[this.data.selectedIndex], //反馈类型
-                    description: this.data.details, //反馈描述
-                    cloudList: [], //云端文件列表
-                    belongTo: this.data.id, //所属项目/任务
-                    createTime: this.formatDate(new Date()),
-                    isRead: 0,
-                }
-            })
-            .then(res => {
-                // console.log(res._id)
-                this.setData({
-                  feedback_id: res._id
+                .add({
+                    data: {
+                        /** 
+                         *  type of fb
+                         */
+                        type: this.data.feedbackType[this.data.selectedIndex],
+                        /** 
+                         *  description of fb
+                         */
+                        description: this.data.details,
+                        /** 
+                         *  cloud list
+                         */
+                        cloudList: [],
+                        /** 
+                         *  belonged task
+                         */
+                        belongTo: this.data.id,
+                        createTime: this.formatDate(new Date()),
+                        isRead: 0,
+                    }
                 })
-                for(var i = 0; i< this.data.fileList.length; i++ ){
-                    this.uploadImage(this.data.fileList[i].url);
-                }
-                // 将本地cloudPath传到数据库 -> feedback_id ==> cloudList
-                this.updateDB();
-                this.action();
-              })
-              .catch(res => {
-                console.log('新建评论失败，请联系管理员', res) 
-              })
+                .then(res => {
+                    // console.log(res._id)
+                    this.setData({
+                        feedback_id: res._id
+                    })
+                    for (var i = 0; i < this.data.fileList.length; i++) {
+                        this.uploadImage(this.data.fileList[i].url);
+                    }
+                    /** 
+                     *  Transfer the local cloudPath to the database -> feedback_id ==> cloudList
+                     */
+
+                    this.updateDB();
+                    this.action();
+                })
+                .catch(res => {
+                    console.log('新建评论失败，请联系管理员', res)
+                })
         }
 
     },
-    updateCloudList(){
+    updateCloudList() {
         // console.log(this.data.cloudPath)
         db.collection('feedback')
-        .where({
-            _id: _.eq(this.data.feedback_id)
-        })
-        .update({
-            // data 传入需要局部更新的数据
-            data: {
-              // 表示将 done 字段置为 true
-              cloudList: this.data.cloudPath
-            },
-            success: function(res) {
-              console.log(res)
-            }
-          })
-    },
-    updateDB(){
-
-            this.data.feedback.push({
-                _id: this.data.feedback_id,
-                createTime: this.formatDate(new Date()),
-            });
-            
-            db.collection('task').doc(this.data.id).update({
-                // data 传入需要局部更新的数据
+            .where({
+                _id: _.eq(this.data.feedback_id)
+            })
+            .update({
+                /** 
+                 * part of data to upload
+                 */
                 data: {
-                  feedback: this.data.feedback
+                    /** 
+                     *  set done to be true
+                     */
+                    cloudList: this.data.cloudPath
                 },
-                success: function(res) {
-                  // console.log(res.data)
+                success: function (res) {
+                    console.log(res)
                 }
-              })
+            })
     },
-    
-    action: function(e){
+    updateDB() {
+
+        this.data.feedback.push({
+            _id: this.data.feedback_id,
+            createTime: this.formatDate(new Date()),
+        });
+
+        db.collection('task').doc(this.data.id).update({
+            /** 
+             * part of data to upload
+             */
+            data: {
+                feedback: this.data.feedback
+            },
+            success: function (res) {
+                // console.log(res.data)
+            }
+        })
+    },
+
+    action: function (e) {
         this.setData({
             isLoading: true,
         })
-        setTimeout(res =>{
+        setTimeout(res => {
             Toast({
                 forbidClick: 'true',
                 type: 'success',
                 message: 'Success!',
-              });
-        },1500)
-        setTimeout(res =>{
+            });
+        }, 1500)
+        setTimeout(res => {
             this.setData({
                 isLoading: false
             })
-        },2400)
-        setTimeout(res =>{
+        }, 2400)
+        setTimeout(res => {
             var pages = getCurrentPages();
-            var currPage = pages[pages.length - 1];   //当前页面
-            var prevPage = pages[pages.length - 2];  //上一个页面
+            /** 
+             * current page
+             */
+            var currPage = pages[pages.length - 1];
+            /** 
+             * former page
+             */
+            var prevPage = pages[pages.length - 2];
             prevPage.updateComment();
 
             wx.navigateBack({
                 delta: 1
-              })
-        },2500)
+            })
+        }, 2500)
     },
 
 
 
-    // 初始化语言
+    /** 
+     *  Initial language
+     */
     initLanguage() {
         var self = this;
-        //获取当前小程序语言版本所对应的字典变量
+        //Get the dictionary variable corresponding to the current language version of the applet
         var lang = languageUtils.languageVersion();
 
-        // 页面显示
+        /** 
+         * show the page
+         */
         self.setData({
-        dictionary: lang.lang.index,
+            dictionary: lang.lang.index,
         });
     },
 
@@ -252,14 +299,16 @@ Page({
         date = new Date(date);
         // return `${date.getMonth() + 1}/${date.getDate()}`;
         return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
-      },
+    },
 
     deleteImg(event) {
         const delIndex = event.detail.index
-        const { fileList } = this.data
+        const {
+            fileList
+        } = this.data
         fileList.splice(delIndex, 1)
         this.setData({
-          fileList
+            fileList
         })
-      }
+    }
 })

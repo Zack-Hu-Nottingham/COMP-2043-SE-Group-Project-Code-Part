@@ -8,6 +8,8 @@ var Languague = {
      more_page: "更多",
      task_info: "任务信息",
      project_info: "项目信息",
+     page_name_for_pm: ['消息', '项目', '更多'],
+     page_name: ['首页', '更多'],
 
      // message page
      notification: "通知",
@@ -45,6 +47,8 @@ var Languague = {
      cancel: "取消",
      worker: "工人",
      project_manager: "项目经理",
+     share: "分享",
+     save: "保存",
 
      // language setting page
      current_lan: "当前语言",
@@ -147,8 +151,11 @@ var Languague = {
     upload_image_finish_construction: "上传照片 结束施工",
     finish_construction: "结束施工",
     finished: "已完成",
-    no_project_error: "您当前还没有项目",
-    no_task_error: "您当前还没有任务",
+    no_project_error: "暂无项目",
+
+    no_assignment_error: "暂无任务",
+
+    no_task_error: "暂无任务",
     phase_name: ["现场交底拆改、界面处理", "图纸深化", "拆除", "一次放样", "墙体砌筑", "二次精放样", "水电施工", "木工施工", "地暖、地面找平", "瓷砖、石材", "油工施工", "成品安装", "油漆修补", "杂物处理", "验收、软装摆场", "其他"],
     current_phase_description: ["项目经理针对客户要求向参与施工的团队工人技术性交代，以便于更合理的展开施工，避免交代不清导致的事故", "获得更加精确的房屋信息，", "拆除多余墙体", "第一次放样，根据设计图纸上工程建筑物的平面位置和高度，通过仪器和一定方法在实地进行测试", "根据需要对墙体进行砌筑", "第二次放样，获得更高精度的摆放测试样例", "有关水电管道的布局摆放", "木匠工人根据用户需要进行木工施工", "确保地面平整后铺设地暖", "铺设瓷砖石材", "油工施工", "对于成品的摆放安装", "对成品安装过程中产生的油漆脱落进行修补", "处理房屋内多余建筑杂物", "项目经理带领客户验收，软装摆入家中", "其他"],
 
