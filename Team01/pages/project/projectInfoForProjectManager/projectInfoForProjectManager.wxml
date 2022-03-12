@@ -132,7 +132,7 @@
         label="{{ item.startTime }} — {{ item.endTime }} "
         title="{{ item.name }}"
         link-type="navigateTo"
-        url="/pages/project/taskInfo/taskInfo?id={{item._id}}">
+        url="/pages/taskInfoPages/taskInfoForProjectManager/taskInfoForProjectManager?id={{item._id}}">
         
           <view>
             <van-tag color="#87CEFA" size="medium"><van-icon name="play"></van-icon>Progressing</van-tag>
@@ -150,7 +150,7 @@
         label="{{ item.startTime }} — {{ item.endTime }} "
         title="{{ item.name }}"
         link-type="navigateTo"
-        url="/pages/project/taskInfo/taskInfo?id={{item._id}}">
+        url="/pages/taskInfoPages/taskInfoForProjectManager/taskInfoForProjectManager?id={{item._id}}">
 
           <view>
             <van-tag color="#ffe1e1" text-color="#ad0000"  size="medium"><van-icon name="replay" />Reworking</van-tag>
@@ -169,7 +169,7 @@
         label="{{ item.startTime }} — {{ item.endTime }} "
         title="{{item.name}}"
         link-type="navigateTo"
-        url="/pages/project/taskInfo/taskInfo?id={{item._id}}">
+        url="/pages/taskInfoPages/taskInfoForProjectManager/taskInfoForProjectManager?id={{item._id}}">
 
           <view>
             <van-tag color="#ffe1e1" text-color="#ad0000"  size="medium"><van-icon name="warning-o" />Delayed</van-tag>
@@ -188,7 +188,7 @@
         label="{{ item.startTime }} — {{ item.endTime }} "
         title="{{ item.name }}"
         link-type="navigateTo"
-        url="/pages/project/taskInfo/taskInfo?id={{item._id}}">
+        url="/pages/taskInfoPages/taskInfoForProjectManager/taskInfoForProjectManager?id={{item._id}}">
 
           <view>
             <van-tag color="#D3D3D3" icon="fail" size="medium"><van-icon name="close"/>Unstarted</van-tag>
@@ -207,7 +207,7 @@
         label="{{ item.startTime }} — {{ item.endTime }} "
         title="{{ item.name }}"
         link-type="navigateTo"
-        url="/pages/project/taskInfo/taskInfo?id={{item._id}}">
+        url="/pages/taskInfoPages/taskInfoForProjectManager/taskInfoForProjectManager?id={{item._id}}">
 
           <view>
             <van-tag color="#32CD32" size="medium"><van-icon name="passed" />Finished</van-tag>

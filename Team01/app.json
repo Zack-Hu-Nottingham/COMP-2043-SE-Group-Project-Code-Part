@@ -4,11 +4,9 @@
         "pages/indexs/indexForWorker/indexForWorker",
         "pages/indexs/indexForProjectManager/indexForProjectManager",
         "pages/indexs/indexOfHouseOwner/indexOfHouseOwner",
-        "pages/project/taskInfoForWorker/taskInfoForWorker",
         "pages/project/projectInfoForWorker/projectInfoForWorker",
         "pages/project/projectInfo/projectInfo",
         "pages/project/testDiagram/testDiagram",
-        "pages/project/taskInfo/taskInfo",
         "pages/project/addComment/addComment",
         "pages/project/newTask/newTask",
         "pages/project/newProject/newProject",
@@ -21,10 +19,11 @@
         "pages/more/languageSetting/languageSetting",
         "pages/more/test/test",
         "pages/project/projectReport/projectReport",
-        "pages/project/taskInfoForHouseOwner/taskInfoForHouseOwner",
         "pages/project/projectTemplate/projectTemplate",
         "pages/project/projectInfoForProjectManager/projectInfoForProjectManager",
-        "pages/project/taskInfoForProjectManager/taskInfoForProjectManager"
+        "pages/taskInfoPages/taskInfoForHouseOwner/taskInfoForHouseOwner",
+        "pages/taskInfoPages/taskInfoForProjectManager/taskInfoForProjectManager",
+        "pages/taskInfoPages/taskInfoForWorker/taskInfoForWorker"
     ],
     "window": {
         "backgroundTextStyle": "light",

@@ -92,6 +92,8 @@ var Languague = {
     participant: "Participant",
     reworking: "Reworking",
     related_photo: "Related photos",
+    phase: "Phase",
+
 
     // New task page
     task_name: "Task Name",
