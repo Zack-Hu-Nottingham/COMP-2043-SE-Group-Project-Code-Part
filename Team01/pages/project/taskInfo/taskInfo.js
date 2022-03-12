@@ -24,15 +24,14 @@ Page({
 
     taskPage: {},
     belongTo: "",
+    participant: "",
 
     dateShow: false,
     priorityShow: false,
     feedback: [],
     fileList: [],
 
-    priority: [{
-        name: 'Highest',
-      },
+    priority: [
       {
         name: 'High'
       },
@@ -41,10 +40,7 @@ Page({
       },
       {
         name: 'Low'
-      },
-      {
-        name: 'Lowest'
-      },
+      }
     ],
   },
 
@@ -181,6 +177,10 @@ Page({
             belongTo: res.data.belongTo,
           });
           this.updateComment(res.data.feedback)
+          
+          this.getProjectName()
+          this.getParticipantName()
+
           wx.setNavigationBarTitle({
             title: res.data.name,
           });
@@ -189,7 +189,7 @@ Page({
           console.log('拉取任务信息请求失败', err)
         }
       })
-    //})
+    
   },
 
   onPriorityClose() {
@@ -360,5 +360,38 @@ Page({
       },
       fail: console.error
     })
+  },
+
+  getProjectName() {
+    db.collection('project')
+    .doc(this.data.belongTo)
+    .field({
+      name: true,
+    })
+    .get()
+    .then(res => {
+      this.setData({belongTo: res.data.name})
+    })
+  },
+
+  
+
+  getParticipantName() {
+    db.collection('user')
+    .where({
+      _openid: this.data.taskPage.participant 
+    })
+    // .doc(this.data.taskPage.participant)
+    .field({
+      nickName: true,
+    })
+    .get()
+    .then(res => {
+      // console.log(res.data[0].nickName)
+      this.setData({
+        participant: res.data[0].nickName
+      })
+    })
+
   },
 })
