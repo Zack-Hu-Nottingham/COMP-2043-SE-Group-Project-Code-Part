@@ -20,9 +20,11 @@ var Languague = {
     my_task: "My Task",
     statistic_report: "Statistics Report",
     project_statistic_report: "Project's statistic report",
+    my_project: "My project",
     project_list: "Projects",
     create_new_project: "Create New Project",
     comment_list: "Comment List",
+    view_gantt_diagram: "View gantt diagram",
 
     // dashboard page
     today_task: "Today's Task",     
@@ -98,6 +100,8 @@ var Languague = {
     participant: "Participant",
     reworking: "Reworking",
     related_photo: "Related photos",
+    phase: "Phase",
+
 
     // New task page
     task_name: "Task Name",

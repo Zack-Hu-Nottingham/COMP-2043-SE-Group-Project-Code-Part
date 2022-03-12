@@ -2,23 +2,17 @@
 <wxs module="numberUtil" src="../../../utils/numberFormat.wxs"></wxs>
 
 
-<!-- pop up calendar -->
-<van-calendar
-  show="{{ show }}"
-  title="choose period"
-  type="range"
-  bind:close="onDateClose"
-  bind:confirm="onDateConfirm"
-/>
-
-<view>
+<view style="padding-bottom: 30rpx;">
   <van-cell-group inset title="{{dictionary.project_info}}">
     <van-cell title="{{dictionary.owner}}" value="{{ projectManager.nickName }}" />
     <van-cell title="{{dictionary.start_time}}" value="{{ project.startTime }}"/>
-    <van-cell title="{{dictionary.end_time}}" value="{{ project.endTime }}"/>
+    <van-cell title="{{dictionary.expected_end_time}}" value="{{ project.endTime }}"/>
     <van-cell model:value="{{ project.projectDescription }}" title="{{ dictionary.description }}" type="textarea" placeholder="{{ project.projectDescription }}" border="{{ false }}" class="projectInfoDescriptionForTest"></van-cell>
+    <van-cell title="{{dictionary.view_gantt_diagram}}" is-link bindtap="viewGantt" />
   </van-cell-group>
+</view>
 
+<view style="padding-bottom: 30rpx;">
   <van-cell-group inset title="{{dictionary.state_information}}">
     <van-cell title="{{dictionary.current_phase}}" value="{{ dictionary.phase_name[project.currentPhase] }}" />
     <van-cell title="{{dictionary.phase_description }}" value="{{ dictionary.current_phase_description[project.currentPhase] }}"
@@ -31,12 +25,10 @@
 
   <van-cell class="van-cell">
     <view class="parallin">
-
-      <van-circle class="circle" layer-color="#eeeeee" value="{{ value }}" clockwise="{{ false }}" stroke-width="6">Completed: {{numberUtil.numberFormat((totalCompleted/totalTasks)*100)}}%</van-circle>
-      
+      <van-circle class="circle" layer-color="#eeeeee" value="{{ value }}" clockwise="{{ false }}" stroke-width="6">{{dictionary.task_state[2]}}: {{numberUtil.numberFormat((totalCompleted/totalTasks)*100)}}%</van-circle>
       <view class="overall">
         <view style="margin: 10rpx;">
-          <text>Number of tasks</text>
+          <text>{{dictionary.task_number}}</text>
           <text style="color: rgb(0, 94, 156); font-size: large;">\t{{totalTasks}}</text> 
         </view>
       </view>
@@ -47,28 +39,24 @@
   <view class="parallin space-between">
     <view class="virtical">
       <view style="color: black; font-size: medium;">{{totalUnstart}}</view>
-      <view>Unstart</view>
+      <view>{{dictionary.task_state[0]}}</view>
     </view>
 
     <view class="virtical">
       <view style="color: rgb(255, 187, 0); font-size: medium;">{{totalProgressing}}</view>
-      <view>Processing</view>
+      <view>{{dictionary.task_state[1]}}</view>
     </view>
 
     <view class="virtical">
       <view style="color: rgb(61, 90, 255); font-size: medium;">{{totalCompleted}}</view>
-      <view>Completed</view>
+      <view>{{dictionary.task_state[2]}}</view>
     </view>
 
     <view class="virtical">
       <view style="color: rgb(255, 0, 0); font-size: medium;">{{totalDelayed}}</view>
-      <view>Delayed</view>
+      <view>{{dictionary.task_state[3]}}</view>
     </view>
 
-    <view class="virtical">
-      <view style="color: rgb(0, 255, 127); font-size: medium;">{{totalReworking}}</view>
-      <view>Reworking</view>
-    </view>
   </view>
   </van-cell>
 

@@ -10,10 +10,9 @@
 
 <van-cell-group inset style="padding: 30rpx">
   <van-cell title="{{dictionary.belong_to}}" value="{{belongTo}}" />
-  <van-cell title="{{dictionary.stage_of_project}}" value="{{taskPage.state}}" />
-  <van-field model:value="{{taskPage.taskDescription}}" input-align="right" clearable label="{{dictionary.description}}" placeholder="{{taskPage.descriptions}}" border="{{ false }}" bind:blur="onTaskDescriptionBlur">
-  </van-field>
-  <van-cell title="{{dictionary.current_state}}" value="{{taskPage.state}}" />
+  <van-cell title="{{dictionary.phase}}" value="{{dictionary.phase_name[taskPage.phase]}}" />
+  <van-cell title="{{dictionary.description}}" value="{{taskPage.taskDescription}}" />
+  <van-cell title="{{dictionary.current_state}}" value="{{dictionary.task_state[taskPage.state]}}" />
 </van-cell-group>
 
 
