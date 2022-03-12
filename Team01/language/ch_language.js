@@ -149,6 +149,8 @@ var Languague = {
     null_name: "名称为空",
     null_date_setting: "未设置日期",
     null_template_setting: "未选择模板",
+    upload_image_success: "上传图片成功",
+    delete_image_success: "删除图片成功",
 
     // index for worker
     project: ["项目一", "项目二", "项目三", "项目四", "项目五"],

@@ -410,12 +410,12 @@ Page({
         newList.push({
           "url": res.tempFilePath
         })
+        this.setData({
+          fileList: newList
+        })
         //console.log(res.tempFilePath)
       })
     }
-    this.setData({
-      fileList: newList
-    })
     // console.log(fileList)
   },
 

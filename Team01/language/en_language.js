@@ -150,6 +150,8 @@ var Languague = {
     null_name: "Name is null",
     null_date_setting: "No date setting",
     null_template_setting: "No template selected",
+    upload_image_success: "Upload image successfully",
+    delete_image_success: "Delete image successfully",
     
     // index for worker
     project: ["Project One", "Project Two", "Project Three", "Project Four", "Project Five"],
