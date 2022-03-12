@@ -24,6 +24,7 @@ var Languague = {
     project_list: "Projects",
     create_new_project: "Create New Project",
     comment_list: "Comment List",
+    view_gantt_diagram: "View gantt diagram",
 
     // dashboard page
     today_task: "Today's Task",     

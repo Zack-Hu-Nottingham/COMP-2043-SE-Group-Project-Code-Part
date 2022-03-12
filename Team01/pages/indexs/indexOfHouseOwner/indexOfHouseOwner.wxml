@@ -28,7 +28,7 @@
     <van-cell center title=" {{dictionary.my_project}}" icon="bar-chart-o" clickable="true" bindtap="clickProjectReport" class="statisticReportForTest"/>
   </van-cell-group>
 
-  <view wx:if="{{isProjectEmpty}}" style="margin-top: 220rpx;">
+  <view wx:if="{{isProjectEmpty == true}}" style="margin-top: 220rpx;">
     <van-empty description="{{dictionary.no_project_error}}" />
   </view>
 

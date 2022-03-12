@@ -24,6 +24,7 @@ var Languague = {
      project_list: "项目列表",
      create_new_project: "新建项目",
      comment_list: "评论列表",
+     view_gantt_diagram: "查看甘特图",
 
      // dashboard page
      today_task: "今天的任务",

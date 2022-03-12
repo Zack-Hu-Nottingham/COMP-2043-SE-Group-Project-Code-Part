@@ -220,6 +220,31 @@ Page({
         })
     })
   },
+
+  viewGantt() {
+    console.log(this.data.project._id)
+    /** 
+     *  update gantt
+     */
+    wx.cloud.callFunction({
+      name: 'uploadJSON',
+      data: {
+        id: this.data.project._id,
+        // localPath: ganttPATH,
+      }
+    }).then(res => {
+      console.log('gantt_json更新成功', res)
+    }).catch(res => {
+      console.log('gantt_json更新失败', res)
+    })
+
+    wx.navigateTo({
+      url: '../testDiagram/testDiagram?id=' + this.data.project._id,
+    })
+  },
+  
+
+
   /**
    * Life cycle function - Listens for the page to complete its first rendering
    */
