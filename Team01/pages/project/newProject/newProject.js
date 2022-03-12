@@ -7,6 +7,8 @@ const templateLib = require("../../../template/template.js");
 
 const detachedLib = require("../../../template/detached_house.js");
 
+const GardenLib = require("../../../template/Garden_Villa.js");
+
 const db = wx.cloud.database();
 const _ = db.command;
 
@@ -53,8 +55,7 @@ Page({
     project: "",
     task: [],
 
-    template: templateLib.template,
-    detached_house: detachedLib.detached_house,
+    template: "",
   },
 
   /** 
@@ -404,6 +405,10 @@ Page({
     }else if(this.data.selectedTemplate == "Detached Villa Decoration"){
       this.setData({
         template: detachedLib.detached_house,
+      })
+    }else if(this.data.selectedTemplate == "Garden Villa Decoration"){
+      this.setData({
+        template: GardenLib.garden_Villa,
       })
     }
   }

@@ -48,6 +48,7 @@ Page({
              */
             name: "Garden Villa Decoration",
             content: "More info...",
+            duration: 233,
             useFrq: "4",
             id: '3'
         }, ],
