@@ -25,11 +25,13 @@ Page({
         },{
             name: "Detached Villa Decoration", // 独立式别墅
             content: "More info...",
+            duration: 198,
             useFrq: "6",
             id: '2'
         },{
             name: "Garden Villa Decoration", // 花园洋房式住宅
             content: "More info...",
+            duration: 211,
             useFrq: "4",
             id: '3'
         },],

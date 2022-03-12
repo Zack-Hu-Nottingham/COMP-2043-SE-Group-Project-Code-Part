@@ -307,8 +307,6 @@ Page({
       filter: e.detail.name
     })
 
-    console.log(e.detail.value)
-   
     if(this.data.filter == 'Time'){
       this.onTimeSelect()
     }
@@ -341,7 +339,7 @@ Page({
               task: this.data.task.concat(res.data[idx])
             })
           }
-          // console.log("成功获取任务信息")
+          console.log("成功获取任务信息")
         })
         .catch(err => {
           console.log("请求任务信息失败")
