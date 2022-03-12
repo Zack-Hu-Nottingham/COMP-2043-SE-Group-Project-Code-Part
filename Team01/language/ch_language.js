@@ -50,6 +50,12 @@ var Languague = {
      share: "分享",
      save: "保存",
 
+    // about page
+    current_version: "当前版本",
+    official_phone: "官方电话",
+    revisions: "历史版本",
+    check_for_update: "检查更新",
+
      // language setting page
      current_lan: "当前语言",
      available_lan: "可选语言",

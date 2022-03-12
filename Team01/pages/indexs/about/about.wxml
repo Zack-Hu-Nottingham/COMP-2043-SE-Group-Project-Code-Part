@@ -1,4 +1,19 @@
 <!--pages/indexs/about/about.wxml-->
-<van-cell center title="自定义左侧图标" is-link>
-   <image class='mine_headicon' src='../../../images/AcceptIcon.png' slot="icon"></image>
- </van-cell>
+<view class="showIcon">
+  <image class="icon" mode="widthFix" src="../../../images/icon/icon2.png"/>
+</view>
+<view class="appName">
+  <text>Worktile</text>
+</view>
+<view class="currentVersion">
+  <text>{{dictionary.current_version}} 1.0.0</text>
+</view>
+<van-cell-group class="van-cell-group">
+<van-cell title="{{dictionary.official_phone}}" size="large">186-6335-8058</van-cell>
+<van-cell title="{{dictionary.revisions}}" is-link size="large"></van-cell>
+<van-cell title="{{dictionary.check_for_update}}" clickable size="large"></van-cell>
+</van-cell-group>
+<view class="bottomInfo">
+  <text class="info">2022 Worktile</text>
+  <text class="info">https://worktile.com</text>
+</view>

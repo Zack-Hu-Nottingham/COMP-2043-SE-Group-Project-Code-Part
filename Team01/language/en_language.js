@@ -49,6 +49,12 @@ var Languague = {
     project_manager: "Project Manager",
     share: "Share",
     save: "Save",
+    
+    // about page
+    current_version: "Current Version",
+    official_phone: "Official Tel.",
+    revisions: "Revisions",
+    check_for_update: "Check for Updates",
 
      // language setting page
     current_lan: "Current language",
