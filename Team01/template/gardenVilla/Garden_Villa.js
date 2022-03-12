@@ -49,6 +49,7 @@ var garden_villa = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 21,
+  offset: 1,
   location: "上海市青浦区嘉松中路5369号",
   workingArea: "房屋墙面及地面",
 },{
@@ -84,6 +85,7 @@ var garden_villa = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 10,
+  offset: 29,
   location: "上海市青浦区嘉松中路5369号",
   workingArea: "房屋墙面",
 },{
