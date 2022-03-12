@@ -91,7 +91,7 @@
   </view>
 
   <!--Upload related images-->
-  <!-- <van-uploader class="uploader" file-list="{{ fileList }}" bindtap="upload" deletable="{{ true }}" max-count="9" bind:delete="deleteImg" disabled="{{true}}"/> -->
+  <van-uploader class="uploader" file-list="{{ fileList }}" bind:tap="upload" deletable="{{ true }}" max-count="9" bind:delete="deleteImg" disabled="{{ true }}"/>
 
   <van-divider />
 

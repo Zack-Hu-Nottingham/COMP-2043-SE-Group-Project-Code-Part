@@ -4,6 +4,7 @@
         "pages/indexs/indexForWorker/indexForWorker",
         "pages/indexs/indexForProjectManager/indexForProjectManager",
         "pages/indexs/indexOfHouseOwner/indexOfHouseOwner",
+        "pages/indexs/about/about",
         "pages/project/projectInfoForWorker/projectInfoForWorker",
         "pages/project/projectInfo/projectInfo",
         "pages/project/testDiagram/testDiagram",

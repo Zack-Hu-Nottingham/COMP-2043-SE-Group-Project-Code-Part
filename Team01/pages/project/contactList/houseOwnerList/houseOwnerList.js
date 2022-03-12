@@ -23,6 +23,14 @@ Page({
   },
 
   onLoad() {
+    /** 
+     *  Initial language
+     */
+    var lan = wx.getStorageSync("languageVersion");
+    this.initLanguage();
+    this.setData({
+      language: lan
+    })
 
     // console.log(options.index)
 
@@ -39,14 +47,6 @@ Page({
 
     this.getList();
 
-    /** 
-     *  Initial language
-     */
-    var lan = wx.getStorageSync("languageVersion");
-    this.initLanguage();
-    this.setData({
-      language: lan
-    })
   },
 
   getList() {
@@ -62,8 +62,41 @@ Page({
             initial: res.data,
             list: res.data
           })
+          this.updateList(res.data);
+          
         })
     })
+  },
+  updateList(list){
+    for(var i=0;i<list.length;i++){
+      // console.log(list[i])
+      if(list[i].project.length != 0){
+        this.setProjectName(i);
+        // console.log(i)
+      }
+    }
+  },
+  setProjectName(i){
+    var list = this.data.list;
+    var index = i;
+    db.collection('project')
+        .where({
+          _id: _.eq(list[index].project[0])
+        })
+        .field({
+          name: true,
+        })
+        .get({
+          success: res=>{
+            // console.log(res)
+            this.setData({
+              ['list['+index+'].project[0]']: res.data[0].name,
+              ['initial['+index+'].project[0]']: res.data[0].name,
+            })
+            console.log(this.data.list)
+            console.log(this.data.initial)
+          }
+        })
   },
 
 

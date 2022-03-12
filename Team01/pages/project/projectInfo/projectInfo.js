@@ -49,8 +49,9 @@ Page({
     project: {},
     houseOwner: "",
     projectManager: "",
-    feedback: [],
+    // feedback: [],
     fileList: [],
+    cloudList: [],
 
     /**
      * Task Management's data
@@ -96,7 +97,10 @@ Page({
     id = options.id
 
 
-    this.getDetail()
+    this.getDetail().then(res =>{
+      console.log(res)
+    })
+    // this.getFileList(this.data.cloudList);
 
 
     /** 
@@ -368,29 +372,30 @@ Page({
   },
 
 
-  getDetail() {
-    db.collection('project')
-      .doc(id)
-      .get({
-        success: res => {
-          this.setData({
-              project: res.data,
-              name: res.data.name,
-              feedback: res.data.feedback,
-            }),
-            console.log(res.data.cloudList)
-          this.getFileList(res.data.cloudList);
+  async getDetail() {
+    return new Promise((resolve, reject) => {
+      db.collection('project')
+        .doc(id)
+        .get({
+          success: res => {
+            this.setData({
+                project: res.data,
+                name: res.data.name,
+                feedback: res.data.feedback,
+                cloudList: res.data.cloudList,
+              }),
 
-          wx.setNavigationBarTitle({
-              title: this.data.name,
-            }),
+            wx.setNavigationBarTitle({
+                title: this.data.name,
+              }),
 
             this.getHouseOwner()
-          this.getProjectManager()
-        },
-        fail: function (err) {
-          // console.log(err)
-        }
+            this.getProjectManager()
+          },
+          fail: function (err) {
+            // console.log(err)
+          }
+        })
       })
 
   },
@@ -408,10 +413,10 @@ Page({
         //console.log(res.tempFilePath)
       })
     }
-    console.log(newList)
     this.setData({
       fileList: newList
     })
+    // console.log(fileList)
   },
 
   getHouseOwner() {
