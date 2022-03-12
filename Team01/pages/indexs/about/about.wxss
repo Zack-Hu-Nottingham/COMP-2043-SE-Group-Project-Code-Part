@@ -1,0 +1,6 @@
+/* pages/indexs/about/about.wxss */
+.mine_headicon{
+    width: 50rpx;
+    height: 50rpx;
+    border-radius: 50%;
+  }

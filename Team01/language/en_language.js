@@ -132,7 +132,9 @@ var Languague = {
     // contact list page
     copy_phone_confirm: "Phone number has been copied",
     search: "Search",
-    enter_keyword: "Please enter key word",
+    enter_keyword: "Please enter key word of name",
+    have_no_project: "No project held",
+    have_project: "Held project",
 
     // Toast message
     null_name: "Name is null",

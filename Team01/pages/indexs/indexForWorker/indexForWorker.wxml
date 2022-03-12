@@ -83,7 +83,15 @@
 
     <van-button class="van-button" round style="padding-top: 40rpx;padding-left:20% ;" type="info" bindtap="forNotice" >保存</van-button>
 
-    <!-- <van-toast id="van-toast" /> -->
+  <van-cell center title="{{ dictionary.invite_member }}" clickable="true" is-link bind:click="showPopup1">
+  </van-cell>
+  <van-popup show="{{ show1 }}" custom-style="width:75%; height: 32%;" bind:close="onClose1">
+    <van-radio-group style="padding-left:20% ;"value="{{ radio }}" bind:change="onChange">
+      <van-radio style="padding-top: 20rpx;padding-left:20% ;" icon-size="55rpx" name="1">{{dictionary.house_owner}}</van-radio>
+      <van-radio style="padding-top: 20rpx;padding-left:20% ;" icon-size="55rpx" name="2">{{dictionary.worker}}</van-radio>
+      <van-radio style="padding-top: 20rpx;padding-left:20% ;" icon-size="55rpx" name="3">{{dictionary.project_manager}}</van-radio>
+    </van-radio-group>
+    <van-button class="button-share" plain round color="#1296db" type="primary" style="padding-top: 40rpx;padding-left:20% ;" open-type="share" bindtip="onShareAppMessage">{{dictionary.share}}</van-button>
   </van-popup>
 
   <van-cell center title="{{ dictionary.identity }}" value="{{ dictionary.worker }}" />
@@ -94,6 +102,7 @@
       <van-icon name="friends-o" />
     </van-button>
   </van-cell> -->
+  </van-popup>
 </van-cell-group>
 
   <van-cell-group inset style="padding: 30rpx;">

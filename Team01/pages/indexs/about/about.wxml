@@ -1,0 +1,4 @@
+<!--pages/indexs/about/about.wxml-->
+<van-cell center title="自定义左侧图标" is-link>
+   <image class='mine_headicon' src='../../../images/AcceptIcon.png' slot="icon"></image>
+ </van-cell>

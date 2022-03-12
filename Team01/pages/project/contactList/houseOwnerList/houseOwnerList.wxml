@@ -11,17 +11,38 @@
 <!-- <view class="selected">上次保存选择：{{ owners }}</view> -->
 <!-- 选择联系人添加至需要的列表中 -->
 <van-radio-group value="{{ radio }}" bind:change="onChange">
-  <van-cell-group>
+  <van-cell-group wx:for="{{ list }}" wx:key="index">
+  <view wx:if="{{item.project.length == 0}}">
     <van-cell
-      wx:for="{{ list }}"
+      center
+      title="{{ item.nickName }}"
+      value-class="value-class"
+      clickable
+      data-name="{{ index }}"
+      bind:click="onClick"
+      size="large"
+      label="{{dictionary.have_no_project}}"
+    >
+    <image class='mine_headicon' src='{{item.avatarUrl}}' slot="icon"></image>
+    <van-radio slot="right-icon" name="{{index}}" />
+    </van-cell>
+  </view>
+  <view wx:else>
+    <van-cell
+      center
       wx:key="index"
       title="{{ item.nickName }}"
       value-class="value-class"
       clickable
       data-name="{{ index }}"
       bind:click="onClick"
+      size="large"
+      label="{{dictionary.have_project}}: {{item.project[0]}}"
     >
+    <image class='mine_headicon' src='{{item.avatarUrl}}' slot="icon"></image>
     <van-radio slot="right-icon" name="{{index}}" />
     </van-cell>
+
+  </view>
   </van-cell-group>
 </van-radio-group>
