@@ -39,6 +39,7 @@ Page({
              */
             name: "Detached Villa Decoration",
             content: "More info...",
+            duration: 233,
             useFrq: "6",
             id: '2'
         }, {

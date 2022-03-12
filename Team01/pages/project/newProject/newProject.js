@@ -5,10 +5,14 @@ const languageUtils = require("../../../language/languageUtils");
 
 const templateLib = require("../../../template/template.js");
 
+const detachedLib = require("../../../template/detached_house.js");
+
 const db = wx.cloud.database();
 const _ = db.command;
 
 var app = getApp();
+
+var start = "";
 
 Page({
   /**
@@ -50,6 +54,7 @@ Page({
     task: [],
 
     template: templateLib.template,
+    detached_house: detachedLib.detached_house,
   },
 
   /** 
@@ -175,6 +180,8 @@ Page({
    * submit new project
    */
   formSubmit: function (e) {
+
+    this.ConfirmTemplate()
 
     if (this.data.name == "") {
       Toast(this.data.dictionary.null_name);
@@ -307,7 +314,7 @@ Page({
   },
 
   onDateConfirm(event) {
-    const start = event.detail;
+    start = event.detail;
     var end = this.addDate(start, this.data.duration)
     this.setData({
       startDate: this.formatDate(start),
@@ -329,17 +336,16 @@ Page({
   },
 
   // modify the template accordingly
-  modifyTemplate() {
+  modifyTemplate(startTime) {
     for (var idx in this.data.template) {
       this.data.template[idx].belongTo = this.data.project
 
       /**
        * change time
        */
-      this.data.template[idx].startTime = this.data.template[idx].startTime
-      this.data.template[idx].endTime = this.data.template[idx].endTime
+      this.data.template[idx].startTime = this.addDate(startTime, this.data.template[idx].offset)
+      this.data.template[idx].endTime = this.addDate(this.data.template[idx].startTime, this.data.template[idx].duration)
     }
-
   },
 
   createTaskAccordingToTemplate(idx) {
@@ -363,10 +369,9 @@ Page({
 
   async createTask() {
 
-    this.modifyTemplate()
+    this.modifyTemplate(start)
 
     for (var idx in this.data.template) {
-      // console.log(idx)
       await this.createTaskAccordingToTemplate(idx)
     }
 
@@ -389,5 +394,18 @@ Page({
     this.setData({
       fileList
     })
+  },
+
+  ConfirmTemplate(){
+    if(this.data.selectedTemplate == "Townhouse Decoration"){
+      this.setData({
+        template: templateLib.template,
+      })
+    }else if(this.data.selectedTemplate == "Detached Villa Decoration"){
+      this.setData({
+        template: detachedLib.detached_house,
+      })
+    }
   }
+
 })
