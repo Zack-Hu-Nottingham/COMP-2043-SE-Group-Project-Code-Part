@@ -21,7 +21,7 @@
 <van-cell-group inset style="padding: 30rpx">
   <van-cell title="{{dictionary.priority}}" is-link value="{{taskPage.currentPriority}}" bindtap="clickPriority" />
   <van-cell title="{{dictionary.tag}}" is-link value="{{taskPage.tag}}" />
-  <van-cell title="{{dictionary.participant}}" is-link value="{{taskPage.participant}}" />
+  <van-cell title="{{dictionary.participant}}" is-link value="{{participant}}" />
 </van-cell-group>
 
   <!--Upload related images-->

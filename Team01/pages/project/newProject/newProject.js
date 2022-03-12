@@ -3,11 +3,11 @@ import Toast from '../../../miniprogram_npm/@vant/weapp/toast/toast'
 
 const languageUtils = require("../../../language/languageUtils");
 
-const templateLib = require("../../../template/template.js");
+const templateLib = require("../../../template/townhouse/Townhouse.js");
 
-const detachedLib = require("../../../template/detached_house.js");
+const detachedLib = require("../../../template/detachedHouse/Detached_House.js");
 
-const GardenLib = require("../../../template/Garden_Villa.js");
+const GardenLib = require("../../../template/gardenVilla/Garden_Villa.js");
 
 const db = wx.cloud.database();
 const _ = db.command;
@@ -117,7 +117,6 @@ Page({
       url: '../../project/contactList/participantList/participantList',
     })
   },
-
   /** 
    *  choose template
    */
@@ -322,7 +321,6 @@ Page({
       endDate: this.formatDate(end),
     })
     this.onDateClose();
-
   },
 
   /** 
@@ -365,7 +363,6 @@ Page({
           reject()
         })
     })
-
   },
 
   async createTask() {
@@ -400,7 +397,7 @@ Page({
   ConfirmTemplate(){
     if(this.data.selectedTemplate == "Townhouse Decoration"){
       this.setData({
-        template: templateLib.template,
+        template: templateLib.townhouse,
       })
     }else if(this.data.selectedTemplate == "Detached Villa Decoration"){
       this.setData({
@@ -408,9 +405,8 @@ Page({
       })
     }else if(this.data.selectedTemplate == "Garden Villa Decoration"){
       this.setData({
-        template: GardenLib.garden_Villa,
+        template: GardenLib.garden_villa,
       })
     }
   }
-
 })

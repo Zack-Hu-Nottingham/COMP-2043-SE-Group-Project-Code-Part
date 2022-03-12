@@ -277,7 +277,7 @@ Page({
 
 
   /** 
-   *  Initial language
+   *  Initialize language
    */
   initLanguage() {
     var self = this;

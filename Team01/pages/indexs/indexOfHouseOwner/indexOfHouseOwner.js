@@ -369,9 +369,7 @@ Page({
       filter: e.detail.name
     })
 
-    console.log(e.detail.value)
-
-    if (this.data.filter == 'Time') {
+    if(this.data.filter == 'Time'){
       this.onTimeSelect()
     } else if (this.data.filter == 'Priority') {
       this.onPrioritySelect()
@@ -402,7 +400,7 @@ Page({
               task: this.data.task.concat(res.data[idx])
             })
           }
-          // console.log("success to get task info")
+          console.log("成功获取任务信息")
         })
         .catch(err => {
           console.log("fail to get task info")
