@@ -25,7 +25,7 @@
 <view wx:if="{{active == 0}}">
 
   <van-cell-group inset style="padding: 30rpx;">
-    <van-cell center title=" {{dictionary.project_statistic_report}}" icon="bar-chart-o" clickable="true" bindtap="clickProjectReport" class="statisticReportForTest"/>
+    <van-cell center title=" {{dictionary.my_project}}" icon="bar-chart-o" clickable="true" bindtap="clickProjectReport" class="statisticReportForTest"/>
   </van-cell-group>
 
   <view wx:if="{{isProjectEmpty}}" style="margin-top: 220rpx;">

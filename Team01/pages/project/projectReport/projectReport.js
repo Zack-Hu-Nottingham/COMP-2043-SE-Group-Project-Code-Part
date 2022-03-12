@@ -22,7 +22,6 @@ Page({
     totalProgressing: 0,
     totalCompleted: 0,
     totalDelayed: 0,
-    totalReworking: 0,
     projects: [],
 
     project: [],
@@ -93,7 +92,7 @@ Page({
             }),
 
             wx.setNavigationBarTitle({
-              title: "Data Report",
+              title: this.data.dictionary.my_project,
             })
 
           this.getProjectManager()
@@ -178,22 +177,6 @@ Page({
         .then(res => {
           this.setData({
             totalDelayed: res.total
-          })
-          resolve("成功获取任务信息")
-        })
-        .catch(err => {
-          reject("请求任务信息失败")
-        })
-
-      db.collection('task')
-        .where({
-          belongTo: _.eq(projectId),
-          state: 4,
-        })
-        .count()
-        .then(res => {
-          this.setData({
-            totalReworking: res.total
           })
           resolve("成功获取任务信息")
         })
