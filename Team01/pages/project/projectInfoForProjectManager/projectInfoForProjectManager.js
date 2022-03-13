@@ -430,22 +430,33 @@ Page({
   go_update() {
     this.getDetail()
   },
-  upload() {
-    wx.chooseImage({
-      sizeType: ['original', 'compressed'],
-      sourceType: ['album', 'camera'],
-      success: res => {
-        var fileList = this.data.fileList;
-        fileList.push({
-          url: res.tempFilePaths[0]
-        });
-        this.setData({
-          fileList: fileList
-        });
-        this.uploadImage(res.tempFilePaths[0]);
-        // console.log("成功选择图片",fileList);
-      }
+  // upload() {
+  //   wx.chooseImage({
+  //     sizeType: ['original', 'compressed'],
+  //     sourceType: ['album', 'camera'],
+  //     success: res => {
+  //       var fileList = this.data.fileList;
+  //       fileList.push({
+  //         url: res.tempFilePaths[0]
+  //       });
+  //       this.setData({
+  //         fileList: fileList
+  //       });
+  //       this.uploadImage(res.tempFilePaths[0]);
+  //       // console.log("成功选择图片",fileList);
+  //     }
+  //   })
+  // },
+  upload(event){
+    const { file } = event.detail;
+    var fileList = this.data.fileList;
+    fileList.push({
+      url: file.url
     })
+    this.setData({
+      fileList: fileList
+    });
+    this.uploadImage(file.url)
   },
 
   uploadImage(fileURL) {
@@ -473,6 +484,7 @@ Page({
   },
   deleteImg(event) {
     const delIndex = event.detail.index
+    console.log(delIndex)
     const { fileList } = this.data
     fileList.splice(delIndex, 1)
     this.setData({

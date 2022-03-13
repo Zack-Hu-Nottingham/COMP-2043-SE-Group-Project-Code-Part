@@ -125,22 +125,16 @@ Page({
       url: '../projectTemplate/projectTemplate',
     })
   },
-  upload() {
-    wx.chooseImage({
-      count: 1,
-      sizeType: ['original', 'compressed'],
-      sourceType: ['album', 'camera'],
-      success: res => {
-        var fileList = this.data.fileList;
-        fileList.push({
-          url: res.tempFilePaths[0]
-        });
-        this.setData({
-          fileList: fileList
-        });
-        console.log("成功选择图片", fileList);
-      }
+  upload(event){
+    const { file } = event.detail;
+    var fileList = this.data.fileList;
+    fileList.push({
+      url: file.url
     })
+    this.setData({
+      fileList: fileList
+    });
+    // this.uploadImage(file.url)
   },
 
   uploadImage(fileURL) {
