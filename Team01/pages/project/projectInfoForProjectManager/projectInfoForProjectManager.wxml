@@ -32,7 +32,7 @@
   </van-cell-group>
 
   <van-cell-group inset title="{{dictionary.state_information}}">
-    <view wx:if="{{userInfo.identity == 1}}">
+    <view wx:if="{{userInfo.id == 1}}">
       <van-cell title="{{dictionary.start_time}}" is-link value="{{ project.startTime }}" bindtap="onDateDisplay" class="projectInfoStartTimeForTest"/>
       <van-cell title="{{dictionary.end_time}}" is-link value="{{ project.endTime }}" bindtap="onDateDisplay" class="projectInfoEndTimeForTest"/>
     </view>
@@ -143,7 +143,7 @@
   </van-collapse-item>
 
 
-  <van-collapse-item title="{{dictionary.reworking}}" name="reworking">
+  <!-- <van-collapse-item title="{{dictionary.reworking}}" name="reworking">
 
     <view wx:for="{{ reworking }}" wx:key="index">
       <van-cell clickable
@@ -159,7 +159,7 @@
         </van-cell>
     </view>
 
-</van-collapse-item>
+</van-collapse-item> -->
 
 
   <van-collapse-item title="{{dictionary.delayed}}" name="delayed">

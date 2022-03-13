@@ -1,5 +1,4 @@
 {
-    "setting": {},
     "condition": {
         "plugin": {
             "list": []
@@ -14,57 +13,8 @@
             "list": [
                 {
                     "name": "",
-                    "pathName": "pages/project/testDiagram/testDiagram",
-                    "query": "id=17e3426e622475721219644a00409a31",
-                    "launchMode": "default",
-                    "scene": null
-                },
-                {
-                    "name": "",
-                    "pathName": "pages/project/projectInfo/projectInfo",
-                    "query": "id=17e3426e622c7d231318b58a66e93e4c",
-                    "launchMode": "default",
-                    "scene": null
-                },
-                {
-                    "name": "",
-                    "pathName": "pages/project/taskInfoForProjectManager/taskInfoForProjectManager",
-                    "query": "id=17e3426e622c7d231318b58a66e93e4c",
-                    "launchMode": "default",
-                    "scene": null
-                },
-                {
-                    "name": "",
-                    "pathName": "pages/project/taskInfoForHouseOwner/taskInfoForHouseOwner",
-                    "query": "id=17e3426e622c7d231318b58a66e93e4c",
-                    "launchMode": "default",
-                    "scene": null
-                },
-                {
-                    "name": "",
-                    "pathName": "pages/indexs/about/about",
-                    "query": "",
-                    "launchMode": "default",
-                    "scene": null
-                },
-                {
-                    "name": "",
-                    "pathName": "pages/project/newProject/newProject",
-                    "query": "",
-                    "launchMode": "default",
-                    "scene": null
-                },
-                {
-                    "name": "",
-                    "pathName": "pages/project/contactList/houseOwnerList/houseOwnerList",
-                    "query": "",
-                    "launchMode": "default",
-                    "scene": null
-                },
-                {
-                    "name": "",
                     "pathName": "pages/project/projectInfoForProjectManager/projectInfoForProjectManager",
-                    "query": "id=17e3426e622b1bbc12f2458d0711d59c",
+                    "query": "id=617ef50c622de4370b4cb58e56f5b7fb",
                     "scene": null,
                     "launchMode": "default"
                 }
