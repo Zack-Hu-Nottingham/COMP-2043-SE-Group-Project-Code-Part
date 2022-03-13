@@ -20,6 +20,7 @@ Page({
     searchKey: "",
     radio: '',
     owner: "",
+    openid: "",
   },
 
   onLoad() {
@@ -129,6 +130,7 @@ Page({
       radio: name,
       owner: this.data.list[name].nickName,
     });
+    this.getOpenid(this.data.owner)
     // console.log(this.data.owner);
   },
 
@@ -166,6 +168,25 @@ Page({
     });
   },
 
+  getOpenid(name) {
+    return new Promise((resolve, reject) => {
+      db.collection('user')
+        .where({
+          nickName: _.eq(name)
+        })
+        .get()
+        .then(res => {
+          this.setData({
+            openid: res.data[0]._openid,
+          })
+          resolve("成功获取openid")
+        })
+        .catch(err =>{
+          reject("获取openid失败")
+        })
+    })
+  },
+
   onUnload() {
     var pages = getCurrentPages();
     /** 
@@ -177,9 +198,11 @@ Page({
      */
     var prevPage = pages[pages.length - 2];
 
-
     prevPage.setData({
-      houseOwner: this.data.owner
+      houseOwner: this.data.owner,
+      houseOwner_openid: this.data.openid
     })
+
+    
   }
 });

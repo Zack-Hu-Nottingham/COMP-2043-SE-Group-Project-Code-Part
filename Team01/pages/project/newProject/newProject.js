@@ -87,7 +87,7 @@ Page({
     this.setData({
       language: lan
     })
-    console.log(this.getOpenid('Lokkk'));
+    //console.log(this.getOpenid('Lokkk'));
   },
 
 
@@ -160,21 +160,6 @@ Page({
     })
   },
 
-  getOpenid(name) {
-    return new Promise((resolve, reject) => {
-      db.collection('user')
-        .where({
-          nickName: _.eq(name)
-        })
-        .get()
-        .then(res => {
-          this.setData({
-            houseOwner_openid: res.data[0]._openid,
-          })
-        })
-    })
-  },
-
 
   /** 
    * submit new project
@@ -192,7 +177,6 @@ Page({
     } else if (this.data.selectedTemplate == "") {
       Toast(this.data.dictionary.null_template_setting)
     } else {
-      this.getOpenid(this.data.houseOwner);
 
       wx.cloud.database().collection('project')
         .add({
@@ -231,7 +215,6 @@ Page({
           for (var i = 0; i < this.data.fileList.length; i++) {
             this.uploadImage(this.data.fileList[i].url);
           }
-
 
           this.createTask()
           this.action();
