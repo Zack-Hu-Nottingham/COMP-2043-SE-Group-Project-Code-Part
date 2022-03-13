@@ -90,7 +90,6 @@ Page({
     this.setData({
       result: event.detail,
     });
-
     //console.log(this.data.owners);
   },
 
@@ -155,6 +154,7 @@ Page({
      * former page
      */
     var prevPage = pages[pages.length - 2];
+    var owners = this.data.owners;
 
     for (var i = 0; i < this.data.result.length; i++) {
       db.collection('user')
@@ -163,14 +163,15 @@ Page({
         })
         .get()
         .then(res => {
-          this.data.owners.push(res.data[0].name)
+          owners.push(res.data[0].nickName)
+
+          prevPage.setData({
+            participant: owners
+          })
         })
     }
     // console.log(this.data.owners)
 
 
-    prevPage.setData({
-      participant: this.data.owners
-    })
   }
 });

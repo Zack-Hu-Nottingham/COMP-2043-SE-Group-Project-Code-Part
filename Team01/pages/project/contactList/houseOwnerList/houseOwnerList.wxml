@@ -23,7 +23,7 @@
       size="large"
       label="{{dictionary.have_no_project}}"
     >
-    <image class='mine_headicon' src='{{item.avatarUrl}}' slot="icon"></image>
+    <image class='mine_headicon' src='{{item.avatarUrl==null || item.avatarUrl==""?"/images/chatPic.jpg":item.avatarUrl}}' slot="icon"></image>
     <van-radio slot="right-icon" name="{{index}}" />
     </van-cell>
   </view>
@@ -39,7 +39,7 @@
       size="large"
       label="{{dictionary.have_project}}: {{item.project[0]}}"
     >
-    <image class='mine_headicon' src='{{item.avatarUrl}}' slot="icon"></image>
+    <image class='mine_headicon' src='{{item.avatarUrl==null || item.avatarUrl==""?"/images/chatPic.jpg":item.avatarUrl}}'slot="icon"></image>
     <van-radio slot="right-icon" name="{{index}}" />
     </van-cell>
 

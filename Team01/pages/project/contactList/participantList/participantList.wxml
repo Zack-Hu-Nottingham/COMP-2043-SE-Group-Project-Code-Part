@@ -12,6 +12,7 @@
 <van-checkbox-group value="{{ result }}" bind:change="onChange">
   <van-cell-group>
     <van-cell
+      center
       wx:for="{{ list }}"
       wx:key="index"
       title="{{ item.nickName }}"
@@ -20,6 +21,7 @@
       data-index="{{ index }}"
       bindtouchstart="bindTouchStart" bindtouchend="bindTouchEnd" bindlongpress="bindLongTap" bindtap="toggle"
     >
+      <image class='mine_headicon' src='{{item.avatarUrl==null || item.avatarUrl==""?"/images/chatPic.jpg":item.avatarUrl}}' slot="icon"></image>
       <van-checkbox
         catch:tap="noop"
         class="checkboxes-{{ index }}"

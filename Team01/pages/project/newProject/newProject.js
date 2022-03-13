@@ -51,6 +51,7 @@ Page({
     houseOwner: "",
     houseOwner_openid: '',
     participant: [],
+    participant_openid: [],
 
     project: "",
     task: [],
@@ -87,7 +88,6 @@ Page({
     this.setData({
       language: lan
     })
-    //console.log(this.getOpenid('Lokkk'));
   },
 
 

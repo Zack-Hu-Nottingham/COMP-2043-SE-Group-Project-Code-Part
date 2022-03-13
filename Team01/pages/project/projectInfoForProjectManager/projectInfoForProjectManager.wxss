@@ -119,3 +119,11 @@ ec-canvas {
   display: flex;
   padding: 0 0 5% 5%;
 }
+.filedContent {
+  display: -webkit-box ;
+  overflow: hidden; /*隐藏溢出的文本  */
+  text-overflow: ellipsis;
+  word-break: break-all;/*自动换行*/
+  -moz-box-orient: vertical; /*从上到下自动排列子元素*/
+  -webkit-line-clamp:2; /*显示的行数*/
+}

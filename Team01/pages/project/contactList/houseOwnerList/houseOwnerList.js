@@ -94,8 +94,8 @@ Page({
               ['list['+index+'].project[0]']: res.data[0].name,
               ['initial['+index+'].project[0]']: res.data[0].name,
             })
-            console.log(this.data.list)
-            console.log(this.data.initial)
+            //console.log(this.data.list)
+            //console.log(this.data.initial)
           }
         })
   },
@@ -129,6 +129,7 @@ Page({
     this.setData({
       radio: name,
       owner: this.data.list[name].nickName,
+      openid: this.data.list[name]._openid,
     });
     this.getOpenid(this.data.owner)
     // console.log(this.data.owner);
@@ -200,7 +201,7 @@ Page({
 
     prevPage.setData({
       houseOwner: this.data.owner,
-      houseOwner_openid: this.data.openid
+      houseOwner_openid: this.data.openid,
     })
 
     

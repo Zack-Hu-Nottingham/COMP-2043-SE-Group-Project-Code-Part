@@ -141,7 +141,7 @@ var Languague = {
     // contact list page
     copy_phone_confirm: "已复制用户电话",
     search: "搜索",
-    enter_keyword: "请输入业主姓名",
+    enter_keyword: "请输入姓名关键字",
     have_no_project: "无项目",
     have_project: "已有项目",
 

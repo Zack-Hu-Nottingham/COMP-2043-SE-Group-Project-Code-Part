@@ -22,7 +22,7 @@
     <van-cell title="{{ dictionary.house_owner }}" value="{{ houseOwner.nickName }}" />
     <van-cell title="{{ dictionary.project_manager }}" value="{{ projectManager.nickName }}" />
     
-    <view wx:if="{{userInfo.isManager == 1}}">
+    <view wx:if="{{userInfo.identity == 1}}">
       <van-field model:value="{{ project.projectDescription }}" right clearable label="{{ dictionary.description }}" type="textarea" placeholder="{{ project.projectDescription }}" border="{{ false }}" class="projectInfoDescriptionForTest" bind:blur="onProjectDescriptionBlur" autosize></van-field>
     </view>
 
@@ -32,7 +32,7 @@
   </van-cell-group>
 
   <van-cell-group inset title="{{dictionary.state_information}}">
-    <view wx:if="{{userInfo.isManager == 1}}">
+    <view wx:if="{{userInfo.identity == 1}}">
       <van-cell title="{{dictionary.start_time}}" is-link value="{{ project.startTime }}" bindtap="onDateDisplay" class="projectInfoStartTimeForTest"/>
       <van-cell title="{{dictionary.end_time}}" is-link value="{{ project.endTime }}" bindtap="onDateDisplay" class="projectInfoEndTimeForTest"/>
     </view>
