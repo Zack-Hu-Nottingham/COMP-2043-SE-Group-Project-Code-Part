@@ -26,7 +26,7 @@ Page({
              * Townhouses
              */
             name: "Townhouse Decoration",
-            content: "More info...",
+            content: "Townhouses have their own separate gardens to the front and rear, plus a dedicated parking space or garage.",
             duration: 233,
             /**
              * Frequency of use (record the number of times used, the array is sorted by frequency of use)
@@ -38,8 +38,8 @@ Page({
              * Freestanding Villas
              */
             name: "Detached Villa Decoration",
-            content: "More info...",
-            duration: 233,
+            content: "Detached Villa is a detached house with a high degree of privacy. It has private space above, private garden area and basement below.",
+            duration: 90,
             useFrq: "6",
             id: '2'
         }, {
@@ -47,8 +47,8 @@ Page({
              * Garden house style residence
              */
             name: "Garden Villa Decoration",
-            content: "More info...",
-            duration: 233,
+            content: "Garden Villa has private gardens and large floor plans for a high level of living comfort.",
+            duration: 90,
             useFrq: "4",
             id: '3'
         }, ],
