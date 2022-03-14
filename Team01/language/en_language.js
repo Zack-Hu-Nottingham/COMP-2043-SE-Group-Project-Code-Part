@@ -51,6 +51,10 @@ var Languague = {
     project_manager: "Project Manager",
     share: "Share",
     save: "Save",
+    original_user_name: "OriginalName",
+    new_user_name: "NewName",
+    changetip: "Input New Name",
+    successname: "Successfully Change",
     
     // about page
     current_version: "Current Version",

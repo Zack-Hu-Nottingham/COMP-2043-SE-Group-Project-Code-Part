@@ -58,7 +58,6 @@ Page({
     filter: '',
     filterShow: false,
 
-    changetip: '请输入新用户名',
     name : "",
     show: false,
     show1: false,
@@ -598,7 +597,7 @@ Page({
     var id = app.globalData.userInfo._openid;
     // console.log(id)
     if (value=='') {
-      Toast.fail('空用户名');
+      Toast.fail(this.data.dictionary.null_name);
     } else {
       wx.cloud.callFunction({
         name:'updateuserName',
@@ -613,7 +612,7 @@ Page({
       })
       Toast({
         type: 'success',
-        message: '提交成功',
+        message: this.data.dictionary.successname,
         onClose: () => {
           this.setData({
             show: false,
