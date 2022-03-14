@@ -21,7 +21,6 @@
   height: 800rpx;
 }
 .table-content {
-
   white-space: nowrap; /*溢出则不换行*/
   text-overflow:ellipsis; /*溢出用省略号显示*/
   overflow: hidden; /*超出的文本隐藏*/

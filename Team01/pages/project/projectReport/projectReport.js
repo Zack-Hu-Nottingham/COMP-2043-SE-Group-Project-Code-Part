@@ -25,6 +25,7 @@ Page({
     projects: [],
 
     project: [],
+    fileList: [],
 
     dictionary: {},
     language: 0,
@@ -84,6 +85,8 @@ Page({
       .doc(id)
       .get({
         success: res => {
+
+          this.getFileList(res.data.cloudList);
 
           this.setData({
               project: res.data,
@@ -241,6 +244,24 @@ Page({
     wx.navigateTo({
       url: '../testDiagram/testDiagram?id=' + this.data.project._id,
     })
+  },
+  async getFileList(cloudPath) {
+    // console.log(cloudPath)
+    var newList = [];
+    for (var i = 0; i < cloudPath.length; i++) {
+      await wx.cloud.downloadFile({
+        fileID: cloudPath[i]
+      }).then(res => {
+        newList.push({
+          "url": res.tempFilePath
+        })
+        this.setData({
+          fileList: newList
+        })
+        //console.log(res.tempFilePath)
+      })
+    }
+    // console.log(newList)
   },
   
 

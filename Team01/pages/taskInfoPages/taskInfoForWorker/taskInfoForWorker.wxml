@@ -21,6 +21,8 @@
 
 </van-cell-group>
 
+<van-divider contentPosition="center">{{dictionary.related_photo}}</van-divider>
+
 <van-uploader file-list="{{ fileList }}" bindtap="upload" deletable="{{ true }}" bind:delete="deleteImg" max-count="9" bind:after-read="afterRead" disabled="{{true}}"/>
 
 <van-sticky offset-top="{{ 50 }}">

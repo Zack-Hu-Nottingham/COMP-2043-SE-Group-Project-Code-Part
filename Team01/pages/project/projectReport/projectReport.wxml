@@ -7,7 +7,7 @@
     <van-cell title="{{dictionary.owner}}" value="{{ projectManager.nickName }}" />
     <van-cell title="{{dictionary.start_time}}" value="{{ project.startTime }}"/>
     <van-cell title="{{dictionary.expected_end_time}}" value="{{ project.endTime }}"/>
-    <van-cell model:value="{{ project.projectDescription }}" title="{{ dictionary.description }}" type="textarea" placeholder="{{ project.projectDescription }}" border="{{ false }}" class="projectInfoDescriptionForTest"></van-cell>
+    <van-cell model:value="{{ project.projectDescription }}" title="{{ dictionary.description }}" type="textarea" placeholder="{{ project.projectDescription }}" border="{{ false }}" class="projectInfoDescriptionForTest" />
     <van-cell title="{{dictionary.view_gantt_diagram}}" is-link bindtap="viewGantt" />
   </van-cell-group>
 </view>
@@ -77,3 +77,7 @@
     </view>
   </van-cell>
 </van-cell-group>
+
+<van-divider contentPosition="center">{{dictionary.related_photo}}</van-divider>
+  <!--Upload related images-->
+  <van-uploader class="uploader" file-list="{{ fileList }}" deletable="{{ false }}" max-count="9" show-upload="{{ false }}"/>

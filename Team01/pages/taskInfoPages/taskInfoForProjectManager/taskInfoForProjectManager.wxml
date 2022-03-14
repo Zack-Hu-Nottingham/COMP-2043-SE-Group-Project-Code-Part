@@ -23,6 +23,7 @@
   <van-cell title="{{dictionary.participant}}" is-link value="{{participant}}" />
 </van-cell-group>
 
+<van-divider contentPosition="center">{{dictionary.related_photo}}</van-divider>
   <!--Upload related images-->
   <van-uploader class="uploader" file-list="{{ fileList }}" bind:after-read="upload" deletable="{{ true }}" max-count="9" bind:delete="deleteImg"/>
 
