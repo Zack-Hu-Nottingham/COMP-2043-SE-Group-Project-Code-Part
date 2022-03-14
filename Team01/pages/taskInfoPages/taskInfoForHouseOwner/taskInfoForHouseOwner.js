@@ -208,7 +208,7 @@ Page({
         this.setData({
           feedback: res.data
         })
-        console.log(res)
+        // console.log(res)
       }
     })
 

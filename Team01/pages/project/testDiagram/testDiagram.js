@@ -1,9 +1,11 @@
 // pages/project/testDiagram/testDiagram.js
 var id = '';
+var redirectPage = '';
 var fs = wx.getFileSystemManager();
 const db = wx.cloud.database();
 const _ = db.command;
 var ganttPATH = '../../../ganttData/testData.json';
+const app = getApp();
 
 Page({
 
@@ -17,6 +19,12 @@ Page({
      */
     onLoad: function (options) {
         id = options.id;
+        redirectPage = options.index;
+        /**redirectPage:
+         * 0 - projectInfo
+         * 1 - projectInfoForProjectManager
+         * 2 - projectReport
+         */
 
         // wx.cloud.callFunction({
         //   name: 'uploadJSON',
@@ -55,7 +63,21 @@ Page({
      * Life cycle function - Listens for page unload
      */
     onUnload: function () {
-
+        if(redirectPage==1){
+            wx.redirectTo({
+              url: '../projectInfoForProjectManager/projectInfoForProjectManager?id='+id,
+            })
+        }
+        else if(redirectPage==0){
+            wx.redirectTo({
+              url: '../projectInfo/projectInfo?id='+id,
+            })
+        }
+        else{
+            wx.redirectTo({
+                url: '../projectReport/projectReport?id='+id,
+              })
+        }
     },
 
     /**

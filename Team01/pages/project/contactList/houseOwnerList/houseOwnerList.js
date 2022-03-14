@@ -70,7 +70,6 @@ Page({
   },
   updateList(list){
     for(var i=0;i<list.length;i++){
-      // console.log(list[i])
       if(list[i].project.length != 0){
         this.setProjectName(i);
         // console.log(i)

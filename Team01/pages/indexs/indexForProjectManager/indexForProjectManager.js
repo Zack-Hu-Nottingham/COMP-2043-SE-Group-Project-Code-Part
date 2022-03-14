@@ -362,7 +362,7 @@ Page({
    * click to create new project
    */
   clickNewProject(event) {
-    wx.navigateTo({
+    wx.redirectTo({
       url: '../../project/newProject/newProject',
     })
   },

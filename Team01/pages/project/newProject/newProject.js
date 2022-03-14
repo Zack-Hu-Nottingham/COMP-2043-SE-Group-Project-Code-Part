@@ -80,6 +80,7 @@ Page({
    * Life cycle function - listens for page loads
    */
   onLoad: function (options) {
+
     /** 
      *  Initial language
      */
@@ -210,19 +211,48 @@ Page({
             this.uploadImage(this.data.fileList[i].url);
           }
 
-          this.createTask()
+          this.createTask();
+          
+          // house owner's project list update
+          // this.updateOwners(res._id);
           this.action();
 
         })
         .catch(res => {
           console.log('新建项目失败，请联系管理员', res)
         })
-      this.action();
 
 
     }
 
   },
+
+  updateOwners(res_id){
+    var newProjectList=[];
+    newProjectList.push(res_id);
+    console.log(newProjectList)
+    db.collection('user').where({
+      _openid: _.eq(this.data.houseOwner_openid)
+    }).update({
+      data:{
+        project: newProjectList
+      },
+      success: res => {
+        console.log('[数据库] [更新记录] 成功：',res)
+      },
+      fail: err => {
+        console.error('[数据库] [更新记录] 失败：', err)
+      }
+    })
+    // }).update({
+    //   data: {
+    //     project: ['o_jxV5TAqQjBnhn2BVwEBhfBHbrn']
+    //   }
+    // }).then(res =>{
+    //   console.log(res)
+    // })
+  },
+
   updateCloudList() {
     // console.log(this.data.cloudPath)
     db.collection('project')

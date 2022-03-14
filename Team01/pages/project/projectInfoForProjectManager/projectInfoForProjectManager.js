@@ -157,14 +157,15 @@ Page({
    * Global method
    */
   navbarTap: function (e) {
+    const number = 1;
     this.setData({
       currentTab: e.currentTarget.dataset.idx
     })
     // console.log(this.data.currentTab)
     if (this.data.currentTab == 2) {
-      console.log('success')
+      //console.log('success')
       wx.navigateTo({
-        url: '../testDiagram/testDiagram?id=' + id,
+        url: '../testDiagram/testDiagram?id=' + id + '&index=' + number,
       })
     }
 

@@ -240,9 +240,9 @@ Page({
     }).catch(res => {
       console.log('gantt_json更新失败', res)
     })
-
+    var number = 2;
     wx.navigateTo({
-      url: '../testDiagram/testDiagram?id=' + this.data.project._id,
+      url: '../testDiagram/testDiagram?id=' + this.data.project._id + '&index=' + number,
     })
   },
   async getFileList(cloudPath) {
