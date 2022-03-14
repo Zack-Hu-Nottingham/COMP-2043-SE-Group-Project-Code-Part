@@ -54,6 +54,7 @@ var Languague = {
      original_user_name: "旧用户名",
      new_user_name: "新用户名",
      changetip: "请输入新用户名",
+     successname: "修改成功",
 
     // about page
     current_version: "当前版本",

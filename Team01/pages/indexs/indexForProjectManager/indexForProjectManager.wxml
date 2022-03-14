@@ -2,7 +2,7 @@
 <van-dialog id="van-dialog" bind:getuserinfo="getuserinfo" />
 
 <!-- Toast -->
-<van-toast id="van-toast" />
+<van-toast id="van-toast"/>
 
 <!-- Bottom tabbar -->
 <van-tabbar active="{{ active }}" bind:change="onChangeTab">
