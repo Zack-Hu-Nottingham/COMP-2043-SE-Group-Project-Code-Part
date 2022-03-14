@@ -57,6 +57,7 @@ var Languague = {
     successname: "Successfully Change",
     
     // about page
+    about_button: "About",
     current_version: "Current Version",
     official_phone: "Official Tel.",
     revisions: "Revisions",
@@ -102,7 +103,6 @@ var Languague = {
     basic_info: "Basic Information",
     belong_to: "Belong To",
     stage_of_project: "Stage Of Project",
-    priority: "Priority",
     tag: "Tag",
     participant: "Participant",
     reworking: "Reworking",

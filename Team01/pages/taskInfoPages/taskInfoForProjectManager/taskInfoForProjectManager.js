@@ -176,7 +176,8 @@ Page({
             taskPage: res.data,
             belongTo: res.data.belongTo,
           });
-          this.updateComment(res.data.feedback)
+          //this.updateComment(res.data.feedback)
+          this.updateComment()
           
           this.getProjectName()
           this.getParticipantName()

@@ -57,6 +57,7 @@ var Languague = {
      successname: "修改成功",
 
     // about page
+    about_button: "关于",
     current_version: "当前版本",
     official_phone: "官方电话",
     revisions: "历史版本",
@@ -102,7 +103,6 @@ var Languague = {
     basic_info: "基本信息",
     belong_to: "所属项目",
     stage_of_project: "项目状态",
-    priority: "优先级",
     tag: "标签",
     participant: "参与者",
    //  reworking: "重加工",

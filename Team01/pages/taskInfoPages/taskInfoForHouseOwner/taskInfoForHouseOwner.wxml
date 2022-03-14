@@ -15,19 +15,19 @@
   placeholder="{{project.stateDescription}}" border="{{ false }}" ></van-cell>
   
   <view wx:if="{{taskPage.state == 0}}">
-    <van-cell title="{{dictionary.current_state}}" value="Unstarted" />
+    <van-cell title="{{dictionary.current_state}}" value="{{dictionary.unstarted}}" />
   </view>
   <view wx:if="{{taskPage.state == 1}}">
-    <van-cell title="{{dictionary.current_state}}" value="Progressing" />
+    <van-cell title="{{dictionary.current_state}}" value="{{dictionary.progressing}}" />
   </view>
   <view wx:if="{{taskPage.state == 2}}">
-    <van-cell title="{{dictionary.current_state}}" value="Finished" />
+    <van-cell title="{{dictionary.current_state}}" value="{{dictionary.completed}}" />
   </view>
   <view wx:if="{{taskPage.state == 3}}">
-    <van-cell title="{{dictionary.current_state}}" value="Delayed" />
+    <van-cell title="{{dictionary.current_state}}" value="{{dictionary.delayed}}" />
   </view>
   <view wx:if="{{taskPage.state == 4}}">
-    <van-cell title="{{dictionary.current_state}}" value="Reworking" />
+    <van-cell title="{{dictionary.current_state}}" value="{{dictionary.reworking}}" />
   </view>
 
 </van-cell-group>

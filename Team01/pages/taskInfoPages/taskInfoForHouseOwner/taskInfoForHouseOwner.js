@@ -170,10 +170,11 @@ Page({
       .doc(id)
       .get()
       .then(res => {
+        console.log(res.data)
         wx.setNavigationBarTitle({
             title: res.data.name,
           }),
-        this.getFileList(res.data.cloudList)
+          this.getFileList(res.data.cloudList)
 
           this.setData({
             taskPage: res.data,
@@ -197,11 +198,27 @@ Page({
       })
   },
 
-  async getFileList(cloudPath) {
+  updateComment(){
+    db.collection('feedback')
+    .where({
+      belongTo: _.eq(id)
+    }).orderBy("startTime",'asc')
+    .get({
+      success: res=>{
+        this.setData({
+          feedback: res.data
+        })
+        console.log(res)
+      }
+    })
+
+  },
+
+  getFileList(cloudPath) {
     // console.log(cloudPath)
     var newList = [];
     for (var i = 0; i < cloudPath.length; i++) {
-      await wx.cloud.downloadFile({
+      wx.cloud.downloadFile({
         fileID: cloudPath[i]
       }).then(res => {
         newList.push({
