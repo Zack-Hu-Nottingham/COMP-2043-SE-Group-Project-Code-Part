@@ -9,6 +9,7 @@ var Languague = {
     task_info: "Task Information",
     project_info: "Project Information",
     page_name_for_pm: ['Message', 'Project', 'More'],
+    page_name: ['Dashboard', 'More'],
 
     // message page
     notification: "Notification",
@@ -19,9 +20,11 @@ var Languague = {
     my_task: "My Task",
     statistic_report: "Statistics Report",
     project_statistic_report: "Project's statistic report",
+    my_project: "My project",
     project_list: "Projects",
     create_new_project: "Create New Project",
     comment_list: "Comment List",
+    view_gantt_diagram: "View gantt diagram",
 
     // dashboard page
     today_task: "Today's Task",     
@@ -48,6 +51,12 @@ var Languague = {
     project_manager: "Project Manager",
     share: "Share",
     save: "Save",
+    
+    // about page
+    current_version: "Current Version",
+    official_phone: "Official Tel.",
+    revisions: "Revisions",
+    check_for_update: "Check for Updates",
 
      // language setting page
     current_lan: "Current language",
@@ -91,6 +100,8 @@ var Languague = {
     participant: "Participant",
     reworking: "Reworking",
     related_photo: "Related photos",
+    phase: "Phase",
+
 
     // New task page
     task_name: "Task Name",
@@ -104,7 +115,7 @@ var Languague = {
     choose_template: "Choose Template",
     choose_start_time: "Choose start time",
     expetced_end_time: "Expected end time",
-    expected_duration:"Estimated duration of work",
+    expected_duration:"Estimated construction time",
     house_owner: "House Owner",
     description_hint: "less than 200 words",
     choose_period: "Choose period",
@@ -131,12 +142,16 @@ var Languague = {
     // contact list page
     copy_phone_confirm: "Phone number has been copied",
     search: "Search",
-    enter_keyword: "Please enter key word",
+    enter_keyword: "Please enter key word of name",
+    have_no_project: "No project held",
+    have_project: "Held project",
 
     // Toast message
     null_name: "Name is null",
     null_date_setting: "No date setting",
     null_template_setting: "No template selected",
+    upload_image_success: "Upload image successfully",
+    delete_image_success: "Delete image successfully",
     
     // index for worker
     project: ["Project One", "Project Two", "Project Three", "Project Four", "Project Five"],

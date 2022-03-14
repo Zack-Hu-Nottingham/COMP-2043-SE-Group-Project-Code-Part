@@ -304,7 +304,7 @@ Page({
    */
   clickTask(event) {
     wx.navigateTo({
-      url: '../../project/taskInfoForHouseOwner/taskInfoForHouseOwner?id=' + event.currentTarget.dataset.id,
+      url: '../../taskInfoPages/taskInfoForHouseOwner/taskInfoForHouseOwner?id=' + event.currentTarget.dataset.id,
     })
   },
 
@@ -369,9 +369,7 @@ Page({
       filter: e.detail.name
     })
 
-    console.log(e.detail.value)
-
-    if (this.data.filter == 'Time') {
+    if(this.data.filter == 'Time'){
       this.onTimeSelect()
     } else if (this.data.filter == 'Priority') {
       this.onPrioritySelect()
@@ -393,7 +391,7 @@ Page({
         .where({
           belongTo: _.eq(projectId),
         })
-        .orderBy("endTime", 'asc')
+        .orderBy("startTime", 'asc')
         .skip(i * 20)
         .get()
         .then(res => {
@@ -402,7 +400,7 @@ Page({
               task: this.data.task.concat(res.data[idx])
             })
           }
-          // console.log("success to get task info")
+          console.log("成功获取任务信息")
         })
         .catch(err => {
           console.log("fail to get task info")
@@ -416,7 +414,7 @@ Page({
       task: [],
     })
 
-    this.priorityFilter(this.data.project._id)
+    this.priorityFilter(this.data.project[0]._id)
     // for (var idx in this.data.project) {
     //   this.priorityFilter(this.data.project[idx]._id)
     // }

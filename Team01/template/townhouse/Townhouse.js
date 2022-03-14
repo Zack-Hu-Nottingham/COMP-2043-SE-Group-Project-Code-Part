@@ -1,4 +1,4 @@
-var template = [{
+var townhouse = [{
   name: "房管审批",
   taskDescription: "",
   belongTo: "",
@@ -13,6 +13,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 1,
+  offset: 0,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "整间房屋",
 }, {
@@ -30,6 +31,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 1,
+  offset: 0,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "整间房屋",
 }, {
@@ -47,6 +49,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 1,
+  offset: 0,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "整间房屋",
 },{
@@ -64,6 +67,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 1,
+  offset: 0,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "整间房屋",
 },{
@@ -81,6 +85,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 1,
+  offset: 0,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "整间房屋",
 }, {
@@ -98,6 +103,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 1,
+  offset: 0,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "整间房屋",
 }, {
@@ -115,6 +121,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 1,
+  offset: 0,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "整间房屋",
 }, {
@@ -132,6 +139,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 10,
+  offset: 0,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "整间房屋",
 },{
@@ -149,6 +157,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 10,
+  offset: 0,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "整间房屋",
 }, {
@@ -166,6 +175,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 21,
+  offset: 1,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "房屋墙面及地面",
 },{
@@ -183,6 +193,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 21,
+  offset: 1,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "房屋墙面及地面",
 },{
@@ -200,6 +211,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 21,
+  offset: 1,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "房屋墙面及地面",
 },{
@@ -217,6 +229,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 21,
+  offset: 22,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "房屋墙面及地面",
 }, {
@@ -234,6 +247,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 2,
+  offset: 23,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "房屋墙面及地面",
 }, {
@@ -251,6 +265,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 2,
+  offset: 25,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "房屋墙面及地面",
 }, {
@@ -268,6 +283,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 10,
+  offset: 26,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "房屋墙面",
 }, {
@@ -285,6 +301,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 10,
+  offset: 26,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "房屋墙面",
 }, {
@@ -302,6 +319,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 10,
+  offset: 26,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "房屋墙面",
 },{
@@ -319,6 +337,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 10,
+  offset: 26,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "房屋墙面",
 },{
@@ -336,6 +355,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 10,
+  offset: 36,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "房屋墙面",
 }, {
@@ -353,6 +373,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 2,
+  offset: 37,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "房屋墙面",
 }, {
@@ -370,6 +391,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 2,
+  offset: 37,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "房屋墙面",
 }, {
@@ -387,6 +409,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 2,
+  offset: 37,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "房屋墙面",
 }, {
@@ -404,6 +427,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 2,
+  offset: 37,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "房屋墙面",
 }, {
@@ -421,6 +445,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 2,
+  offset: 37,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "房屋墙面",
 }, {
@@ -438,6 +463,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 2,
+  offset: 37,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "房屋墙面",
 }, {
@@ -455,6 +481,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 2,
+  offset: 39,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "房屋墙面",
 }, {
@@ -472,6 +499,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 25,
+  offset: 40,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "房屋墙面",
 }, {
@@ -489,6 +517,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 25,
+  offset: 40,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "房屋墙面",
 }, {
@@ -506,6 +535,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 25,
+  offset: 40, 
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "房屋墙面",
 }, {
@@ -523,6 +553,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 25,
+  offset: 40,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "房屋墙面",
 },{
@@ -540,6 +571,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 25,
+  offset: 40,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "房屋墙面",
 }, {
@@ -557,6 +589,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 25,
+  offset: 40,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "房屋墙面",
 }, {
@@ -574,6 +607,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 25,
+  offset: 40,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "房屋墙面",
 },{
@@ -591,6 +625,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 25,
+  offset: 40,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "房屋墙面",
 }, {
@@ -608,6 +643,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 25,
+  offset: 40,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "房屋墙面",
 }, {
@@ -625,6 +661,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 25,
+  offset: 40,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "房屋墙面",
 }, {
@@ -642,6 +679,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 25,
+  offset: 40,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "房屋墙面",
 }, {
@@ -659,6 +697,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 25,
+  offset: 40,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "房屋墙面",
 }, {
@@ -676,6 +715,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 35,
+  offset: 55,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "房屋木工",
 }, {
@@ -693,6 +733,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 35,
+  offset: 55,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "房屋木工",
 }, {
@@ -710,6 +751,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 35,
+  offset: 55,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "房屋木工",
 }, {
@@ -727,6 +769,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 35,
+  offset: 55,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "房屋木工",
 }, {
@@ -744,6 +787,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 35,
+  offset: 55,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "房屋木工",
 }, {
@@ -761,6 +805,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 35,
+  offset: 55,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "房屋木工",
 }, {
@@ -778,6 +823,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 35,
+  offset: 90,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "房屋木工",
 }, {
@@ -795,6 +841,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 10,
+  offset: 92,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "房屋地暖地面",
 }, {
@@ -812,6 +859,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 10,
+  offset: 92,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "房屋地暖地面",
 }, {
@@ -829,6 +877,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 10,
+  offset: 92,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "房屋地暖地面",
 }, {
@@ -846,6 +895,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 10,
+  offset: 92,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "房屋地暖地面",
 }, {
@@ -863,6 +913,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 10,
+  offset: 92,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "房屋地暖地面",
 }, {
@@ -880,6 +931,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 10,
+  offset: 92,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "房屋地暖地面",
 }, {
@@ -897,6 +949,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 45,
+  offset: 104,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "房屋瓷砖石材",
 }, {
@@ -914,6 +967,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 45,
+  offset: 104,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "房屋瓷砖石材",
 }, {
@@ -931,6 +985,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 45,
+  offset: 104,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "房屋瓷砖石材",
 }, {
@@ -948,6 +1003,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 45,
+  offset: 104,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "房屋瓷砖石材",
 }, {
@@ -965,6 +1021,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 45,
+  offset: 104,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "房屋瓷砖石材",
 }, {
@@ -982,6 +1039,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 45,
+  offset: 104,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "房屋瓷砖石材",
 }, {
@@ -999,6 +1057,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 40,
+  offset: 104,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "房屋油工施工",
 }, {
@@ -1016,6 +1075,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 40,
+  offset: 104,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "房屋油工施工",
 }, {
@@ -1033,6 +1093,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 40,
+  offset: 104,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "房屋油工施工",
 }, {
@@ -1050,6 +1111,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 40,
+  offset: 104,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "房屋油工施工",
 }, {
@@ -1067,6 +1129,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 40,
+  offset: 113,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "房屋油工施工",
 }, {
@@ -1084,6 +1147,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 1,
+  offset: 139,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "成品安装",
 }, {
@@ -1101,6 +1165,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 50,
+  offset: 146,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "成品安装",
 }, {
@@ -1118,6 +1183,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 50,
+  offset: 146,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "成品安装",
 }, {
@@ -1135,6 +1201,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 1,
+  offset: 149,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "成品安装",
 }, {
@@ -1152,6 +1219,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 50,
+  offset: 146,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "成品安装",
 }, {
@@ -1169,6 +1237,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 50,
+  offset: 146,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "成品安装",
 }, {
@@ -1186,6 +1255,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 50,
+  offset: 146,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "成品安装",
 }, {
@@ -1203,6 +1273,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 50,
+  offset: 146,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "成品安装",
 }, {
@@ -1220,6 +1291,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 50,
+  offset: 146,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "成品安装",
 }, {
@@ -1237,6 +1309,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 50,
+  offset: 146,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "成品安装",
 }, {
@@ -1254,6 +1327,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 50,
+  offset: 196,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "成品安装",
 }, {
@@ -1271,6 +1345,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 10,
+  offset: 198,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "油漆修补",
 }, {
@@ -1288,6 +1363,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 10,
+  offset: 198,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "油漆修补",
 }, {
@@ -1305,6 +1381,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 10,
+  offset: 198,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "油漆修补",
 }, {
@@ -1322,6 +1399,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 1,
+  offset: 208,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "油漆修补",
 }, {
@@ -1339,6 +1417,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 15,
+  offset: 210,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "整间房屋",
 }, {
@@ -1356,6 +1435,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 15,
+  offset: 210,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "整间房屋",
 }, {
@@ -1373,6 +1453,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 15,
+  offset: 210,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "整间房屋",
 }, {
@@ -1390,6 +1471,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 15,
+  offset: 210,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "整间房屋",
 }, {
@@ -1407,6 +1489,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 15,
+  offset: 210,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "整间房屋",
 }, {
@@ -1424,6 +1507,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 15,
+  offset: 210,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "整间房屋",
 }, {
@@ -1441,6 +1525,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 15,
+  offset: 210,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "整间房屋",
 }, {
@@ -1458,6 +1543,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 1,
+  offset: 226,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "验收",
 }, {
@@ -1475,6 +1561,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 1,
+  offset: 227,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "验收",
 }, {
@@ -1492,6 +1579,7 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 1,
+  offset: 229,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "验收",
 }, {
@@ -1509,11 +1597,12 @@ var template = [{
   state: 0,
   constructionRequirements: "暂无",
   duration: 1,
+  offset: 231,
   location: "上海市浦东新区花园石桥路28弄汤臣一品A栋409室",
   workingArea: "软装摆场",
 }];
 
 
 module.exports = {
-  template: template
+  townhouse: townhouse
 }

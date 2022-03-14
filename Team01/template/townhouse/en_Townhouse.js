@@ -1,4 +1,4 @@
-var en_template = [{
+var en_townhouse = [{
   name: "Ground-breaking ceremony",
   taskDescription: "",
   belongTo: "",
@@ -1430,5 +1430,5 @@ var en_template = [{
 
 
 module.exports = {
-  en_template: en_template
+  en_townhouse: en_townhouse
 }

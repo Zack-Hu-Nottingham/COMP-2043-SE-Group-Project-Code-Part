@@ -160,7 +160,7 @@ Page({
     this.setData({
       currentTab: e.currentTarget.dataset.idx
     })
-    console.log(this.data.currentTab)
+    // console.log(this.data.currentTab)
     if (this.data.currentTab == 2) {
       console.log('success')
       wx.navigateTo({
@@ -277,7 +277,7 @@ Page({
 
 
   /** 
-   *  Initial language
+   *  Initialize language
    */
   initLanguage() {
     var self = this;
@@ -305,7 +305,7 @@ Page({
               name: res.data.name,
               feedback: res.data.feedback,
             }),
-            console.log(res.data.cloudList)
+            // console.log(res.data.cloudList)
           this.getFileList(res.data.cloudList);
 
           wx.setNavigationBarTitle({
@@ -322,23 +322,23 @@ Page({
 
   },
 
-  getFileList(cloudPath) {
+  async getFileList(cloudPath) {
     // console.log(cloudPath)
     var newList = [];
     for (var i = 0; i < cloudPath.length; i++) {
-      wx.cloud.downloadFile({
+      await wx.cloud.downloadFile({
         fileID: cloudPath[i]
       }).then(res => {
         newList.push({
           "url": res.tempFilePath
         })
+        this.setData({
+          fileList: newList
+        })
         //console.log(res.tempFilePath)
       })
     }
-    console.log(newList)
-    this.setData({
-      fileList: newList
-    })
+    // console.log(newList)
   },
 
   /** 
@@ -430,7 +430,93 @@ Page({
   go_update() {
     this.getDetail()
   },
+  // upload() {
+  //   wx.chooseImage({
+  //     sizeType: ['original', 'compressed'],
+  //     sourceType: ['album', 'camera'],
+  //     success: res => {
+  //       var fileList = this.data.fileList;
+  //       fileList.push({
+  //         url: res.tempFilePaths[0]
+  //       });
+  //       this.setData({
+  //         fileList: fileList
+  //       });
+  //       this.uploadImage(res.tempFilePaths[0]);
+  //       // console.log("成功选择图片",fileList);
+  //     }
+  //   })
+  // },
+  upload(event){
+    const { file } = event.detail;
+    var fileList = this.data.fileList;
+    fileList.push({
+      url: file.url
+    })
+    this.setData({
+      fileList: fileList
+    });
+    this.uploadImage(file.url)
+  },
 
+  uploadImage(fileURL) {
+    wx.cloud.uploadFile({
+      cloudPath: 'project/' + id + '/' + new Date().getTime() + Math.floor(9 * Math.random()) + '.png',
+      filePath: fileURL,
+      success: res => {
+        // console.log(res.fileID)
+        db.collection('project').where({
+          _id: id
+        }).update({
+          data: {
+            cloudList: _.push(res.fileID)
+          }
+        })
+        // wx.showToast({
+        //   title: this.data.dictionary.upload_image_success,
+        //   icon: 'success',
+        //   duration: 2000,
+        // })
+        // console.log("图片上传成功",res)
+      },
+      fail: console.error
+    })
+  },
+  deleteImg(event) {
+    const delIndex = event.detail.index
+    console.log(delIndex)
+    const { fileList } = this.data
+    fileList.splice(delIndex, 1)
+    this.setData({
+      fileList
+    })
+    db.collection('project').where({_id:id})
+    .field({
+      cloudList: true,
+    })
+    .get({
+      success: res=>{
+        db.collection('project').where({
+          _id: id
+        }).update({
+          data: {
+            cloudList: _.pull(res.data[0].cloudList[delIndex])
+          }
+        }).then(res =>{
+          // console.log("图片删除成功",res)
+          // wx.showToast({
+          //   title: this.data.dictionary.delete_image_success,
+          //   icon: 'success',
+          //   duration: 2000,
+          // })
+        })
+        
+        // console.log(res.data[0].cloudList[delIndex])
+      }
+    })
+    
+    
+  },
 
 
 

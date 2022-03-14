@@ -9,6 +9,7 @@ var Languague = {
      task_info: "任务信息",
      project_info: "项目信息",
      page_name_for_pm: ['消息', '项目', '更多'],
+     page_name: ['首页', '更多'],
 
      // message page
      notification: "通知",
@@ -19,9 +20,11 @@ var Languague = {
      my_task: "我的任务",
      statistic_report: "数据报告",
      project_statistic_report: "项目数据报告",
+      my_project: "我的家装项目",
      project_list: "项目列表",
      create_new_project: "新建项目",
      comment_list: "评论列表",
+     view_gantt_diagram: "查看甘特图",
 
      // dashboard page
      today_task: "今天的任务",
@@ -48,6 +51,12 @@ var Languague = {
      project_manager: "项目经理",
      share: "分享",
      save: "保存",
+
+    // about page
+    current_version: "当前版本",
+    official_phone: "官方电话",
+    revisions: "历史版本",
+    check_for_update: "检查更新",
 
      // language setting page
      current_lan: "当前语言",
@@ -91,6 +100,7 @@ var Languague = {
     participant: "参与者",
    //  reworking: "重加工",
     related_photo: "相关照片",
+    phase: "阶段",
 
     // New task page
     task_name: "任务名称",
@@ -131,12 +141,16 @@ var Languague = {
     // contact list page
     copy_phone_confirm: "已复制用户电话",
     search: "搜索",
-    enter_keyword: "请输入关键字",
+    enter_keyword: "请输入姓名关键字",
+    have_no_project: "无项目",
+    have_project: "已有项目",
 
     // Toast message
     null_name: "名称为空",
     null_date_setting: "未设置日期",
     null_template_setting: "未选择模板",
+    upload_image_success: "上传图片成功",
+    delete_image_success: "删除图片成功",
 
     // index for worker
     project: ["项目一", "项目二", "项目三", "项目四", "项目五"],

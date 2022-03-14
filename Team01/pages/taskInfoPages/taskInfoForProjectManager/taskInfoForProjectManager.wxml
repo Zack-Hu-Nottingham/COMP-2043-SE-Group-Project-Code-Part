@@ -10,10 +10,9 @@
 
 <van-cell-group inset style="padding: 30rpx">
   <van-cell title="{{dictionary.belong_to}}" value="{{belongTo}}" />
-  <van-cell title="{{dictionary.stage_of_project}}" value="{{taskPage.state}}" />
-  <van-field model:value="{{taskPage.taskDescription}}" input-align="right" clearable label="{{dictionary.description}}" placeholder="{{taskPage.descriptions}}" border="{{ false }}" bind:blur="onTaskDescriptionBlur">
-  </van-field>
-  <van-cell title="{{dictionary.current_state}}" value="{{taskPage.state}}" />
+  <van-cell title="{{dictionary.phase}}" value="{{dictionary.phase_name[taskPage.phase]}}" />
+  <van-cell title="{{dictionary.description}}" value="{{taskPage.taskDescription}}" />
+  <van-cell title="{{dictionary.current_state}}" value="{{dictionary.task_state[taskPage.state]}}" />
 </van-cell-group>
 
 
@@ -21,11 +20,11 @@
 <van-cell-group inset style="padding: 30rpx">
   <van-cell title="{{dictionary.priority}}" is-link value="{{taskPage.currentPriority}}" bindtap="clickPriority" />
   <van-cell title="{{dictionary.tag}}" is-link value="{{taskPage.tag}}" />
-  <van-cell title="{{dictionary.participant}}" is-link value="{{taskPage.participant}}" />
+  <van-cell title="{{dictionary.participant}}" is-link value="{{participant}}" />
 </van-cell-group>
 
   <!--Upload related images-->
-  <van-uploader class="uploader" file-list="{{ fileList }}" bindtap="upload" deletable="{{ true }}" max-count="9" bind:delete="deleteImg" disabled="{{true}}"/>
+  <van-uploader class="uploader" file-list="{{ fileList }}" bind:after-read="upload" deletable="{{ true }}" max-count="9" bind:delete="deleteImg"/>
 
   <van-divider />
 

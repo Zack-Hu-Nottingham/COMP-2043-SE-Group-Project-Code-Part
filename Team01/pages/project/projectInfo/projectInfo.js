@@ -49,8 +49,9 @@ Page({
     project: {},
     houseOwner: "",
     projectManager: "",
-    feedback: [],
+    // feedback: [],
     fileList: [],
+    cloudList: [],
 
     /**
      * Task Management's data
@@ -96,7 +97,10 @@ Page({
     id = options.id
 
 
-    this.getDetail()
+    this.getDetail().then(res =>{
+      console.log(res)
+    })
+    // this.getFileList(this.data.cloudList);
 
 
     /** 
@@ -368,29 +372,30 @@ Page({
   },
 
 
-  getDetail() {
-    db.collection('project')
-      .doc(id)
-      .get({
-        success: res => {
-          this.setData({
-              project: res.data,
-              name: res.data.name,
-              feedback: res.data.feedback,
-            }),
-            console.log(res.data.cloudList)
-          this.getFileList(res.data.cloudList);
+  async getDetail() {
+    return new Promise((resolve, reject) => {
+      db.collection('project')
+        .doc(id)
+        .get({
+          success: res => {
+            this.setData({
+                project: res.data,
+                name: res.data.name,
+                feedback: res.data.feedback,
+                cloudList: res.data.cloudList,
+              }),
 
-          wx.setNavigationBarTitle({
-              title: this.data.name,
-            }),
+            wx.setNavigationBarTitle({
+                title: this.data.name,
+              }),
 
             this.getHouseOwner()
-          this.getProjectManager()
-        },
-        fail: function (err) {
-          // console.log(err)
-        }
+            this.getProjectManager()
+          },
+          fail: function (err) {
+            // console.log(err)
+          }
+        })
       })
 
   },
@@ -405,13 +410,13 @@ Page({
         newList.push({
           "url": res.tempFilePath
         })
+        this.setData({
+          fileList: newList
+        })
         //console.log(res.tempFilePath)
       })
     }
-    console.log(newList)
-    this.setData({
-      fileList: newList
-    })
+    // console.log(fileList)
   },
 
   getHouseOwner() {
@@ -575,22 +580,16 @@ Page({
     })
   },
 
-  upload() {
-    wx.chooseImage({
-      sizeType: ['original', 'compressed'],
-      sourceType: ['album', 'camera'],
-      success: res => {
-        var fileList = this.data.fileList;
-        fileList.push({
-          url: res.tempFilePaths[0]
-        });
-        this.setData({
-          fileList: fileList
-        });
-        this.uploadImage(res.tempFilePaths[0]);
-        // console.log("成功选择图片",fileList);
-      }
+  upload(event){
+    const { file } = event.detail;
+    var fileList = this.data.fileList;
+    fileList.push({
+      url: file.url
     })
+    this.setData({
+      fileList: fileList
+    });
+    this.uploadImage(file.url)
   },
 
   uploadImage(fileURL) {

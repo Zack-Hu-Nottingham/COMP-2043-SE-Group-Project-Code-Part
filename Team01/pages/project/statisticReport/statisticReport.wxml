@@ -5,7 +5,7 @@
   <van-cell class="van-cell">
     <view class="parallin">
 
-      <van-circle class="circle" layer-color="#eeeeee" value="{{100 * (totalCompleted / totalTasks)}}" clockwise="{{ false }}" stroke-width="6">{{dictionary.completed}} {{numberUtil.numberFormat((totalCompleted/totalTasks)*100)}}%</van-circle>
+      <van-circle class="circle" layer-color="#eeeeee" value="{{100 * (totalCompleted / totalTasks)}}" clockwise="{{ false }}" stroke-width="6">{{dictionary.task_state[2]}} {{numberUtil.numberFormat((totalCompleted/totalTasks)*100)}}%</van-circle>
       
       <view class="overall">
         <view style="margin: 10rpx;">

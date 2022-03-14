@@ -22,7 +22,7 @@
     <van-cell title="{{ dictionary.house_owner }}" value="{{ houseOwner.nickName }}" />
     <van-cell title="{{ dictionary.project_manager }}" value="{{ projectManager.nickName }}" />
     
-    <view wx:if="{{userInfo.isManager == 1}}">
+    <view wx:if="{{userInfo.identity == 1}}">
       <van-field model:value="{{ project.projectDescription }}" right clearable label="{{ dictionary.description }}" type="textarea" placeholder="{{ project.projectDescription }}" border="{{ false }}" class="projectInfoDescriptionForTest" bind:blur="onProjectDescriptionBlur" autosize></van-field>
     </view>
 
@@ -32,7 +32,7 @@
   </van-cell-group>
 
   <van-cell-group inset title="{{dictionary.state_information}}">
-    <view wx:if="{{userInfo.isManager == 1}}">
+    <view wx:if="{{userInfo.id == 1}}">
       <van-cell title="{{dictionary.start_time}}" is-link value="{{ project.startTime }}" bindtap="onDateDisplay" class="projectInfoStartTimeForTest"/>
       <van-cell title="{{dictionary.end_time}}" is-link value="{{ project.endTime }}" bindtap="onDateDisplay" class="projectInfoEndTimeForTest"/>
     </view>
@@ -91,7 +91,7 @@
   </view>
 
   <!--Upload related images-->
-  <!-- <van-uploader class="uploader" file-list="{{ fileList }}" bindtap="upload" deletable="{{ true }}" max-count="9" bind:delete="deleteImg" disabled="{{true}}"/> -->
+  <van-uploader class="uploader" file-list="{{ fileList }}" bind:after-read="upload" deletable="{{ true }}" max-count="9" bind:delete="deleteImg"/>
 
   <van-divider />
 
@@ -132,7 +132,7 @@
         label="{{ item.startTime }} — {{ item.endTime }} "
         title="{{ item.name }}"
         link-type="navigateTo"
-        url="/pages/project/taskInfo/taskInfo?id={{item._id}}">
+        url="/pages/taskInfoPages/taskInfoForProjectManager/taskInfoForProjectManager?id={{item._id}}">
         
           <view>
             <van-tag color="#87CEFA" size="medium"><van-icon name="play"></van-icon>Progressing</van-tag>
@@ -143,14 +143,14 @@
   </van-collapse-item>
 
 
-  <van-collapse-item title="{{dictionary.reworking}}" name="reworking">
+  <!-- <van-collapse-item title="{{dictionary.reworking}}" name="reworking">
 
     <view wx:for="{{ reworking }}" wx:key="index">
       <van-cell clickable
         label="{{ item.startTime }} — {{ item.endTime }} "
         title="{{ item.name }}"
         link-type="navigateTo"
-        url="/pages/project/taskInfo/taskInfo?id={{item._id}}">
+        url="/pages/taskInfoPages/taskInfoForProjectManager/taskInfoForProjectManager?id={{item._id}}">
 
           <view>
             <van-tag color="#ffe1e1" text-color="#ad0000"  size="medium"><van-icon name="replay" />Reworking</van-tag>
@@ -159,7 +159,7 @@
         </van-cell>
     </view>
 
-</van-collapse-item>
+</van-collapse-item> -->
 
 
   <van-collapse-item title="{{dictionary.delayed}}" name="delayed">
@@ -169,7 +169,7 @@
         label="{{ item.startTime }} — {{ item.endTime }} "
         title="{{item.name}}"
         link-type="navigateTo"
-        url="/pages/project/taskInfo/taskInfo?id={{item._id}}">
+        url="/pages/taskInfoPages/taskInfoForProjectManager/taskInfoForProjectManager?id={{item._id}}">
 
           <view>
             <van-tag color="#ffe1e1" text-color="#ad0000"  size="medium"><van-icon name="warning-o" />Delayed</van-tag>
@@ -188,7 +188,7 @@
         label="{{ item.startTime }} — {{ item.endTime }} "
         title="{{ item.name }}"
         link-type="navigateTo"
-        url="/pages/project/taskInfo/taskInfo?id={{item._id}}">
+        url="/pages/taskInfoPages/taskInfoForProjectManager/taskInfoForProjectManager?id={{item._id}}">
 
           <view>
             <van-tag color="#D3D3D3" icon="fail" size="medium"><van-icon name="close"/>Unstarted</van-tag>
@@ -207,7 +207,7 @@
         label="{{ item.startTime }} — {{ item.endTime }} "
         title="{{ item.name }}"
         link-type="navigateTo"
-        url="/pages/project/taskInfo/taskInfo?id={{item._id}}">
+        url="/pages/taskInfoPages/taskInfoForProjectManager/taskInfoForProjectManager?id={{item._id}}">
 
           <view>
             <van-tag color="#32CD32" size="medium"><van-icon name="passed" />Finished</van-tag>

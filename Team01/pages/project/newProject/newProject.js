@@ -3,12 +3,18 @@ import Toast from '../../../miniprogram_npm/@vant/weapp/toast/toast'
 
 const languageUtils = require("../../../language/languageUtils");
 
-const templateLib = require("../../../template/template.js");
+const templateLib = require("../../../template/townhouse/Townhouse.js");
+
+const detachedLib = require("../../../template/detachedHouse/Detached_House.js");
+
+const GardenLib = require("../../../template/gardenVilla/Garden_Villa.js");
 
 const db = wx.cloud.database();
 const _ = db.command;
 
 var app = getApp();
+
+var start = "";
 
 Page({
   /**
@@ -45,11 +51,12 @@ Page({
     houseOwner: "",
     houseOwner_openid: '',
     participant: [],
+    participant_openid: [],
 
     project: "",
     task: [],
 
-    template: templateLib.template,
+    template: "",
   },
 
   /** 
@@ -81,7 +88,6 @@ Page({
     this.setData({
       language: lan
     })
-    console.log(this.getOpenid('Lokkk'));
   },
 
 
@@ -111,7 +117,6 @@ Page({
       url: '../../project/contactList/participantList/participantList',
     })
   },
-
   /** 
    *  choose template
    */
@@ -120,22 +125,16 @@ Page({
       url: '../projectTemplate/projectTemplate',
     })
   },
-  upload() {
-    wx.chooseImage({
-      count: 1,
-      sizeType: ['original', 'compressed'],
-      sourceType: ['album', 'camera'],
-      success: res => {
-        var fileList = this.data.fileList;
-        fileList.push({
-          url: res.tempFilePaths[0]
-        });
-        this.setData({
-          fileList: fileList
-        });
-        console.log("成功选择图片", fileList);
-      }
+  upload(event){
+    const { file } = event.detail;
+    var fileList = this.data.fileList;
+    fileList.push({
+      url: file.url
     })
+    this.setData({
+      fileList: fileList
+    });
+    // this.uploadImage(file.url)
   },
 
   uploadImage(fileURL) {
@@ -155,26 +154,13 @@ Page({
     })
   },
 
-  getOpenid(name) {
-    return new Promise((resolve, reject) => {
-      db.collection('user')
-        .where({
-          nickName: _.eq(name)
-        })
-        .get()
-        .then(res => {
-          this.setData({
-            houseOwner_openid: res.data[0]._openid,
-          })
-        })
-    })
-  },
-
 
   /** 
    * submit new project
    */
   formSubmit: function (e) {
+
+    this.ConfirmTemplate()
 
     if (this.data.name == "") {
       Toast(this.data.dictionary.null_name);
@@ -185,7 +171,6 @@ Page({
     } else if (this.data.selectedTemplate == "") {
       Toast(this.data.dictionary.null_template_setting)
     } else {
-      this.getOpenid(this.data.houseOwner);
 
       wx.cloud.database().collection('project')
         .add({
@@ -224,7 +209,6 @@ Page({
           for (var i = 0; i < this.data.fileList.length; i++) {
             this.uploadImage(this.data.fileList[i].url);
           }
-
 
           this.createTask()
           this.action();
@@ -307,14 +291,13 @@ Page({
   },
 
   onDateConfirm(event) {
-    const start = event.detail;
+    start = event.detail;
     var end = this.addDate(start, this.data.duration)
     this.setData({
       startDate: this.formatDate(start),
       endDate: this.formatDate(end),
     })
     this.onDateClose();
-
   },
 
   /** 
@@ -329,17 +312,16 @@ Page({
   },
 
   // modify the template accordingly
-  modifyTemplate() {
+  modifyTemplate(startTime) {
     for (var idx in this.data.template) {
       this.data.template[idx].belongTo = this.data.project
 
       /**
        * change time
        */
-      this.data.template[idx].startTime = this.data.template[idx].startTime
-      this.data.template[idx].endTime = this.data.template[idx].endTime
+      this.data.template[idx].startTime = this.addDate(startTime, this.data.template[idx].offset)
+      this.data.template[idx].endTime = this.addDate(this.data.template[idx].startTime, this.data.template[idx].duration)
     }
-
   },
 
   createTaskAccordingToTemplate(idx) {
@@ -358,15 +340,13 @@ Page({
           reject()
         })
     })
-
   },
 
   async createTask() {
 
-    this.modifyTemplate()
+    this.modifyTemplate(start)
 
     for (var idx in this.data.template) {
-      // console.log(idx)
       await this.createTaskAccordingToTemplate(idx)
     }
 
@@ -389,5 +369,21 @@ Page({
     this.setData({
       fileList
     })
+  },
+
+  ConfirmTemplate(){
+    if(this.data.selectedTemplate == "Townhouse Decoration"){
+      this.setData({
+        template: templateLib.townhouse,
+      })
+    }else if(this.data.selectedTemplate == "Detached Villa Decoration"){
+      this.setData({
+        template: detachedLib.detached_house,
+      })
+    }else if(this.data.selectedTemplate == "Garden Villa Decoration"){
+      this.setData({
+        template: GardenLib.garden_villa,
+      })
+    }
   }
 })

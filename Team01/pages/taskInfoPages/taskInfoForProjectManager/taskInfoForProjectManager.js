@@ -4,9 +4,7 @@ const languageUtils = require("../../../language/languageUtils");
 const db = wx.cloud.database();
 const _ = db.command;
 var id = '';
-/**
- * Identify the index list in the page of addComment as task/project
- */
+
 var taskComment = '1';
 
 Page({
@@ -26,15 +24,14 @@ Page({
 
     taskPage: {},
     belongTo: "",
+    participant: "",
 
     dateShow: false,
     priorityShow: false,
     feedback: [],
     fileList: [],
 
-    priority: [{
-        name: 'Highest',
-      },
+    priority: [
       {
         name: 'High'
       },
@@ -43,10 +40,7 @@ Page({
       },
       {
         name: 'Low'
-      },
-      {
-        name: 'Lowest'
-      },
+      }
     ],
   },
 
@@ -55,9 +49,7 @@ Page({
    */
   onLoad: function (options) {
 
-    /**
-     * Initial data of page
-     */
+
     var lan = wx.getStorageSync("languageVersion");
     this.initLanguage();
     this.setData({
@@ -71,6 +63,9 @@ Page({
 
 
     this.getDetail()
+
+    // this.updateComment();
+
   },
 
   /**
@@ -148,7 +143,9 @@ Page({
     //   date: `${this.formatDate(start)} - ${this.formatDate(end)}`,
     // });
 
-
+    /**
+     * cloud function
+     */
     wx.cloud.callFunction({
       name: 'updateDate',
       data: {
@@ -180,6 +177,10 @@ Page({
             belongTo: res.data.belongTo,
           });
           this.updateComment(res.data.feedback)
+          
+          this.getProjectName()
+          this.getParticipantName()
+
           wx.setNavigationBarTitle({
             title: res.data.name,
           });
@@ -188,7 +189,7 @@ Page({
           console.log('拉取任务信息请求失败', err)
         }
       })
-    //})
+    
   },
 
   onPriorityClose() {
@@ -332,22 +333,16 @@ Page({
     })
     // console.log(this.data.feedback)
   },
-  upload() {
-    wx.chooseImage({
-      sizeType: ['original', 'compressed'],
-      sourceType: ['album', 'camera'],
-      success: res => {
-        var fileList = this.data.fileList;
-        fileList.push({
-          url: res.tempFilePaths[0]
-        });
-        this.setData({
-          fileList: fileList
-        });
-        this.uploadImage(res.tempFilePaths[0]);
-        // console.log("成功选择图片",fileList);
-      }
+  upload(event){
+    const { file } = event.detail;
+    var fileList = this.data.fileList;
+    fileList.push({
+      url: file.url
     })
+    this.setData({
+      fileList: fileList
+    });
+    this.uploadImage(file.url)
   },
 
   uploadImage(fileURL) {
@@ -359,5 +354,38 @@ Page({
       },
       fail: console.error
     })
+  },
+
+  getProjectName() {
+    db.collection('project')
+    .doc(this.data.belongTo)
+    .field({
+      name: true,
+    })
+    .get()
+    .then(res => {
+      this.setData({belongTo: res.data.name})
+    })
+  },
+
+  
+
+  getParticipantName() {
+    db.collection('user')
+    .where({
+      _openid: this.data.taskPage.participant 
+    })
+    // .doc(this.data.taskPage.participant)
+    .field({
+      nickName: true,
+    })
+    .get()
+    .then(res => {
+      // console.log(res.data[0].nickName)
+      this.setData({
+        participant: res.data[0].nickName
+      })
+    })
+
   },
 })

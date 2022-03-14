@@ -1,5 +1,4 @@
 {
-    "setting": {},
     "condition": {
         "plugin": {
             "list": []
@@ -14,15 +13,8 @@
             "list": [
                 {
                     "name": "",
-                    "pathName": "pages/project/testDiagram/testDiagram",
-                    "query": "id=17e3426e622475721219644a00409a31",
-                    "launchMode": "default",
-                    "scene": null
-                },
-                {
-                    "name": "",
-                    "pathName": "pages/project/projectInfo/projectInfo",
-                    "query": "id=17e3426e622475721219644a00409a31",
+                    "pathName": "pages/project/projectInfoForProjectManager/projectInfoForProjectManager",
+                    "query": "id=617ef50c622de4370b4cb58e56f5b7fb",
                     "scene": null,
                     "launchMode": "default"
                 }

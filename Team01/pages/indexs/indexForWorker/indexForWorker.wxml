@@ -70,46 +70,46 @@
 
 <van-cell-group inset>
   <van-cell center icon="user-o" />
-  <van-cell center title="{{dictionary.user_name}}" is-link bind:click="showPopup"  value="{{name}}"/>
+  <van-cell center title="{{dictionary.user_name}}" value="{{userInfo.nickName}}" is-link clickable="true" bindtap="showPopup" />
   <van-popup show="{{ show }}" custom-style="width:75%; height: 30%;"bind:close="onClose">
 
-<van-cell-group style="padding-top: 80rpx">
-<van-field label="旧用户名" left-icon="contact" placeholder="{{ name }}" disabled border="{{ false }}">
-</van-field>
+    <van-cell-group style="padding-top: 80rpx">
+      <van-field model:value="{{ value }}" label="旧用户名" left-icon="contact" placeholder="{{ name }}" disabled border="{{ false }}">
+      </van-field>
 
-<van-field model:value="{{ value }}" label="新用户名" left-icon="contact" placeholder="{{ changetip }}" bindinput='userNameInput' border="{{ false }}">
-</van-field>
- </van-cell-group>
- <van-button class="van-button" plain round color="#1296db" type="primary" style="padding-top: 40rpx;padding-left:20% ;" bindtap="forNotice" >保存</van-button>
- <!--
- <van-dialog useslot id="van-dialog"></van-dialog>
--->
- <van-toast id="van-toast" />
-</van-popup>
+      <van-field value="{{ value }}" label="新用户名" left-icon="contact" placeholder="{{ changetip }}" bindinput='userNameInput' border="{{ false }}">
+      </van-field>
+    </van-cell-group>
 
-  <van-cell center title="{{ dictionary.identity }}" value="{{ dictionary.worker }}" />
+    <van-button class="van-button" round style="padding-top: 40rpx;padding-left:20% ;" type="info" bindtap="forNotice" >保存</van-button>
 
-  <van-cell center title="邀请用户" clickable="true" is-link bind:click="showPopup1">
+  <van-cell center title="{{ dictionary.invite_member }}" clickable="true" is-link bind:click="showPopup1">
   </van-cell>
   <van-popup show="{{ show1 }}" custom-style="width:75%; height: 32%;" bind:close="onClose1">
     <van-radio-group style="padding-left:20% ;"value="{{ radio }}" bind:change="onChange">
-      <van-radio style="padding-top: 20rpx;padding-left:20% ;" icon-size="55rpx" name="1">业主</van-radio>
-      <van-radio style="padding-top: 20rpx;padding-left:20% ;" icon-size="55rpx" name="2">工人</van-radio>
-      <van-radio style="padding-top: 20rpx;padding-left:20% ;" icon-size="55rpx" name="3">项目经理</van-radio>
+      <van-radio style="padding-top: 20rpx;padding-left:20% ;" icon-size="55rpx" name="1">{{dictionary.house_owner}}</van-radio>
+      <van-radio style="padding-top: 20rpx;padding-left:20% ;" icon-size="55rpx" name="2">{{dictionary.worker}}</van-radio>
+      <van-radio style="padding-top: 20rpx;padding-left:20% ;" icon-size="55rpx" name="3">{{dictionary.project_manager}}</van-radio>
     </van-radio-group>
-    <van-button class="button-share" plain round color="#1296db" type="primary" style="padding-top: 40rpx;padding-left:20% ;" open-type="share" bindtip="onShareAppMessage">分享</van-button>
+    <van-button class="button-share" plain round color="#1296db" type="primary" style="padding-top: 40rpx;padding-left:20% ;" open-type="share" bindtip="onShareAppMessage">{{dictionary.share}}</van-button>
+  </van-popup>
+
+  <van-cell center title="{{ dictionary.identity }}" value="{{ dictionary.worker }}" />
+  <van-cell title = ""/>
+
+  <!-- <van-cell center title="邀请用户" clickable="true" bindtap="onShareAppMessage">
+    <van-button round class="button-share" open-type="share"> 
+      <van-icon name="friends-o" />
+    </van-button>
+  </van-cell> -->
   </van-popup>
 </van-cell-group>
 
   <van-cell-group inset style="padding: 30rpx;">
     <van-cell center icon="setting-o"/>
-    <!-- <van-cell center title="{{dictionary.invite_member}}" is-link icon="" clickable="true" bindtap="onInviteMember"/> -->
     <van-cell center title="{{dictionary.language}}" value="{{languageList[language]}}" icon="" is-link clickable="true" bindtap="onChangeLan" class="settingForTest"/>
+    <van-cell title = ""/>
   </van-cell-group>
 
-<!-- 底部悬浮登出按钮 -->
-<!-- <van-sticky offset-top="{{ 570 }}">
-  <van-button hairline plain round block color="#DC143C" class="signOut" type="primary">{{dictionary.sign_out}}</van-button>
-</van-sticky> -->
 
 </view>
