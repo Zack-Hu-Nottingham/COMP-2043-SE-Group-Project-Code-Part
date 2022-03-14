@@ -23,6 +23,13 @@
                     "name": "",
                     "pathName": "pages/project/projectReport/projectReport",
                     "query": "id=617ef50c622de4370b4cb58e56f5b7fb",
+                    "launchMode": "default",
+                    "scene": null
+                },
+                {
+                    "name": "",
+                    "pathName": "pages/indexs/about/about",
+                    "query": "",
                     "scene": null,
                     "launchMode": "default"
                 }

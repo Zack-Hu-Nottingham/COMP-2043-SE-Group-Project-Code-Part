@@ -32,5 +32,6 @@
   flex-direction: column;
 }
 .van-cell-group {
-  margin-top: 50rpx;
+  /* margin-top: 50rpx;
+  padding-top: 200rpx; */
 }

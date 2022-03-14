@@ -61,6 +61,9 @@ var Languague = {
     official_phone: "Official Tel.",
     revisions: "Revisions",
     check_for_update: "Check for Updates",
+    group_member: "Group Member",
+    group_members: "Member",
+    group_leader: "Leader",
 
      // language setting page
     current_lan: "Current language",

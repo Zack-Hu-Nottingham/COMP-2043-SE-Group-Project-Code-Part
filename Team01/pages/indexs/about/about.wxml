@@ -3,17 +3,23 @@
   <image class="icon" mode="widthFix" src="../../../images/icon/icon2.png"/>
 </view>
 <view class="appName">
-  <text>Worktile</text>
+  <text>Team202101</text>
 </view>
 <view class="currentVersion">
   <text>{{dictionary.current_version}} 1.0.0</text>
 </view>
-<van-cell-group class="van-cell-group">
-<van-cell title="{{dictionary.official_phone}}" size="large">186-6335-8058</van-cell>
+<van-cell-group inset class="van-cell-group" title="{{dictionary.group_member}}">
+  <van-cell title="Zixiang Hu" label="{{dictionary.group_leader}}">ID: 20215538</van-cell>
+  <van-cell title="Yuzhe Zhang" label="{{dictionary.group_members}}">ID: 20215366</van-cell>
+  <van-cell title="Yizhou Liu" label="{{dictionary.group_members}}">ID: 20216921</van-cell>
+  <van-cell title="Yuanshi Wang" label="{{dictionary.group_members}}">ID: 20215278</van-cell>
+  <van-cell title="Yuhong Wei" label="{{dictionary.group_members}}">ID: 20217010</van-cell>
+  <van-cell title="Ming Kai" label="{{dictionary.group_members}}">ID: 20216414</van-cell>
+<!-- <van-cell title="{{dictionary.official_phone}}" size="large">186-6335-8058</van-cell>
 <van-cell title="{{dictionary.revisions}}" is-link size="large"></van-cell>
-<van-cell title="{{dictionary.check_for_update}}" clickable size="large"></van-cell>
+<van-cell title="{{dictionary.check_for_update}}" clickable size="large"></van-cell> -->
 </van-cell-group>
 <view class="bottomInfo">
-  <text class="info">2022 Worktile</text>
+  <text class="info">Team202101</text>
   <text class="info">https://worktile.com</text>
 </view>

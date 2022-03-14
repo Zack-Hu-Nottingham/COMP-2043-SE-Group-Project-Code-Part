@@ -61,6 +61,9 @@ var Languague = {
     official_phone: "官方电话",
     revisions: "历史版本",
     check_for_update: "检查更新",
+    group_member: "小组成员",
+    group_members: "组员",
+    group_leader: "组长",
 
      // language setting page
      current_lan: "当前语言",
