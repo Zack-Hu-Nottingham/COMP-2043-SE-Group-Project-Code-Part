@@ -24,6 +24,7 @@ Page({
     active: 1,
     currentTime: "",
     isProjectEmpty: true,
+    ifDot: false,
 
     /**
      * Store bylingual settings
@@ -117,13 +118,16 @@ Page({
    * Life cycle function - Listens for the page to complete its first rendering
    */
   onReady: function () {
-
   },
 
   /**
    * Life cycle function - Listens for page display
    */
   onShow: function () {
+    // this.getFeedbackInfo(app.globalData.userInfo._openid)
+    if(this.messageList!=null){
+      this.getFeedbackInfo(app.globalData.userInfo._openid)
+    }
     wx.hideHomeButton()
 
     /** 
@@ -256,15 +260,25 @@ Page({
         .where({
           _openid: _.eq(openid),
         })
-        .orderBy('createTime', 'desc')
+        .orderBy('time', 'desc')
         .get()
         .then(res => {
           // console.log(res.data)
           this.setData({
             messageList: res.data
           })
+          this.countIsReadNumber(res.data);
         })
     })
+  },
+  countIsReadNumber(msgList){
+    for(var i=0;i<msgList.length;i++){
+      if (msgList[i].isRead==0){
+        this.setData({
+          ifDot: true
+        })
+      }
+    }
   },
 
 
@@ -278,21 +292,21 @@ Page({
    * Click the message and change its state to isRead
    */
   clickToChangeIsRead(event) {
-    console.log(event)
+    var index = event.currentTarget.dataset.index;
+    this.data.messageList[index].isRead = 1;
+    
     // console.log(event.currentTarget.dataset.taskid)
     db.collection('feedback')
       .where({
         _id: event.currentTarget.dataset.taskid
       })
       .update({
-
         /** 
          * data passed in the data that needs to be updated locally
          */
         data: {
           isRead: 1
         }
-
       })
       .then(res => {
         console.log('revise isRead successfully', res)
@@ -392,7 +406,7 @@ Page({
         project: [],
         task: [],
       }),
-      this.getData()
+      this.getData(app.globalData.userInfo._openid)
   },
 
   updateState(){

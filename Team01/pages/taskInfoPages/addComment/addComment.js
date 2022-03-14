@@ -173,7 +173,9 @@ Page({
                          */
                         belongTo: this.data.id,
                         createTime: this.formatDate(new Date()),
+                        time: new Date(),
                         isRead: 0,
+                        owner: app.globalData.userInfo.nickName,
                     }
                 })
                 .then(res => {

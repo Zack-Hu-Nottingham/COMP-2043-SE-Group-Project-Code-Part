@@ -203,7 +203,8 @@ Page({
     db.collection('feedback')
     .where({
       belongTo: _.eq(id)
-    }).orderBy("startTime",'asc')
+    })
+    .orderBy('time', 'desc')
     .get({
       success: res=>{
         this.setData({

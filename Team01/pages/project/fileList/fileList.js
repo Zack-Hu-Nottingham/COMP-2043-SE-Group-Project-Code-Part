@@ -175,6 +175,9 @@ Page({
    * Life cycle function - Listens for page unload
    */
   onUnload: function () {
+    let pages = getCurrentPages();
+    let prePage = pages[pages.length-2];
+    prePage.onShow();
 
   },
 
