@@ -51,7 +51,6 @@ Page({
      */
     userInfo: {},
 
-    changetip: '请输入新用户名',
     name: "",
     show: false,
     value: '',

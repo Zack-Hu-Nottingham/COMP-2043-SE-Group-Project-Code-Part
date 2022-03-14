@@ -51,6 +51,9 @@ var Languague = {
      project_manager: "项目经理",
      share: "分享",
      save: "保存",
+     original_user_name: "旧用户名",
+     new_user_name: "新用户名",
+     changetip: "请输入新用户名",
 
     // about page
     current_version: "当前版本",

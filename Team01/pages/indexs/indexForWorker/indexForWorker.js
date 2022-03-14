@@ -44,7 +44,6 @@ Page({
      * More page's data
      */
 
-    changetip: '请输入新用户名',
     name: "",
     show: false,
     value: '',

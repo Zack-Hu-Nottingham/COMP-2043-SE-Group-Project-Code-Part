@@ -58,7 +58,6 @@ Page({
     filter: '',
     filterShow: false,
 
-    changetip: '请输入新用户名',
     name : "",
     show: false,
     show1: false,

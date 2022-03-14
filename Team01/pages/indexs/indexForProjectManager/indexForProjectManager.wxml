@@ -96,8 +96,8 @@
     <van-popup show="{{ show }}" custom-style="width:75%; height: 30%;"bind:close="onClose">
 
       <van-cell-group style="padding-top: 80rpx">
-        <van-field label="旧用户名" left-icon="contact" placeholder="{{ name }}" disabled border="{{ false }}"/>
-        <van-field value="{{ value }}" label="新用户名" left-icon="contact" placeholder="{{ changetip }}" bindinput='userNameInput' border="{{ false }}"/>
+        <van-field label="{{dictionary.original_user_name}}" left-icon="contact" placeholder="{{ name }}" disabled border="{{ false }}"/>
+        <van-field value="{{ value }}" label="{{dictionary.new_user_name}}" left-icon="contact" placeholder="{{ dictionary.changetip }}" bindinput='userNameInput' border="{{ false }}"/>
       </van-cell-group>
 
       <van-button class="van-button" plain round color="#1296db" type="primary" style="padding-top: 40rpx;padding-left:20% ;" bindtap="forNotice" >{{dictionary.save}}</van-button>
