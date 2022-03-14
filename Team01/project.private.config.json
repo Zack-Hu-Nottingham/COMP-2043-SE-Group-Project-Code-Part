@@ -16,6 +16,13 @@
                     "name": "",
                     "pathName": "pages/project/projectInfoForProjectManager/projectInfoForProjectManager",
                     "query": "id=617ef50c622f24230b885c363fd400ed",
+                    "launchMode": "default",
+                    "scene": null
+                },
+                {
+                    "name": "",
+                    "pathName": "pages/taskInfoPages/taskInfoForProjectManager/taskInfoForProjectManager",
+                    "query": "id=41ae62ef622f24230c530e4d4ee2ebfd",
                     "scene": null,
                     "launchMode": "default"
                 }
