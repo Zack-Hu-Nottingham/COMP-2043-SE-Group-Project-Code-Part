@@ -43,6 +43,7 @@ Page({
     ],
 
     fileList: [],
+    feedback: [],
   },
 
   /**
@@ -170,12 +171,12 @@ Page({
       .doc(id)
       .get()
       .then(res => {
-        console.log(res.data)
-        wx.setNavigationBarTitle({
-            title: res.data.name,
-          }),
-          this.getFileList(res.data.cloudList)
-
+          // console.log(res.data)
+          this.updateComment()
+          wx.setNavigationBarTitle({
+              title: res.data.name,
+            });
+          this.getFileList(res.data.cloudList)            
           this.setData({
             taskPage: res.data,
           })
@@ -215,22 +216,23 @@ Page({
   },
 
   getFileList(cloudPath) {
-    // console.log(cloudPath)
-    var newList = [];
-    for (var i = 0; i < cloudPath.length; i++) {
-      wx.cloud.downloadFile({
-        fileID: cloudPath[i]
-      }).then(res => {
-        newList.push({
-          "url": res.tempFilePath
+      // console.log(cloudPath)
+      var newList = [];
+      for (var i = 0; i < cloudPath.length; i++) {
+        wx.cloud.downloadFile({
+          fileID: cloudPath[i]
+        }).then(res => {
+          newList.push({
+            "url": res.tempFilePath
+          })
+          this.setData({
+            fileList: newList
+          })
+          //console.log(res.tempFilePath)
         })
-        this.setData({
-          fileList: newList
-        })
-        //console.log(res.tempFilePath)
-      })
-    }
-    // console.log(newList)
+      }
+      // console.log(newList)
+    
   },
 
   getParticipant() {

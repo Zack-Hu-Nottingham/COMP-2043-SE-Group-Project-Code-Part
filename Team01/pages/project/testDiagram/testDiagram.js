@@ -73,11 +73,6 @@ Page({
               url: '../projectInfo/projectInfo?id='+id,
             })
         }
-        else{
-            wx.redirectTo({
-                url: '../projectReport/projectReport?id='+id,
-              })
-        }
     },
 
     /**

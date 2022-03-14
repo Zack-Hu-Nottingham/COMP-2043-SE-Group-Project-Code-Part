@@ -47,8 +47,17 @@
 <!-- </view>  -->
 
 <!--Upload related images-->
-<van-uploader class="uploader" file-list="{{ fileList }}"  max-count="9" disabled="{{true}}" deletable="{{false}}" show-upload="{{false}}"/>
+<van-uploader class="uploader" file-list="{{ fileList }}"  max-count="9" disabled="{{true}}" show-upload="{{false}}"/>
 
+<van-divider contentPosition="center">{{dictionary.comment_list}}</van-divider>
+ 
+ <!-- feedback -->
+  <van-cell-group inset class="cell-group" wx:for="{{feedback}}" wx:key="index">
+  <view class="projectDelay">
+    <van-cell  title="{{item.type.name}}" label="{{item.description}}" clickable
+      link-type="navigateTo" url="/pages/project/fileList/fileList?id={{item._id}}">{{item.createTime}}</van-cell>
+  </view>
+  </van-cell-group>
 <van-sticky offset-top="{{ 570 }}">
   <van-button hairline plain round block type="info" bindtap="clickAddComment" class="addComment">{{dictionary.add_comment}}</van-button>
 </van-sticky>
