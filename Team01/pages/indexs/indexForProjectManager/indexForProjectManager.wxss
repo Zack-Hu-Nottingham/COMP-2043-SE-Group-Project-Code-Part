@@ -9,7 +9,8 @@
   }
 
   .notReadMessage {
-    --cell-background-color: antiquewhite ; 
+    --cell-background-color: antiquewhite ;
+    /* --cell-background-color: #B0E0E6 ; */
   }
 
 
