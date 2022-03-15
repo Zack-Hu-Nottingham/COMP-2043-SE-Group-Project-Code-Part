@@ -109,6 +109,7 @@ var Languague = {
    //  reworking: "重加工",
     related_photo: "相关照片",
     phase: "阶段",
+    
 
     // New task page
     task_name: "任务名称",
