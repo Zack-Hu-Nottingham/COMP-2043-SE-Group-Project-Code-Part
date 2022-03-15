@@ -4,10 +4,13 @@ import Toast from '../../../miniprogram_npm/@vant/weapp/toast/toast'
 const languageUtils = require("../../../language/languageUtils");
 
 const templateLib = require("../../../template/townhouse/Townhouse.js");
+const en_templateLib = require("../../../template/townhouse/en_Townhouse.js");
 
 const detachedLib = require("../../../template/detachedHouse/Detached_House.js");
+const en_detachedLib = require("../../../template/detachedHouse/en_Datached_House.js");
 
 const GardenLib = require("../../../template/gardenVilla/Garden_Villa.js");
+const en_GardenLib = require("../../../template/gardenVilla/en_Garden_Villa.js");
 
 const db = wx.cloud.database();
 const _ = db.command;
@@ -191,7 +194,6 @@ Page({
 
             projectDescription: this.data.description,
 
-            // projectManager: app.globalData.userInfo._openid,
             houseOwner: this.data.houseOwner_openid,
             participant: this.data.participant,
 
@@ -208,7 +210,6 @@ Page({
             currentPhase: 0,
             // feedback: [],
             fileList: [],
-
           }
         })
         .then(res => {
@@ -229,10 +230,7 @@ Page({
         .catch(res => {
           console.log('新建项目失败，请联系管理员', res)
         })
-
-
     }
-
   },
 
   updateOwners(res_id){
@@ -349,13 +347,13 @@ Page({
     return d.getFullYear() + '-' + m + '-' + d.getDate();
   },
 
-  // modify the template accordingly
+  // Modify the template according to the start time of project
   modifyTemplate(startTime) {
     for (var idx in this.data.template) {
       this.data.template[idx].belongTo = this.data.project
 
       /**
-       * change time
+       * Change time
        */
       this.data.template[idx].startTime = this.addDate(startTime, this.data.template[idx].offset)
       this.data.template[idx].endTime = this.addDate(this.data.template[idx].startTime, this.data.template[idx].duration)
@@ -380,6 +378,7 @@ Page({
     })
   },
 
+  // Create a list of tasks according to the template
   async createTask() {
 
     this.modifyTemplate(start)
@@ -409,19 +408,42 @@ Page({
     })
   },
 
+  // Select template according to current language setting
   ConfirmTemplate(){
-    if(this.data.selectedTemplate == "Townhouse Decoration"){
-      this.setData({
-        template: templateLib.townhouse,
-      })
-    }else if(this.data.selectedTemplate == "Detached Villa Decoration"){
-      this.setData({
-        template: detachedLib.detached_house,
-      })
-    }else if(this.data.selectedTemplate == "Garden Villa Decoration"){
-      this.setData({
-        template: GardenLib.garden_villa,
-      })
+    if(this.data.language == 0) {
+      if(this.data.selectedTemplate == "Townhouse Decoration"){
+        this.setData({
+          template: templateLib.townhouse,
+        })
+      }else if(this.data.selectedTemplate == "Detached Villa Decoration"){
+        this.setData({
+          template: detachedLib.detached_house,
+        })
+      }else if(this.data.selectedTemplate == "Garden Villa Decoration"){
+        this.setData({
+          template: GardenLib.garden_villa,
+        })
+      }
+      // const en_templateLib = require("../../../template/townhouse/en_Townhouse.js");
+      // const en_GardenLib = require("../../../template/gardenVilla/en_Garden_Villa.js");
+      // const en_detachedLib = require("../../../template/detachedHouse/en_Detached_House.js");
+      
+
+    } else {
+      if(this.data.selectedTemplate == "Townhouse Decoration"){
+        this.setData({
+          template: en_templateLib.en_townhouse,
+        })
+      }else if(this.data.selectedTemplate == "Detached Villa Decoration"){
+        this.setData({
+          template: en_detachedLib.en_detached_house,
+        })
+      }else if(this.data.selectedTemplate == "Garden Villa Decoration"){
+        this.setData({
+          template: en_GardenLib.en_garden_villa,
+        })
+      }
     }
+    
   }
 })

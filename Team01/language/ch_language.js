@@ -119,6 +119,7 @@ var Languague = {
     project_name: "项目名称",
     enter_name: "输入名称",
     house_template: ["联排别墅", "独立式别墅", "花园洋房式住宅"],
+    house_template_description: ["联排别墅的前后都有自己独立的花园，还有一个专门的停车位或车库。", "独立别墅是一个具有高度私密性的独立房屋。它上面有私人空间，下面有私人花园区和地下室。", "花园别墅拥有私人花园和大面积的平面图，提供高水平的生活舒适度。"],
     choose_template: "选择模板",
     choose_start_time: "选择开始时间",
     expetced_end_time:"预计结束时间",

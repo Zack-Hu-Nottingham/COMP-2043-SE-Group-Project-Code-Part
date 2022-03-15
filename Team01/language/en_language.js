@@ -120,6 +120,7 @@ var Languague = {
     project_name: "Project Name",
     enter_name: "Enter name...",
     house_template: ["Townhouse Decoration", "Detached Villa Decoration", "Garden Villa Decoration"],
+    house_template_description: ["Townhouses have their own separate gardens to the front and rear, plus a dedicated parking space or garage.", "Detached Villa is a detached house with a high degree of privacy. It has private space above, private garden area and basement below.", "Garden Villa has private gardens and large floor plans for a high level of living comfort."],
     choose_template: "Choose Template",
     choose_start_time: "Choose start time",
     expetced_end_time: "Expected end time",
