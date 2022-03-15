@@ -293,6 +293,11 @@ Page({
    */
   clickToChangeIsRead(event) {
     var index = event.currentTarget.dataset.index;
+    var list = this.data.messageList;
+    list[index].isRead = 1;
+    this.setData({
+      messageList: list
+    })
     this.data.messageList[index].isRead = 1;
     
     // console.log(event.currentTarget.dataset.taskid)
