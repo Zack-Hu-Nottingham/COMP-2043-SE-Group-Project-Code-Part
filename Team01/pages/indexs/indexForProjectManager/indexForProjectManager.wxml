@@ -41,7 +41,7 @@
         <van-cell class="notReadMessage" title="{{item.owner}}" clickable link-type="navigateTo" url="/pages/project/fileList/fileList?id={{item._id}}" label="{{item.type.name}}: {{item.description}}" value="{{item.createTime}}" id="{{item.owner}}"  bindtap="clickToChangeIsRead" data-index="{{index}}" data-isRead="{{item.isRead}}" data-taskID="{{item._id}}" class="messageForTest"/>
       </view>
 
-      <view wx:elif="{{item.isRead != 0}}">
+      <view wx:else>
         <van-cell  title="{{item.owner}}" clickable
         link-type="navigateTo" url="/pages/project/fileList/fileList?id={{item.belongTo}}&index={{index}}" label="{{item.type.name}}: {{item.description}}" value="{{item.createTime}}" id="{{item.owner}}" class="messageForTest" bindtap="clickToChangeIsRead" data-index="{{index}}"  data-isRead="{{item.isRead}}" data-taskID="{{item._id}}"/>
       </view>

@@ -13,7 +13,7 @@ var Languague = {
      new_project: "新项目",
 
      // message page
-     notification: "通知",
+     notification: "最新通知",
      recent_message: "最近的消息",
      no_feedback: "暂无反馈",
 

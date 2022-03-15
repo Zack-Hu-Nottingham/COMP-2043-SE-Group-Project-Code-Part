@@ -293,7 +293,13 @@ Page({
    */
   clickToChangeIsRead(event) {
     var index = event.currentTarget.dataset.index;
-    this.data.messageList[index].isRead = 1;
+    var list = this.data.messageList;
+    list[index].isRead = 1;
+    this.setData({
+      messageList: list
+    })
+    this.countIsReadNumber(list);
+    // this.data.messageList[index].isRead = 1;
     
     // console.log(event.currentTarget.dataset.taskid)
     db.collection('feedback')

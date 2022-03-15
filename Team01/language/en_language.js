@@ -13,7 +13,7 @@ var Languague = {
     new_project: "New Project",
 
     // message page
-    notification: "Notification",
+    notification: "Newest Notification",
     recent_message: "Recent Message",
     no_feedback: "No feedback",
 
