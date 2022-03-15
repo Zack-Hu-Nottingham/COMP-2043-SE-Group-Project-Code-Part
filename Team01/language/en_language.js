@@ -10,6 +10,7 @@ var Languague = {
     project_info: "Project Information",
     page_name_for_pm: ['Message', 'Project', 'More'],
     page_name: ['Dashboard', 'More'],
+    new_project: "New Project",
 
     // message page
     notification: "Notification",
@@ -157,6 +158,8 @@ var Languague = {
     null_name: "Name is null",
     null_date_setting: "No date setting",
     null_template_setting: "No template selected",
+    null_house_owner: "No house owner selected",
+    null_participant: "No participant selected",
     upload_image_success: "Upload image successfully",
     delete_image_success: "Delete image successfully",
     

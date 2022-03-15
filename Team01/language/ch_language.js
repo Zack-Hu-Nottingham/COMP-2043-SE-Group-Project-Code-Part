@@ -10,6 +10,7 @@ var Languague = {
      project_info: "项目信息",
      page_name_for_pm: ['消息', '项目', '更多'],
      page_name: ['首页', '更多'],
+     new_project: "新项目",
 
      // message page
      notification: "通知",
@@ -156,6 +157,8 @@ var Languague = {
     null_name: "名称为空",
     null_date_setting: "未设置日期",
     null_template_setting: "未选择模板",
+    null_house_owner: "未选择房主",
+    null_participant: "未选择参与者",
     upload_image_success: "上传图片成功",
     delete_image_success: "删除图片成功",
 

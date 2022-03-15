@@ -89,6 +89,10 @@ Page({
     this.setData({
       language: lan
     })
+
+    wx.setNavigationBarTitle({
+      title: this.data.dictionary.new_project,
+    })
   },
 
 
@@ -171,6 +175,10 @@ Page({
       Toast(this.data.dictionary.submitErrMsg2);
     } else if (this.data.selectedTemplate == "") {
       Toast(this.data.dictionary.null_template_setting)
+    } else if (this.data.houseOwner == "" ) {
+      Toast(this.data.dictionary.null_house_owner)
+    } else if (this.data.participant.length == 0) {
+      Toast(this.data.dictionary.null_participant)
     } else {
 
       wx.cloud.database().collection('project')
