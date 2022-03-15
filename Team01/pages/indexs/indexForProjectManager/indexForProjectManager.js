@@ -298,7 +298,8 @@ Page({
     this.setData({
       messageList: list
     })
-    this.data.messageList[index].isRead = 1;
+    this.countIsReadNumber(list);
+    // this.data.messageList[index].isRead = 1;
     
     // console.log(event.currentTarget.dataset.taskid)
     db.collection('feedback')
