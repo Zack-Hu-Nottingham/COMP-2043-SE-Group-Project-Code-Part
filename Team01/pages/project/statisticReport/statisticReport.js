@@ -43,6 +43,10 @@ Page({
      */
 
     this.getData(app.globalData.userInfo._openid)
+
+    wx.setNavigationBarTitle({
+      title: this.data.dictionary.statistic_report,
+    })
   },
 
   /** 
@@ -189,7 +193,7 @@ Page({
    */
   clickProject(event) {
     wx.navigateTo({
-      url: '../../project/projectInfo/projectInfo?id=' + event.currentTarget.dataset.id,
+      url: '../../project/projectInfoForProjectManager/projectInfoForProjectManager?id=' + event.currentTarget.dataset.id,
     })
   },
 
