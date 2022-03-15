@@ -1,6 +1,7 @@
 // pages/project/newProject/newProject.js
 import Toast from '../../../miniprogram_npm/@vant/weapp/toast/toast'
 
+const Utils = require("../../../utils/util");
 const languageUtils = require("../../../language/languageUtils");
 
 const templateLib = require("../../../template/townhouse/Townhouse.js");
@@ -322,8 +323,8 @@ Page({
 
   formatDate(date) {
     date = new Date(date);
-    // return `${date.getMonth() + 1}/${date.getDate()}`;
-    return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+    // return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+    return Utils.formatDate(date);
   },
 
   onDateConfirm(event) {
@@ -344,7 +345,8 @@ Page({
     var d = new Date(date);
     d.setDate(d.getDate() + days);
     var m = d.getMonth() + 1;
-    return d.getFullYear() + '-' + m + '-' + d.getDate();
+    //return d.getFullYear() + '-' + m + '-' + d.getDate();
+    return [d.getFullYear(), m, d.getDate()].map(Utils.formatNumber).join('-')
   },
 
   // Modify the template according to the start time of project
