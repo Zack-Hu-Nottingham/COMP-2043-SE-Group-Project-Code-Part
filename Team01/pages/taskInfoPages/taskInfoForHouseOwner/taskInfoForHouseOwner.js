@@ -3,10 +3,6 @@ const languageUtils = require("../../../language/languageUtils");
 const db = wx.cloud.database();
 const _ = db.command;
 var id = '';
-/**
- * Identify the index list in the page of addComment as task/project
- */
-var taskComment = '1';
 
 Page({
 
@@ -262,7 +258,7 @@ Page({
    */
   clickAddComment(event) {
     wx.navigateTo({
-      url: '../addComment/addComment?id=' + id + '&index=' + taskComment,
+      url: '../addComment/addComment?id=' + id + '&projectId=' + this.data.taskPage.belongTo,
     })
   },
 

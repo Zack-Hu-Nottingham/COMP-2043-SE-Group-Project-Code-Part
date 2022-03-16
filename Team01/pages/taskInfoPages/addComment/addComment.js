@@ -28,6 +28,7 @@ Page({
         cloudPath: [],
         details: '',
         id: '',
+        project_id: '',
         feedback_id: '',
         // commentPage: '',
         isLoading: false,
@@ -41,6 +42,7 @@ Page({
 
         this.setData({
             id: options.id,
+            project_id: options.projectId,
             // commentPage: options.index,
         })
         db.collection('task').doc(options.id).get().then(res => {
@@ -172,6 +174,7 @@ Page({
                          *  belonged task
                          */
                         belongTo: this.data.id,
+                        projectId: this.data.project_id,
                         createTime: this.formatDate(new Date()),
                         time: new Date(),
                         isRead: 0,

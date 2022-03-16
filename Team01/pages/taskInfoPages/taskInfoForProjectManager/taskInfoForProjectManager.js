@@ -204,7 +204,7 @@ Page({
    */
   clickAddComment(event) {
     wx.navigateTo({
-      url: '../addComment/addComment?id=' + id + '&index=' + taskComment,
+      url: '../addComment/addComment?id=' + id + '&projectId=' + this.data.taskPage.belongTo,
     })
   },
 

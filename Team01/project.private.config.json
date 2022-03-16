@@ -30,6 +30,13 @@
                     "name": "",
                     "pathName": "pages/taskInfoPages/taskInfoForHouseOwner/taskInfoForHouseOwner",
                     "query": "id=617ef50c622f24230b885c41102e3b49",
+                    "launchMode": "default",
+                    "scene": null
+                },
+                {
+                    "name": "",
+                    "pathName": "pages/taskInfoPages/taskInfoForHouseOwner/taskInfoForHouseOwner",
+                    "query": "id=54ad1eea622f242316258cb93d0fcb7c",
                     "scene": null,
                     "launchMode": "default"
                 }
