@@ -286,10 +286,10 @@ Page({
    * Click the message and change its state to isRead
    */
   clickToChangeIsRead(event) {
-    console.log(event)
+    // console.log(event)
     var index = event.currentTarget.dataset.index;
     var list = this.data.messageList;
-    console.log(list[index])
+    // console.log(list[index])
     list[index].isRead = 1;
     this.setData({
       messageList: list
@@ -428,8 +428,8 @@ Page({
         this.setData({
           updateIndex: this.data.totalTask / 20,
         })
-        console.log(this.data.totalTask)
-        console.log(parseInt(this.data.updateIndex))
+        // console.log(this.data.totalTask)
+        // console.log(parseInt(this.data.updateIndex))
 
         for(var i = 0; i <= parseInt(this.data.updateIndex); i++){
           db.collection('task')
