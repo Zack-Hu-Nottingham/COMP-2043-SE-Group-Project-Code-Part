@@ -320,7 +320,7 @@ Page({
           })
           .get({
             success: res => {
-              // console.log(res.data)
+              console.log(res.data)
               newList.push(res.data[0])
               // console.log(newList)
               this.setData({
