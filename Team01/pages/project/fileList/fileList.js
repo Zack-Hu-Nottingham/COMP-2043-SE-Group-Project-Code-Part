@@ -41,14 +41,14 @@ Page({
     this.setData({
       language: lan
     })
-    // console.log(options.id)
+    console.log(options)
     db.collection('feedback')
       .where({
         _id: options.id
       })
       .get({
         success: res => {
-          // console.log(res.data)
+          console.log(res.data)
           this.setData({
             feedback: res.data[0]
           });

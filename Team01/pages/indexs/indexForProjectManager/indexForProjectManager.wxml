@@ -19,17 +19,18 @@
     <van-empty description="{{dictionary.no_feedback}}" />
   </view>
 
+  <!-- If the message list is not empty -->
   <view wx:elif="{{messageList.length != 0}}">
     <view wx:if="{{messageList[0].isRead == 0}}" class="notReadMessage">
       <van-cell-group inset style="padding: 30rpx;" class="notReadMessage">
-        <van-cell center title="{{dictionary.notification}}" icon="bullhorn-o" size="large" label="{{messageList[0].type.name}}: {{messageList[0].description}}" value="{{messageList[0].createTime}}" clickable="true" bindtap="clickToChangeIsRead" class="notReadMessage" data-taskID="{{messageList[0]._id}}">
+        <van-cell center title="{{dictionary.notification}}" icon="bullhorn-o" size="large" label="{{messageList[0].type.name}}: {{messageList[0].description}}" value="{{messageList[0].createTime}}" clickable="true" bindtap="clickToChangeIsRead" class="notReadMessage" data-taskID="{{messageList[0]._id}}" data-index="0">
        </van-cell>
      </van-cell-group>
     </view>
 
     <view wx:elif="{{messageList[0].isRead != 0}}">
       <van-cell-group inset style="padding: 30rpx;">
-        <van-cell center title="{{dictionary.notification}}" icon="bullhorn-o" size="large" label="{{messageList[0].type.name}}: {{messageList[0].description}}" value="{{messageList[0].createTime}}" clickable="true" bindtap="clickToChangeIsRead" data-taskID="{{messageList[0]._id}}" >
+        <van-cell center title="{{dictionary.notification}}" icon="bullhorn-o" size="large" label="{{messageList[0].type.name}}: {{messageList[0].description}}" value="{{messageList[0].createTime}}" clickable="true" bindtap="clickToChangeIsRead" data-taskID="{{messageList[0]._id}}" data-index="0">
        </van-cell>
      </van-cell-group>
     </view>
@@ -43,7 +44,7 @@
 
       <view wx:else>
         <van-cell  title="{{item.owner}}" clickable
-        link-type="navigateTo" url="/pages/project/fileList/fileList?id={{item.belongTo}}&index={{index}}" label="{{item.type.name}}: {{item.description}}" value="{{item.createTime}}" id="{{item.owner}}" class="messageForTest" bindtap="clickToChangeIsRead" data-index="{{index}}"  data-isRead="{{item.isRead}}" data-taskID="{{item._id}}"/>
+        link-type="navigateTo" url="/pages/project/fileList/fileList?id={{item._id}}&index={{index}}" label="{{item.type.name}}: {{item.description}}" value="{{item.createTime}}" id="{{item.owner}}" class="messageForTest" bindtap="clickToChangeIsRead" data-index="{{index}}"  data-isRead="{{item.isRead}}" data-taskID="{{item._id}}"/>
       </view>
     </view>
   </van-cell-group>

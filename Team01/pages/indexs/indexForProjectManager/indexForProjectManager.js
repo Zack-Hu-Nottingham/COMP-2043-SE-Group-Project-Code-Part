@@ -282,18 +282,14 @@ Page({
   },
 
 
-  clickMessage(event) {
-    wx.navigateTo({
-      url: '../message/message/message?sender=' + event.target.id,
-    })
-  },
-
   /** 
    * Click the message and change its state to isRead
    */
   clickToChangeIsRead(event) {
+    console.log(event)
     var index = event.currentTarget.dataset.index;
     var list = this.data.messageList;
+    console.log(list[index])
     list[index].isRead = 1;
     this.setData({
       messageList: list
