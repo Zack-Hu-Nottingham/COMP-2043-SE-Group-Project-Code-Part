@@ -27,7 +27,6 @@
        </van-cell>
      </van-cell-group>
     </view>
-
     <view wx:elif="{{messageList[0].isRead != 0}}">
       <van-cell-group inset style="padding: 30rpx;">
         <van-cell center title="{{dictionary.notification}}" icon="bullhorn-o" size="large" label="{{messageList[0].type.name}}: {{messageList[0].description}}" value="{{messageList[0].createTime}}" clickable="true" bindtap="clickToChangeIsRead" data-taskID="{{messageList[0]._id}}" data-index="0">
@@ -35,7 +34,7 @@
      </van-cell-group>
     </view>
 
-  <van-cell-group inset style="padding: 30rpx;" title="{{dictionary.recent_message}}">
+  <van-cell-group inset title="{{dictionary.recent_message}}">
   
     <view wx:for="{{messageList}}" wx:key="index">
       <view wx:if="{{item.isRead == 0}}" class="notReadMessage" >
