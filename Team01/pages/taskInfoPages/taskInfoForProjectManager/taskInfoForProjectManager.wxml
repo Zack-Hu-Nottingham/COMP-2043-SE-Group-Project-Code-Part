@@ -3,8 +3,8 @@
 </van-cell-group>
 
 
-<van-cell-group inset style="padding: 30rpx" >
-  <van-cell title="{{dictionary.start_time}}" is-link value="{{taskPage.startTime}}" bindtap="onDateDisplay" class="startTimeForTest"/>
+<van-cell-group inset style="padding: 30rpx">
+  <van-cell title="{{dictionary.start_time}}" is-link value="{{taskPage.startTime}}" bindtap="onDateDisplay" class="startTimeForTest" />
   <van-cell title="{{dictionary.end_time}}" is-link value="{{taskPage.endTime}}" bindtap="onDateDisplay" />
 </van-cell-group>
 
@@ -24,35 +24,22 @@
 </van-cell-group>
 
 <van-divider contentPosition="center">{{dictionary.related_photo}}</van-divider>
-  <!--Upload related images-->
-  <van-uploader class="uploader" file-list="{{ fileList }}" bind:after-read="upload" deletable="{{ true }}" max-count="9" bind:delete="deleteImg"/>
+<!--Upload related images-->
+<van-uploader class="uploader" file-list="{{ fileList }}" bind:after-read="upload" deletable="{{ true }}" max-count="9" bind:delete="deleteImg" />
 
-  <van-divider contentPosition="center">{{dictionary.comment_list}}</van-divider>
- 
- <!-- feedback -->
-  <van-cell-group inset class="cell-group" wx:for="{{feedback}}" wx:key="index">
+<van-divider contentPosition="center">{{dictionary.comment_list}}</van-divider>
+
+<!-- feedback -->
+<van-cell-group inset class="cell-group" wx:for="{{feedback}}" wx:key="index">
   <view class="projectDelay">
- 
-      <van-cell  title="{{item.type.name}}" label="{{item.description}}" clickable
-      link-type="navigateTo" url="/pages/project/fileList/fileList?id={{item.id}}">{{item.createTime}}</van-cell>
+    <van-cell title="{{item.type.name}}" label="{{item.description}}" clickable link-type="navigateTo" url="/pages/project/fileList/fileList?id={{item.id}}">{{item.createTime}}</van-cell>
   </view>
-  </van-cell-group>
+</van-cell-group>
 
-  <!-- <van-sticky offset-top="{{ 0 }}">
+<!-- <van-sticky offset-top="{{ 0 }}">
     <van-button hairline plain round block type="info" bindtap="clickAddComment" class="addComment">{{dictionary.add_comment}}</van-button>
   </van-sticky> -->
 
-<van-action-sheet
-  show="{{ priorityShow }}"
-  actions="{{ priority }}"
-  bind:close="onPriorityClose"
-  bind:select="onPrioritySelect"
-/>
+<van-action-sheet show="{{ priorityShow }}" actions="{{ priority }}" bind:close="onPriorityClose" bind:select="onPrioritySelect" />
 
-<van-calendar
-  show="{{ dateShow }}"
-  title="choose period"
-  type="range"
-  bind:close="onClose"
-  bind:confirm="onConfirm"
-/>
+<van-calendar show="{{ dateShow }}" title="choose period" type="range" bind:close="onClose" bind:confirm="onConfirm" />
