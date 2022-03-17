@@ -10,9 +10,9 @@ Page({
    * Initial data of page
    */
   data: {
-     /**
-   * Store bylingual settings
-   */
+    /**
+     * Store bylingual settings
+     */
     dictionary: {},
     language: 0,
     languageList: ["简体中文", "English"],
@@ -42,7 +42,7 @@ Page({
     this.setData({
       language: lan
     })
-    
+
     console.log(options)
     db.collection('feedback')
       .where({
@@ -57,7 +57,7 @@ Page({
           this.getBelongTo();
         }
       })
-   
+
 
     wx.setNavigationBarTitle({
       title: this.data.navigationBar,
@@ -79,10 +79,10 @@ Page({
         .get({
           success: res => {
             console.log(res.data[0]),
-            this.setData({
-                  phase: res.data[0].phase,
-                  feedbackBelongToTask: res.data[0].name
-                })
+              this.setData({
+                phase: res.data[0].phase,
+                feedbackBelongToTask: res.data[0].name
+              })
             //  console.log(res.data[0].phase)
             // this.getPhase(res.data[0].phase);
             db.collection('project')
@@ -114,6 +114,7 @@ Page({
                         })
                       }
                     })
+
                 }
               })
           },
@@ -183,7 +184,7 @@ Page({
    */
   onUnload: function () {
     let pages = getCurrentPages();
-    let prePage = pages[pages.length-2];
+    let prePage = pages[pages.length - 2];
     prePage.onShow();
 
   },
