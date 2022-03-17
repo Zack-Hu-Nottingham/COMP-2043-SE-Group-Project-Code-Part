@@ -336,24 +336,22 @@ Page({
   
   getList() {
     var newList = [];
-    // console.log("SSSSS")
-    // console.log(this.data.taskPage)
-    for (var i = 0; i < this.data.taskPage.feedback.length; i++) {
       db.collection('feedback')
         .where({
-          _id: this.data.taskPage.feedback[i]._id
+          belongTo: this.data.taskPage._id
         })
         .get({
           success: res => {
-            newList.push(res.data[0])
-           
+            
+            for (var i = 0; i < res.data.length; i++) {
+            newList.push(res.data[i])
           }
+          this.setData({
+            feedback: newList
+          })
+        }
         })
-    }
-    this.setData({
-      feedback: newList
-    })
-    console.log(this.data.feedback)
+    
   },
   upload(event){
     const { file } = event.detail;

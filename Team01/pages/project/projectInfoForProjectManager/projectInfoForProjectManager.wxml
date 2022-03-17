@@ -101,7 +101,7 @@
   <van-cell-group inset class="cell-group" wx:for="{{ feedback }}" wx:key="index">
   <view class="projectDelay">
     <van-cell  title="{{item.type.name}}" label="{{item.details}}" clickable
-      link-type="navigateTo" url="/pages/project/fileList/fileList?id={{item.belongTo}}&index={{index}}">{{item.createTime}}</van-cell>
+      link-type="navigateTo" url="/pages/project/fileList/fileList?id={{item._id}}">{{item.createTime}}</van-cell>
   </view>
   </van-cell-group>
  <!--

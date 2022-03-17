@@ -297,13 +297,18 @@ Page({
   getFeedback() {
     db.collection('feedback')
       .where({
-        belongToProject: id, 
+        projectId: id, 
       })
       .get({
         success: res => {
+          var newList = []
+          for (var i = 0; i < res.data.length; i++) {
+            newList.push(res.data[i])
+          }
           this.setData({
-              feedback: res.data.feedback,
+              feedback: newList,
             })
+            console.log(feedback)
         },
         fail: function (err) {
           // console.log(err)
