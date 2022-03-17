@@ -10,6 +10,7 @@ var Languague = {
     project_info: "Project Information",
     page_name_for_pm: ['Message', 'Project', 'More'],
     page_name: ['Dashboard', 'More'],
+    new_project: "New Project",
 
     // message page
     notification: "Newest Notification",
@@ -119,6 +120,7 @@ var Languague = {
     project_name: "Project Name",
     enter_name: "Enter name...",
     house_template: ["Townhouse Decoration", "Detached Villa Decoration", "Garden Villa Decoration"],
+    house_template_description: ["Townhouses have their own separate gardens to the front and rear, plus a dedicated parking space or garage.", "Detached Villa is a detached house with a high degree of privacy. It has private space above, private garden area and basement below.", "Garden Villa has private gardens and large floor plans for a high level of living comfort."],
     choose_template: "Choose Template",
     choose_start_time: "Choose start time",
     expetced_end_time: "Expected end time",
@@ -157,6 +159,8 @@ var Languague = {
     null_name: "Name is null",
     null_date_setting: "No date setting",
     null_template_setting: "No template selected",
+    null_house_owner: "No house owner selected",
+    null_participant: "No participant selected",
     upload_image_success: "Upload image successfully",
     delete_image_success: "Delete image successfully",
     

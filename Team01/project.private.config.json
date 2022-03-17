@@ -14,20 +14,31 @@
             "list": [
                 {
                     "name": "",
+<<<<<<< Updated upstream
                     "pathName": "pages/project/projectInfoForProjectManager/projectInfoForProjectManager",
                     "query": "id=617ef50c622f24230b885c363fd400ed",
                     "launchMode": "default",
+=======
+                    "pathName": "pages/project/testDiagram/testDiagram",
+                    "query": "id=17e3426e622475721219644a00409a31",
+>>>>>>> Stashed changes
                     "scene": null
                 },
                 {
                     "name": "",
+<<<<<<< Updated upstream
                     "pathName": "pages/taskInfoPages/taskInfoForProjectManager/taskInfoForProjectManager",
                     "query": "id=41ae62ef622f24230c530e4d4ee2ebfd",
                     "launchMode": "default",
+=======
+                    "pathName": "pages/project/projectInfo/projectInfo",
+                    "query": "id=17e3426e622c7d231318b58a66e93e4c",
+>>>>>>> Stashed changes
                     "scene": null
                 },
                 {
                     "name": "",
+<<<<<<< Updated upstream
                     "pathName": "pages/taskInfoPages/taskInfoForHouseOwner/taskInfoForHouseOwner",
                     "query": "id=617ef50c622f24230b885c41102e3b49",
                     "launchMode": "default",
@@ -39,6 +50,23 @@
                     "query": "id=54ad1eea622f242316258cb93d0fcb7c",
                     "scene": null,
                     "launchMode": "default"
+=======
+                    "pathName": "pages/project/taskInfoForProjectManager/taskInfoForProjectManager",
+                    "query": "id=17e3426e622c7d231318b58a66e93e4c",
+                    "scene": null
+                },
+                {
+                    "name": "",
+                    "pathName": "pages/project/taskInfoForHouseOwner/taskInfoForHouseOwner",
+                    "query": "id=17e3426e622c7d231318b58a66e93e4c",
+                    "scene": null
+                },
+                {
+                    "name": "",
+                    "pathName": "pages/indexs/about/about",
+                    "query": "",
+                    "scene": null
+>>>>>>> Stashed changes
                 }
             ]
         }

@@ -1,13 +1,17 @@
 // pages/project/newProject/newProject.js
 import Toast from '../../../miniprogram_npm/@vant/weapp/toast/toast'
 
+const Utils = require("../../../utils/util");
 const languageUtils = require("../../../language/languageUtils");
 
 const templateLib = require("../../../template/townhouse/Townhouse.js");
+const en_templateLib = require("../../../template/townhouse/en_Townhouse.js");
 
 const detachedLib = require("../../../template/detachedHouse/Detached_House.js");
+const en_detachedLib = require("../../../template/detachedHouse/en_Datached_House.js");
 
 const GardenLib = require("../../../template/gardenVilla/Garden_Villa.js");
+const en_GardenLib = require("../../../template/gardenVilla/en_Garden_Villa.js");
 
 const db = wx.cloud.database();
 const _ = db.command;
@@ -88,6 +92,10 @@ Page({
     this.initLanguage();
     this.setData({
       language: lan
+    })
+
+    wx.setNavigationBarTitle({
+      title: this.data.dictionary.new_project,
     })
   },
 
@@ -171,6 +179,10 @@ Page({
       Toast(this.data.dictionary.submitErrMsg2);
     } else if (this.data.selectedTemplate == "") {
       Toast(this.data.dictionary.null_template_setting)
+    } else if (this.data.houseOwner == "" ) {
+      Toast(this.data.dictionary.null_house_owner)
+    } else if (this.data.participant.length == 0) {
+      Toast(this.data.dictionary.null_participant)
     } else {
 
       wx.cloud.database().collection('project')
@@ -183,7 +195,6 @@ Page({
 
             projectDescription: this.data.description,
 
-            // projectManager: app.globalData.userInfo._openid,
             houseOwner: this.data.houseOwner_openid,
             participant: this.data.participant,
 
@@ -200,7 +211,6 @@ Page({
             currentPhase: 0,
             // feedback: [],
             fileList: [],
-
           }
         })
         .then(res => {
@@ -221,10 +231,7 @@ Page({
         .catch(res => {
           console.log('新建项目失败，请联系管理员', res)
         })
-
-
     }
-
   },
 
   updateOwners(res_id){
@@ -316,8 +323,8 @@ Page({
 
   formatDate(date) {
     date = new Date(date);
-    // return `${date.getMonth() + 1}/${date.getDate()}`;
-    return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+    // return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+    return Utils.formatDate(date);
   },
 
   onDateConfirm(event) {
@@ -338,16 +345,17 @@ Page({
     var d = new Date(date);
     d.setDate(d.getDate() + days);
     var m = d.getMonth() + 1;
-    return d.getFullYear() + '-' + m + '-' + d.getDate();
+    //return d.getFullYear() + '-' + m + '-' + d.getDate();
+    return [d.getFullYear(), m, d.getDate()].map(Utils.formatNumber).join('-')
   },
 
-  // modify the template accordingly
+  // Modify the template according to the start time of project
   modifyTemplate(startTime) {
     for (var idx in this.data.template) {
       this.data.template[idx].belongTo = this.data.project
 
       /**
-       * change time
+       * Change time
        */
       this.data.template[idx].startTime = this.addDate(startTime, this.data.template[idx].offset)
       this.data.template[idx].endTime = this.addDate(this.data.template[idx].startTime, this.data.template[idx].duration)
@@ -372,6 +380,7 @@ Page({
     })
   },
 
+  // Create a list of tasks according to the template
   async createTask() {
 
     this.modifyTemplate(start)
@@ -401,19 +410,42 @@ Page({
     })
   },
 
+  // Select template according to current language setting
   ConfirmTemplate(){
-    if(this.data.selectedTemplate == "Townhouse Decoration"){
-      this.setData({
-        template: templateLib.townhouse,
-      })
-    }else if(this.data.selectedTemplate == "Detached Villa Decoration"){
-      this.setData({
-        template: detachedLib.detached_house,
-      })
-    }else if(this.data.selectedTemplate == "Garden Villa Decoration"){
-      this.setData({
-        template: GardenLib.garden_villa,
-      })
+    if(this.data.language == 0) {
+      if(this.data.selectedTemplate == "Townhouse Decoration"){
+        this.setData({
+          template: templateLib.townhouse,
+        })
+      }else if(this.data.selectedTemplate == "Detached Villa Decoration"){
+        this.setData({
+          template: detachedLib.detached_house,
+        })
+      }else if(this.data.selectedTemplate == "Garden Villa Decoration"){
+        this.setData({
+          template: GardenLib.garden_villa,
+        })
+      }
+      // const en_templateLib = require("../../../template/townhouse/en_Townhouse.js");
+      // const en_GardenLib = require("../../../template/gardenVilla/en_Garden_Villa.js");
+      // const en_detachedLib = require("../../../template/detachedHouse/en_Detached_House.js");
+      
+
+    } else {
+      if(this.data.selectedTemplate == "Townhouse Decoration"){
+        this.setData({
+          template: en_templateLib.en_townhouse,
+        })
+      }else if(this.data.selectedTemplate == "Detached Villa Decoration"){
+        this.setData({
+          template: en_detachedLib.en_detached_house,
+        })
+      }else if(this.data.selectedTemplate == "Garden Villa Decoration"){
+        this.setData({
+          template: en_GardenLib.en_garden_villa,
+        })
+      }
     }
+    
   }
 })

@@ -118,6 +118,7 @@ Page({
       }, {
         name: this.data.dictionary.priority,
       }],
+      filter: this.data.dictionary.time
     })
 
     /** 
@@ -138,7 +139,13 @@ Page({
     var lan = wx.getStorageSync("languageVersion");
     this.initLanguage();
     this.setData({
-      language: lan
+      language: lan,
+      Filter: [{
+        name: this.data.dictionary.time,
+      }, {
+        name: this.data.dictionary.priority,
+      }],
+      filter: this.data.dictionary.time
     })
   },
 

@@ -10,6 +10,7 @@ var Languague = {
      project_info: "项目信息",
      page_name_for_pm: ['消息', '项目', '更多'],
      page_name: ['首页', '更多'],
+     new_project: "新项目",
 
      // message page
      notification: "最新通知",
@@ -108,6 +109,7 @@ var Languague = {
    //  reworking: "重加工",
     related_photo: "相关照片",
     phase: "阶段",
+    
 
     // New task page
     task_name: "任务名称",
@@ -118,6 +120,7 @@ var Languague = {
     project_name: "项目名称",
     enter_name: "输入名称",
     house_template: ["联排别墅", "独立式别墅", "花园洋房式住宅"],
+    house_template_description: ["联排别墅的前后都有自己独立的花园，还有一个专门的停车位或车库。", "独立别墅是一个具有高度私密性的独立房屋。它上面有私人空间，下面有私人花园区和地下室。", "花园别墅拥有私人花园和大面积的平面图，提供高水平的生活舒适度。"],
     choose_template: "选择模板",
     choose_start_time: "选择开始时间",
     expetced_end_time:"预计结束时间",
@@ -156,6 +159,8 @@ var Languague = {
     null_name: "名称为空",
     null_date_setting: "未设置日期",
     null_template_setting: "未选择模板",
+    null_house_owner: "未选择房主",
+    null_participant: "未选择参与者",
     upload_image_success: "上传图片成功",
     delete_image_success: "删除图片成功",
 

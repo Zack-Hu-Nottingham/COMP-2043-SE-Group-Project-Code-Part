@@ -133,7 +133,7 @@ var en_detached_house = [{
   workingArea: "Walls of the house",
 },{
   name: "Verification and acceptance of the setting out of water pipe and wires",
-  taskDescription: "Client should be included",
+  taskDescription: "Client should be included during the process",
   belongTo: "",
   feedback: [],
   cloudList: [],

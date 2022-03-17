@@ -15,7 +15,7 @@ function formatDate(date){
   var year = date.getFullYear()
   var month = date.getMonth() + 1
   var day = date.getDate()
-  return [year, month, day].join('-')
+  return [year, month, day].map(formatNumber).join('-')
 }
 
 function formatDate4YearMotchDay(year, month, day){
@@ -98,6 +98,7 @@ module.exports = {
   formatTime: formatTime,
   formatDate: formatDate,
   formatDate4YearMotchDay: formatDate4YearMotchDay,
+  formatNumber: formatNumber,
   compareDate: compareDate,
   arrayContains: arrayContains,
   request: request,

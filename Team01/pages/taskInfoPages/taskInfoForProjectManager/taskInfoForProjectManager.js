@@ -49,7 +49,7 @@ Page({
    */
   onLoad: function (options) {
 
-
+    
     var lan = wx.getStorageSync("languageVersion");
     this.initLanguage();
     this.setData({
@@ -176,12 +176,12 @@ Page({
             taskPage: res.data,
             belongTo: res.data.belongTo,
           });
-          //this.updateComment(res.data.feedback)
+          
           this.updateComment()
           this.getFileList(res.data.cloudList)
           this.getProjectName()
           this.getParticipantName()
-
+          this.getList()
           wx.setNavigationBarTitle({
             title: res.data.name,
           });
@@ -312,7 +312,7 @@ Page({
   updateComment(list) {
     if (list) {
       var newList = [];
-      // console.log(list)
+      console.log(list)
       for (var i = 0; i < list.length; i++) {
         db.collection('feedback')
           .where({
@@ -320,7 +320,7 @@ Page({
           })
           .get({
             success: res => {
-              // console.log(res.data)
+              //console.log(res.data)
               newList.push(res.data[0])
               // console.log(newList)
               this.setData({
@@ -333,25 +333,27 @@ Page({
     }
 
   },
-  getList(list) {
+  
+  getList() {
     var newList = [];
-    // console.log(list)
-    for (var i = 0; i < list.length; i++) {
+    // console.log("SSSSS")
+    // console.log(this.data.taskPage)
+    for (var i = 0; i < this.data.taskPage.feedback.length; i++) {
       db.collection('feedback')
         .where({
-          _id: list[i]._id
+          _id: this.data.taskPage.feedback[i]._id
         })
         .get({
           success: res => {
             newList.push(res.data[0])
-            // console.log(newList)
+           
           }
         })
     }
     this.setData({
       feedback: newList
     })
-    // console.log(this.data.feedback)
+    console.log(this.data.feedback)
   },
   upload(event){
     const { file } = event.detail;
