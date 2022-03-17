@@ -49,7 +49,7 @@ Page({
    */
   onLoad: function (options) {
 
-
+    
     var lan = wx.getStorageSync("languageVersion");
     this.initLanguage();
     this.setData({
@@ -176,12 +176,12 @@ Page({
             taskPage: res.data,
             belongTo: res.data.belongTo,
           });
-          //this.updateComment(res.data.feedback)
+          
           this.updateComment()
           this.getFileList(res.data.cloudList)
           this.getProjectName()
           this.getParticipantName()
-
+          this.getList()
           wx.setNavigationBarTitle({
             title: res.data.name,
           });
@@ -204,7 +204,7 @@ Page({
    */
   clickAddComment(event) {
     wx.navigateTo({
-      url: '../addComment/addComment?id=' + id + '&index=' + taskComment,
+      url: '../addComment/addComment?id=' + id + '&projectId=' + this.data.taskPage.belongTo,
     })
   },
 
@@ -312,7 +312,7 @@ Page({
   updateComment(list) {
     if (list) {
       var newList = [];
-      // console.log(list)
+      console.log(list)
       for (var i = 0; i < list.length; i++) {
         db.collection('feedback')
           .where({
@@ -320,7 +320,7 @@ Page({
           })
           .get({
             success: res => {
-              // console.log(res.data)
+              //console.log(res.data)
               newList.push(res.data[0])
               // console.log(newList)
               this.setData({
@@ -333,25 +333,25 @@ Page({
     }
 
   },
-  getList(list) {
+  
+  getList() {
     var newList = [];
-    // console.log(list)
-    for (var i = 0; i < list.length; i++) {
       db.collection('feedback')
         .where({
-          _id: list[i]._id
+          belongTo: this.data.taskPage._id
         })
         .get({
           success: res => {
-            newList.push(res.data[0])
-            // console.log(newList)
+            
+            for (var i = 0; i < res.data.length; i++) {
+            newList.push(res.data[i])
           }
+          this.setData({
+            feedback: newList
+          })
+        }
         })
-    }
-    this.setData({
-      feedback: newList
-    })
-    // console.log(this.data.feedback)
+    
   },
   upload(event){
     const { file } = event.detail;

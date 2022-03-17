@@ -272,6 +272,9 @@ Page({
     })
   },
   countIsReadNumber(msgList){
+    this.setData({
+      ifDot: false
+    })
     for(var i=0;i<msgList.length;i++){
       if (msgList[i].isRead==0){
         this.setData({

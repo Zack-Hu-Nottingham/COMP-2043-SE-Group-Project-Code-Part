@@ -100,7 +100,7 @@ Page({
 
 
     this.getDetail()
-
+    
 
     /** 
      *  get unstarted numbers
@@ -293,6 +293,29 @@ Page({
     });
   },
 
+
+  getFeedback() {
+    db.collection('feedback')
+      .where({
+        projectId: id, 
+      })
+      .get({
+        success: res => {
+          var newList = []
+          for (var i = 0; i < res.data.length; i++) {
+            newList.push(res.data[i])
+          }
+          this.setData({
+              feedback: newList,
+            })
+            console.log(feedback)
+        },
+        fail: function (err) {
+          // console.log(err)
+        }
+      })
+
+  },
   /** 
    * Get detailed info about the project
    */
@@ -304,11 +327,10 @@ Page({
           this.setData({
               project: res.data,
               name: res.data.name,
-              feedback: res.data.feedback,
             }),
             // console.log(res.data.cloudList)
           this.getFileList(res.data.cloudList);
-
+          this.getFeedback();
           wx.setNavigationBarTitle({
               title: this.data.project.name,
             }),

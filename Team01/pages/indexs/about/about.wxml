@@ -6,7 +6,7 @@
   <text>Team202101</text>
 </view>
 <view class="currentVersion">
-  <text>{{dictionary.current_version}} 1.0.0</text>
+  <text>{{dictionary.current_version}} 1.1.0</text>
 </view>
 <van-cell-group inset class="van-cell-group" title="{{dictionary.group_member}}">
   <van-cell title="Zixiang Hu" label="{{dictionary.group_leader}}">ID: 20215538</van-cell>
@@ -21,5 +21,5 @@
 </van-cell-group>
 <view class="bottomInfo">
   <text class="info">Team202101</text>
-  <text class="info">https://worktile.com</text>
+  <text class="info"></text>
 </view>

@@ -20,6 +20,7 @@ Page({
     feedback: [],
     navigationBar: 'Details',
     feedbackBelongTo: '',
+    feedbackBelongToTask: '',
     creater: '',
 
     show: false,
@@ -41,6 +42,7 @@ Page({
     this.setData({
       language: lan
     })
+    
     console.log(options)
     db.collection('feedback')
       .where({
@@ -52,11 +54,10 @@ Page({
           this.setData({
             feedback: res.data[0]
           });
-          // console.log(this.data.feedback)
-          // console.log(this.data.feedback.cloudList.length)
+          this.getBelongTo();
         }
       })
-    this.getBelongTo();
+   
 
     wx.setNavigationBarTitle({
       title: this.data.navigationBar,
@@ -65,7 +66,7 @@ Page({
 
   getBelongTo() {
     return new Promise((resolve, reject) => {
-      //console.log(this.data.feedback.belongTo)
+      console.log(this.data.feedback.belongTo)
       db.collection('task')
         .where({
           _id: this.data.feedback.belongTo
@@ -73,11 +74,17 @@ Page({
         .field({
           belongTo: true,
           phase: true,
+          name: true,
         })
         .get({
           success: res => {
-            // console.log(res.data[0])
-            this.getPhase(res.data[0].phase);
+            console.log(res.data[0]),
+            this.setData({
+                  phase: res.data[0].phase,
+                  feedbackBelongToTask: res.data[0].name
+                })
+            //  console.log(res.data[0].phase)
+            // this.getPhase(res.data[0].phase);
             db.collection('project')
               .where({
                 _id: res.data[0].belongTo
@@ -87,7 +94,8 @@ Page({
               })
               .get({
                 success: res => {
-                  // console.log(res.data[0])
+                  console.log("Sssss")
+                  console.log(res.data[0])
                   this.setData({
                     feedbackBelongTo: res.data[0].name,
                   })
@@ -116,12 +124,11 @@ Page({
         })
     })
   },
-  getPhase(index) {
-    // console.log(index)
-    this.setData({
-      phase: this.data.dictionary.current_phase_description[parseInt(index)]
-    })
-  },
+  // getPhase(index) {
+  //   this.setData({
+  //     phase: this.data.dictionary.current_phase_description[parseInt(index)]
+  //   })
+  // },
 
   /** 
    *  Initial language
