@@ -1,0 +1,6 @@
+/* subpages/pack_W/pages/taskInfo/taskInfo.wxss */
+.addComment {
+  display: flex;
+  padding: 50rpx;
+  margin: 0;
+}

@@ -1,0 +1,11 @@
+/* subpages/pack_HO/pages/taskInfo/taskInfo.wxss */
+.addComment {
+  display: flex;
+  padding: 50rpx;
+  margin: 0;
+}
+
+.uploader {
+display: flex;
+padding: 0 0 5% 5%;
+}

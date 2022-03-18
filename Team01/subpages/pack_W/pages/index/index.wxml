@@ -1,0 +1,104 @@
+<!--subpages/pack_W/pages/index/index.wxml-->
+<!-- Dialog -->
+<van-dialog id="van-dialog" bind:getuserinfo="getuserinfo" />
+
+<!-- Toast -->
+<van-toast id="van-toast" />
+
+<!-- Empty -->
+<!-- <van-empty description="描述文字" /> -->
+
+<!-- Bottom tabbar -->
+<van-tabbar active="{{ active }}" bind:change="onChangeTab">
+  <van-tabbar-item icon="home-o">{{dictionary.dashboard_page}}</van-tabbar-item>
+  <van-tabbar-item icon="friends-o">{{dictionary.more_page}}</van-tabbar-item>
+</van-tabbar>
+
+
+<!-- Dashboard page -->
+<view wx:if="{{active == 0}}">
+
+  <view wx:if="{{isTaskEmpty}}" class="empty">
+    <van-empty description="{{dictionary.no_task_error}}" />
+  </view>
+  
+  <view wx:else>
+    <view wx:for="{{projectInfo}}" wx:key="index" wx:for-item="project" wx:for-index="idx">
+      <van-cell-group style="padding-bottom: 30rpx;" inset title="{{dictionary.project[idx]}}" >
+        <van-cell title="{{project.name}}" clickable bindtap="clickProject" id="{{project._id}}" icon="todo-list-o" is-link size="large"/>
+        
+        <view wx:for="{{projectTask[idx]}}" wx:key="index">
+
+          <van-cell title="{{item.name}}" label="{{item.startTime}} - {{item.endTime}}" clickable="true" bindtap="clickTask" data-id="{{item._id}}" class="taskForTest">
+
+            <view>
+              <view wx:if="{{item.state==0}}">
+                <van-tag color="#D3D3D3" icon="fail" size="medium"><van-icon name="close"/>{{dictionary.task_state[0]}}</van-tag>
+              </view>
+              <view wx:elif="{{item.state==1}}">
+                <van-tag color="#87CEFA" size="medium"><van-icon name="play"></van-icon>{{dictionary.task_state[1]}}</van-tag>
+              </view>
+              <view wx:elif="{{item.state==2}}">
+                <van-tag color="#32CD32" size="medium"><van-icon name="passed" />{{dictionary.task_state[2]}}</van-tag>
+              </view>
+              <view wx:elif="{{item.state==3}}">
+                <van-tag color="#ffe1e1" text-color="#ad0000"  size="medium"><van-icon name="warning-o" />{{dictionary.task_state[3]}}</van-tag>
+              </view>
+              <view wx:elif="{{item.state==4}}">
+                <van-tag color="#ffe1e1" text-color="#ad0000"  size="medium"><van-icon name="replay" />{{dictionary.task_state[4]}}</van-tag>
+              </view>
+            </view>
+
+          </van-cell>      
+
+        </view>
+      </van-cell-group>
+
+    </view>
+
+  </view>
+  
+</view>
+
+
+
+<!-- More page -->
+<view wx:elif="{{active == 1}}">
+
+<view class="userinfo-avatar">
+  <image src="{{userInfo.avatarUrl}}"></image>
+</view>
+
+<van-cell-group inset>
+  <van-cell center icon="user-o" />
+  <van-cell center title="{{dictionary.user_name}}" value="{{userInfo.nickName}}" is-link clickable="true" bindtap="showPopup" />
+  <van-popup show="{{ show }}" custom-style="width:75%; height: 30%;"bind:close="onClose">
+
+    <van-cell-group style="padding-top: 80rpx">
+      <van-field label="{{dictionary.original_user_name}}" left-icon="contact" placeholder="{{ name }}" disabled border="{{ false }}">
+      </van-field>
+
+      <van-field value="{{ value }}" label="{{dictionary.new_user_name}}" left-icon="contact" placeholder="{{ dictionary.changetip  }}" bindinput='userNameInput' border="{{ false }}">
+      </van-field>
+    </van-cell-group>
+
+    <van-button class="van-button" round style="padding-top: 40rpx;padding-left:20% ;" type="info" bindtap="forNotice" >{{dictionary.save}}</van-button>
+
+  <!-- <van-cell center title="邀请用户" clickable="true" bindtap="onShareAppMessage">
+    <van-button round class="button-share" open-type="share"> 
+      <van-icon name="friends-o" />
+    </van-button>
+  </van-cell> -->
+  </van-popup>
+</van-cell-group>
+
+  <van-cell-group inset style="padding: 30rpx;">
+    <van-cell center icon="setting-o"/>
+    <van-cell center title="{{dictionary.language}}" value="{{languageList[language]}}" icon="" is-link clickable="true" bindtap="onChangeLan" class="settingForTest"/>
+    <van-cell center title="{{dictionary.about_button}}" is-link clickable link-type="navigateTo" url="/pages/about/about"/>
+    <van-cell title = ""/>
+  </van-cell-group>
+
+
+</view>
+

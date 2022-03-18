@@ -1,0 +1,47 @@
+<!--pages/project/newTask/newTask.wxml-->
+<view class="form">
+    <!--Set Task Information-->
+    <van-cell-group inset style="padding: 10rpx;" class="projectNameForTest">
+        <van-field label="{{dictionary.project_name}}" value="{{ name }}" size="large" input-align="right" placeholder="{{dictionary.enter_name}}" bind:change="typeName" class="projectNameForTest1"/>
+    </van-cell-group>
+    
+    <van-cell-group inset style="padding: 10rpx;">
+        <van-cell title="{{dictionary.choose_template}}" is-link size="large" value="{{selectedTemplate}}" bindtap="selectTemplate" class="templateForTest"/>
+        <van-cell title="{{dictionary.expected_duration}}" size="large" value="{{duration}}"/>
+    </van-cell-group>
+
+    <van-cell-group inset style="padding: 10rpx;">
+        <van-cell title="{{dictionary.choose_start_time}}" is-link size="large" value="{{startDate}}" bindtap="onDateDisplay" class="startTimeForTest"/>
+        <van-cell title="{{dictionary.expected_end_time}}" size="large" value="{{endDate}}"/>
+    </van-cell-group>
+    
+    <!--Set other information-->
+    <van-cell-group inset style="padding: 10rpx;">
+        <van-cell title="{{dictionary.house_owner}}" is-link size="large" value="{{houseOwner}}" bindtap="changeOwner" class="chooseHouseOwnerForTest"/>
+        <van-cell title="{{dictionary.participant}}" is-link size="large" value="{{participant}}" bindtap="changeParticipant" class="chooseParticipantForTest"/>
+    </van-cell-group>
+
+    <!--Set Time-->
+    <van-calendar show="{{ show }}" title="{{dictionary.choose_period}}" type="range" bind:close="onClose" bind:confirm="onConfirm"/>
+
+    <!--Description-->
+    <van-cell-group inset style="padding: 10rpx;">
+        <van-field label="{{dictionary.description}}" value="{{ description }}" type="textarea" placeholder="({{dictionary.description_hint}})" size="large" maxlength="500" input-align="right" autosize bind:change="typeDescription" />
+    </van-cell-group>
+</view>
+
+<!--Upload related images-->
+  <van-uploader class="uploader" file-list="{{ fileList }}" bind:after-read="upload" deletable="{{ true }}" max-count="9" bind:delete="deleteImg"/>
+
+<!--Submit-->    
+<van-button plain round block loading="{{isLoading}}" disabled="{{isLoading}}" class="submitBtn" color="#1296db" type="primary" size="normal" form-type="submit" bindtap="formSubmit">{{dictionary.create_new_project}}</van-button>
+
+<van-toast id="van-toast" />
+
+<!-- pop up calendar -->
+<van-calendar
+  show="{{ show }}"
+  title="choose period"
+  bind:close="onDateClose"
+  bind:confirm="onDateConfirm"
+/>

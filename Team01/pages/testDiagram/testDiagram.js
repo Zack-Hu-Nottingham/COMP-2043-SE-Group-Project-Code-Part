@@ -1,4 +1,4 @@
-// pages/project/testDiagram/testDiagram.js
+// pages/testDiagram/testDiagram.js
 var id = '';
 var redirectPage = '';
 var fs = wx.getFileSystemManager();

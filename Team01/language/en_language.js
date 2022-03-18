@@ -31,7 +31,7 @@ var Languague = {
     today_task: "Today's Task",     
     task_list: "Task List",
     filter: "Sort Task",
-    select_sort: "Select sort",
+    select_sort: "Sort By",
     time: "Time",
     priority: "Priority",
 

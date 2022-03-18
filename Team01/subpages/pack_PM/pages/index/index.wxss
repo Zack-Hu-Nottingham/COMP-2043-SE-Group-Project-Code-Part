@@ -1,0 +1,102 @@
+/* subpages/pack_PM/pages/index/index.wxss */
+
+/**
+  * Message page's css
+  */
+  .emptyFeedback {
+    margin-top: 300rpx;
+  }
+
+  .notReadMessage {
+    --cell-background-color: antiquewhite ;
+    /* --cell-background-color: #B0E0E6 ; */
+  }
+
+
+
+  
+/**
+  * Projects page's css
+  */
+
+.createNewProjectForTest {
+  display: flex;
+  padding: 50rpx;
+  margin: 0;
+}
+
+
+/**
+  * Dashboard page's css
+  */
+  .notStartedGroup {
+    font-size: medium ;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items:inherit;
+    height: 40rpx;
+    width: 220rpx;
+    background: #F08080;
+    padding: 10rpx;
+
+    border-radius: 0.5ex;
+  }
+
+
+/**
+  * More page's css
+  */
+.userinfo {
+  font-size: 14px;  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #aaa;
+}
+
+.userinfo-avatar {
+  justify-content: center;
+  align-items: center;  
+  overflow:hidden;
+  width: 160rpx;  
+  height: 160rpx;  
+  margin: 20rpx;  
+  margin-top: 50rpx;
+  margin-left: 50rpx;
+  border-radius: 50%;  
+  border: 2px solid #fff;  
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);  
+}
+
+.userinfo-avatar image{
+  width: 160rpx;
+  height: 160rpx;
+}
+
+.userNickName {
+  padding-left: 80rpx;
+}
+
+.signOut {
+  display: flex;
+  padding: 50rpx;
+  margin: 0;
+}
+
+.van-button{
+  width: 80%;
+  border: 20rpx coral;
+}
+
+.van-field{
+
+  justify-content:center;
+  align-items: center;
+}
+
+.van-popup{
+  display: flex;
+  flex-direction: column;
+  border-radius: 4%;
+} 

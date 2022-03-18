@@ -7,7 +7,7 @@
         "pages/about/about",
         "pages/project/projectInfoForWorker/projectInfoForWorker",
         "pages/project/projectInfo/projectInfo",
-        "pages/project/testDiagram/testDiagram",
+        "pages/testDiagram/testDiagram",
         "pages/project/newTask/newTask",
         "pages/project/newProject/newProject",
         "pages/project/statisticReport/statisticReport",
@@ -22,6 +22,40 @@
         "pages/taskInfoPages/taskInfoForProjectManager/taskInfoForProjectManager",
         "pages/taskInfoPages/taskInfoForWorker/taskInfoForWorker",
         "pages/languageSetting/languageSetting"
+    ],
+    "subpackages": [
+        {
+          "root": "subpages/pack_HO",
+          "name": "HouseOwner",
+          "pages": [
+              "pages/index/index",
+              "pages/taskInfo/taskInfo",
+              "pages/projectReport/projectReport",
+              "pages/addComment/addComment"
+          ]
+        }, {
+          "root": "subpages/pack_PM",
+          "name": "ProjectManager",
+          "pages": [
+            "pages/index/index",
+            "pages/taskInfo/taskInfo",
+            "pages/projectInfo/projectInfo",
+            "pages/contactList/houseOwnerList/houseOwnerList",
+            "pages/contactList/participantList/participantList",
+            "pages/newProject/newProject",
+            "pages/newTask/newTask",
+            "pages/statisticReport/statisticReport",
+            "pages/projectTemplate/projectTemplate"
+          ]
+        }, {
+          "root": "subpages/pack_W",
+          "name": "Worker",
+          "pages": [
+            "pages/index/index",
+            "pages/taskInfo/taskInfo",
+            "pages/projectInfo/projectInfo"
+          ]
+        }
     ],
     "window": {
         "backgroundTextStyle": "light",
@@ -64,6 +98,10 @@
         "van-dialog": "@vant/weapp/dialog/index",
         "van-empty": "@vant/weapp/empty/index",
         "van-overlay": "@vant/weapp/overlay/index",
-        "van-image": "@vant/weapp/image/index"
+        "van-image": "@vant/weapp/image/index",
+        "van-sidebar": "@vant/weapp/sidebar/index",
+        "van-sidebar-item": "@vant/weapp/sidebar-item/index",
+        "van-dropdown-menu": "@vant/weapp/dropdown-menu/index",
+        "van-dropdown-item": "@vant/weapp/dropdown-item/index"
     }
 }

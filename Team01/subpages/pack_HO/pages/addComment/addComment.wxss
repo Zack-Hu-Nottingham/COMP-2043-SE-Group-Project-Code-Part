@@ -1,0 +1,11 @@
+/* pages/project/addComment/addComment.wxss */
+.submitBtn {
+    display: flex;
+    padding: 50rpx;
+    margin: 0;
+  }
+  
+.uploader {
+  display: flex;
+  padding: 0 0 5% 5%;
+}

@@ -1,0 +1,28 @@
+<!--pages/project/addComment/addComment.wxml-->
+<form bindsubmit="formSubmit" report-submit="true">
+<van-cell-group inset style="padding: 30rpx">
+  <van-cell title="{{dictionary.select_feedback}}" is-link size="large" value="{{selectedFeedback}}" bindtap="changeFeedback" />
+  <van-field label="{{dictionary.description}}" value="{{ details }}" type="textarea" placeholder="({{dictionary.description_hint}})" size="large" maxlength="500" input-align="right" autosize bind:change="typeDetails" />
+</van-cell-group>
+
+<!--Upload related images-->
+<van-uploader class="uploader" file-list="{{ fileList }}" bind:after-read="upload" deletable="{{ true }}" max-count="9" bind:delete="deleteImg"/>
+
+<!--Submit-->    
+<van-sticky offset-top="{{ 600 }}">
+<van-button plain round block loading="{{isLoading}}" disabled="{{isLoading}}" class="submitBtn" color="#1296db" type="primary" size="normal" form-type="submit" >{{dictionary.create_comment}}</van-button>
+</van-sticky>
+
+
+<!-- Choose Feedback -->
+<van-action-sheet
+  show="{{ showFeedback }}"
+  title="{{ dictionary.select_feedback }}"
+  actions="{{ feedbackType }}"
+  cancel-text="{{ dictionary.cancel }}"
+  bind:close="onCloseFeedback"
+  bind:select="onSelectFeedback"
+/>
+</form>
+
+<van-toast id="van-toast" />
