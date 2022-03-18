@@ -290,7 +290,7 @@ Page({
    * Click the message and change its state to isRead
    */
   clickToChangeIsRead(event) {
-    console.log(event)
+    // console.log(event)
     if(!event.currentTarget.dataset.index){
       var index = 0;
     }
@@ -321,7 +321,7 @@ Page({
         }
       })
       .then(res => {
-        console.log('revise isRead successfully', res)
+        // console.log('revise isRead successfully', res)
 
       }).catch(res => {
         console.log('revise isRead failed', res)
@@ -462,7 +462,7 @@ Page({
                   }
                 })
                 .then(res=>{
-                  console.log('请求修改任务状态成功', res)
+                  // console.log('请求修改任务状态成功', res)
                 })
                 .catch(res => {
                   console.log('请求修改任务状态失败', res)
@@ -476,7 +476,7 @@ Page({
                   }
                 })
                 .then(res=>{
-                  console.log('请求修改任务状态成功', res)
+                  // console.log('请求修改任务状态成功', res)
                 })
                 .catch(res => {
                   console.log('请求修改任务状态失败', res)
@@ -491,7 +491,7 @@ Page({
                   }
                 })
                 .then(res=>{
-                  console.log('请求修改任务状态成功', res)
+                  // console.log('请求修改任务状态成功', res)
                 })
                 .catch(res => {
                   console.log('请求修改任务状态失败', res)
@@ -505,7 +505,7 @@ Page({
                   }
                 })
                 .then(res=>{
-                  console.log('请求修改任务状态成功', res)
+                  // console.log('请求修改任务状态成功', res)
                 })
                 .catch(res => {
                   console.log('请求修改任务状态失败', res)
@@ -517,7 +517,7 @@ Page({
           })
         }
 
-        console.log("成功获取任务信息")
+        // console.log("成功获取任务信息")
       })
       .catch(err => {
         console.log("请求任务信息失败")
@@ -550,7 +550,7 @@ Page({
           nickName:value
         },
         success:function (res){
-          console.log("success" + value)
+          // console.log("success" + value)
         },
         fail:console.error
       })

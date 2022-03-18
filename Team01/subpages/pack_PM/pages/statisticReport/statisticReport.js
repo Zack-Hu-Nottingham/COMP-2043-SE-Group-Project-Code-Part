@@ -124,7 +124,7 @@ Page({
           this.setData({
             totalUnstart: res.total + this.data.totalUnstart
           })
-          console.log("添加未开始任务 res.total=" + res.total + " total = " + this.data.totalUnstart)
+          // console.log("添加未开始任务 res.total=" + res.total + " total = " + this.data.totalUnstart)
           resolve("成功获取任务信息")
         })
         .catch(err => {

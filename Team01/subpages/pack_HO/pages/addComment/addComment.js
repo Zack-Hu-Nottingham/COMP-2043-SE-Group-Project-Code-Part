@@ -219,7 +219,7 @@ Page({
                     cloudList: this.data.cloudPath
                 },
                 success: function (res) {
-                    console.log(res)
+                    // console.log(res)
                 }
             })
     },

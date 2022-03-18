@@ -54,6 +54,7 @@ Page({
     projectManager: "",
     feedback: [],
     fileList: [],
+    defaultDate: [],
 
     /**
      * Task Management's data
@@ -308,7 +309,7 @@ Page({
           this.setData({
               feedback: newList,
             })
-            console.log(feedback)
+            // console.log(feedback)
         },
         fail: function (err) {
           // console.log(err)
@@ -324,25 +325,35 @@ Page({
       .doc(id)
       .get({
         success: res => {
+          // console.log(res)
           this.setData({
               project: res.data,
               name: res.data.name,
             }),
+            wx.setNavigationBarTitle({
+                title: this.data.project.name,
+              }),
             // console.log(res.data.cloudList)
+          this.getDefaultDate();
           this.getFileList(res.data.cloudList);
           this.getFeedback();
-          wx.setNavigationBarTitle({
-              title: this.data.project.name,
-            }),
-
-            this.getHouseOwner()
-          this.getProjectManager()
+          this.getHouseOwner(res.data.houseOwner)
+          this.getProjectManager(res.data._openid)
         },
         fail: function (err) {
           // console.log(err)
         }
       })
 
+  },
+
+  getDefaultDate(){
+    let dateStart = Date.parse(new Date(this.data.taskPage.startTime.replace(/-/,"/")));
+    let dateEnd = Date.parse(new Date(this.data.taskPage.endTime.replace(/-/,"/")));
+    let defaultDate = [dateStart, dateEnd];
+    this.setData({
+      defaultDate: defaultDate
+    })
   },
 
   async getFileList(cloudPath) {
@@ -367,13 +378,14 @@ Page({
   /** 
    * Get the info of house owner
    */
-  getHouseOwner() {
+  getHouseOwner(houseOwnerId) {
     db.collection('user')
       .where({
-        _openid: _.eq(this.data.project.houseOwner)
+        _openid: _.eq(houseOwnerId)
       })
       .get()
       .then(res => {
+        console.log(res)
         this.setData({
           houseOwner: res.data[0]
         })
@@ -414,7 +426,7 @@ Page({
         projectDescription: e.detail.value
       }
     }).then(res => {
-      console.log('调用云函数修改项目描述成功', res),
+      // console.log('调用云函数修改项目描述成功', res),
         this.getDetail()
     }).catch(res => {
       console.log('调用云函数修改项目描述失败', res)
@@ -507,7 +519,7 @@ Page({
   },
   deleteImg(event) {
     const delIndex = event.detail.index
-    console.log(delIndex)
+    // console.log(delIndex)
     const { fileList } = this.data
     fileList.splice(delIndex, 1)
     this.setData({

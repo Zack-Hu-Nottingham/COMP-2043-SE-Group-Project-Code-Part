@@ -179,7 +179,7 @@ Page({
             title: '上传失败',
             icon: 'none'
           });
-          console.log(e);
+          // console.log(e);
         });
     }
   },
@@ -267,7 +267,7 @@ Page({
         this.setData({
           fileList: fileList
         });
-        console.log("成功选择图片", fileList);
+        // console.log("成功选择图片", fileList);
       }
     })
   },
@@ -283,7 +283,7 @@ Page({
           cloudPath: cloudList
         })
         this.updateCloudList();
-        console.log("图片上传成功", res)
+        // console.log("图片上传成功", res)
       },
       fail: console.error
     })
@@ -304,7 +304,7 @@ Page({
           cloudList: this.data.cloudPath
         },
         success: function (res) {
-          console.log(res)
+          //console.log(res)
         }
       })
   },

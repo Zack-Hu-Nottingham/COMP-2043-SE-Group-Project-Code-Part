@@ -30,6 +30,7 @@ Page({
     priorityShow: false,
     feedback: [],
     fileList: [],
+    defaultDate: [],
 
     priority: [
       {
@@ -154,7 +155,7 @@ Page({
         endTime: `${end.getFullYear()}-${end.getMonth() + 1}-${end.getDate()}`
       }
     }).then(res => {
-      console.log('修改task日期成功', res),
+      // console.log('修改task日期成功', res),
         this.getDetail()
     }).catch(res => {
       console.log('修改task日期失败', res)
@@ -177,6 +178,7 @@ Page({
             belongTo: res.data.belongTo,
           });
           
+          this.getDefaultDate()
           this.updateComment()
           this.getFileList(res.data.cloudList)
           this.getProjectName()
@@ -193,20 +195,20 @@ Page({
     
   },
 
+  getDefaultDate(){
+    let dateStart = Date.parse(new Date(this.data.taskPage.startTime.replace(/-/,"/")));
+    let dateEnd = Date.parse(new Date(this.data.taskPage.endTime.replace(/-/,"/")));
+    let defaultDate = [dateStart, dateEnd];
+    this.setData({
+      defaultDate: defaultDate
+    })
+  },
+
   onPriorityClose() {
     this.setData({
       priorityShow: false
     })
   },
-
-  /**
-   * Create Comment page's method
-   */
-  // clickAddComment(event) {
-  //   wx.navigateTo({
-  //     url: '../addComment/addComment?id=' + id + '&projectId=' + this.data.taskPage.belongTo,
-  //   })
-  // },
 
   onTaskDescriptionBlur: function (e) {
     // console.log(e.detail.value)
@@ -218,7 +220,7 @@ Page({
         descriptions: e.detail.value
       }
     }).then(res => {
-      console.log('调用云函数修改任务描述成功', res),
+      // console.log('调用云函数修改任务描述成功', res),
         this.getDetail()
     }).catch(res => {
       console.log('调用云函数修改任务描述失败', res)
@@ -239,7 +241,7 @@ Page({
           currentPriority: e.detail.name
         }
       }).then(res => {
-        console.log('修改task优先级成功', res),
+        // console.log('修改task优先级成功', res),
           this.getDetail()
       }).catch(res => {
         console.log('修改task优先级失败', res)
@@ -312,7 +314,7 @@ Page({
   updateComment(list) {
     if (list) {
       var newList = [];
-      console.log(list)
+      // console.log(list)
       for (var i = 0; i < list.length; i++) {
         db.collection('feedback')
           .where({

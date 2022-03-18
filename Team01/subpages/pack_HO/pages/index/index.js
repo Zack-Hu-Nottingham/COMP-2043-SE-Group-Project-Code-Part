@@ -406,7 +406,7 @@ Page({
               task: this.data.task.concat(res.data[idx])
             })
           }
-          console.log("成功获取任务信息")
+          //console.log("成功获取任务信息")
         })
         .catch(err => {
           console.log("fail to get task info")
@@ -613,7 +613,7 @@ Page({
           nickName:value
         },
         success:function (res){
-          console.log("success" + value)
+          // console.log("success" + value)
         },
         fail:console.error
       })

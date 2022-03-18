@@ -76,4 +76,5 @@
   type="range"
   bind:close="onClose"
   bind:confirm="onConfirm"
+  default-date="{{defaultDate}}"
 />

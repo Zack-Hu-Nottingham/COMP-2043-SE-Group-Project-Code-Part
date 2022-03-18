@@ -117,13 +117,13 @@ Page({
 
   changeOwner() {
     wx.navigateTo({
-      url: '../../project/contactList/houseOwnerList/houseOwnerList',
+      url: '../contactList/houseOwnerList/houseOwnerList'
     })
   },
 
   changeParticipant() {
     wx.navigateTo({
-      url: '../../project/contactList/participantList/participantList',
+      url: '../contactList/participantList/participantList',
     })
   },
   /** 
@@ -157,7 +157,7 @@ Page({
           cloudPath: cloudList
         })
         this.updateCloudList();
-        console.log("图片上传成功", res)
+        // console.log("图片上传成功", res)
       },
       fail: console.error
     })
@@ -237,7 +237,7 @@ Page({
   updateOwners(res_id){
     var newProjectList=[];
     newProjectList.push(res_id);
-    console.log(newProjectList)
+    // console.log(newProjectList)
     db.collection('user').where({
       _openid: _.eq(this.data.houseOwner_openid)
     }).update({
@@ -245,7 +245,7 @@ Page({
         project: newProjectList
       },
       success: res => {
-        console.log('[数据库] [更新记录] 成功：',res)
+        // console.log('[数据库] [更新记录] 成功：',res)
       },
       fail: err => {
         console.error('[数据库] [更新记录] 失败：', err)
@@ -256,7 +256,7 @@ Page({
     //     project: ['o_jxV5TAqQjBnhn2BVwEBhfBHbrn']
     //   }
     // }).then(res =>{
-    //   console.log(res)
+    //  console.log(res)
     // })
   },
 
@@ -277,7 +277,7 @@ Page({
           cloudList: this.data.cloudPath
         },
         success: function (res) {
-          console.log(res)
+          // console.log(res)
         }
       })
   },
@@ -303,7 +303,7 @@ Page({
     }, 2400)
     setTimeout(res => {
       wx.redirectTo({
-        url: '../../indexs/indexForProjectManager/indexForProjectManager',
+        url: '../index/index'
       })
     }, 2500)
   },

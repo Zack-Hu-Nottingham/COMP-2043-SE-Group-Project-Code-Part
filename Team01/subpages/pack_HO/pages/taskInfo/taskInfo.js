@@ -155,7 +155,7 @@ Page({
         endTime: `${end.getFullYear()}-${end.getMonth() + 1}-${end.getDate()}`
       }
     }).then(res => {
-      console.log('修改task日期成功', res),
+      // console.log('修改task日期成功', res),
         this.getDetail()
     }).catch(res => {
       console.log('修改task日期失败', res)
@@ -272,7 +272,7 @@ Page({
         taskDescriptions: e.detail.value
       }
     }).then(res => {
-      console.log('调用云函数修改任务描述成功', res),
+      //console.log('调用云函数修改任务描述成功', res),
         this.getDetail()
     }).catch(res => {
       console.log('调用云函数修改任务描述失败', res)

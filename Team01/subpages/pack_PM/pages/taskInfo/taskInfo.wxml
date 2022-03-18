@@ -37,6 +37,7 @@
       link-type="navigateTo" url="/pages/project/fileList/fileList?id={{item._id}}">{{item.createTime}}</van-cell>
   </view>
 </van-cell-group>
+<view style="padding:50rpx"></view>
 
 <!-- <van-sticky offset-top="{{ 0 }}">
     <van-button hairline plain round block type="info" bindtap="clickAddComment" class="addComment">{{dictionary.add_comment}}</van-button>
@@ -44,4 +45,10 @@
 
 <van-action-sheet show="{{ priorityShow }}" actions="{{ priority }}" bind:close="onPriorityClose" bind:select="onPrioritySelect" />
 
-<van-calendar show="{{ dateShow }}" title="choose period" type="range" bind:close="onClose" bind:confirm="onConfirm" />
+<van-calendar 
+  show="{{ dateShow }}" 
+  title="choose period" 
+  type="range" 
+  bind:close="onClose" 
+  bind:confirm="onConfirm" 
+  default-date="{{defaultDate}}"/>

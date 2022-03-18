@@ -225,7 +225,7 @@ Page({
   },
 
   viewGantt() {
-    console.log(this.data.project._id)
+    // console.log(this.data.project._id)
     /** 
      *  update gantt
      */

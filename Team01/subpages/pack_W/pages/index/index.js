@@ -236,7 +236,7 @@ Page({
    * Get project summary information
    */
   getProjectInfo(projectId) {
-    console.log(projectId)
+    // console.log(projectId)
     return new Promise((resolve, reject) => {
       db.collection('project')
         .doc(projectId)
@@ -403,7 +403,7 @@ Page({
           nickName:value
         },
         success:function (res){
-          console.log("success" + value)
+          // console.log("success" + value)
         },
         fail:console.error
       })

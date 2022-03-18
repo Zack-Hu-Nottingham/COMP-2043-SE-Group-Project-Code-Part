@@ -108,7 +108,7 @@ Page({
           this.getProjectManager()
         },
         fail: function (err) {
-          console.log(err)
+          // console.log(err)
         }
       })
 

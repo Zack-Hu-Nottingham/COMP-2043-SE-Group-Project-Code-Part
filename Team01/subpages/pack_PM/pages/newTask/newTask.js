@@ -239,7 +239,7 @@ Page({
                     cloudPath: cloudList
                 })
                 this.updateCloudList();
-                console.log("图片上传成功", res)
+                // console.log("图片上传成功", res)
             },
             fail: console.error
         })
@@ -259,7 +259,7 @@ Page({
                     cloudList: this.data.cloudPath
                 },
                 success: function (res) {
-                    console.log(res)
+                    // console.log(res)
                 }
             })
     },
@@ -310,7 +310,7 @@ Page({
                         this.uploadImage(this.data.fileList[i].url);
                     }
 
-                    console.log('添加成功', res)
+                    // console.log('添加成功', res)
                 })
                 .catch(res => {
                     console.log('添加失败', res)
