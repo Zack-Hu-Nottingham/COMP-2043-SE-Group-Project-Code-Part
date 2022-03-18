@@ -1,5 +1,5 @@
-// pages/indexs/about/about.js
-const languageUtils = require("../../../language/languageUtils");
+// pages/about/about.js
+const languageUtils = require("../../language/languageUtils");
 
 Page({
 

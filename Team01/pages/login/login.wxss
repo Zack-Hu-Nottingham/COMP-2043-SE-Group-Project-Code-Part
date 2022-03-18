@@ -1,1 +1,37 @@
 /* pages/login/login.wxss */
+.icon {
+  width: 180rpx;
+}
+.showIcon {
+  margin-top: 140rpx;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+.appName {
+  font-size: larger;
+  margin-top: 25rpx;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+.currentVersion {
+  color: #696969;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+.bottomInfo {
+  color: #D3D3D3;
+  position:fixed;
+  bottom:40rpx;
+  width:100%;
+  align-items: center;
+  justify-content:center;
+  display: flex;
+  flex-direction: column;
+}
+.van-cell-group {
+  /* margin-top: 50rpx;
+  padding-top: 200rpx; */
+}

@@ -1,3 +1,15 @@
+
+<view class="showIcon">
+  <image class="icon" mode="widthFix" src="../../images/icon/icon2.png"/>
+</view>
+<view class="appName">
+  <text>Team202101</text>
+</view>
+<view class="currentVersion">
+  <text>{{dictionary.current_version}} 1.1.0</text>
+</view>
+
+
 <!-- Dialog -->
 <van-dialog id="van-dialog" bind:getuserinfo="getuserinfo" />
 

@@ -94,7 +94,7 @@
   <van-cell-group inset style="padding: 30rpx;">
     <van-cell center icon="setting-o"/>
     <van-cell center title="{{dictionary.language}}" value="{{languageList[language]}}" icon="" is-link clickable="true" bindtap="onChangeLan" class="settingForTest"/>
-    <van-cell center title="{{dictionary.about_button}}" is-link clickable link-type="navigateTo" url="/pages/indexs/about/about"/>
+    <van-cell center title="{{dictionary.about_button}}" is-link clickable link-type="navigateTo" url="/pages/about/about"/>
     <van-cell title = ""/>
   </van-cell-group>
 
