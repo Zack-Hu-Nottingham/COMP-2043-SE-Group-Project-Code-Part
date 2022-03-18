@@ -22,7 +22,6 @@
 
 
 <van-cell-group inset title="{{dictionary.statistic_report}}">
-<!-- <van-cell-group style="margin: 0 1rpx;" inset title="{{dictionary.statistic_report}}"> -->
 
   <van-cell class="van-cell">
     <view class="parallin">
