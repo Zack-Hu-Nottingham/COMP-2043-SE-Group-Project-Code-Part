@@ -1,8 +1,0 @@
-<!--pages/project/newProject/projectTemplate/projectTemplate.wxml-->
-<van-radio-group value="{{ radio }}" bind:change="onChange">
-  <van-cell-group inset class="cell-group" wx:for="{{ templates }}" wx:key="index">
-    <van-cell title="{{dictionary.house_template[index]}}" label="{{dictionary.house_template_description[index]}}" clickable data-name="{{item.id}}" bind:click="onClick">
-      <van-radio slot="right-icon" name="{{item.id}}" class="chooseTemplateForTest"/>
-    </van-cell>
-  </van-cell-group> 
-</van-radio-group>

@@ -1,6 +1,0 @@
-.cell-group {
-    padding: 5rpx;
-}
-.value-class {
-    flex: none !important;
-  }

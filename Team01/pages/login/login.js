@@ -79,18 +79,18 @@ Page({
                     // House Owner
                     if (identity == 0) {
                       wx.redirectTo({
-                        url: '../indexs/indexOfHouseOwner/indexOfHouseOwner?openid=' + this.data.openid,
+                        url: '../../subpages/pack_HO/pages/index/index?openid=' + this.data.openid,
                       })
                       // Project Manager
                     } else if (identity == 1) {
                       wx.redirectTo({
-                        url: '../indexs/indexForProjectManager/indexForProjectManager?openid=' + this.data.openid,
+                        url: '../../subpages/pack_PM/pages/index/index?openid=' + this.data.openid,
                       })
 
                       // Worker
                     } else if (identity == 2) {
                       wx.redirectTo({
-                        url: '../indexs/indexForWorker/indexForWorker',
+                        url: '../../subpages/pack_W/pages/index/index',
                       })
                     }
                   },
