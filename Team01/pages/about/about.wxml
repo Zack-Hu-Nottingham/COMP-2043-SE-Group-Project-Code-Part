@@ -1,4 +1,4 @@
-<!--pages/indexs/about/about.wxml-->
+<!--pages/about/about.wxml-->
 <view class="showIcon">
   <image class="icon" mode="widthFix" src="../../../images/icon/icon2.png"/>
 </view>

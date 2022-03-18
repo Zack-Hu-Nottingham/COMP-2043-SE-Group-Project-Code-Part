@@ -1,4 +1,4 @@
-/* pages/indexs/about/about.wxss */
+/* pages/about/about.wxss */
 .icon {
   width: 180rpx;
 }
