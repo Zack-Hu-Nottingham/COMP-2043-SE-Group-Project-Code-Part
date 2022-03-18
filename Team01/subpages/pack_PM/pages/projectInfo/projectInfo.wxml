@@ -102,7 +102,7 @@
   <van-cell-group inset class="cell-group" wx:for="{{ feedback }}" wx:key="index">
   <view class="projectDelay">
     <van-cell  title="{{item.type.name}}" label="{{item.details}}" clickable
-      link-type="navigateTo" url="/pages/project/fileList/fileList?id={{item._id}}">{{item.createTime}}</van-cell>
+      link-type="navigateTo" url="../../../../pages/fileList/fileList?id={{item._id}}">{{item.createTime}}</van-cell>
   </view>
   </van-cell-group>
  <!--
@@ -131,7 +131,7 @@
         label="{{ item.startTime }} — {{ item.endTime }} "
         title="{{ item.name }}"
         link-type="navigateTo"
-        url="/pages/taskInfoPages/taskInfoForProjectManager/taskInfoForProjectManager?id={{item._id}}">
+        url="../taskInfo/taskInfo?id={{item._id}}">
         
           <view>
             <van-tag color="#87CEFA" size="medium"><van-icon name="play"></van-icon>Progressing</van-tag>
@@ -168,7 +168,7 @@
         label="{{ item.startTime }} — {{ item.endTime }} "
         title="{{item.name}}"
         link-type="navigateTo"
-        url="/pages/taskInfoPages/taskInfoForProjectManager/taskInfoForProjectManager?id={{item._id}}">
+        url="../taskInfo/taskInfo?id={{item._id}}">
 
           <view>
             <van-tag color="#ffe1e1" text-color="#ad0000"  size="medium"><van-icon name="warning-o" />Delayed</van-tag>
@@ -187,7 +187,7 @@
         label="{{ item.startTime }} — {{ item.endTime }} "
         title="{{ item.name }}"
         link-type="navigateTo"
-        url="/pages/taskInfoPages/taskInfoForProjectManager/taskInfoForProjectManager?id={{item._id}}">
+        url="../taskInfo/taskInfo?id={{item._id}}">
 
           <view>
             <van-tag color="#D3D3D3" icon="fail" size="medium"><van-icon name="close"/>Unstarted</van-tag>
@@ -206,7 +206,7 @@
         label="{{ item.startTime }} — {{ item.endTime }} "
         title="{{ item.name }}"
         link-type="navigateTo"
-        url="/pages/taskInfoPages/taskInfoForProjectManager/taskInfoForProjectManager?id={{item._id}}">
+        url="../taskInfo/taskInfo?id={{item._id}}">
 
           <view>
             <van-tag color="#32CD32" size="medium"><van-icon name="passed" />Finished</van-tag>

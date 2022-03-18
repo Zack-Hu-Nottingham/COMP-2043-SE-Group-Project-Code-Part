@@ -2,8 +2,8 @@
     "pages": [
         "pages/login/login",
         "pages/about/about",
+        "pages/fileList/fileList",
         "pages/testDiagram/testDiagram",
-        "pages/project/fileList/fileList",
         "pages/languageSetting/languageSetting"
     ],
     "subpackages": [
@@ -28,8 +28,7 @@
             "pages/newProject/newProject",
             "pages/newTask/newTask",
             "pages/statisticReport/statisticReport",
-            "pages/projectTemplate/projectTemplate",
-            "pages/template/template"
+            "pages/projectTemplate/projectTemplate"
           ]
         }, {
           "root": "subpages/pack_W",

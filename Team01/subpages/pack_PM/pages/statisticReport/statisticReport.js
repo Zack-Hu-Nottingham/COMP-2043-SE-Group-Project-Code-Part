@@ -1,5 +1,5 @@
 // pages/project/statisticReport/statisticReport.js
-const languageUtils = require("../../../language/languageUtils");
+const languageUtils = require("../../../../language/languageUtils");
 
 const app = getApp();
 

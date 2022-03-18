@@ -1,17 +1,17 @@
 // pages/project/newProject/newProject.js
-import Toast from '../../../miniprogram_npm/@vant/weapp/toast/toast'
+import Toast from '../../../../miniprogram_npm/@vant/weapp/toast/toast'
 
-const Utils = require("../../../utils/util");
-const languageUtils = require("../../../language/languageUtils");
+const Utils = require("../../../../utils/util");
+const languageUtils = require("../../../../language/languageUtils");
 
-const templateLib = require("../../../template/townhouse/Townhouse.js");
-const en_templateLib = require("../../../template/townhouse/en_Townhouse.js");
+const templateLib = require("../template/townhouse/Townhouse.js");
+const en_templateLib = require("../template/townhouse/en_Townhouse.js");
 
-const detachedLib = require("../../../template/detachedHouse/Detached_House.js");
-const en_detachedLib = require("../../../template/detachedHouse/en_Datached_House.js");
+const detachedLib = require("../template/detachedHouse/Detached_House.js");
+const en_detachedLib = require("../template/detachedHouse/en_Datached_House.js");
 
-const GardenLib = require("../../../template/gardenVilla/Garden_Villa.js");
-const en_GardenLib = require("../../../template/gardenVilla/en_Garden_Villa.js");
+const GardenLib = require("../template/gardenVilla/Garden_Villa.js");
+const en_GardenLib = require("../template/gardenVilla/en_Garden_Villa.js");
 
 const db = wx.cloud.database();
 const _ = db.command;

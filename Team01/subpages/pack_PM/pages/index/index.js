@@ -1,16 +1,16 @@
 // subpages/pack_PM/pages/index/index.js
-import Dialog from '../../../miniprogram_npm/@vant/weapp/dialog/dialog';
-import Toast from '../../../miniprogram_npm/@vant/weapp/toast/toast';
+import Dialog from '../../../../miniprogram_npm/@vant/weapp/dialog/dialog';
+import Toast from '../../../../miniprogram_npm/@vant/weapp/toast/toast';
 
 const app = getApp();
 
-const languageUtils = require("../../../language/languageUtils");
+const languageUtils = require("../../../../language/languageUtils");
 
 const db = wx.cloud.database();
 
 const _ = db.command;
 
-const lib = require('../../../utils/util');
+const lib = require('../../../../utils/util');
 
 Page({
 
@@ -290,9 +290,15 @@ Page({
    * Click the message and change its state to isRead
    */
   clickToChangeIsRead(event) {
-    // console.log(event)
-    var index = event.currentTarget.dataset.index;
+    console.log(event)
+    if(!event.currentTarget.dataset.index){
+      var index = 0;
+    }
+    else{
+      var index = event.currentTarget.dataset.index;
+    }
     var list = this.data.messageList;
+    
     // console.log(list[index])
     list[index].isRead = 1;
     this.setData({
@@ -365,7 +371,7 @@ Page({
    */
   clickStatisticReport(event) {
     wx.navigateTo({
-      url: '../../project/statisticReport/statisticReport',
+      url: '../statisticReport/statisticReport',
     })
   },
 
@@ -374,7 +380,7 @@ Page({
    */
   clickProject(event) {
     wx.navigateTo({
-      url: '../../project/projectInfoForProjectManager/projectInfoForProjectManager?id=' + event.currentTarget.dataset.id,
+      url: '../projectInfo/projectInfo?id=' + event.currentTarget.dataset.id,
     })
   },
 
@@ -382,8 +388,8 @@ Page({
    * click to create new project
    */
   clickNewProject(event) {
-    wx.redirectTo({
-      url: '../../project/newProject/newProject',
+    wx.navigateTo({
+      url: '../newProject/newProject',
     })
   },
 
@@ -400,7 +406,7 @@ Page({
   onChangeLan(event) {
     // console.log('check')
     wx.navigateTo({
-      url: '../../more/languageSetting/languageSetting',
+      url: '../../../../pages/languageSetting/languageSetting'
     })
   },
 

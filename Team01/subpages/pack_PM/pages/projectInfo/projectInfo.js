@@ -1,5 +1,5 @@
 // subpages/pack_PM/pages/projectInfo/projectInfo.js
-const languageUtils = require("../../../language/languageUtils");
+const languageUtils = require("../../../../language/languageUtils");
 
 const app = getApp();
 
@@ -165,7 +165,7 @@ Page({
     if (this.data.currentTab == 2) {
       //console.log('success')
       wx.navigateTo({
-        url: '../testDiagram/testDiagram?id=' + id + '&index=' + number,
+        url: '../../../../pages/testDiagram/testDiagram?id=' + id + '&index=' + number,
       })
     }
 

@@ -1,6 +1,6 @@
 // subpages/pack_PM/pages/taskInfo/taskInfo.js
 
-const languageUtils = require("../../../language/languageUtils");
+const languageUtils = require("../../../../language/languageUtils");
 const db = wx.cloud.database();
 const _ = db.command;
 var id = '';

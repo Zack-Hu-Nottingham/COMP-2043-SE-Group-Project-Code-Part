@@ -43,14 +43,14 @@ Page({
       language: lan
     })
 
-    console.log(options)
+    // console.log(options)
     db.collection('feedback')
       .where({
         _id: options.id
       })
       .get({
         success: res => {
-          console.log(res.data)
+          // console.log(res.data)
           this.setData({
             feedback: res.data[0]
           });
@@ -66,7 +66,7 @@ Page({
 
   getBelongTo() {
     return new Promise((resolve, reject) => {
-      console.log(this.data.feedback.belongTo)
+      // console.log(this.data.feedback.belongTo)
       db.collection('task')
         .where({
           _id: this.data.feedback.belongTo
@@ -78,7 +78,7 @@ Page({
         })
         .get({
           success: res => {
-            console.log(res.data[0]),
+            // console.log(res.data[0]),
               this.setData({
                 phase: res.data[0].phase,
                 feedbackBelongToTask: res.data[0].name
@@ -94,8 +94,7 @@ Page({
               })
               .get({
                 success: res => {
-                  console.log("Sssss")
-                  console.log(res.data[0])
+                  // console.log(res.data[0])
                   this.setData({
                     feedbackBelongTo: res.data[0].name,
                   })

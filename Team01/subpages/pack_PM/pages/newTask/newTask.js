@@ -1,6 +1,6 @@
 // pages/project/newTask/newTask.js
-import Toast from '../../../miniprogram_npm/@vant/weapp/toast/toast'
-const languageUtils = require("../../../language/languageUtils");
+import Toast from '../../../../miniprogram_npm/@vant/weapp/toast/toast'
+const languageUtils = require("../../../../language/languageUtils");
 
 var app = getApp()
 var id = '';

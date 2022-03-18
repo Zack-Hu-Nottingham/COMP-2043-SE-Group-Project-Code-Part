@@ -65,12 +65,12 @@ Page({
     onUnload: function () {
         if(redirectPage==1){
             wx.redirectTo({
-              url: '../projectInfoForProjectManager/projectInfoForProjectManager?id='+id,
+                url: '../../pages/projectInfo/projectInfo?id='+id,
             })
         }
         else if(redirectPage==0){
             wx.redirectTo({
-              url: '../projectInfo/projectInfo?id='+id,
+                url: '../../pages/projectReport/projectReport?id='+id,
             })
         }
     },
