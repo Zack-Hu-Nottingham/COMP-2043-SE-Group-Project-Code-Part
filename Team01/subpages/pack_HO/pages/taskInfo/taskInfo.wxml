@@ -11,8 +11,8 @@
 
 <van-cell-group inset style="padding: 30rpx">
   <van-cell title="{{dictionary.belong_to}}" value="{{belongTo}}" />
-  <van-cell title="{{dictionary.current_phase}}" value="{{ dictionary.phase_name[taskPage.phase] }}" />
-  <van-cell title="{{dictionary.phase_description }}" value="{{ dictionary.current_phase_description[taskPage.phase] }}"
+  <van-cell class="valueLeft" title="{{dictionary.current_phase}}" value="{{ dictionary.phase_name[taskPage.phase] }}" />
+  <van-cell class="valueLeft" title="{{dictionary.phase_description }}" value="{{ dictionary.current_phase_description[taskPage.phase] }}"
   placeholder="{{project.stateDescription}}" border="{{ false }}" ></van-cell>
   
   <view wx:if="{{taskPage.state == 0}}">
@@ -56,7 +56,7 @@
   <van-cell-group inset class="cell-group" wx:for="{{feedback}}" wx:key="index">
   <view class="projectDelay">
     <van-cell  title="{{item.type.name}}" label="{{item.description}}" clickable
-      link-type="navigateTo" url="/pages/project/fileList/fileList?id={{item._id}}">{{item.createTime}}</van-cell>
+      link-type="navigateTo" url="../../../../pages/fileList/fileList?id={{item._id}}">{{item.createTime}}</van-cell>
   </view>
   </van-cell-group>
 <van-sticky offset-top="{{ 570 }}">

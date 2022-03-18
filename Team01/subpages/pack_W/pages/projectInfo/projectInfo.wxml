@@ -5,7 +5,7 @@
   <van-cell title="{{ dictionary.house_owner }}" value="{{ houseOwner.nickName }}" />
   <van-cell title="{{ dictionary.project_manager }}" value="{{ projectManager.nickName }}" />
   
-  <van-cell title="{{ dictionary.description }}" value="{{ project.projectDescription }}"class="projectInfoDescriptionForTest" />
+  <van-cell title="{{ dictionary.description }}" value="{{ project.projectDescription }}"class="projectInfoDescriptionForTest valueLeft" />
 </van-cell-group>
 
 <van-cell-group inset title="{{dictionary.state_information}}">
@@ -13,8 +13,8 @@
   <van-cell title="{{dictionary.start_time}}" value="{{ project.startTime }}" class="projectInfoStartTimeForTest"/>
   <van-cell title="{{dictionary.expected_end_time}}" value="{{ project.endTime }}"  class="projectInfoEndTimeForTest"/>
 
-  <van-cell title="{{dictionary.current_phase}}" value="{{ dictionary.phase_name[project.currentPhase] }}" />
-  <van-cell title="{{dictionary.description}}" value="{{ dictionary.current_phase_description[project.currentPhase] }}" />
+  <van-cell class="valueLeft" title="{{dictionary.current_phase}}" value="{{ dictionary.phase_name[project.currentPhase] }}" />
+  <van-cell class="valueLeft" title="{{dictionary.description}}" value="{{ dictionary.current_phase_description[project.currentPhase] }}" />
 
 </van-cell-group>
 

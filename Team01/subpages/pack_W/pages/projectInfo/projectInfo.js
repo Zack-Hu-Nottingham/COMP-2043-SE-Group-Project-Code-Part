@@ -1,5 +1,5 @@
 // subpages/pack_W/pages/projectInfo/projectInfo.js
-const languageUtils = require("../../../language/languageUtils");
+const languageUtils = require("../../../../language/languageUtils");
 
 const app = getApp();
 

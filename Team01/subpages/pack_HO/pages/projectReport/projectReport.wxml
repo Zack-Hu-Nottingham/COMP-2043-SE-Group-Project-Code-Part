@@ -7,15 +7,15 @@
     <van-cell title="{{dictionary.owner}}" value="{{ projectManager.nickName }}" />
     <van-cell title="{{dictionary.start_time}}" value="{{ project.startTime }}"/>
     <van-cell title="{{dictionary.expected_end_time}}" value="{{ project.endTime }}"/>
-    <van-cell model:value="{{ project.projectDescription }}" title="{{ dictionary.description }}" type="textarea" placeholder="{{ project.projectDescription }}" class="projectInfoDescriptionForTest" />
+    <van-cell class="valueLeft" model:value="{{ project.projectDescription }}" title="{{ dictionary.description }}" type="textarea" placeholder="{{ project.projectDescription }}" class="projectInfoDescriptionForTest" />
     <van-cell title="{{dictionary.view_gantt_diagram}}" is-link bindtap="viewGantt" />
   </van-cell-group>
 </view>
 
 <view style="padding-bottom: 30rpx;">
   <van-cell-group inset title="{{dictionary.state_information}}">
-    <van-cell title="{{dictionary.current_phase}}" value="{{ dictionary.phase_name[project.currentPhase] }}" />
-    <van-cell title="{{dictionary.phase_description }}" value="{{ dictionary.current_phase_description[project.currentPhase] }}"
+    <van-cell class="valueLeft" title="{{dictionary.current_phase}}" value="{{ dictionary.phase_name[project.currentPhase] }}" />
+    <van-cell class="valueLeft" title="{{dictionary.phase_description }}" value="{{ dictionary.current_phase_description[project.currentPhase] }}"
     placeholder="{{project.stateDescription}}" border="{{ false }}" ></van-cell>
   </van-cell-group>
 </view>

@@ -1,10 +1,10 @@
 // subpages/pack_W/pages/index/index.js
-import Dialog from '../../../miniprogram_npm/@vant/weapp/dialog/dialog';
-import Toast from '../../../miniprogram_npm/@vant/weapp/toast/toast';
+import Dialog from '../../../../miniprogram_npm/@vant/weapp/dialog/dialog';
+import Toast from '../../../../miniprogram_npm/@vant/weapp/toast/toast';
 
 const app = getApp();
 
-const languageUtils = require("../../../language/languageUtils");
+const languageUtils = require("../../../../language/languageUtils");
 
 const db = wx.cloud.database();
 
@@ -315,7 +315,7 @@ Page({
   clickProject(projectId) {
     // console.log(projectId.currentTarget.id)
     wx.navigateTo({
-      url: '../../project/projectInfoForWorker/projectInfoForWorker?id=' + projectId.currentTarget.id,
+      url: '../projectInfo/projectInfo?id=' + projectId.currentTarget.id,
     })
   },
 
@@ -353,7 +353,7 @@ Page({
    */
   clickTask(event) {
     wx.navigateTo({
-      url: '../../taskInfoPages/taskInfoForWorker/taskInfoForWorker?id=' + event.currentTarget.dataset.id,
+      url: '../taskInfo/taskInfo?id=' + event.currentTarget.dataset.id,
     })
   },
 
@@ -370,7 +370,7 @@ Page({
    */
   onChangeLan(event) {
     wx.navigateTo({
-      url: '../../more/languageSetting/languageSetting',
+      url: '/pages/languageSetting/languageSetting',
     })
   },
 

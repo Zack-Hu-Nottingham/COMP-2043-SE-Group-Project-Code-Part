@@ -1,12 +1,12 @@
-import Dialog from '../../../miniprogram_npm/@vant/weapp/dialog/dialog';
-import Toast from '../../../miniprogram_npm/@vant/weapp/toast/toast';
+import Dialog from '../../../../miniprogram_npm/@vant/weapp/dialog/dialog';
+import Toast from '../../../../miniprogram_npm/@vant/weapp/toast/toast';
 
 const app = getApp();
 
-const languageUtils = require("../../../language/languageUtils");
+const languageUtils = require("../../../../language/languageUtils");
 const db = wx.cloud.database();
 const _ = db.command;
-const lib = require('../../../utils/util');
+const lib = require('../../../../utils/util');
 
 Page({
   /**
@@ -310,7 +310,7 @@ Page({
    */
   clickTask(event) {
     wx.navigateTo({
-      url: '../../taskInfoPages/taskInfoForHouseOwner/taskInfoForHouseOwner?id=' + event.currentTarget.dataset.id,
+      url: '../taskInfo/taskInfo?id=' + event.currentTarget.dataset.id,
     })
   },
 
@@ -320,7 +320,7 @@ Page({
       Toast(this.data.dictionary.no_project_error)
     } else {
       wx.navigateTo({
-        url: '../../project/projectReport/projectReport?id=' + this.data.project[0]._id,
+        url: '../projectReport/projectReport?id=' + this.data.project[0]._id,
       })
     }
   },
@@ -336,7 +336,7 @@ Page({
   onChangeLan(event) {
     // console.log('check')
     wx.navigateTo({
-      url: '../../more/languageSetting/languageSetting',
+      url: '../../../../pages/languageSetting/languageSetting',
     })
   },
 

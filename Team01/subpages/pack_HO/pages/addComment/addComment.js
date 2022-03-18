@@ -1,6 +1,6 @@
 // pages/project/addComment/addComment.js
-import Toast from '../../../miniprogram_npm/@vant/weapp/toast/toast'
-const languageUtils = require("../../../language/languageUtils");
+import Toast from '../../../../miniprogram_npm/@vant/weapp/toast/toast'
+const languageUtils = require("../../../../language/languageUtils");
 const app = getApp();
 const db = wx.cloud.database();
 const _ = db.command;

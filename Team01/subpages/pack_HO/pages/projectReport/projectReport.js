@@ -1,5 +1,5 @@
 // pages/project/statisticReport/statisticReport.js
-const languageUtils = require("../../../language/languageUtils");
+const languageUtils = require("../../../../language/languageUtils");
 
 const app = getApp();
 
@@ -242,7 +242,7 @@ Page({
     })
     var number = 2;
     wx.navigateTo({
-      url: '../testDiagram/testDiagram?id=' + this.data.project._id + '&index=' + number,
+      url: '../../../../pages/testDiagram/testDiagram?id=' + this.data.project._id + '&index=' + number,
     })
   },
   async getFileList(cloudPath) {

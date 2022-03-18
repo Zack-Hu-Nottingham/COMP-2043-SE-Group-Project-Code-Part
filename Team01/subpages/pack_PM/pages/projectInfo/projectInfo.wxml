@@ -25,16 +25,16 @@
     <van-cell title="{{ dictionary.project_manager }}" value="{{ projectManager.nickName }}" />
     
     <view wx:if="{{userInfo.identity == 1}}">
-      <van-field model:value="{{ project.projectDescription }}" right clearable label="{{ dictionary.description }}" type="textarea" placeholder="{{ project.projectDescription }}" border="{{ false }}" class="projectInfoDescriptionForTest" bind:blur="onProjectDescriptionBlur" autosize></van-field>
+      <van-field class="valueLeft" model:value="{{ project.projectDescription }}" right clearable label="{{ dictionary.description }}" type="textarea" placeholder="{{ project.projectDescription }}" border="{{ false }}" class="projectInfoDescriptionForTest" bind:blur="onProjectDescriptionBlur" autosize></van-field>
     </view>
 
     <view wx:else>
-      <van-cell title="{{ dictionary.description }}" value="{{ project.projectDescription }}"class="projectInfoDescriptionForTest" />
+      <van-cell title="{{ dictionary.description }}" value="{{ project.projectDescription }}"class="projectInfoDescriptionForTest valueLeft" />
     </view>
   </van-cell-group>
 
   <van-cell-group inset title="{{dictionary.state_information}}">
-    <view wx:if="{{userInfo.id == 1}}">
+    <view wx:if="{{userInfo.identity == 1}}">
       <van-cell title="{{dictionary.start_time}}" is-link value="{{ project.startTime }}" bindtap="onDateDisplay" class="projectInfoStartTimeForTest"/>
       <van-cell title="{{dictionary.end_time}}" is-link value="{{ project.endTime }}" bindtap="onDateDisplay" class="projectInfoEndTimeForTest"/>
     </view>
@@ -44,8 +44,8 @@
       <van-cell title="{{dictionary.end_time}}" value="{{ project.endTime }}"  class="projectInfoEndTimeForTest"/>
     </view>
 
-    <van-cell title="{{dictionary.current_phase}}" value="{{ dictionary.phase_name[project.currentPhase] }}" />
-    <van-cell title="{{dictionary.phase_description}}" value="{{ dictionary.current_phase_description[project.currentPhase] }}" />
+    <van-cell class="valueLeft" title="{{dictionary.current_phase}}" value="{{ dictionary.phase_name[project.currentPhase] }}" />
+    <van-cell class="valueLeft" title="{{dictionary.phase_description}}" value="{{ dictionary.current_phase_description[project.currentPhase] }}" />
 
   </van-cell-group>
 

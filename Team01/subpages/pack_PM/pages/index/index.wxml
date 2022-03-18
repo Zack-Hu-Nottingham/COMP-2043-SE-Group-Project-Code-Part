@@ -25,14 +25,14 @@
 
     <view wx:if="{{messageList[0].isRead == 0}}" class="notReadMessage">
       <van-cell-group inset style="padding: 30rpx;" class="notReadMessage">
-        <van-cell center title="{{dictionary.notification}}" icon="bullhorn-o" size="large" label="{{messageList[0].type.name}}: {{messageList[0].description}}" value="{{messageList[0].createTime}}" clickable link-type="navigateTo" url="../../../../pages/fileList/fileList?id={{messageList[0]._id}}"bindtap="clickToChangeIsRead" class="notReadMessage" data-taskID="{{messageList[0]._id}}" >
+        <van-cell center title="{{dictionary.notification}}" icon="bullhorn-o" size="large" label="{{messageList[0].type.name}}: {{messageList[0].description}}" value="{{messageList[0].createTime}}" clickable link-type="navigateTo" url="/pages/fileList/fileList?id={{messageList[0]._id}}"bindtap="clickToChangeIsRead" class="notReadMessage" data-taskID="{{messageList[0]._id}}" >
        </van-cell>
      </van-cell-group>
     </view>
 
     <view wx:elif="{{messageList[0].isRead != 0}}">
       <van-cell-group inset style="padding: 30rpx;">
-        <van-cell center title="{{dictionary.notification}}" icon="bullhorn-o" size="large" label="{{messageList[0].type.name}}: {{messageList[0].description}}" value="{{messageList[0].createTime}}" clickable link-type="navigateTo" url="../../../../pages/fileList/fileList?id={{messageList[0]._id}}" bindtap="clickToChangeIsRead" data-taskID="{{messageList[0]._id}}" >
+        <van-cell center title="{{dictionary.notification}}" icon="bullhorn-o" size="large" label="{{messageList[0].type.name}}: {{messageList[0].description}}" value="{{messageList[0].createTime}}" clickable link-type="navigateTo" url="/pages/fileList/fileList?id={{messageList[0]._id}}" bindtap="clickToChangeIsRead" data-taskID="{{messageList[0]._id}}" >
        </van-cell>
      </van-cell-group>
     </view>
@@ -41,12 +41,12 @@
   
     <view wx:for="{{messageList}}" wx:key="index">
       <view wx:if="{{item.isRead == 0}}" class="notReadMessage" >
-        <van-cell class="notReadMessage" title="{{item.owner}}" clickable link-type="navigateTo" url="../../../../pages/fileList/fileList?id={{item._id}}" label="{{item.type.name}}: {{item.description}}" value="{{item.createTime}}" id="{{item.owner}}"  bindtap="clickToChangeIsRead" data-index="{{index}}" data-isRead="{{item.isRead}}" data-taskID="{{item._id}}" class="messageForTest"/>
+        <van-cell class="notReadMessage" title="{{item.owner}}" clickable link-type="navigateTo" url="/pages/fileList/fileList?id={{item._id}}" label="{{item.type.name}}: {{item.description}}" value="{{item.createTime}}" id="{{item.owner}}"  bindtap="clickToChangeIsRead" data-index="{{index}}" data-isRead="{{item.isRead}}" data-taskID="{{item._id}}" class="messageForTest"/>
       </view>
 
       <view wx:else>
         <van-cell  title="{{item.owner}}" clickable
-        link-type="navigateTo" url="../../../../pages/fileList/fileList?id={{item._id}}&index={{index}}" label="{{item.type.name}}: {{item.description}}" value="{{item.createTime}}" id="{{item.owner}}" class="messageForTest" bindtap="clickToChangeIsRead" data-index="{{index}}"  data-isRead="{{item.isRead}}" data-taskID="{{item._id}}"/>
+        link-type="navigateTo" url="/pages/fileList/fileList?id={{item._id}}&index={{index}}" label="{{item.type.name}}: {{item.description}}" value="{{item.createTime}}" id="{{item.owner}}" class="messageForTest" bindtap="clickToChangeIsRead" data-index="{{index}}"  data-isRead="{{item.isRead}}" data-taskID="{{item._id}}"/>
       </view>
     </view>
   </van-cell-group>

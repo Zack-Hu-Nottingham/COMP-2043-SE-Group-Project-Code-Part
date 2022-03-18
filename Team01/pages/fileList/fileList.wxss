@@ -26,3 +26,12 @@
 .img {
   margin: 4%;
 }
+.valueLeft .van-cell__value{
+  min-width: 65%;
+  text-align: left;
+}
+
+.valueLeft .van-cell__value span {
+  display: inline-block;
+  word-break: break-all;
+}

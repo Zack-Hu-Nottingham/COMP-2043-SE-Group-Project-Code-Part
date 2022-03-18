@@ -1,7 +1,7 @@
 // subpages/pack_W/pages/taskInfo/taskInfo.js
-import Toast from '../../../miniprogram_npm/@vant/weapp/toast/toast'
+import Toast from '../../../../miniprogram_npm/@vant/weapp/toast/toast'
 
-const languageUtils = require("../../../language/languageUtils");
+const languageUtils = require("../../../../language/languageUtils");
 
 const db = wx.cloud.database();
 
@@ -341,7 +341,7 @@ Page({
     }, 2400)
     setTimeout(res => {
       wx.redirectTo({
-        url: '../../indexs/indexForWorker/indexForWorker',
+        url: '../index/index',
       })
     }, 2500)
   },
