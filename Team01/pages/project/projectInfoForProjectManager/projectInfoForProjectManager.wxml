@@ -23,11 +23,11 @@
     <van-cell title="{{ dictionary.project_manager }}" value="{{ projectManager.nickName }}" />
     
     <view wx:if="{{userInfo.identity == 1}}">
-      <van-field model:value="{{ project.projectDescription }}" right clearable label="{{ dictionary.description }}" type="textarea" placeholder="{{ project.projectDescription }}" border="{{ false }}" class="projectInfoDescriptionForTest" bind:blur="onProjectDescriptionBlur" autosize></van-field>
+      <van-field model:value="{{ project.projectDescription }}" left clearable label="{{ dictionary.description }}" type="textarea" placeholder="{{ project.projectDescription }}" border="{{ false }}" class="projectInfoDescriptionForTest textLeft" bind:blur="onProjectDescriptionBlur" autosize></van-field>
     </view>
 
     <view wx:else>
-      <van-cell title="{{ dictionary.description }}" value="{{ project.projectDescription }}"class="projectInfoDescriptionForTest" />
+      <van-cell title="{{ dictionary.description }}" value="{{ project.projectDescription }}"class="projectInfoDescriptionForTest textLeft" />
     </view>
   </van-cell-group>
 
@@ -43,7 +43,7 @@
     </view>
 
     <van-cell title="{{dictionary.current_phase}}" value="{{ dictionary.phase_name[project.currentPhase] }}" />
-    <van-cell title="{{dictionary.phase_description}}" value="{{ dictionary.current_phase_description[project.currentPhase] }}" />
+    <van-cell class="textLeft" left title="{{dictionary.phase_description}}" value="{{ dictionary.current_phase_description[project.currentPhase] }}" />
 
   </van-cell-group>
 
