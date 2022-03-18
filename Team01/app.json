@@ -1,26 +1,9 @@
 {
     "pages": [
         "pages/login/login",
-        "pages/indexs/indexForWorker/indexForWorker",
-        "pages/indexs/indexForProjectManager/indexForProjectManager",
-        "pages/indexs/indexOfHouseOwner/indexOfHouseOwner",
         "pages/about/about",
-        "pages/project/projectInfoForWorker/projectInfoForWorker",
-        "pages/project/projectInfo/projectInfo",
         "pages/testDiagram/testDiagram",
-        "pages/project/newTask/newTask",
-        "pages/project/newProject/newProject",
-        "pages/project/statisticReport/statisticReport",
         "pages/project/fileList/fileList",
-        "pages/project/contactList/houseOwnerList/houseOwnerList",
-        "pages/project/contactList/participantList/participantList",
-        "pages/project/projectReport/projectReport",
-        "pages/project/projectTemplate/projectTemplate",
-        "pages/project/projectInfoForProjectManager/projectInfoForProjectManager",
-        "pages/taskInfoPages/addComment/addComment",
-        "pages/taskInfoPages/taskInfoForHouseOwner/taskInfoForHouseOwner",
-        "pages/taskInfoPages/taskInfoForProjectManager/taskInfoForProjectManager",
-        "pages/taskInfoPages/taskInfoForWorker/taskInfoForWorker",
         "pages/languageSetting/languageSetting"
     ],
     "subpackages": [
@@ -45,7 +28,8 @@
             "pages/newProject/newProject",
             "pages/newTask/newTask",
             "pages/statisticReport/statisticReport",
-            "pages/projectTemplate/projectTemplate"
+            "pages/projectTemplate/projectTemplate",
+            "pages/template/template"
           ]
         }, {
           "root": "subpages/pack_W",
