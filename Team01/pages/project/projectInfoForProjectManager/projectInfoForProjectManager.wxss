@@ -127,3 +127,13 @@ ec-canvas {
   -moz-box-orient: vertical; /*从上到下自动排列子元素*/
   -webkit-line-clamp:2; /*显示的行数*/
 }
+
+.textLeft .van-cell__value{
+  min-width: 70%;
+}
+
+.textLeft .van-cell__value span {
+  display: inline-block;
+  text-align: left;
+  word-break: break-all;
+}
