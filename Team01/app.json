@@ -21,10 +21,7 @@
         "pages/taskInfoPages/taskInfoForHouseOwner/taskInfoForHouseOwner",
         "pages/taskInfoPages/taskInfoForProjectManager/taskInfoForProjectManager",
         "pages/taskInfoPages/taskInfoForWorker/taskInfoForWorker",
-        "pages/more/more/more",
-        "pages/more/moreInfo/moreInfo",
-        "pages/more/languageSetting/languageSetting",
-        "pages/more/test/test"
+        "pages/languageSetting/languageSetting"
     ],
     "window": {
         "backgroundTextStyle": "light",

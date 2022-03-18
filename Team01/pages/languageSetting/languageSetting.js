@@ -1,12 +1,12 @@
 import {
   changLanguage
-} from '../../../language/languageUtils';
+} from '../../language/languageUtils';
 
-import Toast from '../../../miniprogram_npm/@vant/weapp/toast/toast';
+import Toast from '../../miniprogram_npm/@vant/weapp/toast/toast';
 
-import Dialog from '../../../miniprogram_npm/@vant/weapp/dialog/dialog';
+import Dialog from '../../miniprogram_npm/@vant/weapp/dialog/dialog';
 
-const languageUtils = require("../../../language/languageUtils");
+const languageUtils = require("../../language/languageUtils");
 
 Page({
 
