@@ -111,12 +111,15 @@
     <van-cell title="" />
     
 
-    <van-popup show="{{ showInvite }}" custom-style="width:75%; height: 32%;" bind:close="onCloseInvite">
-      <van-radio-group style="padding-left:20% ;"value="{{ radio }}" bind:change="onChange">
+    <van-popup show="{{ showInvite }}" custom-style="width:75%; height: 48%;" bind:close="onCloseInvite">
+      <!--
+        <van-radio-group style="padding-left:20% ;"value="{{ radio }}" bind:change="onChange">
         <van-radio style="padding-top: 20rpx;padding-left:20% ;" icon-size="55rpx" name="1">{{dictionary.house_owner}}</van-radio>
         <van-radio style="padding-top: 20rpx;padding-left:20% ;" icon-size="55rpx" name="2">{{dictionary.worker}}</van-radio>
         <van-radio style="padding-top: 20rpx;padding-left:20% ;" icon-size="55rpx" name="3">{{dictionary.project_manager}}</van-radio>
       </van-radio-group>
+      -->
+      <van-picker columns="{{dictionary.columns}}" default-index="{{1}}" bind:change="onChange2" />
       <van-button class="button-share" plain round color="#1296db" type="primary" style="padding-top: 40rpx;padding-left:20% ;" open-type="share" bindtip="onShareAppMessage">{{dictionary.share}}</van-button>
     </van-popup>
   </van-cell-group>

@@ -58,6 +58,8 @@ Page({
     value: '',
     showInvite: false,
     radio: '1',
+    selectindex:'1',
+    countid:'',
 
     totalTask: 0,
     updateIndex: 1,
@@ -86,6 +88,14 @@ Page({
 
   onChange(event) {
     this.setData({ radio: event.detail, });
+  },
+
+  onChange2(event) {
+    const { picker, value, index } = event.detail;
+    Toast(`当前值：${value}, 当前索引：${index}`);
+    this.setData({
+      selectindex:index,
+    })
   },
 
   /**
@@ -181,23 +191,101 @@ Page({
    * Users click on the upper right to share
    */
   onShareAppMessage: function (e) {
-    return {
-      /**
-       * Customized Title
-       */
-      title: '',
-      /**
-       * Jump page after friend click
-       */
-      path: '',
-      /**
-       * Discription
-       */
-      desc: '',
-      /**
-       * Path of shared images
-       */
-      imageUrl: ''
+    let selectindex= this.data.selectindex;
+    console.log('success'+selectindex);
+    if (selectindex=='1') {
+      db.collection('user').add({
+        data:{
+          identity: 2
+        },
+        success:res =>{
+          console.log(res)
+          this.setData({
+            countid: res._id
+          })
+          console.log(countid);
+        }
+      })
+      return {
+        /**
+         * Customized Title
+         */
+        title: '',
+        /**
+         * Jump page after friend click
+         */
+        path: '/pages/login/login?_id' + this.data.countid,
+        /**
+         * Discription
+         */
+        desc: this.data.dictionary.description1,
+        /**
+         * Path of shared images
+         */
+        imageUrl: ''
+      }
+    } else if (selectindex=='2') {
+      db.collection('user').add({
+        data:{
+          identity: 0
+        },
+        success:res =>{
+          console.log(res)
+          this.setData({
+            countid: res._id
+          })
+          console.log(countid);
+        }
+      })
+      return {
+        /**
+         * Customized Title
+         */
+        title: '',
+        /**
+         * Jump page after friend click
+         */
+        path: '/pages/login/login?_id' + this.data.countid,
+        /**
+         * Discription
+         */
+        desc: this.data.dictionary.description2,
+        /**
+         * Path of shared images
+         */
+        imageUrl: ''
+      }
+    }else{
+      db.collection('user').add({
+        data:{
+          identity: 1
+        },
+        success:res =>{
+          console.log(res)
+          this.setData({
+            countid: res._id
+          })
+          console.log(countid);
+        }
+      })
+      return {
+        /**
+         * Customized Title
+         */
+        title: '',
+        /**
+         * Jump page after friend click
+         */
+        path: '/pages/login/login?_id' + this.data.countid,
+        /**
+         * Discription
+         */
+        desc: this.data.dictionary.description0,
+        /**
+         * Path of shared images
+         */
+        imageUrl: ''
+      }
     }
   },
 

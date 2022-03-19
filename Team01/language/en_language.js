@@ -56,6 +56,10 @@ var Languague = {
     new_user_name: "NewName",
     changetip: "Input New Name",
     successname: "Successfully Change",
+    columns: ["Project Manager", "Worker", "House Owner"],
+    description0:"Invite New Project Manager",
+    description1:"Invite New Worker",
+    description2:"Invite New House Owner",
     
     // about page
     about_button: "About",

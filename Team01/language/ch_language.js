@@ -56,6 +56,10 @@ var Languague = {
      new_user_name: "新用户名",
      changetip: "请输入新用户名",
      successname: "修改成功",
+     description0:"邀请用户为项目管理者",
+     description1:"邀请用户为工人",
+     description2:"邀请用户为房屋拥有者",
+     columns: ["项目管理者", "工人", "房屋拥有者"],
 
     // about page
     about_button: "关于",
