@@ -129,7 +129,7 @@ Page({
          * jump to house owner page
          */
         wx.redirectTo({
-          url: '../indexs/indexOfHouseOwner/indexOfHouseOwner',
+          url: '../../subpages/pack_HO/pages/index/index',
         })
       })
   },
