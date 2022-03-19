@@ -65,32 +65,34 @@
 <!-- More page -->
 <view wx:elif="{{active == 1}}">
 
-<view class="userinfo-avatar">
-  <image src="{{userInfo.avatarUrl}}"></image>
-</view>
+  <view class="userinfo-avatar">
+    <image src="{{userInfo.avatarUrl}}"></image>
+  </view>
 
-<van-cell-group inset>
-  <van-cell center icon="user-o" />
-  <van-cell center title="{{dictionary.user_name}}" value="{{userInfo.nickName}}" is-link clickable="true" bindtap="showPopup" />
-  <van-popup show="{{ show }}" custom-style="width:75%; height: 30%;"bind:close="onClose">
+  <van-cell-group inset>
+    <van-cell center icon="user-o" />
+    <van-cell center title="{{dictionary.user_name}}" value="{{userInfo.nickName}}" is-link clickable="true" bindtap="showPopup" />
+    <van-popup show="{{ show }}" custom-style="width:75%; height: 30%;"bind:close="onClose">
 
-    <van-cell-group style="padding-top: 80rpx">
-      <van-field label="{{dictionary.original_user_name}}" left-icon="contact" placeholder="{{ name }}" disabled border="{{ false }}">
-      </van-field>
+      <van-cell-group style="padding-top: 80rpx">
+        <van-field label="{{dictionary.original_user_name}}" left-icon="contact" placeholder="{{ name }}" disabled border="{{ false }}">
+        </van-field>
 
-      <van-field value="{{ value }}" label="{{dictionary.new_user_name}}" left-icon="contact" placeholder="{{ dictionary.changetip  }}" bindinput='userNameInput' border="{{ false }}">
-      </van-field>
-    </van-cell-group>
+        <van-field value="{{ value }}" label="{{dictionary.new_user_name}}" left-icon="contact" placeholder="{{ dictionary.changetip  }}" bindinput='userNameInput' border="{{ false }}">
+        </van-field>
+      </van-cell-group>
 
-    <van-button class="van-button" round style="padding-top: 40rpx;padding-left:20% ;" type="info" bindtap="forNotice" >{{dictionary.save}}</van-button>
+      <van-button class="van-button" round style="padding-top: 40rpx;padding-left:20% ;" type="info" bindtap="forNotice" >{{dictionary.save}}</van-button>
+    </van-popup>
 
-  <!-- <van-cell center title="邀请用户" clickable="true" bindtap="onShareAppMessage">
-    <van-button round class="button-share" open-type="share"> 
-      <van-icon name="friends-o" />
-    </van-button>
-  </van-cell> -->
-  </van-popup>
-</van-cell-group>
+    <van-cell center title="{{dictionary.identity}}" value="{{dictionary.house_owner}}" />
+    <van-cell title="" />
+    <!-- <van-cell center title="邀请用户" clickable="true" bindtap="onShareAppMessage">
+      <van-button round class="button-share" open-type="share"> 
+        <van-icon name="friends-o" />
+      </van-button>
+    </van-cell> -->
+  </van-cell-group>
 
   <van-cell-group inset style="padding: 30rpx;">
     <van-cell center icon="setting-o"/>
