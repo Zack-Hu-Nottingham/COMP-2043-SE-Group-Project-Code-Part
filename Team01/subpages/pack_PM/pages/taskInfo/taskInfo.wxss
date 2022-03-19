@@ -19,3 +19,7 @@
   display: inline-block;
   word-break: break-all;
 }
+
+.valueWidth .van-cell__value{
+  min-width: 65%;
+}

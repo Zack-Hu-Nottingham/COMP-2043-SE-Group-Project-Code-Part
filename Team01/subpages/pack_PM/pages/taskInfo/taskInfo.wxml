@@ -10,7 +10,7 @@
 </van-cell-group>
 
 <van-cell-group inset style="padding: 30rpx">
-  <van-cell title="{{dictionary.belong_to}}" value="{{belongTo}}" />
+  <van-cell class="valueWidth" title="{{dictionary.belong_to}}" value="{{belongTo}}" />
   <van-cell class="valueLeft" title="{{dictionary.phase}}" value="{{dictionary.phase_name[taskPage.phase]}}" />
   <van-cell class="valueLeft" title="{{dictionary.description}}" value="{{taskPage.taskDescription}}" />
   <van-cell title="{{dictionary.current_state}}" value="{{dictionary.task_state[taskPage.state]}}" />

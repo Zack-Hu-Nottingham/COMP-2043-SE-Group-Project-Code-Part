@@ -120,8 +120,10 @@
   <van-collapse-item title="{{dictionary.progressing}}" name="progressing" class="releaseStartedItemForTest">
 
     <view wx:for="{{ progressing }}" wx:key="index">
-      <van-cell clickable
-        label="{{ item.startTime }} — {{ item.endTime }} "
+      <van-cell 
+        class="valueWidth"
+        clickable
+        label="{{ item.startTime }} - {{ item.endTime }} "
         title="{{ item.name }}"
         link-type="navigateTo"
         url="../taskInfo/taskInfo?id={{item._id}}">
@@ -158,6 +160,7 @@
 
     <view wx:for="{{ delayed }}" wx:key="index">
       <van-cell clickable
+        class="valueWidth"
         label="{{ item.startTime }} — {{ item.endTime }} "
         title="{{item.name}}"
         link-type="navigateTo"
@@ -177,6 +180,7 @@
 
     <view wx:for="{{ unstarted }}" wx:key="index">
       <van-cell clickable
+        class="valueWidth"
         label="{{ item.startTime }} — {{ item.endTime }} "
         title="{{ item.name }}"
         link-type="navigateTo"
@@ -196,6 +200,7 @@
 
     <view wx:for="{{ completed }}" wx:key="index">
       <van-cell clickable
+        class="valueWidth"
         label="{{ item.startTime }} — {{ item.endTime }} "
         title="{{ item.name }}"
         link-type="navigateTo"

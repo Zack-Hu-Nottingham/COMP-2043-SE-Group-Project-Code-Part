@@ -138,3 +138,14 @@ ec-canvas {
   display: inline-block;
   word-break: break-all;
 }
+
+.valueWidth .van-cell__label{
+  font-size: small;
+  min-width: 120%;
+  text-align: left;
+}
+
+.valueWidth .van-cell__title{
+  min-width: 70%;
+  text-align: left;
+}
