@@ -264,9 +264,9 @@ Page({
             })
     },
 
-    changeParticipant() {
+    selectParticipant() {
         wx.navigateTo({
-            url: '../../project/contactList/participantList/participantList',
+            url: '../contactList/participantList/participantList',
         })
     },
 

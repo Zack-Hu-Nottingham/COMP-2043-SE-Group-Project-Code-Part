@@ -18,7 +18,7 @@
     <!--Set other information-->
     <van-cell-group inset style="padding: 10rpx;">
         <van-cell title="{{dictionary.house_owner}}" is-link size="large" value="{{houseOwner}}" bindtap="changeOwner" class="chooseHouseOwnerForTest"/>
-        <van-cell title="{{dictionary.participant}}" is-link size="large" value="{{participant}}" bindtap="changeParticipant" class="chooseParticipantForTest"/>
+        <van-cell title="{{dictionary.participant}}" is-link size="large" value="{{participant}}" bindtap="changeParticipant" class="valueLeft chooseParticipantForTest"/>
     </van-cell-group>
 
     <!--Set Time-->

@@ -413,34 +413,30 @@ Page({
   // Select template according to current language setting
   ConfirmTemplate(){
     if(this.data.language == 0) {
-      if(this.data.selectedTemplate == "Townhouse Decoration"){
+      if(this.data.selectedTemplateIndex == 0){
         this.setData({
           template: templateLib.townhouse,
         })
-      }else if(this.data.selectedTemplate == "Detached Villa Decoration"){
+      }else if(this.data.selectedTemplateIndex == 1){
         this.setData({
           template: detachedLib.detached_house,
         })
-      }else if(this.data.selectedTemplate == "Garden Villa Decoration"){
+      }else if(this.data.selectedTemplateIndex == 2){
         this.setData({
           template: GardenLib.garden_villa,
         })
       }
-      // const en_templateLib = require("../../../template/townhouse/en_Townhouse.js");
-      // const en_GardenLib = require("../../../template/gardenVilla/en_Garden_Villa.js");
-      // const en_detachedLib = require("../../../template/detachedHouse/en_Detached_House.js");
-      
 
     } else {
-      if(this.data.selectedTemplate == "Townhouse Decoration"){
+      if(this.data.selectedTemplateIndex == 0){
         this.setData({
           template: en_templateLib.en_townhouse,
         })
-      }else if(this.data.selectedTemplate == "Detached Villa Decoration"){
+      }else if(this.data.selectedTemplateIndex == 1){
         this.setData({
           template: en_detachedLib.en_detached_house,
         })
-      }else if(this.data.selectedTemplate == "Garden Villa Decoration"){
+      }else if(this.data.selectedTemplateIndex == 2){
         this.setData({
           template: en_GardenLib.en_garden_villa,
         })

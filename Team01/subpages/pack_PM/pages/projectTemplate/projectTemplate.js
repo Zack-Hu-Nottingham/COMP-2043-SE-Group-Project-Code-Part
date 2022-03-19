@@ -25,8 +25,8 @@ Page({
             /**
              * Townhouses
              */
-            name: "Townhouse Decoration",
-            content: "Townhouses have their own separate gardens to the front and rear, plus a dedicated parking space or garage.",
+            // name: "Townhouse Decoration",
+            // content: "Townhouses have their own separate gardens to the front and rear, plus a dedicated parking space or garage.",
             duration: 233,
             /**
              * Frequency of use (record the number of times used, the array is sorted by frequency of use)
@@ -37,8 +37,8 @@ Page({
             /**
              * Freestanding Villas
              */
-            name: "Detached Villa Decoration",
-            content: "Detached Villa is a detached house with a high degree of privacy. It has private space above, private garden area and basement below.",
+            // name: "Detached Villa Decoration",
+            // content: "Detached Villa is a detached house with a high degree of privacy. It has private space above, private garden area and basement below.",
             duration: 90,
             useFrq: "6",
             id: '2'
@@ -46,8 +46,8 @@ Page({
             /**
              * Garden house style residence
              */
-            name: "Garden Villa Decoration",
-            content: "Garden Villa has private gardens and large floor plans for a high level of living comfort.",
+            // name: "Garden Villa Decoration",
+            // content: "Garden Villa has private gardens and large floor plans for a high level of living comfort.",
             duration: 90,
             useFrq: "4",
             id: '3'
@@ -110,7 +110,7 @@ Page({
         for (i = 0; i < templates.length; i++) {
             if (name == i + 1) {
                 prevPage.setData({
-                    selectedTemplate: templates[i].name,
+                    selectedTemplate: this.data.dictionary.house_template[i],
                     selectedTemplateIndex: i,
                     duration: templates[i].duration
                 });

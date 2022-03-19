@@ -35,7 +35,6 @@ Page({
     wx.cloud.callFunction({
       name: 'login',
       complete: res => {
-        console.log(res.result)
 
         // set global openid
         app.globalData.userInfo.openid = res.result.OPENID
@@ -50,16 +49,9 @@ Page({
         db.collection('user').where({
           _openid: app.globalData.userInfo.openid
         }).get().then(res => {
-          // console.log(res.data)
 
           if (res.data.length != 0) {
             app.globalData.userInfo = res.data[0];
-            // console.log(app.globalData.userInfo)
-
-            /**
-             * set global id
-             */
-            //app.globalData.userInfo.name = res.data[0].name;
             var identity = res.data[0].identity;
 
             Toast({
@@ -114,17 +106,7 @@ Page({
    */
   getuserinfo(e) {
 
-
-    // wx.setStorageSync('userInfo', e.detail.userInfo)
     app.globalData.userInfo = e.detail.userInfo
-
-    // wx.getUserInfo的返回兼容
-    // wx.setStorageSync('encryptedData', e.detail.encryptedData)
-    // wx.setStorageSync('iv', e.detail.iv)
-
-    //拿到用户信息后 获取 用户手机号
-
-
 
     /**
      * write into db
@@ -150,10 +132,8 @@ Page({
           url: '../indexs/indexOfHouseOwner/indexOfHouseOwner',
         })
       })
-
-
-
   },
+
   /**
    * Life cycle function - Listens for the page to complete its first rendering
    */
