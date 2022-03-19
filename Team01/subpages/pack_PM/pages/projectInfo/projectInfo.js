@@ -347,14 +347,14 @@ Page({
 
   },
 
-  getDefaultDate(){
-    let dateStart = Date.parse(new Date(this.data.taskPage.startTime.replace(/-/,"/")));
-    let dateEnd = Date.parse(new Date(this.data.taskPage.endTime.replace(/-/,"/")));
-    let defaultDate = [dateStart, dateEnd];
-    this.setData({
-      defaultDate: defaultDate
-    })
-  },
+  // getDefaultDate(){
+  //   let dateStart = Date.parse(new Date(this.data.taskPage.startTime.replace(/-/,"/")));
+  //   let dateEnd = Date.parse(new Date(this.data.taskPage.endTime.replace(/-/,"/")));
+  //   let defaultDate = [dateStart, dateEnd];
+  //   this.setData({
+  //     defaultDate: defaultDate
+  //   })
+  // },
 
   async getFileList(cloudPath) {
     // console.log(cloudPath)

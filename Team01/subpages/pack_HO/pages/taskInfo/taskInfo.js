@@ -61,15 +61,41 @@ Page({
      */
     id = options.id
 
-
     this.getDetail()
-
-    this.getImage()
 
   },
 
-  getImage() {
-    wx.cloud.downloadFile()
+  deleteImg(event) {
+    const delIndex = event.detail.index
+    console.log(event.detail.index)
+
+    const {
+      fileList
+    } = this.data
+    fileList.splice(delIndex, 1)
+
+    this.setData({
+      fileList
+    })
+
+    if(event.detail.index == 0){
+      db.collection('task').where({
+        _id: id
+      }).update({
+        data: {
+          cloudList: []
+        }
+      })
+      return 0;
+    }
+
+    db.collection('task').where({
+      _id: id
+    }).update({
+      data: {
+        cloudList: cloudList.splice(delIndex, 1)
+      }
+    })
   },
 
   /**
@@ -213,23 +239,52 @@ Page({
   },
 
   getFileList(cloudPath) {
-      // console.log(cloudPath)
-      var newList = [];
-      for (var i = 0; i < cloudPath.length; i++) {
-        wx.cloud.downloadFile({
-          fileID: cloudPath[i]
-        }).then(res => {
-          newList.push({
-            "url": res.tempFilePath
-          })
-          this.setData({
-            fileList: newList
-          })
-          //console.log(res.tempFilePath)
+    // console.log(cloudPath)
+    var newList = [];
+    for (var i = 0; i < cloudPath.length; i++) {
+      wx.cloud.downloadFile({
+        fileID: cloudPath[i]
+      }).then(res => {
+        newList.push({
+          "url": res.tempFilePath
         })
-      }
-      // console.log(newList)
-    
+        this.setData({
+          fileList: newList
+        })
+        //console.log(res.tempFilePath)
+      })
+    }
+    // console.log(fileList)
+  },
+
+  upload(event){
+    const { file } = event.detail;
+    var fileList = this.data.fileList;
+    fileList.push({
+      url: file.url
+    })
+    this.setData({
+      fileList: fileList
+    });
+    this.uploadImage(file.url)
+  },
+
+  uploadImage(fileURL) {
+    wx.cloud.uploadFile({
+      cloudPath: 'task/' + id + '/' + new Date().getTime() + Math.floor(9 * Math.random()) + '.png',
+      filePath: fileURL,
+      success: res => {
+        db.collection('task').where({
+          _id: id
+        }).update({
+          data: {
+            cloudList: _.push(res.fileID)
+          }
+        })
+        // console.log("图片上传成功",res)
+      },
+      fail: console.error
+    })
   },
 
   getParticipant() {
