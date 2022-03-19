@@ -1,5 +1,5 @@
 <!--pages/project/statisticReport/statisticReport.wxml-->
-<wxs module="numberUtil" src="../../../utils/numberFormat.wxs"></wxs>
+<wxs module="numberUtil" src="../../../../utils/numberFormat.wxs"></wxs>
 
 
 <view style="padding-bottom: 30rpx;">

@@ -193,8 +193,7 @@ Page({
    */
   clickProject(event) {
     wx.navigateTo({
-      url: '../../project/projectInfoForProjectManager/projectInfoForProjectManager?id=' + event.currentTarget.dataset.id,
+      url: '../projectInfo/projectInfo?id=' + event.currentTarget.dataset.id,
     })
   },
-
 })
