@@ -15,7 +15,8 @@
   text-align: left;
 }
 
-.valueLeft .van-cell__value span {
+.valueLeft .van-cel
+l__value span {
   display: inline-block;
   word-break: break-all;
 }

@@ -1,4 +1,5 @@
 var detached_house = [{
+  id: 1,
   name: "开工仪式",
   taskDescription: "",
   belongTo: "",
@@ -18,6 +19,7 @@ var detached_house = [{
   location: "广东省广州市番禺区南村镇兴南大道368号",
   workingArea: "整间房屋",
 },{
+  id: 2,
   name: "放样深化",
   taskDescription: "墙身材质确定技术参数图纸到位，材质节点技术参数图纸",
   belongTo: "",
@@ -37,6 +39,7 @@ var detached_house = [{
   location: "广东省广州市番禺区南村镇兴南大道368号",
   workingArea: "整间房屋",
 },{
+  id: 3,
   name: "拆除面抹灰层、腻子层",
   taskDescription: "",
   belongTo: "",
@@ -56,6 +59,7 @@ var detached_house = [{
   location: "广东省广州市番禺区南村镇兴南大道368号",
   workingArea: "房屋墙面及地面",
 },{
+  id: 4,
   name: "现场轴线放样",
   taskDescription: "控制线、建墙线、完成面线、砌墙材质标清楚，抹灰完成面",
   belongTo: "",
@@ -75,6 +79,7 @@ var detached_house = [{
   location: "广东省广州市番禺区南村镇兴南大道368号",
   workingArea: "房屋墙面及地面",
 },{
+  id: 5,
   name: "墙体砌筑",
   taskDescription: "",
   belongTo: "",
@@ -94,6 +99,7 @@ var detached_house = [{
   location: "广东省广州市番禺区南村镇兴南大道368号",
   workingArea: "房屋墙面",
 },{
+  id: 6,
   name: "开关插座灯位放样",
   taskDescription: "按照现场放样填充插座灯位位置",
   belongTo: "",
@@ -113,6 +119,7 @@ var detached_house = [{
   location: "广东省广州市番禺区南村镇兴南大道368号",
   workingArea: "房屋墙面",
 },{
+  id: 7,
   name: "电路穿管",
   taskDescription: "强弱电水布管、下水布管（通水试验）",
   belongTo: "",
@@ -132,6 +139,7 @@ var detached_house = [{
   location: "广东省广州市番禺区南村镇兴南大道368号",
   workingArea: "房屋墙面",
 },{
+  id: 8,
   name: "水电验收",
   taskDescription: "客户参与",
   belongTo: "",
@@ -151,6 +159,7 @@ var detached_house = [{
   location: "广东省广州市番禺区南村镇兴南大道368号",
   workingArea: "房屋墙面",
 },{
+  id: 9,
   name: "基础钢架",
   taskDescription: "",
   belongTo: "",
@@ -170,6 +179,7 @@ var detached_house = [{
   location: "广东省广州市番禺区南村镇兴南大道368号",
   workingArea: "房屋木工",
 },{
+  id: 10,
   name: "中期验收",
   taskDescription: "客户参与验收、木工全部完成、木作全部下单",
   belongTo: "",
@@ -189,6 +199,7 @@ var detached_house = [{
   location: "广东省广州市番禺区南村镇兴南大道368号",
   workingArea: "房屋木工",
 },{
+  id: 11,
   name: "地暖敷设",
   taskDescription: "打压实验",
   belongTo: "",
@@ -208,6 +219,7 @@ var detached_house = [{
   location: "广东省广州市番禺区南村镇兴南大道368号",
   workingArea: "房屋地暖地面",
 },{
+  id: 12,
   name: "墙砖铺贴",
   taskDescription: "",
   belongTo: "",
@@ -227,6 +239,7 @@ var detached_house = [{
   location: "广东省广州市番禺区南村镇兴南大道368号",
   workingArea: "房屋瓷砖石材",
 },{
+  id: 13,
   name: "批腻子打砂子",
   taskDescription: "防锈、防裂、找平、、基膜滚刷",
   belongTo: "",
@@ -246,6 +259,7 @@ var detached_house = [{
   location: "广东省广州市番禺区南村镇兴南大道368号",
   workingArea: "房屋油工施工",
 },{
+  id: 14,
   name: "地板安装",
   taskDescription: "",
   belongTo: "",
@@ -265,6 +279,7 @@ var detached_house = [{
   location: "广东省广州市番禺区南村镇兴南大道368号",
   workingArea: "成品安装",
 },{
+  id: 15,
   name: "喷涂保护",
   taskDescription: "",
   belongTo: "",
@@ -284,6 +299,7 @@ var detached_house = [{
   location: "广东省广州市番禺区南村镇兴南大道368号",
   workingArea: "油漆修补",
 },{
+  id: 16,
   name: "开关插座、灯带安装",
   taskDescription: "",
   belongTo: "",
@@ -303,6 +319,7 @@ var detached_house = [{
   location: "广东省广州市番禺区南村镇兴南大道368号",
   workingArea: "整间房屋",
 },{
+  id: 17,
   name: "硬装竣工验收",
   taskDescription: "客户参与验收",
   belongTo: "",

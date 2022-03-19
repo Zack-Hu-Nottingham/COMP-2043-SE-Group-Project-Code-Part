@@ -1,4 +1,5 @@
 var en_detached_house = [{
+  id: 1,
   name: "Ground-breaking ceremony",
   taskDescription: "",
   belongTo: "",
@@ -18,6 +19,7 @@ var en_detached_house = [{
   location: "No.368 Xingnan Avenue, Nancun Town, Panyu District, Guangzhou City, Guangdong Province",
   workingArea: "Whole house",
 },{
+  id: 2,
   name: "Further construction setting out",
   taskDescription: "Make sure the technical parameters drawings of the wall and the material technical parameters are inplace.",
   belongTo: "",
@@ -37,6 +39,7 @@ var en_detached_house = [{
   location: "No.368 Xingnan Avenue, Nancun Town, Panyu District, Guangzhou City, Guangdong Province",
   workingArea: "Whole house",
 },{
+  id: 3,
   name: "Removal of surface plaster layer and putty layer",
   taskDescription: "",
   belongTo: "",
@@ -56,6 +59,7 @@ var en_detached_house = [{
   location: "No.368 Xingnan Avenue, Nancun Town, Panyu District, Guangzhou City, Guangdong Province",
   workingArea: "House walls and floor",
 },{
+  id: 4,
   name: "On-site axial alignment sampling",
   taskDescription: "Control lines, wall lines, finish surface lines, masonry wall materials clearly marked, plaster finish surface",
   belongTo: "",
@@ -75,6 +79,7 @@ var en_detached_house = [{
   location: "No.368 Xingnan Avenue, Nancun Town, Panyu District, Guangzhou City, Guangdong Province",
   workingArea: "House walls and floor",
 },{
+  id: 5,
   name: "Wall Masonry",
   taskDescription: "",
   belongTo: "",
@@ -94,6 +99,7 @@ var en_detached_house = [{
   location: "No.368 Xingnan Avenue, Nancun Town, Panyu District, Guangzhou City, Guangdong Province",
   workingArea: "Walls of the house",
 },{
+  id: 6,
   name: "Setting out of switch and socket light position",
   taskDescription: "Fill the socket light position according to the site setting out sample",
   belongTo: "",
@@ -113,6 +119,7 @@ var en_detached_house = [{
   location: "No.368 Xingnan Avenue, Nancun Town, Panyu District, Guangzhou City, Guangdong Province",
   workingArea: "Walls of the house",
 },{
+  id: 7,
   name: "Circuit threading",
   taskDescription: "Locate the water pipe and wires",
   belongTo: "",
@@ -132,6 +139,7 @@ var en_detached_house = [{
   location: "No.368 Xingnan Avenue, Nancun Town, Panyu District, Guangzhou City, Guangdong Province",
   workingArea: "Walls of the house",
 },{
+  id: 8,
   name: "Verification and acceptance of the setting out of water pipe and wires",
   taskDescription: "Client should be included during the process",
   belongTo: "",
@@ -151,6 +159,7 @@ var en_detached_house = [{
   location: "No.368 Xingnan Avenue, Nancun Town, Panyu District, Guangzhou City, Guangdong Province",
   workingArea: "Walls of the house",
 },{
+  id: 9,
   name: "Build foundation steel frame",
   taskDescription: "",
   belongTo: "",
@@ -170,6 +179,7 @@ var en_detached_house = [{
   location: "No.368 Xingnan Avenue, Nancun Town, Panyu District, Guangzhou City, Guangdong Province",
   workingArea: "",
 },{
+  id: 10,
   name: "Mid-term verification and acceptance",
   taskDescription: "Client should be involved in the verification. At the moment all the wooden work is supposed to be done.",
   belongTo: "",
@@ -189,6 +199,7 @@ var en_detached_house = [{
   location: "No.368 Xingnan Avenue, Nancun Town, Panyu District, Guangzhou City, Guangdong Province",
   workingArea: "",
 },{
+  id: 11,
   name: "Floor heating laying",
   taskDescription: "Pressing test",
   belongTo: "",
@@ -208,6 +219,7 @@ var en_detached_house = [{
   location: "No.368 Xingnan Avenue, Nancun Town, Panyu District, Guangzhou City, Guangdong Province",
   workingArea: "Floor of the house",
 },{
+  id: 12,
   name: "Wall tile paving",
   taskDescription: "",
   belongTo: "",
@@ -227,6 +239,7 @@ var en_detached_house = [{
   location: "No.368 Xingnan Avenue, Nancun Town, Panyu District, Guangzhou City, Guangdong Province",
   workingArea: "Walls of the house",
 },{
+  id: 13,
   name: "Putty Batching Sanding",
   taskDescription: "Anti-rust, anti-crack, leveling, base film rolling",
   belongTo: "",
@@ -246,6 +259,7 @@ var en_detached_house = [{
   location: "No.368 Xingnan Avenue, Nancun Town, Panyu District, Guangzhou City, Guangdong Province",
   workingArea: "",
 },{
+  id: 14,
   name: "Floor installation",
   taskDescription: "",
   belongTo: "",
@@ -265,6 +279,7 @@ var en_detached_house = [{
   location: "No.368 Xingnan Avenue, Nancun Town, Panyu District, Guangzhou City, Guangdong Province",
   workingArea: "Finished product installation",
 },{
+  id: 15,
   name: "Spray protection",
   taskDescription: "",
   belongTo: "",
@@ -284,6 +299,7 @@ var en_detached_house = [{
   location: "No.368 Xingnan Avenue, Nancun Town, Panyu District, Guangzhou City, Guangdong Province",
   workingArea: "Paint repair",
 },{
+  id: 16,
   name: "Switch, socket and light strip installation",
   taskDescription: "",
   belongTo: "",
@@ -303,6 +319,7 @@ var en_detached_house = [{
   location: "No.368 Xingnan Avenue, Nancun Town, Panyu District, Guangzhou City, Guangdong Province",
   workingArea: "Whole house",
 },{
+  id: 17,
   name: "Hardscaping completion verification and acceptance",
   taskDescription: "House owner involved in receiving and inspection",
   belongTo: "",
