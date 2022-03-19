@@ -17,19 +17,28 @@ Page({
   /**
    * Initial data of page
    */
-  data: {},
+  data: {
+    identity: 0
+  },
 
   /**
    * Life cycle function - listens for page loads
    */
   onLoad: function (options) {
-
+    console.log(options)
     // 显示loading
     Toast.loading({
       message: 'Loading...',
       forbidClick: true,
       mask: true,
     });
+
+    // 如果这个用户来自PM邀请
+    if (Object.keys(options).length != 0) {
+      this.setData({
+        identity: options.identity
+      })
+    }
 
     // 调用云函数获取用户信息
     wx.cloud.callFunction({
@@ -42,7 +51,6 @@ Page({
           openid: res.result.OPENID
         })
 
-        
         /**
          * check whether the user has signed in
          */
@@ -91,7 +99,7 @@ Page({
             Dialog.confirm({
               context: this,
               title: 'Registration',
-              message: 'Your nickName & phone would be used for registration',
+              message: "It's good to meet you here, click to register~",
               confirmButtonOpenType: "getUserInfo",
             })
           }
@@ -115,22 +123,28 @@ Page({
         data: {
           nickName: e.detail.userInfo.nickName,
           avatarUrl: e.detail.userInfo.avatarUrl,
-          identity: 0,
+          identity: this.data.identity,
           task: [],
           project: []
         }
       })
       .then(res => {
+        Toast.success("Success")
 
-        Toast.success("Successfully registered")
-
-
-        /**
-         * jump to house owner page
-         */
-        wx.redirectTo({
-          url: '../../subpages/pack_HO/pages/index/index',
-        })
+        if (this.data.identity == 0) {
+          wx.redirectTo({
+            url: '../../subpages/pack_HO/pages/index/index',
+          })
+        } else if (this.data.identity == 1) {
+          wx.redirectTo({
+            url: '../../subpages/pack_PM/pages/index/index',
+          })
+        } else {
+          wx.redirectTo({
+            url: '../../subpages/pack_W/pages/index/index',
+          })
+        }
+        
       })
   },
 

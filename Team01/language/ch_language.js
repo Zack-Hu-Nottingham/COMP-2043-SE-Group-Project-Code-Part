@@ -59,7 +59,7 @@ var Languague = {
      description0:"邀请用户为项目管理者",
      description1:"邀请用户为工人",
      description2:"邀请用户为房屋拥有者",
-     columns: ["项目管理者", "工人", "房屋拥有者"],
+     columns: ["房屋拥有者", "项目管理者", "工人"],
 
     // about page
     about_button: "关于",

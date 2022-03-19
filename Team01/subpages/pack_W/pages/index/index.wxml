@@ -85,7 +85,7 @@
       <van-button class="van-button" round style="padding-top: 40rpx;padding-left:20% ;" type="info" bindtap="forNotice" >{{dictionary.save}}</van-button>
     </van-popup>
 
-    <van-cell center title="{{dictionary.identity}}" value="{{dictionary.house_owner}}" />
+    <van-cell center title="{{dictionary.identity}}" value="{{dictionary.worker}}" />
     <van-cell title="" />
     <!-- <van-cell center title="邀请用户" clickable="true" bindtap="onShareAppMessage">
       <van-button round class="button-share" open-type="share"> 
