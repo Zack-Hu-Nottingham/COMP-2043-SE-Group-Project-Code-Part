@@ -24,99 +24,89 @@ Page({
    */
   onLoad: function (options) {
 
-    wx.login()
-      .then(res => {
+    // 显示loading
+    Toast.loading({
+      message: 'Loading...',
+      forbidClick: true,
+      mask: true,
+    });
+
+    // 调用云函数获取用户信息
+    wx.cloud.callFunction({
+      name: 'login',
+      complete: res => {
+        console.log(res.result)
+
+        // set global openid
+        app.globalData.userInfo.openid = res.result.OPENID
+        this.setData({
+          openid: res.result.OPENID
+        })
+
+        
         /**
-         * showLoading
+         * check whether the user has signed in
          */
+        db.collection('user').where({
+          _openid: app.globalData.userInfo.openid
+        }).get().then(res => {
+          // console.log(res.data)
 
-        Toast.loading({
-          message: 'Loading...',
-          forbidClick: true,
-          mask: true,
-        });
-
-        if (res.code) {
-
-          var url = "https://api.weixin.qq.com/sns/jscode2session?appid=wxd4b06f2e9673ed00&secret=909d4ff30ed2d6e828f73e55a63cd862&js_code=" + res.code + "&grant_type=authorization_code";
-          lib.request({
-            url: url,
-            method: "GET"
-          }).task.then(res => {
+          if (res.data.length != 0) {
+            app.globalData.userInfo = res.data[0];
+            // console.log(app.globalData.userInfo)
 
             /**
-             * set global openid
+             * set global id
              */
-            app.globalData.userInfo.openid = res.data.openid
-            this.setData({
-              openid: res.data.openid
-            })
+            //app.globalData.userInfo.name = res.data[0].name;
+            var identity = res.data[0].identity;
 
-          }).then(res => {
+            Toast({
+              type: 'success',
+              message: 'Logged in',
+              onClose: () => {
+                // House Owner
+                if (identity == 0) {
+                  wx.redirectTo({
+                    url: '../../subpages/pack_HO/pages/index/index?openid=' + this.data.openid,
+                  })
+                  // Project Manager
+                } else if (identity == 1) {
+                  wx.redirectTo({
+                    url: '../../subpages/pack_PM/pages/index/index?openid=' + this.data.openid,
+                  })
+
+                  // Worker
+                } else if (identity == 2) {
+                  wx.redirectTo({
+                    url: '../../subpages/pack_W/pages/index/index',
+                  })
+                }
+              },
+            });
+          }
+
+          /**
+           * if is new account
+           */
+          else {
+            Toast.clear()
 
             /**
-             * check whether the user has signed in
+             * get the info of new account
              */
-            db.collection('user').where({
-              _openid: app.globalData.userInfo.openid
-            }).get().then(res => {
-              // console.log(res.data)
-
-              if (res.data.length != 0) {
-                app.globalData.userInfo = res.data[0];
-                // console.log(app.globalData.userInfo)
-
-                /**
-                 * set global id
-                 */
-                //app.globalData.userInfo.name = res.data[0].name;
-                var identity = res.data[0].identity;
-
-                Toast({
-                  type: 'success',
-                  message: 'Logged in',
-                  onClose: () => {
-                    // House Owner
-                    if (identity == 0) {
-                      wx.redirectTo({
-                        url: '../../subpages/pack_HO/pages/index/index?openid=' + this.data.openid,
-                      })
-                      // Project Manager
-                    } else if (identity == 1) {
-                      wx.redirectTo({
-                        url: '../../subpages/pack_PM/pages/index/index?openid=' + this.data.openid,
-                      })
-
-                      // Worker
-                    } else if (identity == 2) {
-                      wx.redirectTo({
-                        url: '../../subpages/pack_W/pages/index/index',
-                      })
-                    }
-                  },
-                });
-              }
-
-              /**
-               * if is new account
-               */
-              else {
-                Toast.clear()
-
-                /**
-                 * get the info of new account
-                 */
-                Dialog.confirm({
-                  context: this,
-                  title: 'Registration',
-                  message: 'Your nickName & phone would be used for registration',
-                  confirmButtonOpenType: "getUserInfo",
-                })
-              }
+            Dialog.confirm({
+              context: this,
+              title: 'Registration',
+              message: 'Your nickName & phone would be used for registration',
+              confirmButtonOpenType: "getUserInfo",
             })
-          })
-        }
-      })
+          }
+        })
+      }
+    })
+
   },
 
   /**

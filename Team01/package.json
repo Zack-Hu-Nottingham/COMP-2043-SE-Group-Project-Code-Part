@@ -2,7 +2,8 @@
   "dependencies": {
     "@vant/weapp": "^1.10.2",
     "jest": "^27.5.1",
-    "rollup": "^2.64.0"
+    "rollup": "^2.64.0",
+    "wx-server-sdk": "^2.6.1"
   },
   "name": "team01",
   "version": "1.0.0",

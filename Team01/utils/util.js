@@ -63,6 +63,7 @@ function request(params) {
       success(res) {
         resolve(res)
       },
+      
       fail(err) {
         reject({
           msg: '请求失败',
