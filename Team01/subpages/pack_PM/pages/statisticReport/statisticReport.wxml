@@ -1,4 +1,4 @@
-<wxs module="numberUtil" src="../../../utils/numberFormat.wxs"></wxs>
+<wxs module="numberUtil" src="../../../../utils/numberFormat.wxs"></wxs>
 
 <!--pages/project/statisticReport/statisticReport.wxml-->
 <van-cell-group style="margin: 0 1rpx;">

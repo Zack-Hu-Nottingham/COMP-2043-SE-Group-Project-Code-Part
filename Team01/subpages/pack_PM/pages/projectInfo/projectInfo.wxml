@@ -1,4 +1,6 @@
 <!--subpages/pack_PM/pages/projectInfo/projectInfo.wxml-->
+<wxs module="numberUtil" src="../../../../utils/numberFormat.wxs"></wxs>
+
 <!-- Nav bar -->
 <van-sticky offset-top="{{ 0 }}">
   <view class="navbar">
@@ -53,29 +55,29 @@
   </van-cell-group>
   <view class="container">
     <view class="circle">
-      <van-circle value="{{(project.completed.length/project.task.length)*100}}" layer-color="#eeeeee"         color="#4169E1">
-        {{(project.completed.length/project.task.length)%1*100}}%<view></view>{{dictionary.completed}}
+      <van-circle value="{{(countState2Result/project.task.length)*100}}" layer-color="#eeeeee"         color="#4169E1">
+        {{(numberUtil.numberFormat(100*countState2Result/project.task.length))}}%<view></view>{{dictionary.completed}}
       </van-circle>
 
-      <van-circle value="{{(project.delayed.length/project.task.length)*100}}" layer-color="#eeeeee" color="#FF4500">
-        {{(project.delayed.length/project.task.length)%1*100}}%<view></view> {{dictionary.delayed}}
+      <van-circle value="{{(countState3Result/project.task.length)*100}}" layer-color="#eeeeee" color="#FF4500">
+        {{(numberUtil.numberFormat(100*countState3Result/project.task.length))}}%<view></view> {{dictionary.delayed}}
       </van-circle>
     </view>
     
     <view class="taskInfo">
       <view class="taskInfoDetail">
-        <view style="font-size: 35rpx; color: #696969;">{{ project.unstarted.length }}</view>
+        <view style="font-size: 35rpx; color: #696969;">{{ countState0Result }}</view>
         <view>{{dictionary.unstarted}}</view>
       </view>
 
 
       <view class="taskInfoDetail">
-        <view style="font-size: 35rpx; color: #FFA500;">{{ project.progressing.length }}</view>
+        <view style="font-size: 35rpx; color: #FFA500;">{{ countState1Result }}</view>
         <view>{{dictionary.progressing}}</view>
       </view>
 
       <view class="taskInfoDetail">
-        <view style="font-size: 35rpx; color: 	#FF4500;">{{ project.completed.length }}</view>
+        <view style="font-size: 35rpx; color: 	#FF4500;">{{ countState2Result }}</view>
         <view>{{dictionary.completed}}</view>
       </view>
 
@@ -85,7 +87,7 @@
       </view>
 
       <view class="taskInfoDetail">
-        <view style="font-size: 35rpx; color:#FF4500;">{{ project.delayed.length }}</view>
+        <view style="font-size: 35rpx; color:#FF4500;">{{ countState3Result }}</view>
         <view>{{dictionary.delayed}}</view>
       </view>
 
