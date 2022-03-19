@@ -101,7 +101,6 @@ Page({
 
 
     this.getDetail()
-    
 
     /** 
      *  get unstarted numbers
@@ -150,7 +149,6 @@ Page({
         countState3Result: res.total
       })
     })
-    
   },
 
 
@@ -328,16 +326,17 @@ Page({
         success: res => {
           // console.log(res)
           this.setData({
-              project: res.data,
-              name: res.data.name,
-            }),
-            wx.setNavigationBarTitle({
-                title: this.data.project.name,
-              }),
-            // console.log(res.data.cloudList)
-          this.getDefaultDate();
-          this.getFileList(res.data.cloudList);
-          this.getFeedback();
+            project: res.data,
+            name: res.data.name,
+          }),
+          wx.setNavigationBarTitle({
+            title: this.data.project.name,
+          }),
+          
+          //console.log(res.data.cloudList)
+          //this.getDefaultDate()
+          this.getFileList(res.data.cloudList)
+          this.getFeedback()
           this.getHouseOwner(res.data.houseOwner)
           this.getProjectManager(res.data._openid)
         },
@@ -386,7 +385,6 @@ Page({
       })
       .get()
       .then(res => {
-        console.log(res)
         this.setData({
           houseOwner: res.data[0]
         })
