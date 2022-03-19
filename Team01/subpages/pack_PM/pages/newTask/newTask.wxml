@@ -23,7 +23,7 @@
     </van-cell-group>
 
 <!--Upload related images-->
-<van-uploader class="uploader" file-list="{{ fileList }}" bindtap="upload" deletable="{{ true }}" bind:delete="deleteImg" max-count="9" disabled="{{true}}"/>
+<van-uploader class="uploader" file-list="{{ fileList }}" bindtap="upload" deletable="{{ true }}" bind:delete="deleteImg" max-count="9" disabled="{{true}}" />
 
 <!--Submit-->    
 <van-button plain round block loading="{{isLoading}}" disabled="{{isLoading}}" class="submitBtn" color="#1296db" type="primary" size="normal" form-type="submit" bindtap="formSubmit">{{dictionary.create_new_task}}</van-button>

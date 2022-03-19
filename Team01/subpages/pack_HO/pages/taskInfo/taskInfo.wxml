@@ -36,8 +36,8 @@
 
 <van-cell-group inset style="padding: 30rpx">
   <van-cell title="{{dictionary.priority}}" value="{{taskPage.currentPriority}}"/>
-  <van-cell title="{{dictionary.tag}}" is-link value="{{taskPage.tag}}" />
-  <van-cell title="{{dictionary.participant}}" value="{{participant.nickName}}" />
+  <!-- <van-cell title="{{dictionary.tag}}" is-link value="{{taskPage.tag}}" /> -->
+  <van-cell class="valueLeft" title="{{dictionary.participant}}" value="{{participant.nickName}}" />
 </van-cell-group>
 
 
@@ -48,7 +48,7 @@
 <!-- </view>  -->
 
 <!--Upload related images-->
-<van-uploader class="uploader" file-list="{{ fileList }}" bind:after-read="upload" deletable="{{ true }}" max-count="9" bind:delete="deleteImg" />
+<van-uploader class="uploader" file-list="{{ fileList }}" max-count="9" show-upload="{{false}}" />
 
 <van-divider contentPosition="center">{{dictionary.comment_list}}</van-divider>
  
