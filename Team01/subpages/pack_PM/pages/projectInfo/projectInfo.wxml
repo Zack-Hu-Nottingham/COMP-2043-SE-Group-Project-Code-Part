@@ -8,17 +8,6 @@
   </view>
 </van-sticky>
 
-<!-- pop up calendar -->
-<van-calendar
-  show="{{ show }}"
-  title="choose period"
-  type="range"
-  bind:close="onDateClose"
-  bind:confirm="onDateConfirm"
-  default-date="{{defaultDate}}"
-/>
-
-
 <!-- Subpages -->
 <view wx:if="{{ currentTab == 0 }}">
 
