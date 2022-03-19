@@ -141,7 +141,7 @@ Page({
                     cloudPath: cloudList
                 })
                 this.updateCloudList();
-                console.log("图片上传成功", res)
+                // console.log("图片上传成功", res)
             },
             fail: res => {
                 console.log("图片上传失败", res)

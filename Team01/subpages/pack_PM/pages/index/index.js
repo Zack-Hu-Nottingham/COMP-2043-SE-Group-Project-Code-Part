@@ -192,18 +192,18 @@ Page({
    */
   onShareAppMessage: function (e) {
     let selectindex= this.data.selectindex;
-    console.log('success'+selectindex);
+    // console.log('success'+selectindex);
     if (selectindex=='1') {
       db.collection('user').add({
         data:{
           identity: 2
         },
         success:res =>{
-          console.log(res)
+          // console.log(res)
           this.setData({
             countid: res._id
           })
-          console.log(countid);
+          // console.log(countid);
         }
       })
       return {
@@ -230,11 +230,11 @@ Page({
           identity: 0
         },
         success:res =>{
-          console.log(res)
+          // console.log(res)
           this.setData({
             countid: res._id
           })
-          console.log(countid);
+          // console.log(countid);
         }
       })
       return {
@@ -261,11 +261,11 @@ Page({
           identity: 1
         },
         success:res =>{
-          console.log(res)
+          // console.log(res)
           this.setData({
             countid: res._id
           })
-          console.log(countid);
+          // console.log(countid);
         }
       })
       return {

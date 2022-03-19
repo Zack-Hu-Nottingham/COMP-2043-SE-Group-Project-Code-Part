@@ -98,7 +98,7 @@ Page({
      *  get the id of project
      */
     id = options.id
-    console.log(id)
+    // console.log(id)
 
 
     this.getDetail()

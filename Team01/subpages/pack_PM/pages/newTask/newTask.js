@@ -264,6 +264,7 @@ Page({
             })
     },
 
+
     selectParticipant() {
         wx.navigateTo({
             url: '../contactList/participantList/participantList',

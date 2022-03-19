@@ -67,7 +67,7 @@ Page({
 
   deleteImg(event) {
     const delIndex = event.detail.index
-    console.log(event.detail.index)
+    // console.log(event.detail.index)
 
     const {
       fileList

@@ -237,7 +237,7 @@ Page({
         // localPath: ganttPATH,
       }
     }).then(res => {
-      console.log('gantt_json更新成功', res)
+      // console.log('gantt_json更新成功', res)
     }).catch(res => {
       console.log('gantt_json更新失败', res)
     })

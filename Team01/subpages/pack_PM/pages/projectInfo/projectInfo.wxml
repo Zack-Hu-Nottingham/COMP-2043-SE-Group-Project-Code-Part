@@ -128,9 +128,9 @@
         link-type="navigateTo"
         url="../taskInfo/taskInfo?id={{item._id}}">
         
-          <view>
+          <!-- <view>
             <van-tag color="#87CEFA" size="medium"><van-icon name="play"></van-icon>Progressing</van-tag>
-          </view>
+          </view> -->
         </van-cell>
     </view>
     
