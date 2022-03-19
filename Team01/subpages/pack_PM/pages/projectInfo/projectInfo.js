@@ -98,9 +98,12 @@ Page({
      *  get the id of project
      */
     id = options.id
+    console.log(id)
 
 
     this.getDetail()
+    this.updateGantt()
+    
 
     /** 
      *  get unstarted numbers
@@ -151,6 +154,21 @@ Page({
     })
   },
 
+  updateGantt(){
+    wx.cloud.callFunction({
+      name: 'uploadJSON',
+      data:{
+        id: id,
+        template: this.data.project.template,
+        // localPath: ganttPATH,
+      }
+    }).then(res => {
+      // console.log('gantt_json更新成功', res)
+    }).catch(res => {
+      console.log('gantt_json更新失败', res)
+    })
+  },
+
 
 
   /** 
@@ -164,6 +182,7 @@ Page({
     // console.log(this.data.currentTab)
     if (this.data.currentTab == 2) {
       //console.log('success')
+      
       wx.navigateTo({
         url: '../../../../pages/testDiagram/testDiagram?id=' + id + '&index=' + number,
       })

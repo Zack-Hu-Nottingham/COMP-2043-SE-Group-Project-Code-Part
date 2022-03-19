@@ -1,4 +1,5 @@
 var garden_villa = [{
+  id: 17,
   name: "开工仪式",
   taskDescription: "",
   belongTo: "",
@@ -18,6 +19,7 @@ var garden_villa = [{
   location: "上海市青浦区嘉松中路5369号",
   workingArea: "整间房屋",
 },{
+  id: 1,
   name: "墙身材质图",
   taskDescription: "",
   belongTo: "",
@@ -37,6 +39,7 @@ var garden_villa = [{
   location: "上海市青浦区嘉松中路5369号",
   workingArea: "整间房屋",
 },{
+  id: 2,
   name: "墙地面修补找平",
   taskDescription: "",
   belongTo: "",
@@ -56,6 +59,7 @@ var garden_villa = [{
   location: "上海市青浦区嘉松中路5369号",
   workingArea: "房屋墙面及地面",
 },{
+  id: 3,
   name: "现场轴线放样",
   taskDescription: "控制线、建墙线、完成面线、砌墙材质标清楚，抹灰完成面",
   belongTo: "",
@@ -75,6 +79,7 @@ var garden_villa = [{
   location: "上海市青浦区嘉松中路5369号",
   workingArea: "房屋墙面及地面",
 },{
+  id: 4,
   name: "墙体砌筑",
   taskDescription: "",
   belongTo: "",
@@ -94,6 +99,7 @@ var garden_villa = [{
   location: "上海市青浦区嘉松中路5369号",
   workingArea: "房屋墙面",
 },{
+  id: 5,
   name: "强弱电箱放样",
   taskDescription: "",
   belongTo: "",
@@ -113,6 +119,7 @@ var garden_villa = [{
   location: "上海市青浦区嘉松中路5369号",
   workingArea: "房屋墙面",
 },{
+  id: 6,
   name: "电路穿管",
   taskDescription: "强弱电水布管、下水布管（通水试验）",
   belongTo: "",
@@ -132,6 +139,7 @@ var garden_villa = [{
   location: "上海市青浦区嘉松中路5369号",
   workingArea: "房屋墙面",
 },{
+  id: 7,
   name: "水电验收",
   taskDescription: "客户参与",
   belongTo: "",
@@ -151,6 +159,7 @@ var garden_villa = [{
   location: "上海市青浦区嘉松中路5369号",
   workingArea: "房屋墙面",
 },{
+  id: 8,
   name: "木工龙骨施工",
   taskDescription: "吊顶、基层打底等",
   belongTo: "",
@@ -170,6 +179,7 @@ var garden_villa = [{
   location: "上海市青浦区嘉松中路5369号",
   workingArea: "房屋木工",
 },{
+  id: 9,
   name: "中期验收",
   taskDescription: "客户参与验收、木工全部完成、木作全部下单",
   belongTo: "",
@@ -189,6 +199,7 @@ var garden_villa = [{
   location: "上海市青浦区嘉松中路5369号",
   workingArea: "房屋木工",
 },{
+  id: 10,
   name: "找平打点",
   taskDescription: "",
   belongTo: "",
@@ -208,6 +219,7 @@ var garden_villa = [{
   location: "上海市青浦区嘉松中路5369号",
   workingArea: "房屋地暖地面",
 },{
+  id: 11,
   name: "墙砖铺贴",
   taskDescription: "",
   belongTo: "",
@@ -227,6 +239,7 @@ var garden_villa = [{
   location: "上海市青浦区嘉松中路5369号",
   workingArea: "房屋瓷砖石材",
 },{
+  id: 12,
   name: "底漆喷涂",
   taskDescription: "",
   belongTo: "",
@@ -246,6 +259,7 @@ var garden_villa = [{
   location: "上海市青浦区嘉松中路5369号",
   workingArea: "房屋油工施工",
 },{
+  id: 13,
   name: "地板安装",
   taskDescription: "",
   belongTo: "",
@@ -265,6 +279,7 @@ var garden_villa = [{
   location: "上海市青浦区嘉松中路5369号",
   workingArea: "成品安装",
 },{
+  id: 14,
   name: "喷涂保护",
   taskDescription: "",
   belongTo: "",
@@ -284,6 +299,7 @@ var garden_villa = [{
   location: "上海市青浦区嘉松中路5369号",
   workingArea: "油漆修补",
 },{
+  id: 15,
   name: "智能安装",
   taskDescription: "",
   belongTo: "",
@@ -303,6 +319,7 @@ var garden_villa = [{
   location: "上海市青浦区嘉松中路5369号",
   workingArea: "整间房屋",
 },{
+  id: 16,
   name: "硬装竣工验收",
   taskDescription: "客户参与验收",
   belongTo: "",

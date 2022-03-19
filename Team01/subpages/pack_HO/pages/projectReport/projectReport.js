@@ -233,6 +233,7 @@ Page({
       name: 'uploadJSON',
       data: {
         id: this.data.project._id,
+        template: this.data.project.template,
         // localPath: ganttPATH,
       }
     }).then(res => {

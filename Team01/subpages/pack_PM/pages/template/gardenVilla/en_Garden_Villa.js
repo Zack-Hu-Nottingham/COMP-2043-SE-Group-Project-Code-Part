@@ -1,4 +1,5 @@
 var en_garden_villa = [{
+  id: 17,
   name: "Ground-breaking ceremony",
   taskDescription: "",
   belongTo: "",
@@ -18,6 +19,7 @@ var en_garden_villa = [{
   location: "No.5369, Jiasong Zhong Road, Qingpu District, Shanghai",
   workingArea: "Whole house",
 },{
+  id: 1,
   name: "Draw wall body texture diagram",
   taskDescription: "",
   belongTo: "",
@@ -37,6 +39,7 @@ var en_garden_villa = [{
   location: "No.5369, Jiasong Zhong Road, Qingpu District, Shanghai",
   workingArea: "Whole house",
 },{
+  id: 2,
   name: "Wall and floor repair and leveling",
   taskDescription: "",
   belongTo: "",
@@ -56,6 +59,7 @@ var en_garden_villa = [{
   location: "No.5369, Jiasong Zhong Road, Qingpu District, Shanghai",
   workingArea: "House walls and floor",
 },{
+  id: 3,
   name: "On-site axial alignment sampling",
   taskDescription: "Control lines, wall lines, finish surface lines, masonry wall materials clearly marked, plaster finish surface",
   belongTo: "",
@@ -75,6 +79,7 @@ var en_garden_villa = [{
   location: "No.5369, Jiasong Zhong Road, Qingpu District, Shanghai",
   workingArea: "House walls and floor",
 },{
+  id: 4,
   name: "Wall Masonry",
   taskDescription: "",
   belongTo: "",
@@ -94,6 +99,7 @@ var en_garden_villa = [{
   location: "No.5369, Jiasong Zhong Road, Qingpu District, Shanghai",
   workingArea: "Walls of the house",
 },{
+  id: 5,
   name: "Setting out of strong and weak electrical box",
   taskDescription: "",
   belongTo: "",
@@ -113,6 +119,7 @@ var en_garden_villa = [{
   location: "No.5369, Jiasong Zhong Road, Qingpu District, Shanghai",
   workingArea: "Walls of the house",
 },{
+  id: 6,
   name: "Circuit threading",
   taskDescription: "Locate the water pipe and wires",
   belongTo: "",
@@ -132,6 +139,7 @@ var en_garden_villa = [{
   location: "No.5369, Jiasong Zhong Road, Qingpu District, Shanghai",
   workingArea: "Walls of the house",
 },{
+  id: 7,
   name: "Verification and acceptance of the setting out of water pipe and wires",
   taskDescription: "Client should be included",
   belongTo: "",
@@ -151,6 +159,7 @@ var en_garden_villa = [{
   location: "No.5369, Jiasong Zhong Road, Qingpu District, Shanghai",
   workingArea: "Walls of the house",
 },{
+  id: 8,
   name: "Woodworking keel construction",
   taskDescription: "Ceiling, base priming, etc.",
   belongTo: "",
@@ -170,6 +179,7 @@ var en_garden_villa = [{
   location: "No.5369, Jiasong Zhong Road, Qingpu District, Shanghai",
   workingArea: "",
 },{
+  id: 9,
   name: "Mid-term verification and acceptance",
   taskDescription: "Client should be involved in the verification. At the moment all the wooden work is supposed to be done.",
   belongTo: "",
@@ -179,7 +189,7 @@ var en_garden_villa = [{
   phase: 7,
   taskSerialNumber: 7.6,
   startTime: "2021-8-4",
-  endTime: "2021-8-4",
+  endTime: "2021-8-5",
   participant: "o_jxV5TAqQjBnhn2BVwEBhfBHbrn",
   supervisor: "o_jxV5cv5StM3IW4L-4obHf50dY4",
   state: 0,
@@ -189,6 +199,7 @@ var en_garden_villa = [{
   location: "No.5369, Jiasong Zhong Road, Qingpu District, Shanghai",
   workingArea: "",
 },{
+  id: 10,
   name: "Leveling and puncturing",
   taskDescription: "",
   belongTo: "",
@@ -208,6 +219,7 @@ var en_garden_villa = [{
   location: "No.5369, Jiasong Zhong Road, Qingpu District, Shanghai",
   workingArea: "Floor of the house",
 },{
+  id: 11,
   name: "Wall tile paving",
   taskDescription: "",
   belongTo: "",
@@ -227,6 +239,7 @@ var en_garden_villa = [{
   location: "No.5369, Jiasong Zhong Road, Qingpu District, Shanghai",
   workingArea: "Walls of the house",
 },{
+  id: 12,
   name: "Primer spraying",
   taskDescription: "",
   belongTo: "",
@@ -246,6 +259,7 @@ var en_garden_villa = [{
   location: "No.5369, Jiasong Zhong Road, Qingpu District, Shanghai",
   workingArea: "",
 },{
+  id: 13,
   name: "Floor installation",
   taskDescription: "",
   belongTo: "",
@@ -265,6 +279,7 @@ var en_garden_villa = [{
   location: "No.5369, Jiasong Zhong Road, Qingpu District, Shanghai",
   workingArea: "Finished product installation",
 },{
+  id: 14,
   name: "Spray protection",
   taskDescription: "",
   belongTo: "",
@@ -284,6 +299,7 @@ var en_garden_villa = [{
   location: "No.5369, Jiasong Zhong Road, Qingpu District, Shanghai",
   workingArea: "Paint repair",
 },{
+  id: 15,
   name: "Installation of intelligent furniture",
   taskDescription: "",
   belongTo: "",
@@ -303,6 +319,7 @@ var en_garden_villa = [{
   location: "No.5369, Jiasong Zhong Road, Qingpu District, Shanghai",
   workingArea: "Whole house",
 },{
+  id: 16,
   name: "Hardscaping completion verification and acceptance",
   taskDescription: "House owner involved in receiving and inspection",
   belongTo: "",
