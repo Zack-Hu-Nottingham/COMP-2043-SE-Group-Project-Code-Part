@@ -147,6 +147,7 @@ var en_townhouse = [{
   state: 0,
   constructionRequirements: "None",
   duration: 10,
+  offset: 0,
   location: "Room 409, Building A, Tomson Riviera Lane 28, Huayuan Shiqiao Road, Pudong New Area, Shanghai",
   workingArea: "Whole house",
 }, {
@@ -165,6 +166,7 @@ var en_townhouse = [{
   state: 0,
   constructionRequirements: "None",
   duration: 21,
+  offset: 1,
   location: "Room 409, Building A, Tomson Riviera Lane 28, Huayuan Shiqiao Road, Pudong New Area, Shanghai",
   workingArea: "House walls and floor",
 },{
@@ -183,6 +185,7 @@ var en_townhouse = [{
   state: 0,
   constructionRequirements: "None",
   duration: 21,
+  offset: 1,
   location: "Room 409, Building A, Tomson Riviera Lane 28, Huayuan Shiqiao Road, Pudong New Area, Shanghai",
   workingArea: "House walls and floor",
 },{
@@ -201,6 +204,7 @@ var en_townhouse = [{
   state: 0,
   constructionRequirements: "None",
   duration: 21,
+  offset: 1,
   location: "Room 409, Building A, Tomson Riviera Lane 28, Huayuan Shiqiao Road, Pudong New Area, Shanghai",
   workingArea: "House walls and floor",
 },{
@@ -219,6 +223,7 @@ var en_townhouse = [{
   state: 0,
   constructionRequirements: "None",
   duration: 21,
+  offset: 22,
   location: "Room 409, Building A, Tomson Riviera Lane 28, Huayuan Shiqiao Road, Pudong New Area, Shanghai",
   workingArea: "House walls and floor",
 }, {
@@ -237,6 +242,7 @@ var en_townhouse = [{
   state: 0,
   constructionRequirements: "None",
   duration: 2,
+  offset: 23,
   location: "Room 409, Building A, Tomson Riviera Lane 28, Huayuan Shiqiao Road, Pudong New Area, Shanghai",
   workingArea: "House walls and floor",
 }, {
@@ -255,6 +261,7 @@ var en_townhouse = [{
   state: 0,
   constructionRequirements: "None",
   duration: 2,
+  offset: 25,
   location: "Room 409, Building A, Tomson Riviera Lane 28, Huayuan Shiqiao Road, Pudong New Area, Shanghai",
   workingArea: "House walls and floor",
 }, {
@@ -273,6 +280,7 @@ var en_townhouse = [{
   state: 0,
   constructionRequirements: "None",
   duration: 10,
+  offset: 26,
   location: "Room 409, Building A, Tomson Riviera Lane 28, Huayuan Shiqiao Road, Pudong New Area, Shanghai",
   workingArea: "Walls of the house",
 }, {
@@ -291,6 +299,7 @@ var en_townhouse = [{
   state: 0,
   constructionRequirements: "None",
   duration: 10,
+  offset: 26,
   location: "Room 409, Building A, Tomson Riviera Lane 28, Huayuan Shiqiao Road, Pudong New Area, Shanghai",
   workingArea: "Walls of the house",
 },{
@@ -309,6 +318,7 @@ var en_townhouse = [{
   state: 0,
   constructionRequirements: "None",
   duration: 10,
+  offset: 26,
   location: "Room 409, Building A, Tomson Riviera Lane 28, Huayuan Shiqiao Road, Pudong New Area, Shanghai",
   workingArea: "Walls of the house",
 },{
@@ -327,6 +337,7 @@ var en_townhouse = [{
   state: 0,
   constructionRequirements: "None",
   duration: 10,
+  offset: 36,
   location: "Room 409, Building A, Tomson Riviera Lane 28, Huayuan Shiqiao Road, Pudong New Area, Shanghai",
   workingArea: "Walls of the house",
 }, {
@@ -345,6 +356,7 @@ var en_townhouse = [{
   state: 0,
   constructionRequirements: "None",
   duration: 2,
+  offset: 37,
   location: "Room 409, Building A, Tomson Riviera Lane 28, Huayuan Shiqiao Road, Pudong New Area, Shanghai",
   workingArea: "Walls of the house",
 }, {
@@ -363,6 +375,7 @@ var en_townhouse = [{
   state: 0,
   constructionRequirements: "None",
   duration: 2,
+  offset: 37,
   location: "Room 409, Building A, Tomson Riviera Lane 28, Huayuan Shiqiao Road, Pudong New Area, Shanghai",
   workingArea: "Walls of the house",
 }, {
@@ -381,6 +394,7 @@ var en_townhouse = [{
   state: 0,
   constructionRequirements: "None",
   duration: 2,
+  offset: 37,
   location: "Room 409, Building A, Tomson Riviera Lane 28, Huayuan Shiqiao Road, Pudong New Area, Shanghai",
   workingArea: "Walls of the house",
 }, {
@@ -399,6 +413,7 @@ var en_townhouse = [{
   state: 0,
   constructionRequirements: "None",
   duration: 2,
+  offset: 37,
   location: "Room 409, Building A, Tomson Riviera Lane 28, Huayuan Shiqiao Road, Pudong New Area, Shanghai",
   workingArea: "Walls of the house",
 }, {
@@ -417,6 +432,7 @@ var en_townhouse = [{
   state: 0,
   constructionRequirements: "None",
   duration: 2,
+  offset: 37,
   location: "Room 409, Building A, Tomson Riviera Lane 28, Huayuan Shiqiao Road, Pudong New Area, Shanghai",
   workingArea: "Walls of the house",
 }, {
@@ -435,6 +451,7 @@ var en_townhouse = [{
   state: 0,
   constructionRequirements: "None",
   duration: 2,
+  offset: 37,
   location: "Room 409, Building A, Tomson Riviera Lane 28, Huayuan Shiqiao Road, Pudong New Area, Shanghai",
   workingArea: "",
 }, {
@@ -453,6 +470,7 @@ var en_townhouse = [{
   state: 0,
   constructionRequirements: "None",
   duration: 2,
+  offset: 39,
   location: "Room 409, Building A, Tomson Riviera Lane 28, Huayuan Shiqiao Road, Pudong New Area, Shanghai",
   workingArea: "Walls of the house",
 }, {
@@ -471,6 +489,7 @@ var en_townhouse = [{
   state: 0,
   constructionRequirements: "None",
   duration: 25,
+  offset: 40,
   location: "Room 409, Building A, Tomson Riviera Lane 28, Huayuan Shiqiao Road, Pudong New Area, Shanghai",
   workingArea: "Walls of the house",
 }, {
@@ -489,6 +508,7 @@ var en_townhouse = [{
   state: 0,
   constructionRequirements: "None",
   duration: 25,
+  offset: 40,
   location: "Room 409, Building A, Tomson Riviera Lane 28, Huayuan Shiqiao Road, Pudong New Area, Shanghai",
   workingArea: "Walls of the house",
 }, {
@@ -507,6 +527,7 @@ var en_townhouse = [{
   state: 0,
   constructionRequirements: "None",
   duration: 25,
+  offset: 40,
   location: "Room 409, Building A, Tomson Riviera Lane 28, Huayuan Shiqiao Road, Pudong New Area, Shanghai",
   workingArea: "Walls of the house",
 }, {
@@ -525,6 +546,7 @@ var en_townhouse = [{
   state: 0,
   constructionRequirements: "None",
   duration: 25,
+  offset: 40,
   location: "Room 409, Building A, Tomson Riviera Lane 28, Huayuan Shiqiao Road, Pudong New Area, Shanghai",
   workingArea: "Walls of the house",
 },{
@@ -543,6 +565,7 @@ var en_townhouse = [{
   state: 0,
   constructionRequirements: "None",
   duration: 25,
+  offset: 40,
   location: "Room 409, Building A, Tomson Riviera Lane 28, Huayuan Shiqiao Road, Pudong New Area, Shanghai",
   workingArea: "Walls and floor of the house",
 },{
@@ -561,6 +584,7 @@ var en_townhouse = [{
   state: 0,
   constructionRequirements: "None",
   duration: 25,
+  offset: 40,
   location: "Room 409, Building A, Tomson Riviera Lane 28, Huayuan Shiqiao Road, Pudong New Area, Shanghai",
   workingArea: "Walls of the house",
 }, {
@@ -579,6 +603,7 @@ var en_townhouse = [{
   state: 0,
   constructionRequirements: "None",
   duration: 25,
+  offset: 40,
   location: "Room 409, Building A, Tomson Riviera Lane 28, Huayuan Shiqiao Road, Pudong New Area, Shanghai",
   workingArea: "Walls of the house",
 }, {
@@ -597,6 +622,7 @@ var en_townhouse = [{
   state: 0,
   constructionRequirements: "None",
   duration: 25,
+  offset: 40,
   location: "Room 409, Building A, Tomson Riviera Lane 28, Huayuan Shiqiao Road, Pudong New Area, Shanghai",
   workingArea: "Walls of the house",
 }, {
@@ -615,6 +641,7 @@ var en_townhouse = [{
   state: 0,
   constructionRequirements: "None",
   duration: 25,
+  offset: 40,
   location: "Room 409, Building A, Tomson Riviera Lane 28, Huayuan Shiqiao Road, Pudong New Area, Shanghai",
   workingArea: "Walls of the house",
 }, {
@@ -633,6 +660,7 @@ var en_townhouse = [{
   state: 0,
   constructionRequirements: "None",
   duration: 25,
+  offset: 40,
   location: "Room 409, Building A, Tomson Riviera Lane 28, Huayuan Shiqiao Road, Pudong New Area, Shanghai",
   workingArea: "Walls of the house",
 }, {
@@ -651,6 +679,7 @@ var en_townhouse = [{
   state: 0,
   constructionRequirements: "None",
   duration: 35,
+  offset: 55,
   location: "Room 409, Building A, Tomson Riviera Lane 28, Huayuan Shiqiao Road, Pudong New Area, Shanghai",
   workingArea: "",
 }, {
@@ -669,6 +698,7 @@ var en_townhouse = [{
   state: 0,
   constructionRequirements: "None",
   duration: 35,
+  offset: 55,
   location: "Room 409, Building A, Tomson Riviera Lane 28, Huayuan Shiqiao Road, Pudong New Area, Shanghai",
   workingArea: "",
 }, {
@@ -687,6 +717,7 @@ var en_townhouse = [{
   state: 0,
   constructionRequirements: "None",
   duration: 35,
+  offset: 55,
   location: "Room 409, Building A, Tomson Riviera Lane 28, Huayuan Shiqiao Road, Pudong New Area, Shanghai",
   workingArea: "",
 }, {
@@ -705,6 +736,7 @@ var en_townhouse = [{
   state: 0,
   constructionRequirements: "None",
   duration: 35,
+  offset: 55,
   location: "Room 409, Building A, Tomson Riviera Lane 28, Huayuan Shiqiao Road, Pudong New Area, Shanghai",
   workingArea: "",
 }, {
@@ -723,6 +755,7 @@ var en_townhouse = [{
   state: 0,
   constructionRequirements: "None",
   duration: 35,
+  offset: 55,
   location: "Room 409, Building A, Tomson Riviera Lane 28, Huayuan Shiqiao Road, Pudong New Area, Shanghai",
   workingArea: "",
 }, {
@@ -741,6 +774,7 @@ var en_townhouse = [{
   state: 0,
   constructionRequirements: "None",
   duration: 35,
+  offset: 90,
   location: "Room 409, Building A, Tomson Riviera Lane 28, Huayuan Shiqiao Road, Pudong New Area, Shanghai",
   workingArea: "",
 }, {
@@ -759,6 +793,7 @@ var en_townhouse = [{
   state: 0,
   constructionRequirements: "None",
   duration: 10,
+  offset: 92,
   location: "Room 409, Building A, Tomson Riviera Lane 28, Huayuan Shiqiao Road, Pudong New Area, Shanghai",
   workingArea: "Bathroom",
 }, {
@@ -777,6 +812,7 @@ var en_townhouse = [{
   state: 0,
   constructionRequirements: "None",
   duration: 10,
+  offset: 92,
   location: "Room 409, Building A, Tomson Riviera Lane 28, Huayuan Shiqiao Road, Pudong New Area, Shanghai",
   workingArea: "Floor of the house",
 }, {
@@ -795,6 +831,7 @@ var en_townhouse = [{
   state: 0,
   constructionRequirements: "None",
   duration: 10,
+  offset: 92,
   location: "Room 409, Building A, Tomson Riviera Lane 28, Huayuan Shiqiao Road, Pudong New Area, Shanghai",
   workingArea: "Floor of the house",
 }, {
@@ -813,6 +850,7 @@ var en_townhouse = [{
   state: 0,
   constructionRequirements: "None",
   duration: 10,
+  offset: 92,
   location: "Room 409, Building A, Tomson Riviera Lane 28, Huayuan Shiqiao Road, Pudong New Area, Shanghai",
   workingArea: "Floor of the house",
 }, {
@@ -831,6 +869,7 @@ var en_townhouse = [{
   state: 0,
   constructionRequirements: "None",
   duration: 10,
+  offset: 92,
   location: "Room 409, Building A, Tomson Riviera Lane 28, Huayuan Shiqiao Road, Pudong New Area, Shanghai",
   workingArea: "Floor of the house",
 }, {
@@ -849,6 +888,7 @@ var en_townhouse = [{
   state: 0,
   constructionRequirements: "None",
   duration: 10,
+  offset: 92,
   location: "Room 409, Building A, Tomson Riviera Lane 28, Huayuan Shiqiao Road, Pudong New Area, Shanghai",
   workingArea: "Floor of the house",
 }, {
@@ -867,6 +907,7 @@ var en_townhouse = [{
   state: 0,
   constructionRequirements: "None",
   duration: 45,
+  offset: 104,
   location: "Room 409, Building A, Tomson Riviera Lane 28, Huayuan Shiqiao Road, Pudong New Area, Shanghai",
   workingArea: "Walls of the house",
 }, {
@@ -885,6 +926,7 @@ var en_townhouse = [{
   state: 0,
   constructionRequirements: "None",
   duration: 45,
+  offset: 104,
   location: "Room 409, Building A, Tomson Riviera Lane 28, Huayuan Shiqiao Road, Pudong New Area, Shanghai",
   workingArea: "Walls of the house",
 }, {
@@ -903,6 +945,7 @@ var en_townhouse = [{
   state: 0,
   constructionRequirements: "None",
   duration: 45,
+  offset: 104,
   location: "Room 409, Building A, Tomson Riviera Lane 28, Huayuan Shiqiao Road, Pudong New Area, Shanghai",
   workingArea: "Walls of the house",
 }, {
@@ -921,6 +964,7 @@ var en_townhouse = [{
   state: 0,
   constructionRequirements: "None",
   duration: 45,
+  offset: 104,
   location: "Room 409, Building A, Tomson Riviera Lane 28, Huayuan Shiqiao Road, Pudong New Area, Shanghai",
   workingArea: "Walls of the house",
 }, {
@@ -939,6 +983,7 @@ var en_townhouse = [{
   state: 0,
   constructionRequirements: "None",
   duration: 45,
+  offset: 104,
   location: "Room 409, Building A, Tomson Riviera Lane 28, Huayuan Shiqiao Road, Pudong New Area, Shanghai",
   workingArea: "Walls of the house",
 }, {
@@ -957,6 +1002,7 @@ var en_townhouse = [{
   state: 0,
   constructionRequirements: "None",
   duration: 45,
+  offset: 104,
   location: "Room 409, Building A, Tomson Riviera Lane 28, Huayuan Shiqiao Road, Pudong New Area, Shanghai",
   workingArea: "Walls of the house",
 }, {
@@ -975,6 +1021,7 @@ var en_townhouse = [{
   state: 0,
   constructionRequirements: "None",
   duration: 40,
+  offset: 104,
   location: "Room 409, Building A, Tomson Riviera Lane 28, Huayuan Shiqiao Road, Pudong New Area, Shanghai",
   workingArea: "",
 }, {
@@ -993,6 +1040,7 @@ var en_townhouse = [{
   state: 0,
   constructionRequirements: "None",
   duration: 40,
+  offset: 104,
   location: "Room 409, Building A, Tomson Riviera Lane 28, Huayuan Shiqiao Road, Pudong New Area, Shanghai",
   workingArea: "",
 }, {
@@ -1011,6 +1059,7 @@ var en_townhouse = [{
   state: 0,
   constructionRequirements: "None",
   duration: 40,
+  offset: 104,
   location: "Room 409, Building A, Tomson Riviera Lane 28, Huayuan Shiqiao Road, Pudong New Area, Shanghai",
   workingArea: "",
 }, {
@@ -1029,6 +1078,7 @@ var en_townhouse = [{
   state: 0,
   constructionRequirements: "None",
   duration: 40,
+  offset: 104,
   location: "Room 409, Building A, Tomson Riviera Lane 28, Huayuan Shiqiao Road, Pudong New Area, Shanghai",
   workingArea: "",
 }, {
@@ -1047,6 +1097,7 @@ var en_townhouse = [{
   state: 0,
   constructionRequirements: "None",
   duration: 40,
+  offset: 113,
   location: "Room 409, Building A, Tomson Riviera Lane 28, Huayuan Shiqiao Road, Pudong New Area, Shanghai",
   workingArea: "",
 }, {
@@ -1065,6 +1116,7 @@ var en_townhouse = [{
   state: 0,
   constructionRequirements: "None",
   duration: 1,
+  offset: 139,
   location: "Room 409, Building A, Tomson Riviera Lane 28, Huayuan Shiqiao Road, Pudong New Area, Shanghai",
   workingArea: "Finished product installation",
 }, {
@@ -1083,6 +1135,7 @@ var en_townhouse = [{
   state: 0,
   constructionRequirements: "None",
   duration: 50,
+  offset: 146,
   location: "Room 409, Building A, Tomson Riviera Lane 28, Huayuan Shiqiao Road, Pudong New Area, Shanghai",
   workingArea: "Finished product installation",
 }, {
@@ -1101,6 +1154,7 @@ var en_townhouse = [{
   state: 0,
   constructionRequirements: "None",
   duration: 50,
+  offset: 146,
   location: "Room 409, Building A, Tomson Riviera Lane 28, Huayuan Shiqiao Road, Pudong New Area, Shanghai",
   workingArea: "Finished product installation",
 }, {
@@ -1119,6 +1173,7 @@ var en_townhouse = [{
   state: 0,
   constructionRequirements: "None",
   duration: 1,
+  offset: 149,
   location: "Room 409, Building A, Tomson Riviera Lane 28, Huayuan Shiqiao Road, Pudong New Area, Shanghai",
   workingArea: "Finished product installation",
 }, {
@@ -1137,6 +1192,7 @@ var en_townhouse = [{
   state: 0,
   constructionRequirements: "None",
   duration: 50,
+  offset: 146,
   location: "Room 409, Building A, Tomson Riviera Lane 28, Huayuan Shiqiao Road, Pudong New Area, Shanghai",
   workingArea: "Finished product installation",
 }, {
@@ -1155,6 +1211,7 @@ var en_townhouse = [{
   state: 0,
   constructionRequirements: "None",
   duration: 50,
+  offset: 146,
   location: "Room 409, Building A, Tomson Riviera Lane 28, Huayuan Shiqiao Road, Pudong New Area, Shanghai",
   workingArea: "Finished product installation",
 }, {
@@ -1173,6 +1230,7 @@ var en_townhouse = [{
   state: 0,
   constructionRequirements: "None",
   duration: 50,
+  offset: 146,
   location: "Room 409, Building A, Tomson Riviera Lane 28, Huayuan Shiqiao Road, Pudong New Area, Shanghai",
   workingArea: "Finished product installation",
 }, {
@@ -1191,6 +1249,7 @@ var en_townhouse = [{
   state: 0,
   constructionRequirements: "None",
   duration: 50,
+  offset: 146,
   location: "Room 409, Building A, Tomson Riviera Lane 28, Huayuan Shiqiao Road, Pudong New Area, Shanghai",
   workingArea: "Finished product installation",
 }, {
@@ -1209,6 +1268,7 @@ var en_townhouse = [{
   state: 0,
   constructionRequirements: "None",
   duration: 50,
+  offset: 146,
   location: "Room 409, Building A, Tomson Riviera Lane 28, Huayuan Shiqiao Road, Pudong New Area, Shanghai",
   workingArea: "Finished product installation",
 }, {
@@ -1227,6 +1287,7 @@ var en_townhouse = [{
   state: 0,
   constructionRequirements: "None",
   duration: 50,
+  offset: 146,
   location: "Room 409, Building A, Tomson Riviera Lane 28, Huayuan Shiqiao Road, Pudong New Area, Shanghai",
   workingArea: "Finished product installation",
 }, {
@@ -1245,6 +1306,7 @@ var en_townhouse = [{
   state: 0,
   constructionRequirements: "None",
   duration: 50,
+  offset: 196,
   location: "Room 409, Building A, Tomson Riviera Lane 28, Huayuan Shiqiao Road, Pudong New Area, Shanghai",
   workingArea: "Finished product installation",
 }, {
@@ -1263,6 +1325,7 @@ var en_townhouse = [{
   state: 0,
   constructionRequirements: "None",
   duration: 10,
+  offset: 198,
   location: "Room 409, Building A, Tomson Riviera Lane 28, Huayuan Shiqiao Road, Pudong New Area, Shanghai",
   workingArea: "Paint repair",
 }, {
@@ -1281,6 +1344,7 @@ var en_townhouse = [{
   state: 0,
   constructionRequirements: "None",
   duration: 10,
+  offset: 198,
   location: "Room 409, Building A, Tomson Riviera Lane 28, Huayuan Shiqiao Road, Pudong New Area, Shanghai",
   workingArea: "Paint repair",
 }, {
@@ -1299,6 +1363,7 @@ var en_townhouse = [{
   state: 0,
   constructionRequirements: "None",
   duration: 10,
+  offset: 198,
   location: "Room 409, Building A, Tomson Riviera Lane 28, Huayuan Shiqiao Road, Pudong New Area, Shanghai",
   workingArea: "Paint repair",
 }, {
@@ -1317,6 +1382,7 @@ var en_townhouse = [{
   state: 0,
   constructionRequirements: "None",
   duration: 1,
+  offset: 208,
   location: "Room 409, Building A, Tomson Riviera Lane 28, Huayuan Shiqiao Road, Pudong New Area, Shanghai",
   workingArea: "Paint repair",
 }, {
@@ -1335,6 +1401,7 @@ var en_townhouse = [{
   state: 0,
   constructionRequirements: "None",
   duration: 15,
+  offset: 211,
   location: "Room 409, Building A, Tomson Riviera Lane 28, Huayuan Shiqiao Road, Pudong New Area, Shanghai",
   workingArea: "Whole house",
 }, {
@@ -1353,6 +1420,7 @@ var en_townhouse = [{
   state: 0,
   constructionRequirements: "None",
   duration: 15,
+  offset: 211,
   location: "Room 409, Building A, Tomson Riviera Lane 28, Huayuan Shiqiao Road, Pudong New Area, Shanghai",
   workingArea: "Whole house",
 }, {
@@ -1371,6 +1439,7 @@ var en_townhouse = [{
   state: 0,
   constructionRequirements: "None",
   duration: 15,
+  offset: 211,
   location: "Room 409, Building A, Tomson Riviera Lane 28, Huayuan Shiqiao Road, Pudong New Area, Shanghai",
   workingArea: "Whole house",
 }, {
@@ -1389,6 +1458,7 @@ var en_townhouse = [{
   state: 0,
   constructionRequirements: "None",
   duration: 15,
+  offset: 211,
   location: "Room 409, Building A, Tomson Riviera Lane 28, Huayuan Shiqiao Road, Pudong New Area, Shanghai",
   workingArea: "Whole house",
 }, {
@@ -1407,6 +1477,7 @@ var en_townhouse = [{
   state: 0,
   constructionRequirements: "None",
   duration: 15,
+  offset: 211,
   location: "Room 409, Building A, Tomson Riviera Lane 28, Huayuan Shiqiao Road, Pudong New Area, Shanghai",
   workingArea: "Whole house",
 }, {
@@ -1425,6 +1496,7 @@ var en_townhouse = [{
   state: 0,
   constructionRequirements: "None",
   duration: 15,
+  offset: 211,
   location: "Room 409, Building A, Tomson Riviera Lane 28, Huayuan Shiqiao Road, Pudong New Area, Shanghai",
   workingArea: "Whole house",
 }, {
@@ -1443,6 +1515,7 @@ var en_townhouse = [{
   state: 0,
   constructionRequirements: "None",
   duration: 15,
+  offset: 211,
   location: "Room 409, Building A, Tomson Riviera Lane 28, Huayuan Shiqiao Road, Pudong New Area, Shanghai",
   workingArea: "Whole house",
 }, {
@@ -1461,6 +1534,7 @@ var en_townhouse = [{
   state: 0,
   constructionRequirements: "None",
   duration: 1,
+  offset: 227,
   location: "Room 409, Building A, Tomson Riviera Lane 28, Huayuan Shiqiao Road, Pudong New Area, Shanghai",
   workingArea: "Receiving and inspection",
 }, {
@@ -1479,6 +1553,7 @@ var en_townhouse = [{
   state: 0,
   constructionRequirements: "None",
   duration: 1,
+  offset: 228,
   location: "Room 409, Building A, Tomson Riviera Lane 28, Huayuan Shiqiao Road, Pudong New Area, Shanghai",
   workingArea: "Receiving and inspection",
 }, {
@@ -1497,6 +1572,7 @@ var en_townhouse = [{
   state: 0,
   constructionRequirements: "None",
   duration: 1,
+  offset: 230,
   location: "Room 409, Building A, Tomson Riviera Lane 28, Huayuan Shiqiao Road, Pudong New Area, Shanghai",
   workingArea: "Receiving and inspection",
 }, {
@@ -1515,6 +1591,7 @@ var en_townhouse = [{
   state: 0,
   constructionRequirements: "None",
   duration: 1,
+  offset: 232,
   location: "Room 409, Building A, Tomson Riviera Lane 28, Huayuan Shiqiao Road, Pudong New Area, Shanghai",
   workingArea: "Soft furnishings set-up",
 }];
