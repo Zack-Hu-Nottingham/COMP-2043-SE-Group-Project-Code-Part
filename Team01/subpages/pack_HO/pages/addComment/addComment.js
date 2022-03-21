@@ -29,6 +29,7 @@ Page({
         details: '',
         id: '',
         project_id: '',
+        PM_id: '',
         feedback_id: '',
         // commentPage: '',
         isLoading: false,
@@ -45,6 +46,7 @@ Page({
             project_id: options.projectId,
             // commentPage: options.index,
         })
+        this.getPM(options.projectId);
         db.collection('task').doc(options.id).get().then(res => {
             this.setData({
                 feedback: res.data.feedback,
@@ -82,6 +84,20 @@ Page({
          */
         wx.setNavigationBarTitle({
             title: this.data.dictionary.comment_title,
+        })
+    },
+    getPM(projectId){
+        db.collection('project')
+        .doc(projectId)
+        .field({
+            _openid: true,
+        })
+        .get({
+            success: res=>{
+                this.setData({
+                    PM_id: res.data._openid
+                })
+            }
         })
     },
 
@@ -175,6 +191,7 @@ Page({
                          */
                         belongTo: this.data.id,
                         projectId: this.data.project_id,
+                        pmId: this.data.PM_id,
                         createTime: this.formatDate(new Date()),
                         time: new Date(),
                         isRead: 0,
