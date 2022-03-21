@@ -202,11 +202,11 @@ Page({
             cloudList: [],
             template: this.data.selectedTemplate,
 
-            completed: [],
-            delayed: [],
             task: [],
-            unstarted: [],
-            progressing: [],
+            completed: 0,
+            delayed: 0,
+            unstarted: 0,
+            progressing: 0,
 
             currentPhase: 0,
             // feedback: [],

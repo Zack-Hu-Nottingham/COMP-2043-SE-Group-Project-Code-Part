@@ -64,6 +64,13 @@ Page({
     totalTask: 0,
     updateIndex: 1,
 
+    projectId: [],
+    state0: 0,
+    state1: 0,
+    state2: 0,
+    state3: 0,
+    state4: 0,
+
   },
 
   showPopup() {
@@ -240,6 +247,8 @@ Page({
 
     await this.getProjectInfo(openid)
 
+    await this.getStateCount()
+
     await this.getFeedbackInfo(openid)
 
   },
@@ -378,9 +387,22 @@ Page({
               isProjectEmpty: false
             })
             for (var idx in res.data) {
+              console.log(res.data[idx]._id)
               this.setData({
-                project: this.data.project.concat(res.data[idx])
+                project: this.data.project.concat(res.data[idx]),
+                projectId: this.data.project.concat(res.data[idx]._id)
               })
+              console.log(this.data.projectId[0])
+
+              // wx.cloud.callFunction({
+              //   // 云函数名称
+              //   name: 'updateProjectInformation',
+              //   // 传给云函数的参数
+              //   data: {
+              //     id: res.data[idx]._id,
+              //   },
+              // })
+
             }
           }
           resolve("Successful access to project information")
@@ -594,5 +616,143 @@ Page({
         name:value
       }) 
     }
+  },
+
+  getStateCount(){
+    for(var i in this.data.projectId){
+      db.collection('task')
+       .where({
+          belongTo: _.eq(this.data.projectId[i]),
+          state: _.eq(0)
+       })
+       .count()
+       .then(res => {
+         console.log(res.total)
+         this.setData({
+           state0: res.total
+         })
+
+         wx.cloud.callFunction({
+            // 云函数名称
+            name: 'updateProjectInformation',
+            // 传给云函数的参数
+            data: {
+              id: this.data.projectId[i],
+              state: 0,
+              count: res.total
+            },
+         })
+
+       })
+
+      db.collection('task')
+       .where({
+          belongTo: _.eq(this.data.projectId[i]),
+          state: _.eq(1)
+       })
+       .count()
+       .then(res => {
+         console.log(res.total)
+         this.setData({
+           state1: res.total
+         })
+
+         wx.cloud.callFunction({
+            // 云函数名称
+            name: 'updateProjectInformation',
+            // 传给云函数的参数
+            data: {
+              id: this.data.projectId[i],
+              state: 1,
+              count: res.total
+            },
+         })
+
+       })
+
+      db.collection('task')
+       .where({
+          belongTo: _.eq(this.data.projectId[i]),
+          state: _.eq(2)
+       })
+       .count()
+       .then(res => {
+         console.log(res.total)
+         this.setData({
+           state2: res.total
+         })
+
+         wx.cloud.callFunction({
+              // 云函数名称
+              name: 'updateProjectInformation',
+              // 传给云函数的参数
+              data: {
+                id: this.data.projectId[i],
+                state: 2,
+                count: res.total
+              },
+          })
+
+
+
+       })
+
+      db.collection('task')
+       .where({
+          belongTo: _.eq(this.data.projectId[i]),
+          state: _.eq(3)
+       })
+       .count()
+       .then(res => {
+         console.log(res.total)
+         this.setData({
+           state3: res.total
+         })
+
+         wx.cloud.callFunction({
+              // 云函数名称
+              name: 'updateProjectInformation',
+              // 传给云函数的参数
+              data: {
+                id: this.data.projectId[i],
+                state: 3,
+                count: res.total
+              },
+          })
+
+
+
+       })
+
+      db.collection('task')
+       .where({
+          belongTo: _.eq(this.data.projectId[i]),
+          state: _.eq(4)
+       })
+       .count()
+       .then(res => {
+         console.log(res.total)
+         this.setData({
+           state4: res.total
+         })
+
+         wx.cloud.callFunction({
+              // 云函数名称
+              name: 'updateProjectInformation',
+              // 传给云函数的参数
+              data: {
+                id: this.data.projectId[i],
+                state: 4,
+                count: res.total
+              },
+          })
+
+
+
+       })
+
+    }
   }
+
+
 })
