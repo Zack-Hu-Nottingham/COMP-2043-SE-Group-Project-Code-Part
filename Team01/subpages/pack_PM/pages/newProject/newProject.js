@@ -60,6 +60,8 @@ Page({
     project: "",
     task: [],
 
+    taskParticipant: "",
+
     template: "",
   },
 
@@ -394,9 +396,27 @@ Page({
       .update({
         data: {
           task: this.data.task,
-          unstarted: this.data.task
+          //unstarted: this.data.task
         }
       })
+
+    for(var i in this.data.task){
+      db.collection('task')
+        .doc(this.data.task[i])
+        .get()
+        .then(res => {
+          //console.log(res.data.participant)
+          //console.log(this.data.task[i])
+          wx.cloud.callFunction({
+              name: 'addUserTask',
+              data: {
+                id: res.data.participant,
+                task: this.data.task[i]
+              },
+          })
+
+        })
+    }
   },
 
   deleteImg(event) {
