@@ -112,6 +112,7 @@ var Languague = {
     participant: "参与者",
    //  reworking: "重加工",
     related_photo: "相关照片",
+    update_state_history: "更新任务状态历史记录",
     phase: "阶段",
     
 
@@ -138,6 +139,7 @@ var Languague = {
     select_feedback:"选择反馈类型",
     submitErrMsg1:"反馈类型为空",
     submitErrMsg2:"描述为空",
+    submitErrMsg3:"未上传照片",
     feedback_type0:"项目延期",
     feedback_type1:"任务延期",
     feedback_type2:"任务需返工",

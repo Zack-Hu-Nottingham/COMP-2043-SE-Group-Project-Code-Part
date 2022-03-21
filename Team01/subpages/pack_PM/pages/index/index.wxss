@@ -100,3 +100,9 @@
   flex-direction: column;
   border-radius: 4%;
 } 
+
+.valueWidth .van-cell__label{
+  font-size: small;
+  min-width: 140%;
+  text-align: left;
+}

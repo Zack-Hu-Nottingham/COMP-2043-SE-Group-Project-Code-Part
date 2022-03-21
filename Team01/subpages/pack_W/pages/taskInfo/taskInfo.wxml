@@ -24,19 +24,48 @@
 
 <van-divider contentPosition="center">{{dictionary.related_photo}}</van-divider>
 
-<van-uploader class="uploader" file-list="{{ fileList }}" bindtap="upload" deletable="{{ true }}" bind:delete="deleteImg" max-count="9" bind:after-read="afterRead" disabled="{{true}}"/>
+<van-uploader class="uploader" file-list="{{ fileList }}"  disabled="{{true}}" show-upload="{{false}}"/>
+<!-- 
+<van-uploader class="uploader" file-list="{{ fileList }}" bindtap="upload" deletable="{{ true }}" bind:delete="deleteImg" max-count="9" bind:after-read="afterRead" disabled="{{true}}"/> -->
+
+<van-divider contentPosition="center">{{dictionary.update_state_history}}</van-divider>
+
+<van-cell-group inset class="cell-group" wx:for="{{ feedback }}" wx:key="index">
+  <view>
+    <van-cell  title="{{item.type.name}}" label="{{item.details}}" clickable
+      link-type="navigateTo" url="/pages/fileList/fileList?id={{item._id}}">{{item.createTime}}</van-cell>
+  </view>
+</van-cell-group>
+
 
 <van-sticky offset-top="{{ 50 }}">
-
-    <view wx:if="{{taskPage.state == 0}}">
-      <van-button hairline round block type="primary" bindtap="startConstruction" class="addComment">{{dictionary.upload_image_start_construction}}</van-button>
-    </view>
-    <view wx:if="{{taskPage.state == 1}}">
-      <van-button hairline round block type="primary" bindtap="finishConstruction" class="addComment">{{dictionary.upload_image_finish_construction}}</van-button>
-    </view>
-    <view wx:if="{{taskPage.state == 2}}">
-      <van-button hairline disabled round block disabled type="primary" class="addComment">{{dictionary.task_state[taskPage.state]}}</van-button>
-    </view>
+<view wx:if="{{taskPage.state == 2}}"></view>
+<view wx:else>
+  <van-button hairline round block type="primary" bindtap="changeState" class="addComment">{{button_title}}</van-button>
+</view>
 
 </van-sticky>
+
+<van-dialog
+  use-slot
+  title="{{dictionary.upload_image_start_construction}}"
+  show="{{ show }}"
+  width="700rpx"
+  confirm-button-text="{{dictionary.confirm}}"
+  cancel-button-text="{{dictionary.cancel}}"
+  confirm-button-color="#3CB371"
+  show-cancel-button
+  bind:close="onClose"
+  bind:confirm="updateComment"
+  before-close="{{beforeClose}}"
+  >
+  <!-- bind:confirm="uploadComment"> -->
+  <van-cell-group class="dialog-cell-group">
+    <van-cell title="{{dictionary.creater}}" value="{{ creater }}" size="large"/>
+    <van-cell title="{{dictionary.create_time}}" size="large" value="{{createTime}}"/>
+  </van-cell-group>
+  <van-uploader class="uploader" file-list="{{ construction_fileList }}" bind:after-read="upload" deletable="{{ true }}" max-count="9" bind:delete="deleteImg"/>
+</van-dialog>
+   
+<van-toast id="van-toast" />
 

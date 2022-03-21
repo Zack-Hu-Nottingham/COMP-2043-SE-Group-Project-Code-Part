@@ -112,6 +112,7 @@ var Languague = {
     participant: "Participant",
     reworking: "Reworking",
     related_photo: "Related photos",
+    update_state_history: "Updaate task state history",
     phase: "Phase",
 
 
@@ -139,6 +140,7 @@ var Languague = {
     select_feedback:"Select feedback type",
     submitErrMsg1:"Feedback type is null",
     submitErrMsg2:"Description is null",
+    submitErrMsg3:"No photo uploaded",
     feedback_type0:"Project Delay",
     feedback_type1:"Task Delay",
     feedback_type2:"Task need rework",

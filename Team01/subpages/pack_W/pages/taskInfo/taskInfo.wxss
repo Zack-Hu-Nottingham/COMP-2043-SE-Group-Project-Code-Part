@@ -7,5 +7,11 @@
 
 .uploader {
   display: flex;
-  padding: 0 0 5% 5%;
+  margin-left: 13%;
+}
+.dialog-cell-group{
+  margin: 20rpx;
+}
+.cell-group{
+  margin-bottom: 10rpx;
 }

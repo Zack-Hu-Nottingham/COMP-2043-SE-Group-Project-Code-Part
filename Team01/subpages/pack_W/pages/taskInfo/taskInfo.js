@@ -1,7 +1,10 @@
 // subpages/pack_W/pages/taskInfo/taskInfo.js
-import Toast from '../../../../miniprogram_npm/@vant/weapp/toast/toast'
+import Dialog from '../../../../miniprogram_npm/@vant/weapp/dialog/dialog';
+import Toast from '../../../../miniprogram_npm/@vant/weapp/toast/toast';
 
 const languageUtils = require("../../../../language/languageUtils");
+
+const app = getApp();
 
 const db = wx.cloud.database();
 
@@ -26,13 +29,20 @@ Page({
     /**
      * Store images
      */
+    construction_fileList: [],
     fileList: [],
     cloudPath: [],
+    feedback: [],
 
     taskPage: {},
     belongTo: "",
     projectId: "",
     openid: "",
+    show: false,
+    creater: "",
+    createTime: "",
+    button_title: "",
+    PM_id: "",
 
 
     priority: [{
@@ -54,13 +64,17 @@ Page({
    */
   onLoad: function (options) {
 
+
+
     /**
      * Initial data of page
      */
     var lan = wx.getStorageSync("languageVersion");
     this.initLanguage();
     this.setData({
-      language: lan
+      language: lan,
+      creater: app.globalData.userInfo.nickName,
+      createTime:  this.formatDate(new Date()),
     })
 
     /**
@@ -68,11 +82,47 @@ Page({
      */
     id = options.id
 
+      const newState = 1;
+      db.collection('task')
+      .where({
+        _id: _.eq(options.id)
+      }).update({
+        data: {
+          state: newState,
+        }
+      })
 
     this.getDetail()
 
     wx.setNavigationBarTitle({
       title: this.data.dictionary.task_info,
+    })
+    this.setData({
+      beforeClose:(action)=>{
+        return new Promise((resolve) => {
+          if (action === 'confirm'){
+            //如果没有填写原因
+            if(this.data.construction_fileList.length == 0){
+              //保留弹框并提示
+              resolve(false);              
+              // Toast(this.data.dictionary.submitErrMsg3)
+            }else{
+              this.updateState();
+              this.uploadComment();
+              setTimeout(res => {
+                this.setData({
+                  construction_fileList: [],
+                })
+                resolve(true);
+              }, 2400)
+            }
+          }else{
+            //点击取消按钮关闭弹框
+            // console.log('cancel')
+            resolve(true);
+          }
+         });
+       },
     })
   },
 
@@ -91,6 +141,19 @@ Page({
       .doc(id)
       .get()
       .then(res => {
+        if(res.data.state==0){
+          this.setData({
+            button_title: this.data.dictionary.upload_image_start_construction
+          })
+        }
+        else if(res.data.state==1){
+          this.setData({
+            button_title: this.data.dictionary.upload_image_finish_construction
+          })
+        }
+        this.updateComment();
+        this.getFileList(res.data.cloudList)
+
         this.setData({
           taskPage: res.data,
         })
@@ -103,14 +166,51 @@ Page({
           .doc(this.data.taskPage.belongTo)
           .get()
           .then(res => {
+            this.getPM(res.data._id);
             this.setData({
               belongTo: res.data.name,
               projectId: res.data._id,
               openid: res.data.projectManager,
             })
+
           })
       })
   },
+
+  updateComment(){
+    db.collection('feedback')
+    .where({
+      belongTo: _.eq(id),
+      type: {
+        value: _.eq("3"),
+      }
+    })
+    .orderBy('time', 'desc')
+    .get({
+      success: res=>{
+        // console.log(res)
+        this.setData({
+          feedback: res.data,
+        })
+        // console.log(res)
+      }
+    })
+  },
+
+  getPM(projectId){
+    db.collection('project')
+    .doc(projectId)
+    .field({
+        _openid: true,
+    })
+    .get({
+        success: res=>{
+            this.setData({
+                PM_id: res.data._openid
+            })
+        }
+    })
+},
 
 
   /** 
@@ -131,177 +231,210 @@ Page({
     });
   },
 
-  // 
-  afterRead(event) {
-    const {
-      file
-    } = event.detail;
-    const {
-      fileList = []
-    } = this.data;
-    fileList.push({
-      ...file
-    });
+  changeState(){
     this.setData({
-      fileList
-    });
+      show: true
+    })
+  },
+  uploadComment(){
+      wx.cloud.database().collection('feedback')
+          .add({
+              data: {
+                  type: {
+                    name: "Update task status",
+                    value: "3"
+                  },
+                  taskName: this.data.taskPage.name,
+                  /** 
+                   *  description of fb
+                   */
+                  description: this.data.button_title,
+                  /** 
+                   *  cloud list
+                   */
+                  cloudList: [],
+                  /** 
+                   *  belonged task
+                   */
+                  belongTo: id,
+                  projectId: this.data.projectId,
+                  pmId: this.data.PM_id,
+                  createTime: this.data.createTime,
+                  time: new Date(),
+                  isRead: 0,
+                  owner: app.globalData.userInfo.nickName,
+              }
+          })
+          .then(res => {
+              // console.log(res._id)
+              this.uploadImage(this.data.construction_fileList,res._id)
+          })
+          .catch(res => {
+              console.log('新建评论失败，请联系管理员', res)
+          })
   },
 
+  onClose(){
+    this.setData({
+      show: false
+    })
+  },
 
-  uploadToCloud() {
-    wx.cloud.init();
-    const {
-      fileList
-    } = this.data;
-    if (!fileList.length) {
-      wx.showToast({
-        title: '请选择图片',
-        icon: 'none'
-      });
-    } else {
-      const uploadTasks = fileList.map((file, index) => this.uploadFilePromise(`my-photo${index}.png`, file));
-      Promise.all(uploadTasks)
-        .then(data => {
-          wx.showToast({
-            title: '上传成功',
-            icon: 'none'
-          });
-          const newFileList = data.map(item => ({
-            url: item.fileID
-          }));
-          this.setData({
-            cloudPath: data,
-            fileList: newFileList
-          });
+  getFileList(cloudPath) {
+    // console.log(cloudPath)
+    var newList = [];
+    for (var i = 0; i < cloudPath.length; i++) {
+      wx.cloud.downloadFile({
+        fileID: cloudPath[i]
+      }).then(res => {
+        newList.push({
+          "url": res.tempFilePath
         })
-        .catch(e => {
-          wx.showToast({
-            title: '上传失败',
-            icon: 'none'
-          });
-          // console.log(e);
-        });
+        this.setData({
+          fileList: newList
+        })
+        //console.log(res.tempFilePath)
+      })
     }
+    // console.log(fileList)
   },
-
-  uploadFilePromise(fileName, chooseResult) {
-    return wx.cloud.uploadFile({
-      cloudPath: fileName,
-      filePath: chooseResult.url
-    });
-  },
-
-  startConstruction() {
-    db.collection('task')
-      .doc(id)
-      .update({
-        data: {
+  updateState(){
+    console.log(id)
+    if(this.data.taskPage.state == 0){
+      this.setData({
+        taskPage: {
           state: 1,
         }
       })
-      .catch(err => {
-        console.log('请求失败', err)
-      })
-
-    wx.cloud.callFunction({
-      name: 'updateMessage',
-      data: {
-        belongTo: this.data.projectId,
-        cloudList: this.data.fileList,
-        type: {
-          "name": "任务开始"
-        },
-        _openid: this.data.openid
-      }
-    })
-
-    for (var i = 0; i < this.data.fileList.length; i++) {
-      this.uploadImage(this.data.fileList[i].url);
-    }
-    this.action();
-  },
-
-  finishConstruction() {
-
-    db.collection('task')
-      .doc(id)
-      .update({
+      var newState = 1;
+      db.collection('task')
+      .where({
+        _id: _.eq(id)
+      }).update({
         data: {
+          state: newState,
+        }
+      })
+    } 
+    else if(this.data.taskPage.state == 1){
+      this.setData({
+        taskPage: {
           state: 2,
         }
       })
-      .catch(err => {
-        console.log('请求失败', err)
+      var newState = 2;
+      db.collection('task').doc(id).update({
+        data: {
+          state: newState,
+        }
       })
-
-    wx.cloud.callFunction({
-      name: 'updateMessage',
-      data: {
-        belongTo: this.data.projectId,
-        cloudList: this.data.fileList,
-        type: {
-          "name": "任务完成"
-        },
-        _openid: this.data.openid
-      }
-    })
-
-    for (var i = 0; i < this.data.fileList.length; i++) {
-      this.uploadImage(this.data.fileList[i].url);
     }
-    this.action();
+    
   },
 
+  // startConstruction() {
+  //   db.collection('task')
+  //     .doc(id)
+  //     .update({
+  //       data: {
+  //         state: 1,
+  //       }
+  //     })
+  //     .catch(err => {
+  //       console.log('请求失败', err)
+  //     })
 
+  //   wx.cloud.callFunction({
+  //     name: 'updateMessage',
+  //     data: {
+  //       belongTo: this.data.projectId,
+  //       cloudList: this.data.fileList,
+  //       type: {
+  //         "name": "任务开始"
+  //       },
+  //       _openid: this.data.openid
+  //     }
+  //   })
 
-  upload() {
-    wx.chooseImage({
-      count: 1,
-      sizeType: ['original', 'compressed'],
-      sourceType: ['album', 'camera'],
-      success: res => {
-        var fileList = this.data.fileList;
-        fileList.push({
-          url: res.tempFilePaths[0]
-        });
-        this.setData({
-          fileList: fileList
-        });
-        // console.log("成功选择图片", fileList);
-      }
+  //   for (var i = 0; i < this.data.fileList.length; i++) {
+  //     this.uploadImage(this.data.fileList[i].url);
+  //   }
+  //   this.action();
+  // },
+
+  // finishConstruction() {
+
+  //   db.collection('task')
+  //     .doc(id)
+  //     .update({
+  //       data: {
+  //         state: 2,
+  //       }
+  //     })
+  //     .catch(err => {
+  //       console.log('请求失败', err)
+  //     })
+
+  //   wx.cloud.callFunction({
+  //     name: 'updateMessage',
+  //     data: {
+  //       belongTo: this.data.projectId,
+  //       cloudList: this.data.fileList,
+  //       type: {
+  //         "name": "任务完成"
+  //       },
+  //       _openid: this.data.openid
+  //     }
+  //   })
+
+  //   for (var i = 0; i < this.data.fileList.length; i++) {
+  //     this.uploadImage(this.data.fileList[i].url);
+  //   }
+  //   this.action();
+  // },
+
+  //upload construction state fb
+  upload(event){
+    const { file } = event.detail;
+    var fileList = this.data.construction_fileList;
+    fileList.push({
+      url: file.url
     })
+    this.setData({
+      construction_fileList: fileList
+    });
+    // this.uploadImage(file.url)
   },
 
-  uploadImage(fileURL) {
-    wx.cloud.uploadFile({
-      cloudPath: 'task/' + id + '/' + new Date().getTime() + Math.floor(9 * Math.random()) + '.png',
-      filePath: fileURL,
-      success: res => {
-        var cloudList = this.data.cloudPath;
-        cloudList.push(res.fileID);
-        this.setData({
-          cloudPath: cloudList
-        })
-        this.updateCloudList();
-        // console.log("图片上传成功", res)
-      },
-      fail: console.error
-    })
+  uploadImage(list,comment_id) {
+    var cloudList = [];
+    for(var i=0;i<list.length;i++){
+      wx.cloud.uploadFile({
+        cloudPath: 'feedback/' + this.data.projectId + '/' + id + '/' + new Date().getTime() + Math.floor(9 * Math.random()) + '.png',
+        filePath: list[i].url,
+        success: res => {
+          cloudList.push(res.fileID);
+          this.updateCloudList(cloudList,comment_id);
+          // console.log("图片上传成功", res)
+        },
+        fail: console.error
+      })
+    }
+    this.updateComment()
   },
 
-  updateCloudList() {
+  updateCloudList(fileList,comment_id) {
     // console.log(this.data.cloudPath)
-    db.collection('task')
+    db.collection('feedback')
       .where({
-        _id: _.eq(id)
+        _id: _.eq(comment_id)
       })
       .update({
-
         data: {
           /**
            * set done to be true
            */
-          cloudList: this.data.cloudPath
+          cloudList: fileList
         },
         success: function (res) {
           //console.log(res)
@@ -309,41 +442,23 @@ Page({
       })
   },
 
+  formatDate(date) {
+    date = new Date(date);
+    // return `${date.getMonth() + 1}/${date.getDate()}`;
+    return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+},
+
   deleteImg(event) {
     const delIndex = event.detail.index
     const {
-      fileList
+      construction_fileList
     } = this.data
-    fileList.splice(delIndex, 1)
+    construction_fileList.splice(delIndex, 1)
     this.setData({
-      fileList
+      construction_fileList
     })
   },
+  
 
-  action() {
-    /**
-     * submit images
-     */
-    this.setData({
-      isLoading: true,
-    })
-    setTimeout(res => {
-      Toast({
-        forbidClick: 'true',
-        type: 'success',
-        message: 'Success!',
-      });
-    }, 1500)
-    setTimeout(res => {
-      this.setData({
-        isLoading: false
-      })
-    }, 2400)
-    setTimeout(res => {
-      wx.redirectTo({
-        url: '../index/index',
-      })
-    }, 2500)
-  },
 
 })
