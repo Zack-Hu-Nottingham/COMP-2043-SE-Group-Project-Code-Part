@@ -290,26 +290,26 @@ Page({
    */
   getTaskList() {
 
-    // return new Promise((resolve, reject) => {
-    //   db.collection('user')
-    //     .where({
-    //       _openid: _.eq(this.data.userInfo._openid)
-    //     })
-    //     .get()
-    //     .then(res => {
-    //       if (res.data[0].task.length != 0) {
-    //         this.setData({
-    //           taskList: res.data[0].task,
-    //           isTaskEmpty: false,
-    //         })
-    //       }
+    return new Promise((resolve, reject) => {
+      db.collection('user')
+        .where({
+          _openid: _.eq(this.data.userInfo._openid)
+        })
+        .get()
+        .then(res => {
+          if (res.data[0].task.length != 0) {
+            this.setData({
+              taskList: res.data[0].task,
+              isTaskEmpty: false,
+            })
+          }
 
-    //       resolve("Request for project list failed")
-    //     })
-    //     .catch(err => {
-    //       reject("Request for project list failed")
-    //     })
-    // })
+          resolve("Request for project list failed")
+        })
+        .catch(err => {
+          reject("Request for project list failed")
+        })
+    })
   },
 
   clickProject(projectId) {
