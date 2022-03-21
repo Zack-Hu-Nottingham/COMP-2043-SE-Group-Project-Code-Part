@@ -188,11 +188,9 @@ Page({
     .orderBy('time', 'desc')
     .get({
       success: res=>{
-        // console.log(res)
         this.setData({
           feedback: res.data,
         })
-        // console.log(res)
       }
     })
   },
