@@ -174,6 +174,7 @@ Page({
             wx.cloud.database().collection('feedback')
                 .add({
                     data: {
+                        taskName: this.data.taskPage.name,
                         /** 
                          *  type of fb
                          */
