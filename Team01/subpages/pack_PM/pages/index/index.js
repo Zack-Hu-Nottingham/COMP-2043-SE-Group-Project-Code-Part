@@ -661,7 +661,6 @@ Page({
          })
 
          wx.cloud.callFunction({
-            // 云函数名称
             name: 'updateProjectInformation',
             // 传给云函数的参数
             data: {
