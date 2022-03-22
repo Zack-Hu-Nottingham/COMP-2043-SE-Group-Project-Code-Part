@@ -261,6 +261,9 @@ Page({
     this.setData({
       active: event.detail
     });
+    if(event.detail==0){
+      this.countIsReadNumber(this.data.messageList);
+    }
     wx.setNavigationBarTitle({
       title: this.data.dictionary.page_name_for_pm[this.data.active],
     })
