@@ -102,7 +102,6 @@ Page({
 
 
     this.getDetail()
-    this.updateGantt()
     
 
     /** 
@@ -154,12 +153,12 @@ Page({
     })
   },
 
-  updateGantt(){
+  updateGantt(template){
     wx.cloud.callFunction({
       name: 'uploadJSON',
       data:{
         id: id,
-        template: this.data.project.template,
+        template: template,
         // localPath: ganttPATH,
       }
     }).then(res => {
@@ -354,6 +353,8 @@ Page({
           
           //console.log(res.data.cloudList)
           //this.getDefaultDate()
+
+          this.updateGantt(res.data.template)
           this.getFileList(res.data.cloudList)
           this.getFeedback()
           this.getHouseOwner(res.data.houseOwner)
