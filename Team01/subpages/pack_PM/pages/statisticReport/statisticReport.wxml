@@ -52,7 +52,7 @@
       <view>{{dictionary.task_state[2]}} {{ item.completed }}</view>
     </view>
     <view class="progress">
-      <van-progress percentage="{{ item.percentage }}" color="{{ item.color }}" show-pivot="{{false}}"/>
+      <van-progress percentage="{{ (item.completed / item.task.length) * 100 }}" color="{{ item.color }}" show-pivot="{{false}}"/>
     </view>
   </van-cell>
 </van-cell-group>
