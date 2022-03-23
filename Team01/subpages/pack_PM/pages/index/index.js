@@ -390,21 +390,10 @@ Page({
               isProjectEmpty: false
             })
             for (var idx in res.data) {
-              console.log(res.data[idx]._id)
               this.setData({
                 project: this.data.project.concat(res.data[idx]),
                 projectId: this.data.project.concat(res.data[idx]._id)
               })
-              console.log(this.data.projectId[0])
-
-              // wx.cloud.callFunction({
-              //   // 云函数名称
-              //   name: 'updateProjectInformation',
-              //   // 传给云函数的参数
-              //   data: {
-              //     id: res.data[idx]._id,
-              //   },
-              // })
 
             }
           }
@@ -630,15 +619,12 @@ Page({
        })
        .count()
        .then(res => {
-         console.log(res.total)
          this.setData({
            state0: res.total
          })
 
          wx.cloud.callFunction({
-            // 云函数名称
             name: 'updateProjectInformation',
-            // 传给云函数的参数
             data: {
               id: this.data.projectId[i],
               state: 0,
@@ -655,14 +641,12 @@ Page({
        })
        .count()
        .then(res => {
-         console.log(res.total)
          this.setData({
            state1: res.total
          })
 
          wx.cloud.callFunction({
             name: 'updateProjectInformation',
-            // 传给云函数的参数
             data: {
               id: this.data.projectId[i],
               state: 1,
@@ -679,23 +663,18 @@ Page({
        })
        .count()
        .then(res => {
-         console.log(res.total)
          this.setData({
            state2: res.total
          })
 
          wx.cloud.callFunction({
-              // 云函数名称
               name: 'updateProjectInformation',
-              // 传给云函数的参数
               data: {
                 id: this.data.projectId[i],
                 state: 2,
                 count: res.total
               },
           })
-
-
 
        })
 
@@ -706,23 +685,18 @@ Page({
        })
        .count()
        .then(res => {
-         console.log(res.total)
          this.setData({
            state3: res.total
          })
 
          wx.cloud.callFunction({
-              // 云函数名称
               name: 'updateProjectInformation',
-              // 传给云函数的参数
               data: {
                 id: this.data.projectId[i],
                 state: 3,
                 count: res.total
               },
           })
-
-
 
        })
 
@@ -733,23 +707,18 @@ Page({
        })
        .count()
        .then(res => {
-         console.log(res.total)
          this.setData({
            state4: res.total
          })
 
          wx.cloud.callFunction({
-              // 云函数名称
               name: 'updateProjectInformation',
-              // 传给云函数的参数
               data: {
                 id: this.data.projectId[i],
                 state: 4,
                 count: res.total
               },
           })
-
-
 
        })
 

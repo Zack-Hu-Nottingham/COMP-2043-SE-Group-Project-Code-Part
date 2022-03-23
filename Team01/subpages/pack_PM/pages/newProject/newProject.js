@@ -414,7 +414,7 @@ Page({
                 task: this.data.task[i]
               },
           })
-
+          i--
         })
     }
   },
