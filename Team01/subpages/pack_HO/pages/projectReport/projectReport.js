@@ -243,7 +243,7 @@ Page({
     })
     var number = 2;
     wx.navigateTo({
-      url: '../../../../pages/testDiagram/testDiagram?id=' + this.data.project._id + '&index=' + number,
+      url: '../../../../pages/ganttDiagram/ganttDiagram?id=' + this.data.project._id + '&index=' + number,
     })
   },
   async getFileList(cloudPath) {

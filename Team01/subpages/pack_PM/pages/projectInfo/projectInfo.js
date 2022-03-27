@@ -183,7 +183,7 @@ Page({
       //console.log('success')
       
       wx.navigateTo({
-        url: '../../../../pages/testDiagram/testDiagram?id=' + id + '&index=' + number,
+        url: '../../../../pages/ganttDiagram/ganttDiagram?id=' + id + '&index=' + number,
       })
     }
 

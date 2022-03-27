@@ -1,4 +1,4 @@
-// pages/testDiagram/testDiagram.js
+// pages/ganttDiagram/ganttDiagram.js
 var id = '';
 var redirectPage = '';
 var fs = wx.getFileSystemManager();

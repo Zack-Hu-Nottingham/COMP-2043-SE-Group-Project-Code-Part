@@ -3,7 +3,7 @@
         "pages/login/login",
         "pages/about/about",
         "pages/fileList/fileList",
-        "pages/testDiagram/testDiagram",
+        "pages/ganttDiagram/ganttDiagram",
         "pages/languageSetting/languageSetting"
     ],
     "subpackages": [

@@ -136,7 +136,7 @@ describe('index', () => {
 
     currentPageIndex = await miniProgram.currentPage();
     //验证是否成功跳转到发起页面
-    expect(await currentPageIndex.path).toBe('pages/testDiagram/testDiagram');
+    expect(await currentPageIndex.path).toBe('pages/ganttDiagram/ganttDiagram');
 
   },30000);
 
