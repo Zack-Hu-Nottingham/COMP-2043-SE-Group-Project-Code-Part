@@ -2,6 +2,7 @@
 .icon {
   width: 400rpx;
   margin-bottom: -80rpx;
+  /*width: 180rpx*/
 }
 .showIcon {
   display: flex;
