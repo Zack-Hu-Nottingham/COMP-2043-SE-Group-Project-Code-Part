@@ -1,6 +1,7 @@
 /* pages/login/login.wxss */
 .icon {
-  width: 180rpx;
+  width: 400rpx;
+  margin-bottom: -100rpx;
 }
 .showIcon {
   margin-top: 140rpx;

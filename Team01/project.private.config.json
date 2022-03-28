@@ -23,6 +23,20 @@
                     "name": "",
                     "pathName": "subpages/pack_PM/pages/taskInfo/taskInfo",
                     "query": "id=6360507662359eda0078e2fb6a560801",
+                    "launchMode": "default",
+                    "scene": null
+                },
+                {
+                    "name": "",
+                    "pathName": "pages/about/about",
+                    "query": "",
+                    "launchMode": "default",
+                    "scene": null
+                },
+                {
+                    "name": "",
+                    "pathName": "pages/login/login",
+                    "query": "",
                     "scene": null,
                     "launchMode": "default"
                 }

@@ -1,6 +1,6 @@
 <!--pages/about/about.wxml-->
 <view class="showIcon">
-  <image class="icon" mode="widthFix" src="../../images/icon/icon2.png"/>
+  <image class="icon" mode="widthFix" src="../../images/icon/Logo.png"/>
 </view>
 <view class="appName">
   <text>Team202101</text>
