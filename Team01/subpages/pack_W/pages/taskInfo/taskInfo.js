@@ -243,17 +243,8 @@ Page({
                     value: "3"
                   },
                   taskName: this.data.taskPage.name,
-                  /** 
-                   *  description of fb
-                   */
                   description: this.data.button_title,
-                  /** 
-                   *  cloud list
-                   */
                   cloudList: [],
-                  /** 
-                   *  belonged task
-                   */
                   belongTo: id,
                   projectId: this.data.projectId,
                   pmId: this.data.PM_id,
@@ -264,7 +255,6 @@ Page({
               }
           })
           .then(res => {
-              // console.log(res._id)
               this.uploadImage(this.data.construction_fileList,res._id)
           })
           .catch(res => {
@@ -329,67 +319,6 @@ Page({
     }
     
   },
-
-  // startConstruction() {
-  //   db.collection('task')
-  //     .doc(id)
-  //     .update({
-  //       data: {
-  //         state: 1,
-  //       }
-  //     })
-  //     .catch(err => {
-  //       console.log('请求失败', err)
-  //     })
-
-  //   wx.cloud.callFunction({
-  //     name: 'updateMessage',
-  //     data: {
-  //       belongTo: this.data.projectId,
-  //       cloudList: this.data.fileList,
-  //       type: {
-  //         "name": "任务开始"
-  //       },
-  //       _openid: this.data.openid
-  //     }
-  //   })
-
-  //   for (var i = 0; i < this.data.fileList.length; i++) {
-  //     this.uploadImage(this.data.fileList[i].url);
-  //   }
-  //   this.action();
-  // },
-
-  // finishConstruction() {
-
-  //   db.collection('task')
-  //     .doc(id)
-  //     .update({
-  //       data: {
-  //         state: 2,
-  //       }
-  //     })
-  //     .catch(err => {
-  //       console.log('请求失败', err)
-  //     })
-
-  //   wx.cloud.callFunction({
-  //     name: 'updateMessage',
-  //     data: {
-  //       belongTo: this.data.projectId,
-  //       cloudList: this.data.fileList,
-  //       type: {
-  //         "name": "任务完成"
-  //       },
-  //       _openid: this.data.openid
-  //     }
-  //   })
-
-  //   for (var i = 0; i < this.data.fileList.length; i++) {
-  //     this.uploadImage(this.data.fileList[i].url);
-  //   }
-  //   this.action();
-  // },
 
   //upload construction state fb
   upload(event){
