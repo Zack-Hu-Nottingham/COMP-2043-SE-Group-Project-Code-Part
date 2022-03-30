@@ -3,10 +3,10 @@
   <image class="icon" mode="widthFix" src="../../images/icon/Logo.png"/>
 </view>
 <view class="appName">
-  <text>Team202101</text>
+  <text>Intelli-Home</text>
 </view>
 <view class="currentVersion">
-  <text>{{dictionary.current_version}} 1.1.0</text>
+  <text>{{dictionary.current_version}} 1.2.1</text>
 </view>
 <van-cell-group inset class="van-cell-group" title="{{dictionary.group_member}}">
   <van-cell title="Zixiang Hu" label="{{dictionary.group_leader}}">ID: 20215538</van-cell>
