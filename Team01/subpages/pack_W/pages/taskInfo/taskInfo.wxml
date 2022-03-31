@@ -1,4 +1,9 @@
 <!--subpages/pack_W/pages/taskInfo/taskInfo.wxml-->
+<!-- /*
+ * Code written by team
+ * Code created by: Yuzhe ZHANG, Zixiang HU
+ * Code Modified by: Yuzhe ZHANG, Zixiang HU
+ */ -->
 <van-cell-group inset style="padding: 30rpx">
   <van-cell title="{{dictionary.task_name}}" value="{{taskPage.name}}" />
   

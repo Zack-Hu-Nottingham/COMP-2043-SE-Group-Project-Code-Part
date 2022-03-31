@@ -1,5 +1,9 @@
 /* subpages/pack_W/pages/projectInfo/projectInfo.wxss */
-
+/*
+ * Code written by team
+ * Code created by: Yuzhe ZHANG, Zixiang HU
+ * Code Modified by: Yuzhe ZHANG, Zixiang HU
+ */
 page {
   display: flex;
   flex-direction: column;

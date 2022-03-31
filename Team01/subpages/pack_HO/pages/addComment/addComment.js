@@ -1,3 +1,8 @@
+/*
+ * Code written by team
+ * Code created by: Ming KAI
+ * Code Modified by: Ming KAI
+ */
 // pages/project/addComment/addComment.js
 import Toast from '../../../../miniprogram_npm/@vant/weapp/toast/toast'
 const languageUtils = require("../../../../language/languageUtils");

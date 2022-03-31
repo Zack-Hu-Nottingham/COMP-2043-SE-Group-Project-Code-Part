@@ -1,4 +1,9 @@
 // pages/project/statisticReport/statisticReport.js
+/*
+ * Code written by team
+ * Code created by: Yuzhe ZHANG
+ * Code Modified by: Yuzhe ZHANG
+ */
 const languageUtils = require("../../../../language/languageUtils");
 
 const app = getApp();

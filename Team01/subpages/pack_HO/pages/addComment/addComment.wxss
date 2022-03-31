@@ -1,4 +1,9 @@
 /* pages/project/addComment/addComment.wxss */
+/*
+ * Code written by team
+ * Code created by: Ming KAI
+ * Code Modified by: Ming KAI
+ */
 .submitBtn {
     display: flex;
     padding: 50rpx;

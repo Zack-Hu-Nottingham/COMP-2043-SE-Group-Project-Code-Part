@@ -1,4 +1,9 @@
 // subpages/pack_PM/pages/projectTemplate/projectTemplate.js
+/*
+ * Code written by team
+ * Code created by: Yuzhe ZHANG
+ * Code Modified by: Yuzhe ZHANG
+ */
 var app = getApp()
 
 const languageUtils = require("../../../../language/languageUtils");

@@ -1,3 +1,9 @@
+/*
+ * Code written by team
+ * Code created by: Yizhou LIU
+ * Code Modified by: Yizhou LIU
+ */
+
 // pages/about/about.js
 const languageUtils = require("../../language/languageUtils");
 

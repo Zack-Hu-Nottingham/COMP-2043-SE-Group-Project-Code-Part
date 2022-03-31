@@ -1,4 +1,9 @@
 /* pages/project/participantList/participantList.wxss */
+/*
+ * Code written by team
+ * Code created by: Yizhou LIU
+ * Code Modified by: Yizhou LIU
+ */
 .value-class {
     flex: none !important;
   }

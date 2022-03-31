@@ -1,3 +1,8 @@
+<!-- /*
+ * Code written by team
+ * Code created by: Ming KAI
+ * Code Modified by: Ming KAI
+ */ -->
 <!--subpages/pack_HO/pages/taskInfo/taskInfo.wxml-->
 <van-cell-group inset style="padding: 30rpx">
   <van-cell title="{{dictionary.task_name}}" value="{{taskPage.name}}" />

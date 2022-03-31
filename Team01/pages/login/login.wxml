@@ -1,4 +1,8 @@
-
+<!-- /*
+ * Code written by team
+ * Code created by: Yuanshi WANG
+ * Code Modified by: Yuanshi WANG
+ */ -->
 <view class="showIcon">
   <image class="icon" mode="widthFix" src="../../images/icon/Logo.png"/>
 </view>

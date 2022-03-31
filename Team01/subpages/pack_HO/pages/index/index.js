@@ -1,3 +1,8 @@
+/*
+ * Code written by team
+ * Code created by: Ming KAI
+ * Code Modified by: Ming KAI
+ */
 import Dialog from '../../../../miniprogram_npm/@vant/weapp/dialog/dialog';
 import Toast from '../../../../miniprogram_npm/@vant/weapp/toast/toast';
 

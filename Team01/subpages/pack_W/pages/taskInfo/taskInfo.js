@@ -1,4 +1,9 @@
 // subpages/pack_W/pages/taskInfo/taskInfo.js
+/*
+ * Code written by team
+ * Code created by: Yuzhe ZHANG, Zixiang HU
+ * Code Modified by: Yuzhe ZHANG, Zixiang HU
+ */
 import Dialog from '../../../../miniprogram_npm/@vant/weapp/dialog/dialog';
 import Toast from '../../../../miniprogram_npm/@vant/weapp/toast/toast';
 

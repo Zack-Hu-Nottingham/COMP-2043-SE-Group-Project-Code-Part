@@ -1,4 +1,9 @@
 <!--subpages/pack_PM/pages/projectInfo/projectInfo.wxml-->
+<!-- /*
+ * Code written by team
+ * Code created by: Yuzhe ZHANG
+ * Code Modified by: Yuzhe ZHANG
+ */ -->
 <wxs module="numberUtil" src="../../../../utils/numberFormat.wxs"></wxs>
 
 <!-- Nav bar -->

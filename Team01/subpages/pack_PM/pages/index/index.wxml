@@ -1,4 +1,9 @@
 <!--subpages/pack_PM/pages/index/index.wxml-->
+<!-- /*
+ * Code written by team
+ * Code created by: Yuzhe ZHANG
+ * Code Modified by: Yuzhe ZHANG
+ */ -->
 <!-- Dialog -->
 <van-dialog id="van-dialog" bind:getuserinfo="getuserinfo" />
 

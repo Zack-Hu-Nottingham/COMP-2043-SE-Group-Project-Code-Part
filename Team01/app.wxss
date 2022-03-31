@@ -1,4 +1,9 @@
 /**app.wxss**/
+/*
+ * Code written by team
+ * Code created by: Yizhou LIU
+ * Code Modified by: Yizhou LIU
+ */
 page{
   background-color: #F6F6F6;
 }

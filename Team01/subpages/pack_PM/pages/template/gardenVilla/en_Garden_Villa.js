@@ -1,3 +1,8 @@
+/*
+ * Code written by team
+ * Code created by: Yuanshi WANG, Yuhong WEI
+ * Code Modified by: Yuanshi WANG, Yuhong WEI
+ */
 var en_garden_villa = [{
   id: 17,
   name: "Ground-breaking ceremony",

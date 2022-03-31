@@ -1,3 +1,8 @@
+/*
+ * Code written by team
+ * Code created by: Yuzhe ZHANG, Zixiang HU
+ * Code Modified by: Yuzhe ZHANG, Zixiang HU
+ */
 // subpages/pack_W/pages/projectInfo/projectInfo.js
 const languageUtils = require("../../../../language/languageUtils");
 

@@ -1,3 +1,8 @@
+<!-- /*
+ * Code written by team
+ * Code created by: Ming KAI
+ * Code Modified by: Ming KAI
+ */ -->
 <!--pages/project/addComment/addComment.wxml-->
 <form bindsubmit="formSubmit" report-submit="true">
 <van-cell-group inset style="padding: 30rpx">

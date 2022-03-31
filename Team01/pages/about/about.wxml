@@ -1,3 +1,8 @@
+<!--/*
+ * Code written by team
+ * Code created by: Yizhou LIU
+ * Code Modified by: Yizhou LIU
+ */-->
 <!--pages/about/about.wxml-->
 <view class="showIcon">
   <image class="icon" mode="widthFix" src="../../images/icon/Logo.png"/>

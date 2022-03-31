@@ -1,4 +1,9 @@
 /* subpages/pack_W/pages/taskInfo/taskInfo.wxss */
+/*
+ * Code written by team
+ * Code created by: Yuzhe ZHANG, Zixiang HU
+ * Code Modified by: Yuzhe ZHANG, Zixiang HU
+ */
 .addComment {
   display: flex;
   padding: 50rpx;

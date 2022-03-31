@@ -1,3 +1,8 @@
+/*
+ * Code written by team
+ * Code created by: Yuanshi WANG
+ * Code Modified by: Yuanshi WANG
+ */
 import Dialog from '../../miniprogram_npm/@vant/weapp/dialog/dialog';
 import Toast from '../../miniprogram_npm/@vant/weapp/toast/toast';
 

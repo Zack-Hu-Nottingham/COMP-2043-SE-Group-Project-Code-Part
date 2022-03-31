@@ -1,4 +1,9 @@
 /* pages/project/newProject/newProject.wxss */
+/*
+ * Code written by team
+ * Code created by: Yuzhe ZHANG
+ * Code Modified by: Yuzhe ZHANG
+ */
 .gray {
     color:gray;
     font-size:15px;

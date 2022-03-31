@@ -1,3 +1,8 @@
+/*
+ * Code written by team
+ * Code created by: Yizhou LIU
+ * Code Modified by: Yizhou LIU
+ */
 function formatTime(date) {
   var year = date.getFullYear()
   var month = date.getMonth() + 1

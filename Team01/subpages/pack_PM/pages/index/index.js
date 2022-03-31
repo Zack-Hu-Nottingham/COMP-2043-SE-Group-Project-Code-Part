@@ -1,4 +1,9 @@
 // subpages/pack_PM/pages/index/index.js
+/*
+ * Code written by team
+ * Code created by: Yuzhe ZHANG
+ * Code Modified by: Yuzhe ZHANG
+ */
 import Dialog from '../../../../miniprogram_npm/@vant/weapp/dialog/dialog';
 import Toast from '../../../../miniprogram_npm/@vant/weapp/toast/toast';
 

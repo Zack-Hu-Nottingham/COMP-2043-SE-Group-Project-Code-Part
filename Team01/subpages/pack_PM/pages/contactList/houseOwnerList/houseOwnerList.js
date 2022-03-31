@@ -1,3 +1,8 @@
+/*
+ * Code written by team
+ * Code created by: Yizhou LIU
+ * Code Modified by: Yizhou LIU
+ */
 // pages/project/houseOwnerList/houseOwnerList.js
 const languageUtils = require("../../../../../language/languageUtils");
 const app = getApp();

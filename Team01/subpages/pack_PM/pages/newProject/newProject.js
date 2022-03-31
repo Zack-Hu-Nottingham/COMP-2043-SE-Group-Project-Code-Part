@@ -1,4 +1,9 @@
 // pages/project/newProject/newProject.js
+/*
+ * Code written by team
+ * Code created by: Yuzhe ZHANG
+ * Code Modified by: Yuzhe ZHANG
+ */
 import Toast from '../../../../miniprogram_npm/@vant/weapp/toast/toast'
 
 const Utils = require("../../../../utils/util");

@@ -1,3 +1,8 @@
+/*
+ * Code written by team
+ * Code created by: Zixiang HU
+ * Code Modified by: Zixiang HU
+ */
 import {
   changLanguage
 } from '../../language/languageUtils';

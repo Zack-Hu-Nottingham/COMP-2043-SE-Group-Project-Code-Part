@@ -1,4 +1,9 @@
 // subpages/pack_HO/pages/taskInfo/taskInfo.js
+/*
+ * Code written by team
+ * Code created by: Ming KAI
+ * Code Modified by: Ming KAI
+ */
 const languageUtils = require("../../../../language/languageUtils");
 const db = wx.cloud.database();
 const _ = db.command;

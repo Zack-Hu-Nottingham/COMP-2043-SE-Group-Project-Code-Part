@@ -1,4 +1,9 @@
 <!--subpages/pack_W/pages/projectInfo/projectInfo.wxml-->
+<!-- /*
+ * Code written by team
+ * Code created by: Yuzhe ZHANG, Zixiang HU
+ * Code Modified by: Yuzhe ZHANG, Zixiang HU
+ */ -->
 <view wx:if="{{ currentTab == 0 }}">
 
 <van-cell-group inset title="{{dictionary.project_info}}">

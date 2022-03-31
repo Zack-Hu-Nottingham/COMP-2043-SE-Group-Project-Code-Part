@@ -1,3 +1,8 @@
+/*
+ * Code written by team
+ * Code created by: Yuzhe ZHANG, Zixiang HU
+ * Code Modified by: Yuzhe ZHANG, Zixiang HU
+ */
 // subpages/pack_W/pages/index/index.js
 import Dialog from '../../../../miniprogram_npm/@vant/weapp/dialog/dialog';
 import Toast from '../../../../miniprogram_npm/@vant/weapp/toast/toast';

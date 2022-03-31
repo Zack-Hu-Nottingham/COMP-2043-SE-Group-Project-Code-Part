@@ -1,3 +1,8 @@
+/*
+ * Code written by team
+ * Code created by: Yuzhe ZHANG
+ * Code Modified by: Yuzhe ZHANG
+ */
 const automator = require('miniprogram-automator')
 
 describe('index', () => {

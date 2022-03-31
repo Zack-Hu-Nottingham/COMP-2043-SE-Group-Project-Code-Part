@@ -1,4 +1,9 @@
 <!--subpages/pack_PM/pages/projectTemplate/projectTemplate.wxml-->
+<!-- /*
+ * Code written by team
+ * Code created by: Yuzhe ZHANG
+ * Code Modified by: Yuzhe ZHANG
+ */ -->
 <van-radio-group value="{{ radio }}" bind:change="onChange">
   <van-cell-group inset style="margin: 30rpx;" wx:for="{{ templates }}" wx:key="index">
     <van-cell title="{{dictionary.house_template[index]}}" label="{{dictionary.house_template_description[index]}}" clickable data-name="{{item.id}}" bind:click="onClick">

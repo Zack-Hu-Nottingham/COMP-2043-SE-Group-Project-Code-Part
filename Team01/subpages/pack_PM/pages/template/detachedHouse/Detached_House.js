@@ -1,3 +1,8 @@
+/*
+ * Code written by team
+ * Code created by: Yuanshi WANG, Yuhong WEI
+ * Code Modified by: Yuanshi WANG, Yuhong WEI
+ */
 var detached_house = [{
   id: 1,
   name: "开工仪式",

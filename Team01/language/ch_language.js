@@ -1,3 +1,8 @@
+/*
+ * Code written by team
+ * Code created by: Zixiang HU
+ * Code Modified by: Zixiang HU
+ */
 var Languague = {
   // 首页
    index: {

@@ -1,4 +1,9 @@
 // pages/project/participantList/participantList.js
+/*
+ * Code written by team
+ * Code created by: Yizhou LIU
+ * Code Modified by: Yizhou LIU
+ */
 const languageUtils = require("../../../../../language/languageUtils");
 const app = getApp();
 const db = wx.cloud.database();

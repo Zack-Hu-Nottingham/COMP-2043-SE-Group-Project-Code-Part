@@ -1,4 +1,9 @@
 /* pages/login/login.wxss */
+/*
+ * Code written by team
+ * Code created by: Yuanshi WANG
+ * Code Modified by: Yuanshi WANG
+ */
 .icon {
   width: 400rpx;
   margin-bottom: -100rpx;

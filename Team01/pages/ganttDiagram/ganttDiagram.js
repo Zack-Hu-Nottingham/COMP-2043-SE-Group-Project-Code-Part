@@ -1,3 +1,8 @@
+/*
+ * Code written by team
+ * Code created by: Yizhou LIU
+ * Code Modified by: Yizhou LIU
+ */
 // pages/ganttDiagram/ganttDiagram.js
 var id = '';
 var redirectPage = '';

@@ -1,5 +1,9 @@
 <!--pages/project/newTask/newTask.wxml-->
-
+<!-- /*
+ * Code written by team
+ * Code created by: Yuzhe ZHANG
+ * Code Modified by: Yuzhe ZHANG
+ */ -->
     <!--Set Task Information-->
     <van-cell-group inset style="padding: 10rpx;">
         <van-field label="{{dictionary.task_name}}" value="{{ name }}" size="large" input-align="right" placeholder="Enter name..." bind:change="typeName"/>

@@ -1,5 +1,9 @@
 // app.js
-
+/*
+ * Code written by team
+ * Code created by: Zixiang HU
+ * Code Modified by: Zixiang HU
+ */
 
 App({
   onLaunch() {
