@@ -11,9 +11,8 @@ Here is the maintenance documentation for the WeChat applet "**Intelli-Home**" d
 You could find the following information in this documentation:
 
 - **Installation instructions** with **Environment requirements**
-- 
-- Detailed **user manual**
-- 
+- Links to the detailed **user manual**
+- Quality assurance
 
 
 
@@ -23,6 +22,10 @@ If you have any suggestions or find problems with the current applet, it is welc
 
 - WeChat: HZX2001227
 -  Email: scyzh6@nottingham.edu.cn
+
+
+
+
 
 ## 2. Installation instructions & Environment requirements
 
@@ -36,8 +39,6 @@ If you have any suggestions or find problems with the current applet, it is welc
 ### 2.2 Instruction for developer & maintainer
 
 To maintain this applet as a maintainer, it is suggested to install the WeChat development tools.
-
-
 
 ##### 2.2.1 Mac user
 
@@ -54,7 +55,9 @@ After downloading the files, click **"Open"**
 
 Then drag the **"WeChat Devtools"** to "Applications"
 
-<img src="images\mac_download2.png" style="zoom:50%;" />
+<img src="images\mac_download2.png" style="zoom: 50%">
+
+
 
 Cheers, you could start coding with WeChat development tools now~
 
@@ -73,7 +76,15 @@ Click the links below to install the stable version of WeChat development tools:
 
 After downloading the .exe file, click it to start the installation process. 
 
+<img src="images\icon.png"/>
+
 Then click **"Next step"**, "I Allow" and choose the location of installation, finally click **"Install"** to end up.
+
+<img src="images\next.png" />
+
+<img src="images\agree.png"/>
+
+<img src="images\install.png"/>
 
 Cheers, you could start coding with WeChat development tools now~
 
@@ -119,7 +130,7 @@ For a more detailed guide, please refer to the user manual in chapter 2.
 
 2.4.1 Pre-requested implementation environment
 
-- WeChat development tool installed (Follow the instruction in 1.2 to install)
+- **WeChat development tool installed (Follow the instruction in 1.2 to install)**
 - Node.js installed and version above 8.0
 - The base library version is 2.7.3 or above
 - Developer tools version 1.02.1907232 or above
@@ -182,12 +193,6 @@ For a more detailed guide, please refer to the user manual in chapter 2.
 
 
 
-
-
-For more detailed WeChat development tools installation instructions please refer to the WeChat [official website](https://developers.weixin.qq.com/miniprogram/dev/devtools/auto/demo.html)
-
-
-
 ## 3. User manual
 
 Click [here](User_manual.md) to open the detailed user manual.
@@ -195,10 +200,6 @@ Click [here](User_manual.md) to open the detailed user manual.
 ## 4. Quality assurance
 
 
-
-## Third-party libraries and licenses
-
-这一部分放到report里
 
 
 
