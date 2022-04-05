@@ -9,7 +9,7 @@
   margin-bottom: -100rpx;
 }
 .showIcon {
-  margin-top: 140rpx;
+  margin-top: 115rpx;
   display: flex;
   justify-content: center;
   align-content: center;

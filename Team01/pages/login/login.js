@@ -106,6 +106,8 @@ Page({
               title: 'Registration',
               message: "It's good to meet you here, click to register~",
               confirmButtonOpenType: "getUserInfo",
+              confirmButtonText: "Confirm",
+              cancelButtonText: "Cancel"
             })
           }
         })
