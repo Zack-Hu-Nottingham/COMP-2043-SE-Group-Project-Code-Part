@@ -104,21 +104,29 @@ For Android users, download the latest version of  WeChat from your trusted app 
 
 ##### 2.3.2 Search for the applet
 
-Search the applet **"Intelli-Home"** from the top search bar in WeChat.
+Search the applet **"Intelli Home"** from the top search bar in WeChat.
 
-
-
-Then click **"Search Intelli-Home"**.
+Then click **"Search Intelli Home"**.
 
 <img src="images\search.jpg" style="zoom:25%;" />
 
 
 
+Then click the Mini Program "**Intelli Home**".
+
+<img src="images\home.jpg" style="zoom:25%;" />
 
 
-##### 2.3.3 Start the journey with "Intelli-Home"
+
+
+
+##### 2.3.3 Start the journey with "Intelli Home"
 
 Now, you could register an account and start the journey with **"Intelli-Home"**~  
+
+<img src="images\register1.jpg" style="zoom:25%;" />
+
+<img src="images\register2.jpg" style="zoom:25%;" />
 
 For a more detailed guide, please refer to the user manual in chapter 2.
 
@@ -195,11 +203,23 @@ For a more detailed guide, please refer to the user manual in chapter 2.
 
 ## 3. User manual
 
-Click [here](User_manual.md) to open the detailed user manual.
+Click [here](User_manual.pdf) to open the detailed user manual.
 
 ## 4. Quality assurance
 
+Team 01 had assigned a team member to specialize in quality assurance. He does the following things:
+- Design the team workflow and documentation system to ensure work efficiency and traceability.
+- Define standards and make sure all documented/changed files meet the requirements.
+- Approve merge requests only if the changes meet the specifications.
+- Arrange meetings for the error collection and expected improvements after each stage is finished.
+- Encourage to comment in the GitLab
+- Help team members with technical issues and introduce the helpful method to solve the problem
+- Hold discussions about some difficult problems that happened while coding/ testing.
+- Check the test coverage and do the version control
 
+Thankfully, he did all these well and therefore guaranteed the success of our project.
+
+If you would like to go through the test of this applet, you may refer to chapter 2.4 "**Instruction for tester**" and you could also find the detailed test report [here](Test_report.pdf)
 
 
 
