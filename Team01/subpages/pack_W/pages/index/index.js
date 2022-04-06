@@ -234,7 +234,7 @@ Page({
      * Get project summary information
      */
     for (var idx in this.data.project) {
-      this.getProjectInfo(this.data.project[idx])
+      await this.getProjectInfo(this.data.project[idx])
     }
   },
   /**
@@ -253,6 +253,7 @@ Page({
           this.setData({
             projectInfo: this.data.projectInfo.concat(res.data)
           })
+          console.log(this.data.projectInfo)
           resolve("成功获取项目简要信息")
         })
         .catch(err => {
