@@ -253,7 +253,6 @@ Page({
           this.setData({
             projectInfo: this.data.projectInfo.concat(res.data)
           })
-          console.log(this.data.projectInfo)
           resolve("成功获取项目简要信息")
         })
         .catch(err => {
