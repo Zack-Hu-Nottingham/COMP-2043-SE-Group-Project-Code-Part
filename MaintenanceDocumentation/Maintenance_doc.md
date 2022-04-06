@@ -27,7 +27,7 @@ If you have any suggestions or find problems with the current applet, it is welc
 
 
 
-## 2. Installation instructions & Environment requirements
+## 2. Installation instructions, Environment requirements & Activate account
 
 ### 2.1 Installation list
 
@@ -57,9 +57,19 @@ Then drag the **"WeChat Devtools"** to "Applications"
 
 <img src="images\mac_download2.png" style="zoom: 50%">
 
+Then you may need to use your WeChat account to scan and login
 
+<img src="images\scan.png" style="zoom: 50%">
+
+Click the ***"+"***, and select another file that was uploaded. 
+
+<img src="images\dashboard.png" style="zoom: 50%">
 
 Cheers, you could start coding with WeChat development tools now~
+
+However, if you want to view/modify our project on this tool, you have one more step to do. Because only the developer of this applet has the right to view, modify, and even run this piece of code (rules made by WeChat). ***So it is strongly recommended you add the maintenance leader Zack's WeChat "HZX2001227"***, and he would set your account as the developer account immediately. Then, everything should work fine, and you could play around with our applet~ 
+
+***(If your account is not activated as a manager account, you probably can't even run it, I'm sorry about that, but that is the case )***
 
 For more detailed WeChat development tools installation instructions please refer to the [official website](https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html)
 
@@ -78,7 +88,7 @@ After downloading the .exe file, click it to start the installation process.
 
 <img src="images\icon.png"/>
 
-Then click **"Next step"**, "I Allow" and choose the location of installation, finally click **"Install"** to end up.
+Then click **"Next step"**, "I Allow" and choose the location of installation, finally click **"Install"**.
 
 <img src="images\next.png" />
 
@@ -86,7 +96,21 @@ Then click **"Next step"**, "I Allow" and choose the location of installation, f
 
 <img src="images\install.png"/>
 
+Then you may need to use your WeChat account to scan and login.
+
+<img src="images\scan.png" style="zoom: 50%">
+
+Click the ***"+"***, and select another file that was uploaded. 
+
+<img src="images\dashboard.png" style="zoom: 50%">
+
+
+
 Cheers, you could start coding with WeChat development tools now~
+
+However, if you want to view/modify our project on this tool, you have one more step to do. Because only the developer of this applet has the right to view, modify, and even run this piece of code (rules made by WeChat). ***So it is strongly recommended you add the maintenance leader Zack's WeChat "HZX2001227"***, and he would set your account as the developer account immediately. Then, everything should work fine, and you could play around with our applet~ 
+
+***(If your account is not activated as a manager account, you probably can't even run it, I'm sorry about that, but that is the case )***
 
 For more detailed WeChat development tools installation instructions please refer to the WeChat [official website](https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html)
 
@@ -138,7 +162,7 @@ For a more detailed guide, please refer to the user manual in chapter 2.
 
 2.4.1 Pre-requested implementation environment
 
-- **WeChat development tool installed (Follow the instruction in 1.2 to install)**
+- **WeChat development tool installed (Follow the instruction in 1.2 to install and activate your account)**
 - Node.js installed and version above 8.0
 - The base library version is 2.7.3 or above
 - Developer tools version 1.02.1907232 or above
@@ -212,7 +236,7 @@ Team 01 had assigned a team member to specialize in quality assurance. He does t
 - Define standards and make sure all documented/changed files meet the requirements.
 - Approve merge requests only if the changes meet the specifications.
 - Arrange meetings for the error collection and expected improvements after each stage is finished.
-- Encourage to comment in the GitLab
+- Encourage to comment on the GitLab
 - Help team members with technical issues and introduce the helpful method to solve the problem
 - Hold discussions about some difficult problems that happened while coding/ testing.
 - Check the test coverage and do the version control
