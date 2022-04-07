@@ -55,6 +55,7 @@ Page({
         db.collection('task').doc(options.id).get().then(res => {
             this.setData({
                 feedback: res.data.feedback,
+                taskPage: res.data
             })
         })
 
