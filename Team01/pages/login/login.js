@@ -23,7 +23,7 @@ Page({
    * Initial data of page
    */
   data: {
-    identity: 0
+    identity: 1
   },
 
   /**
