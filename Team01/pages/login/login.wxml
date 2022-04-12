@@ -10,7 +10,7 @@
   <text>Intelli-Home</text>
 </view>
 <view class="currentVersion">
-  <text>{{dictionary.current_version}} 1.2.1</text>
+  <text>{{dictionary.current_version}} 1.2.6</text>
 </view>
 
 

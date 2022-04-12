@@ -11,7 +11,7 @@
   <text>Intelli-Home</text>
 </view>
 <view class="currentVersion">
-  <text>{{dictionary.current_version}} 1.2.1</text>
+  <text>{{dictionary.current_version}} 1.2.6</text>
 </view>
 <van-cell-group inset class="van-cell-group" title="{{dictionary.group_member}}">
   <van-cell title="Zixiang Hu" label="{{dictionary.group_leader}}">ID: 20215538</van-cell>
