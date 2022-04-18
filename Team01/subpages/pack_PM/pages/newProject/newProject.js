@@ -197,7 +197,8 @@ Page({
           data: {
             name: this.data.name,
 
-            startTime: this.data.startDate,
+            startTime: "2021-04-19",
+            // startTime: this.data.startDate,
             endTime: this.data.endDate,
 
             projectDescription: this.data.description,
@@ -335,7 +336,9 @@ Page({
   },
 
   onDateConfirm(event) {
-    start = event.detail;
+    start = new Date(2021, 3, 19, 0, 0, 0, 0);
+    console.log(start);
+    // start = event.detail;
     var end = this.addDate(start, this.data.duration)
     this.setData({
       startDate: this.formatDate(start),
