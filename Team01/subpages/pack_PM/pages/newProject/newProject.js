@@ -197,8 +197,8 @@ Page({
           data: {
             name: this.data.name,
 
-            startTime: "2021-04-19",
-            // startTime: this.data.startDate,
+            //startTime: "2021-04-19",
+            startTime: this.data.startDate,
             endTime: this.data.endDate,
 
             projectDescription: this.data.description,
