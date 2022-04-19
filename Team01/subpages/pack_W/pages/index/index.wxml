@@ -29,7 +29,7 @@
   
   <view wx:else>
     <view wx:for="{{projectInfo}}" wx:key="index" wx:for-item="project" wx:for-index="idx">
-      <van-cell-group style="padding-bottom: 30rpx;" inset title="{{dictionary.project[idx]}}" >
+      <van-cell-group style="padding-bottom: 30rpx" inset title="{{dictionary.project[idx]}}" >
         <van-cell title="{{project.name}}" clickable bindtap="clickProject" id="{{project._id}}" icon="todo-list-o" is-link size="large"/>
         
         <view wx:for="{{projectTask[idx]}}" wx:key="index">
@@ -61,6 +61,7 @@
 
     </view>
 
+    <view class="scrollSpase" style="padding:90rpx"></view>
   </view>
   
 </view>

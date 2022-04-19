@@ -29,7 +29,7 @@
 
 <van-divider contentPosition="center">{{dictionary.related_photo}}</van-divider>
 
-<van-uploader class="uploader" file-list="{{ fileList }}"  disabled="{{true}}" show-upload="{{false}}"/>
+<van-uploader class="uploader" file-list="{{ fileList }}"  disabled="{{true}}" show-upload="{{false}}" deletable="{{false}}"/>
 <!-- 
 <van-uploader class="uploader" file-list="{{ fileList }}" bindtap="upload" deletable="{{ true }}" bind:delete="deleteImg" max-count="9" bind:after-read="afterRead" disabled="{{true}}"/> -->
 
