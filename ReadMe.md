@@ -6,19 +6,19 @@
 </br>
 
 
-### 颜色
+### Color
 
-颜色参考：https://www.sioe.cn/yingyong/yanse-rgb-16/
+Color reference: https://www.sioe.cn/yingyong/yanse-rgb-16/
 
-底色：浅背景-深色字 / 深背景-浅色字
+Base color: light background - dark lettering / dark background - light lettering
 
-文字蓝色：#1296db
+Text blue: #1296db
 
-图片灰底色：#696969
+Image gray background color: #696969
 
-分割线：#efefef
+Dividing line: #efefef
 
-背景色：#efefef
+Background color: #efefef
 
 </br>
 
@@ -27,9 +27,9 @@
 
 
 
-### 页面格式
+### Page format
 
- 标题栏文字(navigationBarTitleText)：统一显示当前页面功能
+ Title bar text (navigationBarTitleText): unified display of the current page function
  
 </br>
 
@@ -37,19 +37,19 @@
 
 
 
-### 代码规范
+### Code specification
 
-- 尽量使用Vant Weapp组件库
-- 外层同级组件之间空行
+- Use Vant Weapp component library as much as possible
+- Empty lines between outer sibling components
 - px->rpx
-- 格式居中：alignment
+- Format centering: alignment
 
 </br>
 
 
 
 
-### 数据格式
+### Data format
 ```
 task stage: 
 0 - unstarted
@@ -65,8 +65,7 @@ task priority:
 ```
 
 </br>
-
-### 数据库对象及属性
+### Database objects and properties
 ```
 <!-- For project -->
 {
