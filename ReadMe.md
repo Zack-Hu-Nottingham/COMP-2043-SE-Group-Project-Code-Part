@@ -65,7 +65,9 @@ task priority:
 ```
 
 </br>
+
 ### Database objects and properties
+
 ```
 <!-- For project -->
 {
